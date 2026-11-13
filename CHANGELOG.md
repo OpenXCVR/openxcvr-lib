@@ -58,6 +58,11 @@ breaking item so each claim can be traced to its landed change.
   counters of CMIS Page 14h were previously left out of
   `openxcvr_cmis_page14h_diagnostics_results`; adding them changes that
   struct's layout.
+- **BREAKING** The Java, C# and PHP bindings decode `u64le` and `u64be` fields
+  as exact unsigned values: `java.math.BigInteger` in Java, `ulong` in C#, and a
+  decimal `string` in PHP (arrays of those for instanced fields). Values at or
+  above 2^63 previously decoded as negative. This changes the type of the 16
+  CMIS Page 14h error and bit counters in those three bindings.
 - **BREAKING** The SFF-8472 revision domain now matches Table 8-8 of the
   specification (checked against the Rev 12.3, Rev 12.4 and Rev 12.5a
   documents): compliance byte `0x08` decodes to Rev **12.3** (previously
