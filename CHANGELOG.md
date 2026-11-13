@@ -53,6 +53,11 @@ breaking item so each claim can be traced to its landed change.
 
 - C-CMIS 64-bit PM/FEC counters were decoded little-endian; they now decode
   MSB-first as the specification states.
+- Generated C page structs include `u64le` and `u64be` fields as `uint64_t`,
+  decoded in the field's byte order. The 16 little-endian error and bit
+  counters of CMIS Page 14h were previously left out of
+  `openxcvr_cmis_page14h_diagnostics_results`; adding them changes that
+  struct's layout.
 - **BREAKING** The SFF-8472 revision domain now matches Table 8-8 of the
   specification (checked against the Rev 12.3, Rev 12.4 and Rev 12.5a
   documents): compliance byte `0x08` decodes to Rev **12.3** (previously
