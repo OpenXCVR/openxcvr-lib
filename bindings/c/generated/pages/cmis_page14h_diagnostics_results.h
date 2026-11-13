@@ -16,6 +16,22 @@ typedef struct openxcvr_cmis_page14h_diagnostics_results {
     bool pattern_generator_lol_flag_media[8];
     bool pattern_checker_lol_flag_host[8];
     bool pattern_checker_lol_flag_media[8];
+    uint64_t host_side_error_count_lane_1_4[4];
+    uint64_t host_side_total_bits_count_lane_1_4[4];
+    uint64_t host_side_error_count_lane_5_8[4];
+    uint64_t host_side_total_bits_count_lane_5_8[4];
+    uint64_t media_side_error_count_lane_1_4[4];
+    uint64_t media_side_total_bits_count_lane_1_4[4];
+    uint64_t media_side_error_count_lane_5_8[4];
+    uint64_t media_side_total_bits_count_lane_5_8[4];
+    uint64_t gated_host_side_error_count_lane_1_4[4];
+    uint64_t gated_host_side_total_bits_count_lane_1_4[4];
+    uint64_t gated_host_side_error_count_lane_5_8[4];
+    uint64_t gated_host_side_total_bits_count_lane_5_8[4];
+    uint64_t gated_media_side_error_count_lane_1_4[4];
+    uint64_t gated_media_side_total_bits_count_lane_1_4[4];
+    uint64_t gated_media_side_error_count_lane_5_8[4];
+    uint64_t gated_media_side_total_bits_count_lane_5_8[4];
 } openxcvr_cmis_page14h_diagnostics_results;
 
 openxcvr_status openxcvr_decode_cmis_page14h_diagnostics_results(const uint8_t *buf, size_t len, openxcvr_cmis_page14h_diagnostics_results *out);

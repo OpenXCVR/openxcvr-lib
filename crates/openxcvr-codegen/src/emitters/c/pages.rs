@@ -21,9 +21,24 @@ pub(super) fn c_type(f: &PageField) -> Option<&'static str> {
         FieldType::I8 => Some("int8_t"),
         FieldType::U16Be => Some("uint16_t"),
         FieldType::I16Be => Some("int16_t"),
+        FieldType::U64Le | FieldType::U64Be => Some("uint64_t"),
         FieldType::Ascii => Some("char"),
         _ => None,
     }
+}
+
+/// Eight wire bytes assembled into a `uint64_t`. Every byte is cast before
+/// it is shifted, matching `extract_raw` in `bindings/c/src/observation.c`:
+/// little-endian is `bytes[i] << (8 * i)`, big-endian is MSB at the lowest
+/// address.
+fn assemble_u64(file_offset: usize, little_endian: bool) -> String {
+    let terms: Vec<String> = (0..8)
+        .map(|i| {
+            let shift = if little_endian { i * 8 } else { (7 - i) * 8 };
+            format!("((uint64_t)buf[{}] << {shift})", file_offset + i)
+        })
+        .collect();
+    format!("({})", terms.join(" | "))
 }
 
 fn decode_expr(f: &PageField, file_offset: i64) -> String {
@@ -69,6 +84,8 @@ fn decode_expr(f: &PageField, file_offset: i64) -> String {
                 o + 1
             )
         }
+        FieldType::U64Le => assemble_u64(o, true),
+        FieldType::U64Be => assemble_u64(o, false),
         _ => "0".to_string(),
     }
 }
@@ -97,8 +114,6 @@ fn emit_scalar_field(f: &PageField, base: i64, destination: &str) -> Option<Fiel
             | FieldType::U16Le
             | FieldType::U32Be
             | FieldType::I32Be
-            | FieldType::U64Le
-            | FieldType::U64Be
     ) {
         return None;
     }
@@ -164,8 +179,6 @@ fn emit_instanced_field(
                 | FieldType::U16Le
                 | FieldType::U32Be
                 | FieldType::I32Be
-                | FieldType::U64Le
-                | FieldType::U64Be
         )
     {
         return None;
@@ -1183,5 +1196,51 @@ mod tests {
             c.contains("out->format_id = (uint16_t)(((uint16_t)buf[0] << 8) | (uint16_t)buf[1]);"),
             "2-byte enum must decode as big-endian u16\n---\n{c}"
         );
+    }
+
+    /// `u64le` and `u64be` are struct members. Each of the eight wire bytes
+    /// is cast to `uint64_t` before it is shifted, LSB-first or MSB-first.
+    #[test]
+    fn emits_u64_both_byte_orders() {
+        let mut le = field("counter_le", 0, FieldType::U64Le);
+        le.size_bytes = Some(8);
+        let mut be = field("counter_be", 8, FieldType::U64Be);
+        be.size_bytes = Some(8);
+        let schema = PageSchema {
+            spec: None,
+            provenance: None,
+            schema: "openxcvr.page.v1".to_string(),
+            kind: "page".to_string(),
+            id: "CmisLowerMemory".to_string(),
+            title: "Lower".to_string(),
+            page_address: "lower".to_string(),
+            size_bytes: Some(128),
+            field_includes: vec![],
+            fields: vec![le, be],
+            present_when: None,
+            banking: None,
+            page_select: None,
+            page_select_field: None,
+        };
+        let h = emit_page_header(&schema);
+        assert!(h.contains("uint64_t counter_le;"), "{h}");
+        assert!(h.contains("uint64_t counter_be;"), "{h}");
+
+        let c = emit_page_source(&schema, "pages/cmis_lower_memory.h");
+        let le_terms: Vec<String> = (0..8)
+            .map(|i| format!("((uint64_t)buf[{i}] << {})", i * 8))
+            .collect();
+        let le_expr = format!("out->counter_le = ({});", le_terms.join(" | "));
+        assert!(
+            c.contains(&le_expr),
+            "little-endian u64 decode missing:\n{c}"
+        );
+
+        let be_terms: Vec<String> = (0..8)
+            .map(|i| format!("((uint64_t)buf[{}] << {})", 8 + i, (7 - i) * 8))
+            .collect();
+        let be_expr = format!("out->counter_be = ({});", be_terms.join(" | "));
+        assert!(c.contains(&be_expr), "big-endian u64 decode missing:\n{c}");
+        assert_ne!(le_expr, be_expr);
     }
 }

@@ -627,6 +627,13 @@ target_link_libraries(openxcvr_c_implicit_subbyte_widths PRIVATE openxcvr_c)
 target_compile_options(openxcvr_c_implicit_subbyte_widths PRIVATE -Wall -Wextra -Werror -UNDEBUG)
 add_test(NAME openxcvr_c_implicit_subbyte_widths COMMAND openxcvr_c_implicit_subbyte_widths)
 
+# CMIS Page 14h u64le: wire bytes 80 00 00 00 00 00 00 01 must decode
+# little-endian. A swapped order or a truncated shift fails the assertion.
+add_executable(openxcvr_c_page14h_u64 tests/page14h_u64.c)
+target_link_libraries(openxcvr_c_page14h_u64 PRIVATE openxcvr_c)
+target_compile_options(openxcvr_c_page14h_u64 PRIVATE -Wall -Wextra -Werror -UNDEBUG)
+add_test(NAME openxcvr_c_page14h_u64 COMMAND openxcvr_c_page14h_u64)
+
 # Revision-checked CMIS Page 01h/11h contract (Task 2).
 add_executable(openxcvr_c_checked_pages tests/checked_pages.c)
 target_link_libraries(openxcvr_c_checked_pages PRIVATE openxcvr_c)
