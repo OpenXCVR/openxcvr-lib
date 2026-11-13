@@ -120,6 +120,45 @@ fn enc_bit_width(f: &PageField) -> u32 {
     })
 }
 
+/// Decimal-string u64 to exactly 8 bytes, no bcmath/gmp. Rejects a non-digit
+/// string and any value above 18446744073709551615.
+fn encode_u64_php(o: usize, le: bool) -> String {
+    let reverse = if le {
+        "\n        $raw = strrev($raw);"
+    } else {
+        ""
+    };
+    format!(
+        r#"if (!preg_match('/^[0-9]+$/', $value)) {{
+        throw new \InvalidArgumentException('u64 must be a decimal digit string');
+        }}
+        $digits = ltrim($value, '0');
+        if ($digits === '') {{ $digits = '0'; }}
+        if (strlen($digits) > 20 || (strlen($digits) === 20 && strcmp($digits, '18446744073709551615') > 0)) {{
+        throw new \InvalidArgumentException('u64 out of range: ' . $value);
+        }}
+        $be = array_fill(0, 8, 0);
+        for ($i = 7; $i >= 0; $i--) {{
+        $rem = 0;
+        $next = '';
+        $len = strlen($digits);
+        for ($j = 0; $j < $len; $j++) {{
+        $acc = $rem * 10 + (ord($digits[$j]) - 48);
+        $q = intdiv($acc, 256);
+        $rem = $acc % 256;
+        if ($next !== '' || $q !== 0) {{ $next .= chr(48 + $q); }}
+        }}
+        $be[$i] = $rem;
+        $digits = ($next === '') ? '0' : $next;
+        }}
+        if ($digits !== '0') {{
+        throw new \InvalidArgumentException('u64 out of range: ' . $value);
+        }}
+        $raw = chr($be[0]) . chr($be[1]) . chr($be[2]) . chr($be[3]) . chr($be[4]) . chr($be[5]) . chr($be[6]) . chr($be[7]);{reverse}
+        $buf = substr_replace($buf, $raw, {o}, 8);"#
+    )
+}
+
 /// PHP encode statement — inverse of `decode_scalar_php` — mutating `$buf`
 /// (passed by reference). Sub-byte fields use read-modify-write.
 fn encode_scalar_php(f: &PageField, offset: i64) -> String {
@@ -166,8 +205,8 @@ fn encode_scalar_php(f: &PageField, offset: i64) -> String {
         FieldType::I32Be => {
             format!("$buf = substr_replace($buf, pack('N', $value & 0xFFFFFFFF), {o}, 4);")
         }
-        FieldType::U64Le => format!("$buf = substr_replace($buf, pack('P', $value), {o}, 8);"),
-        FieldType::U64Be => format!("$buf = substr_replace($buf, pack('J', $value), {o}, 8);"),
+        FieldType::U64Le => encode_u64_php(o, true),
+        FieldType::U64Be => encode_u64_php(o, false),
         FieldType::F16Be | FieldType::X16Be => {
             format!("$buf = substr_replace($buf, pack('n', $value & 0xFFFF), {o}, 2);")
         }

@@ -15,8 +15,8 @@ fn bit_width(f: &PageField) -> u32 {
     })
 }
 
-/// C# scalar type. `long` for values exceeding signed 32-bit (u32be, u64le, u64be,
-/// 4/8-byte bitmaps); `int` otherwise.
+/// C# scalar type. `ulong` for u64; `long` for values exceeding signed 32-bit
+/// (u32be, 4/8-byte bitmaps); `int` otherwise.
 fn cs_type(f: &PageField) -> Option<&'static str> {
     match &f.ty {
         FieldType::Bool => Some("bool"),
@@ -35,7 +35,8 @@ fn cs_type(f: &PageField) -> Option<&'static str> {
         | FieldType::I32Be
         | FieldType::F16Be
         | FieldType::X16Be => Some("int"),
-        FieldType::U32Be | FieldType::U64Le | FieldType::U64Be => Some("long"),
+        FieldType::U32Be => Some("long"),
+        FieldType::U64Le | FieldType::U64Be => Some("ulong"),
         FieldType::Bitmap => Some(match f.size_bytes.unwrap_or(1) {
             n if f.bit_offset.is_none() && f.bit_width.is_none() && n >= 4 => "long",
             _ => "int",
@@ -84,8 +85,8 @@ fn decode_scalar_cs(f: &PageField, file_offset: i64) -> String {
         FieldType::U16Le => format!("(int){}", bp("ReadUInt16LittleEndian", o, 2)),
         FieldType::U32Be => format!("(long){}", bp("ReadUInt32BigEndian", o, 4)),
         FieldType::I32Be => bp("ReadInt32BigEndian", o, 4),
-        FieldType::U64Le => format!("(long){}", bp("ReadUInt64LittleEndian", o, 8)),
-        FieldType::U64Be => format!("(long){}", bp("ReadUInt64BigEndian", o, 8)),
+        FieldType::U64Le => bp("ReadUInt64LittleEndian", o, 8),
+        FieldType::U64Be => bp("ReadUInt64BigEndian", o, 8),
         FieldType::F16Be | FieldType::X16Be => format!("(int){}", bp("ReadUInt16BigEndian", o, 2)),
         FieldType::Bitmap => {
             if f.bit_offset.is_some() || f.bit_width.is_some() {
@@ -266,10 +267,10 @@ fn encode_scalar_cs(f: &PageField, offset: i64) -> String {
         FieldType::U32Be => format!("{bp}.WriteUInt32BigEndian(buf.AsSpan({o}, 4), (uint)value);"),
         FieldType::I32Be => format!("{bp}.WriteInt32BigEndian(buf.AsSpan({o}, 4), value);"),
         FieldType::U64Le => {
-            format!("{bp}.WriteUInt64LittleEndian(buf.AsSpan({o}, 8), (ulong)value);")
+            format!("{bp}.WriteUInt64LittleEndian(buf.AsSpan({o}, 8), value);")
         }
         FieldType::U64Be => {
-            format!("{bp}.WriteUInt64BigEndian(buf.AsSpan({o}, 8), (ulong)value);")
+            format!("{bp}.WriteUInt64BigEndian(buf.AsSpan({o}, 8), value);")
         }
         FieldType::F16Be | FieldType::X16Be => {
             format!("{bp}.WriteUInt16BigEndian(buf.AsSpan({o}, 2), (ushort)value);")
@@ -562,6 +563,53 @@ mod tests {
                 "(int)System.Buffers.Binary.BinaryPrimitives.ReadUInt16BigEndian(buf.AsSpan(0, 2))"
             ),
             "2-byte enum must decode as big-endian u16\n---\n{out}"
+        );
+    }
+
+    fn writable(name: &str, offset: u32, ty: FieldType) -> PageField {
+        let mut f = field(name, offset, ty, Some(8));
+        f.access = Some(crate::ir::pages::Access::Rw);
+        f
+    }
+
+    #[test]
+    fn u64_is_ulong_without_a_signed_cast_and_u32_stays_long() {
+        let out = emit_page(&page(vec![
+            writable("counter_le", 0, FieldType::U64Le),
+            writable("counter_be", 8, FieldType::U64Be),
+            field("module_power_up_time", 16, FieldType::U32Be, Some(4)),
+        ]));
+        assert!(out.contains("ulong CounterLe"), "{out}");
+        assert!(out.contains("ulong CounterBe"), "{out}");
+        assert!(out.contains("long ModulePowerUpTime"), "{out}");
+        assert!(
+            out.contains(
+                "System.Buffers.Binary.BinaryPrimitives.ReadUInt64LittleEndian(buf.AsSpan(0, 8))"
+            ),
+            "{out}"
+        );
+        assert!(
+            out.contains(
+                "System.Buffers.Binary.BinaryPrimitives.ReadUInt64BigEndian(buf.AsSpan(8, 8))"
+            ),
+            "{out}"
+        );
+        assert!(
+            !out.contains("(long)System.Buffers.Binary.BinaryPrimitives.ReadUInt64"),
+            "{out}"
+        );
+        assert!(
+            out.contains("WriteUInt64LittleEndian(buf.AsSpan(0, 8), value)"),
+            "{out}"
+        );
+        assert!(
+            out.contains("WriteUInt64BigEndian(buf.AsSpan(8, 8), value)"),
+            "{out}"
+        );
+        assert!(!out.contains("(ulong)value"), "writer must not cast\n{out}");
+        assert!(
+            out.contains("void SetCounterLe(byte[] buf, ulong value)"),
+            "{out}"
         );
     }
 }

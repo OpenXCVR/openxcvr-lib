@@ -15,8 +15,9 @@ fn bit_width(f: &PageField) -> u32 {
     })
 }
 
-/// Java scalar type. `long` for values exceeding signed 32-bit (u32be, u64le, u64be,
-/// 4/8-byte bitmaps); `int` otherwise (Java has no unsigned types).
+/// Java scalar type. `java.math.BigInteger` for u64 (always non-negative); `long` for
+/// values exceeding signed 32-bit (u32be, 4/8-byte bitmaps); `int` otherwise
+/// (Java has no unsigned types).
 fn java_type(f: &PageField) -> Option<&'static str> {
     match &f.ty {
         FieldType::Bool => Some("boolean"),
@@ -35,7 +36,8 @@ fn java_type(f: &PageField) -> Option<&'static str> {
         | FieldType::I32Be
         | FieldType::F16Be
         | FieldType::X16Be => Some("int"),
-        FieldType::U32Be | FieldType::U64Le | FieldType::U64Be => Some("long"),
+        FieldType::U32Be => Some("long"),
+        FieldType::U64Le | FieldType::U64Be => Some("java.math.BigInteger"),
         FieldType::Bitmap => Some(match f.size_bytes.unwrap_or(1) {
             n if f.bit_offset.is_none() && f.bit_width.is_none() && n >= 4 => "long",
             _ => "int",
@@ -107,32 +109,34 @@ fn decode_scalar_java(f: &PageField, file_offset: i64) -> String {
             b(o + 2),
             b(o + 3)
         ),
-        FieldType::U64Le => {
-            let terms: Vec<String> = (0..8)
-                .map(|i| {
-                    let shift = i * 8;
-                    if shift == 0 {
-                        format!("(long) {}", b(o))
-                    } else {
-                        format!("((long) {} << {shift})", b(o + i))
-                    }
-                })
-                .collect();
-            format!("({})", terms.join(" | "))
-        }
-        FieldType::U64Be => {
-            let terms: Vec<String> = (0..8)
-                .map(|i| {
-                    let shift = (7 - i) * 8;
-                    if shift == 0 {
-                        format!("(long) {}", b(o + i))
-                    } else {
-                        format!("((long) {} << {shift})", b(o + i))
-                    }
-                })
-                .collect();
-            format!("({})", terms.join(" | "))
-        }
+        // Signum 1 plus a big-endian magnitude: the value is always >= 0,
+        // including magnitudes whose high bit is set (which a Java long would
+        // treat as negative).
+        // Raw wire bytes: BigInteger(signum, magnitude) reads the array as an
+        // unsigned big-endian magnitude, so a high bit stays non-negative.
+        // `(buf[i] & 0xFF)` is an int and is not a legal byte[] element.
+        FieldType::U64Le => format!(
+            "new java.math.BigInteger(1, new byte[] {{ buf[{}], buf[{}], buf[{}], buf[{}], buf[{}], buf[{}], buf[{}], buf[{}] }})",
+            o + 7,
+            o + 6,
+            o + 5,
+            o + 4,
+            o + 3,
+            o + 2,
+            o + 1,
+            o
+        ),
+        FieldType::U64Be => format!(
+            "new java.math.BigInteger(1, new byte[] {{ buf[{}], buf[{}], buf[{}], buf[{}], buf[{}], buf[{}], buf[{}], buf[{}] }})",
+            o,
+            o + 1,
+            o + 2,
+            o + 3,
+            o + 4,
+            o + 5,
+            o + 6,
+            o + 7
+        ),
         FieldType::F16Be | FieldType::X16Be => be_uint(o, 2, false),
         FieldType::Bitmap => {
             if f.bit_offset.is_some() || f.bit_width.is_some() {
@@ -288,6 +292,28 @@ fn put_java(o: usize, size: usize, le: bool) -> String {
         .join("\n        ")
 }
 
+/// Write a BigInteger in [0, 2^64-1] as 8 bytes. Out of range throws
+/// IllegalArgumentException. `toByteArray` is big-endian two's-complement and
+/// may carry a leading zero when the high bit is set; the loop keeps the low 8.
+fn encode_u64_java(o: usize, le: bool) -> String {
+    let index = if le {
+        format!("{o} + (7 - u64i)")
+    } else {
+        format!("{o} + u64i")
+    };
+    [
+        "if (value == null || value.signum() < 0 || value.bitLength() > 64) {",
+        "throw new IllegalArgumentException(\"u64 out of range: \" + value);",
+        "}",
+        "byte[] u64mag = value.toByteArray();",
+        "for (int u64i = 0; u64i < 8; u64i++) {",
+        "int u64mi = u64mag.length - 8 + u64i;",
+        &format!("buf[{index}] = u64mi >= 0 ? u64mag[u64mi] : (byte) 0;"),
+        "}",
+    ]
+    .join("\n        ")
+}
+
 /// Java encode body — inverse of `decode_scalar_java` — into `byte[] buf`.
 fn encode_scalar_java(f: &PageField, offset: i64) -> String {
     let o = offset as usize;
@@ -317,8 +343,8 @@ fn encode_scalar_java(f: &PageField, offset: i64) -> String {
         }
         FieldType::U16Le => put_java(o, 2, true),
         FieldType::U32Be | FieldType::I32Be => put_java(o, 4, false),
-        FieldType::U64Le => put_java(o, 8, true),
-        FieldType::U64Be => put_java(o, 8, false),
+        FieldType::U64Le => encode_u64_java(o, true),
+        FieldType::U64Be => encode_u64_java(o, false),
         FieldType::Bitmap => {
             if f.bit_offset.is_some() || f.bit_width.is_some() {
                 let mask = (1u64 << bit_width(f)) - 1;
@@ -599,6 +625,61 @@ mod tests {
         assert!(
             !out.contains("this.formatId = (buf[0] & 0xFF);"),
             "2-byte enum must not truncate to the first byte\n---\n{out}"
+        );
+    }
+
+    fn writable(name: &str, offset: u32, ty: FieldType) -> PageField {
+        let mut f = field(name, offset, ty, Some(8));
+        f.access = Some(crate::ir::pages::Access::Rw);
+        f
+    }
+
+    #[test]
+    fn u64_is_non_negative_big_integer_and_u32_stays_long() {
+        let out = emit_page(&page(vec![
+            writable("counter_le", 0, FieldType::U64Le),
+            writable("counter_be", 8, FieldType::U64Be),
+            field("module_power_up_time", 16, FieldType::U32Be, Some(4)),
+        ]));
+        assert!(
+            out.contains("public final java.math.BigInteger counterLe;"),
+            "{out}"
+        );
+        assert!(
+            out.contains("public final java.math.BigInteger counterBe;"),
+            "{out}"
+        );
+        assert!(
+            out.contains("public final long modulePowerUpTime;"),
+            "{out}"
+        );
+        assert!(
+            out.contains(
+                "new java.math.BigInteger(1, new byte[] { buf[7], buf[6], buf[5], buf[4], buf[3], buf[2], buf[1], buf[0] })"
+            ),
+            "u64le magnitude must be little-endian bytes reversed into big-endian order\n{out}"
+        );
+        assert!(
+            out.contains(
+                "new java.math.BigInteger(1, new byte[] { buf[8], buf[9], buf[10], buf[11], buf[12], buf[13], buf[14], buf[15] })"
+            ),
+            "u64be magnitude must be wire order\n{out}"
+        );
+        assert!(
+            out.contains("void setCounterLe(byte[] buf, java.math.BigInteger value)"),
+            "{out}"
+        );
+        assert!(
+            out.contains("void setCounterBe(byte[] buf, java.math.BigInteger value)"),
+            "{out}"
+        );
+        assert!(out.contains("value.bitLength() > 64"), "{out}");
+        assert!(out.contains("IllegalArgumentException"), "{out}");
+        assert!(out.contains("buf[0 + (7 - u64i)]"), "le writer\n{out}");
+        assert!(out.contains("buf[8 + u64i]"), "be writer\n{out}");
+        assert!(
+            !out.contains("(long) (buf[0] & 0xFF)"),
+            "u64 must not decode as a signed long\n{out}"
         );
     }
 }

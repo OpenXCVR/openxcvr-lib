@@ -30,11 +30,12 @@ pub(super) fn php_type(f: &PageField) -> Option<&'static str> {
         | FieldType::U16Le
         | FieldType::U32Be
         | FieldType::I32Be
-        | FieldType::U64Le
-        | FieldType::U64Be
         | FieldType::F16Be
         | FieldType::X16Be
         | FieldType::Bitmap => Some("int"),
+        // PHP has no unsigned 64-bit integer and no core big-integer type.
+        // A decimal string carries every value in [0, 2^64-1] exactly.
+        FieldType::U64Le | FieldType::U64Be => Some("string"),
         FieldType::Ascii => Some("string"),
         FieldType::Bytes | FieldType::Composite => Some("string"),
     }
@@ -112,11 +113,13 @@ pub(super) fn decode_scalar_php(f: &PageField, file_offset: i64) -> String {
                 "($tmp{o} = unpack('N', substr($buf, {o}, 4))[1]) >= 2147483648 ? $tmp{o} - 4294967296 : $tmp{o}"
             )
         }
+        // On 64-bit PHP, unpack of a value >= 2^63 yields a negative int.
+        // sprintf('%u') prints that bit pattern as an unsigned decimal string.
         FieldType::U64Le => {
-            format!("unpack('P', substr($buf, {o}, 8))[1]")
+            format!("sprintf('%u', unpack('P', substr($buf, {o}, 8))[1])")
         }
         FieldType::U64Be => {
-            format!("unpack('J', substr($buf, {o}, 8))[1]")
+            format!("sprintf('%u', unpack('J', substr($buf, {o}, 8))[1])")
         }
         FieldType::F16Be | FieldType::X16Be => {
             format!("unpack('n', substr($buf, {o}, 2))[1]")

@@ -99,13 +99,23 @@ fn u64be_round_trips_through_parse_validate_and_emit() {
 
     let java = JavaEmitter.emit_page(&schema);
     assert!(
-        java.contains("((long) (buf[0] & 0xFF) << 56)"),
-        "java decode must shift the first byte as the MSB:\n{java}"
+        java.contains(
+            "new java.math.BigInteger(1, new byte[] { buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7] })"
+        ),
+        "java decode must pass wire order as a non-negative BigInteger magnitude:\n{java}"
+    );
+    assert!(java.contains("java.math.BigInteger"), "{java}");
+    assert!(
+        !java.contains("(long)"),
+        "u64be must not decode or encode as a signed long:\n{java}"
     );
 
     let php = PhpEmitter.emit_page(&schema);
-    assert!(php.contains("unpack('J', substr($buf, 0, 8))"), "{php}");
-    assert!(php.contains("pack('J', $value)"), "{php}");
+    assert!(
+        php.contains("sprintf('%u', unpack('J', substr($buf, 0, 8))[1])"),
+        "{php}"
+    );
+    assert!(php.contains("18446744073709551615"), "{php}");
     assert!(
         !php.contains("pack('P'") && !php.contains("unpack('P'"),
         "{php}"
@@ -238,6 +248,63 @@ fn main() {{
         .trim()
         .parse()
         .unwrap_or_else(|err| panic!("decode output {:?}: {err}", run.stdout))
+}
+
+fn round_trip_le_page() -> openxcvr_codegen::ir::pages::PageSchema {
+    let yaml = r#"
+schema: openxcvr.page.v1
+kind: page
+id: U64LeRoundTrip
+title: u64le round trip
+page_address: lower
+size_bytes: 8
+fields:
+  - { name: counter, offset: 0, size_bytes: 8, type: u64le, access: rw }
+"#;
+    let schema = parse_page_schema(yaml).expect("u64le parses");
+    validate_pages(std::slice::from_ref(&schema)).expect("u64le validates");
+    schema
+}
+
+/// Writable round-trip pages executed by the Java, C# and PHP binding suites.
+/// CMIS Page 14h counters are read-only, so the generator emits no setter for
+/// them; these fixtures are the emitter output for a writable scalar of each
+/// byte order and must stay byte-identical to a fresh emit.
+#[test]
+fn unsigned_u64_round_trip_fixtures_match_emitter() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let cases = [
+        (
+            "bindings/java/src/test/java/com/openxcvr/generated/U64LeRoundTrip.java",
+            JavaEmitter.emit_page(&round_trip_le_page()),
+        ),
+        (
+            "bindings/java/src/test/java/com/openxcvr/generated/U64BeRoundTrip.java",
+            JavaEmitter.emit_page(&round_trip_page()),
+        ),
+        (
+            "bindings/csharp/tests/OpenXcvr.Transceivers.Tests/U64LeRoundTrip.cs",
+            CSharpEmitter.emit_page(&round_trip_le_page()),
+        ),
+        (
+            "bindings/csharp/tests/OpenXcvr.Transceivers.Tests/U64BeRoundTrip.cs",
+            CSharpEmitter.emit_page(&round_trip_page()),
+        ),
+        (
+            "bindings/php/tests/support/U64LeRoundTrip.php",
+            PhpEmitter.emit_page(&round_trip_le_page()),
+        ),
+        (
+            "bindings/php/tests/support/U64BeRoundTrip.php",
+            PhpEmitter.emit_page(&round_trip_page()),
+        ),
+    ];
+    for (path, emitted) in cases {
+        let full = root.join(path);
+        let committed = std::fs::read_to_string(&full)
+            .unwrap_or_else(|err| panic!("read {}: {err}", full.display()));
+        assert_eq!(committed, emitted, "{path} drifted from the emitter");
+    }
 }
 
 #[test]

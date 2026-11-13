@@ -209,3 +209,55 @@ fn two_byte_enum_ref_decodes_full_width() {
         "2-byte enum must not truncate to the first byte\n---\n{out}"
     );
 }
+
+#[test]
+fn u64_is_decimal_string_and_u32_stays_int() {
+    let mut le = u8_field("counter_le", 0);
+    le.ty = FieldType::U64Le;
+    le.size_bytes = Some(8);
+    le.access = Some(crate::ir::pages::Access::Rw);
+    let mut be = u8_field("counter_be", 8);
+    be.ty = FieldType::U64Be;
+    be.size_bytes = Some(8);
+    be.access = Some(crate::ir::pages::Access::Rw);
+    let mut u32 = u8_field("module_power_up_time", 16);
+    u32.ty = FieldType::U32Be;
+    u32.size_bytes = Some(4);
+    let mut schema = lower_schema();
+    schema.fields = vec![le, be, u32];
+    schema.size_bytes = Some(128);
+    let out = emit_page(&schema);
+    assert!(out.contains("public readonly string $counterLe,"), "{out}");
+    assert!(out.contains("public readonly string $counterBe,"), "{out}");
+    assert!(
+        out.contains("public readonly int $modulePowerUpTime,"),
+        "{out}"
+    );
+    assert!(
+        out.contains("counterLe: sprintf('%u', unpack('P', substr($buf, 0, 8))[1]),"),
+        "{out}"
+    );
+    assert!(
+        out.contains("counterBe: sprintf('%u', unpack('J', substr($buf, 8, 8))[1]),"),
+        "{out}"
+    );
+    assert!(
+        out.contains("function setCounterLe(string &$buf, string $value)"),
+        "{out}"
+    );
+    assert!(
+        out.contains("function setCounterBe(string &$buf, string $value)"),
+        "{out}"
+    );
+    assert!(out.contains("18446744073709551615"), "{out}");
+    assert!(out.contains("preg_match('/^[0-9]+$/', $value)"), "{out}");
+    assert!(
+        out.contains("$raw = strrev($raw);"),
+        "le writer reverses\n{out}"
+    );
+    assert!(
+        !out.contains("pack('P', $") && !out.contains("pack('J', $"),
+        "writer must not pack the decimal string\n{out}"
+    );
+    assert!(!out.contains("bcmath") && !out.contains("gmp"), "{out}");
+}
