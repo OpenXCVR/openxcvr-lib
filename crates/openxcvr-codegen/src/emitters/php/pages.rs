@@ -121,7 +121,9 @@ fn enc_bit_width(f: &PageField) -> u32 {
 }
 
 /// Decimal-string u64 to exactly 8 bytes, no bcmath/gmp. Rejects a non-digit
-/// string and any value above 18446744073709551615.
+/// string and any value above 18446744073709551615. `\A`/`\z` match the whole
+/// subject; PCRE `$` also matches before a final newline, so `"5\n"` would
+/// otherwise pass and the division loop would encode a different value.
 fn encode_u64_php(o: usize, le: bool) -> String {
     let reverse = if le {
         "\n        $raw = strrev($raw);"
@@ -129,7 +131,7 @@ fn encode_u64_php(o: usize, le: bool) -> String {
         ""
     };
     format!(
-        r#"if (!preg_match('/^[0-9]+$/', $value)) {{
+        r#"if (!preg_match('/\A[0-9]+\z/', $value)) {{
         throw new \InvalidArgumentException('u64 must be a decimal digit string');
         }}
         $digits = ltrim($value, '0');

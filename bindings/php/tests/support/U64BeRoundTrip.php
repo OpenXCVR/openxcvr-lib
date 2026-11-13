@@ -19,7 +19,7 @@ readonly class U64BeRoundTrip
 
     public static function setCounter(string &$buf, string $value): void
     {
-        if (!preg_match('/^[0-9]+$/', $value)) {
+        if (!preg_match('/\A[0-9]+\z/', $value)) {
         throw new \InvalidArgumentException('u64 must be a decimal digit string');
         }
         $digits = ltrim($value, '0');

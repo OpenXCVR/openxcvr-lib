@@ -250,7 +250,7 @@ fn u64_is_decimal_string_and_u32_stays_int() {
         "{out}"
     );
     assert!(out.contains("18446744073709551615"), "{out}");
-    assert!(out.contains("preg_match('/^[0-9]+$/', $value)"), "{out}");
+    assert!(out.contains(r"preg_match('/\A[0-9]+\z/', $value)"), "{out}");
     assert!(
         out.contains("$raw = strrev($raw);"),
         "le writer reverses\n{out}"

@@ -68,6 +68,51 @@ public class U64UnsignedTests
         }
     }
 
+    [Fact]
+    public void AsymmetricLittleEndianBytes()
+    {
+        byte[] le = { 0x10, 0x32, 0x54, 0x76, 0x98, 0xBA, 0xDC, 0xFE };
+        Assert.Equal(18364758544493064720UL, U64LeRoundTrip.Decode(le).Counter);
+        var buf = new byte[8];
+        U64LeRoundTrip.SetCounter(buf, 18364758544493064720UL);
+        Assert.Equal(le, buf);
+    }
+
+    [Fact]
+    public void AsymmetricBigEndianBytes()
+    {
+        byte[] be = { 0xFE, 0xDC, 0xBA, 0x98, 0x76, 0x54, 0x32, 0x10 };
+        Assert.Equal(18364758544493064720UL, U64BeRoundTrip.Decode(be).Counter);
+        var buf = new byte[8];
+        U64BeRoundTrip.SetCounter(buf, 18364758544493064720UL);
+        Assert.Equal(be, buf);
+    }
+
+    [Fact]
+    public void Page14hLaneElementsAreIndependent()
+    {
+        var page = new byte[128];
+        page[64] = 0x01;
+        page[65] = 0x02;
+        page[66] = 0x03;
+        page[67] = 0x04;
+        page[68] = 0x05;
+        page[69] = 0x06;
+        page[70] = 0x07;
+        page[71] = 0x08;
+        page[80] = 0x10;
+        page[81] = 0x32;
+        page[82] = 0x54;
+        page[83] = 0x76;
+        page[84] = 0x98;
+        page[85] = 0xBA;
+        page[86] = 0xDC;
+        page[87] = 0xFE;
+        var decoded = CmisPage14hDiagnosticsResults.Decode(page);
+        Assert.Equal(578437695752307201UL, decoded.HostSideErrorCountLane14[0]);
+        Assert.Equal(18364758544493064720UL, decoded.HostSideErrorCountLane14[1]);
+    }
+
     private static void RoundTrip(bool little)
     {
         ulong[] values = { 0UL, long.MaxValue, 1UL << 63, ulong.MaxValue };
