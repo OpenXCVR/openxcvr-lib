@@ -1,0 +1,240 @@
+fields:
+  - name: recovered_clock_for_generator_options
+    display_name: RecoveredClockForGeneratorOptions
+    offset: 140
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    enum_inline:
+      - { value: 0x0, name: not_supported, description: "Recovered clock not supported for contra-directional pattern generator" }
+      - { value: 0x1, name: supported_without_loopback, description: "Supported without loopback" }
+      - { value: 0x2, name: supported_with_loopback, description: "Supported with loopback" }
+      - { value: 0x3, name: supported_with_and_without_loopback, description: "Supported with and without loopback" }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 229, table: "Table 8-108", quote: "Options to use recovered clock for contra-directional pattern generator on the same module side." }
+
+  - name: reference_clock_for_patterns_supported
+    display_name: ReferenceClockForPatternsSupported
+    offset: 140
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 229, table: "Table 8-108", quote: "Option to use reference clock for pattern generation." }
+
+  - name: user_pattern_length_supported
+    display_name: UserPatternLengthSupported
+    offset: 140
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    encoding: { kind: formula, expression: "length_bytes = 2 * (raw + 1)" }
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 229, table: "Table 8-108", quote: "U4 Maximum length L of the user defined pattern, where field value n encodes L as L=2(n+1)." }
+
+  - name: host_side_generator_data_invert_supported
+    display_name: HostSideGeneratorSupportsDataInvert
+    offset: 141
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "HostSideGeneratorSupportsDataInvert: Byte 13h:145 supported." }
+
+  - name: host_side_generator_data_swap_supported
+    display_name: HostSideGeneratorSupportsDataSwap
+    offset: 141
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "HostSideGeneratorSupportsDataSwap: Byte 13h:146 supported." }
+
+  - name: host_side_checker_data_invert_supported
+    display_name: HostSideCheckerSupportsDataInvert
+    offset: 141
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "HostSideCheckerSupportsDataInvert: Byte 13h:161 supported." }
+
+  - name: host_side_checker_data_swap_supported
+    display_name: HostSideCheckerSupportsDataSwap
+    offset: 141
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "HostSideCheckerSupportsDataSwap: Byte 13h:162 supported." }
+
+  - name: media_side_generator_data_invert_supported
+    display_name: MediaSideGeneratorSupportsDataInvert
+    offset: 141
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "MediaSideGeneratorSupportsDataInvert: Byte 13h:153 supported." }
+
+  - name: media_side_generator_data_swap_supported
+    display_name: MediaSideGeneratorSupportsDataSwap
+    offset: 141
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "MediaSideGeneratorSupportsDataSwap: Byte 13h:154 supported." }
+
+  - name: media_side_checker_data_invert_supported
+    display_name: MediaSideCheckerSupportsDataInvert
+    offset: 141
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "MediaSideCheckerSupportsDataInvert: Byte 13h:169 supported." }
+
+  - name: media_side_checker_data_swap_supported
+    display_name: MediaSideCheckerSupportsDataSwap
+    offset: 141
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "MediaSideCheckerSupportsDataSwap: Byte 13h:170 supported." }
+
+  - name: host_generator_per_lane_pattern_supported
+    display_name: HostGeneratorSupportsPerLanePattern
+    offset: 142
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Host side pattern selection for generator supports per lane pattern selection." }
+
+  - name: host_generator_per_lane_enable_supported
+    display_name: HostGeneratorSupportsPerLaneEnable
+    offset: 142
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Host side pattern generator supports per lane enable." }
+
+  - name: host_checker_per_lane_pattern_supported
+    display_name: HostCheckerSupportsPerLanePattern
+    offset: 142
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Host side pattern selection for checker supports per lane pattern selection." }
+
+  - name: host_checker_per_lane_enable_supported
+    display_name: HostCheckerSupportsPerLaneEnable
+    offset: 142
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Host side pattern checker supports per lane enable." }
+
+  - name: media_generator_per_lane_pattern_supported
+    display_name: MediaGeneratorSupportsPerLanePattern
+    offset: 142
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Media side pattern selection for generator supports per lane pattern selection." }
+
+  - name: media_generator_per_lane_enable_supported
+    display_name: MediaGeneratorSupportsPerLaneEnable
+    offset: 142
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Media side pattern generator supports per lane enable." }
+
+  - name: media_checker_per_lane_pattern_supported
+    display_name: MediaCheckerSupportsPerLanePattern
+    offset: 142
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Media side pattern selection for checker supports per lane pattern selection." }

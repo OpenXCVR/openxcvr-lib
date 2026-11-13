@@ -1,0 +1,54 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisMediaType
+title: CMIS Media Type (8-bit)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.2.13 / Table 8-20
+  pdf_pages: [156, 157]
+entries:
+  - value: 0x00
+    name: undefined
+    description: Undefined media type; no associated MediaInterfaceID table applies
+    reach:
+      kind: none
+  - value: 0x01
+    name: optical_interfaces_mmf
+    description: Optical interfaces over MMF; MediaInterfaceID values use SFF-8024 4.14 Table 4-6 MMF media interface IDs
+    aliases: [mmf]
+    reach:
+      kind: mmf
+  - value: 0x02
+    name: optical_interfaces_smf
+    description: Optical interfaces over SMF; MediaInterfaceID values use SFF-8024 4.14 Table 4-7 SMF media interface IDs
+    aliases: [smf]
+    reach:
+      kind: smf
+  - value: 0x03
+    name: passive_and_linear_active_copper_cables
+    description: Passive and linear active copper cables; MediaInterfaceID values use SFF-8024 4.14 Table 4-8 passive and linear active copper cable and passive loopback media interface codes
+    aliases: [passive_copper]
+    reach:
+      kind: passive_copper
+  - value: 0x04
+    name: active_cables
+    description: Active cables; MediaInterfaceID values use SFF-8024 4.14 Table 4-9 limiting and retimed active cable assembly and active loopback media interface codes
+    aliases: [active_copper]
+    reach:
+      kind: active_copper
+  - value: 0x05
+    name: base_t
+    description: BASE-T; MediaInterfaceID values use SFF-8024 4.14 Table 4-10 BASE-T media interface codes
+    reach:
+      kind: base_t
+  - value: 0x06..0x3f
+    name: reserved_06_3f
+    description: Reserved
+  - value: 0x40..0x8f
+    name: custom_40_8f
+    description: Custom media types
+  - value: 0x90..0xff
+    name: reserved_90_ff
+    description: Reserved

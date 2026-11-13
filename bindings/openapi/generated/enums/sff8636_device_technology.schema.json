@@ -1,0 +1,100 @@
+{
+  "$id": "sff8636_device_technology.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "850 nm VCSEL",
+      "title": "nm850_vcsel"
+    },
+    {
+      "const": 1,
+      "description": "1310 nm VCSEL",
+      "title": "nm1310_vcsel"
+    },
+    {
+      "const": 2,
+      "description": "1550 nm VCSEL",
+      "title": "nm1550_vcsel"
+    },
+    {
+      "const": 3,
+      "description": "1310 nm FP laser",
+      "title": "nm1310_fp"
+    },
+    {
+      "const": 4,
+      "description": "1310 nm DFB laser",
+      "title": "nm1310_dfb"
+    },
+    {
+      "const": 5,
+      "description": "1550 nm DFB laser",
+      "title": "nm1550_dfb"
+    },
+    {
+      "const": 6,
+      "description": "1310 nm EML",
+      "title": "nm1310_eml"
+    },
+    {
+      "const": 7,
+      "description": "1550 nm EML",
+      "title": "nm1550_eml"
+    },
+    {
+      "const": 8,
+      "description": "Other or undefined transmitter technology",
+      "title": "other_or_undefined"
+    },
+    {
+      "const": 9,
+      "description": "1490 nm DFB laser",
+      "title": "nm1490_dfb"
+    },
+    {
+      "const": 10,
+      "description": "Copper cable unequalized",
+      "title": "copper_unequalized"
+    },
+    {
+      "const": 11,
+      "description": "Copper cable passive equalized",
+      "title": "copper_passive_equalized"
+    },
+    {
+      "const": 12,
+      "description": "Copper cable with near and far end limiting active equalizers",
+      "title": "copper_near_far_limiting_active_equalizers"
+    },
+    {
+      "const": 13,
+      "description": "Copper cable with far end limiting active equalizers",
+      "title": "copper_far_limiting_active_equalizers"
+    },
+    {
+      "const": 14,
+      "description": "Copper cable with near end limiting active equalizers",
+      "title": "copper_near_limiting_active_equalizers"
+    },
+    {
+      "const": 15,
+      "description": "Copper cable with linear active equalizers",
+      "title": "copper_linear_active_equalizers"
+    }
+  ],
+  "title": "Sff8636DeviceTechnology",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      51
+    ],
+    "spec": "SFF-8636 v2.11 § 6.3.13",
+    "table": "Table 6-20"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

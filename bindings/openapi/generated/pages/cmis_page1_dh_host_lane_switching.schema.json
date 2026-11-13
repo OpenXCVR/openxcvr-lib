@@ -1,0 +1,250 @@
+{
+  "$id": "cmis_page1_dh_host_lane_switching.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "commit_redirection": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "CommitRedirection: 1b: Commit RedirectionOfLane register to HW.",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "enable_host_lane_redirection": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "EnableHostLaneRedirection: 0b: disabled: commit command is without effect; 1b: enabled: commit command is effective",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "max_redirection_commit_duration": {
+      "description": "Encoded as defined in CMIS 5.3 Table 8-48.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "MaxRedirectionCommitDuration: Maximum duration of a CommitRedirection command execution being in progress, encoded as defined in Table 8-48.",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "redirect_status_of_lane": {
+      "description": "Value is the nominal host lane number j in {1..8} to which electrical host lane <lane> is currently redirected; default value is j = lane.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 270,
+        "quote": "RedirectStatusOfLane<i> contains the nominal lane number j in {1, ..., 8} to which the electrical host lane <i> is redirected. Default value: j = i.",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "redirection_commit_result": {
+      "$ref": "../enums/cmis_redirection_commit_result.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 270,
+        "quote": "RedirectionCommitResult<i> encodes the result of the last (or current) host lane switching commit command on lane <i>.",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      },
+      "x-openxcvr-until": "5.4"
+    },
+    "redirection_commit_result_lane": {
+      "items": {
+        "$ref": "../enums/cmis_redirection_commit_result.schema.json"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 299,
+        "quote": "RedirectionCommitResult<i> encodes the result of the last (or current) host lane switching commit command on lane <i>",
+        "section": "CMIS 5.4 § 8.25",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "redirection_of_lane": {
+      "description": "Value is the nominal host lane number j in {1..8} to which electrical host lane <lane> is redirected; values must form a permutation of {1..8}.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "RedirectionOfLane<i> contains the nominal host lane number j in {1, ..., 8} to which the electrical host lane with lane number <i> is to be redirected.",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_128_bits_3_0": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "Byte 128 bits 3-0: Reserved",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_129_135": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "Bytes 129-135: Reserved [7]",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_144_151": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "Bytes 144-151: Reserved [8]",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_152_bits_7_1": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "Byte 152 bits 7-1: Reserved",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_153_159": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "Bytes 153-159: Reserved [7]",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_160_bits_7_1": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "Byte 160 bits 7-1: Reserved",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_161_167": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 270,
+        "quote": "Bytes 161-167: Reserved [7]",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_169_183": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 270,
+        "quote": "Bytes 169-183: Reserved [15]",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      },
+      "x-openxcvr-until": "5.4"
+    },
+    "reserved_page_1dh_176_183": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 299,
+        "quote": "Bytes 176-183: Reserved [8]",
+        "section": "CMIS 5.4 § 8.25",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_1dh_192_199": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 270,
+        "quote": "Bytes 192-199: Reserved [8]",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-166"
+      }
+    },
+    "reserved_page_1dh_200_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 269,
+        "quote": "Bytes 200-255: Reserved [56]",
+        "section": "CMIS 5.3 § 8.21",
+        "table": "Table 8-165"
+      }
+    }
+  },
+  "required": [
+    "max_redirection_commit_duration",
+    "reserved_page_1dh_128_bits_3_0",
+    "reserved_page_1dh_129_135",
+    "redirection_of_lane",
+    "reserved_page_1dh_144_151",
+    "enable_host_lane_redirection",
+    "reserved_page_1dh_152_bits_7_1",
+    "reserved_page_1dh_153_159",
+    "commit_redirection",
+    "reserved_page_1dh_160_bits_7_1",
+    "reserved_page_1dh_161_167",
+    "redirection_commit_result",
+    "reserved_page_1dh_169_183",
+    "redirection_commit_result_lane",
+    "reserved_page_1dh_176_183",
+    "redirect_status_of_lane",
+    "reserved_page_1dh_192_199",
+    "reserved_page_1dh_200_255"
+  ],
+  "title": "CmisPage1DhHostLaneSwitching",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      268,
+      269,
+      270
+    ],
+    "spec": "CMIS 5.3 § 8.21"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

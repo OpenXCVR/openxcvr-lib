@@ -1,0 +1,684 @@
+{
+  "$id": "page_a2h_diagnostics_base.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "adaptive_input_eq_fail_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added bit 4, byte 118, A2h Adaptive Input EQ Fault indicator'; Rev 12.4 Table 10-1 (p. 41) defines byte 118 bit 4, Rev 12.3 Table 10-1 (p. 40) reserves byte 118 bits 4-7",
+        "pdf_page": 50,
+        "quote": "Adaptive Input EQ Fail Flag - Tx Adaptive Input EQ fail status. 1b = Tx Adaptive Input EQ fail",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "alarm_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 32,
+      "minItems": 32,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 47,
+        "quote": "Alarm and Warning Flag Bits",
+        "section": "SFF-8472 v12.5a § 9.9",
+        "table": "Table 9-17"
+      }
+    },
+    "cc_dmi": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 45,
+        "quote": "CC_DMI",
+        "section": "SFF-8472 v12.5a § 9.7"
+      }
+    },
+    "data_not_ready": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.4: 'Modified name and definition of bit 0/byte110/A2h to clarify that this status refers to monitor data'",
+        "pdf_page": 46,
+        "quote": "Data_Not_Ready - Indicates module does not yet have valid monitor data",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "enhanced_control_registers": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Tables 9-15 (Enhanced Control)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 71-74 'Enhanced Control Registers'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)",
+        "pdf_page": 44,
+        "quote": "Enhanced Control Registers",
+        "section": "SFF-8472 v12.5a § 9.6",
+        "table": "Table 9-15"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "enhanced_controls_advertisement": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 on Additional Enhanced Features ... Tables 9-12 (Enhanced Control Advertisement)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 56-57 'Enhanced Controls Advertisements'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)",
+        "pdf_page": 42,
+        "quote": "Enhanced Control Advertisement",
+        "section": "SFF-8472 v12.5a § 9.6",
+        "table": "Table 9-12"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "enhanced_flags_advertisement": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Tables 9-13 (Enhanced Flag Advertisement)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 58-59 'Enhanced Status Advertisements'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)",
+        "pdf_page": 42,
+        "quote": "Enhanced Flags Advertisement",
+        "section": "SFF-8472 v12.5a § 9.6",
+        "table": "Table 9-13"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "external_calibration_constants": {
+      "type": "object",
+      "x-openxcvr-note": "complex type — see schema YAML for full constraints",
+      "x-openxcvr-provenance": {
+        "pdf_page": 40,
+        "quote": "Calibration Constants for External Calibration Option",
+        "section": "SFF-8472 v12.5a § 9.5",
+        "table": "Table 9-6"
+      }
+    },
+    "external_calibration_linear_term": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 40,
+        "quote": "Slopes and offsets for Tx bias, Tx power, temperature, and voltage",
+        "section": "SFF-8472 v12.5a § 9.5",
+        "table": "Table 9-6"
+      }
+    },
+    "gfc64_mode_select": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.3: 'Added bits to support 64GFC speed negotiation'; Rev 12.3 Table 10-1 (p. 40) defines byte 119 bit 2 as '64GFC Mode'",
+        "pdf_page": 50,
+        "quote": "64GFC Mode - Writing a 1 to this bit selects 64GFC speed of operation at 28.9 GBd",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "12.3"
+    },
+    "max_power_consumption": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "0.1 W",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Table 9-11 with definitions for all bytes used'). Rev 12.4 § 9.6 Table 9-11 (p. 34) defines A2h byte 66 'Max Power Consumption'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)",
+        "pdf_page": 42,
+        "quote": "Max Power Consumption",
+        "section": "SFF-8472 v12.5a § 9.6",
+        "table": "Table 9-11"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "optional_laser_temperature": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1/256 deg C or vendor-defined wavelength units",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'",
+        "pdf_page": 46,
+        "quote": "Optional Laser Temp/Wavelength MSB/LSB",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "optional_laser_temperature_threshold": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "1/256 deg C",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'",
+        "pdf_page": 39,
+        "quote": "Optional Laser Temp High/Low Alarm and Warning",
+        "section": "SFF-8472 v12.5a § 9.4",
+        "table": "Table 9-5"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "optional_rx_cdr_unlocked": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Optional Rx CDR unlocked - Used when bit 64.3 (A0h) is set to 1. If the Rx side CDR is enabled, a value of 0 indicates that the CDR is locked",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "optional_tec_current": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "0.1 mA",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'",
+        "pdf_page": 46,
+        "quote": "Optional TEC current MSB/LSB",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "optional_tec_current_threshold": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.1 mA",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'",
+        "pdf_page": 39,
+        "quote": "Optional TEC Current High/Low Alarm and Warning",
+        "section": "SFF-8472 v12.5a § 9.4",
+        "table": "Table 9-5"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "optional_tx_cdr_unlocked": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Optional Tx CDR unlocked - Used when bit 64.3 (A0h) is set to 1. If the Tx side CDR is enabled, a value of 0 indicates that the CDR is locked",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "page_select": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Page Select",
+        "section": "SFF-8472 v12.5a § 10.3",
+        "table": "Table 10-3"
+      }
+    },
+    "paged_region_vendor_specific_tail": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "quote": "Vendor specific control functions",
+        "section": "SFF-8472 v12.5a § 11.2",
+        "table": "Table 11-2"
+      }
+    },
+    "pam4_mode_rx_configured": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.3: 'Added bits to support 64GFC speed negotiation'; Rev 12.3 Table 10-1 (p. 40) defines byte 119 bit 3 as '64GFC Mode Rx Configured'",
+        "pdf_page": 50,
+        "quote": "PAM4 Mode Rx Configured - This status bit indicates the module Rx logic has finished configuring itself to 64GFC mode at 28.9 GBd",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "12.3"
+    },
+    "pam4_mode_tx_configured": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.3: 'Added bits to support 64GFC speed negotiation'; Rev 12.3 Table 10-1 (p. 40) defines byte 119 bit 4 as '64GFC Mode Tx Configured'",
+        "pdf_page": 50,
+        "quote": "PAM4 Mode Tx Configured - This status bit indicates the module Tx logic has finished configuring itself to 64GFC mode at 28.9 GBd",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "12.3"
+    },
+    "power_level_4_enable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added bit 2, byte 118, A2h Enable Power Class 4'; Rev 12.4 Table 10-1 (p. 41) defines byte 118 bit 2, Rev 12.3 Table 10-1 (p. 40) reserves byte 118 bit 2",
+        "pdf_page": 50,
+        "quote": "Power Level 4 Enable - Value of 1 enables Power Level 4 if listed in A0h, Byte 64",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "power_level_operation_state": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Power Level Operation State - Optional. SFF-8431 Power Level (maximum power dissipation) status",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "power_level_select": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Power Level Select - Optional. SFF-8431 Power Level (maximum power dissipation) control bit",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "reserved_a2h_111": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Reserved",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "reserved_calibration_or_enhanced_tail": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 42,
+        "quote": "Reserved",
+        "section": "SFF-8472 v12.5a §§ 9.5-9.6",
+        "tables": [
+          "Table 9-6",
+          "Table 9-11"
+        ]
+      }
+    },
+    "rs0_state": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Rate_Select State [aka. RS(0)] - Digital state of the module's Rate_Select Input Pin",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "rs1_state": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "RS(1) State - Digital state of SFP input pin AS(1) per SFF-8079 or RS(1) per SFF-8431",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "rx_los_state": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Rx_LOS State - Digital state of the RX_LOS Output Pin",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "rx_output_emphasis_control": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 11.9b (SFF-8472 Rev 12.3 change history: 'Added Tx input EQ and RX output EMPH to bytes A2h 114-115'). 11.9b is not an admitted compliance revision (Table 8-8 codes name 11.4 then 12.3), so the window snaps to 12.3, the earliest compliance-code revision whose document defines the field (Rev 12.3 Table 9-14 'Output Emphasis Control (Address A2H Byte 115)', p. 39)",
+        "pdf_page": 49,
+        "quote": "Output Emphasis Control",
+        "section": "SFF-8472 v12.5a § 9.10",
+        "table": "Table 9-19"
+      },
+      "x-openxcvr-since": "12.3"
+    },
+    "rx_power": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "RX Power MSB/LSB",
+        "section": "SFF-8472 v12.5a §§ 9.3, 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "rx_power_coefficient": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 40,
+        "quote": "Rx_PWR(4) through Rx_PWR(0)",
+        "section": "SFF-8472 v12.5a § 9.5",
+        "table": "Table 9-6"
+      }
+    },
+    "rx_power_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.1 uW",
+      "x-openxcvr-provenance": {
+        "pdf_page": 39,
+        "quote": "RX Power High/Low Alarm and Warning",
+        "section": "SFF-8472 v12.5a § 9.4",
+        "table": "Table 9-5"
+      }
+    },
+    "secondary_extended_specification_compliance": {
+      "$ref": "../enums/sff8024_extended_spec_compliance.schema.json",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Table 9-11 with definitions for all bytes used'). Rev 12.4 § 9.6 Table 9-11 (p. 34) defines A2h byte 67 'Secondary Extended Spec compliance'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)",
+        "pdf_page": 42,
+        "quote": "Secondary Extended Spec compliance",
+        "section": "SFF-8472 v12.5a § 9.6",
+        "table": "Table 9-11"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "signal_integrity_control_advertisement": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Tables 9-14 (Enhanced Signal Integrity Control Advertisement)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 60-65 'Enhanced Signal Integrity Controls Advertisement'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)",
+        "pdf_page": 43,
+        "quote": "Enhanced Signal Integrity Control Advertisement",
+        "section": "SFF-8472 v12.5a § 9.6",
+        "table": "Table 9-14"
+      },
+      "x-openxcvr-since": "12.4"
+    },
+    "soft_rate_select_rs0": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Soft Rate_Select Select [aka. RS(0)] - Read/write bit that allows software rate select control. Writing '1' selects full bandwidth operation",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "soft_rate_select_rs1": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Rate Select logic for 10G/8G with bypassable CDRs'",
+        "pdf_page": 50,
+        "quote": "Soft RS(1) Select - Read/write bit that allows software Tx rate control. Writing '1' selects full speed Tx operation",
+        "section": "SFF-8472 v12.5a § 10.1",
+        "table": "Table 10-1"
+      },
+      "x-openxcvr-since": "11.4"
+    },
+    "soft_tx_disable_select": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Soft TX Disable Select - Read/write bit that allows software disable of laser. Writing '1' disables laser",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "supply_voltage": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Vcc MSB/LSB",
+        "section": "SFF-8472 v12.5a §§ 9.3, 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "supply_voltage_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "100 uV",
+      "x-openxcvr-provenance": {
+        "pdf_page": 39,
+        "quote": "Voltage High/Low Alarm and Warning",
+        "section": "SFF-8472 v12.5a § 9.4",
+        "table": "Table 9-5"
+      }
+    },
+    "temperature": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Temperature MSB/LSB",
+        "section": "SFF-8472 v12.5a §§ 9.3, 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "temperature_threshold": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "1/256 deg C",
+      "x-openxcvr-provenance": {
+        "pdf_page": 39,
+        "quote": "Temp High/Low Alarm and Warning",
+        "section": "SFF-8472 v12.5a § 9.4",
+        "table": "Table 9-5"
+      }
+    },
+    "tx_bias": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "TX Bias MSB/LSB",
+        "section": "SFF-8472 v12.5a §§ 9.3, 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "tx_bias_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "2 uA",
+      "x-openxcvr-provenance": {
+        "pdf_page": 39,
+        "quote": "Bias High/Low Alarm and Warning",
+        "section": "SFF-8472 v12.5a § 9.4",
+        "table": "Table 9-5"
+      }
+    },
+    "tx_disable_state": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "TX Disable State - Digital state of the TX Disable Input Pin. Updated within 100 ms of change on pin",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "tx_fault_state": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "TX Fault State - Digital state of the TX Fault Output Pin",
+        "section": "SFF-8472 v12.5a § 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "tx_input_equalization_control": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "Added at Rev 11.9b (SFF-8472 Rev 12.3 change history: 'Added Tx input EQ and RX output EMPH to bytes A2h 114-115'). 11.9b is not an admitted compliance revision (Table 8-8 codes name 11.4 then 12.3), so the window snaps to 12.3, the earliest compliance-code revision whose document defines the field (Rev 12.3 Table 9-13 'Input Equalization (Address A2H Byte 114)', p. 39)",
+        "pdf_page": 49,
+        "quote": "Input Equalization",
+        "section": "SFF-8472 v12.5a § 9.10",
+        "table": "Table 9-18"
+      },
+      "x-openxcvr-since": "12.3"
+    },
+    "tx_power": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "TX Power MSB/LSB",
+        "section": "SFF-8472 v12.5a §§ 9.3, 9.8",
+        "table": "Table 9-16"
+      }
+    },
+    "tx_power_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.1 uW",
+      "x-openxcvr-provenance": {
+        "pdf_page": 39,
+        "quote": "TX Power High/Low Alarm and Warning",
+        "section": "SFF-8472 v12.5a § 9.4",
+        "table": "Table 9-5"
+      }
+    },
+    "user_eeprom_or_paged_region": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Page select directs A2h bytes 128-255",
+        "section": "SFF-8472 v12.5a §§ 10.3-11"
+      }
+    },
+    "vendor_specific_a2h_120_126": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Vendor Specific",
+        "section": "SFF-8472 v12.5a § 10.2"
+      }
+    }
+  },
+  "required": [
+    "temperature_threshold",
+    "supply_voltage_threshold",
+    "tx_bias_threshold",
+    "tx_power_threshold",
+    "rx_power_threshold",
+    "reserved_calibration_or_enhanced_tail",
+    "cc_dmi",
+    "temperature",
+    "supply_voltage",
+    "tx_bias",
+    "tx_power",
+    "rx_power",
+    "tx_disable_state",
+    "soft_tx_disable_select",
+    "rs1_state",
+    "rs0_state",
+    "soft_rate_select_rs0",
+    "tx_fault_state",
+    "rx_los_state",
+    "data_not_ready",
+    "reserved_a2h_111",
+    "alarm_warning_flag",
+    "tx_input_equalization_control",
+    "rx_output_emphasis_control",
+    "adaptive_input_eq_fail_flag",
+    "soft_rate_select_rs1",
+    "power_level_4_enable",
+    "power_level_operation_state",
+    "power_level_select",
+    "pam4_mode_tx_configured",
+    "pam4_mode_rx_configured",
+    "gfc64_mode_select",
+    "optional_tx_cdr_unlocked",
+    "optional_rx_cdr_unlocked",
+    "vendor_specific_a2h_120_126",
+    "page_select",
+    "user_eeprom_or_paged_region",
+    "paged_region_vendor_specific_tail"
+  ],
+  "title": "page_a2h_diagnostics_base",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "spec": "SFF-8472 v12.5a §§ 9-10"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8472",
+    "revision": "12.5a"
+  }
+}

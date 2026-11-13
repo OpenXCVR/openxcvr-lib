@@ -1,0 +1,38 @@
+{
+  "$id": "sff8636_page02h_user_eeprom.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "clei_code": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 58,
+        "quote": "the first 10 bytes of Page 02h Bytes 128-137 are used to store the CLEI code",
+        "section": "SFF-8636 v2.11 § 6.5"
+      }
+    },
+    "user_eeprom": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 58,
+        "quote": "Page 02 is optionally provided as user-writable EEPROM.",
+        "section": "SFF-8636 v2.11 § 6.5"
+      }
+    }
+  },
+  "required": [
+    "user_eeprom"
+  ],
+  "title": "Sff8636Page02hUserEeprom",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      58
+    ],
+    "spec": "SFF-8636 v2.11 § 6.5"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

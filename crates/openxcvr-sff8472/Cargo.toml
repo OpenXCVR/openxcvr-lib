@@ -1,0 +1,22 @@
+[package]
+name = "openxcvr-sff8472"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "SFF-8472 v12.5a (SFP / SFP+ / SFP28) adapter for the openxcvr universal transceiver library"
+readme = "README.md"
+keywords = ["transceiver", "sfp", "sff-8472", "optics", "eeprom"]
+categories = ["hardware-support", "encoding", "parser-implementations"]
+publish = false
+
+[dependencies]
+openxcvr-core = { path = "../openxcvr-core", version = "0.2.0" }
+thiserror = "2"
+
+[dev-dependencies]
+proptest = "1"
+serde_json = "1"

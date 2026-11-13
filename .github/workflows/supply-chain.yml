@@ -1,0 +1,68 @@
+name: supply-chain
+
+# Supply-chain gates: cargo-deny (licenses / advisories / bans / sources) and
+# cargo-semver-checks (breaking-change detection against the latest release
+# tag).
+#
+# deny.toml is tuned to this workspace's actual dependency tree. This repo
+# deliberately does not commit Cargo.lock, so cargo-deny re-resolves the tree
+# on every run: drift in dependency licensing, RustSec advisories, or allowed
+# sources fails here instead of on a dev host holding a stale local lockfile.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cargo-deny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Official action from the cargo-deny authors. Pinned to the commit
+      # tag v2 peels to (v2^{} == v2.1.1, "Fix use-git-cli deprecation
+      # (#116)", committer date 2026-07-13). The annotated tag object is
+      # b66acf5e9fe20f8aba065be86778a8a4c846f902; Actions requires the
+      # commit, not that object. Resolved from
+      # `gh api repos/EmbarkStudios/cargo-deny-action/commits/v2`
+      # and `git ls-remote` refs/tags/v2^{}.
+      - uses: EmbarkStudios/cargo-deny-action@3c6349835b2b7b196a839186cb8b78e02f7b5f25
+        # Runs `cargo deny check` over the full workspace lockfile:
+        # licenses + advisories + bans + sources. Warnings do not fail the
+        # job (e.g. duplicate syn majors surfaced by multiple-versions=warn,
+        # or a license allowance not currently encountered); errors do.
+        with:
+          command-arguments: --hide-inclusion-graph
+
+  # Breaking-change detection for the workspace crates. The baseline is the
+  # latest git tag: this repository has NO release tags yet, so until the
+  # first one is published this job resolves to an explanatory skip -- no
+  # baseline is invented (--baseline with a made-up version would compare
+  # against nothing real). It arms automatically on the first tag.
+  semver-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history + tags: the baseline is a git tag
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Detect baseline (latest release tag)
+        id: baseline
+        run: |
+          if [ -n "$(git tag -l)" ]; then
+            echo "have_tag=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No release tags exist yet: cargo-semver-checks has no baseline"
+            echo "to compare against, so this run skips. It arms automatically"
+            echo "when the first release tag is published."
+          fi
+      - name: Install cargo-semver-checks
+        if: steps.baseline.outputs.have_tag == 'true'
+        run: cargo install cargo-semver-checks --locked
+      - name: "Semver check (baseline = latest tag)"
+        if: steps.baseline.outputs.have_tag == 'true'
+        run: cargo semver-checks --workspace

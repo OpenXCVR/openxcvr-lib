@@ -1,0 +1,31 @@
+entries:
+  - value: 0xFA
+    name: vendor_specific_fa
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xFB
+    name: vendor_specific_fb
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xFC
+    name: vendor_specific_fc
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xFD
+    name: vendor_specific_fd
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xFE
+    name: vendor_specific_fe
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xFF
+    name: vendor_specific_ff
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}

@@ -1,0 +1,80 @@
+{
+  "$id": "cmis_lt_amplitude_code.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 2,
+      "description": "350 +/- 25 mV",
+      "title": "mv_350"
+    },
+    {
+      "const": 3,
+      "description": "400 +/- 25 mV",
+      "title": "mv_400"
+    },
+    {
+      "const": 4,
+      "description": "450 +/- 25 mV",
+      "title": "mv_450"
+    },
+    {
+      "const": 5,
+      "description": "500 +/- 25 mV",
+      "title": "mv_500"
+    },
+    {
+      "const": 6,
+      "description": "550 +/- 25 mV",
+      "title": "mv_550"
+    },
+    {
+      "const": 7,
+      "description": "600 +/- 25 mV",
+      "title": "mv_600"
+    },
+    {
+      "const": 8,
+      "description": "650 +/- 25 mV",
+      "title": "mv_650"
+    },
+    {
+      "const": 9,
+      "description": "700 +/- 25 mV",
+      "title": "mv_700"
+    },
+    {
+      "const": 10,
+      "description": "750 +/- 25 mV",
+      "title": "mv_750"
+    },
+    {
+      "const": 11,
+      "description": "800 +/- 25 mV",
+      "title": "mv_800"
+    },
+    {
+      "const": 12,
+      "description": "850 +/- 25 mV",
+      "title": "mv_850"
+    },
+    {
+      "const": 13,
+      "description": "900 +/- 25 mV",
+      "title": "mv_900"
+    }
+  ],
+  "title": "CmisLtAmplitudeCode",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      49,
+      64
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.3.1 and 6.5.1 (Tables 32, 67)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

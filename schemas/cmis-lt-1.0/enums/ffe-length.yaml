@@ -1,0 +1,37 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtFfeLength
+title: "CMIS-LT 1.0 Transmitter FFE Length"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.1 and 6.4.1 (Tables 9, 44)"
+  pdf_pages: [39, 55]
+entries:
+  - value: 0x0
+    name: taps_1
+    description: "FFE has 1 tap (no pulse shaping, simple driver)"
+  - value: 0x1
+    name: taps_2
+    description: "FFE has 2 taps (cursor plus one pre or post tap)"
+  - value: 0x2
+    name: taps_3
+    description: "FFE has 3 taps"
+  - value: 0x3
+    name: taps_4
+    description: "FFE has 4 taps"
+  - value: 0x4
+    name: taps_5
+    description: "FFE has 5 taps"
+  - value: 0x5
+    name: taps_6
+    description: "FFE has 6 taps"
+  - value: 0x6
+    name: taps_7
+    description: "FFE has 7 taps"
+  - value: 0x7
+    name: taps_8
+    description: "FFE has 8 taps"

@@ -1,0 +1,32 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage6DhMediaLaneSwitching
+title: CMIS Page 6Dh Media Lane Switching (banked)
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 8.33
+  pdf_pages: [318, 319]
+page_address: "6Dh"
+size_bytes: 128
+present_when: "page_01h_advertising.media_lane_switching_supported == true"
+
+# Introduced by CMIS 5.4 § 8.33 (see § 7.9 for the feature): permutation
+# routing of media lanes, mirroring the Page 1Dh host lane switching layout
+# (Table 8-195 subject areas Advertisement/Provisioning/Configuration/
+# Commands/Results/Status). Banked across media lanes per 's
+# bank-relative scope convention: each supported Bank covers a group of 8
+# media lanes; lane-banked pages support up to 4 banks through CMIS 5.3 and
+# up to 32 banks (256 lanes) since CMIS 5.4 via the BanksSupported escape
+# code 11b (01h:142.1-0, CmisBanksSupported5p4) plus ExtraLaneBanksSupported
+# (01h:174.4-0). Every field on this page is windowed since 5.4.
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+field_includes:
+  - fields/page-6dh-media-lane-switching-part-01.yaml
+fields: []

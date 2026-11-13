@@ -1,0 +1,379 @@
+fields:
+  - name: clei_code
+    display_name: CLEICode
+    offset: 190
+    size_bytes: 10
+    type: ascii
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.8"
+          table: "Table 8-15"
+          row: "190..199"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.7"
+      pdf_page: 162
+      table: "Table 8-30"
+      quote: "The CLEI (Common Language Equipment Identification) code is a 10-byte field that contains the vendor's CLEI code in ASCII characters."
+
+  # ===========================================================================
+  # § 8.3.3 Module Power Characteristics (bytes 200-201)
+  # ===========================================================================
+
+  - name: module_power_class
+    display_name: ModulePowerClass
+    offset: 200
+    bit_offset: 5
+    bit_width: 3
+    type: u3
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.9"
+          table: "Table 8-15; Table 8-18"
+          row: "200 bits 7:5"
+          pdf_page: [94, 96]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    enum_inline:
+      - { value: 0, name: power_class_1, description: "Power class 1" }
+      - { value: 1, name: power_class_2, description: "Power class 2" }
+      - { value: 2, name: power_class_3, description: "Power class 3" }
+      - { value: 3, name: power_class_4, description: "Power class 4" }
+      - { value: 4, name: power_class_5, description: "Power class 5" }
+      - { value: 5, name: power_class_6, description: "Power class 6" }
+      - { value: 6, name: power_class_7, description: "Power class 7" }
+      - { value: 7, name: power_class_8, description: "Power class 8" }
+    provenance:
+      section: "§ 8.3.3"
+      pdf_page: 163
+      table: "Table 8-31"
+      quote: "The ModulePowerClass field provides a form factor specific classification of the MaxPower value."
+
+  - name: reserved_module_power_characteristics
+    display_name: ReservedModulePowerCharacteristics
+    offset: 200
+    bit_offset: 0
+    bit_width: 5
+    type: bitmap
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.9"
+          table: "Table 8-15; Table 8-18"
+          row: "200 bits 4:0"
+          pdf_page: [94, 96]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.3"
+      pdf_page: 163
+      table: "Table 8-31"
+      quote: "Reserved"
+
+  - name: max_power
+    display_name: MaxPower
+    offset: 201
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "0.25 W" }
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.9"
+          table: "Table 8-15; Table 8-18"
+          row: "201"
+          pdf_page: [94, 96]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.3"
+      pdf_page: 163
+      table: "Table 8-31"
+      quote: "Maximum power consumption in multiples of 0.25 W rounded up to the next whole multiple of 0.25 W"
+
+  # ===========================================================================
+  # § 8.3.4 Cable Assembly Link Length (byte 202)
+  # ===========================================================================
+
+  - name: length_multiplier
+    display_name: LengthMultiplier
+    offset: 202
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.10"
+          table: "Table 8-15; Table 8-19"
+          row: "202 bits 7:6"
+          pdf_page: [94, 96]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    enum_inline:
+      - { value: 0, name: multiplier_0p1, description: "Multiplier 0.1" }
+      - { value: 1, name: multiplier_1, description: "Multiplier 1" }
+      - { value: 2, name: multiplier_10, description: "Multiplier 10" }
+      - { value: 3, name: multiplier_100, description: "Multiplier 100" }
+    provenance:
+      section: "§ 8.3.4"
+      pdf_page: 163
+      table: "Table 8-32"
+      quote: "Multiplier for value in bits 5-0: 00: multiplier 0.1 01: multiplier 1 10: multiplier 10 11: multiplier 100"
+
+  - name: base_length
+    display_name: BaseLength
+    offset: 202
+    bit_offset: 0
+    bit_width: 6
+    type: u6
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.10"
+          table: "Table 8-15; Table 8-19"
+          row: "202 bits 5:0"
+          pdf_page: [94, 96]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.4"
+      pdf_page: 163
+      table: "Table 8-32"
+      quote: "Link length base value in meters. To calculate actual link length use multiplier in bits 7-6."
+
+  # ===========================================================================
+  # § 8.3.5 Media Connector Type (byte 203)
+  # ===========================================================================
+
+  - name: connector_type
+    display_name: ConnectorType
+    offset: 203
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024ConnectorType
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.11"
+          table: "Table 8-15; Table 8-20"
+          row: "203"
+          pdf_page: [94, 96]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.5"
+      pdf_page: 163
+      table: "Table 8-33"
+      quote: "Type of connector present in the module. See Table 4-3 in [5] for Connector Type codes."
+
+  # ===========================================================================
+  # § 8.3.6 Copper Cable Attenuation (bytes 204-209)
+  # ===========================================================================
+
+  - name: attenuation_at_5ghz
+    display_name: AttenuationAt5GHz
+    offset: 204
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 dB" }
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.12"
+          table: "Table 8-15; Table 8-21"
+          row: "204"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.6"
+      pdf_page: 164
+      table: "Table 8-34"
+      quote: "U8 cable attenuation at 5 GHz in 1 dB increments"
+
+  - name: attenuation_at_7ghz
+    display_name: AttenuationAt7GHz
+    offset: 205
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 dB" }
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.12"
+          table: "Table 8-15; Table 8-21"
+          row: "205"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.6"
+      pdf_page: 164
+      table: "Table 8-34"
+      quote: "U8 cable attenuation at 7 GHz in 1 dB increments"
+
+  - name: attenuation_at_12p9ghz
+    display_name: AttenuationAt12p9GHz
+    offset: 206
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 dB" }
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.12"
+          table: "Table 8-15; Table 8-21"
+          row: "206"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.6"
+      pdf_page: 164
+      table: "Table 8-34"
+      quote: "U8 cable attenuation at 12.9 GHz in 1 dB increments"

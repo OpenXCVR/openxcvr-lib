@@ -1,0 +1,31 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtPresetStorageLevel
+title: "CMIS-LT 1.0 Module Preset Storage Level"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 § 6.1.1 (Table 6)"
+  pdf_pages: [36]
+entries:
+  - value: 0x0
+    name: never
+    description: "Never - not supported"
+  - value: 0x1
+    name: while_active_firmware
+    description: "Preserved while active firmware is running"
+  - value: 0x2
+    name: until_module_reset
+    description: "Preserved until module reset"
+  - value: 0x3
+    name: until_power_cycle
+    description: "Preserved until power cycle"
+  - value: 0x4
+    name: persistent
+    description: "Persistently stored"
+  - value: 0x5..0x7
+    name: reserved
+    description: "Reserved"

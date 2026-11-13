@@ -1,0 +1,319 @@
+{
+  "_metadata": {
+    "authored_at": "2026-04-29",
+    "authored_by": "ras + codex via claude-opus-4-7",
+    "cmis_version": "5.1",
+    "fixture": "fboss-cmis-5-1-osfp-credo-800g-aec",
+    "monitoring_stale": true,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "cmis-5.3",
+    "spec_revision": "5.3",
+    "vendor_strings_synthetic": false
+  },
+  "applications": [
+    {
+      "app_code": 1,
+      "host_interface_id": 75,
+      "host_interface_name": "gaui_100g_1_s_c2m",
+      "host_lane_assignment_options": "0xFF",
+      "host_lane_count": 1,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 2,
+      "host_interface_id": 76,
+      "host_interface_name": "gaui_100g_1_l_c2m",
+      "host_lane_assignment_options": "0xFF",
+      "host_lane_count": 1,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 3,
+      "host_interface_id": 77,
+      "host_interface_name": "gaui_200g_2_s_c2m",
+      "host_lane_assignment_options": "0x55",
+      "host_lane_count": 2,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 2
+    },
+    {
+      "app_code": 4,
+      "host_interface_id": 78,
+      "host_interface_name": "gaui_200g_2_l_c2m",
+      "host_lane_assignment_options": "0x55",
+      "host_lane_count": 2,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 2
+    },
+    {
+      "app_code": 5,
+      "host_interface_id": 79,
+      "host_interface_name": "gaui_400g_4_s_c2m",
+      "host_lane_assignment_options": "0x11",
+      "host_lane_count": 4,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 4
+    },
+    {
+      "app_code": 6,
+      "host_interface_id": 80,
+      "host_interface_name": "gaui_400g_4_l_c2m",
+      "host_lane_assignment_options": "0x11",
+      "host_lane_count": 4,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 4
+    },
+    {
+      "app_code": 7,
+      "host_interface_id": 81,
+      "host_interface_name": "gaui_800g_8_s_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 8
+    },
+    {
+      "app_code": 8,
+      "host_interface_id": 82,
+      "host_interface_name": "gaui_800g_8_l_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 4,
+      "media_interface_name": "active_cable_ber_1e_6",
+      "media_lane_count": 8
+    }
+  ],
+  "checksums": null,
+  "decode_status": "ok",
+  "flags": {
+    "data_not_ready": null,
+    "interrupt_asserted": false,
+    "lanes": [
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      }
+    ],
+    "supply_high_alarm": false,
+    "supply_low_alarm": false,
+    "temp_high_alarm": false,
+    "temp_low_alarm": false
+  },
+  "identity": {
+    "date_code": "240424",
+    "vendor_name": "FACETEST",
+    "vendor_oui": "9A:AD:CA",
+    "vendor_pn": "CAC815321A1AC1HW",
+    "vendor_rev": "",
+    "vendor_sn": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  "lanes": [
+    {
+      "dp_state": "DpActivated",
+      "index": 1,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 2,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 3,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 4,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 5,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 6,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 7,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 8,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    }
+  ],
+  "module": {
+    "cmis_revision": "5.1",
+    "connector": {
+      "name": "no_separable_connector",
+      "raw": "0x23"
+    },
+    "identifier": {
+      "name": "osfp",
+      "raw": "0x19"
+    },
+    "memory_model": "paged",
+    "module_state": "ModuleReady",
+    "module_type": null
+  },
+  "monitoring": {
+    "module_temperature_c": 40.9375,
+    "module_voltage_v": 3.29
+  }
+}

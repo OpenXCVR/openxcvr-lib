@@ -1,0 +1,247 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024MmfMediaInterface
+title: SFF-8024 MMF Media Interface IDs
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-6
+  pdf_pages: [28, 29]
+entries:
+  - value: 0x00
+    name: undefined
+    description: Undefined MMF media interface
+    reach: {kind: none}
+  - value: 0x01
+    name: base_10g_sw
+    description: 10GBASE-SW MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 9.95328, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 9.95
+  - value: 0x02
+    name: base_10g_sr
+    description: 10GBASE-SR MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 10.31
+  - value: 0x03
+    name: base_25g_sr
+    description: 25GBASE-SR MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 25.78
+  - value: 0x04
+    name: base_40g_sr4
+    description: 40GBASE-SR4 MMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 41.25
+  - value: 0x05
+    name: swdm4_40ge
+    description: 40GE SWDM4 MSA MMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 41.25
+  - value: 0x06
+    name: bidi_40ge
+    description: 40GE BiDi MMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 20.625, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 41.25
+  - value: 0x07
+    name: base_50g_sr
+    description: 50GBASE-SR MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 53.13
+  - value: 0x08
+    name: base_100g_sr10
+    description: 100GBASE-SR10 MMF media interface
+    signaling: {lane_count: 10, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 103.13
+  - value: 0x09
+    name: base_100g_sr4
+    description: 100GBASE-SR4 MMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 103.13
+  - value: 0x0a
+    name: swdm4_100ge
+    description: 100GE SWDM4 MSA MMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 103.13
+  - value: 0x0b
+    name: bidi_100ge
+    description: 100GE BiDi MMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 25.5625, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 106.25
+  - value: 0x0c
+    name: base_100g_sr2
+    description: 100GBASE-SR2 MMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 106.25
+  - value: 0x0d
+    name: base_100g_sr1
+    description: 100GBASE-SR1 MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 106.25
+  - value: 0x0e
+    name: base_200g_sr4
+    description: 200GBASE-SR4 MMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 212.50
+  - value: 0x0f
+    name: base_400g_sr16
+    description: 400GBASE-SR16 MMF media interface
+    signaling: {lane_count: 16, lane_rate_gbd: 26.5625, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 425.00
+  - value: 0x10
+    name: base_400g_sr8
+    description: 400GBASE-SR8 MMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 425.00
+  - value: 0x11
+    name: base_400g_sr4
+    description: 400GBASE-SR4 MMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 425.00
+  - value: 0x12
+    name: base_800g_sr8
+    description: 800GBASE-SR8 MMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 850.00
+  - value: 0x13
+    name: fc_8g_mm
+    description: 8G Fibre Channel MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 8.500, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 8.50
+  - value: 0x14
+    name: fc_10g_mm
+    description: 10G Fibre Channel MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 10.51875, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 10.52
+  - value: 0x15
+    name: fc_16g_mm
+    description: 16G Fibre Channel MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 14.025, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 14.03
+  - value: 0x16
+    name: fc_32g_mm
+    description: 32G Fibre Channel MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 28.050, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 28.05
+  - value: 0x17
+    name: fc_64g_mm
+    description: 64G Fibre Channel MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 28.900, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 57.80
+  - value: 0x18
+    name: fc_128g_mm4
+    description: 128G Fibre Channel MM4 media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 28.050, modulation: nrz}
+    reach: {kind: mmf}
+    bit_rate_gbps: 112.20
+  - value: 0x19
+    name: fc_256g_mm4
+    description: 256G Fibre Channel MM4 media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 28.900, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 231.20
+  - value: 0x1a
+    name: base_400g_sr4_2
+    description: 400GBASE-SR4.2 BiDi MMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 425.00
+  - value: 0x1b
+    name: base_200g_sr2
+    description: 200GBASE-SR2 MMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 212.50
+  - value: 0x1c
+    name: fc_128g_mm
+    description: 128G Fibre Channel MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 56.100, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 112.20
+  - value: 0x1d
+    name: base_100g_vr1
+    description: 100GBASE-VR1 MMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 106.25
+  - value: 0x1e
+    name: base_200g_vr2
+    description: 200GBASE-VR2 MMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 212.50
+  - value: 0x1f
+    name: base_400g_vr4
+    description: 400GBASE-VR4 MMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 425.00
+  - value: 0x20
+    name: base_800g_vr8
+    description: 800GBASE-VR8 MMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 850.00
+  - value: 0x21
+    name: base_800g_vr4_2
+    description: 800G-VR4.2 MMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 850.00
+  - value: 0x22
+    name: base_800g_sr4_2
+    description: 800G-SR4.2 MMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 850.00
+  - value: 0x23
+    name: base_1_6t_vr8_2
+    description: 1.6T-VR8.2 MMF media interface
+    signaling: {lane_count: 16, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 1700.00
+  - value: 0x24
+    name: base_1_6t_sr8_2
+    description: 1.6T-SR8.2 MMF media interface
+    signaling: {lane_count: 16, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: mmf}
+    bit_rate_gbps: 1700.00
+  - value: 0x25..0xbd
+    name: reserved_25_bd
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xbe
+    name: overflow_escape
+    description: Escape to MMF media interface ID tables with nonzero GID; refer to the CMIS page 1Ch normalized application descriptor structure for the 12-bit Unique ID
+    reach: {kind: none}
+  - value: 0xbf
+    name: reserved_bf
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xc0..0xff
+    name: vendor_specific
+    description: Vendor specific/custom MMF media interface
+    reach: {kind: mmf}

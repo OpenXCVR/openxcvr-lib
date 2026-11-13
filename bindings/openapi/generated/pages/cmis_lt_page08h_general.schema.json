@@ -1,0 +1,462 @@
+{
+  "$id": "cmis_lt_page08h_general.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "cmis_lt_major_revision": {
+      "description": "Major CMIS-LT revision number; upper U4 of the CMISLTRevision register (01h indicates version 0.1, 21h version 2.1).",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "cmis_lt_minor_revision": {
+      "description": "Minor CMIS-LT revision number; lower U4 of the CMISLTRevision register.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "enable_host_management_visibility": {
+      "description": "When enabled, the host mirrors the ingress link training management states to the relevant module registers in pages 52h and 53h for diagnostics visibility. This host configuration is intentionally visible also in the module management registers.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 7"
+      }
+    },
+    "host_preset_storage_level": {
+      "description": "The host preserves stored modifiable presets: 0 never - not supported, 1-3 reserved, 4 persistent storage.",
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supported_amplitude_steps": {
+      "description": "Bit mask of host-settable non-default p-p differential amplitude step sizes (default 50 mV): bit0 reserved, bit1 25 mV, bit2/bit3 reserved.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supported_ffe_steps": {
+      "description": "Bit mask of host-settable non-default tap tuning step sizes (default 0.02): bit0 reserved, bit1 0.01, bit2 reserved, bit3 0.04 (e.g. 0101b indicates support of 0.01 and 0.04).",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_amplitude_read": {
+      "description": "Host supports module-readable output amplitude values by always keeping the amplitude registers up to date. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_amplitude_setting": {
+      "description": "Host supports the tuning procedure to set output amplitudes to given values (in addition to tuning by stepwise adjustments). 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_ffe_taps_read": {
+      "description": "Host supports module-readable FFE tap values by always keeping the tap registers up to date. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_ffe_taps_setting": {
+      "description": "Host supports the tuning procedure to set FFE taps to given values (in addition to tuning by stepwise adjustments). 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_host_visibility": {
+      "description": "Host supports enabling ingress training state visibility in the module management memory.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_pattern_setting": {
+      "description": "Host supports module-programmable training patterns. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_precoder": {
+      "description": "Host supports precoder of type 1/(1+D) mod 4 as defined in IEEE 802.3 clause 135.5.7.2. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_preset": {
+      "description": "U16 bit mask HostSupportsPreset<k>, k = 0..15; bit k set indicates Preset k is supported by the host transmitter.",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_sqm_alarm_in_service": {
+      "description": "Host supports SQM alarm during operation. 0: no, 1: yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "host_supports_sqm_alarm_in_training": {
+      "description": "Host supports SQM alarm only during training. 0: no, 1: yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_preset_storage_level": {
+      "description": "Module preserves stored modifiable presets.",
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supported_amplitude_steps": {
+      "description": "Bit mask of module-selectable p-p differential amplitude step sizes: bit0 50 mV (must be supported as default), bit1 25 mV, bit2/bit3 reserved.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supported_ffe_steps": {
+      "description": "Bit mask of module-selectable tap tuning step sizes: bit0 0.02 (must be supported as default), bit1 0.01, bit2 reserved, bit3 0.04 (e.g. 1001b indicates support of 0.02 and 0.04).",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_amplitude_read": {
+      "description": "Module supports host-readable output amplitude values by always keeping the amplitude registers up to date. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_amplitude_setting": {
+      "description": "Module supports the tuning procedure to set output amplitudes to given values (in addition to tuning by stepwise adjustments). 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_ffe_setting": {
+      "description": "Module supports the tuning procedure to set FFE taps to given values (in addition to tuning by stepwise adjustments). 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_ffe_taps_read": {
+      "description": "Module supports host-readable FFE tap values by always keeping the tap registers up to date. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_pattern_setting": {
+      "description": "Module supports module-programmable training patterns. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_precoder": {
+      "description": "Module supports precoder of type 1/(1+D) mod 4 as defined in IEEE 802.3 clause 135.5.7.2. 0: No, 1: Yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_preset": {
+      "description": "U16 bit mask ModuleSupportsPreset<k>, k = 0..15; bit k set indicates Preset k is supported by the module transmitter.",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_sqm_alarm_in_service": {
+      "description": "Module supports SQM alarm during operation. 0: no, 1: yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "module_supports_sqm_alarm_in_training": {
+      "description": "Module supports SQM alarm only during training. 0: no, 1: yes.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_129_135": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_136_bits_7_6": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_140_bits_7_6": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_141_143": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 34,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_144_bits_7_6": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_148_bit_3": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_148_bits_7_6": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_149_151": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_156_159": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "reserved_160_bits_7_1": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 7"
+      }
+    },
+    "reserved_161_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 7"
+      }
+    },
+    "supported_egress_protocols": {
+      "description": "U16 bit mask SupportedEgressProtocols<k>, k = 0..15, indicating which training protocol is supported by the module (egress).",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    },
+    "supported_ingress_protocols": {
+      "description": "U16 bit mask SupportedIngressProtocols<k>, k = 0..15, indicating which training protocol is supported by the host (ingress).",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "section": "OIF-CMIS-LT-01.0 § 6.1",
+        "table": "Table 6"
+      }
+    }
+  },
+  "required": [
+    "cmis_lt_major_revision",
+    "cmis_lt_minor_revision",
+    "reserved_129_135",
+    "host_supports_ffe_taps_setting",
+    "host_supports_amplitude_setting",
+    "host_supports_ffe_taps_read",
+    "host_supports_amplitude_read",
+    "host_supports_precoder",
+    "host_supports_pattern_setting",
+    "reserved_136_bits_7_6",
+    "host_supported_ffe_steps",
+    "host_supported_amplitude_steps",
+    "host_supports_preset",
+    "reserved_140_bits_7_6",
+    "host_supports_sqm_alarm_in_service",
+    "host_supports_sqm_alarm_in_training",
+    "host_supports_host_visibility",
+    "host_preset_storage_level",
+    "reserved_141_143",
+    "module_supports_ffe_setting",
+    "module_supports_amplitude_setting",
+    "module_supports_ffe_taps_read",
+    "module_supports_amplitude_read",
+    "module_supports_precoder",
+    "module_supports_pattern_setting",
+    "reserved_144_bits_7_6",
+    "module_supported_ffe_steps",
+    "module_supported_amplitude_steps",
+    "module_supports_preset",
+    "reserved_148_bits_7_6",
+    "module_supports_sqm_alarm_in_service",
+    "module_supports_sqm_alarm_in_training",
+    "reserved_148_bit_3",
+    "module_preset_storage_level",
+    "reserved_149_151",
+    "supported_egress_protocols",
+    "supported_ingress_protocols",
+    "reserved_156_159",
+    "reserved_160_bits_7_1",
+    "enable_host_management_visibility",
+    "reserved_161_255"
+  ],
+  "title": "CmisLtPage08hGeneral",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "spec": "OIF-CMIS-LT-01.0 § 6.1 (Tables 4-7)"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

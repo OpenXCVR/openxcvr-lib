@@ -1,0 +1,118 @@
+{
+  "_metadata": {
+    "authored_at": "2026-04-29",
+    "authored_by": "ras + claude-opus-4-7",
+    "cmis_version": null,
+    "fixture": "finisar-ftlc9551repm-100g-sr4",
+    "monitoring_stale": false,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "sff-8636",
+    "spec_revision": "2.11",
+    "vendor_strings_synthetic": false
+  },
+  "checksums": {
+    "cc_base": {
+      "computed": "0x3C",
+      "stored": "0x3C",
+      "valid": true
+    },
+    "cc_ext": {
+      "computed": "0xF2",
+      "stored": "0xF2",
+      "valid": true
+    }
+  },
+  "compliance": {
+    "bits_set": [
+      "compliance_extended"
+    ],
+    "device_technology": {
+      "name": "nm850_vcsel",
+      "raw": "0x0"
+    },
+    "ext_spec_byte_192": {
+      "name": "base_100g_sr4_or_25g_sr",
+      "raw": "0x02"
+    },
+    "raw_bytes_page_00h_3_10": [
+      "0x80",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00"
+    ],
+    "reach": {
+      "om1_m": 0,
+      "om2_m": 0,
+      "om3_2m_units": 70,
+      "om4_or_copper_m": 50,
+      "smf_km": 0
+    }
+  },
+  "decode_status": "ok",
+  "flags": {
+    "data_not_ready": false,
+    "interrupt_asserted": true
+  },
+  "identity": {
+    "date_code": "150926",
+    "vendor_name": "FINISAR CORP",
+    "vendor_oui": "00:90:65",
+    "vendor_pn": "FTLC9551REPM",
+    "vendor_rev": "A0",
+    "vendor_sn": "XUB0AAQ"
+  },
+  "lanes": [
+    {
+      "index": 1,
+      "rx_power_mw": 0.0001,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0001
+    },
+    {
+      "index": 2,
+      "rx_power_mw": 0.0001,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0001
+    },
+    {
+      "index": 3,
+      "rx_power_mw": 0.0001,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0001
+    },
+    {
+      "index": 4,
+      "rx_power_mw": 0.0001,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0001
+    }
+  ],
+  "module": {
+    "cmis_revision": null,
+    "connector": {
+      "name": "mpo_1x12",
+      "raw": "0x0C"
+    },
+    "encoding": {
+      "name": "two_hundred_fifty_six_b_two_hundred_fifty_seven_b",
+      "raw": "0x07"
+    },
+    "extended_identifier": "0xCC",
+    "identifier": {
+      "name": "qsfp28_sff8636",
+      "raw": "0x11"
+    },
+    "memory_model": "paged",
+    "module_state": null,
+    "module_type": "100GBASE-SR4 QSFP28",
+    "nominal_bit_rate_gbps": 25.75
+  },
+  "monitoring": {
+    "module_temperature_c": 19.140625,
+    "module_voltage_v": 3.2861
+  }
+}

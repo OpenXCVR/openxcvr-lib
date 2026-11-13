@@ -1,0 +1,64 @@
+{
+  "$id": "sff8024_encoding.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Unspecified",
+      "title": "unspecified"
+    },
+    {
+      "const": 1,
+      "description": "8B/10B",
+      "title": "eight_b_ten_b"
+    },
+    {
+      "const": 2,
+      "description": "4B/5B",
+      "title": "four_b_five_b"
+    },
+    {
+      "const": 3,
+      "description": "NRZ",
+      "title": "nrz"
+    },
+    {
+      "const": 4,
+      "description": "Common Manchester code; legacy SFF-8636 used this value for SONET scrambled",
+      "title": "manchester_or_sonet_scrambled_legacy"
+    },
+    {
+      "const": 5,
+      "description": "Common SONET scrambled code; legacy SFF-8636 used this value for 64B/66B",
+      "title": "sonet_scrambled_or_legacy_64b66b"
+    },
+    {
+      "const": 6,
+      "description": "Common 64B/66B code; legacy SFF-8636 used this value for Manchester",
+      "title": "sixty_four_b_sixty_six_b_or_legacy_manchester"
+    },
+    {
+      "const": 7,
+      "description": "256B/257B transcoded FEC-enabled data",
+      "title": "two_hundred_fifty_six_b_two_hundred_fifty_seven_b"
+    },
+    {
+      "const": 8,
+      "description": "PAM4",
+      "title": "pam4"
+    }
+  ],
+  "title": "Sff8024Encoding",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      18
+    ],
+    "spec": "SFF-8024 4.14 Table 4-2"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8024",
+    "revision": "4.14"
+  }
+}

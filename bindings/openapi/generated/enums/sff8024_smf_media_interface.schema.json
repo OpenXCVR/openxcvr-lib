@@ -1,0 +1,828 @@
+{
+  "$id": "sff8024_smf_media_interface.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Undefined SMF media interface",
+      "title": "undefined"
+    },
+    {
+      "const": 1,
+      "description": "10GBASE-LW SMF media interface",
+      "title": "base_10g_lw"
+    },
+    {
+      "const": 2,
+      "description": "10GBASE-EW SMF media interface",
+      "title": "base_10g_ew"
+    },
+    {
+      "const": 3,
+      "description": "10G-ZW SMF media interface",
+      "title": "base_10g_zw"
+    },
+    {
+      "const": 4,
+      "description": "10GBASE-LR SMF media interface",
+      "title": "base_10g_lr"
+    },
+    {
+      "const": 5,
+      "description": "10GBASE-ER SMF media interface",
+      "title": "base_10g_er"
+    },
+    {
+      "const": 6,
+      "description": "10G-ZR SMF media interface",
+      "title": "base_10g_zr"
+    },
+    {
+      "const": 7,
+      "description": "25GBASE-LR SMF media interface",
+      "title": "base_25g_lr"
+    },
+    {
+      "const": 8,
+      "description": "25GBASE-ER SMF media interface",
+      "title": "base_25g_er"
+    },
+    {
+      "const": 9,
+      "description": "40GBASE-LR4 SMF media interface",
+      "title": "base_40g_lr4"
+    },
+    {
+      "const": 10,
+      "description": "40GBASE-FR SMF media interface",
+      "title": "base_40g_fr"
+    },
+    {
+      "const": 11,
+      "description": "50GBASE-FR SMF media interface",
+      "title": "base_50g_fr"
+    },
+    {
+      "const": 12,
+      "description": "50GBASE-LR SMF media interface",
+      "title": "base_50g_lr"
+    },
+    {
+      "const": 13,
+      "description": "100GBASE-LR4 SMF media interface",
+      "title": "base_100g_lr4"
+    },
+    {
+      "const": 14,
+      "description": "100GBASE-ER4 SMF media interface",
+      "title": "base_100g_er4"
+    },
+    {
+      "const": 15,
+      "description": "100G PSM4 MSA SMF media interface",
+      "title": "psm4_100g"
+    },
+    {
+      "const": 16,
+      "description": "100G CWDM4 MSA SMF media interface",
+      "title": "cwdm4_100g"
+    },
+    {
+      "const": 17,
+      "description": "100G 4WDM-10 MSA SMF media interface",
+      "title": "four_wdm_10_100g"
+    },
+    {
+      "const": 18,
+      "description": "100G 4WDM-20 MSA SMF media interface",
+      "title": "four_wdm_20_100g"
+    },
+    {
+      "const": 19,
+      "description": "100G 4WDM-40 MSA SMF media interface",
+      "title": "four_wdm_40_100g"
+    },
+    {
+      "const": 20,
+      "description": "100GBASE-DR SMF media interface",
+      "title": "base_100g_dr"
+    },
+    {
+      "const": 21,
+      "description": "100G-FR MSA or 100GBASE-FR1 SMF media interface",
+      "title": "base_100g_fr1"
+    },
+    {
+      "const": 22,
+      "description": "100G-LR MSA or 100GBASE-LR1 SMF media interface",
+      "title": "base_100g_lr1"
+    },
+    {
+      "const": 23,
+      "description": "200GBASE-DR4 SMF media interface",
+      "title": "base_200g_dr4"
+    },
+    {
+      "const": 24,
+      "description": "200GBASE-FR4 SMF media interface",
+      "title": "base_200g_fr4"
+    },
+    {
+      "const": 25,
+      "description": "200GBASE-LR4 SMF media interface",
+      "title": "base_200g_lr4"
+    },
+    {
+      "const": 26,
+      "description": "400GBASE-FR8 SMF media interface",
+      "title": "base_400g_fr8"
+    },
+    {
+      "const": 27,
+      "description": "400GBASE-LR8 SMF media interface",
+      "title": "base_400g_lr8"
+    },
+    {
+      "const": 28,
+      "description": "400GBASE-DR4 SMF media interface",
+      "title": "base_400g_dr4"
+    },
+    {
+      "const": 29,
+      "description": "400G-FR4 MSA or 400GBASE-FR4 SMF media interface",
+      "title": "base_400g_fr4"
+    },
+    {
+      "const": 30,
+      "description": "400G-LR4-10 MSA SMF media interface",
+      "title": "lr4_400g_10"
+    },
+    {
+      "const": 31,
+      "description": "8G Fibre Channel SMF media interface",
+      "title": "fc_8g_sm"
+    },
+    {
+      "const": 32,
+      "description": "10G Fibre Channel SMF media interface",
+      "title": "fc_10g_sm"
+    },
+    {
+      "const": 33,
+      "description": "16G Fibre Channel SMF media interface",
+      "title": "fc_16g_sm"
+    },
+    {
+      "const": 34,
+      "description": "32G Fibre Channel SMF media interface",
+      "title": "fc_32g_sm"
+    },
+    {
+      "const": 35,
+      "description": "64G Fibre Channel SMF media interface",
+      "title": "fc_64g_sm"
+    },
+    {
+      "const": 36,
+      "description": "128G Fibre Channel PSM4 SMF media interface",
+      "title": "fc_128g_psm4"
+    },
+    {
+      "const": 37,
+      "description": "Reserved",
+      "title": "reserved_25"
+    },
+    {
+      "const": 38,
+      "description": "128G Fibre Channel CWDM4 SMF media interface",
+      "title": "fc_128g_cwdm4"
+    },
+    {
+      "const": 44,
+      "description": "OTN 4I1-9D1F SMF media interface",
+      "title": "otn_4i1_9d1f"
+    },
+    {
+      "const": 45,
+      "description": "OTN 4L1-9C1F SMF media interface",
+      "title": "otn_4l1_9c1f"
+    },
+    {
+      "const": 46,
+      "description": "OTN 4L1-9D1F SMF media interface",
+      "title": "otn_4l1_9d1f"
+    },
+    {
+      "const": 47,
+      "description": "OTN C4S1-9D1F SMF media interface",
+      "title": "otn_c4s1_9d1f"
+    },
+    {
+      "const": 48,
+      "description": "OTN C4S1-4D1F SMF media interface",
+      "title": "otn_c4s1_4d1f"
+    },
+    {
+      "const": 49,
+      "description": "OTN 4I1-4D1F SMF media interface",
+      "title": "otn_4i1_4d1f"
+    },
+    {
+      "const": 50,
+      "description": "OTN 8R1-4D1F SMF media interface",
+      "title": "otn_8r1_4d1f"
+    },
+    {
+      "const": 51,
+      "description": "OTN 8I1-4D1F SMF media interface",
+      "title": "otn_8i1_4d1f"
+    },
+    {
+      "const": 52,
+      "description": "100G CWDM4-OCP SMF media interface",
+      "title": "cwdm4_100g_ocp"
+    },
+    {
+      "const": 53,
+      "description": "ZR400-OFEC-16QAM-HA coherent SMF media interface",
+      "title": "zr400_ofec_16qam_ha"
+    },
+    {
+      "const": 54,
+      "description": "ZR400-OFEC-16QAM-HB coherent SMF media interface",
+      "title": "zr400_ofec_16qam_hb"
+    },
+    {
+      "const": 55,
+      "description": "ZR400-OFEC-8QAM-HA coherent SMF media interface",
+      "title": "zr400_ofec_8qam_ha"
+    },
+    {
+      "const": 56,
+      "description": "CPRI 10G-SR SMF media interface",
+      "title": "cpri_10g_sr"
+    },
+    {
+      "const": 57,
+      "description": "CPRI 10G-LR SMF media interface",
+      "title": "cpri_10g_lr"
+    },
+    {
+      "const": 58,
+      "description": "CPRI 25G-SR SMF media interface",
+      "title": "cpri_25g_sr"
+    },
+    {
+      "const": 59,
+      "description": "CPRI 25G-LR SMF media interface",
+      "title": "cpri_25g_lr"
+    },
+    {
+      "const": 60,
+      "description": "CPRI 10G-LR-BiDi SMF media interface",
+      "title": "cpri_10g_lr_bidi"
+    },
+    {
+      "const": 61,
+      "description": "CPRI 25G-LR-BiDi SMF media interface",
+      "title": "cpri_25g_lr_bidi"
+    },
+    {
+      "const": 62,
+      "description": "400ZR DWDM amplified coherent SMF media interface",
+      "title": "oif_400zr_dwdm_amplified"
+    },
+    {
+      "const": 63,
+      "description": "400ZR single wavelength unamplified coherent SMF media interface",
+      "title": "oif_400zr_single_wavelength_unamplified"
+    },
+    {
+      "const": 64,
+      "description": "50GBASE-ER SMF media interface",
+      "title": "base_50g_er"
+    },
+    {
+      "const": 65,
+      "description": "200GBASE-ER4 SMF media interface",
+      "title": "base_200g_er4"
+    },
+    {
+      "const": 66,
+      "description": "400GBASE-ER8 SMF media interface",
+      "title": "base_400g_er8"
+    },
+    {
+      "const": 67,
+      "description": "400GBASE-LR4-6 SMF media interface",
+      "title": "base_400g_lr4_6"
+    },
+    {
+      "const": 68,
+      "description": "100GBASE-ZR coherent SMF media interface",
+      "title": "base_100g_zr"
+    },
+    {
+      "const": 69,
+      "description": "128G Fibre Channel SMF media interface",
+      "title": "fc_128g_sm"
+    },
+    {
+      "const": 70,
+      "description": "ZR400-OFEC-16QAM coherent SMF media interface",
+      "title": "zr400_ofec_16qam"
+    },
+    {
+      "const": 71,
+      "description": "ZR300-OFEC-8QAM coherent SMF media interface",
+      "title": "zr300_ofec_8qam"
+    },
+    {
+      "const": 72,
+      "description": "ZR200-OFEC-QPSK coherent SMF media interface",
+      "title": "zr200_ofec_qpsk"
+    },
+    {
+      "const": 73,
+      "description": "ZR100-OFEC-QPSK coherent SMF media interface",
+      "title": "zr100_ofec_qpsk"
+    },
+    {
+      "const": 74,
+      "description": "100G-LR1-20 MSA SMF media interface",
+      "title": "lr1_100g_20"
+    },
+    {
+      "const": 75,
+      "description": "100G-ER1-30 MSA SMF media interface",
+      "title": "er1_100g_30"
+    },
+    {
+      "const": 76,
+      "description": "100G-ER1-40 MSA SMF media interface",
+      "title": "er1_100g_40"
+    },
+    {
+      "const": 77,
+      "description": "400GBASE-ZR coherent SMF media interface",
+      "title": "base_400g_zr"
+    },
+    {
+      "const": 78,
+      "description": "10GBASE-BR SMF media interface; BR details need direction and wavelength",
+      "title": "base_10g_br"
+    },
+    {
+      "const": 79,
+      "description": "25GBASE-BR SMF media interface; BR details need direction and wavelength",
+      "title": "base_25g_br"
+    },
+    {
+      "const": 80,
+      "description": "50GBASE-BR SMF media interface; BR details need direction and wavelength",
+      "title": "base_50g_br"
+    },
+    {
+      "const": 81,
+      "description": "OTN FOIC1.4-DO coherent SMF media interface",
+      "title": "otn_foic1_4_do"
+    },
+    {
+      "const": 82,
+      "description": "OTN FOIC2.8-DO coherent SMF media interface",
+      "title": "otn_foic2_8_do"
+    },
+    {
+      "const": 83,
+      "description": "OTN FOIC4.8-DO coherent SMF media interface",
+      "title": "otn_foic4_8_do"
+    },
+    {
+      "const": 84,
+      "description": "OTN FOIC2.4-DO coherent SMF media interface",
+      "title": "otn_foic2_4_do"
+    },
+    {
+      "const": 85,
+      "description": "400GBASE-DR4-2 SMF media interface",
+      "title": "base_400g_dr4_2"
+    },
+    {
+      "const": 86,
+      "description": "800GBASE-DR8 SMF media interface",
+      "title": "base_800g_dr8"
+    },
+    {
+      "const": 87,
+      "description": "800GBASE-DR8-2 SMF media interface",
+      "title": "base_800g_dr8_2"
+    },
+    {
+      "const": 88,
+      "description": "ZR400-OFEC-8QAM-HB coherent SMF media interface",
+      "title": "zr400_ofec_8qam_hb"
+    },
+    {
+      "const": 89,
+      "description": "ZR300-OFEC-8QAM-HA coherent SMF media interface",
+      "title": "zr300_ofec_8qam_ha"
+    },
+    {
+      "const": 90,
+      "description": "ZR300-OFEC-8QAM-HB coherent SMF media interface",
+      "title": "zr300_ofec_8qam_hb"
+    },
+    {
+      "const": 91,
+      "description": "ZR200-OFEC-QPSK-HA coherent SMF media interface",
+      "title": "zr200_ofec_qpsk_ha"
+    },
+    {
+      "const": 92,
+      "description": "ZR200-OFEC-QPSK-HB coherent SMF media interface",
+      "title": "zr200_ofec_qpsk_hb"
+    },
+    {
+      "const": 93,
+      "description": "ZR100-OFEC-QPSK-HA coherent SMF media interface",
+      "title": "zr100_ofec_qpsk_ha"
+    },
+    {
+      "const": 94,
+      "description": "ZR100-OFEC-QPSK-HB coherent SMF media interface",
+      "title": "zr100_ofec_qpsk_hb"
+    },
+    {
+      "const": 95,
+      "description": "FLEXO-4-DO-16QAM/FOIC4.8-DO coherent SMF media interface",
+      "title": "flexo_4_do_16qam_foic4_8_do"
+    },
+    {
+      "const": 96,
+      "description": "FLEXO-3-DO-8QAM/FOIC3.6-DO coherent SMF media interface",
+      "title": "flexo_3_do_8qam_foic3_6_do"
+    },
+    {
+      "const": 97,
+      "description": "FLEXO-2-DO-QPSK/FOIC2.4-DO coherent SMF media interface",
+      "title": "flexo_2_do_qpsk_foic2_4_do"
+    },
+    {
+      "const": 98,
+      "description": "FLEXO-2-DO-16QAM/FOIC2.8-DO coherent SMF media interface",
+      "title": "flexo_2_do_16qam_foic2_8_do"
+    },
+    {
+      "const": 99,
+      "description": "FLEXO-1-DO-QPSK/FOIC1.4-DO coherent SMF media interface",
+      "title": "flexo_1_do_qpsk_foic1_4_do"
+    },
+    {
+      "const": 100,
+      "description": "FLEXO-4e-DO-QPSK/FOIC4e.4-DO coherent SMF media interface",
+      "title": "flexo_4e_do_qpsk_foic4e_4_do"
+    },
+    {
+      "const": 101,
+      "description": "FLEXO-4-DO-QPSK/FOIC4.4-DO coherent SMF media interface",
+      "title": "flexo_4_do_qpsk_foic4_4_do"
+    },
+    {
+      "const": 102,
+      "description": "FLEXO-8e-DO-16QAM/FOIC8e.8-DO coherent SMF media interface",
+      "title": "flexo_8e_do_16qam_foic8e_8_do"
+    },
+    {
+      "const": 103,
+      "description": "FLEXO-8-DO-16QAM/FOIC8.8-DO coherent SMF media interface",
+      "title": "flexo_8_do_16qam_foic8_8_do"
+    },
+    {
+      "const": 104,
+      "description": "FLEXO-8e-DPO-16QAM/FOIC8e.8-DPO coherent SMF media interface",
+      "title": "flexo_8e_dpo_16qam_foic8e_8_dpo"
+    },
+    {
+      "const": 105,
+      "description": "FLEXO-8-DPO-16QAM/FOIC8.8-DPO coherent SMF media interface",
+      "title": "flexo_8_dpo_16qam_foic8_8_dpo"
+    },
+    {
+      "const": 106,
+      "description": "FLEXO-6e-DPO-16QAM/FOIC6e.8-DPO coherent SMF media interface",
+      "title": "flexo_6e_dpo_16qam_foic6e_8_dpo"
+    },
+    {
+      "const": 107,
+      "description": "FLEXO-6-DP0-16QAM/FOIC6.8-DPO coherent SMF media interface",
+      "title": "flexo_6_dp0_16qam_foic6_8_dpo"
+    },
+    {
+      "const": 108,
+      "description": "800ZR-A 150 GHz DWDM coherent SMF media interface",
+      "title": "zr_800a"
+    },
+    {
+      "const": 109,
+      "description": "800ZR-B 150 GHz DWDM coherent SMF media interface",
+      "title": "zr_800b"
+    },
+    {
+      "const": 110,
+      "description": "800ZR-C 150 GHz DWDM coherent SMF media interface",
+      "title": "zr_800c"
+    },
+    {
+      "const": 111,
+      "description": "400G-ER4-30 MSA SMF media interface",
+      "title": "er4_400g_30"
+    },
+    {
+      "const": 112,
+      "description": "OTN 1I1-5D1F SMF media interface",
+      "title": "otn_1i1_5d1f"
+    },
+    {
+      "const": 113,
+      "description": "OTN 1R1-5D1F SMF media interface",
+      "title": "otn_1r1_5d1f"
+    },
+    {
+      "const": 114,
+      "description": "OTN FOIC1.1-RS SMF media interface",
+      "title": "otn_foic1_1_rs"
+    },
+    {
+      "const": 115,
+      "description": "200GBASE-DR1 SMF media interface",
+      "title": "base_200g_dr1"
+    },
+    {
+      "const": 116,
+      "description": "200GBASE-DR1-2 SMF media interface",
+      "title": "base_200g_dr1_2"
+    },
+    {
+      "const": 117,
+      "description": "400GBASE-DR2 SMF media interface",
+      "title": "base_400g_dr2"
+    },
+    {
+      "const": 118,
+      "description": "400GBASE-DR2-2 SMF media interface",
+      "title": "base_400g_dr2_2"
+    },
+    {
+      "const": 119,
+      "description": "800GBASE-DR4 SMF media interface",
+      "title": "base_800g_dr4"
+    },
+    {
+      "const": 120,
+      "description": "800GBASE-DR4-2 SMF media interface",
+      "title": "base_800g_dr4_2"
+    },
+    {
+      "const": 121,
+      "description": "800GBASE-FR4-500 SMF media interface",
+      "title": "base_800g_fr4_500"
+    },
+    {
+      "const": 122,
+      "description": "800GBASE-FR4 SMF media interface",
+      "title": "base_800g_fr4"
+    },
+    {
+      "const": 123,
+      "description": "800GBASE-LR4 SMF media interface",
+      "title": "base_800g_lr4"
+    },
+    {
+      "const": 124,
+      "description": "800GBASE-LR1 coherent SMF media interface",
+      "title": "base_800g_lr1"
+    },
+    {
+      "const": 125,
+      "description": "800GBASE-ER1-20 coherent SMF media interface",
+      "title": "base_800g_er1_20"
+    },
+    {
+      "const": 126,
+      "description": "800GBASE-ER1 coherent SMF media interface",
+      "title": "base_800g_er1"
+    },
+    {
+      "const": 127,
+      "description": "1.6TBASE-DR8 SMF media interface",
+      "title": "base_1_6t_dr8"
+    },
+    {
+      "const": 128,
+      "description": "1.6TBASE-DR8-2 SMF media interface",
+      "title": "base_1_6t_dr8_2"
+    },
+    {
+      "const": 129,
+      "description": "XR400-16QAM coherent SMF media interface",
+      "title": "xr400_16qam"
+    },
+    {
+      "const": 130,
+      "description": "XR300-8QAM coherent SMF media interface",
+      "title": "xr300_8qam"
+    },
+    {
+      "const": 131,
+      "description": "XR200-QPSK coherent SMF media interface",
+      "title": "xr200_qpsk"
+    },
+    {
+      "const": 132,
+      "description": "XR200-16QAM coherent SMF media interface",
+      "title": "xr200_16qam"
+    },
+    {
+      "const": 133,
+      "description": "XR100-QPSK coherent SMF media interface",
+      "title": "xr100_qpsk"
+    },
+    {
+      "const": 134,
+      "description": "XR100-16QAM coherent SMF media interface",
+      "title": "xr100_16qam"
+    },
+    {
+      "const": 135,
+      "description": "XR400-WS-16QAM coherent SMF media interface",
+      "title": "xr400_ws_16qam"
+    },
+    {
+      "const": 136,
+      "description": "XR200-WS-QPSK coherent SMF media interface",
+      "title": "xr200_ws_qpsk"
+    },
+    {
+      "const": 137,
+      "description": "XR200-WS-16QAM coherent SMF media interface",
+      "title": "xr200_ws_16qam"
+    },
+    {
+      "const": 138,
+      "description": "XR100-WS-QPSK coherent SMF media interface",
+      "title": "xr100_ws_qpsk"
+    },
+    {
+      "const": 139,
+      "description": "XR100-WS-16QAM coherent SMF media interface",
+      "title": "xr100_ws_16qam"
+    },
+    {
+      "const": 140,
+      "description": "XR200-WS-BIDI-16QAM coherent SMF media interface",
+      "title": "xr200_ws_bidi_16qam"
+    },
+    {
+      "const": 141,
+      "description": "XR100-WS-BIDI-QPSK coherent SMF media interface",
+      "title": "xr100_ws_bidi_qpsk"
+    },
+    {
+      "const": 142,
+      "description": "XR100-WS-BIDI-16QAM coherent SMF media interface",
+      "title": "xr100_ws_bidi_16qam"
+    },
+    {
+      "const": 143,
+      "description": "100G-DR1-LPO SMF media interface",
+      "title": "dr1_100g_lpo"
+    },
+    {
+      "const": 144,
+      "description": "200G-DR2-LPO SMF media interface",
+      "title": "dr2_200g_lpo"
+    },
+    {
+      "const": 145,
+      "description": "400G-DR4-LPO SMF media interface",
+      "title": "dr4_400g_lpo"
+    },
+    {
+      "const": 146,
+      "description": "800G-DR8-LPO SMF media interface",
+      "title": "dr8_800g_lpo"
+    },
+    {
+      "const": 147,
+      "description": "400G-FR4-LPO SMF media interface",
+      "title": "fr4_400g_lpo"
+    },
+    {
+      "const": 190,
+      "description": "Escape to SMF media interface ID tables with nonzero GID; refer to the CMIS page 1Ch normalized application descriptor structure for the 12-bit Unique ID",
+      "title": "overflow_escape"
+    },
+    {
+      "const": 191,
+      "description": "Reserved",
+      "title": "reserved_bf"
+    },
+    {
+      "const": 240,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f0"
+    },
+    {
+      "const": 241,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f1"
+    },
+    {
+      "const": 242,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f2"
+    },
+    {
+      "const": 243,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f3"
+    },
+    {
+      "const": 244,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f4"
+    },
+    {
+      "const": 245,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f5"
+    },
+    {
+      "const": 246,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f6"
+    },
+    {
+      "const": 247,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f7"
+    },
+    {
+      "const": 248,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f8"
+    },
+    {
+      "const": 249,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_f9"
+    },
+    {
+      "const": 250,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_fa"
+    },
+    {
+      "const": 251,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_fb"
+    },
+    {
+      "const": 252,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_fc"
+    },
+    {
+      "const": 253,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_fd"
+    },
+    {
+      "const": 254,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_fe"
+    },
+    {
+      "const": 255,
+      "description": "Vendor specific/custom SMF media interface",
+      "title": "vendor_specific_ff"
+    }
+  ],
+  "title": "Sff8024SmfMediaInterface",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "spec": "SFF-8024 4.14 Table 4-7"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8024",
+    "revision": "4.14"
+  }
+}

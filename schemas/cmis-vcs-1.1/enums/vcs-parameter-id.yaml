@@ -1,0 +1,234 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcsParameterId
+title: CMIS-VCS 1.1 VCS Parameter ID
+spec:
+  id: cmis-vcs-1.1
+  revision: "01.1"
+  parity_deferred: true
+description: >-
+  Versatile Control Set Parameter ID registry, OIF-CMIS-VCS-01.1 § 5
+  Table 5-1. Each VCS Parameter is advertised by the module inside the
+  VCS Descriptor (a TLV encoded byte array returned by the VCS Descriptor
+  CDB commands, § 6) and occupies a module-advertised position inside the
+  Control Set memory spaces (§ 4.4); the ID itself is not a memory address.
+  Every entry records the parameter's Control Set register format as tags:
+  register field name, data type, size in bits per lane and access, plus the
+  descriptor attributes beyond the common set (VCS Parameter ID, VCS
+  Parameter Length, ApplicationMask, MemoryLength, PropertyFlags). Register
+  placement inside the VCS spaces is advertisement data and is not recorded.
+provenance:
+  spec: OIF-CMIS-VCS-01.1 § 5 Table 5-1
+  pdf_pages: [21, 22]
+entries:
+  - value: 0x00
+    name: reserved_space_indicator
+    description: >-
+      Used to reserve memory space for unused parameters so a CMIS base
+      5.x host still sees the Control Set layout it expects; the
+      ReservedLength attribute gives the length in bytes of the unsupported
+      parameter (§ 5.2). Descriptor attributes: VCS Parameter ID, VCS
+      Parameter Length, ApplicationMask (ignored for this parameter),
+      ReservedLength. No register field: the reserved bytes read back as
+      the CMIS base reserved content and writes have no effect.
+    tags: [type:rw, origin:vcs, section:5.2, register:none, memory_length:reserved_length]
+
+  - value: 0x01
+    name: explicit_control_per_param
+    description: >-
+      Pseudo-VCS Parameter assigning host/module ownership of each VCS
+      Parameter per lane; the Nth bit of the register mask corresponds to
+      the Nth VCS Parameter in the advertised VCS, bit 0 = first parameter
+      (§ 5.3, Table 5-5). Register: ExplicitControlPerParam<i>, Bool, RW,
+      size in bits per lane equals the advertised ExplicitControlPerParamMask
+      length (number of advertised VCS Parameters, rounded up to a byte).
+      Descriptor attributes: VCS Parameter ID, VCS Parameter Length,
+      ApplicationMask, MemoryLength, ExplicitControlPerParamMask.
+    tags: [type:rw, origin:vcs, section:5.3, register:explicit_control_per_param, data_type:bool, bits_per_lane:variable, access:rw]
+
+  - value: 0x02
+    name: adaptive_input_eq_enable_tx
+    description: >-
+      Enable the Tx adaptive input equalizer (1b enable, 0b disable and use
+      the host-controlled equalizer); part of the CMIS base Tx Controls
+      (§ 5.4, Table 5-8). Register: AdaptiveInputEqEnableTx<i>, Bool, RW,
+      1 bit per lane. Descriptor attributes: common set only.
+    tags: [type:rw, origin:cmis_base, section:5.4, register:adaptive_input_eq_enable_tx, data_type:bool, bits_per_lane:1, access:rw]
+
+  - value: 0x03
+    name: adaptive_input_eq_recall_tx
+    description: >-
+      Recall stored Tx input equalizer adaptation settings (00b do not
+      recall, 01b recall buffer 1, 10b recall buffer 2, 11b reserved); part
+      of the CMIS base Tx Controls (§ 5.5, Table 5-10). Register:
+      AdaptiveInputEqRecallTx<i>, Enc, RW, 2 bits per lane. Descriptor
+      attributes: common set only.
+    tags: [type:rw, origin:cmis_base, section:5.5, register:adaptive_input_eq_recall_tx, data_type:enc, bits_per_lane:2, access:rw]
+
+  - value: 0x04
+    name: host_controlled_input_eq_target_tx
+    description: >-
+      Host-controlled Tx input equalizer target, encoded per Table 5-11
+      (CmisVcsTxInputEqCode); part of the CMIS base Tx Controls (§ 5.6,
+      Table 5-13). Register: HostControlledInputEqTargetTx<i>, U4, RW,
+      4 bits per lane. Descriptor attributes: common set plus CodeValueMask
+      (U16, one bit per supported code value).
+    tags: [type:rw, origin:cmis_base, section:5.6, register:host_controlled_input_eq_target_tx, data_type:u4, bits_per_lane:4, access:rw, code_table:vcs-tx-input-eq-code]
+
+  - value: 0x05
+    name: cdr_enable_tx
+    description: >-
+      Tx CDR enable (1b CDR enabled, 0b CDR bypassed); part of the CMIS
+      base Tx Controls (§ 5.7, Table 5-15). Register: CDREnableTx<i>,
+      Bool, RW, 1 bit per lane. Descriptor attributes: common set only.
+    tags: [type:rw, origin:cmis_base, section:5.7, register:cdr_enable_tx, data_type:bool, bits_per_lane:1, access:rw]
+
+  - value: 0x06
+    name: cdr_enable_rx
+    description: >-
+      Rx CDR enable (1b CDR enabled, 0b CDR bypassed); part of the CMIS
+      base Rx Controls (§ 5.8, Table 5-17). Register: CDREnableRx<i>,
+      Bool, RW, 1 bit per lane. Descriptor attributes: common set only.
+    tags: [type:rw, origin:cmis_base, section:5.8, register:cdr_enable_rx, data_type:bool, bits_per_lane:1, access:rw]
+
+  - value: 0x07
+    name: output_eq_pre_post_cursor_target_rx
+    description: >-
+      Rx output equalizer pre/post-cursor target in dB, encoded per
+      Table 5-18 (CmisVcsRxOutputEqCode); part of the CMIS base Rx Controls
+      (§ 5.9, Table 5-20). Advertised once per cursor: the
+      PrePostCursorIndex attribute selects the coefficient the settings
+      apply to. Registers: OutputEqPreCursorTargetRx<i> and
+      OutputEqPostCursorTargetRx<i>, Enc, RW, 4 bits per lane each; when a
+      module supports a single emphasis setting the Post-Cursor field
+      carries it and the Pre-Cursor field is ignored. Descriptor attributes:
+      common set plus PrePostCursorIndex (S8, C(value) coefficient index)
+      and CodeValueMask (U16, one bit per supported code value).
+    tags: [type:rw, origin:cmis_base, section:5.9, register:output_eq_pre_cursor_target_rx+output_eq_post_cursor_target_rx, data_type:enc, bits_per_lane:4, access:rw, code_table:vcs-rx-output-eq-code]
+
+  - value: 0x08
+    name: output_amplitude_target_rx
+    description: >-
+      Rx output amplitude target, encoded per Table 5-21
+      (CmisVcsRxOutputAmplitudeCode); part of the CMIS base Rx Controls
+      (§ 5.10, Table 5-23). Register: OutputAmplitudeTargetRx<i>, Enc, RW,
+      4 bits per lane. Descriptor attributes: common set plus CodeValueMask
+      (U16, one bit per supported code value).
+    tags: [type:rw, origin:cmis_base, section:5.10, register:output_amplitude_target_rx, data_type:enc, bits_per_lane:4, access:rw, code_table:vcs-rx-output-amplitude-code]
+
+  - value: 0x09
+    name: host_controlled_input_eq_target_numeric_tx
+    description: >-
+      Host-controlled Tx input equalization target, numeric S8 form with
+      module-advertised range and step (§ 5.11, Table 5-25); VCS-only
+      parameter. Register: HostControlledInputEqTargetNumericTx<i>, S8,
+      RW, 8 bits per lane. Descriptor attributes: common set plus
+      EqualizerTarget (U8, GDC or GDC2), Min (S8), Max (S8) and StepSize
+      (CmisVcsEqualizationStepSize).
+    tags: [type:rw, origin:vcs, section:5.11, register:host_controlled_input_eq_target_numeric_tx, data_type:s8, bits_per_lane:8, access:rw]
+
+  - value: 0x0a
+    name: output_eq_target_numeric_rx
+    description: >-
+      Rx output equalization target in dB, numeric S8 form for modules
+      without independent pre/post-cursor control (§ 5.12, Table 5-27);
+      VCS-only parameter. Register: OutputEqTargetNumericRx<i>, S8, RW,
+      8 bits per lane. Descriptor attributes: common set plus
+      EqualizerTarget (U8, GDC or GDC2), Min (S8), Max (S8) and StepSize
+      (CmisVcsEqualizationStepSize).
+    tags: [type:rw, origin:vcs, section:5.12, register:output_eq_target_numeric_rx, data_type:s8, bits_per_lane:8, access:rw]
+
+  - value: 0x0b
+    name: output_precoding_enable_rx
+    description: >-
+      Enable Rx output precoding per lane; value 1 enables the output
+      precoding encoder (§ 5.13, Table 5-29); VCS-only parameter. Register:
+      OutputPrecodingEnableRx<i>, Bool, RW, 1 bit per lane. Descriptor
+      attributes: common set only.
+    tags: [type:rw, origin:vcs, section:5.13, register:output_precoding_enable_rx, data_type:bool, bits_per_lane:1, access:rw]
+
+  - value: 0x0c
+    name: input_precoding_enable_tx
+    description: >-
+      Enable the Tx input precoding decoder; value 1 enables the decoder
+      (§ 5.14, Table 5-31); VCS-only parameter. Register:
+      InputPrecodingEnableTx<i>, Bool, RW, 1 bit per lane. Descriptor
+      attributes: common set only.
+    tags: [type:rw, origin:vcs, section:5.14, register:input_precoding_enable_tx, data_type:bool, bits_per_lane:1, access:rw]
+
+  - value: 0x0d
+    name: output_eq_pre_post_cursor_coeff_rx
+    description: >-
+      Rx output equalizer FIR tap value, numeric S8 form; the actual tap
+      weight is the S8 value multiplied by the advertised StepSize, range
+      -128*StepSize to +127*StepSize (§ 5.15, Tables 5-32 to 5-34);
+      VCS-only parameter. Advertised once per cursor: the
+      PrePostCursorIndex attribute selects the coefficient. Register:
+      OutputEqPrePostCursorCoeffRx<i>, S8, RW, 8 bits per lane. Descriptor
+      attributes: common set plus PrePostCursorIndex (S8), Max (S8), Min
+      (S8) and StepSize (CmisVcsFirTapStepSize).
+    tags: [type:rw, origin:vcs, section:5.15, register:output_eq_pre_post_cursor_coeff_rx, data_type:s8, bits_per_lane:8, access:rw]
+
+  - value: 0x0e
+    name: output_fine_amplitude_setting_rx
+    description: >-
+      Rx output fine amplitude setting, encoded per Table 5-35
+      (CmisVcsRxOutputFineAmplitudeCode); finer resolution than the CMIS
+      base amplitude target (§ 5.16, Table 5-37); VCS-only parameter.
+      Register: OutputAmplitudeSettingRx<i>, RW, 4 bits per lane.
+      INCONCLUSIVE: Table 5-37 prints the data type as U8 while printing
+      the size as 4 bits per lane; the 16-value code table of Table 5-35
+      fits 4 bits, so the size is recorded and the data-type label is
+      recorded as printed. Descriptor attributes: common set plus
+      CodeValueMask (U16, one bit per supported code value).
+    tags: [type:rw, origin:vcs, section:5.16, register:output_fine_amplitude_setting_rx, data_type:u8, bits_per_lane:4, access:rw, code_table:vcs-rx-output-fine-amplitude-code]
+
+  - value: 0x0f
+    name: host_channel_loss_rx
+    description: >-
+      Host-provided channel loss in dB between the module electrical Rx
+      output and the destination; 0 tells the module to ignore the
+      parameter (§ 5.17, Table 5-39); VCS-only parameter. Used by the
+      module to set its Rx output equalization values when it owns them.
+      Register: HostChannelLossRx<i>, U8, RW, 8 bits per lane. Descriptor
+      attributes: common set only.
+    tags: [type:rw, origin:vcs, section:5.17, register:host_channel_loss_rx, data_type:u8, bits_per_lane:8, access:rw, unit:dB]
+
+  - value: 0x10
+    name: host_channel_loss_tx
+    description: >-
+      Host-provided channel loss in dB of the host electrical Tx channel;
+      0 tells the module to ignore the parameter (§ 5.18, Table 5-41);
+      VCS-only parameter. Used by the module to set its Tx input
+      equalization values when it owns them. Register:
+      HostChannelLossTx<i>, U8, RW, 8 bits per lane. Descriptor attributes:
+      common set only.
+    tags: [type:rw, origin:vcs, section:5.18, register:host_channel_loss_tx, data_type:u8, bits_per_lane:8, access:rw, unit:dB]
+
+  - value: 0x11
+    name: non_linear_compensation_tx
+    description: >-
+      Module-requested Tx Non-Linear Compensation (NLC) target, read-only:
+      the module sets it and the host cannot modify it, so it appears only
+      in the Active Control Set memory space, after all read-write VCS
+      Parameters (§ 5.19, Table 5-43); VCS RO parameter. Registers:
+      FixedNLCuppTargetTx<i> and FixedNLClowTargetTx<i>, S8, RO, 8 bits per
+      lane each, the requested upper and lower eye compensation in percent;
+      positive is expansion, negative is compression. Descriptor
+      attributes: common set only.
+    tags: [type:ro, origin:vcs, section:5.19, register:fixed_nlc_upp_target_tx+fixed_nlc_low_target_tx, data_type:s8, bits_per_lane:8, access:ro, unit:%]
+
+  - value: 0x12
+    name: input_eq_pre_post_cursor_coeff_tx
+    description: >-
+      Advertised Tx input pre-equalizer FIR tap value, read-only: the
+      module sets it and the host cannot modify it, so it appears only in
+      the Active Control Set memory space, after all read-write VCS
+      Parameters (§ 5.20, Table 5-46); VCS RO parameter. Advertised once
+      per cursor: the PrePostCursorIndex attribute selects the
+      coefficient. Register: InputEqPrePostCursorCoeffTx<i>, S8, RO,
+      8 bits per lane; the actual tap weight is the S8 value multiplied by
+      the advertised StepSize, range -128*StepSize to +127*StepSize.
+      Descriptor attributes: common set plus PrePostCursorIndex (S8) and
+      StepSize (CmisVcsFirTapStepSize).
+    tags: [type:ro, origin:vcs, section:5.20, register:input_eq_pre_post_cursor_coeff_tx, data_type:s8, bits_per_lane:8, access:ro]

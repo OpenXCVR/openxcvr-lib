@@ -1,0 +1,11 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: cmis-ff-1.0
+  title: OIF-CMIS-FF
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-CMIS-FF-01.0.pdf
+imports:
+  - ../cmis/_index.yaml
+kind: memory_map
+includes:
+  - page-05h-form-factor-hardware-management.yaml

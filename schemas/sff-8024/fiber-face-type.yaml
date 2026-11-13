@@ -1,0 +1,23 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024FiberFaceType
+title: SFF-8024 Fiber Face Type Codes
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-12
+  pdf_pages: [36]
+entries:
+  - value: 0x00
+    name: unknown_or_unspecified
+    description: Unknown or unspecified fiber face type
+  - value: 0x01
+    name: pc_upc
+    description: Physical or ultra physical contact fiber face
+  - value: 0x02
+    name: apc
+    description: Angled physical contact fiber face
+  - value: 0x03
+    name: reserved_03
+    description: Reserved

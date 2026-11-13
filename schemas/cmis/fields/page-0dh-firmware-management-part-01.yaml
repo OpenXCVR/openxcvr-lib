@@ -1,0 +1,712 @@
+fields:
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.12 Advertisement (byte 128) - Table 8-76
+  # ===========================================================================
+
+  - name: cdb_download_supported
+    display_name: CdbDownloadSupported
+    offset: 128
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: CDB-based download is supported by the Running Load."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "CdbDownloadSupported: 1b: CDB-based download is supported by Running Load"
+
+  - name: reserved_page_0dh_128_bits_6_4
+    display_name: ReservedPage0Dh128Bits6To4
+    offset: 128
+    bit_offset: 4
+    bit_width: 3
+    type: u3
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "Byte 128 bits 6-4: Reserved"
+
+  - name: fixed_load_provides_service
+    display_name: FixedLoadProvidesService
+    offset: 128
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "FixedLoadProvidesService: 0b: Fixed Load provides auxiliary firmware mgmt. facilities; 1b: Fixed Load additionally provides transmission"
+
+  - name: fixed_bank_supported
+    display_name: FixedBankSupported
+    offset: 128
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Fixed Bank for Fixed Firmware Load supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "FixedBankSupported: 1b: Fixed Bank for Fixed Firmware Load supported"
+
+  - name: bank_b_supported
+    display_name: BankBSupported
+    offset: 128
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Loadable Bank B supported (requires BankASupported)."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "BankBSupported: 1b: Loadable Bank B supported (requires BankASupported)"
+
+  - name: bank_a_supported
+    display_name: BankASupported
+    offset: 128
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Loadable Bank A supported (required for Download)."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "BankASupported: 1b: Loadable Bank A supported (required for Download)"
+
+  - name: reserved_page_0dh_129_131
+    display_name: ReservedPage0Dh129To131
+    offset: 129
+    size_bytes: 3
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "Bytes 129-131: Reserved [3]"
+
+  - name: reserved_page_0dh_132_135
+    display_name: ReservedPage0Dh132To135
+    offset: 132
+    size_bytes: 4
+    type: bytes
+    since: "5.4"
+    description: "Control subject area: Reserved [4], RW per Table 8-76."
+    access: rw
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "Bytes 132-135: Reserved [4] (RW)"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.12 Status (byte 136) - Table 8-76. LoadsStatusRegister is
+  # described with examples in CMIS 5.4 § 7.3.1.4.
+  # ===========================================================================
+
+  - name: reserved_page_0dh_136_bit_7
+    display_name: ReservedPage0Dh136Bit7
+    offset: 136
+    bit_offset: 7
+    bit_width: 1
+    type: bitmap
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "Byte 136 bit 7: Reserved"
+
+  - name: validity_status_b
+    display_name: ValidityStatusB
+    offset: 136
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "Validity of the Load in Bank B."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: valid, description: "Load in Bank B is valid" }
+      - { value: 1, name: invalid, description: "Load in Bank B is invalid" }
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "ValidityStatusB: 0b / 1b: Load in Bank B is valid / invalid"
+
+  - name: administrative_status_b
+    display_name: AdministrativeStatusB
+    offset: 136
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "Commit state of the Load in Bank B."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: uncommitted, description: "Load in Bank B is uncommitted" }
+      - { value: 1, name: committed, description: "Load in Bank B is committed" }
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "AdministrativeStatusB: 0b / 1b: Load in Bank B is uncommitted / committed"
+
+  - name: operational_status_b
+    display_name: OperationalStatusB
+    offset: 136
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "Running state of the Load in Bank B."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: not_running, description: "Load in Bank B is not running" }
+      - { value: 1, name: running, description: "Load in Bank B is running" }
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "OperationalStatusB: 0b / 1b: Load in Bank B is not running / running"
+
+  - name: reserved_page_0dh_136_bit_3
+    display_name: ReservedPage0Dh136Bit3
+    offset: 136
+    bit_offset: 3
+    bit_width: 1
+    type: bitmap
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "Byte 136 bit 3: Reserved"
+
+  - name: validity_status_a
+    display_name: ValidityStatusA
+    offset: 136
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "Validity of the Load in Bank A."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: valid, description: "Load in Bank A is valid" }
+      - { value: 1, name: invalid, description: "Load in Bank A is invalid" }
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "ValidityStatusA: 0b / 1b: Load in Bank A is valid / invalid"
+
+  - name: administrative_status_a
+    display_name: AdministrativeStatusA
+    offset: 136
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "Commit state of the Load in Bank A."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: uncommitted, description: "Load in Bank A is uncommitted" }
+      - { value: 1, name: committed, description: "Load in Bank A is committed" }
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "AdministrativeStatusA: 0b / 1b: Load in Bank A is uncommitted / committed"
+
+  - name: operational_status_a
+    display_name: OperationalStatusA
+    offset: 136
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "Running state of the Load in Bank A."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: not_running, description: "Load in Bank A is not running" }
+      - { value: 1, name: running, description: "Load in Bank A is running" }
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "OperationalStatusA: 0b / 1b: Load in Bank A is not running / running"
+
+  - name: reserved_page_0dh_137_147
+    display_name: ReservedPage0Dh137To147
+    offset: 137
+    size_bytes: 11
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-76"
+      quote: "Bytes 137-147: Reserved [11]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.12 Load Version Descriptors (bytes 148-255) - Tables 8-75 and
+  # 8-76. Each 36-byte VersionDescriptor structure (Table 8-75) carries
+  # MajorVersion (byte 0), MinorVersion (byte 1), BuildNumber (bytes 2-3, U16)
+  # and a 32-byte ASCII Description (bytes 4-35) for the Load stored in the
+  # given bank: VersionLoadA (148-183), VersionLoadB (184-219) and
+  # VersionFixedLoad (220-255).
+  # ===========================================================================
+
+  - name: major_version_load_a
+    display_name: MajorVersionLoadA
+    offset: 148
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "U8 major revision number of the Load stored in Bank A."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "MajorVersion: U8 major revision number of Load stored in given Bank"
+
+  - name: minor_version_load_a
+    display_name: MinorVersionLoadA
+    offset: 149
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "U8 minor revision number of the Load stored in Bank A."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "MinorVersion: U8 minor revision number of Load stored in given Bank"
+
+  - name: build_number_load_a
+    display_name: BuildNumberLoadA
+    offset: 150
+    size_bytes: 2
+    type: u16be
+    since: "5.4"
+    description: "U16 build number of the Load stored in Bank A."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "BuildNumber: U16 build number of Load stored in given Bank"
+
+  - name: description_load_a
+    display_name: DescriptionLoadA
+    offset: 152
+    size_bytes: 32
+    type: ascii
+    since: "5.4"
+    description: "ASCII[32] descriptive string for the Load stored in Bank A."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "Description: ASCII[32] descriptive string for Load stored in given Bank"
+
+  - name: major_version_load_b
+    display_name: MajorVersionLoadB
+    offset: 184
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "U8 major revision number of the Load stored in Bank B."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "MajorVersion: U8 major revision number of Load stored in given Bank"
+
+  - name: minor_version_load_b
+    display_name: MinorVersionLoadB
+    offset: 185
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "U8 minor revision number of the Load stored in Bank B."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "MinorVersion: U8 minor revision number of Load stored in given Bank"
+
+  - name: build_number_load_b
+    display_name: BuildNumberLoadB
+    offset: 186
+    size_bytes: 2
+    type: u16be
+    since: "5.4"
+    description: "U16 build number of the Load stored in Bank B."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "BuildNumber: U16 build number of Load stored in given Bank"
+
+  - name: description_load_b
+    display_name: DescriptionLoadB
+    offset: 188
+    size_bytes: 32
+    type: ascii
+    since: "5.4"
+    description: "ASCII[32] descriptive string for the Load stored in Bank B."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "Description: ASCII[32] descriptive string for Load stored in given Bank"
+
+  - name: major_version_fixed_load
+    display_name: MajorVersionFixedLoad
+    offset: 220
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "U8 major revision number of the Load stored in the Fixed Bank."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "MajorVersion: U8 major revision number of Load stored in given Bank"
+
+  - name: minor_version_fixed_load
+    display_name: MinorVersionFixedLoad
+    offset: 221
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "U8 minor revision number of the Load stored in the Fixed Bank."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "MinorVersion: U8 minor revision number of Load stored in given Bank"
+
+  - name: build_number_fixed_load
+    display_name: BuildNumberFixedLoad
+    offset: 222
+    size_bytes: 2
+    type: u16be
+    since: "5.4"
+    description: "U16 build number of the Load stored in the Fixed Bank."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "BuildNumber: U16 build number of Load stored in given Bank"
+
+  - name: description_fixed_load
+    display_name: DescriptionFixedLoad
+    offset: 224
+    size_bytes: 32
+    type: ascii
+    since: "5.4"
+    description: "ASCII[32] descriptive string for the Load stored in the Fixed Bank."
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.12"
+      pdf_page: 220
+      table: "Table 8-75 / Table 8-76"
+      quote: "Description: ASCII[32] descriptive string for Load stored in given Bank"

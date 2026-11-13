@@ -1,0 +1,18 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis15Page40hApplicationsAdvertisement
+title: C-CMIS 1.5 Page 40h Applications Advertisement
+spec:
+  id: c-cmis-1.5
+  revision: "01.5"
+  source: docs/stds/cmis/OIF-C-CMIS-01.5.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.5 § 7.8.1
+  pdf_pages: [39]
+page_address: "40h"
+size_bytes: 128
+fields:
+  - { name: "c_cmis_revision", offset: 128, size_bytes: 1, type: "u8", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "C-CMIS revision; upper nibble=major, lower nibble=minor (01h=v0.1, 21h=v2.1)", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.5 § 7.8.1", pdf_page: 39, table: "Table 21" } }
+  - { name: "reserved_129_247", offset: 129, size_bytes: 119, type: "bytes", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.5 § 7.8.1", pdf_page: 39, table: "Table 21" } }
+  - { name: custom, offset: 248, size_bytes: 8, type: "bytes", access: "rw", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Vendor defined custom bytes", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.5 § 7.8.1", pdf_page: 39, table: "Table 21" } }

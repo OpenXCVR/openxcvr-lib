@@ -1,0 +1,180 @@
+fields:
+
+  - name: mod_hsout_ffe_length
+    display_name: "ModHsOut<lane>FfeLength"
+    description: "FFE length N of ModHsOut lane <lane>, encoded as N = [register] + 1."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "127 + lane"
+    bit_offset: 0
+    bit_width: 3
+    type: u3
+    enum_ref: CmisLtFfeLength
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-LT, FFE]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 55, table: "Table 44" }
+
+  - name: reserved_mod_hsout_ffe_length_bits_7_3
+    description: "Reserved bits 7-3 of the ModHsOut FfeLength byte. The parsed table lists bits 7-4 as reserved next to the 2-0 field, leaving bit 3 unassigned; reserved is modeled as bits 7-3."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "127 + lane"
+    bit_offset: 3
+    bit_width: 5
+    type: u5
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 55, table: "Table 44" }
+
+  - name: mod_hsout_ffe_cursor_location
+    display_name: "ModHsOut<lane>FfeCursorLocation"
+    description: "FFE cursor location L of ModHsOut lane <lane>, encoded as L = [register] + 1."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "135 + lane"
+    bit_offset: 0
+    bit_width: 3
+    type: u3
+    enum_ref: CmisLtFfeCursorLocation
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-LT, FFE]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 55, table: "Table 44" }
+
+  - name: reserved_mod_hsout_ffe_cursor_bits_7_3
+    description: "Reserved bits 7-3 of the ModHsOut FfeCursorLocation byte (same parsed-table gap as the FfeLength byte)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "135 + lane"
+    bit_offset: 3
+    bit_width: 5
+    type: u5
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 55, table: "Table 44" }
+
+  - name: reserved_ingress_lt_protocol_bits_7_4
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "143 + lane"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Reserved
+    tags: []
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 56, table: "Table 45" }
+
+  - name: ingress_lt_protocol_lane
+    display_name: "IngressLTProtocolLane<lane>"
+    description: "Link training protocol/procedure used when link training is enabled on ingress lane <lane>."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "143 + lane"
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtTrainingProtocol
+    access: rw
+    field_type: Configuration
+    tags: [CMIS-LT, Protocol]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 56, table: "Table 45" }
+
+  - name: reserved_ingress_lt_params_bits_7_6
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "151 + lane"
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    access: rw
+    field_type: Reserved
+    tags: []
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 56, table: "Table 45" }
+
+  - name: ingress_lt_timeout_lane
+    display_name: "IngressLTTimeoutLane<lane>"
+    description: "Maximum duration after which the controlling link training entity times out and terminates the session on ingress lane <lane>."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "151 + lane"
+    bit_offset: 3
+    bit_width: 3
+    type: u3
+    enum_ref: CmisLtTrainingTimeout
+    access: rw
+    field_type: Configuration
+    tags: [CMIS-LT, Protocol]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 56, table: "Table 45" }
+
+  - name: ingress_lt_retries_lane
+    display_name: "IngressLTRetriesLane<lane>"
+    description: "Maximum number of retries after which the controlling link training entity terminates the session on ingress lane <lane>."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "151 + lane"
+    bit_offset: 0
+    bit_width: 3
+    type: u3
+    enum_ref: CmisLtTrainingRetries
+    access: rw
+    field_type: Configuration
+    tags: [CMIS-LT, Protocol]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 56, table: "Table 45" }
+
+  - name: reserved_mod_hsout_tuning_params_bits_7_4
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "159 + lane"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Reserved
+    tags: []
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 57, table: "Table 46" }
+
+  - name: mod_hsout_tap_tuning_step
+    display_name: "ModHsOut<lane>TapTuningStep"
+    description: "ModHsOut transmit FFE tap tuning step size; reported tap values have only 0.01 resolution."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "159 + lane"
+    bit_offset: 2
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTapTuningStep
+    access: rw
+    field_type: Configuration
+    tags: [CMIS-LT, Tuning]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 57, table: "Table 46" }
+
+  - name: mod_hsout_out_tuning_step
+    display_name: "ModHsOut<lane>OutTuningStep"
+    description: "Nominal p-p differential amplitude step size for ModHsOut lane <lane>; reported amplitude values have only 50 mV resolution."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "159 + lane"
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtAmplitudeTuningStep
+    access: rw
+    field_type: Configuration
+    tags: [CMIS-LT, Tuning]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 57, table: "Table 46" }

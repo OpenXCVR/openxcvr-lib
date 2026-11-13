@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>OpenXcvr.ConsumerCheck</RootNamespace>
+    <AssemblyName>OpenXcvr.ConsumerCheck</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- No project reference on purpose: this project consumes the packed
+         nupkg from the local feed only (see nuget.config). -->
+    <PackageReference Include="OpenXcvr.Transceivers" Version="0.2.0" />
+  </ItemGroup>
+
+</Project>

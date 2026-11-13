@@ -1,0 +1,193 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbGetMaxFecSymbolErrorWeight
+title: CMIS CDB Command 0233h - Get Max FEC Symbol Error Weight
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.7.11
+  pdf_pages: [380, 381]
+  table: Table 9-46
+cmd_id: 0x0233
+available_since: "5.3"
+cmd_id_group: performance_monitoring
+command_class: advertised
+description: >
+  Returns the maximum FEC symbol error weight observed per Data Path
+  since the last clear, together with the FEC correction capability.
+  Introduced in CMIS 5.3 (5.3 revision history E42: '0232h-0233h added
+  Maximum FEC Symbol Error Weight statistics'). The BankIndex parameter
+  at 9Fh:136 (the bank of the group of 8 lanes of interest) is defined by
+  CMIS 5.4 for modules with more than 32 lanes; through CMIS 5.3 the
+  byte was Reserved (CDB-10).
+advertisement:
+  via_cmd: 0x0042
+  field: performance_monitoring_features.cmd_0233_supported
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 2
+    fields:
+      - name: bank_index
+        offset: 136
+        size_bytes: 1
+        type: u8
+        template: cdb_cmd_parameter
+        description: >
+          The bank index for the group of 8 lanes of interest (CMIS 5.4 >32-lane extension; Reserved through CMIS 5.3).
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: decoder_location
+        offset: 137
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        enum_inline:
+          - { value: 0, name: media_side, description: "Media side, Rx direction" }
+          - { value: 1, name: host_side, description: "Host side, Tx direction" }
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "5.3" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "5.3" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "5.3" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "5.3" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "5.3" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "5.3" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "5.3" }
+  lpl:
+    length: 20
+    fields:
+      - name: unmodified_136
+        offset: 136
+        size_bytes: 1
+        type: u8
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          Unmodified.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: unmodified_137
+        offset: 137
+        size_bytes: 1
+        type: u8
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          Unmodified CMD parameter.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: correction_capability
+        offset: 138
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16: number of correctable FEC symbols per FEC frame.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid1
+        offset: 140
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID1: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 1, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid2
+        offset: 142
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID2: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 2, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid3
+        offset: 144
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID3: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 3, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid4
+        offset: 146
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID4: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 4, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid5
+        offset: 148
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID5: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 5, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid6
+        offset: 150
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID6: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 6, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid7
+        offset: 152
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID7: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 7, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+      - name: max_error_weight_dpid8
+        offset: 154
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16 MaxErrorWeightDPID8: maximum FEC symbol error weight
+          observed on the Data Path with DPID = 8, or zero if no such Data Path
+          exists. When there were uncorrectable FEC frames, a value exceeding
+          CorrectionCapability should be reported.
+        provenance: { spec: "CMIS 5.4 § 9.7.11", table: "Table 9-46" }
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects:

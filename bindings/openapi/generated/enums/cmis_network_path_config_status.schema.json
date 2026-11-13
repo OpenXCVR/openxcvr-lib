@@ -1,0 +1,64 @@
+{
+  "$id": "cmis_network_path_config_status.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "ConfigUndefined - no status information available (initial register value)",
+      "title": "config_undefined"
+    },
+    {
+      "const": 1,
+      "description": "ConfigSuccess - the last accepted Network Path configuration command has completed successfully",
+      "title": "config_success"
+    },
+    {
+      "const": 2,
+      "description": "ConfigRejected - configuration rejected, unspecific validation failure",
+      "title": "config_rejected"
+    },
+    {
+      "const": 3,
+      "description": "ConfigRejectedInvalidAppSel - configuration rejected, invalid AppSel codes",
+      "title": "config_rejected_invalid_app_sel"
+    },
+    {
+      "const": 4,
+      "description": "ConfigRejectedInvalidNetworkPath - configuration rejected, invalid set of lanes for AppSel",
+      "title": "config_rejected_invalid_network_path"
+    },
+    {
+      "const": 5,
+      "description": "Reserved",
+      "title": "reserved_5"
+    },
+    {
+      "const": 6,
+      "description": "ConfigRejectedLanesInUse - configuration rejected, some lanes not in NPDeactivated",
+      "title": "config_rejected_lanes_in_use"
+    },
+    {
+      "const": 7,
+      "description": "ConfigRejectedPartialNetworkPath - configuration rejected, lanes are only a subset of the Network Path",
+      "title": "config_rejected_partial_network_path"
+    },
+    {
+      "const": 12,
+      "description": "ConfigInProgress - a configuration command is still being processed by the module",
+      "title": "config_in_progress"
+    }
+  ],
+  "title": "CmisNetworkPathConfigStatus",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      255
+    ],
+    "spec": "CMIS 5.3 § 8.15.3 / Table 8-141"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

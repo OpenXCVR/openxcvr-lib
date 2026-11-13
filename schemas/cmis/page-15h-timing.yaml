@@ -1,0 +1,83 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage15hTiming
+title: CMIS Page 15h Timing Characteristics (banked)
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.14
+  pdf_pages: [249]
+page_address: "15h"
+size_bytes: 128
+
+# Banked across lanes per 's bank-relative scope convention. Page 15h
+# reports per-host-lane module latency; all fields are read-only.
+# CMIS 5.4 § 4.1.1 / § 8.1.2 expands lane banking to up to 32 banks
+# (256 lanes): BanksSupported = 11b (01h:142.1-0, CmisBanksSupported5p4)
+# is the escape code and 01h:174.4-0 ExtraLaneBanksSupported carries the
+# extra bank count. Through CMIS 5.3 the maximum is 4 banks (32 lanes).
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+fields:
+
+  # ===========================================================================
+  # § 8.14 Data Path Rx and Tx Latency (bytes 224-255) — Table 8-131
+  # ===========================================================================
+
+  - name: data_path_rx_latency_host_lane
+    display_name: DataPathRxLatencyHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "224 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "1 ns" }
+    access: ro
+    behavior:
+      validity_timing: unspecified_by_cmis_5_3
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.14"
+      pdf_page: 249
+      table: "Table 8-131"
+      quote: "DataPathRxLatencyHostLane<i>: U16 lane <i> Rx delay in ns."
+
+  - name: data_path_tx_latency_host_lane
+    display_name: DataPathTxLatencyHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "240 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "1 ns" }
+    access: ro
+    behavior:
+      validity_timing: unspecified_by_cmis_5_3
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.14"
+      pdf_page: 249
+      table: "Table 8-131"
+      quote: "DataPathTxLatencyHostLane<i>: U16 lane <i> Tx delay in ns."

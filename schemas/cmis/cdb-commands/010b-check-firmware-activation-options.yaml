@@ -1,0 +1,98 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbCheckFirmwareActivationOptions
+title: CMIS CDB Command 010Bh - Check Firmware Activation Options
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.6.13
+  pdf_pages: [361]
+  table: Table 9-31
+cmd_id: 0x010b
+available_since: "5.4"
+cmd_id_group: firmware_management
+command_class: advertised
+description: >
+  Performs all feasible firmware load validations (re-validate) and
+  dynamically checks, based on the stored firmware loads, current
+  configuration and module state, whether a load switch or load restart
+  Run Firmware Load command (CMD 0109h) can be executed without traffic
+  impact and/or with preserved configuration. CMD 0109h rejects
+  activation requests when the desired preservation mode is not
+  available. New in CMIS 5.4 ('CMD 010Bh: Check Firmware Activation
+  Options (new)'). The Table 9-18 Type cell prints blank in the parsed
+  5.4 text; the command is recorded as advertised (Consolidated Firmware
+  Load Management feature, section 7.11.2; see the Page 0Ch
+  FwSupportDetails bits TransferIsHarmless and
+  RejectUnsupportedActivation).
+  Table 9-31 prints REPLY RPLLength 0 while the reply defines TrafficImpact and ConfigImpact at bytes 136-137 (2 bytes); the field layout is recorded and the printed value noted here.
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 0
+    fields: []
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "5.4" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "5.4" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "5.4" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "5.4" }
+    - { value: 0x41, name: failed_cmd_not_supported, meaning: "Command not supported (Table 9-19 FailedCmdNotSupported)", since: "5.4" }
+    - { value: 0x44, name: failed_timeout, meaning: "Command checking timeout (Table 9-19 FailedTimeout)", since: "5.4" }
+    - { value: 0x46, name: reject_privileged, meaning: "Privilege related error, e.g. password required (Table 9-19 RejectPrivileged)", since: "5.4" }
+    - { value: 0x47, name: reject_not_now, meaning: "Cannot execute command in current situation (Table 9-19 RejectNotNow)", since: "5.4" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed to validate or execute, no specific failure", since: "5.4" }
+    - { value: 0x60, name: reject_unspecific, meaning: "Unspecific reason to reject execution (Table 9-19 Reject, code 32)", since: "5.4" }
+    - { value: 0x61, name: reject_invalid_load_format, meaning: "Load format not valid (Table 9-19 RejectInvalidLoadFormat, code 33)", since: "5.4" }
+    - { value: 0x62, name: reject_invalid_load_checksum, meaning: "Load internal checksum(s) not valid (Table 9-19 RejectInvalidLoadChecksum, code 34)", since: "5.4" }
+    - { value: 0x63, name: reject_invalid_load_authentication, meaning: "Load authentication has failed (Table 9-19 RejectInvalidLoadAuthentication, code 35)", since: "5.4" }
+    - { value: 0x64, name: reject_invalid_load_target, meaning: "Load not suitable for this hardware (Table 9-19 RejectInvalidLoadTarget, code 36)", since: "5.4" }
+    - { value: 0x65, name: reject_invalid_load, meaning: "Load not supported, other unspecific reason (Table 9-19 RejectInvalidLoad, code 37)", since: "5.4" }
+    - { value: 0x66, name: reject_hitless_activation_not_available, meaning: "Hitless load activation not available (Table 9-19 RejectHitlessActivationNotAvailable, code 38)", since: "5.4" }
+    - { value: 0x67, name: reject_config_preservation_not_available, meaning: "Load activation with configuration preservation not available (Table 9-19 RejectConfigPreservationNotAvailable, code 39)", since: "5.4" }
+  lpl:
+    length: 2
+    fields:
+      - name: traffic_impact
+        offset: 136
+        bit_offset: 0
+        bit_width: 2
+        type: bitmap
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          Indicates if a Run Load CMD with the option to preserve
+          traffic integrity (hitless) and configuration is available, given the
+          specific Load versions in active and inactive banks and the current
+          configuration and module state. Bit 0: restart active preserving
+          traffic integrity available; bit 1: switch to inactive preserving
+          traffic integrity available. In a hitless activation attempt the
+          module will do its best to preserve traffic integrity, configurations
+          and related status indications (e.g. ACS).
+        provenance: { spec: "CMIS 5.4 § 9.6.13", table: "Table 9-31" }
+      - name: config_impact
+        offset: 137
+        bit_offset: 0
+        bit_width: 2
+        type: bitmap
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          Indicates if a Run Load CMD with the option to preserve
+          configuration is available: bit 0 restart active preserving
+          configuration available; bit 1 switch to inactive preserving config
+          available; bits 2-7 reserved. In a configuration preserving
+          activation the module will do its best to preserve configurations and
+          related status indications (e.g. ACS).
+        provenance: { spec: "CMIS 5.4 § 9.6.13", table: "Table 9-31" }
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects:
+    - "Re-validates the stored firmware loads."

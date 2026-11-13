@@ -1,0 +1,49 @@
+{
+  "$id": "sff8024_transceiver_subtype.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Unknown or unspecified transceiver subtype",
+      "title": "unknown_or_unspecified"
+    },
+    {
+      "const": 1,
+      "description": "Type 1 subtype across QSFP+, QSFP-DD, SFP-DD, OSFP, and OSFP-XD families",
+      "title": "type_1"
+    },
+    {
+      "const": 2,
+      "description": "Type 2 subtype across QSFP+, QSFP-DD, SFP-DD, OSFP, and OSFP-XD families",
+      "title": "type_2"
+    },
+    {
+      "const": 3,
+      "description": "Type 2A for QSFP+ and QSFP-DD; Type 3 for OSFP; reserved for SFP-DD and OSFP-XD",
+      "title": "type_2a_or_osfp_type_3"
+    },
+    {
+      "const": 4,
+      "description": "Type 2B for QSFP+ and QSFP-DD; reserved for SFP-DD, OSFP, and OSFP-XD",
+      "title": "type_2b"
+    },
+    {
+      "const": 5,
+      "description": "Type 2C for QSFP-DD; reserved for QSFP+, SFP-DD, OSFP, and OSFP-XD",
+      "title": "qsfp_dd_type_2c"
+    }
+  ],
+  "title": "Sff8024TransceiverSubtype",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      36
+    ],
+    "spec": "SFF-8024 4.14 Table 4-11"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8024",
+    "revision": "4.14"
+  }
+}

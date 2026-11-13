@@ -1,0 +1,124 @@
+{
+  "_metadata": {
+    "authored_at": "2026-05-26",
+    "authored_by": "ras + claude-sonnet-4-6 (gen-synthetic-fixtures.py)",
+    "cmis_version": null,
+    "fixture": "synthetic-extcal-sfp10g-sr",
+    "monitoring_stale": false,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "sff-8472",
+    "spec_revision": "12.5a",
+    "vendor_strings_synthetic": true
+  },
+  "checksums": {
+    "cc_base": {
+      "computed": "0xA2",
+      "stored": "0xA2",
+      "valid": true
+    },
+    "cc_dmi": {
+      "computed": "0xC3",
+      "stored": "0xC3",
+      "valid": true
+    },
+    "cc_ext": {
+      "computed": "0x28",
+      "stored": "0x28",
+      "valid": true
+    }
+  },
+  "compliance": {
+    "raw_bytes_a0h_3_10": [
+      "0x10",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00"
+    ],
+    "reach": {
+      "om1_m": 30,
+      "om2_m": 80,
+      "om3_m": 500,
+      "om4_m": 0,
+      "smf_km": 0
+    },
+    "wavelength_nm": 850
+  },
+  "decode_status": "ok",
+  "flags": {
+    "alarm_summary": {
+      "rx_power_high_alarm": false,
+      "rx_power_low_alarm": false,
+      "temp_high_alarm": false,
+      "temp_low_alarm": false,
+      "tx_bias_high_alarm": false,
+      "tx_bias_low_alarm": false,
+      "tx_power_high_alarm": false,
+      "tx_power_low_alarm": false,
+      "vcc_high_alarm": false,
+      "vcc_low_alarm": false
+    },
+    "warning_summary": {
+      "rx_power_high_warning": false,
+      "rx_power_low_warning": false,
+      "temp_high_warning": false,
+      "temp_low_warning": false,
+      "tx_bias_high_warning": false,
+      "tx_bias_low_warning": false,
+      "tx_power_high_warning": false,
+      "tx_power_low_warning": false,
+      "vcc_high_warning": false,
+      "vcc_low_warning": false
+    }
+  },
+  "identity": {
+    "date_code": "260526",
+    "vendor_name": "OPENXCVR",
+    "vendor_oui": "00:00:00",
+    "vendor_pn": "SYN-EXTCAL-10GSR",
+    "vendor_sn": "SYNTH000001"
+  },
+  "lanes": [
+    {
+      "index": 1,
+      "rx_los": false,
+      "rx_power_mw": 0.3,
+      "tx_bias_ma": 5.0,
+      "tx_disable": false,
+      "tx_fault": false,
+      "tx_power_mw": 0.5
+    }
+  ],
+  "module": {
+    "calibration": {
+      "ddm_implemented": true,
+      "externally_calibrated": true,
+      "internally_calibrated": false,
+      "rx_power_kind": "average"
+    },
+    "cmis_revision": null,
+    "connector": {
+      "name": "lc",
+      "raw": "0x07"
+    },
+    "encoding": {
+      "name": "sixty_four_b_sixty_six_b_or_legacy_manchester",
+      "raw": "0x06"
+    },
+    "identifier": {
+      "name": "sfp_sff8472",
+      "raw": "0x03"
+    },
+    "memory_model": null,
+    "module_state": null,
+    "module_type": "10GBASE-SR SFP+",
+    "nominal_bit_rate_gbps": 10.3
+  },
+  "monitoring": {
+    "module_temperature_c": 25.0,
+    "module_voltage_v": 3.3
+  }
+}

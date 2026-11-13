@@ -1,0 +1,266 @@
+fields:
+  - name: media_side_ber
+    display_name: MediaSideBERLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "208 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: f16be
+    unit: "ratio"
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x01 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BER"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 246, table: "Table 8-129", quote: "MediaSideBERLane<i>: F16 BER values, periodically updated while gating." }
+
+  - name: host_side_error_count_lane_1_4
+    display_name: HostSideErrorCountLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "192 + 16 * (lane - 1)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x02 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::ErrorCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 246, table: "Table 8-129", quote: "HostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 1-4." }
+
+  - name: host_side_total_bits_count_lane_1_4
+    display_name: HostSideTotalBitsCountLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "200 + 16 * (lane - 1)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x02 }
+    access: ro
+    behavior: { least_significant_bit: pattern_sync_loss_indicator }
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BitsCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 246, table: "Table 8-129", quote: "HostSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss." }
+
+  - name: host_side_error_count_lane_5_8
+    display_name: HostSideErrorCountLane<lane>
+    instances: { index: lane, start: 5, end: 8 }
+    offset_expr: "192 + 16 * (lane - 5)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x03 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::ErrorCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "HostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 5-8." }
+
+  - name: host_side_total_bits_count_lane_5_8
+    display_name: HostSideTotalBitsCountLane<lane>
+    instances: { index: lane, start: 5, end: 8 }
+    offset_expr: "200 + 16 * (lane - 5)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x03 }
+    access: ro
+    behavior: { least_significant_bit: pattern_sync_loss_indicator }
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BitsCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "HostSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss." }
+
+  - name: media_side_error_count_lane_1_4
+    display_name: MediaSideErrorCountLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "192 + 16 * (lane - 1)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x04 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::ErrorCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "MediaSideErrorCountLane<i>: U64 little-endian error counter for media lanes 1-4." }
+
+  - name: media_side_total_bits_count_lane_1_4
+    display_name: MediaSideTotalBitsCountLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "200 + 16 * (lane - 1)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x04 }
+    access: ro
+    behavior: { least_significant_bit: pattern_sync_loss_indicator }
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BitsCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "MediaSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss." }
+
+  - name: media_side_error_count_lane_5_8
+    display_name: MediaSideErrorCountLane<lane>
+    instances: { index: lane, start: 5, end: 8 }
+    offset_expr: "192 + 16 * (lane - 5)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x05 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::ErrorCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "MediaSideErrorCountLane<i>: U64 little-endian error counter for media lanes 5-8." }
+
+  - name: media_side_total_bits_count_lane_5_8
+    display_name: MediaSideTotalBitsCountLane<lane>
+    instances: { index: lane, start: 5, end: 8 }
+    offset_expr: "200 + 16 * (lane - 5)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x05 }
+    access: ro
+    behavior: { least_significant_bit: pattern_sync_loss_indicator }
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BitsCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "MediaSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss." }
+
+  - name: host_side_snr
+    display_name: HostSideSNRLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "208 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    encoding: { kind: scaled_unsigned, lsb_units: "1/256 dB" }
+    present_when: { field: diagnostics_selector, equals: 0x06 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::SNR"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "HostSideSNRLane<i>: U16 little-endian in units of 1/256 dB." }
+
+  - name: media_side_snr
+    display_name: MediaSideSNRLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "240 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    encoding: { kind: scaled_unsigned, lsb_units: "1/256 dB" }
+    present_when: { field: diagnostics_selector, equals: 0x06 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::SNR"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 247, table: "Table 8-129", quote: "MediaSideSNRLane<i>: U16 little-endian in units of 1/256 dB." }
+
+  - name: gated_host_side_ber
+    display_name: GatedHostSideBERLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "192 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: f16be
+    unit: "ratio"
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x11 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BER"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 248, table: "Table 8-129", quote: "GatedHostSideBERLane<i>: F16 BER values, stable gating results." }
+
+  - name: gated_media_side_ber
+    display_name: GatedMediaSideBERLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "208 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: f16be
+    unit: "ratio"
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x11 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BER"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 248, table: "Table 8-129", quote: "GatedMediaSideBERLane<i>: F16 BER values, stable gating results." }
+
+  - name: gated_host_side_error_count_lane_1_4
+    display_name: GatedHostSideErrorCountLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "192 + 16 * (lane - 1)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x12 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::ErrorCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 248, table: "Table 8-129", quote: "GatedHostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 1-4." }
+
+  - name: gated_host_side_total_bits_count_lane_1_4
+    display_name: GatedHostSideTotalBitsCountLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "200 + 16 * (lane - 1)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x12 }
+    access: ro
+    behavior: { least_significant_bit: pattern_sync_loss_indicator }
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BitsCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 248, table: "Table 8-129", quote: "GatedHostSideTotalBitsCountLane<i>: U64 little-endian total bits counter for host lanes 1-4." }
+
+  - name: gated_host_side_error_count_lane_5_8
+    display_name: GatedHostSideErrorCountLane<lane>
+    instances: { index: lane, start: 5, end: 8 }
+    offset_expr: "192 + 16 * (lane - 5)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x13 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::ErrorCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 248, table: "Table 8-129", quote: "GatedHostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 5-8." }
+
+  - name: gated_host_side_total_bits_count_lane_5_8
+    display_name: GatedHostSideTotalBitsCountLane<lane>
+    instances: { index: lane, start: 5, end: 8 }
+    offset_expr: "200 + 16 * (lane - 5)"
+    size_bytes: 8
+    type: u64le
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x13 }
+    access: ro
+    behavior: { least_significant_bit: pattern_sync_loss_indicator }
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BitsCount"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 248, table: "Table 8-129", quote: "GatedHostSideTotalBitsCountLane<i>: U64 little-endian total bits counter for host lanes 5-8." }

@@ -1,0 +1,122 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: sff-8472
+  title: SFF-8472
+  revision: "12.5a"
+  source: docs/stds/sff-8472/SFF-8472-Rev12.5a.pdf
+imports:
+  - ../sff-8024/_index.yaml
+kind: memory_map
+includes:
+  - enums/extended-identifier.yaml
+  - enums/rate-identifier.yaml
+  - enums/sff-compliance-codes.yaml
+  - enums/page-03h-format-id.yaml
+  - page-a0h-base-memory.yaml
+  - page-a2h-diagnostics-base.yaml
+  - page-a2h-00h-user-eeprom.yaml
+  - page-a2h-01h-user-eeprom.yaml
+  - page-a2h-02h-tunability-rdt-rpm.yaml
+  - page-a2h-03h-high-accuracy-timing.yaml
+tom_messages:
+  - tom-messages/tom-2a0h-ctrl-cmd-rsp.yaml
+  - tom-messages/tom-2a8h-2a9h-send-page-data.yaml
+  - tom-messages/tom-2aah-extended-idle.yaml
+  - tom-messages/tom-2abh-security-idle.yaml
+
+templates:
+  informational:
+    field_type: Informational
+    tags: [Information]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  vendor_info:
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  operational_parameter:
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  capability_flag:
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+
+  capability_advertisement:
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+
+  telemetry_module:
+    field_type: Telemetry
+    tags: [Monitor]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  telemetry_lane:
+    field_type: Telemetry
+    tags: [Monitor]
+    access: ro
+    scope: { lane: 1 }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  status:
+    field_type: Status
+    tags: [Status]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  flag:
+    field_type: Flag
+    tags: [Flag]
+    access: ro
+    behavior: { latching: implementation_defined }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  mask:
+    field_type: Mask
+    tags: [Mask]
+    access: rw
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+
+  control:
+    field_type: Control
+    tags: [Control]
+    access: rw
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+
+  threshold:
+    field_type: Threshold
+    tags: [AlarmThreshold, AlarmThresholdValue]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  storage:
+    field_type: Storage
+    tags: [Storage]
+    access: rw
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+
+  reserved:
+    field_type: Reserved
+    tags: [Reserved]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+
+  vendor_specific:
+    field_type: VendorSpecific
+    tags: [VendorSpecific]
+    access: rw
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }

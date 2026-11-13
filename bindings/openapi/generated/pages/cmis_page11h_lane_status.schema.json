@@ -1,0 +1,722 @@
+{
+  "$id": "cmis_page11h_lane_status.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "adaptive_input_eq_enable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 217,
+        "quote": "ACS::AdaptiveInputEqEnableTx<i>: Adaptive Tx input equalization for lane <i>. 1b: Enabled; 0b: Disabled (Host-controlled Tx input equalization for lane <i> as per HostControlledInputEqTargetTx<i>, if supported). Advertisement: 01h:161.3.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-94"
+      }
+    },
+    "adaptive_input_eq_fail_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "Latched Tx Adaptive Input Eq Fail, host lane <i>. Advertisement: 01h:157.3.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "adaptive_input_eq_recalled_tx": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 217,
+        "quote": "ACS::AdaptiveInputEqRecalledTx<i>: Recalled Tx Eq settings status for lane <i>. See Table 8-73 and Table 8-78 for the recall settings in the staged control sets. Advertisement: 01h:161.6-5.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-94"
+      }
+    },
+    "app_sel_code_lane": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 216,
+        "quote": "ACS::AppSelCodeLane<i>: Defines the Application assigned to the Data Path containing lane <i>. 0000b: lane <i> is unused and unassigned (not part of a Data Path). 0001b..1111b: lane <i> is part of a Data Path for the Application described in Application Descriptor with this AppSel code.",
+        "section": "§ 8.10.6.1",
+        "table": "Table 8-93"
+      }
+    },
+    "cdr_enable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "ACS::CDREnableTx<i>: 1b: CDR enabled; 0b: CDR bypassed. Advertisement: 01h:161.1.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-94"
+      }
+    },
+    "cdr_enabled_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "ACS::CDREnableRx<i>: 1b: CDR enabled; 0b: CDR bypassed. Advertisement: 01h:162.1.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-95"
+      }
+    },
+    "cdr_lol_flag_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 212,
+        "quote": "Latched Rx CDR LOL Flag, media lane <i>. Advertisement: 01h:158.2.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-88"
+      }
+    },
+    "cdr_lol_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "Latched Tx CDR LOL Flag, host lane <i>. Advertisement: 01h:157.2.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "config_status_lane": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 215,
+        "quote": "Configuration Command Execution / Result Status for the Data Path of host lane <i>, during and after the most recent configuration command. See Table 8-91 for the encoding of values.",
+        "section": "§ 8.10.5",
+        "table": "Table 8-90"
+      }
+    },
+    "data_path_id_lane": {
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 216,
+        "quote": "ACS::DataPathIDLane<i>: Index of first lane in the Data Path containing lane <i>. 000b: Lane 1; 001b: Lane 2; ... 111b: Lane 8.",
+        "section": "§ 8.10.6.1",
+        "table": "Table 8-93"
+      }
+    },
+    "dp_init_pending_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "DPInitPendingLane<i>: 0b: DPInit not pending; 1b: DPInit not yet executed after successful ApplyDPInit, hence the Active Control Set content may deviate from the actual hardware configuration. When SteppedConfigOnly=0, these bits are evaluated in DPSM exit condition equations (see § 6.3.3.1).",
+        "section": "§ 8.10.7",
+        "table": "Table 8-96"
+      },
+      "x-openxcvr-since": "5.0"
+    },
+    "dp_state_changed_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "Latched Data Path State Changed Flag, host lane <i>.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-86"
+      }
+    },
+    "dp_state_host_lane": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 208,
+        "quote": "Data Path State of host lane <i> (see Table 8-84).",
+        "section": "§ 8.10.1",
+        "table": "Table 8-83"
+      }
+    },
+    "explicit_control_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 216,
+        "quote": "ACS::ExplicitControlLane<i>: 0b: Lane <i> SI settings are Application dependent; 1b: Lane <i> SI settings are host defined.",
+        "section": "§ 8.10.6.1",
+        "table": "Table 8-93"
+      }
+    },
+    "failure_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "Latched Tx Failure Flag, affecting media lane <i>. Indicates an internal failure causing unspecified malfunction in the Tx facility used by media lane <i>. Formerly named Tx Fault. Advertisement: 01h:157.0.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "host_controlled_input_eq_target_tx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 217,
+        "quote": "ACS::HostControlledInputEqTargetTx<i>: Host-controlled Tx input equalization target for lane <i> encoded as defined in Table 6-6. Advertisement: 01h:161.2.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-94"
+      }
+    },
+    "laser_bias_high_alarm_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 211,
+        "quote": "Latched Tx Bias High Alarm, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "laser_bias_high_warning_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 211,
+        "quote": "Latched Tx Bias High warning, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "laser_bias_low_alarm_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 211,
+        "quote": "Latched Tx Bias Low alarm, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "laser_bias_low_warning_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 211,
+        "quote": "Latched Tx Bias Low warning, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "laser_bias_tx": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "2 uA times TxBiasCurrentScalingFactor (Page 01h:160)",
+      "x-openxcvr-provenance": {
+        "pdf_page": 213,
+        "quote": "U16 LaserBiasTx<i>: Internally measured Tx bias current monitor in 2 uA increments, times the multiplier from Table 8-52. Advertisement: 01h:160.0.",
+        "section": "§ 8.10.4",
+        "table": "Table 8-89"
+      }
+    },
+    "los_flag_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 212,
+        "quote": "Latched Rx LOS Flag, media lane <i>. Advertisement: 01h:158.1.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-88"
+      }
+    },
+    "los_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "Latched Tx LOS Flag, host lane <i>. Advertisement: 01h:157.1.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "media_lane_to_fiber_mapping_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MediaLaneToFiberMappingRx<i>: Mapping of media lane <i> (Rx).",
+        "section": "§ 8.10.8",
+        "table": "Table 8-97"
+      }
+    },
+    "media_lane_to_fiber_mapping_tx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "MediaLaneToFiberMappingTx<i>: Mapping of media lane <i>. 0000: Mapping unknown or undefined; 0001: Maps to media fiber 1 or TR1; ... 1000: Maps to media fiber 8 or RT4; 1001-1111: Reserved.",
+        "section": "§ 8.10.8",
+        "table": "Table 8-97"
+      }
+    },
+    "media_lane_to_wavelength_mapping_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MediaLaneToWavelengthMappingRx<i>: Mapping of media lane <i> (Rx).",
+        "section": "§ 8.10.8",
+        "table": "Table 8-97"
+      }
+    },
+    "media_lane_to_wavelength_mapping_tx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "MediaLaneToWavelengthMappingTx<i>: Mapping of media lane <i>. 0000: Mapping unknown or undefined; 0001: Maps to media wavelength 1; ... 1000: Maps to media wavelength 8; 1001-1111: Reserved.",
+        "section": "§ 8.10.8",
+        "table": "Table 8-97"
+      }
+    },
+    "optical_power_high_alarm_flag_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 212,
+        "quote": "Latched Rx input power High alarm, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-88"
+      }
+    },
+    "optical_power_high_alarm_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "Latched Tx output power High Alarm, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "optical_power_high_warning_flag_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 212,
+        "quote": "Latched Rx input power High warning, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-88"
+      }
+    },
+    "optical_power_high_warning_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 211,
+        "quote": "Latched Tx output power High warning, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "optical_power_low_alarm_flag_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 212,
+        "quote": "Latched Rx input power Low alarm, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-88"
+      }
+    },
+    "optical_power_low_alarm_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "Latched Tx output power Low alarm, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "optical_power_low_warning_flag_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 212,
+        "quote": "Latched Rx input power Low warning, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-88"
+      }
+    },
+    "optical_power_low_warning_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 211,
+        "quote": "Latched Tx output power Low warning, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-87"
+      }
+    },
+    "optical_power_rx": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.1 uW",
+      "x-openxcvr-provenance": {
+        "pdf_page": 214,
+        "quote": "U16 OpticalPowerRx<i>: Internally measured Rx input optical power in 0.1 uW increments, yielding a total measurement range of 0 to 6.5535 mW (~-40 to +8.2 dBm for non-zero values). Advertisement: 01h:160.2.",
+        "section": "§ 8.10.4",
+        "table": "Table 8-89"
+      }
+    },
+    "optical_power_tx": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.1 uW",
+      "x-openxcvr-provenance": {
+        "pdf_page": 213,
+        "quote": "U16 OpticalPowerTx<i>: Internally measured Tx output optical power in 0.1 uW increments, yielding a total measurement range of 0 to 6.5535 mW (~-40 to +8.2 dBm for non-zero values). Advertisement: 01h:160.1.",
+        "section": "§ 8.10.4",
+        "table": "Table 8-89"
+      }
+    },
+    "output_amplitude_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "ACS::OutputAmplitudeTargetRx<i>: Rx output amplitude level for lane <i>, encoded as per Table 6-8. Advertisement: 01h:162.2.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-95"
+      }
+    },
+    "output_eq_post_cursor_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "ACS::OutputEqPostCursorTargetRx<i>: Rx output post-cursor equalization for lane <i>, encoded as per Table 6-7. Advertisement: 01h:162.4-3.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-95"
+      }
+    },
+    "output_eq_pre_cursor_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "ACS::OutputEqPreCursorTargetRx<i>: Rx output pre-cursor equalization for lane <i>, encoded as per Table 6-7. Advertisement: 01h:162.4-3.",
+        "section": "§ 8.10.6.2",
+        "table": "Table 8-95"
+      }
+    },
+    "output_status_changed_flag_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 213,
+        "quote": "Latched Output Status Changed Flag for Rx host lane <i>. The Mask is in Byte 10h:232.",
+        "section": "§ 8.10.3",
+        "table": "Table 8-88"
+      },
+      "x-openxcvr-since": "5.0"
+    },
+    "output_status_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 209,
+        "quote": "OutputStatusRx<i>: 0b: Rx<i> output signal invalid or muted; 1b: Rx<i> output signal valid.",
+        "section": "§ 8.10.2",
+        "table": "Table 8-85"
+      },
+      "x-openxcvr-since": "5.0"
+    },
+    "output_status_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 209,
+        "quote": "OutputStatusTx<i>: 0b: Tx<i> output signal muted or invalid; 1b: Tx<i> output signal valid.",
+        "section": "§ 8.10.2",
+        "table": "Table 8-85"
+      },
+      "x-openxcvr-since": "5.0"
+    }
+  },
+  "required": [
+    "dp_state_host_lane",
+    "output_status_rx",
+    "output_status_tx",
+    "dp_state_changed_flag",
+    "failure_flag_tx",
+    "los_flag_tx",
+    "cdr_lol_flag_tx",
+    "adaptive_input_eq_fail_flag_tx",
+    "optical_power_high_alarm_flag_tx",
+    "optical_power_low_alarm_flag_tx",
+    "optical_power_high_warning_flag_tx",
+    "optical_power_low_warning_flag_tx",
+    "laser_bias_high_alarm_flag_tx",
+    "laser_bias_low_alarm_flag_tx",
+    "laser_bias_high_warning_flag_tx",
+    "laser_bias_low_warning_flag_tx",
+    "los_flag_rx",
+    "cdr_lol_flag_rx",
+    "optical_power_high_alarm_flag_rx",
+    "optical_power_low_alarm_flag_rx",
+    "optical_power_high_warning_flag_rx",
+    "optical_power_low_warning_flag_rx",
+    "output_status_changed_flag_rx",
+    "optical_power_tx",
+    "laser_bias_tx",
+    "optical_power_rx",
+    "config_status_lane",
+    "app_sel_code_lane",
+    "data_path_id_lane",
+    "explicit_control_lane",
+    "adaptive_input_eq_enable_tx",
+    "adaptive_input_eq_recalled_tx",
+    "host_controlled_input_eq_target_tx",
+    "cdr_enable_tx",
+    "cdr_enabled_rx",
+    "output_eq_pre_cursor_target_rx",
+    "output_eq_post_cursor_target_rx",
+    "output_amplitude_target_rx",
+    "dp_init_pending_lane",
+    "media_lane_to_wavelength_mapping_tx",
+    "media_lane_to_fiber_mapping_tx",
+    "media_lane_to_wavelength_mapping_rx",
+    "media_lane_to_fiber_mapping_rx"
+  ],
+  "title": "CmisPage11hLaneStatus",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220
+    ],
+    "spec": "CMIS 5.3 § 8.10"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

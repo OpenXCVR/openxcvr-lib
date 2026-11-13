@@ -1,0 +1,28 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTrainingProtocol
+title: "CMIS-LT 1.0 Link Training Protocol Selection"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 10, 45)"
+  pdf_pages: [40, 56]
+entries:
+  - value: 0x0
+    name: none
+    description: "None (link training cannot be activated on this lane)"
+  - value: 0x1
+    name: basic
+    description: "Use Basic link training procedure (Appendix C)"
+  - value: 0x2
+    name: advanced
+    description: "Use Advanced link training procedure (Appendix D)"
+  - value: 0x3..0xb
+    name: reserved
+    description: "Reserved"
+  - value: 0xc..0xf
+    name: custom
+    description: "Custom protocol"

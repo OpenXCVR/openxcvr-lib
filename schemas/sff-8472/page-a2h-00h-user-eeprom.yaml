@@ -1,0 +1,38 @@
+schema: openxcvr.page.v1
+kind: page
+id: page_a2h_00h_user_eeprom
+title: SFF-8472 A2h Page 00h User EEPROM
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a § 11.1
+  pdf_pages: [52]
+page_address: A2h
+page_select: 00h
+page_select_field: page_a2h_diagnostics_base.page_select
+size_bytes: 256
+present_when: "page_a2h_diagnostics_base.page_select == 0x00"
+
+fields:
+  - name: user_eeprom
+    display_name: UserEEPROM
+    offset: 128
+    size_bytes: 120
+    type: bytes
+    template: storage
+    scope: { module: true }
+    behavior:
+      nonvolatile: true
+      write_guidance: "Consult module vendor limits for timing and write endurance; not recommended for latency-critical or repetitive use"
+    provenance: { section: "SFF-8472 v12.5a § 11.1", pdf_page: 52, table: "Table 11-1", quote: "User writable EEPROM" }
+
+  - name: vendor_specific_control_functions
+    display_name: VendorSpecificControlFunctions
+    offset: 248
+    size_bytes: 8
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    behavior: { vendor_managed_with: "A2h bytes 120-127" }
+    provenance: { section: "SFF-8472 v12.5a § 11.2", pdf_page: 52, table: "Table 11-2", quote: "Vendor specific control functions" }

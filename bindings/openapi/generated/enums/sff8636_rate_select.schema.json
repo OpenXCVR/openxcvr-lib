@@ -1,0 +1,40 @@
+{
+  "$id": "sff8636_rate_select.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Version 1 less than 2.2 GBd; Version 2 less than 12 GBd",
+      "title": "low_rate"
+    },
+    {
+      "const": 1,
+      "description": "Version 1 from 2.2 to 6.6 GBd; Version 2 from 12 to 24 GBd",
+      "title": "mid_rate"
+    },
+    {
+      "const": 2,
+      "description": "Version 1 6.6 GBd and above; Version 2 from 24 to 26 GBd",
+      "title": "high_rate"
+    },
+    {
+      "const": 3,
+      "description": "Version 1 reserved; Version 2 26 GBd and above",
+      "title": "highest_or_reserved"
+    }
+  ],
+  "title": "Sff8636RateSelect",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      40
+    ],
+    "spec": "SFF-8636 v2.11 § 6.2.7.2",
+    "table": "Table 6-12"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

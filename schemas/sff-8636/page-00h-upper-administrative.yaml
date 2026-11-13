@@ -1,0 +1,19 @@
+schema: openxcvr.page.v1
+kind: page
+id: Sff8636Page00hUpperAdministrative
+title: SFF-8636 Upper Page 00h Administrative Information
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.3
+  pdf_pages: [46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+page_address: 00h
+size_bytes: 128
+
+field_includes:
+  - fields/page-00h-upper-administrative-part-01.yaml
+  - fields/page-00h-upper-administrative-part-02.yaml
+  - fields/page-00h-upper-administrative-part-03.yaml
+  - fields/page-00h-upper-administrative-part-04.yaml
+fields: []

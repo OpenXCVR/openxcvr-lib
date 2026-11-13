@@ -1,0 +1,25 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTuningInstruction
+title: "CMIS-LT 1.0 Tuning Instruction"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.3.2 and 6.5.2 (Tables 33, 34, 68, 69)"
+  pdf_pages: [50, 65]
+entries:
+  - value: 0x0
+    name: hold
+    description: "Hold current value"
+  - value: 0x1
+    name: up
+    description: "Up by configured step size"
+  - value: 0x2
+    name: down
+    description: "Down by configured step size"
+  - value: 0x3
+    name: set
+    description: "Set explicitly given value (see the FFE taps / amplitude registers)"

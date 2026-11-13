@@ -1,0 +1,264 @@
+fields:
+  - name: temp_mon_threshold
+    display_name: TempMon<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "128 + 2 * severity"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "1/256 deg C" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::Temperature"]
+    enum_inline:
+      - { value: 0, name: high_alarm, description: "High alarm threshold" }
+      - { value: 1, name: low_alarm, description: "Low alarm threshold" }
+      - { value: 2, name: high_warning, description: "High warning threshold" }
+      - { value: 3, name: low_warning, description: "Low warning threshold" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 59, table: "Table 6-28", quote: "Temperature thresholds" }
+
+  - name: vcc_mon_threshold
+    display_name: VccMon<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "144 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "100 uV" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::Voltage"]
+    enum_inline:
+      - { value: 0, name: high_alarm, description: "High alarm threshold" }
+      - { value: 1, name: low_alarm, description: "Low alarm threshold" }
+      - { value: 2, name: high_warning, description: "High warning threshold" }
+      - { value: 3, name: low_warning, description: "Low warning threshold" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 59, table: "Table 6-28", quote: "Supply voltage thresholds" }
+
+  - name: rx_power_threshold
+    display_name: RxPower<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "176 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::OpticalPower"]
+    enum_inline:
+      - { value: 0, name: high_alarm, description: "High alarm threshold" }
+      - { value: 1, name: low_alarm, description: "Low alarm threshold" }
+      - { value: 2, name: high_warning, description: "High warning threshold" }
+      - { value: 3, name: low_warning, description: "Low warning threshold" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 60, table: "Table 6-28", quote: "Rx Power thresholds" }
+
+  - name: tx_bias_threshold
+    display_name: TxBias<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "184 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "2 uA" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::BiasCurrent"]
+    enum_inline:
+      - { value: 0, name: high_alarm, description: "High alarm threshold" }
+      - { value: 1, name: low_alarm, description: "Low alarm threshold" }
+      - { value: 2, name: high_warning, description: "High warning threshold" }
+      - { value: 3, name: low_warning, description: "Low warning threshold" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 60, table: "Table 6-28", quote: "Tx Bias thresholds" }
+
+  - name: tx_power_threshold
+    display_name: TxPower<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "192 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::OpticalPower"]
+    enum_inline:
+      - { value: 0, name: high_alarm, description: "High alarm threshold" }
+      - { value: 1, name: low_alarm, description: "Low alarm threshold" }
+      - { value: 2, name: high_warning, description: "High warning threshold" }
+      - { value: 3, name: low_warning, description: "Low warning threshold" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 60, table: "Table 6-28", quote: "Tx Power thresholds" }
+
+  - name: max_tx_input_equalization
+    display_name: MaxTxInputEqualization
+    offset: 224
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8636TxInputEqualization
+    template: capability_advertisement
+    scope: { module: true }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 61, table: "Table 6-29", quote: "Max Tx input equalization supported", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Page 03h Address 224 to define magnitude of Tx EQ and Rx Emph supported'" }
+
+  - name: max_rx_output_emphasis
+    display_name: MaxRxOutputEmphasis
+    offset: 224
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8636RxOutputEmphasis
+    template: capability_advertisement
+    scope: { module: true }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 61, table: "Table 6-29", quote: "Max Rx output emphasis supported", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Page 03h Address 224 to define magnitude of Tx EQ and Rx Emph supported'" }
+
+  - name: rx_output_emphasis_type
+    display_name: RxOutputEmphasisType
+    offset: 225
+    bit_offset: 4
+    bit_width: 2
+    type: u2
+    template: capability_advertisement
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: peak_to_peak_constant, description: "Peak-to-peak constant or not implemented" }
+      - { value: 1, name: steady_state_constant, description: "Steady-state constant" }
+      - { value: 2, name: averaged_constant, description: "Average of peak-to-peak and steady-state stays constant" }
+      - { value: 3, name: reserved, description: "Reserved" }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 61, table: "Table 6-29", quote: "Rx output emphasis type", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Added Byte 225 bits 5-4 Rx output emphasis type'" }
+
+  - name: rx_output_amplitude_supported
+    display_name: RxOutputAmplitude<code>Supported
+    instances: { index: code, start: 0, end: 3 }
+    offset: 225
+    bit_offset_expr: "code"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: amplitude_0000, description: "Rx output amplitude code 0000 supported" }
+      - { value: 1, name: amplitude_0001, description: "Rx output amplitude code 0001 supported" }
+      - { value: 2, name: amplitude_0010, description: "Rx output amplitude code 0010 supported" }
+      - { value: 3, name: amplitude_0011, description: "Rx output amplitude code 0011 supported" }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 61, table: "Table 6-29", quote: "Rx output amplitude support", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Rx output amplitude support indicators in Page 03h Byte 225'" }
+
+  - name: host_side_fec_control_supported
+    display_name: HostSideFecControlSupported
+    offset: 227
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 61, table: "Table 6-29", quote: "Controllable Host-Side FEC support", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits at Page 03h, byte 227, bits 7-6'" }
+
+  - name: media_side_fec_control_supported
+    display_name: MediaSideFecControlSupported
+    offset: 227
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 61, table: "Table 6-29", quote: "Controllable Media-Side FEC support", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits at Page 03h, byte 227, bits 7-6'" }
+
+  - name: tx_force_squelch_supported
+    display_name: TxForceSquelchSupported
+    offset: 227
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 62, table: "Table 6-29", quote: "Tx Force Squelch implemented", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bit at Page 03h, byte 227, bit 3'" }
+
+  - name: rx_losl_fast_mode_supported
+    display_name: RxLOSLFastModeSupported
+    offset: 227
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 62, table: "Table 6-29", quote: "RxLOSL fast mode timing", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits for Fast RxLOS and Fast TxDis ... Page 03h, byte 227, bits 2-1' per SFF-8679" }
+
+  - name: tx_dis_fast_mode_supported
+    display_name: TxDisFastModeSupported
+    offset: 227
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 62, table: "Table 6-29", quote: "TxDis fast mode timing", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits for Fast RxLOS and Fast TxDis ... Page 03h, byte 227, bits 2-1' per SFF-8679" }
+
+  - name: max_tc_stabilization_time
+    display_name: MaxTCStabilizationTime
+    offset: 228
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 s" }
+    template: operational_parameter
+    scope: { module: true }
+    since: "2.8"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 62, table: "Table 6-29", quote: "Max time for TC to reach target working point", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.9 publication: 'Added byte 228 Maximum TEC stabilization time'" }
+
+  - name: max_ctle_settling_time
+    display_name: MaxCTLESettlingTime
+    offset: 229
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "100 ms" }
+    template: operational_parameter
+    scope: { module: true }
+    since: "2.8"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 62, table: "Table 6-29", quote: "Max time for CTLE adaptive algorithm to converge", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.9 publication: 'Added byte 229 Maximum CTLE settling time'" }
+
+  - name: host_side_fec_enable
+    display_name: HostSideFecEnable
+    offset: 230
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    present_when: { field: host_side_fec_control_supported, equals: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Host-Side FEC enable", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Controls at Page 03h, byte 230, bits 7-6'" }
+
+  - name: media_side_fec_enable
+    display_name: MediaSideFecEnable
+    offset: 230
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    present_when: { field: media_side_fec_control_supported, equals: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Media-Side FEC enable", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Controls at Page 03h, byte 230, bits 7-6'" }
+
+  - name: tx_force_squelch_lane
+    display_name: Tx<lane>ForceSquelch
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 231
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: tx_force_squelch_supported, equals: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Per-channel software squelch", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Controls for per-lane Tx forced squelch at Page 03h, byte 231, bits 3-0'" }
+
+  - name: tx_adaptive_eq_freeze_lane
+    display_name: Tx<lane>AdaptiveEQFreeze
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 233
+    bit_offset_expr: "4 - lane"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: page_00h_upper_administrative.tx_equalizer_freeze_capable, equals: true }
+    since: "2.8"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Freeze Tx input adaptive equalizers", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.9 publication: 'Changed byte 233 bits 4-0 from reserved to Tx Adaptive Equalizer Freeze control bits'" }

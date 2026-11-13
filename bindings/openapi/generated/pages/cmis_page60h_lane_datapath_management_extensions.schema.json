@@ -1,0 +1,192 @@
+{
+  "$id": "cmis_page60h_lane_datapath_management_extensions.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "acq_counters_rx_supported": {
+      "description": "1b: the AcquisitionCounterRx category on Page 61h is supported; 0b: not supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "AcqCountersRxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-188"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "acq_counters_tx_supported": {
+      "description": "1b: the AcquisitionCounterTx category on Page 61h is supported; 0b: not supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "AcqCountersTxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-188"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "dp_acq_counters_rx_supported": {
+      "description": "1b: the DpAcquisitionCounterRx category on Page 61h is supported; 0b: not supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "DpAcqCountersRxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-188"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "dp_acq_counters_tx_supported": {
+      "description": "1b: the DpAcquisitionCounterTx category on Page 61h is supported; 0b: not supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "DpAcqCountersTxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-188"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "input_polarity_status_tx": {
+      "description": "0b: Module input lane <lane> polarity is regular; 1b: Module input lane <lane> polarity is inverted. For inverted input lane polarity of the module, the host needs to invert its output lane polarity setting, too.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "InputPolarityStatusTx<i>: 0b: Module input lane <i> polarity is regular; 1b: Module input lane <i> polarity is inverted",
+        "section": "CMIS 5.4 § 8.30.1",
+        "table": "Table 8-188"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "output_polarity_status_rx": {
+      "description": "0b: Module output lane <lane> polarity is regular; 1b: Module output lane <lane> polarity is inverted. For inverted output lane polarity of the module, the host needs to invert its input lane polarity setting, too.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "OutputPolarityStatusRx<i>: 0b: Module output lane <i> polarity is regular; 1b: Module output lane <i> polarity is inverted",
+        "section": "CMIS 5.4 § 8.30.1",
+        "table": "Table 8-188"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_60h_130_bits_3_0": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "Byte 130 bits 3-0: Reserved",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-188"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_60h_131_191": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "Bytes 131-191: Reserved [61]",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-187"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_60h_196_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "Bytes 196-255: Reserved [60]",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-187"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reset_acquisition_counters_rx": {
+      "contentEncoding": "base64",
+      "description": "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for media lane number k+1.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 313,
+        "quote": "ResetAcquisitionCountersRx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for media lane number k+1.",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-189"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reset_acquisition_counters_tx": {
+      "contentEncoding": "base64",
+      "description": "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for host lane number k+1.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 314,
+        "quote": "ResetAcquisitionCountersTx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for host lane number k+1.",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-189"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reset_dp_acquisition_counters_rx": {
+      "contentEncoding": "base64",
+      "description": "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for the media side data path with DPID (or NPID) k+1.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 314,
+        "quote": "ResetDpAcquisitionCountersRx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for media side data path with DPID (or NPID) k+1.",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-189"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reset_dp_acquisition_counters_tx": {
+      "contentEncoding": "base64",
+      "description": "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for the host side data path with DPID k+1.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 314,
+        "quote": "ResetDpAcquisitionCountersTx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for host side data path with DPID k+1.",
+        "section": "CMIS 5.4 § 8.30",
+        "table": "Table 8-189"
+      },
+      "x-openxcvr-since": "5.4"
+    }
+  },
+  "required": [
+    "input_polarity_status_tx",
+    "output_polarity_status_rx",
+    "acq_counters_rx_supported",
+    "acq_counters_tx_supported",
+    "dp_acq_counters_rx_supported",
+    "dp_acq_counters_tx_supported",
+    "reserved_page_60h_130_bits_3_0",
+    "reserved_page_60h_131_191",
+    "reset_acquisition_counters_rx",
+    "reset_acquisition_counters_tx",
+    "reset_dp_acquisition_counters_rx",
+    "reset_dp_acquisition_counters_tx",
+    "reserved_page_60h_196_255"
+  ],
+  "title": "CmisPage60hLaneDatapathManagementExtensions",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      313,
+      314
+    ],
+    "spec": "CMIS 5.4 § 8.30"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

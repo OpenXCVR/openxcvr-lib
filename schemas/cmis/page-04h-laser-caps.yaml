@@ -1,0 +1,20 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage04hLaserCapabilities
+title: CMIS Page 04h Laser Capabilities Advertising
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.7
+  pdf_pages: [188, 189, 190]
+page_address: 04h
+size_bytes: 128
+
+field_includes:
+  - fields/page-04h-laser-caps-part-01.yaml
+  - fields/page-04h-laser-caps-part-02.yaml
+fields: []

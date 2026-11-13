@@ -1,0 +1,18 @@
+{
+  "_metadata": {
+    "authored_at": "2026-04-29",
+    "authored_by": "ras + codex via claude-opus-4-7",
+    "cmis_version": null,
+    "fixture": "fboss-cmis-anomalous-qsfpdd-400g-cr8",
+    "monitoring_stale": false,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "cmis-5.3",
+    "spec_revision": "5.3",
+    "vendor_strings_synthetic": false
+  },
+  "decode_status": "rejected",
+  "rejection": {
+    "detail": "Lower memory byte 1 = 0x05; CMIS 5.3 § 8.2.1 defines major revisions 1.x, 3.0, 4.0, 5.0, 5.1, 5.3. The fboss test corpus uses 0x05 as an explicit anomalous-rev regression target.",
+    "reason": "unknown_major_revision: 0x05"
+  }
+}

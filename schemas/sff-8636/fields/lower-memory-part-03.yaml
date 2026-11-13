@@ -1,0 +1,254 @@
+fields:
+  - name: temp_mon_alarm_warning_mask
+    display_name: MTempMon<severity>Mask
+    instances: { index: severity, start: 0, end: 3 }
+    offset: 103
+    bit_offset_expr: "7 - severity"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, "Monitor::Temperature"]
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for temperature alarm or warning" }
+
+  - name: tc_readiness_mask
+    display_name: MTcReadinessMask
+    offset: 103
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, Status]
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for TC readiness flag" }
+
+  - name: vcc_mon_alarm_warning_mask
+    display_name: MVccMon<severity>Mask
+    instances: { index: severity, start: 0, end: 3 }
+    offset: 104
+    bit_offset_expr: "7 - severity"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, "Monitor::Voltage"]
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for Vcc alarm or warning" }
+
+  - name: max_power_consumption
+    display_name: MaxPowerConsumption
+    offset: 107
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 W" }
+    template: operational_parameter
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 43, table: "Table 6-14", quote: "Maximum power consumption of module", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising Max Power Consumption at byte 107'; byte 107 reserved in the Rev 1.7 map" }
+
+  - name: propagation_delay
+    display_name: PropagationDelay
+    offset: 108
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "10 ns" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 43, table: "Table 6-14", quote: "Propagation Delay" }
+
+  - name: advanced_low_power_mode
+    display_name: AdvancedLowPowerMode
+    offset: 110
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    template: operational_parameter
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: no_below_1p5w_limit, description: "Power limit below 1.5 W is not available" }
+      - { value: 1, name: no_more_than_1w, description: "No more than 1 W" }
+      - { value: 2, name: no_more_than_0p75w, description: "No more than 0.75 W" }
+      - { value: 3, name: no_more_than_0p5w, description: "No more than 0.5 W" }
+      - { value: 4..15, name: reserved, description: "Reserved" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "Advanced Low Power Mode" }
+
+  - name: far_side_managed
+    display_name: FarSideManaged
+    offset: 110
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "Far Side Managed" }
+
+  - name: min_operating_voltage
+    display_name: MinOperatingVoltage
+    offset: 110
+    bit_offset: 0
+    bit_width: 3
+    type: u3
+    template: operational_parameter
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: vcc_3p3, description: "Nominal 3.3 V" }
+      - { value: 1, name: vcc_2p5, description: "Nominal 2.5 V" }
+      - { value: 2, name: vcc_1p8, description: "Nominal 1.8 V" }
+      - { value: 3..7, name: reserved, description: "Reserved" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "Min Operating Voltage" }
+
+  - name: pcie_assigned
+    display_name: PcieAssigned
+    offset: 111
+    size_bytes: 2
+    type: bytes
+    access: rw
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "Assigned for use by PCI Express", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.1: 'Assigned Page 00h Bytes 111-112 for use by PCI-SIG'" }
+
+  - name: far_end_implementation
+    display_name: FarEndImplementation
+    offset: 113
+    bit_offset: 4
+    bit_width: 3
+    type: u3
+    template: capability_advertisement
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: unspecified, description: "Far end is unspecified" }
+      - { value: 1, name: single_far_end_four_channels, description: "Single far end with four channels" }
+      - { value: 2, name: single_far_end_two_channels, description: "Single far end with two channels" }
+      - { value: 3, name: single_far_end_one_channel, description: "Single far end with one channel" }
+      - { value: 4, name: four_by_one_breakout, description: "Four far ends with one channel each" }
+      - { value: 5, name: two_by_two_breakout, description: "Two far ends with two channels each" }
+      - { value: 6, name: two_by_one_breakout, description: "Two far ends with one channel each" }
+      - { value: 7, name: reserved, description: "Reserved" }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "Far-End Implementation", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Added Byte 113 bits 6-4 Far End Implementation'" }
+
+  - name: near_end_implementation
+    display_name: NearEndImplementation
+    offset: 113
+    bit_offset: 0
+    bit_width: 4
+    type: bitmap
+    template: capability_advertisement
+    scope: { lanes: [1, 2, 3, 4] }
+    behavior: { bit_value_0: "channel implemented", bit_value_1: "channel not implemented" }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "Near-End Implementation", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Added Byte 113 bits 3-0 Near End Implementation'" }
+
+  - name: tx_turn_on_max_duration
+    display_name: TxTurnOnMaxDuration
+    offset: 114
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "Tx_TurnOn MaxDuration" }
+
+  - name: data_path_init_max_duration
+    display_name: DataPathInitMaxDuration
+    offset: 114
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 44, table: "Table 6-14", quote: "DataPathInit MaxDuration" }
+
+  - name: modsel_wait_time_exponent
+    display_name: ModSelLWaitTimeExponent
+    offset: 115
+    bit_offset: 5
+    bit_width: 3
+    type: u3
+    template: operational_parameter
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 45, table: "Table 6-14", quote: "ModSelL wait time exponent", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added ModSelL wait time advertising field'" }
+
+  - name: modsel_wait_time_mantissa
+    display_name: ModSelLWaitTimeMantissa
+    offset: 115
+    bit_offset: 0
+    bit_width: 5
+    type: u5
+    template: operational_parameter
+    scope: { module: true }
+    behavior: { formula: "mantissa << exponent", unit: "us" }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 45, table: "Table 6-14", quote: "ModSelL wait time mantissa", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added ModSelL wait time advertising field'" }
+
+  - name: secondary_extended_spec_compliance
+    display_name: SecondaryExtendedSpecCompliance
+    offset: 116
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024ExtendedSpecCompliance
+    template: capability_advertisement
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 45, table: "Table 6-14", quote: "Secondary Extended Specification Compliance Codes", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added a Secondary Extended Spec Compliance Code byte'" }
+
+  - name: transceiver_subtype
+    display_name: TransceiverSubtype
+    offset: 117
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8024TransceiverSubtype
+    template: capability_advertisement
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 45, table: "Table 6-14", quote: "Transceiver Sub-type code", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.11: 'Added Transceiver Subtype code ... Page 00h, byte 117'" }
+
+  - name: fiber_face_type
+    display_name: FiberFaceType
+    offset: 117
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    enum_ref: Sff8024FiberFaceType
+    template: capability_advertisement
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.9", pdf_page: 45, table: "Table 6-14", quote: "Fiber Face Type code", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.11: 'Added ... Fiber Face type code Page 00h, byte 117'" }
+
+  - name: password_change_entry
+    display_name: PasswordChangeEntry
+    offset: 119
+    size_bytes: 4
+    type: u32be
+    access: wo
+    field_type: BlindControl
+    tags: [BlindControl::Password]
+    scope: { management: true }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.10", pdf_page: 45, quote: "Bytes 119-126 are reserved for an optional password entry function" }
+
+  - name: password_entry
+    display_name: PasswordEntry
+    offset: 123
+    size_bytes: 4
+    type: u32be
+    access: wo
+    field_type: BlindControl
+    tags: [BlindControl::Password]
+    scope: { management: true }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.10", pdf_page: 45, quote: "The password entry field shall be set to 00000000h on power-up and reset." }
+
+  - name: page_select
+    display_name: PageSelect
+    offset: 127
+    size_bytes: 1
+    type: u8
+    template: control
+    tags: [Control, "Control::BankSelect"]
+    scope: { management: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.11", pdf_page: 45, quote: "Byte 127 is used to select the upper page." }

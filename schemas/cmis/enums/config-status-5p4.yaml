@@ -1,0 +1,73 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisConfigStatus5p4
+title: CMIS 5.4 Configuration Command Execution and Result Status (4-bit per-lane)
+spec:
+  id: cmis
+  revision: "5.4"
+description: >
+  Configuration Command Execution and Result Status code set as printed by
+  CMIS 5.4 Table 8-101 (p. 244). CmisConfigStatus keeps the pre-5.4 window,
+  where code 8h is Reserved (other validation failures); CMIS 5.4 allocates
+  8h to ConfigRejectedNoEmulation, the DP Emulation rejection code added
+  with the Network Path errata incorporation (CMIS 5.4 revision history
+  M1/M2, § 7.6.9.3: a module that does not support DP Emulation of a
+  nominal NP Application shall reject the DP configuration and report
+  "preferably, ConfigRejectedNoEmulation" in ConfigStatusLane<i>).
+  Revision-blind duplicate/overlap rules forbid re-covering the 8h-Bh span
+  in place, so the since-5.4 code set lands here, following the
+  CmisBanksSupported5p4 / CmisVdmObservableType5p4 precedent (ADV-01).
+provenance:
+  spec: CMIS 5.4 § 8.14.5 / Table 8-101
+  pdf_pages: [244]
+entries:
+  - value: 0x0
+    name: config_undefined
+    description: ConfigUndefined — no status information available (initial register value)
+    since: "5.4"
+  - value: 0x1
+    name: config_success
+    description: ConfigSuccess — the last accepted configuration command has been completed successfully
+    since: "5.4"
+  - value: 0x2
+    name: config_rejected
+    description: ConfigRejected — configuration rejected, unspecific validation failure (negative result status 2h-Bh, Dh-Fh)
+    since: "5.4"
+  - value: 0x3
+    name: config_rejected_invalid_app_sel
+    description: ConfigRejectedInvalidAppSel — configuration rejected, invalid AppSel code
+    since: "5.4"
+  - value: 0x4
+    name: config_rejected_invalid_data_path
+    description: ConfigRejectedInvalidDataPath — configuration rejected, invalid set of lanes for AppSel
+    since: "5.4"
+  - value: 0x5
+    name: config_rejected_invalid_si
+    description: ConfigRejectedInvalidSI — configuration rejected, invalid SI control settings
+    since: "5.4"
+  - value: 0x6
+    name: config_rejected_lanes_in_use
+    description: ConfigRejectedLanesInUse — configuration rejected, some lanes not in DPDeactivated
+    since: "5.4"
+  - value: 0x7
+    name: config_rejected_partial_data_path
+    description: ConfigRejectedPartialDataPath — configuration rejected, lanes are only a subset of the Data Path
+    since: "5.4"
+  - value: 0x8
+    name: config_rejected_no_emulation
+    description: >
+      ConfigRejectedNoEmulation — configuration rejected: DataPath emulation
+      not supported (see section 7.6.9 for a description of DP Emulation)
+    since: "5.4"
+  - value: 0x9..0xb
+    name: reserved_9_b
+    description: Reserved (other validation failures)
+    since: "5.4"
+  - value: 0xc
+    name: config_in_progress
+    description: ConfigInProgress — a configuration command is still being processed by the module; new commands are ignored for this lane while ConfigInProgress
+    since: "5.4"
+  - value: 0xd..0xf
+    name: custom_rejected
+    description: Custom Configuration rejected for custom reasons (vendor-defined)
+    since: "5.4"

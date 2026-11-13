@@ -1,0 +1,223 @@
+fields:
+  # ===========================================================================
+  # OIF-CMIS-FF-01.0 § 7.7, Table 14: Hardware TxDisable Advertisement and
+  # Controls (byte 132)
+  # ===========================================================================
+
+  - name: hw_tx_disable_supported
+    display_name: HWTXDisableSupported
+    description: >-
+      Hardware TxDis/TxDisable implemented on SFP112, SFP-DD/SFP-DD112 media
+      lane 1, QSFP112, and QSFP-DD/QSFP-DD800/QSFP-DD1600 modules
+      (0b: HWTxDis not implemented, 1b: HWTxDis implemented).
+    offset: 132
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-FF, Advertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Hardware TxDis/TxDisable implemented on SFP112, SFP-DD/SFP- DD112 media lane 1, QSFP112, and QSFP-DD/QSFP-DD800/QSFP- DD1600 modules"
+
+  - name: hw_tx_disable_dd_supported
+    display_name: HWTXDisableDDSupported
+    description: >-
+      Hardware TxDisableDD implemented on SFP-DD/SFP-DD112 media lane 2
+      (0b: HWTxDisableDD not implemented, 1b: HWTxDisableDD implemented).
+    offset: 132
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-FF, Advertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Hardware TXDisableDD implemented on SFP-DD/SFP-DD112 media lane 2"
+
+  - name: digital_status_tx_disable
+    display_name: DigitalStatusTxDisable
+    description: >-
+      Digital status of the TxDisable hardware signal on SFP112,
+      SFP-DD/SFP-DD112 lane 1, QSFP112, QSFP-DD/QSFP-DD800/QSFP-DD1600
+      (0b: transmitter is on, 1b: transmitter is turned off).
+    offset: 132
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [CMIS-FF, Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Register indicating digital status of TxDisable hardware signal on SFP112, SFP-DD/SFP-DD112 lane 1, QSFP112, QSFP-DD/QSFP- DD800/QSFP-DD1600 0b: Transmitter is on 1b: Transmitter is turned off"
+
+  - name: digital_status_tx_disable_dd
+    display_name: DigitalStatusTxDisableDD
+    description: >-
+      Digital status of the TxDisableDD hardware signal on SFP-DD/SFP-DD112
+      lane 2 (0b: transmitter is on, 1b: transmitter is turned off).
+    offset: 132
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [CMIS-FF, Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Register indicating digital status of TxDisableDD hardware signal on SFP-DD/SFP-DD112 lane 2 0b: Transmitter is on 1b: Transmitter is turned off"
+
+  - name: mask_hw_tx_disable
+    display_name: MaskHWTxDisable
+    description: >-
+      Mask hardware TxDisable to allow controlling media lane 1 solely
+      through CMIS OutputDisableTx1 (0b: media lane 1 controlled by 'OR'd
+      TxDisable and CMIS OutputDisableTx1 — when TxDisable is configured into
+      module-wide mode on SFP-DD/SFP-DD112, media lanes 1 and 2 are
+      controlled by the 'OR'd TxDisable and TxDisableIsModuleWide; 1b: media
+      lane 1 controlled only by CMIS OutputDisableTx1).
+    offset: 132
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-FF, Mask]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Register masking hardware TxDisable to allow controlling media lanes solely through CMIS OutputDisable1"
+
+  - name: mask_hw_tx_disable_dd
+    display_name: MaskHWTxDisableDD
+    description: >-
+      Mask hardware TxDisableDD to allow controlling media lane 2 solely
+      through CMIS OutputDisableTx2. Section 5.8 defines the hardware
+      TxDisableDD logical signal as 'OR'd with CMIS OutputDisableTx2; the
+      parsed Table 14 text for this bit repeats the media-lane-1
+      (OutputDisableTx1) wording, so the lane-2 behavior is recorded from
+      section 5.8.
+    offset: 132
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-FF, Mask]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Register masking hardware TxDisableDD to allow controlling media lanes solely through CMIS OutputDisable2"
+
+  - name: tx_disable_modes
+    display_name: TxDisableModes
+    description: >-
+      TxDisable mode of operation on SFP-DD/SFP-DD112 (0b: TxDisable is
+      module wide and controls media lanes 1 and 2 that form a data path, in
+      which case TxDisableDD is ignored; 1b: TxDisable controls media lane 1
+      and TxDisableDD controls media lane 2).
+    offset: 132
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [CMIS-FF, Control]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Register configuring TxDisable mode of operation on SFP-DD/SFP- DD112 0b: TxDisable is module wide and controls media lane 1 and 2 that form a data path, in such cases TxDisableDD is ignored. 1b: TxDisable controls media lane 1 and TxDisableDD controls lane2."
+
+  - name: reserved_132_0
+    display_name: Reserved132Bit0
+    description: Reserved bit 0 of byte 132.
+    offset: 132
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      quote: "Reserved"

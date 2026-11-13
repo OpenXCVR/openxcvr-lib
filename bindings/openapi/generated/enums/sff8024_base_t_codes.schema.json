@@ -1,0 +1,59 @@
+{
+  "$id": "sff8024_base_t_codes.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Undefined BASE-T media interface",
+      "title": "undefined"
+    },
+    {
+      "const": 1,
+      "description": "1000BASE-T media interface",
+      "title": "base_1000_t"
+    },
+    {
+      "const": 2,
+      "description": "2.5GBASE-T media interface",
+      "title": "base_2_5g_t"
+    },
+    {
+      "const": 3,
+      "description": "5GBASE-T media interface",
+      "title": "base_5g_t"
+    },
+    {
+      "const": 4,
+      "description": "10GBASE-T media interface",
+      "title": "base_10g_t"
+    },
+    {
+      "const": 5,
+      "description": "25GBASE-T media interface",
+      "title": "base_25g_t"
+    },
+    {
+      "const": 6,
+      "description": "40GBASE-T media interface",
+      "title": "base_40g_t"
+    },
+    {
+      "const": 7,
+      "description": "50GBASE-T placeholder media interface",
+      "title": "base_50g_t_placeholder"
+    }
+  ],
+  "title": "Sff8024BaseTCodes",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      35
+    ],
+    "spec": "SFF-8024 4.14 Table 4-10"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8024",
+    "revision": "4.14"
+  }
+}

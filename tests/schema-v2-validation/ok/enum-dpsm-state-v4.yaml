@@ -1,0 +1,20 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: dpsm-state-v4
+entries:
+  - name: deactivated
+    value: 0x01
+  - name: init
+    value: 0x02
+  - name: deinit
+    value: 0x03
+  - name: activated
+    value: 0x04
+  - name: tx_turn_on
+    value: 0x05
+  - name: tx_turn_off
+    value: 0x06
+  - name: tx_fault
+    value: 0x07
+  - name: activating
+    value: 0x08

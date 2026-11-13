@@ -1,0 +1,267 @@
+fields:
+  - name: sff8024_identifier
+    display_name: SFF8024Identifier
+    offset: 0
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024Identifier
+    template: informational
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.1", pdf_page: 31, table: "Table 6-2", quote: "Identifier (See SFF-8024 Transceiver Management)" }
+
+  - name: revision_compliance
+    display_name: RevisionCompliance
+    offset: 1
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8636RevisionCompliance
+    template: informational
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    since: "1.4"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.2", pdf_page: 31, table: "Table 6-4", quote: "Revision Compliance", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.4: 'Added Revision Compliance Byte'" }
+
+  - name: flat_memory
+    display_name: FlatMem
+    offset: 2
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    enum_inline:
+      - { value: 0, name: paged, description: "Paging supported; at least upper page 03h is implemented" }
+      - { value: 1, name: flat, description: "Flat memory; lower memory and upper page 00h only" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.2", pdf_page: 31, table: "Table 6-3", quote: "Flat_mem" }
+
+  - name: interrupt_deasserted
+    display_name: IntL
+    offset: 2
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    read_effect: acknowledge_startup_interrupt
+    read_effect_scope: byte
+    read_effect_provenance:
+      source: "SFF-8636 Rev 2.12 (SFF-8636-Rev2.12)"
+      section: "§ 6.2.2"
+      table: "Table 6-3"
+      pdf_page: 31
+      basis: "Table 6-3 note: 'The IntL bit will remain asserted until a read is performed of the Data_Not_Ready bit (Byte 2).' Reading the Data_Not_Ready bit is a read of Byte 2 (2-wire reads are byte-granular), so any read of Byte 2 acknowledges the power-up IntL assertion: the effect belongs to the whole byte, matching 'Upon completion of power-up reset, the free-side device shall assert the IntL output signal and bit (if supported) low while de-asserting the Data_Not_Ready bit low.'"
+    enum_inline:
+      - { value: 0, name: asserted, description: "IntL asserted" }
+      - { value: 1, name: not_asserted, description: "IntL not asserted" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.2", pdf_page: 31, table: "Table 6-3", quote: "IntL" }
+
+  - name: data_not_ready
+    display_name: DataNotReady
+    offset: 2
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: monitor_data_valid, description: "Valid monitor data can be read" }
+      - { value: 1, name: monitor_data_not_ready, description: "Free-side device does not yet have valid monitor data" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.2", pdf_page: 31, table: "Table 6-3", quote: "Data_Not_Ready" }
+
+  - name: tx_los_flag
+    display_name: LTx<lane>LOS
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 3
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, "Status::LOS"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-5", quote: "Latched Tx LOS indicator" }
+
+  - name: rx_los_flag
+    display_name: LRx<lane>LOS
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 3
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, "Status::LOS"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-5", quote: "Latched Rx LOS indicator" }
+
+  - name: tx_adaptive_eq_fault_flag
+    display_name: LTx<lane>AdaptEQFault
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 4
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, "Status::Equalization"]
+    scope: { lane: lane }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-5", quote: "Latched Tx input Adaptive EQ fault", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Tx Adaptive EQ Fault flag'; reserved in the Rev 1.7 map" }
+
+  - name: tx_fault_flag
+    display_name: LTx<lane>Fault
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 4
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-5", quote: "Latched Tx transmitter fault" }
+
+  - name: tx_cdr_lol_flag
+    display_name: LTx<lane>LOL
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 5
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, "Status::Lock"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-5", quote: "Latched Tx CDR loss-of-lock" }
+
+  - name: rx_cdr_lol_flag
+    display_name: LRx<lane>LOL
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 5
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, "Status::Lock"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-5", quote: "Latched Rx CDR loss-of-lock" }
+
+  - name: temp_mon_alarm_warning_flag
+    display_name: TempMon<severity>Flag
+    instances: { index: severity, start: 0, end: 3 }
+    offset: 6
+    bit_offset_expr: "7 - severity"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, "Monitor::Temperature"]
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: high_alarm, description: "High temperature alarm" }
+      - { value: 1, name: low_alarm, description: "Low temperature alarm" }
+      - { value: 2, name: high_warning, description: "High temperature warning" }
+      - { value: 3, name: low_warning, description: "Low temperature warning" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-6", quote: "Free Side Monitor Interrupt Flags" }
+
+  - name: tc_readiness_flag
+    display_name: TCReadinessFlag
+    offset: 6
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, Status]
+    scope: { module: true }
+    since: "2.8"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-6", quote: "TC Readiness Flag", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.9 publication: 'Added byte 6, bit 1 for TEC readiness flag'" }
+
+  - name: init_complete_flag
+    display_name: InitCompleteFlag
+    offset: 6
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, Status]
+    scope: { module: true }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-6", quote: "Init Complete Flag", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Initialization complete flag to Byte 6 bit 0'" }
+
+  - name: vcc_mon_alarm_warning_flag
+    display_name: VccMon<severity>Flag
+    instances: { index: severity, start: 0, end: 3 }
+    offset: 7
+    bit_offset_expr: "7 - severity"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, "Monitor::Voltage"]
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: high_alarm, description: "High supply voltage alarm" }
+      - { value: 1, name: low_alarm, description: "Low supply voltage alarm" }
+      - { value: 2, name: high_warning, description: "High supply voltage warning" }
+      - { value: 3, name: low_warning, description: "Low supply voltage warning" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 32, table: "Table 6-6", quote: "Free Side Monitor Interrupt Flags" }
+
+  - name: rx_power_alarm_warning_flag
+    display_name: LRx<lane>Power<severity>Flag
+    instances: { index: bit, start: 0, end: 15 }
+    offset_expr: "9 + bit / 8"
+    bit_offset_expr: "4 * (1 - ((bit / 4) % 2)) + (3 - (bit % 4))"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    behavior:
+      latching: clear_on_read
+      bit_order: "lane 1-4, each lane high_alarm, low_alarm, high_warning, low_warning (bit = 4 * (lane - 1) + severity)"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 33, table: "Table 6-7", quote: "Channel Monitor Interrupt Flags" }
+
+  - name: tx_bias_alarm_warning_flag
+    display_name: LTx<lane>Bias<severity>Flag
+    instances: { index: bit, start: 0, end: 15 }
+    offset_expr: "11 + bit / 8"
+    bit_offset_expr: "4 * (1 - ((bit / 4) % 2)) + (3 - (bit % 4))"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    behavior:
+      latching: clear_on_read
+      bit_order: "lane 1-4, each lane high_alarm, low_alarm, high_warning, low_warning (bit = 4 * (lane - 1) + severity)"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 33, table: "Table 6-7", quote: "Channel Monitor Interrupt Flags" }
+
+  - name: tx_power_alarm_warning_flag
+    display_name: LTx<lane>Power<severity>Flag
+    instances: { index: bit, start: 0, end: 15 }
+    offset_expr: "13 + bit / 8"
+    bit_offset_expr: "4 * (1 - ((bit / 4) % 2)) + (3 - (bit % 4))"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    behavior:
+      latching: clear_on_read
+      bit_order: "lane 1-4, each lane high_alarm, low_alarm, high_warning, low_warning (bit = 4 * (lane - 1) + severity)"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.3", pdf_page: 33, table: "Table 6-7", quote: "Channel Monitor Interrupt Flags" }
+
+  - name: temperature
+    display_name: Temperature
+    offset: 22
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "1/256 deg C" }
+    template: telemetry_module
+    tags: [Monitor, "Monitor::Temperature"]
+    provenance: { section: "SFF-8636 v2.11 § 6.2.4", pdf_page: 35, table: "Table 6-8", quote: "Internally measured temperature" }
+
+  - name: supply_voltage
+    display_name: SupplyVoltage
+    offset: 26
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "100 uV" }
+    template: telemetry_module
+    tags: [Monitor, "Monitor::Voltage"]
+    provenance: { section: "SFF-8636 v2.11 § 6.2.4", pdf_page: 35, table: "Table 6-8", quote: "Internally measured supply voltage" }

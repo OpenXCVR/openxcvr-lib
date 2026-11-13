@@ -1,0 +1,263 @@
+fields:
+  - name: optical_power_low_alarm_flag_rx
+    display_name: OpticalPowerLowAlarmFlagRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 150
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 212
+      table: "Table 8-88"
+      quote: "Latched Rx input power Low alarm, media lane <i>. Advertisement: 01h:160.2."
+
+  - name: optical_power_high_warning_flag_rx
+    display_name: OpticalPowerHighWarningFlagRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 151
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 212
+      table: "Table 8-88"
+      quote: "Latched Rx input power High warning, media lane <i>. Advertisement: 01h:160.2."
+
+  - name: optical_power_low_warning_flag_rx
+    display_name: OpticalPowerLowWarningFlagRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 152
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 212
+      table: "Table 8-88"
+      quote: "Latched Rx input power Low warning, media lane <i>. Advertisement: 01h:160.2."
+
+  - name: output_status_changed_flag_rx
+    display_name: OutputStatusChangedFlagRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 153
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    since: "5.0"
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 213
+      table: "Table 8-88"
+      quote: "Latched Output Status Changed Flag for Rx host lane <i>. The Mask is in Byte 10h:232."
+
+  # ===========================================================================
+  # § 8.10.4 Lane-Specific Monitors (bytes 154-201) — Table 8-89
+  # 16-bit per-lane telemetry, 2 bytes each. 3 monitors × 8 lanes = 48 bytes.
+  # ===========================================================================
+
+  - name: optical_power_tx
+    display_name: OpticalPowerTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "154 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.4"
+      pdf_page: 213
+      table: "Table 8-89"
+      quote: "U16 OpticalPowerTx<i>: Internally measured Tx output optical power in 0.1 uW increments, yielding a total measurement range of 0 to 6.5535 mW (~-40 to +8.2 dBm for non-zero values). Advertisement: 01h:160.1."
+
+  - name: laser_bias_tx
+    display_name: LaserBiasTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "170 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "2 uA times TxBiasCurrentScalingFactor (Page 01h:160)" }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.4"
+      pdf_page: 213
+      table: "Table 8-89"
+      quote: "U16 LaserBiasTx<i>: Internally measured Tx bias current monitor in 2 uA increments, times the multiplier from Table 8-52. Advertisement: 01h:160.0."
+
+  - name: optical_power_rx
+    display_name: OpticalPowerRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "186 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.4"
+      pdf_page: 214
+      table: "Table 8-89"
+      quote: "U16 OpticalPowerRx<i>: Internally measured Rx input optical power in 0.1 uW increments, yielding a total measurement range of 0 to 6.5535 mW (~-40 to +8.2 dBm for non-zero values). Advertisement: 01h:160.2."
+
+  # ===========================================================================
+  # § 8.10.5 Configuration Command Status (bytes 202-205) — Table 8-90
+  # 4-bit per-lane status; lanes packed 2 per byte.
+  # ===========================================================================
+
+  - name: config_status_lane
+    display_name: ConfigStatusLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "202 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisConfigStatus
+    changed_in:
+      # CMIS 5.4 Table 8-101 allocates code 8h to ConfigRejectedNoEmulation
+      # (DP Emulation rejection, Network Path errata incorporation M1/M2);
+      # the since-5.4 code set lives in CmisConfigStatus5p4 (the in-place
+      # enum keeps the pre-5.4 window, where 8h is Reserved).
+      - rev: "5.4"
+        enum_ref: CmisConfigStatus5p4
+        provenance:
+          section: "CMIS 5.4 § 8.14.5"
+          pdf_page: 244
+          table: "Table 8-101"
+          quote: "8h ConfigRejectedNoEmulation Configuration rejected: DataPath emulation not supported"
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.5"
+      pdf_page: 215
+      table: "Table 8-90"
+      quote: "Configuration Command Execution / Result Status for the Data Path of host lane <i>, during and after the most recent configuration command. See Table 8-91 for the encoding of values."
+
+  # ===========================================================================
+  # § 8.10.6 Active Control Set: Provisioned Data Path Configuration
+  # (bytes 206-213) — Tables 8-92 and 8-93
+  # ===========================================================================
+
+  - name: app_sel_code_lane
+    display_name: AppSelCodeLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "206 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.1"
+      pdf_page: 216
+      table: "Table 8-93"
+      quote: "ACS::AppSelCodeLane<i>: Defines the Application assigned to the Data Path containing lane <i>. 0000b: lane <i> is unused and unassigned (not part of a Data Path). 0001b..1111b: lane <i> is part of a Data Path for the Application described in Application Descriptor with this AppSel code."
+
+  - name: data_path_id_lane
+    display_name: DataPathIDLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "206 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 3
+    type: u3
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.1"
+      pdf_page: 216
+      table: "Table 8-93"
+      quote: "ACS::DataPathIDLane<i>: Index of first lane in the Data Path containing lane <i>. 000b: Lane 1; 001b: Lane 2; ... 111b: Lane 8."

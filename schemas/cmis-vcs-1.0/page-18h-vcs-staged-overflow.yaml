@@ -1,0 +1,102 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisVcs10Page18hStagedOverflow
+title: CMIS-VCS 1.0 Page 18h Staged Control Set VCS Overflow
+spec:
+  id: cmis-vcs-1.0
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-CMIS-VCS-01.0.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-CMIS-VCS-01.0 § 4.4
+  pdf_pages: [17, 18]
+page_address: "18h"
+size_bytes: 128
+
+# Banked across lanes per the CMIS base Page 18h convention: each bank carries
+# a group of 8 lanes selected through the lower-memory bank select. Bytes
+# 128-143 of Page 18h (Staged Control Set Extension application descriptor
+# block indices) belong to the CMIS base namespace and are not re-modeled
+# here.
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+fields:
+
+  # ===========================================================================
+  # OIF-CMIS-VCS-01.0 § 4.4 Table 4-1 — Staged Control Set 0 overflow space
+  # (page 18h bytes 144-199). The CMIS base schema reserves this region as
+  # SupplementDefined (SCS0 Versatile Control Set Parameter Space, CMIS 5.3
+  # § 8.17 Table 8-155); this supplement defines its VCS semantics.
+  # ===========================================================================
+
+  - name: scs0_vcs_overflow_space
+    display_name: SCS0VcsOverflowSpace
+    description: >-
+      Staged Control Set 0 VCS overflow space, page 18h bytes 144-199
+      (Table 4-1). Holds the read-write VCS Parameters that do not fit in
+      the page 10h Staged Control Set 0 register space: the page 10h/11h
+      space is filled first (§ 4.4), and in this revision modules shall keep
+      the CMIS base Control Set layout (§ 4.5), so the in-page space carries
+      the CMIS base parameters and every additionally advertised read-write
+      VCS Parameter begins here, in VCS Descriptor advertisement order.
+      Table 4-1 prints that in-page space as page 10h bytes 188-195. That
+      printing disagrees with § 4.5, with § 5.2 (AdaptiveInputEqRecallTx at
+      page 10h bytes 154-155), and with Appendix A Table A-2 and Appendix B
+      Table B-3, which place the staged registers on the CMIS 5.3 base
+      layout beginning at byte 153. The in-page bytes are not re-modeled.
+      The layout inside this overflow space is module-advertised: each
+      parameter's offset is computed from the accumulated MemoryLength
+      attributes of the advertised VCS Descriptor, and a VCS Parameter must
+      be fully contained within a page (§ 4.4), so individual parameter
+      offsets and lengths inside this space are not recorded. Register
+      formats per parameter are recorded in the CmisVcs10ParameterId enum.
+    offset: 144
+    size_bytes: 56
+    type: bytes
+    access: rw
+    field_type: SupplementDefined
+    tags: [VCS, SupplementDefined, ControlSet]
+    scope: { control_set: { id: 0, kind: staged } }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance:
+      section: "OIF-CMIS-VCS-01.0 § 4.4"
+      pdf_page: 17
+      table: "Table 4-1"
+
+  # ===========================================================================
+  # OIF-CMIS-VCS-01.0 § 4.4 Table 4-1 — Staged Control Set 1 overflow space
+  # (page 18h bytes 200-255). Condition: second Staged Control Set supported
+  # (CMIS base optional feature).
+  # ===========================================================================
+
+  - name: scs1_vcs_overflow_space
+    display_name: SCS1VcsOverflowSpace
+    description: >-
+      Staged Control Set 1 VCS overflow space, page 18h bytes 200-255
+      (Table 4-1). Present when the module supports a second Staged Control
+      Set (CMIS base optional). Mirrors the Staged Control Set 0 overflow
+      content: read-write VCS parameters keep the same register offsets in
+      every Control Set (§ 4.4). Table 4-1 prints the in-page Staged Control
+      Set 1 space as page 10h bytes 196-210, which is not the CMIS 5.3 base
+      Staged Control Set 1 signal-integrity range (bytes 188-210) that § 4.5
+      requires the module to keep. The in-page bytes are not re-modeled. As
+      with the Staged Control Set 0 overflow space, the layout is
+      module-advertised and individual parameter offsets inside this space
+      are not recorded; register formats per parameter are recorded in the
+      CmisVcs10ParameterId enum.
+    offset: 200
+    size_bytes: 56
+    type: bytes
+    access: rw
+    field_type: SupplementDefined
+    tags: [VCS, SupplementDefined, ControlSet]
+    scope: { control_set: { id: 1, kind: staged } }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance:
+      section: "OIF-CMIS-VCS-01.0 § 4.4"
+      pdf_page: 18
+      table: "Table 4-1"

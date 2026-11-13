@@ -1,0 +1,248 @@
+fields:
+
+  # ===========================================================================
+  # § 8.12.1 Loopback Capabilities Advertisement (byte 128) — Table 8-101
+  # ===========================================================================
+
+  - name: simultaneous_host_and_media_side_loopbacks_supported
+    display_name: SimultaneousHostAndMediaSideLoopbacksSupported
+    offset: 128
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.1"
+      pdf_page: 225
+      table: "Table 8-101"
+      quote: "SimultaneousHostAndMediaSideLoopbacks: 0b: not supported; 1b: supported."
+
+  - name: per_lane_media_side_loopbacks_supported
+    display_name: PerLaneMediaSideLoopbacksSupported
+    offset: 128
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.1"
+      pdf_page: 225
+      table: "Table 8-101"
+      quote: "PerLaneMediaSideLoopbacks: 1b: supported."
+
+  - name: per_lane_host_side_loopbacks_supported
+    display_name: PerLaneHostSideLoopbacksSupported
+    offset: 128
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.1"
+      pdf_page: 225
+      table: "Table 8-101"
+      quote: "PerLaneHostSideLoopbacks: 1b: supported."
+
+  - name: host_side_input_loopback_supported
+    display_name: HostSideInputLoopbackSupported
+    offset: 128
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.1"
+      pdf_page: 225
+      table: "Table 8-101"
+      quote: "HostSideInputLoopback capability advertisement."
+
+  - name: host_side_output_loopback_supported
+    display_name: HostSideOutputLoopbackSupported
+    offset: 128
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.1"
+      pdf_page: 225
+      table: "Table 8-101"
+      quote: "HostSideOutputLoopback capability advertisement."
+
+  - name: media_side_input_loopback_supported
+    display_name: MediaSideInputLoopbackSupported
+    offset: 128
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.1"
+      pdf_page: 225
+      table: "Table 8-101"
+      quote: "MediaSideInputLoopback capability advertisement."
+
+  - name: media_side_output_loopback_supported
+    display_name: MediaSideOutputLoopbackSupported
+    offset: 128
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.1"
+      pdf_page: 225
+      table: "Table 8-101"
+      quote: "MediaSideOutputLoopback capability advertisement."
+
+  # ===========================================================================
+  # § 8.12.2 Diagnostics Measurement Capabilities (byte 129) — Table 8-102
+  # ===========================================================================
+
+  - name: gating_support
+    display_name: GatingSupport
+    offset: 129
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    enum_inline:
+      - { value: 0x0, name: not_supported, description: "Gating not supported; host defines measurement time" }
+      - { value: 0x1, name: accuracy_le_2_ms, description: "Gating supported with time accuracy <= 2 ms" }
+      - { value: 0x2, name: accuracy_le_20_ms, description: "Gating supported with time accuracy <= 20 ms" }
+      - { value: 0x3, name: accuracy_gt_20_ms, description: "Gating supported with time accuracy > 20 ms" }
+    provenance:
+      section: "CMIS 5.3 § 8.12.2"
+      pdf_page: 225
+      table: "Table 8-102"
+      quote: "GatingSupport: Gating measurement over a given time interval."
+
+  - name: gating_results_supported
+    display_name: GatingResultsSupported
+    offset: 129
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BER"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.2"
+      pdf_page: 225
+      table: "Table 8-102"
+      quote: "Gating result statistics selectable by DiagnosticsSelector values 11h-15h are supported."
+
+  - name: periodic_updates_supported
+    display_name: PeriodicUpdatesSupported
+    offset: 129
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BER"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.2"
+      pdf_page: 225
+      table: "Table 8-102"
+      quote: "Real-time statistics selectable by DiagnosticsSelector values 01h-06h are periodically updated during measurement."
+
+  - name: per_lane_gating_timers_supported
+    display_name: PerLaneGatingTimersSupported
+    offset: 129
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BER"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.2"
+      pdf_page: 225
+      table: "Table 8-102"
+      quote: "Per lane gating timers are supported in all Banks."
+
+  - name: auto_restart_gating_supported
+    display_name: AutoRestartGatingSupported
+    offset: 129
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BER"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.2"
+      pdf_page: 225
+      table: "Table 8-102"
+      quote: "AutoRestartGating control 13h:177.4 supported."
+
+  # ===========================================================================
+  # § 8.12.3 Diagnostic Reporting Capabilities (byte 130) — Table 8-103
+  # ===========================================================================
+
+  - name: media_side_fec_error_information_supported
+    display_name: MediaSideFECErrorInformationSupported
+    offset: 130
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BER"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.3", pdf_page: 226, table: "Table 8-103", quote: "MediaSideFEC: PRBS error information available." }
+
+  - name: host_side_fec_error_information_supported
+    display_name: HostSideFECErrorInformationSupported
+    offset: 130
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BER"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.3", pdf_page: 226, table: "Table 8-103", quote: "HostSideFEC: PRBS error information available." }

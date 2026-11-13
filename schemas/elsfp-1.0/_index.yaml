@@ -1,0 +1,12 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: elsfp-1.0
+  title: OIF-ELSFP-CMIS
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-ELSFP-CMIS-01.0.pdf
+imports:
+  - ../cmis/_index.yaml
+kind: memory_map
+includes:
+  - page-1ah-lane-mgmt.yaml
+  - page-1bh-lane-controls-monitors.yaml

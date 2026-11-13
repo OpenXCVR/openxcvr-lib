@@ -1,0 +1,105 @@
+{
+  "$id": "sff8636_pam4_parameter_type.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Parameter not supported; no data is presented",
+      "title": "not_supported"
+    },
+    {
+      "const": 1,
+      "description": "SNR, line ingress",
+      "title": "snr_line_ingress"
+    },
+    {
+      "const": 2,
+      "description": "Residual ISI or dispersion, line ingress",
+      "title": "residual_isi_dispersion_line_ingress"
+    },
+    {
+      "const": 3,
+      "description": "PAM4 level transition parameter, line ingress",
+      "title": "pam4_level_transition_line_ingress"
+    },
+    {
+      "const": 4,
+      "description": "Pre-FEC BER average, line ingress",
+      "title": "pre_fec_ber_average_line_ingress"
+    },
+    {
+      "const": 5,
+      "description": "FER average, line ingress",
+      "title": "fer_average_line_ingress"
+    },
+    {
+      "const": 6,
+      "description": "TEC current",
+      "title": "tec_current"
+    },
+    {
+      "const": 7,
+      "description": "Laser frequency difference",
+      "title": "laser_frequency"
+    },
+    {
+      "const": 8,
+      "description": "Laser temperature difference",
+      "title": "laser_temperature"
+    },
+    {
+      "const": 9,
+      "description": "Pre-FEC BER latched minimum since last read, line ingress",
+      "title": "pre_fec_ber_latched_min_line_ingress"
+    },
+    {
+      "const": 10,
+      "description": "Pre-FEC BER latched maximum since last read, line ingress",
+      "title": "pre_fec_ber_latched_max_line_ingress"
+    },
+    {
+      "const": 11,
+      "description": "Pre-FEC BER prior period, line ingress",
+      "title": "pre_fec_ber_prior_period_line_ingress"
+    },
+    {
+      "const": 12,
+      "description": "Pre-FEC BER current value, line ingress",
+      "title": "pre_fec_ber_current_line_ingress"
+    },
+    {
+      "const": 13,
+      "description": "FER latched minimum since last read, line ingress",
+      "title": "fer_latched_min_line_ingress"
+    },
+    {
+      "const": 14,
+      "description": "FER latched maximum since last read, line ingress",
+      "title": "fer_latched_max_line_ingress"
+    },
+    {
+      "const": 15,
+      "description": "FER prior period, line ingress",
+      "title": "fer_prior_period_line_ingress"
+    },
+    {
+      "const": 16,
+      "description": "FER current value, line ingress",
+      "title": "fer_current_line_ingress"
+    }
+  ],
+  "title": "Sff8636Pam4ParameterType",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      73
+    ],
+    "spec": "SFF-8636 v2.11 § 6.7.2.5",
+    "table": "Table 6-43"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

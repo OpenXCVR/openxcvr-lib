@@ -1,0 +1,25 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTrainingResult
+title: "CMIS-LT 1.0 Link Training Diagnostic Result"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 16, 51)"
+  pdf_pages: [42, 43, 58]
+entries:
+  - value: 0x0
+    name: no_failure
+    description: "No failure on the lane"
+  - value: 0x1
+    name: timeout
+    description: "Timeout (maximum duration exceeded) on the lane"
+  - value: 0x2
+    name: max_retries
+    description: "Maximum retries reached on the lane"
+  - value: 0x3
+    name: other
+    description: "Other failures on the lane"

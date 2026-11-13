@@ -1,0 +1,146 @@
+fields:
+  - name: reserved_lower_15_21
+    display_name: ReservedLower15To21
+    offset: 15
+    size_bytes: 7
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2", pdf_page: 31, table: "Table 6-2", quote: "Reserved" }
+
+  - name: reserved_lower_24_25
+    display_name: ReservedLower24To25
+    offset: 24
+    size_bytes: 2
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.4", pdf_page: 35, table: "Table 6-8", quote: "Reserved" }
+
+  - name: reserved_lower_28_29
+    display_name: ReservedLower28To29
+    offset: 28
+    size_bytes: 2
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.4", pdf_page: 35, table: "Table 6-8", quote: "Reserved" }
+
+  - name: vendor_specific_lower_30_33
+    display_name: VendorSpecificLower30To33
+    offset: 30
+    size_bytes: 4
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.4", pdf_page: 35, table: "Table 6-8", quote: "Vendor Specific" }
+
+  - name: reserved_channel_monitor_set_4
+    display_name: ReservedChannelMonitorSet4
+    offset: 58
+    size_bytes: 8
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.5", pdf_page: 36, table: "Table 6-9", quote: "Reserved channel monitor set 4" }
+
+  - name: reserved_channel_monitor_set_5
+    display_name: ReservedChannelMonitorSet5
+    offset: 66
+    size_bytes: 8
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.5", pdf_page: 36, table: "Table 6-9", quote: "Reserved channel monitor set 5", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Table 6-8 added Bytes 66-73 description for reserved channel monitor set 5'; vendor-specific in the Rev 1.7 map" }
+
+  - name: vendor_specific_channel_monitor
+    display_name: VendorSpecificChannelMonitor
+    offset: 74
+    size_bytes: 8
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.5", pdf_page: 36, table: "Table 6-9", quote: "Vendor Specific" }
+
+  - name: reserved_lower_82_85
+    display_name: ReservedLower82To85
+    offset: 82
+    size_bytes: 4
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2", pdf_page: 31, table: "Table 6-2", quote: "Reserved" }
+
+  # Tier-2 legacy window: the SFF-8079 software application-select controls
+  # occupied bytes 89-97 through SFF-8636 Rev 2.9 (Rx channels 89-92, Tx 94-97);
+  # the v2.11 map reserves them ("Prior to Rev 2.10 used for SFF-8079").
+  - name: sff8079_rx_application_select
+    display_name: Rx<lane>ApplicationSelect
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "89 + (4 - lane)"
+    size_bytes: 1
+    type: u8
+    template: control
+    scope: { lane: lane }
+    until: "2.11"
+    provenance:
+      section: "SFF-8636 Rev 2.9 § 6.2.6"
+      pdf_page: 37
+      table: "Table 6-9"
+      quote: "Software Application Select per SFF-8079, Rx channels"
+      lineage: "SFF-8636 Rev 2.9 Table 5-3/6-9; removed in Rev 2.10 — v2.11 Table 6-10 byte 89-92: 'Prior to Rev 2.10 used for SFF-8079' (tier-2 legacy window, 2.9 PDF)"
+
+  - name: sff8079_tx_application_select
+    display_name: Tx<lane>ApplicationSelect
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "94 + (4 - lane)"
+    size_bytes: 1
+    type: u8
+    template: control
+    scope: { lane: lane }
+    until: "2.11"
+    provenance:
+      section: "SFF-8636 Rev 2.9 § 6.2.6"
+      pdf_page: 37
+      table: "Table 6-9"
+      quote: "Software Application Select per SFF-8079, Tx channels"
+      lineage: "SFF-8636 Rev 2.9 Table 5-3/6-9; removed in Rev 2.10 — v2.11 Table 6-10 reserves bytes 94-97 (tier-2 legacy window, 2.9 PDF)"
+
+  - name: reserved_lower_89_92
+    display_name: ReservedLower89To92
+    offset: 89
+    size_bytes: 4
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Prior to Rev 2.10 used for SFF-8079", lineage: "Reserved only from Rev 2.10; SFF-8079 application select before that (tier-2 legacy window)" }
+
+  - name: reserved_lower_94_97
+    display_name: ReservedLower94To97
+    offset: 94
+    size_bytes: 4
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 38, table: "Table 6-10", quote: "Reserved", lineage: "SFF-8079 Tx application select through Rev 2.9, reserved from Rev 2.10 (tier-2 legacy window)" }
+
+  - name: vendor_specific_lower_105_106
+    display_name: VendorSpecificLower105To106
+    offset: 105
+    size_bytes: 2
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 42, table: "Table 6-13", quote: "Vendor Specific" }
+
+  - name: reserved_lower_118
+    display_name: ReservedLower118
+    offset: 118
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2", pdf_page: 31, table: "Table 6-2", quote: "Reserved" }

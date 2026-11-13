@@ -1,0 +1,20 @@
+schema: openxcvr.page.v1
+kind: page
+id: page_a2h_02h_tunability_rdt_rpm
+title: SFF-8472 A2h Page 02h Tunability, RDT, and RPM
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a §§ 12.1-12.3
+  pdf_pages: [53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66]
+page_address: A2h
+page_select: 02h
+page_select_field: page_a2h_diagnostics_base.page_select
+size_bytes: 256
+present_when: "page_a2h_diagnostics_base.page_select == 0x02"
+
+field_includes:
+  - fields/page-a2h-02h-tunability-rdt-rpm-part-01.yaml
+  - fields/page-a2h-02h-tunability-rdt-rpm-part-02.yaml
+fields: []

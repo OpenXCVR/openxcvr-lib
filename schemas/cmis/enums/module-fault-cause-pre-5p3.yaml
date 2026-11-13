@@ -1,0 +1,53 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisModuleFaultCausePre5p3
+title: CMIS Module Fault Cause (earlier encoding)
+spec:
+  id: cmis
+  revision: "5.0"
+description: >
+  ModuleFaultCause code set as printed by CMIS 5.0, 5.1 and 5.2: codes 0-3
+  are defined and 4-31 are Reserved (fault codes). CMIS 5.3 defines codes 4-6
+  (Transmitter fault, Receiver fault, Temperature related fault); the full
+  latest-revision code set remains CmisModuleFaultCause. This enum is the
+  pre-5.3 window, selected per revision by the field's changed_in rev 5.0
+  enum_ref override and restored to the full enum by the rev 5.3 entry.
+provenance:
+  spec: CMIS 5.0 § 8.2.10 / Table 8-15 (identical at 5.1 Table 8-15 p133 and 5.2 Table 8-16 p136)
+  pdf_pages: [117]
+entries:
+  - value: 0x00
+    name: no_fault_detected_or_field_not_supported
+    description: No fault detected, or the ModuleFaultCause field is not supported
+    since: "5.0"
+    until: "5.3"
+  - value: 0x01
+    name: tec_runaway
+    description: Thermoelectric cooler runaway fault
+    since: "5.0"
+    until: "5.3"
+  - value: 0x02
+    name: data_memory_corrupted
+    description: Data memory corrupted fault
+    since: "5.0"
+    until: "5.3"
+  - value: 0x03
+    name: program_memory_corrupted
+    description: Program memory corrupted fault
+    since: "5.0"
+    until: "5.3"
+  - value: 0x04..0x1f
+    name: reserved_04_1f
+    description: Reserved fault codes
+    since: "5.0"
+    until: "5.3"
+  - value: 0x20..0x3f
+    name: custom_20_3f
+    description: Custom fault codes
+    since: "5.0"
+    until: "5.3"
+  - value: 0x40..0xff
+    name: reserved_40_ff
+    description: Reserved general codes
+    since: "5.0"
+    until: "5.3"

@@ -1,0 +1,17 @@
+# openxcvr-lib
+
+> Rust library workspace for transceiver memory-map schemas, codegen, and multi-language bindings.
+
+openxcvr-lib decodes SFF-8472 (SFP/SFP+), SFF-8636 (QSFP+/QSFP28) and CMIS memory maps and answers planning questions about a module. It parses and decides. The caller owns the bus.
+
+## Repo entry points
+
+- [README.md](README.md): project overview and a zero-setup run.
+- [CONTRIBUTING.md](CONTRIBUTING.md): how a change lands, including a public pull request.
+- [SECURITY.md](SECURITY.md): what to report, and how.
+
+## Documentation
+
+- [Documentation map](docs/README.md)
+- [Generated schema reference](docs/reference/index.md): per-spec indexes, per-page field tables, revision-resolved variants and enums.
+- [Versioning](docs/versioning.md)

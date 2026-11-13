@@ -1,0 +1,74 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcsTxInputEqCode
+title: CMIS-VCS 1.1 Tx Host-controlled Input Equalization Code
+spec:
+  id: cmis-vcs-1.1
+  revision: "01.1"
+  parity_deferred: true
+description: >-
+  Code values of the HostControlledInputEqTargetTx<i> register
+  (VCS Parameter ID 04h), OIF-CMIS-VCS-01.1 § 5.6 Table 5-11. The table is
+  copied from the CMIS base Tx input equalization codes; input equalization
+  values in dB are based on a reference CTLE and may not directly apply to
+  the module's equalizer. Codes 13 to 15 are custom.
+provenance:
+  spec: OIF-CMIS-VCS-01.1 § 5.6 Table 5-11
+  pdf_pages: [32]
+entries:
+  - value: 0x00
+    name: no_equalization
+    description: No equalization (0 dB)
+    tags: [unit:dB, db:0]
+  - value: 0x01
+    name: eq_1_db
+    description: 1 dB input equalization
+    tags: [unit:dB, db:1]
+  - value: 0x02
+    name: eq_2_db
+    description: 2 dB input equalization
+    tags: [unit:dB, db:2]
+  - value: 0x03
+    name: eq_3_db
+    description: 3 dB input equalization
+    tags: [unit:dB, db:3]
+  - value: 0x04
+    name: eq_4_db
+    description: 4 dB input equalization
+    tags: [unit:dB, db:4]
+  - value: 0x05
+    name: eq_5_db
+    description: 5 dB input equalization
+    tags: [unit:dB, db:5]
+  - value: 0x06
+    name: eq_6_db
+    description: 6 dB input equalization
+    tags: [unit:dB, db:6]
+  - value: 0x07
+    name: eq_7_db
+    description: 7 dB input equalization
+    tags: [unit:dB, db:7]
+  - value: 0x08
+    name: eq_8_db
+    description: 8 dB input equalization
+    tags: [unit:dB, db:8]
+  - value: 0x09
+    name: eq_9_db
+    description: 9 dB input equalization
+    tags: [unit:dB, db:9]
+  - value: 0x0a
+    name: eq_10_db
+    description: 10 dB input equalization
+    tags: [unit:dB, db:10]
+  - value: 0x0b
+    name: eq_11_db
+    description: 11 dB input equalization
+    tags: [unit:dB, db:11]
+  - value: 0x0c
+    name: eq_12_db
+    description: 12 dB input equalization
+    tags: [unit:dB, db:12]
+  - value: 0x0d..0x0f
+    name: custom
+    description: Custom code values
+    tags: [unit:custom]

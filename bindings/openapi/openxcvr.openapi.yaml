@@ -1,0 +1,1008 @@
+openapi: "3.1.0"
+info:
+  title: openxcvr Decoder
+  description: |
+    Machine-readable schemas for the decoded JSON produced by the openxcvr
+    language bindings, listed per family by the aggregate entry points that
+    exist on this tree. CMIS: decode_cmis() / DecodeCmis() in Python, Go,
+    PHP, C, TypeScript, Java and C#, each producing a JSON document that
+    conforms to the CmisDecodeResult schema below. SFF-8636 / SFF-8472:
+    decode_sff8636() / decode_sff8472() in Python, Go, PHP, C, TypeScript,
+    Java and C#, producing Sff8636DecodeResult / Sff8472DecodeResult.
+
+    This document is hand-authored to match the exact shape of the golden
+    fixtures in tests/golden/. It is validated against every discovered
+    golden (cmis, sff-8636, sff-8472) via tools/validate-golden-schema.py.
+
+    SFF results are ok-only: every aggregate SFF decoder emits decode_status
+    "ok"; there is no rejected document. The CMIS and SFF-8636 paths are
+    fail-closed on length: a missing page, a page of the wrong type, or a
+    page under 128 bytes raises an input error. SFF-8472 instead zero-pads
+    an A0h or A2h page shorter than 256 bytes, exactly like the Python
+    _pad_page helper; only a missing or wrong-type page raises an input
+    error there. CmisDecodeResult is the only schema with a rejected arm,
+    and is a discriminated union on decode_status.
+
+    These decoders reproduce the existing aggregate golden contract. Like
+    Python/Go/PHP, they admit CMIS by major revision and decode flat-union
+    page fields. This is not the revision-qualified facade of,
+    which stays outstanding; no PR or doc may claim otherwise.
+
+    v0.4 scope: CmisLaneStatus requires `rx_los` and `tx_fault` (Page 11h
+    lane signal latches). Adding required keys is breaking for a consumer
+    that validated the previous lane object.
+
+    v0.3 scope: adds the SFF-8636 and SFF-8472 ok-only result schemas and
+    restructures CmisDecodeResult from if/then/else into a oneOf union with
+    a decode_status discriminator (verdict-equivalent on the probe set in
+    tools/test_validate_golden_schema.py).
+
+    v0.2 scope (issue #105): for modules that expose CMIS Page 11h, `lanes`
+    is an array of per-lane status (power/bias/data-path state) and `flags`
+    is the module + per-lane flag tree. Flat-memory modules (no Page 11h)
+    keep `lanes` and `flags` null, as do rejected decodes. `checksums` is
+    still always null (CMIS has no identity-byte checksum). Applications may
+    be null for flat-memory modules.
+  version: "0.4.0"
+  contact:
+    name: openxcvr
+    url: https://github.com/OpenXCVR/openxcvr-lib
+
+components:
+  schemas:
+
+    CmisDecodeResult:
+      description: |
+        Top-level result of decoding a CMIS transceiver EEPROM. Two shapes:
+        - decode_status "ok": identity/module/monitoring/applications populated.
+        - decode_status "rejected": only rejection is present (unknown revision).
+        Discriminated union on decode_status: the discriminator is annotation
+        for tooling; the disjoint const literals on the arms do the enforcing.
+      oneOf:
+        - $ref: '#/components/schemas/CmisDecodeOk'
+        - $ref: '#/components/schemas/CmisDecodeRejected'
+      discriminator:
+        propertyName: decode_status
+        mapping:
+          ok: '#/components/schemas/CmisDecodeOk'
+          rejected: '#/components/schemas/CmisDecodeRejected'
+
+    CmisDecodeOk:
+      description: |
+        Successful CMIS decode: every page-derived field is present
+        (applications/lanes/flags may be null for flat-memory modules).
+      allOf:
+        - $ref: '#/components/schemas/CmisDecodeFields'
+        - type: object
+          required:
+            - decode_status
+            - identity
+            - module
+            - monitoring
+            - applications
+            - checksums
+            - lanes
+            - flags
+          properties:
+            decode_status:
+              type: string
+              const: ok
+              description: "'ok' on successful decode."
+
+    CmisDecodeRejected:
+      description: Rejected CMIS decode (unrecognized major revision).
+      allOf:
+        - $ref: '#/components/schemas/CmisDecodeFields'
+        - type: object
+          required:
+            - decode_status
+            - rejection
+          properties:
+            decode_status:
+              type: string
+              const: rejected
+              description: "'rejected' when the CMIS major revision is unrecognized."
+
+    CmisDecodeFields:
+      type: object
+      description: |
+        Fields shared by both CmisDecodeResult arms, unchanged from the
+        pre-0.3 top-level properties block. Open (no
+        additionalProperties:false): cross-arm properties stay validated
+        when present, so an ok document carrying a malformed rejection
+        still fails. decode_status is narrowed per arm, not here.
+      properties:
+        decode_status:
+          type: string
+          enum: [ok, rejected]
+          description: "'ok' on successful decode; 'rejected' when the CMIS major revision is unrecognized."
+        identity:
+          $ref: '#/components/schemas/CmisIdentity'
+        module:
+          $ref: '#/components/schemas/CmisModule'
+        monitoring:
+          $ref: '#/components/schemas/CmisMonitoring'
+        applications:
+          description: "Application descriptors. null for flat-memory modules (no paged upper memory)."
+          oneOf:
+            - type: "null"
+            - type: array
+              items:
+                $ref: '#/components/schemas/CmisApplication'
+        checksums:
+          type: "null"
+          description: "v0.1: always null. Future versions will populate checksum validation results."
+        lanes:
+          description: "Per-lane status from CMIS Page 11h. null for flat-memory modules (no Page 11h) and rejected decodes."
+          oneOf:
+            - type: "null"
+            - type: array
+              items:
+                $ref: '#/components/schemas/CmisLaneStatus'
+        flags:
+          description: "Module-level and per-lane alarm/warning flags. null for flat-memory modules (no Page 11h) and rejected decodes."
+          oneOf:
+            - type: "null"
+            - $ref: '#/components/schemas/CmisModuleFlags'
+        rejection:
+          $ref: '#/components/schemas/CmisRejection'
+
+    CmisIdentity:
+      type: object
+      description: Module vendor identification fields from CMIS Page 00h.
+      required:
+        - vendor_name
+        - vendor_oui
+        - vendor_pn
+        - vendor_sn
+        - vendor_rev
+        - date_code
+      properties:
+        vendor_name:
+          type: string
+          description: "Vendor name (16 bytes, ASCII, may contain NUL padding)."
+        vendor_oui:
+          type: string
+          description: "Vendor OUI, formatted as hex octets separated by colons (e.g. '00:1b:21')."
+          pattern: "^[0-9a-fA-F]{2}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}$"
+        vendor_pn:
+          type: string
+          description: "Vendor part number (16 bytes, ASCII, may contain NUL padding)."
+        vendor_sn:
+          type: string
+          description: "Vendor serial number (16 bytes, ASCII, may contain NUL padding)."
+        vendor_rev:
+          type: string
+          description: "Vendor revision (2 bytes, ASCII)."
+        date_code:
+          type: string
+          description: "Date code (6 bytes, ASCII, format YYMMDD)."
+
+    CmisModule:
+      type: object
+      description: Module-level state and type identification.
+      required:
+        - cmis_revision
+        - identifier
+        - connector
+        - memory_model
+        - module_state
+        - module_type
+      properties:
+        cmis_revision:
+          type: string
+          description: "CMIS version as decoded from lower memory byte 1 (e.g. '5.3', '4.0')."
+          pattern: "^[0-9]+\\.[0-9]+$"
+        identifier:
+          $ref: '#/components/schemas/CmisNamedValue'
+          description: "Module form-factor identifier from lower memory byte 0 (SFF-8024 Table 4-1)."
+        connector:
+          $ref: '#/components/schemas/CmisNamedValue'
+          description: "Connector type from Page 00h (SFF-8024 Table 4-3)."
+        memory_model:
+          type: string
+          enum: [paged, flat]
+          description: "'paged' when upper memory is banked; 'flat' when full 256-byte flat access."
+        module_state:
+          type: string
+          description: "MSM state name in PascalCase (e.g. 'ModuleReady', 'ModuleLowPwr')."
+        module_type:
+          type: ["string", "null"]
+          description: "Optional free-text module type (e.g. '800ZR coherent OSFP'); null when not applicable."
+
+    CmisNamedValue:
+      type: object
+      description: A decoded enumerated value with both its symbolic name and raw hex byte.
+      required:
+        - name
+        - raw
+      properties:
+        name:
+          type: string
+          description: "Symbolic name from the SFF-8024 lookup table (snake_case)."
+        raw:
+          type: string
+          description: "Raw byte value as a two-digit lowercase hex string prefixed with '0x'."
+          pattern: "^0x[0-9a-fA-F]{2}$"
+
+    CmisMonitoring:
+      type: object
+      description: Module-level DOM monitoring values.
+      properties:
+        module_temperature_c:
+          type: number
+          description: "Module temperature in degrees Celsius. s16 × (1/256) per CMIS § 8.2.4."
+        module_voltage_v:
+          type: number
+          description: "Supply voltage in volts. u16 × 100 µV per CMIS § 8.2.4."
+
+    CmisApplication:
+      type: object
+      description: A single CMIS application descriptor (host interface + media interface pairing).
+      required:
+        - app_code
+        - host_interface_id
+        - host_interface_name
+        - host_lane_count
+        - host_lane_assignment_options
+        - media_interface_id
+        - media_interface_name
+        - media_lane_count
+      properties:
+        app_code:
+          type: integer
+          minimum: 1
+          description: "Application code (1-based index into the application descriptor table)."
+        host_interface_id:
+          type: integer
+          minimum: 0
+          maximum: 255
+          description: "Host electrical interface ID from SFF-8024 Table 4-5."
+        host_interface_name:
+          type: string
+          description: "Symbolic name for the host interface (snake_case from SFF-8024)."
+        host_lane_count:
+          type: integer
+          minimum: 1
+          maximum: 8
+          description: "Number of host-side lanes for this application."
+        host_lane_assignment_options:
+          type: string
+          description: "Bitmask of valid host lane start positions, hex-formatted (e.g. '0x11')."
+          pattern: "^0x[0-9a-fA-F]{2}$"
+        media_interface_id:
+          type: integer
+          minimum: 0
+          maximum: 255
+          description: "Media interface ID from SFF-8024 Table 4-6."
+        media_interface_name:
+          type: string
+          description: "Symbolic name for the media interface (snake_case from SFF-8024)."
+        media_lane_count:
+          type: integer
+          minimum: 1
+          maximum: 8
+          description: "Number of media-side lanes for this application."
+
+    CmisLaneStatus:
+      type: object
+      description: |
+        Per-lane status decoded from CMIS Page 11h (§ 8.10.4, Table 8-89).
+        One entry per host lane, 1-based index. Optical power is u16 × 0.1 µW
+        (reported in mW); Tx bias is u16 × 2 µA × the Page 01h:160 multiplier
+        (reported in mA). All linear scalings, NOT f16be.
+      required:
+        - index
+        - dp_state
+        - rx_los
+        - rx_power_mw
+        - tx_bias_ma
+        - tx_fault
+        - tx_power_mw
+      properties:
+        index:
+          type: integer
+          minimum: 1
+          maximum: 8
+          description: "1-based host lane index."
+        dp_state:
+          type: string
+          description: "Data-Path state name (CmisDataPathState variant, e.g. 'DpActivated'; 'Unknown<n>' for reserved nibbles, unmapped values, and unsupported revision contexts)."
+        rx_los:
+          type: boolean
+          description: "Rx loss-of-signal latch (LOSFlagRx<lane>, § 8.10.3 Table 8-88, 11h:147 bit lane-1; latched, clear-on-read)."
+        rx_power_mw:
+          type: number
+          description: "Rx optical input power in mW (u16 × 0.0001), rounded to 4 decimals."
+        tx_bias_ma:
+          type: [number, "null"]
+          description: "Tx laser bias current in mA (u16 × 0.002 × Page 01h:160 multiplier), rounded to 3 decimals. null when the Page 01h:160 scaling code is the reserved 0b11 (CMIS 5.3 Table 8-52): the multiplier is undefined, so the value is unrepresentable while the rest of the lane block stays intact."
+        tx_fault:
+          type: boolean
+          description: "Tx failure latch (FailureFlagTx<lane>, § 8.10.3 Table 8-87, 11h:135 bit lane-1; latched, clear-on-read)."
+        tx_power_mw:
+          type: number
+          description: "Tx optical output power in mW (u16 × 0.0001), rounded to 4 decimals."
+
+    CmisModuleFlags:
+      type: object
+      description: |
+        Module-level latching flags (from lower memory) plus the per-lane
+        flag tree (from Page 11h). data_not_ready is null — CMIS has no
+        single such bit; it is carried for cross-spec shape parity.
+      required:
+        - data_not_ready
+        - interrupt_asserted
+        - temp_high_alarm
+        - temp_low_alarm
+        - supply_high_alarm
+        - supply_low_alarm
+        - lanes
+      properties:
+        data_not_ready:
+          type: "null"
+          description: "Always null for CMIS (no single DataNotReady bit at this layer)."
+        interrupt_asserted:
+          type: boolean
+          description: "True when the module interrupt is asserted (inverse of lower-memory byte 3 bit 0)."
+        temp_high_alarm:
+          type: boolean
+          description: "Module temperature high-alarm latch (lower memory byte 9 bit 0)."
+        temp_low_alarm:
+          type: boolean
+          description: "Module temperature low-alarm latch (lower memory byte 9 bit 1)."
+        supply_high_alarm:
+          type: boolean
+          description: "Supply voltage high-alarm latch (lower memory byte 9 bit 4)."
+        supply_low_alarm:
+          type: boolean
+          description: "Supply voltage low-alarm latch (lower memory byte 9 bit 5)."
+        lanes:
+          type: array
+          description: "Per-lane flag set, one entry per host lane (Page 11h)."
+          items:
+            $ref: '#/components/schemas/CmisLaneFlags'
+
+    CmisLaneFlags:
+      type: object
+      description: |
+        Per-lane latching alarm/warning flags from CMIS Page 11h. tx_power
+        maps to OpticalPower*Tx, tx_bias to LaserBias*Tx, rx_power to
+        OpticalPower*Rx (LaserBias is Tx-only, so there are no rx_bias flags).
+      required:
+        - rx_power_high_alarm
+        - rx_power_low_alarm
+        - rx_power_high_warning
+        - rx_power_low_warning
+        - tx_bias_high_alarm
+        - tx_bias_low_alarm
+        - tx_bias_high_warning
+        - tx_bias_low_warning
+        - tx_power_high_alarm
+        - tx_power_low_alarm
+        - tx_power_high_warning
+        - tx_power_low_warning
+      additionalProperties: false
+      properties:
+        rx_power_high_alarm: { type: boolean }
+        rx_power_low_alarm: { type: boolean }
+        rx_power_high_warning: { type: boolean }
+        rx_power_low_warning: { type: boolean }
+        tx_bias_high_alarm: { type: boolean }
+        tx_bias_low_alarm: { type: boolean }
+        tx_bias_high_warning: { type: boolean }
+        tx_bias_low_warning: { type: boolean }
+        tx_power_high_alarm: { type: boolean }
+        tx_power_low_alarm: { type: boolean }
+        tx_power_high_warning: { type: boolean }
+        tx_power_low_warning: { type: boolean }
+
+    CmisRejection:
+      type: object
+      description: Rejection details when a CMIS major revision is not recognized.
+      required:
+        - reason
+        - detail
+      properties:
+        reason:
+          type: string
+          description: "Short machine-readable rejection reason (e.g. 'unknown_major_revision: 0x05')."
+        detail:
+          type: string
+          description: "Human-readable explanation including spec section reference."
+
+    SffNamedValue:
+      type: object
+      description: A decoded enumerated value with both its symbolic name and raw hex byte.
+      required:
+        - name
+        - raw
+      properties:
+        name:
+          type: string
+          description: "Symbolic name from the SFF-8024 lookup table (snake_case; 'unknown' for unmapped values)."
+        raw:
+          type: string
+          description: "Raw byte value as a two-digit hex string prefixed with '0x'."
+          pattern: "^0x[0-9a-fA-F]{2}$"
+
+    SffChecksum:
+      type: object
+      description: "One EEPROM checksum: computed sum vs the stored byte."
+      required:
+        - computed
+        - stored
+        - valid
+      properties:
+        computed:
+          type: string
+          description: "Sum of the covered bytes (the stored byte excluded), '& 0xFF', hex-formatted."
+          pattern: "^0x[0-9a-fA-F]{2}$"
+        stored:
+          type: string
+          description: "The stored checksum byte, hex-formatted."
+          pattern: "^0x[0-9a-fA-F]{2}$"
+        valid:
+          type: boolean
+          description: "True when computed equals stored."
+
+    Sff8636DecodeResult:
+      type: object
+      description: |
+        Top-level result of decoding an SFF-8636 (QSFP+/QSFP28) module
+        EEPROM from its lower memory and Page 00h upper administrative
+        page. Ok-only: every binding's aggregate decoder emits
+        decode_status "ok" — a missing or short page raises an input
+        error instead of producing a rejected document.
+      required:
+        - decode_status
+        - identity
+        - module
+        - monitoring
+        - compliance
+        - flags
+        - lanes
+        - checksums
+      properties:
+        decode_status:
+          type: string
+          const: ok
+          description: "Always 'ok' for SFF-8636 aggregate decodes."
+        identity:
+          $ref: '#/components/schemas/Sff8636Identity'
+        module:
+          $ref: '#/components/schemas/Sff8636Module'
+        monitoring:
+          $ref: '#/components/schemas/Sff8636Monitoring'
+        compliance:
+          $ref: '#/components/schemas/Sff8636Compliance'
+        flags:
+          $ref: '#/components/schemas/Sff8636Flags'
+        lanes:
+          description: "Per-channel monitor values, one entry per QSFP lane (4), 1-based index."
+          type: array
+          items:
+            $ref: '#/components/schemas/Sff8636Lane'
+        checksums:
+          type: object
+          description: "Page 00h checksum results (cc_base covers bytes 0-63, cc_ext bytes 64-95)."
+          required:
+            - cc_base
+            - cc_ext
+          properties:
+            cc_base:
+              $ref: '#/components/schemas/SffChecksum'
+            cc_ext:
+              $ref: '#/components/schemas/SffChecksum'
+
+    Sff8636Identity:
+      type: object
+      description: Module vendor identification fields from SFF-8636 Page 00h bytes 37-92.
+      required:
+        - date_code
+        - vendor_name
+        - vendor_oui
+        - vendor_pn
+        - vendor_rev
+        - vendor_sn
+      properties:
+        date_code:
+          type: string
+          description: "Date code (Page 00h bytes 84-90, YYMMDD)."
+        vendor_name:
+          type: string
+          description: "Vendor name (16 bytes, ASCII, NUL/space trimmed)."
+        vendor_oui:
+          type: string
+          description: "Vendor OUI (bytes 37-40), formatted as hex octets separated by colons."
+          pattern: "^[0-9a-fA-F]{2}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}$"
+        vendor_pn:
+          type: string
+          description: "Vendor part number (16 bytes, ASCII, trimmed)."
+        vendor_rev:
+          type: string
+          description: "Vendor revision (2 bytes, ASCII, trimmed; may be empty)."
+        vendor_sn:
+          type: string
+          description: "Vendor serial number (16 bytes, ASCII, trimmed)."
+
+    Sff8636Module:
+      type: object
+      description: Module-level identification and type fields for SFF-8636.
+      required:
+        - cmis_revision
+        - connector
+        - encoding
+        - extended_identifier
+        - identifier
+        - memory_model
+        - module_state
+        - module_type
+        - nominal_bit_rate_gbps
+      properties:
+        cmis_revision:
+          type: "null"
+          description: "Always null: SFF-8636 has no CMIS revision."
+        connector:
+          $ref: '#/components/schemas/SffNamedValue'
+        encoding:
+          $ref: '#/components/schemas/SffNamedValue'
+        extended_identifier:
+          type: string
+          description: "Page 00h byte 1 repacked: power_class_low | power_class_high<<6 | rx_cdr<<2 | tx_cdr<<3 | clei<<4 | power_class_8<<5, hex-formatted."
+          pattern: "^0x[0-9a-fA-F]{2}$"
+        identifier:
+          $ref: '#/components/schemas/SffNamedValue'
+        memory_model:
+          type: string
+          enum: [paged, flat]
+          description: "'flat' when lower-memory byte 2 bit 2 is set; 'paged' otherwise."
+        module_state:
+          type: "null"
+          description: "Always null for SFF-8636 (no MSM state at this layer)."
+        module_type:
+          type: ["string", "null"]
+          description: "'100GBASE-SR4 QSFP28' (ext spec compliance 0x02) or '40GBASE-SR4 QSFP+' (40G SR4 compliance bit); null otherwise."
+        nominal_bit_rate_gbps:
+          type: number
+          description: "Page 00h byte 12 / 10, or byte 94 / 4 when byte 12 is the 0xFF high-resolution sentinel."
+
+    Sff8636Monitoring:
+      type: object
+      description: Module-level DOM monitoring values from SFF-8636 lower memory.
+      required:
+        - module_temperature_c
+        - module_voltage_v
+      properties:
+        module_temperature_c:
+          type: number
+          description: "Module temperature in degrees Celsius (lower memory bytes 22-23, s16 × 1/256)."
+        module_voltage_v:
+          type: number
+          description: "Supply voltage in volts (lower memory bytes 26-27, u16 × 100 µV), rounded to 4 decimals."
+
+    Sff8636Compliance:
+      type: object
+      description: SFF-8636 Page 00h compliance and reach fields.
+      required:
+        - bits_set
+        - device_technology
+        - ext_spec_byte_192
+        - raw_bytes_page_00h_3_10
+        - reach
+      properties:
+        bits_set:
+          type: array
+          description: "Compliance bits that are set, in emission order."
+          items:
+            type: string
+            enum: [compliance_extended, compliance_40gbase_sr4]
+        device_technology:
+          type: object
+          description: "Transceiver technology, from the high nibble of Page 00h byte 19 (raw is one hex digit)."
+          required:
+            - name
+            - raw
+          properties:
+            name:
+              type: string
+              description: "Symbolic name from the SFF-8636 device-technology table (snake_case; 'unknown' for unmapped values)."
+            raw:
+              type: string
+              description: "High nibble of byte 19 as a one-digit hex string prefixed with '0x'."
+              pattern: "^0x[0-9a-fA-F]{1}$"
+        ext_spec_byte_192:
+          description: "Extended specification compliance byte (Page 00h byte 192, offset 64 in the page buffer); null when zero."
+          oneOf:
+            - type: "null"
+            - $ref: '#/components/schemas/SffNamedValue'
+        raw_bytes_page_00h_3_10:
+          type: array
+          description: "Page 00h bytes 3-10 as hex strings (compliance bytes for diagnostics)."
+          items:
+            type: string
+            pattern: "^0x[0-9a-fA-F]{2}$"
+        reach:
+          $ref: '#/components/schemas/Sff8636Reach'
+
+    Sff8636Reach:
+      type: object
+      description: SFF-8636 Page 00h reach fields (bytes 14-18).
+      required:
+        - om1_m
+        - om2_m
+        - om3_2m_units
+        - om4_or_copper_m
+        - smf_km
+      properties:
+        om1_m:
+          type: integer
+          description: "OM1 or 25.78 GHz copper attenuation (byte 17)."
+        om2_m:
+          type: integer
+          description: "OM2 length in meters (byte 16)."
+        om3_2m_units:
+          type: integer
+          description: "OM3 length (byte 15) in 2 m units."
+        om4_or_copper_m:
+          type: integer
+          description: "OM4 or copper length in meters (byte 18)."
+        smf_km:
+          type: integer
+          description: "SMF length in km (byte 14)."
+
+    Sff8636Flags:
+      type: object
+      description: SFF-8636 lower-memory status flags.
+      required:
+        - data_not_ready
+        - interrupt_asserted
+      properties:
+        data_not_ready:
+          type: boolean
+          description: "Lower memory byte 2 bit 0."
+        interrupt_asserted:
+          type: boolean
+          description: "True when the module interrupt is asserted (inverse of lower-memory byte 2 bit 1), or any tx/rx LOS flag or lane alarm/warning nibble (bytes 9-14) is nonzero."
+
+    Sff8636Lane:
+      type: object
+      description: Per-channel monitor values from SFF-8636 lower memory bytes 34-57.
+      required:
+        - index
+        - rx_power_mw
+        - tx_bias_ma
+        - tx_power_mw
+      properties:
+        index:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: "1-based QSFP lane index."
+        rx_power_mw:
+          type: number
+          description: "Rx input power in mW (u16 × 0.0001), rounded to 4 decimals."
+        tx_bias_ma:
+          type: number
+          description: "Tx laser bias in mA (u16 × 0.002), rounded to 3 decimals."
+        tx_power_mw:
+          type: number
+          description: "Tx output power in mW (u16 × 0.0001), rounded to 4 decimals."
+
+    Sff8472DecodeResult:
+      type: object
+      description: |
+        Top-level result of decoding an SFF-8472 (SFP/SFP+) module EEPROM
+        from its A0h base memory and A2h diagnostics pages. Ok-only: every
+        binding's aggregate decoder emits decode_status "ok". An A0h or
+        A2h page shorter than 256 bytes is zero-padded, exactly like the
+        Python _pad_page helper (bindings/python/openxcvr/_common.py);
+        only a missing or wrong-type page raises an input error instead
+        of producing a rejected document. (The CMIS and SFF-8636 paths
+        are stricter: they reject a page under 128 bytes.)
+
+        Telemetry in this result is uncalibrated: SFF-8472 external
+        calibration constants are not applied. Check
+        calibration.externally_calibrated; calibrated values come from the
+        Rust SFF-8472 adapter or the observation APIs.
+      required:
+        - decode_status
+        - identity
+        - module
+        - monitoring
+        - compliance
+        - flags
+        - lanes
+        - checksums
+      properties:
+        decode_status:
+          type: string
+          const: ok
+          description: "Always 'ok' for SFF-8472 aggregate decodes."
+        identity:
+          $ref: '#/components/schemas/Sff8472Identity'
+        module:
+          $ref: '#/components/schemas/Sff8472Module'
+        monitoring:
+          description: "A2h real-time monitoring. null when DDM is not implemented (A0h byte 92 bit 6)."
+          oneOf:
+            - type: "null"
+            - $ref: '#/components/schemas/Sff8472Monitoring'
+        compliance:
+          $ref: '#/components/schemas/Sff8472Compliance'
+        flags:
+          description: "A2h alarm/warning flag summaries. null when DDM is not implemented."
+          oneOf:
+            - type: "null"
+            - $ref: '#/components/schemas/Sff8472Flags'
+        lanes:
+          description: "Single-channel status and monitor values. null when DDM is not implemented."
+          oneOf:
+            - type: "null"
+            - type: array
+              items:
+                $ref: '#/components/schemas/Sff8472Lane'
+        checksums:
+          type: object
+          description: "A0h/A2h checksum results (cc_base A0h 0-63, cc_dmi A2h 0-95, cc_ext A0h 64-95)."
+          required:
+            - cc_base
+            - cc_dmi
+            - cc_ext
+          properties:
+            cc_base:
+              $ref: '#/components/schemas/SffChecksum'
+            cc_dmi:
+              $ref: '#/components/schemas/SffChecksum'
+            cc_ext:
+              $ref: '#/components/schemas/SffChecksum'
+
+    Sff8472Identity:
+      type: object
+      description: Module vendor identification fields from SFF-8472 A0h bytes 20-92 (no vendor_rev).
+      required:
+        - date_code
+        - vendor_name
+        - vendor_oui
+        - vendor_pn
+        - vendor_sn
+      properties:
+        date_code:
+          type: string
+          description: "First 6 chars of the date code (A0h bytes 84-92, YYMMDD)."
+        vendor_name:
+          type: string
+          description: "Vendor name (16 bytes, ASCII, trimmed)."
+        vendor_oui:
+          type: string
+          description: "Vendor OUI (bytes 37-40), formatted as hex octets separated by colons."
+          pattern: "^[0-9a-fA-F]{2}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}$"
+        vendor_pn:
+          type: string
+          description: "Vendor part number (16 bytes, ASCII, trimmed)."
+        vendor_sn:
+          type: string
+          description: "Vendor serial number (16 bytes, ASCII, trimmed)."
+
+    Sff8472Module:
+      type: object
+      description: Module-level identification and type fields for SFF-8472.
+      required:
+        - calibration
+        - cmis_revision
+        - connector
+        - encoding
+        - identifier
+        - memory_model
+        - module_state
+        - module_type
+        - nominal_bit_rate_gbps
+      properties:
+        calibration:
+          $ref: '#/components/schemas/Sff8472Calibration'
+        cmis_revision:
+          type: "null"
+          description: "Always null: SFF-8472 has no CMIS revision."
+        connector:
+          $ref: '#/components/schemas/SffNamedValue'
+        encoding:
+          $ref: '#/components/schemas/SffNamedValue'
+        identifier:
+          $ref: '#/components/schemas/SffNamedValue'
+        memory_model:
+          type: "null"
+          description: "Always null: SFF-8472 has a fixed two-page memory map."
+        module_state:
+          type: "null"
+          description: "Always null for SFF-8472."
+        module_type:
+          type: ["string", "null"]
+          description: "'10GBASE-SR SFP+' when the 10G SR compliance bit is set; null otherwise."
+        nominal_bit_rate_gbps:
+          type: number
+          description: "A0h byte 12 / 10, or byte 66 / 4 when byte 12 is the 0xFF high-resolution sentinel."
+
+    Sff8472Calibration:
+      type: object
+      description: SFF-8472 diagnostic monitoring type (A0h byte 92).
+      required:
+        - ddm_implemented
+        - externally_calibrated
+        - internally_calibrated
+        - rx_power_kind
+      properties:
+        ddm_implemented:
+          type: boolean
+          description: "A0h byte 92 bit 6 — the DDM gate for monitoring/flags/lanes."
+        externally_calibrated:
+          type: boolean
+          description: "A0h byte 92 bit 4 — external calibration constants required."
+        internally_calibrated:
+          type: boolean
+          description: "A0h byte 92 bit 5 — internal (factory) calibration."
+        rx_power_kind:
+          type: string
+          enum: [average, oma]
+          description: "'average' when A0h byte 92 bit 3 is set; 'oma' otherwise."
+
+    Sff8472Monitoring:
+      type: object
+      description: A2h real-time monitoring values.
+      required:
+        - module_temperature_c
+        - module_voltage_v
+      properties:
+        module_temperature_c:
+          type: number
+          description: "Module temperature in degrees Celsius (A2h bytes 96-97, s16 × 1/256)."
+        module_voltage_v:
+          type: number
+          description: "Supply voltage in volts (A2h bytes 98-99, u16 × 100 µV), rounded to 4 decimals."
+
+    Sff8472Compliance:
+      type: object
+      description: SFF-8472 A0h compliance and reach fields.
+      required:
+        - raw_bytes_a0h_3_10
+        - reach
+        - wavelength_nm
+      properties:
+        raw_bytes_a0h_3_10:
+          type: array
+          description: "A0h bytes 3-10 as hex strings (transceiver compliance bytes for diagnostics)."
+          items:
+            type: string
+            pattern: "^0x[0-9a-fA-F]{2}$"
+        reach:
+          $ref: '#/components/schemas/Sff8472Reach'
+        wavelength_nm:
+          type: integer
+          minimum: 0
+          maximum: 65535
+          description: "Nominal laser wavelength (A0h bytes 60-61, u16) or cable compliance code."
+
+    Sff8472Reach:
+      type: object
+      description: SFF-8472 A0h reach fields (bytes 14-19).
+      required:
+        - om1_m
+        - om2_m
+        - om3_m
+        - om4_m
+        - smf_km
+      properties:
+        om1_m:
+          type: integer
+          description: "OM1 length (byte 17, 10 m units × 10)."
+        om2_m:
+          type: integer
+          description: "OM2 length (byte 16, 10 m units × 10)."
+        om3_m:
+          type: integer
+          description: "OM3 length (byte 19 as a flat 10 m unit × 10; base|multiplier<<6 equals the raw byte)."
+        om4_m:
+          type: integer
+          description: "OM4 or copper length (byte 18, 1 m units)."
+        smf_km:
+          type: integer
+          description: "SMF length in km (byte 14)."
+
+    Sff8472Flags:
+      type: object
+      description: A2h alarm and warning summaries (bytes 112-113 and 116-117).
+      required:
+        - alarm_summary
+        - warning_summary
+      properties:
+        alarm_summary:
+          $ref: '#/components/schemas/Sff8472AlarmSummary'
+        warning_summary:
+          $ref: '#/components/schemas/Sff8472WarningSummary'
+
+    Sff8472AlarmSummary:
+      type: object
+      description: A2h alarm summary block (bytes 112-113; ten latching alarm flags).
+      required:
+        - rx_power_high_alarm
+        - rx_power_low_alarm
+        - temp_high_alarm
+        - temp_low_alarm
+        - tx_bias_high_alarm
+        - tx_bias_low_alarm
+        - tx_power_high_alarm
+        - tx_power_low_alarm
+        - vcc_high_alarm
+        - vcc_low_alarm
+      properties:
+        rx_power_high_alarm: { type: boolean }
+        rx_power_low_alarm: { type: boolean }
+        temp_high_alarm: { type: boolean }
+        temp_low_alarm: { type: boolean }
+        tx_bias_high_alarm: { type: boolean }
+        tx_bias_low_alarm: { type: boolean }
+        tx_power_high_alarm: { type: boolean }
+        tx_power_low_alarm: { type: boolean }
+        vcc_high_alarm: { type: boolean }
+        vcc_low_alarm: { type: boolean }
+
+    Sff8472WarningSummary:
+      type: object
+      description: A2h warning summary block (bytes 116-117; ten latching warning flags).
+      required:
+        - rx_power_high_warning
+        - rx_power_low_warning
+        - temp_high_warning
+        - temp_low_warning
+        - tx_bias_high_warning
+        - tx_bias_low_warning
+        - tx_power_high_warning
+        - tx_power_low_warning
+        - vcc_high_warning
+        - vcc_low_warning
+      properties:
+        rx_power_high_warning: { type: boolean }
+        rx_power_low_warning: { type: boolean }
+        temp_high_warning: { type: boolean }
+        temp_low_warning: { type: boolean }
+        tx_bias_high_warning: { type: boolean }
+        tx_bias_low_warning: { type: boolean }
+        tx_power_high_warning: { type: boolean }
+        tx_power_low_warning: { type: boolean }
+        vcc_high_warning: { type: boolean }
+        vcc_low_warning: { type: boolean }
+
+    Sff8472Lane:
+      type: object
+      description: Single-channel status and monitor values from SFF-8472 A2h bytes 96-110.
+      required:
+        - index
+        - rx_los
+        - rx_power_mw
+        - tx_bias_ma
+        - tx_disable
+        - tx_fault
+        - tx_power_mw
+      properties:
+        index:
+          type: integer
+          minimum: 1
+          maximum: 1
+          description: "1-based channel index (always 1: SFP is single-channel)."
+        rx_los:
+          type: boolean
+          description: "Rx loss of signal (A2h byte 110 bit 2)."
+        rx_power_mw:
+          type: number
+          description: "Rx input power in mW (A2h bytes 104-105, u16 × 0.0001), rounded to 4 decimals."
+        tx_bias_ma:
+          type: number
+          description: "Tx laser bias in mA (A2h bytes 100-101, u16 × 0.002), rounded to 3 decimals."
+        tx_disable:
+          type: boolean
+          description: "Tx disabled (A2h byte 110 bit 7)."
+        tx_fault:
+          type: boolean
+          description: "Tx fault (A2h byte 110 bit 3)."
+        tx_power_mw:
+          type: number
+          description: "Tx output power in mW (A2h bytes 102-103, u16 × 0.0001), rounded to 4 decimals."

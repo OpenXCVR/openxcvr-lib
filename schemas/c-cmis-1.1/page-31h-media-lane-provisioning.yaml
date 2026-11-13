@@ -1,0 +1,37 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis11Page31hMediaLaneProvisioning
+title: C-CMIS 1.1 Page 31h Media Lane Provisioning
+spec:
+  id: c-cmis-1.1
+  revision: "01.1"
+  source: docs/stds/cmis/OIF-C-CMIS-01.1.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.1 § 7.4.4
+  pdf_pages: [17]
+page_address: "31h"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+fields:
+  - { name: reserved_128_7_2, offset: 128, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.4.4", pdf_page: 17, table: "Table 10" } }
+  - { name: lf_insertion_on_ld_enable, offset: 128, bit_offset: 1, bit_width: 1, type: bool, access: rw, field_type: Control, tags: [C-CMIS, LocalDegrade, ConsequentAction], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable LF insertion on Local Degrade detection; default is 0", provenance: { section: "OIF-C-CMIS-01.1 § 7.4.4", pdf_page: 17, table: "Table 10" } }
+  - { name: tx_filter_enable, offset: 128, bit_offset: 0, bit_width: 1, type: bool, access: rw, field_type: Control, tags: [C-CMIS, TxFilter], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable Tx transmit shape control", provenance: { section: "OIF-C-CMIS-01.1 § 7.4.4", pdf_page: 17, table: "Table 10" } }
+  - name: tx_filter_type
+    offset: 129
+    size_bytes: 1
+    type: u8
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, TxFilter]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Tx transmit filter type"
+    provenance: { section: "OIF-C-CMIS-01.1 § 7.4.4", pdf_page: 17, table: "Table 10" }
+    enum_inline:
+      - { value: 1, name: root_raised_cosine, description: "Root-Raised-Cosine" }
+      - { value: 2, name: raised_cosine, description: "Raised-Cosine" }
+      - { value: 3, name: gaussian, description: "Gaussian" }
+  - { name: tx_filter_roll_off, offset: 130, size_bytes: 1, type: u8, access: rw, field_type: Configuration, tags: [C-CMIS, TxFilter], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Scaled roll-off factor, 1/255 units over 0.0 to 1.0", provenance: { section: "OIF-C-CMIS-01.1 § 7.4.4", pdf_page: 17, table: "Table 10" } }
+  - { name: reserved_131_255, offset: 131, size_bytes: 125, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.4.4", pdf_page: 17, table: "Table 10" } }

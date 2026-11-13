@@ -1,0 +1,13 @@
+schema: openxcvr.page.v2
+kind: page
+id: BadAliasedRev
+title: page.v2 fixture with an invalid aliased_to rev string
+page_address: "00h"
+fields:
+  - name: module_state
+    offset: 0
+    size_bytes: 1
+    type: u8
+    aliased_to:
+      - rev: "v5.2"
+        new_name: module_state_v2

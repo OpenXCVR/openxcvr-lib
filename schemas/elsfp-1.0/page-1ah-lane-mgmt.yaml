@@ -1,0 +1,21 @@
+---
+schema: openxcvr.page.v1
+kind: page
+id: ElsfpPage1ahLaneMgmt
+title: ELSFP-CMIS 1.0 Page 1Ah Lane Management
+spec:
+  id: elsfp-1.0
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-ELSFP-CMIS-01.0.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-ELSFP-CMIS-01.0 § 9
+  pdf_pages: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
+page_address: "1Ah"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+field_includes:
+  - fields/page-1ah-lane-mgmt-part-01.yaml
+  - fields/page-1ah-lane-mgmt-part-02.yaml

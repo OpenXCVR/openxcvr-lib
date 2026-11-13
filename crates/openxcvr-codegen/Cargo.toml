@@ -1,0 +1,31 @@
+[package]
+name = "openxcvr-codegen"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Codegen tool for openxcvr schema definitions (build-time only)"
+publish = false
+
+[[bin]]
+name = "openxcvr-codegen"
+path = "src/main.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_norway = "0.9"
+clap = { version = "4", features = ["derive"] }
+thiserror = "2"
+anyhow = "1"
+heck = "0.5"
+walkdir = "2"
+
+[dev-dependencies]
+openxcvr-core = { path = "../openxcvr-core" }
+tempfile = "3"
+# Newer trybuild releases declare an MSRV above the workspace's.
+trybuild = "=1.0.116"

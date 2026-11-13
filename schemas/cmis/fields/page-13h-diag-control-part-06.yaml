@@ -1,0 +1,174 @@
+fields:
+  - name: host_side_output_loopback_enable
+    display_name: HostSideOutputLoopbackEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 182
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.12", pdf_page: 240, table: "Table 8-121", quote: "HostSideOutputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled." }
+
+  - name: host_side_input_loopback_enable
+    display_name: HostSideInputLoopbackEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 183
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.12", pdf_page: 240, table: "Table 8-121", quote: "HostSideInputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled." }
+
+  # ===========================================================================
+  # § 8.12.13 Host Scratchpad and § 8.12.14 Masks (bytes 184-223)
+  # ===========================================================================
+
+  - name: host_scratchpad
+    display_name: HostScratchPad<scratchpad>
+    instances: { index: scratchpad, start: 0, end: 7 }
+    offset_expr: "184 + scratchpad"
+    size_bytes: 1
+    type: u8
+    access: rw
+    field_type: Storage
+    tags: [Storage]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.13", pdf_page: 241, table: "Table 8-122", quote: "HostScratchPad<i>, i = 0..7, can be used by the host to store state in the module." }
+
+  - name: custom_diagnostics_control
+    display_name: CustomDiagnosticsControl
+    offset: 196
+    size_bytes: 10
+    type: bytes
+    access: rw
+    field_type: VendorSpecific
+    tags: [VendorSpecific]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12", pdf_page: 223, table: "Table 8-100", quote: "Bytes 196-205: Custom[10]." }
+
+  - name: loss_of_reference_clock_mask
+    display_name: LossOfReferenceClockMask
+    offset: 206
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.14", pdf_page: 242, table: "Table 8-123", quote: "Loss of reference clock Mask for the module. Default: 1." }
+
+  - name: pattern_check_gating_complete_mask_host
+    display_name: PatternCheckGatingCompleteMaskHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 208
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.14", pdf_page: 242, table: "Table 8-123", quote: "Per-host lane gating complete Mask. Default: 1." }
+
+  - name: pattern_check_gating_complete_mask_media
+    display_name: PatternCheckGatingCompleteMaskMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 209
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.14", pdf_page: 242, table: "Table 8-123", quote: "Per-media lane gating complete Mask. Default: 1." }
+
+  - name: pattern_generator_lol_mask_host
+    display_name: PatternGeneratorLOLMaskHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 210
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.14", pdf_page: 242, table: "Table 8-123", quote: "Per-host lane pattern generator loss of lock Mask. Default: 1." }
+
+  - name: pattern_generator_lol_mask_media
+    display_name: PatternGeneratorLOLMaskMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 211
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.14", pdf_page: 242, table: "Table 8-123", quote: "Per-media lane pattern generator loss of lock Mask. Default: 1." }
+
+  - name: pattern_checker_lol_mask_host
+    display_name: PatternCheckerLOLMaskHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 212
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.14", pdf_page: 242, table: "Table 8-123", quote: "Per-host lane pattern checker loss of lock Mask. Default: 1." }
+
+  - name: pattern_checker_lol_mask_media
+    display_name: PatternCheckerLOLMaskMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 213
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.14", pdf_page: 242, table: "Table 8-123", quote: "Per-media lane pattern checker loss of lock Mask. Default: 1." }
+
+  # ===========================================================================
+  # § 8.12.15 User Pattern (bytes 224-255) — Table 8-124
+  # ===========================================================================
+
+  - name: user_pattern
+    display_name: UserPattern
+    offset: 224
+    size_bytes: 32
+    type: bytes
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.15"
+      pdf_page: 243
+      table: "Table 8-124"
+      quote: "Host defined user pattern (32 Bytes)."

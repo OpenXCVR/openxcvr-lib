@@ -1,0 +1,244 @@
+fields:
+  - name: media_checker_per_lane_enable_supported
+    display_name: MediaCheckerSupportsPerLaneEnable
+    offset: 142
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.5", pdf_page: 230, table: "Table 8-108", quote: "Media side pattern checker supports per lane enable." }
+
+  # ===========================================================================
+  # §§ 8.12.6-8.12.9 Pattern Generator and Checker Controls (bytes 144-175)
+  # ===========================================================================
+
+  - name: host_side_generator_enable
+    display_name: HostSideGeneratorEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 144
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.6", pdf_page: 231, table: "Table 8-109", quote: "Enable generator with configuration defined in Bytes 145-151." }
+
+  - name: host_side_generator_data_invert
+    display_name: HostSideGeneratorDataInvertLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 145
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.6", pdf_page: 231, table: "Table 8-109", quote: "Invert the selected host side generator pattern." }
+
+  - name: host_side_generator_swap_symbol_bits
+    display_name: HostSideGeneratorSwapSymbolBitsLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 146
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.6", pdf_page: 231, table: "Table 8-109", quote: "Swap MSB and LSB for PAM4 patterns." }
+
+  - name: host_side_generator_pre_fec_enable
+    display_name: HostSideGeneratorPreFECEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 147
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.6", pdf_page: 231, table: "Table 8-109", quote: "Generate the selected pattern at the input to the internal host side FEC encoder when set." }
+
+  - name: host_side_generator_pattern_select
+    display_name: HostSideGeneratorPatternSelectLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "148 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisDiagnosticsPatternId
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.6", pdf_page: 231, table: "Table 8-110", quote: "Selected pattern to be generated on each lane." }
+
+  - name: media_side_generator_enable
+    display_name: MediaSideGeneratorEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 152
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.7", pdf_page: 232, table: "Table 8-111", quote: "Enable media side generator with configuration defined in Bytes 153-159." }
+
+  - name: media_side_generator_data_invert
+    display_name: MediaSideGeneratorDataInvertLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 153
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.7", pdf_page: 232, table: "Table 8-111", quote: "Invert the selected media side generator pattern." }
+
+  - name: media_side_generator_swap_symbol_bits
+    display_name: MediaSideGeneratorSwapSymbolBitsLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 154
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.7", pdf_page: 232, table: "Table 8-111", quote: "Swap MSB and LSB for PAM4 patterns." }
+
+  - name: media_side_generator_pre_fec_enable
+    display_name: MediaSideGeneratorPreFECEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 155
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.7", pdf_page: 232, table: "Table 8-111", quote: "Generate the selected pattern at the input to the internal media side FEC encoder when set." }
+
+  - name: media_side_generator_pattern_select
+    display_name: MediaSideGeneratorPatternSelectLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "156 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisDiagnosticsPatternId
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.7", pdf_page: 232, table: "Table 8-112", quote: "Selected pattern to be generated on each lane." }
+
+  - name: host_side_checker_enable
+    display_name: HostSideCheckerEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 160
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.8", pdf_page: 233, table: "Table 8-113", quote: "Enable host side pattern checker with configuration defined in Bytes 161-167." }
+
+  - name: host_side_checker_data_invert
+    display_name: HostSideCheckerDataInvertLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 161
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.8", pdf_page: 233, table: "Table 8-113", quote: "Invert the selected host side checker pattern." }
+
+  - name: host_side_checker_swap_symbol_bits
+    display_name: HostSideCheckerSwapSymbolBitsLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 162
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.8", pdf_page: 233, table: "Table 8-113", quote: "Swap MSB and LSB for PAM4 patterns." }
+
+  - name: host_side_checker_post_fec_enable
+    display_name: HostSideCheckerPostFECEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 163
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.8", pdf_page: 233, table: "Table 8-113", quote: "Check the selected encoded pattern at the output from the internal FEC decoder when set." }
+
+  - name: host_side_checker_pattern_select
+    display_name: HostSideCheckerPatternSelectLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "164 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisDiagnosticsPatternId
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.8", pdf_page: 233, table: "Table 8-114", quote: "Selected pattern to be checked on each lane." }
+
+  - name: media_side_checker_enable
+    display_name: MediaSideCheckerEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 168
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.9", pdf_page: 234, table: "Table 8-115", quote: "Enable media side pattern checker with configuration defined in Bytes 169-175." }

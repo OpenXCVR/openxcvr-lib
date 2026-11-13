@@ -1,0 +1,32 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis11Page3BhDataPathHostIfFlagsAndMasks
+title: C-CMIS 1.1 Page 3Bh Data Path Host Interface Flags and Masks
+spec:
+  id: c-cmis-1.1
+  revision: "01.1"
+  source: docs/stds/cmis/OIF-C-CMIS-01.1.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.1 § 7.5.3
+  pdf_pages: [26]
+page_address: "3bh"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: data_path
+fields:
+  - { name: reserved_128_7_2, offset: 128, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: m_rx_fed_pm, offset: 128, bit_offset: 1, bit_width: 1, type: bool, access: rw, field_type: Alarm, tags: [C-CMIS, Mask, FED], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Mask for FED over PM Interval alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: m_rx_fdd_pm, offset: 128, bit_offset: 0, bit_width: 1, type: bool, access: rw, field_type: Alarm, tags: [C-CMIS, Mask, FDD], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Mask for FDD over PM Interval alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: reserved_129_7_2, offset: 129, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: m_rd, offset: 129, bit_offset: 1, bit_width: 1, type: bool, access: rw, field_type: Alarm, tags: [C-CMIS, Mask, RemoteDegrade], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Mask for Remote Degrade alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: m_ld, offset: 129, bit_offset: 0, bit_width: 1, type: bool, access: rw, field_type: Alarm, tags: [C-CMIS, Mask, LocalDegrade], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Mask for Local Degrade alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: reserved_130_191, offset: 130, size_bytes: 62, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: reserved_192_7_2, offset: 192, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: l_rx_fed_pm, offset: 192, bit_offset: 1, bit_width: 1, type: bool, access: cor, field_type: Alarm, tags: [C-CMIS, Latch, FED], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Latched FED over PM Interval alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: l_rx_fdd_pm, offset: 192, bit_offset: 0, bit_width: 1, type: bool, access: cor, field_type: Alarm, tags: [C-CMIS, Latch, FDD], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Latched FDD over PM Interval alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: reserved_193_7_2, offset: 193, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: l_rd, offset: 193, bit_offset: 1, bit_width: 1, type: bool, access: cor, field_type: Alarm, tags: [C-CMIS, Latch, RemoteDegrade], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Latched Remote Degrade alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: l_ld, offset: 193, bit_offset: 0, bit_width: 1, type: bool, access: cor, field_type: Alarm, tags: [C-CMIS, Latch, LocalDegrade], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Latched Local Degrade alarm", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }
+  - { name: reserved_194_255, offset: 194, size_bytes: 62, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.1 § 7.5.3", pdf_page: 26, table: "Table 18" } }

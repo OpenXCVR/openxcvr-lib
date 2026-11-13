@@ -1,0 +1,41 @@
+schema: openxcvr.page.v2
+kind: page
+id: VersionMetaExample
+title: page.v2 version-metadata smoke fixture (all keys valid)
+page_address: "00h"
+fields:
+  - name: legacy_only
+    offset: 0
+    size_bytes: 1
+    type: u8
+    until: "4.0"
+  - name: added_in_4
+    offset: 1
+    size_bytes: 1
+    type: u8
+    since: "4.0"
+  - name: windowed
+    offset: 2
+    size_bytes: 1
+    type: u8
+    since: "4.0"
+    until: "5.2"
+  - name: dpsm_state
+    offset: 3
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: dpsm-state
+    changed_in:
+      - rev: "4.0"
+        enum_ref: dpsm-state-v4
+        note: "4-state widened to 8-state at CMIS 4.0"
+  - name: module_state
+    offset: 4
+    size_bytes: 1
+    type: u8
+    renamed_from:
+      rev: "5.0"
+      old_name: mod_state_legacy
+    aliased_to:
+      - rev: "5.2"
+        new_name: module_state_v2

@@ -1,0 +1,971 @@
+{
+  "$id": "cmis_page10h_lane_control.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "adaptive_input_eq_fail_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 205,
+        "quote": "AdaptiveInputEqFailMaskTx<i>: Mask for AdaptiveInputEqFailFlagTx<i>, lane <i>. Advertisement: 01h:157.3.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "adaptive_input_eq_freeze_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 195,
+        "quote": "AdaptiveInputEqFreezeTx<i>: 0b: No impact on Tx input eq adaptation behavior; 1b: Tx input equalizer adaptation frozen at last value. Advertisement: 01h:161.4.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "adaptive_input_eq_store_tx": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 195,
+        "quote": "AdaptiveInputEqStoreTx<i>: Tx Input Equalizer Adaptation Store location for lane <i>. 01b: store to recall buffer 1; 10b: store to recall buffer 2. Advertisement: 01h:161.6-5.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "auto_squelch_disable_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 195,
+        "quote": "AutoSquelchDisableRx<i>: 0b: Automatic Rx output squelching enabled for host lane <i>; 1b: disabled. Advertisement: 01h:156.2.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "auto_squelch_disable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 194,
+        "quote": "AutoSquelchDisableTx<i>: 0b: Automatic Tx output squelching control enabled; 1b: disabled. Advertisement: 01h:155.2.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "cdr_lol_mask_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "CDRLOLMaskRx<i>: Mask for CDRLOLFlagRx<i>, media lane <i>. Advertisement: 01h:158.2.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "cdr_lol_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 205,
+        "quote": "CDRLOLMaskTx<i>: Mask for CDRLOLFlagTx<i>, lane <i>. Advertisement: 01h:157.2.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "dp_deinit_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 192,
+        "quote": "DPDeinitLane<i>: 0b: Initialize the Data Path associated with host lane; 1b: Deinitialize the Data Path associated with host lane.",
+        "section": "CMIS 5.3 § 8.9.1",
+        "table": "Table 8-68"
+      }
+    },
+    "dp_state_changed_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 205,
+        "quote": "DPStateChangedMask<i>: Mask for DPStateChangedFlag<i> for Data Path of host lane <i>.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "failure_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 205,
+        "quote": "FailureMaskTx<i>: Mask for FailureFlagTx<i>, affecting media lane <i>. Advertisement: 01h:157.0.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "input_polarity_flip_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 194,
+        "quote": "InputPolarityFlipTx<i>: 0b: No Tx input polarity flip for lane <i>; 1b: Tx input polarity flip for lane <i>. Advertisement: 01h:155.0.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "laser_bias_high_alarm_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "LaserBiasHighAlarmMaskTx<i>: Mask for LaserBiasHighAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "laser_bias_high_warning_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "LaserBiasHighWarningMaskTx<i>: Mask for LaserBiasHighWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "laser_bias_low_alarm_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "LaserBiasLowAlarmMaskTx<i>: Mask for LaserBiasLowAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "laser_bias_low_warning_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "LaserBiasLowWarningMaskTx<i>: Mask for LaserBiasLowWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.0.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "los_mask_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "LOSMaskRx<i>: Mask for LOSFlagRx<i>, media lane <i>. Advertisement: 01h:158.1.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "los_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 205,
+        "quote": "LOSMaskTx<i>: Mask for LOSFlagTx, lane <i>. Advertisement: 01h:157.1.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_high_alarm_mask_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "OpticalPowerHighAlarmMaskRx<i>: Mask for OpticalPowerHighAlarmFlagRx<i>, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_high_alarm_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 205,
+        "quote": "OpticalPowerHighAlarmMaskTx<i>: Mask for OpticalPowerHighAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_high_warning_mask_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "OpticalPowerHighWarningMaskRx<i>: Mask for OpticalPowerHighWarningFlagRx<i>, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_high_warning_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "OpticalPowerHighWarningMaskTx<i>: Mask for OpticalPowerHighWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_low_alarm_mask_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "OpticalPowerLowAlarmMaskRx<i>: Mask for OpticalPowerLowAlarmFlagRx<i>, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_low_alarm_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "OpticalPowerLowAlarmMaskTx<i>: Mask for OpticalPowerLowAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_low_warning_mask_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "OpticalPowerLowWarningMaskRx<i>: Mask for OpticalPowerLowWarningFlagRx<i>, media lane <i>. Advertisement: 01h:160.2.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "optical_power_low_warning_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "OpticalPowerLowWarningMaskTx<i>: Mask for OpticalPowerLowWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.1.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "output_disable_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 195,
+        "quote": "OutputDisableRx<i>: 0b: Rx output enabled for lane <i>; 1b: Rx output disabled for lane <i>. Advertisement: 01h:156.1.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "output_disable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 194,
+        "quote": "OutputDisableTx<i>: 0b: Tx output enabled for media lane <i>; 1b: Tx output disabled for media lane <i>. Advertisement: 01h:155.1.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "output_polarity_flip_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 195,
+        "quote": "OutputPolarityFlipRx<i>: 0b: No Rx output polarity flip for lane <i>; 1b: Rx output polarity flip for lane <i>. Advertisement: 01h:156.0.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "output_squelch_force_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 195,
+        "quote": "OutputSquelchForceTx<i>: 0b: No impact on Tx output for media lane <i>; 1b: Tx output squelched for media lane <i>. Advertisement: 01h:155.3.",
+        "section": "CMIS 5.3 § 8.9.2.4",
+        "table": "Table 8-69"
+      }
+    },
+    "output_status_changed_mask_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "OutputStatusChangedMaskRx<i>: Mask for OutputStatusChangedFlagRx<i>, media lane <i>.",
+        "section": "CMIS 5.3 § 8.9.5",
+        "table": "Table 8-81"
+      }
+    },
+    "scs0_adaptive_input_eq_enable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 199,
+        "quote": "SCS0::AdaptiveInputEqEnableTx<i>: 1b Enable; 0b Disable (allow host-controlled equalization). Advertisement: 01h:161.3.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-73"
+      }
+    },
+    "scs0_adaptive_input_eq_recall_tx": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 199,
+        "quote": "SCS0::AdaptiveInputEqRecallTx<i>: recall stored Tx input equalizer adaptation settings when copied to Active Control Set.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-73"
+      }
+    },
+    "scs0_app_sel_code_lane": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 198,
+        "quote": "SCS0::DPConfigLane<i> AppSelCodeLane<i>: AppSel code of the Descriptor of the Application; 0000b means unused.",
+        "section": "CMIS 5.3 § 8.9.3.2",
+        "table": "Table 8-72"
+      }
+    },
+    "scs0_apply_dp_init_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 197,
+        "quote": "SCS0::ApplyDPInitLane<i>: 1b triggers the Provision procedure using Staged Control Set 0 settings for host lane <i>.",
+        "section": "CMIS 5.3 § 8.9.3.1",
+        "table": "Table 8-70"
+      }
+    },
+    "scs0_apply_immediate_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 197,
+        "quote": "SCS0::ApplyImmediate<i>: 1b triggers the Provision-and-Commission procedure using Staged Control Set 0 settings. Condition: SteppedConfigOnly (00h:2.6) = 0b.",
+        "section": "CMIS 5.3 § 8.9.3.1",
+        "table": "Table 8-70"
+      }
+    },
+    "scs0_apply_immediate_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 201,
+        "quote": "SCS0::ApplyImmediateRx<i>: 1b triggers the Provision-and-Commission procedure for Rx. Condition: UnidirReconfigSupported (01h:162.6) = 1b.",
+        "section": "CMIS 5.3 § 8.9.3.4",
+        "table": "Table 8-75"
+      }
+    },
+    "scs0_apply_immediate_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 201,
+        "quote": "SCS0::ApplyImmediateTx<i>: 1b triggers the Provision-and-Commission procedure for Tx. Condition: UnidirReconfigSupported (01h:162.6) = 1b.",
+        "section": "CMIS 5.3 § 8.9.3.4",
+        "table": "Table 8-75"
+      }
+    },
+    "scs0_cdr_enable_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 200,
+        "quote": "SCS0::CDREnableRx<i>: 1b CDR enabled; 0b CDR bypassed. Advertisement: 01h:162.0-1.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-74"
+      }
+    },
+    "scs0_cdr_enable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 199,
+        "quote": "SCS0::CDREnableTx<i>: 1b CDR enabled; 0b CDR bypassed. Advertisement: 01h:161.0-1.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-73"
+      }
+    },
+    "scs0_data_path_id_lane": {
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 197,
+        "quote": "SCS<k>::DataPathIDLane<i>: number of the first lane in the Data Path, decremented by one.",
+        "section": "CMIS 5.3 § 8.9.3.2",
+        "table": "Table 8-71"
+      }
+    },
+    "scs0_explicit_control_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 198,
+        "quote": "SCS<k>::ExplicitControlLane<i>: 0b uses Application-dependent settings; 1b uses Staged Control Set control values.",
+        "section": "CMIS 5.3 § 8.9.3.2",
+        "table": "Table 8-71"
+      }
+    },
+    "scs0_host_controlled_input_eq_target_tx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 199,
+        "quote": "SCS0::HostControlledInputEqTargetTx<i>: host-controlled Tx input equalizer target encoded as described in Table 6-6. Advertisement: 01h:161.2.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-73"
+      }
+    },
+    "scs0_output_amplitude_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 200,
+        "quote": "SCS0::OutputAmplitudeTargetRx<i>: Rx output amplitude target. Advertisement: 01h:162.2.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-74"
+      }
+    },
+    "scs0_output_eq_post_cursor_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 200,
+        "quote": "SCS0::OutputEqPostCursorTargetRx<i>: Rx output equalization post-cursor target, or pre-cursor target when only pre-cursor is advertised.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-74"
+      }
+    },
+    "scs0_output_eq_pre_cursor_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 200,
+        "quote": "SCS0::OutputEqPreCursorTargetRx<i>: Rx output equalization pre-cursor target. Advertisement: 01h:162.4-3.",
+        "section": "CMIS 5.3 § 8.9.3.3",
+        "table": "Table 8-74"
+      }
+    },
+    "scs1_adaptive_input_eq_enable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 203,
+        "quote": "SCS1::AdaptiveInputEqEnableTx<i>: 1b Enable; 0b Disable (allow host-controlled equalization).",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-78"
+      }
+    },
+    "scs1_adaptive_input_eq_recall_tx": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 203,
+        "quote": "SCS1::AdaptiveInputEqRecallTx<i>: recall stored Tx input equalizer adaptation settings when copied to Active Control Set.",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-78"
+      }
+    },
+    "scs1_app_sel_code_lane": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 202,
+        "quote": "SCS1::DPConfigLane<i> AppSelCodeLane<i>: see CMIS 5.3 § 8.9.3.2 and Table 8-71.",
+        "section": "CMIS 5.3 § 8.9.4.2",
+        "table": "Table 8-77"
+      }
+    },
+    "scs1_apply_dp_init_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 202,
+        "quote": "SCS1::ApplyDPInitLane<i>: 1b triggers the Provision procedure using Staged Control Set 1 settings for host lane <i>.",
+        "section": "CMIS 5.3 § 8.9.4.1",
+        "table": "Table 8-76"
+      }
+    },
+    "scs1_apply_immediate_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 202,
+        "quote": "SCS1::ApplyImmediate<i>: 1b triggers the Provision-and-Commission procedure using Staged Control Set 1 settings. Condition: SteppedConfigOnly (00h:2.6) = 0b.",
+        "section": "CMIS 5.3 § 8.9.4.1",
+        "table": "Table 8-76"
+      }
+    },
+    "scs1_apply_immediate_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 204,
+        "quote": "SCS1::ApplyImmediateRx<i>: 1b triggers the Provision-and-Commission procedure for Rx. Condition: UnidirReconfigSupported (01h:162.6) = 1b.",
+        "section": "CMIS 5.3 § 8.9.4.4",
+        "table": "Table 8-80"
+      }
+    },
+    "scs1_apply_immediate_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 204,
+        "quote": "SCS1::ApplyImmediateTx<i>: 1b triggers the Provision-and-Commission procedure for Tx. Condition: UnidirReconfigSupported (01h:162.6) = 1b.",
+        "section": "CMIS 5.3 § 8.9.4.4",
+        "table": "Table 8-80"
+      }
+    },
+    "scs1_cdr_enable_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 203,
+        "quote": "SCS1::CDREnableRx<i>: 1b CDR enabled; 0b CDR bypassed.",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-79"
+      }
+    },
+    "scs1_cdr_enable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 203,
+        "quote": "SCS1::CDREnableTx<i>: 1b CDR enabled; 0b CDR bypassed.",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-78"
+      }
+    },
+    "scs1_data_path_id_lane": {
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 202,
+        "quote": "SCS1::DPConfigLane<i> DataPathIDLane<i>: see CMIS 5.3 § 8.9.3.2 and Table 8-71.",
+        "section": "CMIS 5.3 § 8.9.4.2",
+        "table": "Table 8-77"
+      }
+    },
+    "scs1_explicit_control_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 203,
+        "quote": "SCS1::DPConfigLane<i> ExplicitControlLane<i>: see CMIS 5.3 § 8.9.3.2 and Table 8-71.",
+        "section": "CMIS 5.3 § 8.9.4.2",
+        "table": "Table 8-77"
+      }
+    },
+    "scs1_host_controlled_input_eq_target_tx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 203,
+        "quote": "SCS1::HostControlledInputEqTargetTx<i>: host-controlled Tx input equalizer target encoded as described in Table 6-6.",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-78"
+      }
+    },
+    "scs1_output_amplitude_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 204,
+        "quote": "SCS1::OutputAmplitudeTargetRx<i>: Rx output amplitude encoding.",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-79"
+      }
+    },
+    "scs1_output_eq_post_cursor_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 204,
+        "quote": "SCS1::OutputEqPostCursorTargetRx<i>: Rx output equalization post-cursor target, or pre-cursor target when only pre-cursor is advertised.",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-79"
+      }
+    },
+    "scs1_output_eq_pre_cursor_target_rx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 204,
+        "quote": "SCS1::OutputEqPreCursorTargetRx<i>: Rx output equalization pre-cursor target.",
+        "section": "CMIS 5.3 § 8.9.4.3",
+        "table": "Table 8-79"
+      }
+    }
+  },
+  "required": [
+    "dp_deinit_lane",
+    "input_polarity_flip_tx",
+    "output_disable_tx",
+    "auto_squelch_disable_tx",
+    "output_squelch_force_tx",
+    "adaptive_input_eq_freeze_tx",
+    "adaptive_input_eq_store_tx",
+    "output_polarity_flip_rx",
+    "output_disable_rx",
+    "auto_squelch_disable_rx",
+    "scs0_apply_dp_init_lane",
+    "scs0_apply_immediate_lane",
+    "scs0_app_sel_code_lane",
+    "scs0_data_path_id_lane",
+    "scs0_explicit_control_lane",
+    "scs0_adaptive_input_eq_enable_tx",
+    "scs0_adaptive_input_eq_recall_tx",
+    "scs0_host_controlled_input_eq_target_tx",
+    "scs0_cdr_enable_tx",
+    "scs0_cdr_enable_rx",
+    "scs0_output_eq_pre_cursor_target_rx",
+    "scs0_output_eq_post_cursor_target_rx",
+    "scs0_output_amplitude_target_rx",
+    "scs0_apply_immediate_tx",
+    "scs0_apply_immediate_rx",
+    "scs1_apply_dp_init_lane",
+    "scs1_apply_immediate_lane",
+    "scs1_app_sel_code_lane",
+    "scs1_data_path_id_lane",
+    "scs1_explicit_control_lane",
+    "scs1_adaptive_input_eq_enable_tx",
+    "scs1_adaptive_input_eq_recall_tx",
+    "scs1_host_controlled_input_eq_target_tx",
+    "scs1_cdr_enable_tx",
+    "scs1_cdr_enable_rx",
+    "scs1_output_eq_pre_cursor_target_rx",
+    "scs1_output_eq_post_cursor_target_rx",
+    "scs1_output_amplitude_target_rx",
+    "scs1_apply_immediate_tx",
+    "scs1_apply_immediate_rx",
+    "dp_state_changed_mask",
+    "failure_mask_tx",
+    "los_mask_tx",
+    "cdr_lol_mask_tx",
+    "adaptive_input_eq_fail_mask_tx",
+    "optical_power_high_alarm_mask_tx",
+    "optical_power_low_alarm_mask_tx",
+    "optical_power_high_warning_mask_tx",
+    "optical_power_low_warning_mask_tx",
+    "laser_bias_high_alarm_mask_tx",
+    "laser_bias_low_alarm_mask_tx",
+    "laser_bias_high_warning_mask_tx",
+    "laser_bias_low_warning_mask_tx",
+    "los_mask_rx",
+    "cdr_lol_mask_rx",
+    "optical_power_high_alarm_mask_rx",
+    "optical_power_low_alarm_mask_rx",
+    "optical_power_high_warning_mask_rx",
+    "optical_power_low_warning_mask_rx",
+    "output_status_changed_mask_rx"
+  ],
+  "title": "CmisPage10hLaneControl",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207
+    ],
+    "spec": "CMIS 5.3 § 8.9"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

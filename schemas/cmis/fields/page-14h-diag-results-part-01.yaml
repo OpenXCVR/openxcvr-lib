@@ -1,0 +1,270 @@
+fields:
+
+  # ===========================================================================
+  # § 8.13.1 Diagnostics Selection (byte 128) — Tables 8-126 and 8-127
+  # ===========================================================================
+
+  - name: diagnostics_selector
+    display_name: DiagnosticsSelector
+    offset: 128
+    size_bytes: 1
+    type: enum_ref
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    enum_ref: CmisDiagnosticsSelector
+    access: rw
+    behavior:
+      unsupported_value: reverts_to_zero
+      content_switch_time: tDDCS
+    # Stage 1 B2: this selector multiplexes the content of the Diagnostics
+    # Data window (bytes 192-255). The settling bound is revision-qualified:
+    # CMIS 4.0 § 8.11.1 (printed p. 179) — "The values in bytes 192-255
+    # shall be updated with the selected diagnostic data within the
+    # advertised tNACK time after byte 128 has been written"; CMIS 5.0+
+    # (CMIS 5.3 § 8.13.1, printed p. 244, and Table 10-5, printed p. 353) —
+    # a pure timing specification with no completion confirmation, so the
+    # host waits a tDDCS guard period (at most 10 ms from WRITE STOP to
+    # READ START).
+    content_switch:
+      data_range: [192, 255]
+      bound:
+        - since: "4.0"
+          settling: tnack_advertised
+          provenance: "CMIS 4.0 § 8.11.1 (printed p. 179)"
+        - since: "5.0"
+          settling: tddcs
+          provenance: "CMIS 5.3 § 8.13.1 and Table 10-5 (printed pp. 244, 353)"
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.1"
+      pdf_page: 244
+      table: "Table 8-126"
+      quote: "DiagnosticsSelector: Select content of Diagnostics Data, see Table 8-127. Reverts to 0 if value not supported."
+
+  - name: custom_diagnostics_selection
+    display_name: CustomDiagnosticsSelection
+    offset: 130
+    size_bytes: 2
+    type: bytes
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: rw
+    field_type: VendorSpecific
+    tags: [VendorSpecific]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.1"
+      pdf_page: 244
+      table: "Table 8-126"
+      quote: "Bytes 130-131 are Custom[2]."
+
+  # ===========================================================================
+  # § 8.13.2 Diagnostics Flags (bytes 132-139) — Table 8-128
+  # ===========================================================================
+
+  - name: loss_of_reference_clock_flag
+    display_name: LossOfReferenceClockFlag
+    offset: 132
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.2"
+      pdf_page: 245
+      table: "Table 8-128"
+      quote: "LossOfReferenceClockFlag: Latched loss of reference clock Flag."
+
+  - name: pattern_check_gating_complete_flag_host
+    display_name: PatternCheckGatingCompleteFlagHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 134
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, "Monitor::BER"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.2"
+      pdf_page: 245
+      table: "Table 8-128"
+      quote: "Latched per-host lane gating complete Flag. When gating is complete, this bit will be set."
+
+  - name: pattern_check_gating_complete_flag_media
+    display_name: PatternCheckGatingCompleteFlagMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 135
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, "Monitor::BER"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.2"
+      pdf_page: 245
+      table: "Table 8-128"
+      quote: "Latched per-media lane gating complete Flag. When gating is complete, this bit will be set."
+
+  - name: pattern_generator_lol_flag_host
+    display_name: PatternGeneratorLOLFlagHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 136
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.2"
+      pdf_page: 245
+      table: "Table 8-128"
+      quote: "Latched per-host lane pattern generator failure Flag."
+
+  - name: pattern_generator_lol_flag_media
+    display_name: PatternGeneratorLOLFlagMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 137
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.2"
+      pdf_page: 245
+      table: "Table 8-128"
+      quote: "Latched per-media lane pattern generator failure Flag."
+
+  - name: pattern_checker_lol_flag_host
+    display_name: PatternCheckerLOLFlagHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 138
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.2"
+      pdf_page: 245
+      table: "Table 8-128"
+      quote: "Latched per-host lane pattern checker loss of pattern lock Flag."
+
+  - name: pattern_checker_lol_flag_media
+    display_name: PatternCheckerLOLFlagMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 139
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.13.2"
+      pdf_page: 246
+      table: "Table 8-128"
+      quote: "Latched per-media lane pattern checker loss of pattern lock Flag."
+
+  # ===========================================================================
+  # § 8.13.3 Diagnostics Data (bytes 192-255) — Table 8-129
+  # Selector-dependent overlapping views of the Diagnostics Data window.
+  # ===========================================================================
+
+  - name: host_side_ber
+    display_name: HostSideBERLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "192 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: f16be
+    unit: "ratio"
+    since: "4.0"  # exists from CMIS 4.0 § 8.11 (Tables 8-92/8-94, printed pp. 179-184)
+    present_when: { field: diagnostics_selector, equals: 0x01 }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::BER"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.13.3", pdf_page: 246, table: "Table 8-129", quote: "HostSideBERLane<i>: F16 BER values, periodically updated while gating." }

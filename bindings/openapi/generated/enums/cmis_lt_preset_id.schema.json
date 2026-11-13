@@ -1,0 +1,67 @@
+{
+  "$id": "cmis_lt_preset_id.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Preset 0, pseudo-preset for tuning (no change when loaded)",
+      "title": "pseudo_preset_tuning"
+    },
+    {
+      "const": 1,
+      "description": "Preset 1, host default setting",
+      "title": "default_setting"
+    },
+    {
+      "const": 2,
+      "description": "Preset 2, final FFE taps in last successful training",
+      "title": "final_ffe_taps_last_training"
+    },
+    {
+      "const": 3,
+      "description": "Preset 3, Taps[1:5] = [0, 0, 0, 1, 0]",
+      "title": "preset_3"
+    },
+    {
+      "const": 4,
+      "description": "Preset 4, Taps[1:5] = [0, 0, 0, 0.5, 0]",
+      "title": "preset_4"
+    },
+    {
+      "const": 5,
+      "description": "Preset 5, Taps[1:5] = [0, 0, -0.075, 0.75, 0]",
+      "title": "preset_5"
+    },
+    {
+      "const": 6,
+      "description": "Preset 6, Taps[1:5] = [0, 0.05, -0.2, 0.75, 0]",
+      "title": "preset_6"
+    },
+    {
+      "const": 7,
+      "description": "Preset 7, Taps[1:5] = [-0.025, 0.075, -0.25, 0.65, 0]",
+      "title": "preset_7"
+    },
+    {
+      "const": 8,
+      "description": "Preset 8, Taps[1:5] = [0, 0, 0, 0.75, 0]",
+      "title": "preset_8"
+    }
+  ],
+  "title": "CmisLtPresetId",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      44,
+      45,
+      59,
+      60
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.2.4/6.2.5 and 6.4.4/6.4.5 (Tables 19, 22, 54, 57)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

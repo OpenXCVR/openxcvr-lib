@@ -1,0 +1,27 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisTxInputClockingCapabilities
+title: CMIS Tx input frequency synchronism (2-bit)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.4.6 / Table 8-49
+  pdf_pages: [173]
+entries:
+  - value: 0
+    name: frequency_synchronous_lanes_1_to_8
+    description: Tx input lanes 1-8 must be frequency synchronous
+    since: "5.3"
+  - value: 1
+    name: frequency_synchronous_groups_1_to_4_and_5_to_8
+    description: Tx input lanes 1-4 and 5-8 form separate synchronous groups
+    since: "5.3"
+  - value: 2
+    name: frequency_synchronous_lane_pairs
+    description: Tx input lane pairs 1-2, 3-4, 5-6, 7-8 must each be frequency synchronous
+    since: "5.3"
+  - value: 3
+    name: lanes_may_be_asynchronous_in_frequency
+    description: Lanes may be asynchronous in frequency
+    since: "5.3"

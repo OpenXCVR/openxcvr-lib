@@ -1,0 +1,59 @@
+[package]
+name = "openxcvr-lib-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+# Own workspace root so the parent openxcvr-lib workspace does not absorb
+# this crate (and its nightly/libFuzzer-only dependency).
+[workspace]
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.openxcvr-core]
+path = "../crates/openxcvr-core"
+
+[dependencies.openxcvr-cmis]
+path = "../crates/openxcvr-cmis"
+
+[dependencies.openxcvr-sff8636]
+path = "../crates/openxcvr-sff8636"
+
+[dependencies.openxcvr-sff8472]
+path = "../crates/openxcvr-sff8472"
+
+# NOTE: page-decode targets list every union-view page family; the
+# revision-specialised `generated::v*` variants share the same decode
+# shapes and are covered by the in-tree proptest suites.
+
+[[bin]]
+name = "cmis_page_decode"
+path = "fuzz_targets/cmis_page_decode.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "sff8636_page_decode"
+path = "fuzz_targets/sff8636_page_decode.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "sff8472_page_decode"
+path = "fuzz_targets/sff8472_page_decode.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "cdb_reply_parse"
+path = "fuzz_targets/cdb_reply_parse.rs"
+test = false
+doc = false
+bench = false

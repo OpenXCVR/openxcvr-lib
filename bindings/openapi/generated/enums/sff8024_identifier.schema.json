@@ -1,0 +1,214 @@
+{
+  "$id": "sff8024_identifier.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Unknown or unspecified",
+      "title": "unknown_or_unspecified"
+    },
+    {
+      "const": 1,
+      "description": "GBIC",
+      "title": "gbic"
+    },
+    {
+      "const": 2,
+      "description": "Module or connector soldered to motherboard using SFF-8472",
+      "title": "soldered_module_sff8472"
+    },
+    {
+      "const": 3,
+      "description": "SFP, SFP+, SFP28, and later with SFF-8472 management interface",
+      "title": "sfp_sff8472"
+    },
+    {
+      "const": 4,
+      "description": "300 pin XBI",
+      "title": "xbi_300_pin"
+    },
+    {
+      "const": 5,
+      "description": "XENPAK",
+      "title": "xenpak"
+    },
+    {
+      "const": 6,
+      "description": "XFP",
+      "title": "xfp"
+    },
+    {
+      "const": 7,
+      "description": "XFF",
+      "title": "xff"
+    },
+    {
+      "const": 8,
+      "description": "XFP-E",
+      "title": "xfp_e"
+    },
+    {
+      "const": 9,
+      "description": "XPAK",
+      "title": "xpak"
+    },
+    {
+      "const": 10,
+      "description": "X2",
+      "title": "x2"
+    },
+    {
+      "const": 11,
+      "description": "DWDM-SFP or SFP+ not using SFF-8472",
+      "title": "dwdm_sfp_without_sff8472"
+    },
+    {
+      "const": 12,
+      "description": "QSFP with INF-8438 management",
+      "title": "qsfp_inf8438"
+    },
+    {
+      "const": 13,
+      "description": "QSFP+ or later with SFF-8636 or SFF-8436 management interface",
+      "title": "qsfp_plus_sff8636"
+    },
+    {
+      "const": 14,
+      "description": "CXP or later",
+      "title": "cxp"
+    },
+    {
+      "const": 15,
+      "description": "Shielded Mini Multilane HD 4X",
+      "title": "shielded_mini_multilane_hd_4x"
+    },
+    {
+      "const": 16,
+      "description": "Shielded Mini Multilane HD 8X",
+      "title": "shielded_mini_multilane_hd_8x"
+    },
+    {
+      "const": 17,
+      "description": "QSFP28 or later with SFF-8636 management interface",
+      "title": "qsfp28_sff8636"
+    },
+    {
+      "const": 18,
+      "description": "CXP2, also known as CXP28, or later",
+      "title": "cxp2"
+    },
+    {
+      "const": 19,
+      "description": "CDFP Style 1 or Style 2",
+      "title": "cdfp_style_1_2"
+    },
+    {
+      "const": 20,
+      "description": "Shielded Mini Multilane HD 4X fanout cable",
+      "title": "shielded_mini_multilane_hd_4x_fanout"
+    },
+    {
+      "const": 21,
+      "description": "Shielded Mini Multilane HD 8X fanout cable",
+      "title": "shielded_mini_multilane_hd_8x_fanout"
+    },
+    {
+      "const": 22,
+      "description": "CDFP Style 3",
+      "title": "cdfp_style_3"
+    },
+    {
+      "const": 23,
+      "description": "microQSFP",
+      "title": "micro_qsfp"
+    },
+    {
+      "const": 24,
+      "description": "QSFP-DD Double Density 8X pluggable transceiver",
+      "title": "qsfp_dd"
+    },
+    {
+      "const": 25,
+      "description": "OSFP 8X pluggable transceiver",
+      "title": "osfp"
+    },
+    {
+      "const": 26,
+      "description": "SFP-DD with SFP-DD management interface specification",
+      "title": "sfp_dd_sfp_dd_management"
+    },
+    {
+      "const": 27,
+      "description": "DSFP dual small form factor pluggable transceiver",
+      "title": "dsfp"
+    },
+    {
+      "const": 28,
+      "description": "x4 MiniLink or OcuLink",
+      "title": "x4_minilink_oculink"
+    },
+    {
+      "const": 29,
+      "description": "x8 MiniLink",
+      "title": "x8_minilink"
+    },
+    {
+      "const": 30,
+      "description": "QSFP+ or later with CMIS",
+      "title": "qsfp_plus_cmis"
+    },
+    {
+      "const": 31,
+      "description": "SFP-DD with CMIS",
+      "title": "sfp_dd_cmis"
+    },
+    {
+      "const": 32,
+      "description": "SFP+ and later with CMIS",
+      "title": "sfp_plus_cmis"
+    },
+    {
+      "const": 33,
+      "description": "OSFP-XD with CMIS",
+      "title": "osfp_xd_cmis"
+    },
+    {
+      "const": 34,
+      "description": "OIF-ELSFP with CMIS",
+      "title": "oif_elsfp_cmis"
+    },
+    {
+      "const": 35,
+      "description": "CDFP x4 PCIe with CMIS",
+      "title": "cdfp_x4_pcie_cmis"
+    },
+    {
+      "const": 36,
+      "description": "CDFP x8 PCIe with CMIS",
+      "title": "cdfp_x8_pcie_cmis"
+    },
+    {
+      "const": 37,
+      "description": "CDFP x16 PCIe with CMIS",
+      "title": "cdfp_x16_pcie_cmis"
+    },
+    {
+      "const": 38,
+      "description": "XPO",
+      "title": "xpo"
+    }
+  ],
+  "title": "Sff8024Identifier",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      17
+    ],
+    "spec": "SFF-8024 4.14 Table 4-1"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8024",
+    "revision": "4.14"
+  }
+}

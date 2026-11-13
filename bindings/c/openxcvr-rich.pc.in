@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: openxcvr-c-rich
+Description: Optional Rust-backed supplied-data records for openxcvr
+Version: @PROJECT_VERSION@
+Libs: -L${libdir} -lopenxcvr_c_rich
+Libs.private: ${libdir}/libopenxcvr_rich_ffi.a @OPENXCVR_RICH_NATIVE_LIBS@
+Cflags: -I${includedir}

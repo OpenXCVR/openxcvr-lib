@@ -1,0 +1,429 @@
+fields:
+  - name: attenuation_at_25p8ghz
+    display_name: AttenuationAt25p8GHz
+    offset: 207
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 dB" }
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.12"
+          table: "Table 8-15; Table 8-21"
+          row: "207"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.6"
+      pdf_page: 164
+      table: "Table 8-34"
+      quote: "U8 cable attenuation at 25.8 GHz in 1 dB increments"
+
+  - name: reserved_administrative_208_cmis4
+    display_name: ReservedAdministrative208Cmis4
+    offset: 208
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: Reserved
+    tags:
+    - Reserved
+    scope:
+      module: true
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: §8.3.12
+      table: Table 8-21
+      pdf_page: 97
+      quote: 208-209 All reserved
+    since: '4.0'
+    until: '5.0'
+    read_effect: none
+    read_effect_provenance:
+      source: CMIS 4.0 (CMIS4p0_Third_Party_Spec)
+      section: §8.3; §8.3.12
+      table: Table 8-15; Table 8-21
+      row: 208 Reserved at 4.0 (not 5.3 attenuation)
+      pdf_page:
+      - 94
+      - 97
+      basis: §8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through
+        byte 221. No read-triggered action is assigned.
+    emit_value: false
+    changed_in:
+    - rev: '4.0'
+      emit_value: true
+
+  - name: attenuation_at_53p1ghz
+    display_name: AttenuationAt53p1GHz
+    offset: 208
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 dB" }
+    access: ro
+    since: "5.3"
+    changed_in:
+      - rev: "5.0"
+        provenance:
+          section: "§ 8.3.6"
+          pdf_page: 164
+          table: "Table 8-34"
+          quote: "U8 cable attenuation at 53.125 GHz in 1 dB increments."
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.6"
+      pdf_page: 164
+      table: "Table 8-34"
+      quote: "U8 cable attenuation at 53.125 GHz in 1 dB increments."
+
+  - name: reserved_copper_cable_attenuation
+    display_name: ReservedCopperCableAttenuation
+    offset: 209
+    size_bytes: 1
+    type: bytes
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.12"
+          table: "Table 8-15; Table 8-21"
+          row: "209"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.6"
+      pdf_page: 164
+      table: "Table 8-34"
+      quote: "Reserved"
+
+  # ===========================================================================
+  # § 8.3.7 Media Lane Information (byte 210)
+  # ===========================================================================
+
+  - name: media_lane_unsupported_lane_1
+    display_name: MediaLaneUnsupportedLane1
+    offset: 210
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 0:0"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  - name: media_lane_unsupported_lane_2
+    display_name: MediaLaneUnsupportedLane2
+    offset: 210
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 1:1"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  - name: media_lane_unsupported_lane_3
+    display_name: MediaLaneUnsupportedLane3
+    offset: 210
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 2:2"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  - name: media_lane_unsupported_lane_4
+    display_name: MediaLaneUnsupportedLane4
+    offset: 210
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 3:3"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  - name: media_lane_unsupported_lane_5
+    display_name: MediaLaneUnsupportedLane5
+    offset: 210
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 4:4"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  - name: media_lane_unsupported_lane_6
+    display_name: MediaLaneUnsupportedLane6
+    offset: 210
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 5:5"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  - name: media_lane_unsupported_lane_7
+    display_name: MediaLaneUnsupportedLane7
+    offset: 210
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 6:6"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  - name: media_lane_unsupported_lane_8
+    display_name: MediaLaneUnsupportedLane8
+    offset: 210
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.13"
+          table: "Table 8-15; Table 8-22"
+          row: "210 bits 7:7"
+          pdf_page: [94, 97]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.7"
+      pdf_page: 164
+      table: "Table 8-35"
+      quote: "0b: Media Lane <i> supported 1b: Media Lane <i> not supported"
+
+  # ===========================================================================
+  # § 8.3.8 Cable Assembly Lane Breakout Information (byte 211)
+  # ===========================================================================

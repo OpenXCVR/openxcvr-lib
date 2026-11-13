@@ -1,0 +1,472 @@
+schema: openxcvr.state_machine.v2
+kind: state_machine
+id: CmisModuleStateMachine
+title: CMIS Module State Machine
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: "CMIS 5.3 § 6.3.2"
+  pdf_pages: [74, 75, 76, 77, 78, 80]
+  figure: "Figure 6-3"
+state_enum: CmisModuleState
+parent_machine: null
+lifecycle_dependency: null
+scope:
+  kind: per_module
+  cardinality: 1
+# CMIS 5.3 § 6.3.2.5.2: "The Reset state is the initial Module State Machine
+# state on module insertion or power-up." The Resetting/Reset/MgmtInit states
+# are not reported through the Memory Map (CMIS 5.3 § 6.3.2.2: "the behaviors
+# of the Resetting, Reset, and MgmtInit states apply to such modules, [but]
+# those states are not reported to the host through the Memory Map"); they are
+# modelled here as unreported states of the same machine.
+initial_state: Reset
+states:
+  - name: Resetting
+    class: transient
+    reported: false
+    description: >
+      Transient shutdown state entered from any state except Reset when the
+      ResetS transition signal is TRUE; the module powers down its optics and
+      electronics before entering the Reset state. Not reported in the Module
+      State register.
+    invariants:
+      - "ResetS transition signal is TRUE."
+      - "Data Path state machines cease to exist (paged memory modules)."
+    timeout: null
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.5.1"
+      quote: "The Resetting state is entered from any state except the Reset state when the ResetS transition signal is TRUE."
+  - name: Reset
+    class: stable
+    reported: false
+    is_initial: true
+    description: >
+      Ground state holding all internal module electronics in reset after
+      module insertion or power-up; the initial Module State Machine state.
+      Not reported in the Module State register.
+    invariants:
+      - "All internal module electronics are held in reset."
+      - "The module remains in Low Power mode."
+      - "Interrupts to the host are suppressed."
+    timeout: null
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.5.2"
+      quote: "The Reset state is the initial Module State Machine state on module insertion or power-up."
+  - name: MgmtInit
+    class: transient
+    reported: false
+    description: >
+      Transient state initializing the management communication interface and
+      the Memory Map default values; the module may ignore all MCI
+      transactions while it runs. Not reported in the Module State register.
+    invariants:
+      - "Module is initializing the Memory Map and management interface."
+      - "All Data Path states are DPDeactivated (paged memory modules)."
+    timeout:
+      - source: standard
+        timer: tMgmtInit
+        duration_ms: 2000
+        provenance:
+          section: "CMIS 5.3 § 10.1 Table 10-1"
+          quote: "Max Time to reach manageability in ModuleLowPwr | tMgmtInit | 2000 | ms"
+  - name: ModuleLowPwr
+    class: stable
+    enum_name: module_low_pwr
+    enum_value: 0x1
+    description: >
+      Host-visible low-power steady state after management initialization, with
+      paged management memory available while high-power operation is held off.
+    invariants:
+      - "Low Power mode applies."
+      - "Pagemap management memory is readable and writable."
+    timeout: null
+  - name: ModulePwrUp
+    class: transient
+    enum_name: module_pwr_up
+    enum_value: 0x2
+    description: >
+      Transient state for enabling High Power mode and preparing module
+      resources before ModuleReady.
+    invariants:
+      - "Module is transitioning to high power mode."
+    timeout:
+      - source: standard
+        timer: ModulePwrUpMaxDuration
+        duration_ms_field: page_01h_advertising.max_duration_module_pwr_up
+        on_expiry: ModuleFault
+  - name: ModuleReady
+    class: stable
+    enum_name: module_ready
+    enum_value: 0x3
+    description: >
+      High-power steady state where the module may consume the advertised
+      maximum power and Data Path state machines can progress.
+    invariants:
+      - "High Power mode applies."
+      - "Data Path initialization may be requested."
+    timeout: null
+  - name: ModulePwrDn
+    class: transient
+    enum_name: module_pwr_dn
+    enum_value: 0x4
+    description: >
+      Transient state for returning from High Power mode to ModuleLowPwr.
+    invariants:
+      - "Module is transitioning to Low Power mode."
+    timeout:
+      - source: standard
+        timer: ModulePwrDnMaxDuration
+        duration_ms_field: page_01h_advertising.max_duration_module_pwr_dn
+        on_expiry: ModuleFault
+  - name: ModuleFault
+    class: fault
+    enum_name: module_fault
+    enum_value: 0x5
+    is_terminal: true
+    description: >
+      Fault state entered for module implementation-specific safety or
+      damage-prevention conditions.
+    invariants:
+      - "Host action is required to recover."
+    timeout: null
+terminal_states:
+  - state: ModuleFault
+    exit: management_reset
+host_policy:
+  poll_cadence:
+    value_ms: 50
+    description: Host poll cadence while the Module State Machine advances toward ModuleReady.
+    provenance:
+      repo: kernel-module
+      file: plugins/cmis/power.c
+      lines: [79]
+      quote: "#define CMIS_MODULE_POLL_MS 50 /* Poll cadence while the Module SM advances toward ModuleReady. */"
+  readiness_backstop:
+    value_ms: 10000
+    description: Host backstop for the Module State Machine walk; real faults are caught via ModuleFault.
+    provenance:
+      repo: kernel-module
+      file: plugins/cmis/power.c
+      lines: [76]
+      quote: "#define CMIS_MODULE_READY_TIMEOUT_MS 10000 /* Backstop for the Module SM walk; real faults are caught via ModuleFault. */"
+transitions:
+  - id: resetting_to_reset
+    from: Resetting
+    to: Reset
+    trigger:
+      kind: internal
+      condition: "All module electronics have been powered down and are in reset; the module transitions automatically to the Reset state."
+    guard: null
+    side_effects:
+      - { kind: log_event, event_id: msm_resetting_completed }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.5.1"
+      quote: "When all module electronics have been powered down and are in reset, the module state transitions automatically to the Reset state."
+  - id: reset_to_mgmt_init
+    from: Reset
+    to: MgmtInit
+    trigger:
+      kind: internal
+      condition: "ResetS becomes FALSE while power is applied."
+    guard: null
+    side_effects:
+      - { kind: log_event, event_id: msm_mgmt_init_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.5.2"
+      quote: "The module exits the Reset state when the ResetS transition signal is found FALSE... On exit from the Reset state, the Module State Machine enters the MgmtInit state."
+  - id: mgmt_init_to_resetting
+    from: MgmtInit
+    to: Resetting
+    trigger:
+      kind: internal
+      condition: "ResetS transition signal is TRUE."
+    guard: null
+    side_effects:
+      - { kind: log_event, event_id: msm_resetting_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.5.3 Table 6-12"
+      quote: "MgmtInit | Low Power | Management interface powering up and initializing | ResetS transition signal is TRUE | Resetting"
+  - id: mgmt_init_to_module_fault
+    from: MgmtInit
+    to: ModuleFault
+    trigger:
+      kind: internal
+      condition: "FaultS transition signal is TRUE."
+    guard: null
+    side_effects:
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleFault }
+      - { kind: log_event, event_id: msm_fault_entered }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.5.3 Table 6-12"
+      quote: "MgmtInit | Low Power | Management interface powering up and initializing | FaultS transition signal is TRUE | ModuleFault"
+  - id: mgmt_init_to_module_low_pwr
+    from: MgmtInit
+    to: ModuleLowPwr
+    trigger:
+      kind: internal
+      condition: "Module management interface ready AND Interrupt by ModuleStateChangedFlag set, within a duration of tMgmtInit."
+    guard: null
+    side_effects:
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleLowPwr }
+      - { kind: log_event, event_id: msm_low_power_entered }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.5.3 Table 6-12"
+      quote: "MgmtInit | Low Power | Management interface powering up and initializing | Module management interface ready AND Interrupt by ModuleStateChangedFlag set. Note: must occur within a duration of tMgmtInit (see section 10.1) | ModuleLowPwr"
+  # Flat-memory simplified MSM (CMIS 5.3 § 6.3.2.3, Figure 6-4): a flat
+  # memory module "transition[s] to the ModuleReady state without host
+  # interaction" and "shall statically report a module state of ModuleReady
+  # (see Table 8-5)". The MgmtInit exit for such modules is Table 6-15's
+  # assumed-readiness row, not the paged walk's ModuleLowPwr edge above;
+  # the guard is the MemoryModel bit that selects the flat table
+  # (lower byte 2 bit 7, CMIS 5.3 § 8.2.1 Table 8-5). First published in
+  # CMIS 4.0 (§ 6.3.1.2 Table 6-13, same row); CMIS 3.0 has no such edge —
+  # its flat passive-copper table (Table 1) exits MgmtInit only to
+  # ModuleLowPwr — so the edge carries since: "4.0".
+  - id: mgmt_init_to_module_ready_flat
+    from: MgmtInit
+    to: ModuleReady
+    since: "4.0"
+    trigger:
+      kind: timer
+      timer: tMgmtInit
+      duration_ms: 2000
+      condition: "Module Management Interface ready is simply assumed after a duration of tMgmtInit; hosts should just wait for that period."
+    guard:
+      - { field: lower_memory.memory_model, equals: true }
+    side_effects:
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleReady }
+      - { kind: log_event, event_id: msm_module_ready }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.3 Table 6-15"
+      figure: "Figure 6-4"
+      quote: "MgmtInit (not reported) | Low Power | Management interface powering up and initializing until host can access the flat management memory | Module Management Interface ready is simply assumed after a duration tMgmtInit (see section 10.1), so hosts should just wait for that period. | ModuleReady | Required"
+      note: "CMIS 4.0 publishes the same row as § 6.3.1.2 Table 6-13; the timer value follows § 10.1 Table 10-1 (tMgmtInit, 2000 ms)."
+  - id: module_low_pwr_to_module_pwr_up_sw
+    from: ModuleLowPwr
+    to: ModulePwrUp
+    trigger:
+      kind: register_write
+      register: lower_memory.low_pwr_request_sw
+      value: 0
+      condition: "LowPwrS becomes FALSE after host clears LowPwrRequestSW."
+    guard:
+      - { field: lower_memory.low_pwr_allow_request_hw, equals: false }
+    side_effects:
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModulePwrUp }
+      - { kind: start_timer, timer: ModulePwrUpMaxDuration, duration_ms_field: page_01h_advertising.max_duration_module_pwr_up }
+      - { kind: log_event, event_id: msm_power_up_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-12"
+      quote: "LowPwrS = LowPwrRequestSW OR"
+  - id: module_low_pwr_to_module_pwr_up_hw
+    from: ModuleLowPwr
+    to: ModulePwrUp
+    trigger:
+      kind: external_event
+      signal: LowPwrRequestHW
+      condition: "LowPwrRequestHW deasserts while hardware low-power requests are enabled."
+    guard:
+      - { field: lower_memory.low_pwr_request_sw, equals: false }
+      - { field: lower_memory.low_pwr_allow_request_hw, equals: true }
+    side_effects:
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModulePwrUp }
+      - { kind: start_timer, timer: ModulePwrUpMaxDuration, duration_ms_field: page_01h_advertising.max_duration_module_pwr_up }
+      - { kind: log_event, event_id: msm_power_up_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-12"
+      quote: "LowPwrRequestHW hardware signal"
+  - id: module_low_pwr_to_resetting
+    from: ModuleLowPwr
+    to: Resetting
+    trigger:
+      kind: internal
+      condition: "ResetS transition signal is TRUE."
+    guard: null
+    side_effects:
+      - { kind: log_event, event_id: msm_resetting_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2 Table 6-12"
+      quote: "ModuleLowPwr | Low Power | ... | ResetS transition signal is TRUE | Resetting | Rqd."
+  - id: module_pwr_up_to_module_ready
+    from: ModulePwrUp
+    to: ModuleReady
+    trigger:
+      kind: internal
+      condition: "Power up activities are complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: ModulePwrUpMaxDuration }
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleReady }
+      - { kind: spawn_machine, machine: CmisDataPathStateMachine }
+      - { kind: log_event, event_id: msm_module_ready }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-14"
+      quote: "Power up activities are complete"
+  - id: module_pwr_up_to_module_pwr_dn
+    from: ModulePwrUp
+    to: ModulePwrDn
+    trigger:
+      kind: internal
+      condition: "LowPwrS becomes TRUE during power-up."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: ModulePwrUpMaxDuration }
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModulePwrDn }
+      - { kind: start_timer, timer: ModulePwrDnMaxDuration, duration_ms_field: page_01h_advertising.max_duration_module_pwr_dn }
+      - { kind: log_event, event_id: msm_power_down_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-14"
+      quote: "LowPwrS transition signal is TRUE"
+  - id: module_pwr_up_to_resetting
+    from: ModulePwrUp
+    to: Resetting
+    trigger:
+      kind: internal
+      condition: "ResetS transition signal is TRUE."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: ModulePwrUpMaxDuration }
+      - { kind: log_event, event_id: msm_resetting_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2 Table 6-12"
+      quote: "ModulePwrUp | High Power | Module transitioning to high power mode | ResetS transition signal is TRUE | Resetting | Rqd."
+  - id: module_ready_to_module_pwr_dn
+    from: ModuleReady
+    to: ModulePwrDn
+    trigger:
+      kind: internal
+      condition: "LowPwrExS becomes TRUE."
+    guard:
+      - { field: lower_memory.module_state, equals: ModuleReady }
+      - forall: { field: page_11h_lane_status.dp_state_host_lane, equals: DPDeactivated }
+    side_effects:
+      - { kind: terminate_machine, machine: CmisDataPathStateMachine }
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModulePwrDn }
+      - { kind: start_timer, timer: ModulePwrDnMaxDuration, duration_ms_field: page_01h_advertising.max_duration_module_pwr_dn }
+      - { kind: log_event, event_id: msm_power_down_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-13"
+      quote: "LowPwrExS = LowPwrS AND ModuleDeactivatedT"
+  - id: module_ready_to_resetting
+    from: ModuleReady
+    to: Resetting
+    trigger:
+      kind: internal
+      condition: "ResetS transition signal is TRUE."
+    guard: null
+    side_effects:
+      - { kind: terminate_machine, machine: CmisDataPathStateMachine }
+      - { kind: log_event, event_id: msm_resetting_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2 Table 6-12"
+      quote: "ModuleReady | High Power | ... | ResetS transition signal is TRUE | Resetting | Rqd."
+      note: "On entry to Resetting all Data Path state machines cease to exist (CMIS 5.3 § 6.3.2.5.1)."
+  - id: module_pwr_dn_to_module_low_pwr
+    from: ModulePwrDn
+    to: ModuleLowPwr
+    trigger:
+      kind: internal
+      condition: "Module has returned to Low Power mode."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: ModulePwrDnMaxDuration }
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleLowPwr }
+      - { kind: log_event, event_id: msm_low_power_entered }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-14"
+      quote: "Module has returned to Low Power mode"
+  - id: module_pwr_dn_to_resetting
+    from: ModulePwrDn
+    to: Resetting
+    trigger:
+      kind: internal
+      condition: "ResetS transition signal is TRUE."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: ModulePwrDnMaxDuration }
+      - { kind: log_event, event_id: msm_resetting_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2 Table 6-12"
+      quote: "ModulePwrDn | High Power | Module transitioning to Low Power mode | ResetS transition signal is TRUE | Resetting | Rqd."
+  - id: module_fault_from_low_pwr
+    from: ModuleLowPwr
+    to: ModuleFault
+    trigger:
+      kind: internal
+      condition: "FaultS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleFault }
+      - { kind: log_event, event_id: msm_fault_entered }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-14"
+      quote: "FaultS transition signal is TRUE"
+  - id: module_fault_from_pwr_up
+    from: ModulePwrUp
+    to: ModuleFault
+    trigger:
+      kind: internal
+      condition: "FaultS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: ModulePwrUpMaxDuration }
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleFault }
+      - { kind: log_event, event_id: msm_fault_entered }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-14"
+      quote: "FaultS transition signal is TRUE"
+  - id: module_fault_from_ready
+    from: ModuleReady
+    to: ModuleFault
+    trigger:
+      kind: internal
+      condition: "FaultS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: terminate_machine, machine: CmisDataPathStateMachine }
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleFault }
+      - { kind: log_event, event_id: msm_fault_entered }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-14"
+      quote: "FaultS transition signal is TRUE"
+  - id: module_fault_from_pwr_dn
+    from: ModulePwrDn
+    to: ModuleFault
+    trigger:
+      kind: internal
+      condition: "FaultS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: ModulePwrDnMaxDuration }
+      - { kind: state_change, target: lower_memory.module_state, operation: assign, value: ModuleFault }
+      - { kind: log_event, event_id: msm_fault_entered }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2"
+      table: "Table 6-14"
+      quote: "FaultS transition signal is TRUE"
+  - id: module_fault_to_resetting
+    from: ModuleFault
+    to: Resetting
+    trigger:
+      kind: internal
+      condition: "ResetS transition signal is TRUE."
+    guard: null
+    side_effects:
+      - { kind: log_event, event_id: msm_resetting_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.2.2 Table 6-12"
+      quote: "ModuleFault | *Low Power | Module is waiting for host action | ResetS transition signal is TRUE | Resetting | Opt."

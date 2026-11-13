@@ -1,0 +1,249 @@
+fields:
+  - name: temp_mon_low_warning_flag
+    display_name: TempMonLowWarningFlag
+    offset: 9
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Temperature"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low temperature warning."
+
+  - name: vcc_mon_high_alarm_flag
+    display_name: VccMonHighAlarmFlag
+    offset: 9
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Voltage"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high supply voltage alarm."
+
+  - name: vcc_mon_low_alarm_flag
+    display_name: VccMonLowAlarmFlag
+    offset: 9
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Voltage"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low supply voltage alarm."
+
+  - name: vcc_mon_high_warning_flag
+    display_name: VccMonHighWarningFlag
+    offset: 9
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Voltage"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high supply voltage warning."
+
+  - name: vcc_mon_low_warning_flag
+    display_name: VccMonLowWarningFlag
+    offset: 9
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Voltage"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low supply voltage warning."
+
+  # § 8.2.4 (continued) — Aux1/2/3 + Custom monitor flags (bytes 10-11)
+  #
+  # The catalog expands these as individual flags (12 aux + 4 custom = 16 entries).
+  # Per they're not collapsible: each carries a distinct semantic
+  # (aux index N has its own meaning per Table 8-49) so collapsing would lose
+  # spec semantics.
+
+  - name: aux1_mon_high_alarm_flag
+    display_name: Aux1MonHighAlarmFlag
+    offset: 10
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Aux 1 monitor alarm."
+
+  - name: aux1_mon_low_alarm_flag
+    display_name: Aux1MonLowAlarmFlag
+    offset: 10
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Aux 1 monitor alarm."
+
+  - name: aux1_mon_high_warning_flag
+    display_name: Aux1MonHighWarningFlag
+    offset: 10
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Aux 1 monitor warning."
+
+  - name: aux1_mon_low_warning_flag
+    display_name: Aux1MonLowWarningFlag
+    offset: 10
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Aux 1 monitor warning."
+
+  - name: aux2_mon_high_alarm_flag
+    display_name: Aux2MonHighAlarmFlag
+    offset: 10
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Aux 2 monitor alarm."
+
+  - name: aux2_mon_low_alarm_flag
+    display_name: Aux2MonLowAlarmFlag
+    offset: 10
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Aux 2 monitor alarm."

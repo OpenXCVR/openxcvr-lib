@@ -1,0 +1,28 @@
+[package]
+name = "openxcvr-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Core types and traits for the openxcvr universal transceiver library"
+readme = "README.md"
+keywords = ["transceiver", "optics", "eeprom", "decoder"]
+categories = ["hardware-support", "encoding", "parser-implementations"]
+publish = false
+
+[features]
+# Linux /dev/i2c-N transport (issue #173). Off by default.
+# When enabled, brings in the BSD-3-licensed `i2cdev` crate as the
+# userspace ioctl wrapper for /dev/i2c-N.
+linux-i2c = ["dep:i2cdev"]
+
+[dependencies]
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+i2cdev = { version = "0.6", optional = true }
+
+[dev-dependencies]
+serde_json = "1"

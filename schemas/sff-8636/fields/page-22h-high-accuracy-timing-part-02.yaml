@@ -1,0 +1,154 @@
+fields:
+  # ── Calibration format for Loopback Modules (Format ID 100Bh) ─────────────
+
+  - name: loopback_calibration_inaccuracy
+    since: "2.12"
+    display_name: CalibrationInaccuracy
+    offset: 150
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5.1", pdf_page: 91, table: "Table 7-2", quote: "Calibration Inaccuracy", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: reserved_loopback_154
+    since: "2.12"
+    display_name: ReservedLoopback154
+    offset: 154
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5", pdf_page: 85, table: "Table 7-2", quote: "Reserved 00h", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: loopback_tx_to_rx_delay_lane1
+    since: "2.12"
+    display_name: Tx1ToRx1Delay
+    offset: 155
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: 1 }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5.2", pdf_page: 92, table: "Table 7-2", quote: "Tx1_to_Rx1 Delay", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: reserved_loopback_159
+    since: "2.12"
+    display_name: ReservedLoopback159
+    offset: 159
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5", pdf_page: 85, table: "Table 7-2", quote: "Reserved 00h", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: loopback_tx_to_mon_delay_lane1
+    since: "2.12"
+    display_name: Tx1ToMon1Delay
+    offset: 160
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: 1 }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5.3", pdf_page: 92, table: "Table 7-2", quote: "Tx1_to_Mon1 Delay", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: reserved_loopback_164
+    since: "2.12"
+    display_name: ReservedLoopback164
+    offset: 164
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5", pdf_page: 85, table: "Table 7-2", quote: "Reserved 00h", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: loopback_rx_to_mon_delay_lane1
+    since: "2.12"
+    display_name: Rx1ToMon1Delay
+    offset: 165
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: 1 }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5.4", pdf_page: 92, table: "Table 7-2", quote: "Rx1_to_Mon1 Delay", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: reserved_loopback_169
+    since: "2.12"
+    display_name: ReservedLoopback169
+    offset: 169
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5", pdf_page: 85, table: "Table 7-2", quote: "Reserved 00h", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  # Lanes 2-4 pack contiguously in 12-byte strides from byte 170
+  # (§ 7.5.2-7.5.4: Bytes 170-173+(N-2)*12 and siblings); lane 1's row is the
+  # scalar fields above.
+  - name: loopback_tx_to_rx_delay
+    since: "2.12"
+    display_name: Tx<lane>ToRx<lane>Delay
+    instances: { index: lane, start: 2, end: 4 }
+    offset_expr: "170 + 12 * (lane - 2)"
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: lane }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5.2", pdf_page: 92, table: "Table 7-2", quote: "TxN to RxN Delay", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: loopback_tx_to_mon_delay
+    since: "2.12"
+    display_name: Tx<lane>ToMon<lane>Delay
+    instances: { index: lane, start: 2, end: 4 }
+    offset_expr: "174 + 12 * (lane - 2)"
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: lane }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5.3", pdf_page: 92, table: "Table 7-2", quote: "TxN to MonN Delay", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: loopback_rx_to_mon_delay
+    since: "2.12"
+    display_name: Rx<lane>ToMon<lane>Delay
+    instances: { index: lane, start: 2, end: 4 }
+    offset_expr: "178 + 12 * (lane - 2)"
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: lane }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5.4", pdf_page: 92, table: "Table 7-2", quote: "RxN to MonN Delay", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: reserved_loopback_calibration_tail
+    since: "2.12"
+    display_name: ReservedLoopbackCalibrationTail
+    offset: 206
+    size_bytes: 49
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8636 v2.12 § 7.5", pdf_page: 85, table: "Table 7-2", quote: "Reserved 00h", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }

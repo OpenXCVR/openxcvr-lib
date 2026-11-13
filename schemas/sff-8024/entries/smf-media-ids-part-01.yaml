@@ -1,0 +1,249 @@
+entries:
+  - value: 0x00
+    name: undefined
+    description: Undefined SMF media interface
+    reach: {kind: none}
+  - value: 0x01
+    name: base_10g_lw
+    description: 10GBASE-LW SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 9.95328, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 9.95
+  - value: 0x02
+    name: base_10g_ew
+    description: 10GBASE-EW SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 9.953, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 9.95
+  - value: 0x03
+    name: base_10g_zw
+    description: 10G-ZW SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 9.953, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 9.95
+  - value: 0x04
+    name: base_10g_lr
+    description: 10GBASE-LR SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 10.31
+  - value: 0x05
+    name: base_10g_er
+    description: 10GBASE-ER SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 10.31
+  - value: 0x06
+    name: base_10g_zr
+    description: 10G-ZR SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 10.31
+  - value: 0x07
+    name: base_25g_lr
+    description: 25GBASE-LR SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 25.78
+  - value: 0x08
+    name: base_25g_er
+    description: 25GBASE-ER SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 25.78
+  - value: 0x09
+    name: base_40g_lr4
+    description: 40GBASE-LR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 41.25
+  - value: 0x0a
+    name: base_40g_fr
+    description: 40GBASE-FR SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 41.25, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 41.25
+  - value: 0x0b
+    name: base_50g_fr
+    description: 50GBASE-FR SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 53.13
+  - value: 0x0c
+    name: base_50g_lr
+    description: 50GBASE-LR SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 53.13
+  - value: 0x0d
+    name: base_100g_lr4
+    description: 100GBASE-LR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 103.13
+  - value: 0x0e
+    name: base_100g_er4
+    description: 100GBASE-ER4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 103.13
+  - value: 0x0f
+    name: psm4_100g
+    description: 100G PSM4 MSA SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 103.13
+  - value: 0x10
+    name: cwdm4_100g
+    description: 100G CWDM4 MSA SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 103.13
+  - value: 0x11
+    name: four_wdm_10_100g
+    description: 100G 4WDM-10 MSA SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 103.13
+  - value: 0x12
+    name: four_wdm_20_100g
+    description: 100G 4WDM-20 MSA SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 103.13
+  - value: 0x13
+    name: four_wdm_40_100g
+    description: 100G 4WDM-40 MSA SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 103.13
+  - value: 0x14
+    name: base_100g_dr
+    description: 100GBASE-DR SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 106.25
+  - value: 0x15
+    name: base_100g_fr1
+    description: 100G-FR MSA or 100GBASE-FR1 SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 106.25
+  - value: 0x16
+    name: base_100g_lr1
+    description: 100G-LR MSA or 100GBASE-LR1 SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 106.25
+  - value: 0x17
+    name: base_200g_dr4
+    description: 200GBASE-DR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 212.50
+  - value: 0x18
+    name: base_200g_fr4
+    description: 200GBASE-FR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 212.50
+  - value: 0x19
+    name: base_200g_lr4
+    description: 200GBASE-LR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 212.50
+  - value: 0x1a
+    name: base_400g_fr8
+    description: 400GBASE-FR8 SMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x1b
+    name: base_400g_lr8
+    description: 400GBASE-LR8 SMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x1c
+    name: base_400g_dr4
+    description: 400GBASE-DR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x1d
+    name: base_400g_fr4
+    description: 400G-FR4 MSA or 400GBASE-FR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x1e
+    name: lr4_400g_10
+    description: 400G-LR4-10 MSA SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x1f
+    name: fc_8g_sm
+    description: 8G Fibre Channel SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 8.500, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 8.50
+  - value: 0x20
+    name: fc_10g_sm
+    description: 10G Fibre Channel SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 10.51875, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 10.52
+  - value: 0x21
+    name: fc_16g_sm
+    description: 16G Fibre Channel SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 14.025, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 14.03
+  - value: 0x22
+    name: fc_32g_sm
+    description: 32G Fibre Channel SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 28.050, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 28.05
+  - value: 0x23
+    name: fc_64g_sm
+    description: 64G Fibre Channel SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 28.900, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 57.80
+  - value: 0x24
+    name: fc_128g_psm4
+    description: 128G Fibre Channel PSM4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 28.050, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 112.20
+  - value: 0x25
+    name: reserved_25
+    description: Reserved
+    reach: {kind: none}
+  - value: 0x26
+    name: fc_128g_cwdm4
+    description: 128G Fibre Channel CWDM4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 28.050, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 112.20
+  - value: 0x27..0x2b
+    name: reserved_27_2b
+    description: Reserved
+    reach: {kind: none}
+  - value: 0x2c
+    name: otn_4i1_9d1f
+    description: OTN 4I1-9D1F SMF media interface
+    tags: [otn]
+    signaling: {lane_count: 4, lane_rate_gbd: 28, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 112
+  - value: 0x2d
+    name: otn_4l1_9c1f
+    description: OTN 4L1-9C1F SMF media interface
+    tags: [otn]
+    signaling: {lane_count: 4, lane_rate_gbd: 28, modulation: nrz}
+    reach: {kind: smf}
+    bit_rate_gbps: 112

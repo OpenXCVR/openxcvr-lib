@@ -1,0 +1,80 @@
+schema: openxcvr.cdb_command_index.v1
+spec:
+  id: cmis
+  title: OIF-CMIS
+  revision: "5.4"
+  source: docs/stds/cmis/OIF-CMIS-05.4.pdf
+  errata:
+    - docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+kind: cdb_command_registry
+cdb_commands:
+  - 0040-module-features.yaml
+  - 0005-get-module-time.yaml
+  - 0006-set-module-time.yaml
+  - 0041-firmware-management-features.yaml
+  - 0050-get-application-attributes.yaml
+  - 0051-get-interface-code-description.yaml
+  - 0100-get-firmware-info.yaml
+  - 0101-firmware-download-start.yaml
+  - 0103-firmware-write-block-lpl.yaml
+  - 0107-firmware-download-complete.yaml
+  - 0109-run-firmware-load.yaml
+  - 010b-check-firmware-activation-options.yaml
+  - 010c-store-firmware-load-tag.yaml
+  - 010d-retrieve-firmware-load-tag.yaml
+  - 0210-pm-module-lpl.yaml
+  - 0211-pm-module-epl.yaml
+  - 0200-control-pm-statistics.yaml
+  - 0212-pm-host-side-lpl.yaml
+  - 0213-pm-host-side-epl.yaml
+  - 0214-pm-media-side-lpl.yaml
+  - 0215-pm-media-side-epl.yaml
+  - 0216-pm-data-path-lpl.yaml
+  - 0217-pm-data-path-epl.yaml
+  - 0220-rmon-statistics.yaml
+  - 0230-fec-symbol-error-histogram.yaml
+  - 0233-get-max-fec-symbol-error-weight.yaml
+  - 0280-data-monitoring.yaml
+  - 0281-data-monitoring-advertisements.yaml
+  - 0290-temperature-histogram.yaml
+  - 0380-loopbacks.yaml
+  - 0400-device-id-cert-lpl.yaml
+  - 0402-set-digest-to-sign-lpl.yaml
+  - 0404-get-digest-signature-lpl.yaml
+
+templates:
+  cdb_cmd_parameter:
+    access: rw
+    field_type: Control
+    tags: [CDB, Control]
+    scope: { cdb_instance: 0 }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+
+  cdb_reply_field:
+    access: ro
+    field_type: Status
+    tags: [CDB, Status]
+    scope: { cdb_instance: 0 }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+
+  cdb_payload:
+    access: rw
+    field_type: Storage
+    tags: [CDB, LPL]
+    scope: { cdb_instance: 0 }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true

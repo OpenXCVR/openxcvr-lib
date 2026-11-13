@@ -1,0 +1,71 @@
+fields:
+  - name: invalid_channel_mask_tx
+    display_name: InvalidChannelMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "239 + (lane - 1)"
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Mask for InvalidChannelNumberFlagTx<n>. Default: 1."
+
+  - name: wavelength_unlocked_mask_tx
+    display_name: WavelengthUnlockedMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "239 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Mask for WavelengthUnlockedFlagTx<n>. Default: 1."
+
+  - name: tuning_complete_mask_tx
+    display_name: TuningCompleteMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "239 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Mask for TuningCompleteFlagTx<n>. Default: 1."
+
+  # bytes 247-255 are 9 reserved bytes; no Page Checksum on Page 12h

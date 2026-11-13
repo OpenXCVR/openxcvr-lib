@@ -1,0 +1,64 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'com.openxcvr'
+version = '0.2.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 11
+    // Parity-compared rejection details embed '§'; a non-UTF-8 default
+    // charset (JDK 17 with LANG=C) would corrupt them.
+    options.encoding = 'UTF-8'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Test scope only — the library itself has no runtime dependencies.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.18.11'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
+}
+
+test {
+    useJUnitPlatform()
+    // A JUnit-platform misconfiguration must not report parity as green
+    // with zero tests executed. Supported by Gradle >= 9.0.
+    failOnNoDiscoveredTests = true
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifactId = 'transceivers'
+        }
+    }
+}

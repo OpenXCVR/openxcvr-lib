@@ -1,0 +1,21 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisFfPage05hFormFactorHardwareManagement
+title: CMIS-FF 1.0 Page 05h Form-Factor Specific Hardware Management
+spec:
+  id: cmis-ff-1.0
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-CMIS-FF-01.0.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-CMIS-FF-01.0 § 7.7
+  pdf_pages: [24, 25, 26, 27, 28, 29, 30, 31]
+page_address: "05h"
+size_bytes: 128
+field_includes:
+  - fields/page-05h-form-factor-hardware-management-part-01.yaml
+  - fields/page-05h-form-factor-hardware-management-part-02.yaml
+  - fields/page-05h-form-factor-hardware-management-part-03.yaml
+  - fields/page-05h-form-factor-hardware-management-part-04.yaml
+  - fields/page-05h-form-factor-hardware-management-part-05.yaml
+  - fields/page-05h-form-factor-hardware-management-part-06.yaml

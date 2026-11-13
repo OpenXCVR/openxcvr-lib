@@ -1,0 +1,393 @@
+{
+  "_metadata": {
+    "authored_at": "2026-06-03",
+    "authored_by": "ras + claude-opus-4-8",
+    "cmis_version": "5.3",
+    "corrected_at": "2026-10-27",
+    "correction_note": "Applications corrected to the CMIS 5.3 \u00a76.2.1.4 / \u00a78.4.15 numbering: Lower Memory bytes 86-117 are AppSel 1-8 and Page 01h bytes 223-250 are AppSel 9-15 (additive). The previous golden omitted AppSel 1-8 and renumbered 9-15 as 1-7. Expected entries were computed from the fixture bytes and schemas/sff-8024, not from a decoder.",
+    "derived_from": "fboss-cmis-5-3-osfp-800g-zr",
+    "derived_note": "byte-for-byte copy of fboss-cmis-5-3-osfp-800g-zr with page-11h byte 0 changed 0x44->0x48: lane 1 dp_state nibble 0x4 (DpActivated) -> 0x8 (reserved_8_f, CMIS 5.3 \u00a7 8.10.1 / Table 8-84). Regression fixture for the Page 11h reserved-nibble decode panic; only lanes[0].dp_state differs from the source golden.",
+    "fixture": "fboss-cmis-5-3-osfp-800g-zr-dp-reserved",
+    "monitoring_stale": false,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "cmis-5.3",
+    "spec_revision": "5.3",
+    "vendor_strings_synthetic": false
+  },
+  "applications": [
+    {
+      "app_code": 1,
+      "host_interface_id": 81,
+      "host_interface_name": "gaui_800g_8_s_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 2,
+      "host_interface_id": 82,
+      "host_interface_name": "gaui_800g_8_l_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 3,
+      "host_interface_id": 79,
+      "host_interface_name": "gaui_400g_4_s_c2m",
+      "host_lane_assignment_options": "0x11",
+      "host_lane_count": 4,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 4,
+      "host_interface_id": 80,
+      "host_interface_name": "gaui_400g_4_l_c2m",
+      "host_lane_assignment_options": "0x11",
+      "host_lane_count": 4,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 5,
+      "host_interface_id": 77,
+      "host_interface_name": "gaui_200g_2_s_c2m",
+      "host_lane_assignment_options": "0x55",
+      "host_lane_count": 2,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 6,
+      "host_interface_id": 78,
+      "host_interface_name": "gaui_200g_2_l_c2m",
+      "host_lane_assignment_options": "0x55",
+      "host_lane_count": 2,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 7,
+      "host_interface_id": 75,
+      "host_interface_name": "gaui_100g_1_s_c2m",
+      "host_lane_assignment_options": "0xFF",
+      "host_lane_count": 1,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 8,
+      "host_interface_id": 76,
+      "host_interface_name": "gaui_100g_1_l_c2m",
+      "host_lane_assignment_options": "0xFF",
+      "host_lane_count": 1,
+      "media_interface_id": 104,
+      "media_interface_name": "flexo_8e_dpo_16qam_foic8e_8_dpo",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 9,
+      "host_interface_id": 81,
+      "host_interface_name": "gaui_800g_8_s_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 247,
+      "media_interface_name": "vendor_specific_f7",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 10,
+      "host_interface_id": 82,
+      "host_interface_name": "gaui_800g_8_l_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 247,
+      "media_interface_name": "vendor_specific_f7",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 11,
+      "host_interface_id": 79,
+      "host_interface_name": "gaui_400g_4_s_c2m",
+      "host_lane_assignment_options": "0x11",
+      "host_lane_count": 4,
+      "media_interface_id": 247,
+      "media_interface_name": "vendor_specific_f7",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 12,
+      "host_interface_id": 80,
+      "host_interface_name": "gaui_400g_4_l_c2m",
+      "host_lane_assignment_options": "0x11",
+      "host_lane_count": 4,
+      "media_interface_id": 247,
+      "media_interface_name": "vendor_specific_f7",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 13,
+      "host_interface_id": 77,
+      "host_interface_name": "gaui_200g_2_s_c2m",
+      "host_lane_assignment_options": "0x55",
+      "host_lane_count": 2,
+      "media_interface_id": 247,
+      "media_interface_name": "vendor_specific_f7",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 14,
+      "host_interface_id": 78,
+      "host_interface_name": "gaui_200g_2_l_c2m",
+      "host_lane_assignment_options": "0x55",
+      "host_lane_count": 2,
+      "media_interface_id": 247,
+      "media_interface_name": "vendor_specific_f7",
+      "media_lane_count": 1
+    },
+    {
+      "app_code": 15,
+      "host_interface_id": 75,
+      "host_interface_name": "gaui_100g_1_s_c2m",
+      "host_lane_assignment_options": "0xFF",
+      "host_lane_count": 1,
+      "media_interface_id": 247,
+      "media_interface_name": "vendor_specific_f7",
+      "media_lane_count": 1
+    }
+  ],
+  "checksums": null,
+  "decode_status": "ok",
+  "flags": {
+    "data_not_ready": null,
+    "interrupt_asserted": false,
+    "lanes": [
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      }
+    ],
+    "supply_high_alarm": false,
+    "supply_low_alarm": false,
+    "temp_high_alarm": false,
+    "temp_low_alarm": false
+  },
+  "identity": {
+    "date_code": "250331",
+    "vendor_name": "METAZR",
+    "vendor_oui": "7C:B2:5C",
+    "vendor_pn": "DP08SFP8-ZRB-29B",
+    "vendor_rev": "01",
+    "vendor_sn": "251356640"
+  },
+  "lanes": [
+    {
+      "dp_state": "Unknown8",
+      "index": 1,
+      "rx_los": false,
+      "rx_power_mw": 1.3167,
+      "tx_bias_ma": 230.6,
+      "tx_fault": false,
+      "tx_power_mw": 1.2626
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 2,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 3,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 4,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 5,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 6,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 7,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 8,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    }
+  ],
+  "module": {
+    "cmis_revision": "5.3",
+    "connector": {
+      "name": "lc",
+      "raw": "0x07"
+    },
+    "identifier": {
+      "name": "osfp",
+      "raw": "0x19"
+    },
+    "memory_model": "paged",
+    "module_state": "ModuleReady",
+    "module_type": "800ZR coherent OSFP"
+  },
+  "monitoring": {
+    "module_temperature_c": 66.0,
+    "module_voltage_v": 3.1944
+  }
+}

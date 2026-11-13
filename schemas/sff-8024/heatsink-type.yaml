@@ -1,0 +1,26 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024HeatsinkType
+title: SFF-8024 Heatsink Type Codes
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-13
+  pdf_pages: [36]
+entries:
+  - value: 0x00
+    name: unknown_or_unspecified
+    description: Unknown or unspecified heatsink type
+  - value: 0x01
+    name: rhs
+    description: Riding heatsink
+  - value: 0x02
+    name: ihs_open_top
+    description: Integrated heatsink with open top
+  - value: 0x03
+    name: ihs_closed_top
+    description: Integrated heatsink with closed top
+  - value: 0x04..0x0f
+    name: reserved_04_0f
+    description: Reserved

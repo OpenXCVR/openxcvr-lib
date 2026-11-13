@@ -1,0 +1,230 @@
+fields:
+  - name: laser_bias_high_alarm_mask_tx
+    display_name: LaserBiasHighAlarmMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 222
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "LaserBiasHighAlarmMaskTx<i>: Mask for LaserBiasHighAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: laser_bias_low_alarm_mask_tx
+    display_name: LaserBiasLowAlarmMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 223
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "LaserBiasLowAlarmMaskTx<i>: Mask for LaserBiasLowAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: laser_bias_high_warning_mask_tx
+    display_name: LaserBiasHighWarningMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 224
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "LaserBiasHighWarningMaskTx<i>: Mask for LaserBiasHighWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: laser_bias_low_warning_mask_tx
+    display_name: LaserBiasLowWarningMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 225
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "LaserBiasLowWarningMaskTx<i>: Mask for LaserBiasLowWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: los_mask_rx
+    display_name: LOSMaskRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 226
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "LOSMaskRx<i>: Mask for LOSFlagRx<i>, media lane <i>. Advertisement: 01h:158.1."
+
+  - name: cdr_lol_mask_rx
+    display_name: CDRLOLMaskRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 227
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 207
+      table: "Table 8-81"
+      quote: "CDRLOLMaskRx<i>: Mask for CDRLOLFlagRx<i>, media lane <i>. Advertisement: 01h:158.2."
+
+  - name: optical_power_high_alarm_mask_rx
+    display_name: OpticalPowerHighAlarmMaskRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 228
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 207
+      table: "Table 8-81"
+      quote: "OpticalPowerHighAlarmMaskRx<i>: Mask for OpticalPowerHighAlarmFlagRx<i>, media lane <i>. Advertisement: 01h:160.2."
+
+  - name: optical_power_low_alarm_mask_rx
+    display_name: OpticalPowerLowAlarmMaskRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 229
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 207
+      table: "Table 8-81"
+      quote: "OpticalPowerLowAlarmMaskRx<i>: Mask for OpticalPowerLowAlarmFlagRx<i>, media lane <i>. Advertisement: 01h:160.2."
+
+  - name: optical_power_high_warning_mask_rx
+    display_name: OpticalPowerHighWarningMaskRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 230
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 207
+      table: "Table 8-81"
+      quote: "OpticalPowerHighWarningMaskRx<i>: Mask for OpticalPowerHighWarningFlagRx<i>, media lane <i>. Advertisement: 01h:160.2."
+
+  - name: optical_power_low_warning_mask_rx
+    display_name: OpticalPowerLowWarningMaskRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 231
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 207
+      table: "Table 8-81"
+      quote: "OpticalPowerLowWarningMaskRx<i>: Mask for OpticalPowerLowWarningFlagRx<i>, media lane <i>. Advertisement: 01h:160.2."

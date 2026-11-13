@@ -1,0 +1,104 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbPmModuleEpl
+title: CMIS CDB Command 0211h - Get Module PM EPL
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.8.3
+  pdf_pages: [324, 325]
+  table: Table 9-34
+cmd_id: 0x0211
+available_since: "4.0"
+cmd_id_group: performance_monitoring
+command_class: advertised
+description: >
+  Collects module-level performance monitoring records and returns them through
+  the EPL pages. EPL allows more selected observables than the LPL variant.
+advertisement:
+  via_cmd: 0x0042
+  field: performance_monitoring_features.cmd_0211_supported
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+  - { field: page_01h_advertising.cdb_max_pages_epl, in_range: [1, 16] }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: configurable
+cmd:
+  lpl:
+    length: 5
+    fields:
+      - name: clear_on_read
+        offset: 136
+        bit_offset: 7
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        provenance: { spec: "CMIS 5.3 § 9.8.3", table: "Table 9-34" }
+      - name: record_type
+        offset: 136
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        enum_inline:
+          - { value: 0, name: six_byte_pm_record, description: "Minimum, mean, and maximum X16 values" }
+          - { value: 1, name: eight_byte_pm_record, description: "Minimum, mean, maximum, and current X16 values" }
+        provenance: { spec: "CMIS 5.3 § 9.8.3", table: "Table 9-34" }
+      - name: observables
+        offset: 137
+        size_bytes: 1
+        type: bitmap
+        template: cdb_cmd_parameter
+        field_type: Control
+        tags: [CDB, Monitor, Control]
+        provenance: { spec: "CMIS 5.3 § 9.8.3", table: "Table 9-34" }
+      - name: reserved_138_140
+        offset: 138
+        size_bytes: 3
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        provenance: { spec: "CMIS 5.3 § 9.8.3", table: "Table 9-34" }
+  epl:
+    length: 0
+    fields: []
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "4.0" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "4.0" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "4.0" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+  lpl:
+    length: 0
+    fields: []
+  epl:
+    length: variable
+    fields:
+      - name: pm_records
+        epl_page: A0h
+        offset: 128
+        size_bytes: 2048
+        type: bytes
+        template: cdb_reply_field
+        field_type: Telemetry
+        tags: [CDB, Monitor, Telemetry, EPL]
+        encoding:
+          kind: repeated_x16_record
+          record_lengths_bytes: [6, 8]
+          order: selected_observables_ascending_bit
+        provenance: { spec: "CMIS 5.3 § 9.8.3", table: "Table 9-34" }
+behavior:
+  abort_supported: true
+  retry_safe: false
+  side_effects:
+    - "When clear_on_read is set, selected PM statistics are reset after the reply data is captured."

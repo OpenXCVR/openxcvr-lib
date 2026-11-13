@@ -1,0 +1,27 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8472Page03hFormatId
+title: SFF-8472 Page 03h High Accuracy Timing Format IDs
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a § 13
+  table: "Tables 13-1 and 13-2"
+  pdf_pages: [71, 72]
+entries:
+  - value: 0xca1b
+    name: optical_module_calibration
+    description: Page 03h contains calibration format for optical modules.
+  - value: 0x100b
+    name: loopback_module_calibration
+    description: Page 03h contains calibration format for loopback modules.
+  - value: 0x0000..0x100a
+    name: reserved_or_invalid_low
+    description: Not a defined SFF-8472 Page 03h high-accuracy timing format ID.
+  - value: 0x100c..0xca1a
+    name: reserved_or_invalid_mid
+    description: Not a defined SFF-8472 Page 03h high-accuracy timing format ID.
+  - value: 0xca1c..0xffff
+    name: reserved_or_invalid_high
+    description: Not a defined SFF-8472 Page 03h high-accuracy timing format ID unless one of the explicit format values applies.

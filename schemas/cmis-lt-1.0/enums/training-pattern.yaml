@@ -1,0 +1,40 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTrainingPattern
+title: "CMIS-LT 1.0 Training Pattern"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.4/6.2.5 and 6.4.4/6.4.5 (Tables 18, 21, 53, 56)"
+  pdf_pages: [44, 45, 59, 60]
+entries:
+  - value: 0x0
+    name: prbs_13_nrz
+    description: "PRBS13 (NRZ)"
+  - value: 0x1
+    name: prbs_13q_pam4_no_precoding
+    description: "PRBS13Q (PAM4 without precoding)"
+  - value: 0x2
+    name: prbs_13q_pam4_precoding
+    description: "PRBS13Q (PAM4 with precoding)"
+  - value: 0x3
+    name: prbs_31_nrz
+    description: "PRBS31 (NRZ)"
+  - value: 0x4
+    name: prbs_31q_pam4_no_precoding
+    description: "PRBS31Q (PAM4 without precoding)"
+  - value: 0x5
+    name: prbs_31q_pam4_precoding
+    description: "PRBS31Q (PAM4 with precoding)"
+  - value: 0x6..0xd
+    name: reserved
+    description: "Reserved"
+  - value: 0xe
+    name: sub_rate_clock_pattern
+    description: "Sub-rate clock pattern (1/64 of baud rate)"
+  - value: 0xf
+    name: user_pattern
+    description: "User pattern"

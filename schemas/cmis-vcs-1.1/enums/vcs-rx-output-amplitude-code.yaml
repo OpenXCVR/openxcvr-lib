@@ -1,0 +1,41 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcsRxOutputAmplitudeCode
+title: CMIS-VCS 1.1 Rx Output Amplitude Code
+spec:
+  id: cmis-vcs-1.1
+  revision: "01.1"
+  parity_deferred: true
+description: >-
+  Code values of the OutputAmplitudeTargetRx<i> register (VCS Parameter
+  ID 08h), OIF-CMIS-VCS-01.1 § 5.10 Table 5-21. The Rx output amplitude is
+  measured without Rx output equalization at a test point defined by the
+  relevant standard. Codes 4 to 14 are reserved, 15 custom.
+provenance:
+  spec: OIF-CMIS-VCS-01.1 § 5.10 Table 5-21
+  pdf_pages: [39]
+entries:
+  - value: 0x00
+    name: amplitude_100_400_mv
+    description: 100-400 mV peak-to-peak
+    tags: [unit:mV_P-P, min_mv:100, max_mv:400]
+  - value: 0x01
+    name: amplitude_300_600_mv
+    description: 300-600 mV peak-to-peak
+    tags: [unit:mV_P-P, min_mv:300, max_mv:600]
+  - value: 0x02
+    name: amplitude_400_800_mv
+    description: 400-800 mV peak-to-peak
+    tags: [unit:mV_P-P, min_mv:400, max_mv:800]
+  - value: 0x03
+    name: amplitude_600_1200_mv
+    description: 600-1200 mV peak-to-peak
+    tags: [unit:mV_P-P, min_mv:600, max_mv:1200]
+  - value: 0x04..0x0e
+    name: reserved
+    description: Reserved code values
+    tags: [unit:reserved]
+  - value: 0x0f
+    name: custom
+    description: Custom code value
+    tags: [unit:custom]

@@ -1,0 +1,29 @@
+schema: openxcvr.page.v2
+kind: page
+id: CmisPage01hAdvertising
+title: CMIS Page 01h Advertising
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.4
+  pdf_pages: [168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184]
+page_address: 01h
+size_bytes: 128
+
+field_includes:
+  - fields/page-01h-advertising-part-01.yaml
+  - fields/page-01h-advertising-part-02.yaml
+  - fields/page-01h-advertising-part-03.yaml
+  - fields/page-01h-advertising-part-04.yaml
+  - fields/page-01h-advertising-part-05.yaml
+  - fields/page-01h-advertising-part-06.yaml
+  - fields/page-01h-advertising-part-07.yaml
+  - fields/page-01h-advertising-part-08.yaml
+  - fields/page-01h-advertising-part-09.yaml
+  - fields/page-01h-advertising-part-10.yaml
+  - fields/page-01h-advertising-part-11.yaml
+fields: []

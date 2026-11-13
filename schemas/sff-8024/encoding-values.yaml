@@ -1,0 +1,41 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024Encoding
+title: SFF-8024 Encoding Values
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-2
+  pdf_pages: [18]
+entries:
+  - value: 0x00
+    name: unspecified
+    description: Unspecified
+  - value: 0x01
+    name: eight_b_ten_b
+    description: 8B/10B
+  - value: 0x02
+    name: four_b_five_b
+    description: 4B/5B
+  - value: 0x03
+    name: nrz
+    description: NRZ
+  - value: 0x04
+    name: manchester_or_sonet_scrambled_legacy
+    description: Common Manchester code; legacy SFF-8636 used this value for SONET scrambled
+  - value: 0x05
+    name: sonet_scrambled_or_legacy_64b66b
+    description: Common SONET scrambled code; legacy SFF-8636 used this value for 64B/66B
+  - value: 0x06
+    name: sixty_four_b_sixty_six_b_or_legacy_manchester
+    description: Common 64B/66B code; legacy SFF-8636 used this value for Manchester
+  - value: 0x07
+    name: two_hundred_fifty_six_b_two_hundred_fifty_seven_b
+    description: 256B/257B transcoded FEC-enabled data
+  - value: 0x08
+    name: pam4
+    description: PAM4
+  - value: 0x09..0xff
+    name: reserved
+    description: Reserved

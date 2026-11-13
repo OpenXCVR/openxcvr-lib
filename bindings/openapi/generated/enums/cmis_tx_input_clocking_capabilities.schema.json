@@ -1,0 +1,43 @@
+{
+  "$id": "cmis_tx_input_clocking_capabilities.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Tx input lanes 1-8 must be frequency synchronous",
+      "title": "frequency_synchronous_lanes_1_to_8",
+      "x-openxcvr-since": "5.3"
+    },
+    {
+      "const": 1,
+      "description": "Tx input lanes 1-4 and 5-8 form separate synchronous groups",
+      "title": "frequency_synchronous_groups_1_to_4_and_5_to_8",
+      "x-openxcvr-since": "5.3"
+    },
+    {
+      "const": 2,
+      "description": "Tx input lane pairs 1-2, 3-4, 5-6, 7-8 must each be frequency synchronous",
+      "title": "frequency_synchronous_lane_pairs",
+      "x-openxcvr-since": "5.3"
+    },
+    {
+      "const": 3,
+      "description": "Lanes may be asynchronous in frequency",
+      "title": "lanes_may_be_asynchronous_in_frequency",
+      "x-openxcvr-since": "5.3"
+    }
+  ],
+  "title": "CmisTxInputClockingCapabilities",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      173
+    ],
+    "spec": "CMIS 5.3 § 8.4.6 / Table 8-49"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

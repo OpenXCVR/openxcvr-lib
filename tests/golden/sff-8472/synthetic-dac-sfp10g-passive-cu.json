@@ -1,0 +1,86 @@
+{
+  "_metadata": {
+    "authored_at": "2026-05-26",
+    "authored_by": "ras + claude-sonnet-4-6 (gen-synthetic-fixtures.py)",
+    "cmis_version": null,
+    "fixture": "synthetic-dac-sfp10g-passive-cu",
+    "monitoring_stale": true,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "sff-8472",
+    "spec_revision": "12.5a",
+    "vendor_strings_synthetic": true
+  },
+  "checksums": {
+    "cc_base": {
+      "computed": "0x71",
+      "stored": "0x71",
+      "valid": true
+    },
+    "cc_dmi": {
+      "computed": "0x00",
+      "stored": "0x00",
+      "valid": true
+    },
+    "cc_ext": {
+      "computed": "0xCD",
+      "stored": "0xCD",
+      "valid": true
+    }
+  },
+  "compliance": {
+    "raw_bytes_a0h_3_10": [
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x08",
+      "0x00",
+      "0x00"
+    ],
+    "reach": {
+      "om1_m": 0,
+      "om2_m": 0,
+      "om3_m": 0,
+      "om4_m": 1,
+      "smf_km": 0
+    },
+    "wavelength_nm": 0
+  },
+  "decode_status": "ok",
+  "flags": null,
+  "identity": {
+    "date_code": "260526",
+    "vendor_name": "OPENXCVR",
+    "vendor_oui": "00:00:00",
+    "vendor_pn": "SYN-DAC-10G-1M",
+    "vendor_sn": "SYNTH000002"
+  },
+  "lanes": null,
+  "module": {
+    "calibration": {
+      "ddm_implemented": false,
+      "externally_calibrated": false,
+      "internally_calibrated": false,
+      "rx_power_kind": "oma"
+    },
+    "cmis_revision": null,
+    "connector": {
+      "name": "copper_pigtail",
+      "raw": "0x21"
+    },
+    "encoding": {
+      "name": "sixty_four_b_sixty_six_b_or_legacy_manchester",
+      "raw": "0x06"
+    },
+    "identifier": {
+      "name": "sfp_sff8472",
+      "raw": "0x03"
+    },
+    "memory_model": null,
+    "module_state": null,
+    "module_type": null,
+    "nominal_bit_rate_gbps": 10.3
+  },
+  "monitoring": null
+}

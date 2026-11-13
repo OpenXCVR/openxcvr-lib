@@ -1,0 +1,245 @@
+fields:
+  - name: auto_squelch_disable_rx
+    display_name: AutoSquelchDisableRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 139
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: enabled, description: "Automatic Rx output squelching enabled for host lane <lane>" }
+      - { value: 1, name: disabled, description: "Automatic Rx output squelching disabled for host lane <lane>" }
+    provenance:
+      section: "CMIS 5.3 § 8.9.2.4"
+      pdf_page: 195
+      table: "Table 8-69"
+      quote: "AutoSquelchDisableRx<i>: 0b: Automatic Rx output squelching enabled for host lane <i>; 1b: disabled. Advertisement: 01h:156.2."
+
+  # ===========================================================================
+  # CMIS 5.3 §§ 8.9.3-8.9.4 Staged Control Sets 0 and 1
+  # Tables 8-70 through 8-80
+  # ===========================================================================
+
+  - name: scs0_apply_dp_init_lane
+    display_name: SCS0ApplyDPInitLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 143
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.1"
+      pdf_page: 197
+      table: "Table 8-70"
+      quote: "SCS0::ApplyDPInitLane<i>: 1b triggers the Provision procedure using Staged Control Set 0 settings for host lane <i>."
+
+  - name: scs0_apply_immediate_lane
+    display_name: SCS0ApplyImmediateLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 144
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.1"
+      pdf_page: 197
+      table: "Table 8-70"
+      quote: "SCS0::ApplyImmediate<i>: 1b triggers the Provision-and-Commission procedure using Staged Control Set 0 settings. Condition: SteppedConfigOnly (00h:2.6) = 0b."
+
+  - name: scs0_app_sel_code_lane
+    display_name: SCS0AppSelCodeLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "145 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.2"
+      pdf_page: 198
+      table: "Table 8-72"
+      quote: "SCS0::DPConfigLane<i> AppSelCodeLane<i>: AppSel code of the Descriptor of the Application; 0000b means unused."
+
+  - name: scs0_data_path_id_lane
+    display_name: SCS0DataPathIDLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "145 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 3
+    type: u3
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.2"
+      pdf_page: 197
+      table: "Table 8-71"
+      quote: "SCS<k>::DataPathIDLane<i>: number of the first lane in the Data Path, decremented by one."
+
+  - name: scs0_explicit_control_lane
+    display_name: SCS0ExplicitControlLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "145 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.2"
+      pdf_page: 198
+      table: "Table 8-71"
+      quote: "SCS<k>::ExplicitControlLane<i>: 0b uses Application-dependent settings; 1b uses Staged Control Set control values."
+
+  - name: scs0_adaptive_input_eq_enable_tx
+    display_name: SCS0AdaptiveInputEqEnableTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 153
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 199
+      table: "Table 8-73"
+      quote: "SCS0::AdaptiveInputEqEnableTx<i>: 1b Enable; 0b Disable (allow host-controlled equalization). Advertisement: 01h:161.3."
+
+  - name: scs0_adaptive_input_eq_recall_tx
+    display_name: SCS0AdaptiveInputEqRecallTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "154 + (lane - 1) / 4"
+    bit_offset_expr: "((lane - 1) % 4) * 2"
+    bit_width: 2
+    type: u2
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: do_not_recall, description: "Do not recall" }
+      - { value: 1, name: recall_buffer_1, description: "Recall buffer 1" }
+      - { value: 2, name: recall_buffer_2, description: "Recall buffer 2" }
+      - { value: 3, name: reserved, description: "Reserved" }
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 199
+      table: "Table 8-73"
+      quote: "SCS0::AdaptiveInputEqRecallTx<i>: recall stored Tx input equalizer adaptation settings when copied to Active Control Set."
+
+  - name: scs0_host_controlled_input_eq_target_tx
+    display_name: SCS0HostControlledInputEqTargetTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "156 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 199
+      table: "Table 8-73"
+      quote: "SCS0::HostControlledInputEqTargetTx<i>: host-controlled Tx input equalizer target encoded as described in Table 6-6. Advertisement: 01h:161.2."
+
+  - name: scs0_cdr_enable_tx
+    display_name: SCS0CDREnableTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 160
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 199
+      table: "Table 8-73"
+      quote: "SCS0::CDREnableTx<i>: 1b CDR enabled; 0b CDR bypassed. Advertisement: 01h:161.0-1."

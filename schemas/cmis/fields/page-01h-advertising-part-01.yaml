@@ -1,0 +1,267 @@
+fields:
+
+  - name: module_inactive_firmware_major_revision
+    display_name: ModuleInactiveFirmwareMajorRevision
+    offset: 128
+    size_bytes: 1
+    type: u8
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.1"
+          table: "Table 8-43"
+          row: "128 ModuleInactiveFirmwareMajorRevision"
+          pdf_page: [168, 169]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-43 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.1"
+      pdf_page: 168
+      quote: "inactive firmware major revision"
+
+  - name: module_inactive_firmware_minor_revision
+    display_name: ModuleInactiveFirmwareMinorRevision
+    offset: 129
+    size_bytes: 1
+    type: u8
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.1"
+          table: "Table 8-43"
+          row: "129 ModuleInactiveFirmwareMinorRevision"
+          pdf_page: [168, 169]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-43 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.1"
+      pdf_page: 168
+      quote: "inactive firmware minor revision"
+
+  - name: module_hardware_major_revision
+    display_name: ModuleHardwareMajorRevision
+    offset: 130
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.1"
+      pdf_page: 168
+      quote: "hardware major revision"
+
+  - name: module_hardware_minor_revision
+    display_name: ModuleHardwareMinorRevision
+    offset: 131
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.1"
+      pdf_page: 168
+      quote: "hardware minor revision"
+
+  - name: length_multiplier_smf
+    display_name: LengthMultiplierSMF
+    offset: 132
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.2"
+      pdf_page: 169
+      quote: "Link length multiplier for SMF fiber"
+
+  - name: base_length_smf
+    display_name: BaseLengthSMF
+    offset: 132
+    bit_offset: 0
+    bit_width: 6
+    type: u6
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.2"
+      pdf_page: 169
+      quote: "Base link length supported for SMF fiber"
+
+  - name: length_om5
+    display_name: LengthOM5
+    offset: 133
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.2"
+      pdf_page: 169
+      quote: "The link length supported for OM5 fiber"
+
+  - name: length_om4
+    display_name: LengthOM4
+    offset: 134
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.2"
+      pdf_page: 169
+      quote: "The link length supported for OM4 fiber"
+
+  - name: length_om3
+    display_name: LengthOM3
+    offset: 135
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.2"
+      pdf_page: 169
+      quote: "The link length supported for OM3 fiber"
+
+  - name: length_om2
+    display_name: LengthOM2
+    offset: 136
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.2"
+      pdf_page: 169
+      quote: "The link length supported for OM2 fiber"
+
+  - name: length_multiplier_smf2
+    display_name: LengthMultiplierSMF2
+    offset: 137
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    since: "5.3"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.2"
+      pdf_page: 169
+      quote: "Link length multiplier for SMF fiber when 01h:132 is 11b"
+
+  - name: nominal_wavelength
+    display_name: NominalWavelength
+    offset: 138
+    size_bytes: 2
+    type: u16be
+    access: ro
+    field_type: OperationalParameter
+    tags: [OperationalParameter, Characteristic]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.3"
+      pdf_page: 170
+      quote: "U16 nominal transmitter output wavelength for a single wavelength module"

@@ -1,0 +1,123 @@
+fields:
+  - name: dp_init_pending_lane
+    display_name: DPInitPendingLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 235
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    since: "5.0"
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.7"
+      pdf_page: 219
+      table: "Table 8-96"
+      quote: "DPInitPendingLane<i>: 0b: DPInit not pending; 1b: DPInit not yet executed after successful ApplyDPInit, hence the Active Control Set content may deviate from the actual hardware configuration. When SteppedConfigOnly=0, these bits are evaluated in DPSM exit condition equations (see § 6.3.3.1)."
+
+  # bytes 236-239 are 4 reserved bytes (no field schema needed)
+
+  # ===========================================================================
+  # § 8.10.8 Media Lane to Wavelength and Fiber Mapping (bytes 240-255)
+  # — Table 8-97
+  # ===========================================================================
+
+  - name: media_lane_to_wavelength_mapping_tx
+    display_name: MediaLaneToWavelengthMappingTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "240 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.10.8"
+      pdf_page: 219
+      table: "Table 8-97"
+      quote: "MediaLaneToWavelengthMappingTx<i>: Mapping of media lane <i>. 0000: Mapping unknown or undefined; 0001: Maps to media wavelength 1; ... 1000: Maps to media wavelength 8; 1001-1111: Reserved."
+
+  - name: media_lane_to_fiber_mapping_tx
+    display_name: MediaLaneToFiberMappingTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "240 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.10.8"
+      pdf_page: 219
+      table: "Table 8-97"
+      quote: "MediaLaneToFiberMappingTx<i>: Mapping of media lane <i>. 0000: Mapping unknown or undefined; 0001: Maps to media fiber 1 or TR1; ... 1000: Maps to media fiber 8 or RT4; 1001-1111: Reserved."
+
+  - name: media_lane_to_wavelength_mapping_rx
+    display_name: MediaLaneToWavelengthMappingRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "248 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.10.8"
+      pdf_page: 220
+      table: "Table 8-97"
+      quote: "MediaLaneToWavelengthMappingRx<i>: Mapping of media lane <i> (Rx)."
+
+  - name: media_lane_to_fiber_mapping_rx
+    display_name: MediaLaneToFiberMappingRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "248 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.10.8"
+      pdf_page: 220
+      table: "Table 8-97"
+      quote: "MediaLaneToFiberMappingRx<i>: Mapping of media lane <i> (Rx)."

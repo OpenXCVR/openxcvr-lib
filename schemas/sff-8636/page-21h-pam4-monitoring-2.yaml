@@ -1,0 +1,70 @@
+schema: openxcvr.page.v1
+kind: page
+id: Sff8636Page21hPam4Monitoring2
+title: SFF-8636 Page 21h PAM4/DWDM Threshold Sets
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.7.2.8
+  pdf_pages: [76]
+page_address: 21h
+size_bytes: 128
+present_when: { field: "page_00h_upper_administrative.option_control_or_flag_support[pages_20h_21h_implemented]", equals: true }
+
+fields:
+  - name: pam4_threshold_high_alarm
+    since: "2.11"
+    display_name: Pam4ThresholdSet<threshold_set>HighAlarm
+    instances: { index: threshold_set, start: 1, end: 16 }
+    offset_expr: "128 + 8 * (threshold_set - 1)"
+    size_bytes: 2
+    type: x16be
+    template: threshold
+    scope: { threshold_set: threshold_set }
+    behavior:
+      decode_type_source: "page_20h_pam4_monitoring_1.parameter_type entries whose parameter_threshold_id selects this threshold_set"
+      threshold_order: "alarm high, alarm low, warning high, warning low"
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.8", pdf_page: 76, table: "Table 6-47", quote: "High Alarm Threshold", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: pam4_threshold_low_alarm
+    since: "2.11"
+    display_name: Pam4ThresholdSet<threshold_set>LowAlarm
+    instances: { index: threshold_set, start: 1, end: 16 }
+    offset_expr: "128 + 8 * (threshold_set - 1) + 2"
+    size_bytes: 2
+    type: x16be
+    template: threshold
+    scope: { threshold_set: threshold_set }
+    behavior:
+      decode_type_source: "page_20h_pam4_monitoring_1.parameter_type entries whose parameter_threshold_id selects this threshold_set"
+      threshold_order: "alarm high, alarm low, warning high, warning low"
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.8", pdf_page: 76, table: "Table 6-47", quote: "Low Alarm Threshold", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: pam4_threshold_high_warning
+    since: "2.11"
+    display_name: Pam4ThresholdSet<threshold_set>HighWarning
+    instances: { index: threshold_set, start: 1, end: 16 }
+    offset_expr: "128 + 8 * (threshold_set - 1) + 4"
+    size_bytes: 2
+    type: x16be
+    template: threshold
+    scope: { threshold_set: threshold_set }
+    behavior:
+      decode_type_source: "page_20h_pam4_monitoring_1.parameter_type entries whose parameter_threshold_id selects this threshold_set"
+      threshold_order: "alarm high, alarm low, warning high, warning low"
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.8", pdf_page: 76, table: "Table 6-47", quote: "High Warning Threshold", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: pam4_threshold_low_warning
+    since: "2.11"
+    display_name: Pam4ThresholdSet<threshold_set>LowWarning
+    instances: { index: threshold_set, start: 1, end: 16 }
+    offset_expr: "128 + 8 * (threshold_set - 1) + 6"
+    size_bytes: 2
+    type: x16be
+    template: threshold
+    scope: { threshold_set: threshold_set }
+    behavior:
+      decode_type_source: "page_20h_pam4_monitoring_1.parameter_type entries whose parameter_threshold_id selects this threshold_set"
+      threshold_order: "alarm high, alarm low, warning high, warning low"
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.8", pdf_page: 76, table: "Table 6-47", quote: "Low Warning Threshold", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }

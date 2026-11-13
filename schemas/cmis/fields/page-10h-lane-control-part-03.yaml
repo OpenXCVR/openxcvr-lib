@@ -1,0 +1,234 @@
+fields:
+  - name: scs0_cdr_enable_rx
+    display_name: SCS0CDREnableRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 161
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 200
+      table: "Table 8-74"
+      quote: "SCS0::CDREnableRx<i>: 1b CDR enabled; 0b CDR bypassed. Advertisement: 01h:162.0-1."
+
+  - name: scs0_output_eq_pre_cursor_target_rx
+    display_name: SCS0OutputEqPreCursorTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "162 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 200
+      table: "Table 8-74"
+      quote: "SCS0::OutputEqPreCursorTargetRx<i>: Rx output equalization pre-cursor target. Advertisement: 01h:162.4-3."
+
+  - name: scs0_output_eq_post_cursor_target_rx
+    display_name: SCS0OutputEqPostCursorTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "166 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 200
+      table: "Table 8-74"
+      quote: "SCS0::OutputEqPostCursorTargetRx<i>: Rx output equalization post-cursor target, or pre-cursor target when only pre-cursor is advertised."
+
+  - name: scs0_output_amplitude_target_rx
+    display_name: SCS0OutputAmplitudeTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "170 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.3"
+      pdf_page: 200
+      table: "Table 8-74"
+      quote: "SCS0::OutputAmplitudeTargetRx<i>: Rx output amplitude target. Advertisement: 01h:162.2."
+
+  - name: scs0_apply_immediate_tx
+    display_name: SCS0ApplyImmediateTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 176
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.4"
+      pdf_page: 201
+      table: "Table 8-75"
+      quote: "SCS0::ApplyImmediateTx<i>: 1b triggers the Provision-and-Commission procedure for Tx. Condition: UnidirReconfigSupported (01h:162.6) = 1b."
+
+  - name: scs0_apply_immediate_rx
+    display_name: SCS0ApplyImmediateRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 177
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.3.4"
+      pdf_page: 201
+      table: "Table 8-75"
+      quote: "SCS0::ApplyImmediateRx<i>: 1b triggers the Provision-and-Commission procedure for Rx. Condition: UnidirReconfigSupported (01h:162.6) = 1b."
+
+  - name: scs1_apply_dp_init_lane
+    display_name: SCS1ApplyDPInitLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 178
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.1"
+      pdf_page: 202
+      table: "Table 8-76"
+      quote: "SCS1::ApplyDPInitLane<i>: 1b triggers the Provision procedure using Staged Control Set 1 settings for host lane <i>."
+
+  - name: scs1_apply_immediate_lane
+    display_name: SCS1ApplyImmediateLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 179
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.1"
+      pdf_page: 202
+      table: "Table 8-76"
+      quote: "SCS1::ApplyImmediate<i>: 1b triggers the Provision-and-Commission procedure using Staged Control Set 1 settings. Condition: SteppedConfigOnly (00h:2.6) = 0b."
+
+  - name: scs1_app_sel_code_lane
+    display_name: SCS1AppSelCodeLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "180 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.2"
+      pdf_page: 202
+      table: "Table 8-77"
+      quote: "SCS1::DPConfigLane<i> AppSelCodeLane<i>: see CMIS 5.3 § 8.9.3.2 and Table 8-71."
+
+  - name: scs1_data_path_id_lane
+    display_name: SCS1DataPathIDLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "180 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 3
+    type: u3
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.2"
+      pdf_page: 202
+      table: "Table 8-77"
+      quote: "SCS1::DPConfigLane<i> DataPathIDLane<i>: see CMIS 5.3 § 8.9.3.2 and Table 8-71."

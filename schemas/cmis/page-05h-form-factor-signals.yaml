@@ -1,0 +1,26 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage05hFormFactorSignals
+title: CMIS Page 05h Form-Factor Specific Management Signals
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.8
+  pdf_pages: [191]
+  supplement:
+    spec: cmis-ff
+    revision: "1.0"
+    section: "§ 7.7"
+    source: docs/stds/cmis/OIF-CMIS-FF-01.0.pdf
+    pdf_pages: [24, 25, 26, 27, 28, 29, 30, 31]
+page_address: 05h
+size_bytes: 128
+
+field_includes:
+  - fields/page-05h-form-factor-signals-part-01.yaml
+  - fields/page-05h-form-factor-signals-part-02.yaml
+  - fields/page-05h-form-factor-signals-part-03.yaml
+  - fields/page-05h-form-factor-signals-part-04.yaml
+  - fields/page-05h-form-factor-signals-part-05.yaml
+fields: []

@@ -1,0 +1,17 @@
+schema: openxcvr.page.v2
+kind: page
+id: BadRename
+title: page.v2 fixture whose renamed_from.old_name collides with a field
+page_address: "00h"
+fields:
+  - name: current_field
+    offset: 0
+    size_bytes: 1
+    type: u8
+  - name: renamed_field
+    offset: 1
+    size_bytes: 1
+    type: u8
+    renamed_from:
+      rev: "5.0"
+      old_name: current_field

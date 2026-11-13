@@ -1,0 +1,279 @@
+{
+  "_metadata": {
+    "authored_at": "2026-04-29",
+    "authored_by": "ras + codex via claude-opus-4-7",
+    "cmis_version": "4.0",
+    "fixture": "fboss-cmis-4-0-qsfpdd-400g-lr4",
+    "monitoring_stale": true,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "cmis-5.3",
+    "spec_revision": "5.3",
+    "vendor_strings_synthetic": true
+  },
+  "applications": [
+    {
+      "app_code": 1,
+      "host_interface_id": 17,
+      "host_interface_name": "gaui_400g_8_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 30,
+      "media_interface_name": "lr4_400g_10",
+      "media_lane_count": 4
+    },
+    {
+      "app_code": 2,
+      "host_interface_id": 15,
+      "host_interface_name": "gaui_200g_4_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 4,
+      "media_interface_id": 24,
+      "media_interface_name": "base_200g_fr4",
+      "media_lane_count": 4
+    },
+    {
+      "app_code": 3,
+      "host_interface_id": 17,
+      "host_interface_name": "gaui_400g_8_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 192,
+      "media_interface_name": "vendor_specific",
+      "media_lane_count": 4
+    },
+    {
+      "app_code": 4,
+      "host_interface_id": 17,
+      "host_interface_name": "gaui_400g_8_c2m",
+      "host_lane_assignment_options": "0x01",
+      "host_lane_count": 8,
+      "media_interface_id": 193,
+      "media_interface_name": "vendor_specific",
+      "media_lane_count": 4
+    }
+  ],
+  "checksums": null,
+  "decode_status": "ok",
+  "flags": {
+    "data_not_ready": null,
+    "interrupt_asserted": false,
+    "lanes": [
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      }
+    ],
+    "supply_high_alarm": false,
+    "supply_low_alarm": false,
+    "temp_high_alarm": false,
+    "temp_low_alarm": false
+  },
+  "identity": {
+    "date_code": "\u0000\u0000\u0000\u0000\u0000\u0000",
+    "vendor_name": "FACETEST",
+    "vendor_oui": "00:00:00",
+    "vendor_pn": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+    "vendor_rev": "\u0000\u0000",
+    "vendor_sn": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  "lanes": [
+    {
+      "dp_state": "DpActivated",
+      "index": 1,
+      "rx_los": false,
+      "rx_power_mw": 1.7125,
+      "tx_bias_ma": 70.048,
+      "tx_fault": false,
+      "tx_power_mw": 1.9253
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 2,
+      "rx_los": false,
+      "rx_power_mw": 1.7199,
+      "tx_bias_ma": 67.99,
+      "tx_fault": false,
+      "tx_power_mw": 2.0082
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 3,
+      "rx_los": false,
+      "rx_power_mw": 1.8158,
+      "tx_bias_ma": 65.06,
+      "tx_fault": false,
+      "tx_power_mw": 2.0773
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 4,
+      "rx_los": false,
+      "rx_power_mw": 2.1298,
+      "tx_bias_ma": 67.848,
+      "tx_fault": false,
+      "tx_power_mw": 1.9805
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 5,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 6,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 7,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 8,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    }
+  ],
+  "module": {
+    "cmis_revision": "4.0",
+    "connector": {
+      "name": "lc",
+      "raw": "0x07"
+    },
+    "identifier": {
+      "name": "qsfp_dd",
+      "raw": "0x18"
+    },
+    "memory_model": "paged",
+    "module_state": "ModuleReady",
+    "module_type": null
+  },
+  "monitoring": {
+    "module_temperature_c": 45.078125,
+    "module_voltage_v": 3.2578
+  }
+}

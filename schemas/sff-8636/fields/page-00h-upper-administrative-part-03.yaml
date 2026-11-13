@@ -1,0 +1,254 @@
+fields:
+  - name: vendor_name
+    display_name: VendorName
+    offset: 148
+    size_bytes: 16
+    type: ascii
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.14", pdf_page: 51, table: "Table 6-15", quote: "Free side device vendor name" }
+
+  - name: infiniband_compliance
+    display_name: InfiniBandCompliance<rate>
+    instances: { index: rate, start: 0, end: 5 }
+    offset: 164
+    bit_offset_expr: "5 - rate"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: hdr, description: "HDR InfiniBand" }
+      - { value: 1, name: edr, description: "EDR InfiniBand" }
+      - { value: 2, name: fdr, description: "FDR InfiniBand" }
+      - { value: 3, name: qdr, description: "QDR InfiniBand" }
+      - { value: 4, name: ddr, description: "DDR InfiniBand" }
+      - { value: 5, name: sdr, description: "SDR InfiniBand" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.15", pdf_page: 51, table: "Table 6-21", quote: "Extended Module Code Values" }
+
+  - name: vendor_oui
+    display_name: VendorOUI
+    offset: 165
+    size_bytes: 3
+    type: bytes
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.16", pdf_page: 52, table: "Table 6-15", quote: "Vendor OUI" }
+
+  - name: vendor_pn
+    display_name: VendorPN
+    offset: 168
+    size_bytes: 16
+    type: ascii
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.17", pdf_page: 52, table: "Table 6-15", quote: "Vendor PN" }
+
+  - name: vendor_rev
+    display_name: VendorRev
+    offset: 184
+    size_bytes: 2
+    type: ascii
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.18", pdf_page: 52, table: "Table 6-15", quote: "Vendor rev" }
+
+  - name: wavelength_or_copper_attenuation_2p5_5ghz
+    display_name: WavelengthOrCopperAttenuation2p5And5GHz
+    offset: 186
+    size_bytes: 2
+    type: u16be
+    template: operational_parameter
+    scope: { module: true }
+    behavior: { optical_units: "0.05 nm", copper_byte_186_units: "1 dB at 2.5 GHz", copper_byte_187_units: "1 dB at 5.0 GHz", interpretation_source: "device_technology" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.19", pdf_page: 52, table: "Table 6-15", quote: "Wavelength or Copper Cable Attenuation" }
+
+  - name: wavelength_tolerance_or_copper_attenuation_7_12p9ghz
+    display_name: WavelengthToleranceOrCopperAttenuation7And12p9GHz
+    offset: 188
+    size_bytes: 2
+    type: u16be
+    template: operational_parameter
+    scope: { module: true }
+    behavior: { optical_units: "0.005 nm", copper_byte_188_units: "1 dB at 7.0 GHz", copper_byte_189_units: "1 dB at 12.9 GHz", interpretation_source: "device_technology" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.20", pdf_page: 52, table: "Table 6-15", quote: "Wavelength Tolerance or Copper Cable Attenuation" }
+
+  - name: max_case_temperature
+    display_name: MaxCaseTemp
+    offset: 190
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 deg C" }
+    template: operational_parameter
+    scope: { module: true }
+    behavior: { zero_value: "70 deg C standard maximum" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.21", pdf_page: 53, table: "Table 6-15", quote: "Maximum Case Temperature" }
+
+  - name: cc_base
+    display_name: CC_BASE
+    offset: 191
+    size_bytes: 1
+    type: u8
+    encoding: { kind: checksum, covers: "Page 00h bytes 128-190", covers_range: [128, 190], algorithm: sum8 }
+    template: informational
+    scope: { module: true }
+    behavior: { checksum: "low 8 bits of bytes 128-190" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.22", pdf_page: 53, table: "Table 6-15", quote: "Check code for base ID fields" }
+
+  - name: ext_spec_compliance
+    display_name: ExtSpecCompliance
+    offset: 192
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024ExtendedSpecCompliance
+    template: capability_advertisement
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.23", pdf_page: 53, table: "Table 6-15", quote: "Extended Specification Compliance Codes" }
+
+  - name: lpmode_txdis_configurable
+    display_name: LPModeTxDisConfigurable
+    offset: 193
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "LPMode/TxDis input signal is configurable", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits at Page 00h, Byte 193, bits 6-5' per SFF-8679" }
+
+  - name: intl_rx_losl_configurable
+    display_name: IntLRxLOSLConfigurable
+    offset: 193
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "IntL/RxLOSL output signal is configurable", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits at Page 00h, Byte 193, bits 6-5' per SFF-8679" }
+
+  - name: tx_equalizer_freeze_capable
+    display_name: TxEqualizerFreezeCapable
+    offset: 193
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.8"
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "Tx input adaptive equalizers freeze capable", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.9 publication: 'Changed byte 193 bit 4 from reserved to Tx Input Adaptive Equalizer Freeze Capable'" }
+
+  - name: tx_adaptive_equalizer_capable
+    display_name: TxAdaptiveEqualizerCapable
+    offset: 193
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "Tx input equalizers auto-adaptive capable", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Adaptive EQ indicator in Address 193 bit 3'; bits 7-3 reserved in the Rev 1.7 map" }
+
+  - name: tx_fixed_equalizer_capable
+    display_name: TxFixedEqualizerCapable
+    offset: 193
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "Tx input equalizers fixed-programmable settings" }
+
+  - name: rx_output_emphasis_capable
+    display_name: RxOutputEmphasisCapable
+    offset: 193
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "Rx output emphasis fixed-programmable settings" }
+
+  - name: rx_output_amplitude_capable
+    display_name: RxOutputAmplitudeCapable
+    offset: 193
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "Rx output amplitude fixed-programmable settings" }
+
+  - name: option_control_or_flag_support
+    display_name: OptionControlOrFlagSupport<option>
+    instances: { index: option, start: 0, end: 15 }
+    offset_expr: "194 + option / 8"
+    bit_offset_expr: "7 - (option % 8)"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: tx_cdr_control, description: "Tx CDR on/off control implemented" }
+      - { value: 1, name: rx_cdr_control, description: "Rx CDR on/off control implemented" }
+      - { value: 2, name: tx_cdr_lol, description: "Tx CDR LOL flag implemented" }
+      - { value: 3, name: rx_cdr_lol, description: "Rx CDR LOL flag implemented" }
+      - { value: 4, name: rx_squelch_disable, description: "Rx squelch disable implemented" }
+      - { value: 5, name: rx_output_disable, description: "Rx output disable implemented" }
+      - { value: 6, name: tx_squelch_disable, description: "Tx squelch disable implemented" }
+      - { value: 7, name: tx_squelch, description: "Tx squelch implemented" }
+      - { value: 8, name: page_02h_present, description: "Memory Page 02h provided" }
+      - { value: 9, name: page_01h_present, description: "Memory Page 01h provided" }
+      - { value: 10, name: rate_select_implemented, description: "Rate select implemented" }
+      - { value: 11, name: tx_disable_implemented, description: "Tx_Disable implemented" }
+      - { value: 12, name: tx_fault_implemented, description: "Tx_Fault signal implemented" }
+      - { value: 13, name: tx_squelch_oma, description: "Tx squelch OMA/Pave indicator" }
+      - { value: 14, name: tx_los_implemented, description: "Tx LOS implemented" }
+      - { value: 15, name: pages_20h_21h_implemented, description: "Pages 20h and 21h implemented" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.24", pdf_page: 54, table: "Table 6-22", quote: "Optional features implemented" }
+
+  - name: vendor_sn
+    display_name: VendorSN
+    offset: 196
+    size_bytes: 16
+    type: ascii
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.25", pdf_page: 55, table: "Table 6-15", quote: "Vendor SN" }
+
+  - name: date_code
+    display_name: DateCode
+    offset: 212
+    size_bytes: 8
+    type: composite
+    composite_ref: Sff8636DateCode
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.26", pdf_page: 55, table: "Table 6-23", quote: "Vendor's manufacturing date code" }
+
+  - name: date_code_year
+    display_name: DateCode.Year
+    offset: 212
+    size_bytes: 2
+    type: ascii
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.26", pdf_page: 55, table: "Table 6-23", quote: "ASCII code, two low order digits of year" }
+
+  - name: date_code_month
+    display_name: DateCode.Month
+    offset: 214
+    size_bytes: 2
+    type: ascii
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.26", pdf_page: 55, table: "Table 6-23", quote: "ASCII code, digits of month" }
+
+  - name: date_code_day
+    display_name: DateCode.Day
+    offset: 216
+    size_bytes: 2
+    type: ascii
+    template: vendor_info
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.26", pdf_page: 55, table: "Table 6-23", quote: "ASCII code, day of month" }

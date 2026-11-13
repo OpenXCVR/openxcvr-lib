@@ -1,0 +1,518 @@
+{
+  "$id": "sff8636_page22h_high_accuracy_timing.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "average_rx_lane_delay": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 91,
+        "quote": "Average Receiving delay on Lane",
+        "section": "SFF-8636 v2.12 § 7.4.6",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "average_tx_lane_delay": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 91,
+        "quote": "Average Transmitting delay on Lane",
+        "section": "SFF-8636 v2.12 § 7.4.7",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "calibration_date_day_high": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 87,
+        "quote": "Upper four bits of the 5-bit day value",
+        "section": "SFF-8636 v2.12 § 7.3.2",
+        "table": "Table 7-4"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "calibration_date_day_low": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 87,
+        "quote": "Least significant bit of the day encoding",
+        "section": "SFF-8636 v2.12 § 7.3.2",
+        "table": "Table 7-4"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "calibration_date_month": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 87,
+        "quote": "MONTH = Byte132.7-4",
+        "section": "SFF-8636 v2.12 § 7.3.2",
+        "table": "Table 7-4"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "calibration_date_sequence": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 87,
+        "quote": "Number in the range 0 to 126",
+        "section": "SFF-8636 v2.12 § 7.3.2",
+        "table": "Table 7-4"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "calibration_date_year": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 87,
+        "quote": "YEAR = Byte131 + 2000",
+        "section": "SFF-8636 v2.12 § 7.3.2",
+        "table": "Table 7-4"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "calibration_stratum": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 88,
+        "quote": "Calibration accuracy decreases with each calibrator generation",
+        "section": "SFF-8636 v2.12 § 7.3.4"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "calibration_unique_identifier_osi": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 88,
+        "quote": "Organization Specific Identifier",
+        "section": "SFF-8636 v2.12 § 7.3.3",
+        "table": "Table 7-5"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "calibration_unique_identifier_oui": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 88,
+        "quote": "Organization Unique Identifier Company ID",
+        "section": "SFF-8636 v2.12 § 7.3.3",
+        "table": "Table 7-5"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "cc_calib": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 83,
+        "quote": "Checkcode over bytes 128-254",
+        "section": "SFF-8636 v2.12 § 7",
+        "tables": [
+          "Table 7-1",
+          "Table 7-2"
+        ]
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "delta_rx_max": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 90,
+        "quote": "Delta_Rx_Max",
+        "section": "SFF-8636 v2.12 § 7.4.5",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "delta_tx_max": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 90,
+        "quote": "Delta_Tx_Max",
+        "section": "SFF-8636 v2.12 § 7.4.5",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "format_id": {
+      "$ref": "../enums/sff8636_page22h_format_id.schema.json",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 83,
+        "quote": "Format ID determines if page 22h contains a valid entry",
+        "section": "SFF-8636 v2.12 § 7",
+        "tables": [
+          "Table 7-1",
+          "Table 7-2"
+        ]
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "loopback_calibration_inaccuracy": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 91,
+        "quote": "Calibration Inaccuracy",
+        "section": "SFF-8636 v2.12 § 7.5.1",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_rx_to_mon_delay": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 92,
+        "quote": "RxN to MonN Delay",
+        "section": "SFF-8636 v2.12 § 7.5.4",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_rx_to_mon_delay_lane1": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 92,
+        "quote": "Rx1_to_Mon1 Delay",
+        "section": "SFF-8636 v2.12 § 7.5.4",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_tx_to_mon_delay": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 92,
+        "quote": "TxN to MonN Delay",
+        "section": "SFF-8636 v2.12 § 7.5.3",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_tx_to_mon_delay_lane1": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 92,
+        "quote": "Tx1_to_Mon1 Delay",
+        "section": "SFF-8636 v2.12 § 7.5.3",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_tx_to_rx_delay": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 92,
+        "quote": "TxN to RxN Delay",
+        "section": "SFF-8636 v2.12 § 7.5.2",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_tx_to_rx_delay_lane1": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 92,
+        "quote": "Tx1_to_Rx1 Delay",
+        "section": "SFF-8636 v2.12 § 7.5.2",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns"
+    },
+    "optical_number_of_lanes": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 89,
+        "quote": "For SFF-8636 this value is 4",
+        "section": "SFF-8636 v2.12 § 7.4.1",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "optical_operational_mode_id": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 89,
+        "quote": "For SFF-8636 this value is 0",
+        "section": "SFF-8636 v2.12 § 7.4.2",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "reserved_common_header": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 87,
+        "quote": "Common header section. Reserved 00h.",
+        "section": "SFF-8636 v2.12 § 7.3",
+        "table": "Table 7-3"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "reserved_loopback_154": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 85,
+        "quote": "Reserved 00h",
+        "section": "SFF-8636 v2.12 § 7.5",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "reserved_loopback_159": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 85,
+        "quote": "Reserved 00h",
+        "section": "SFF-8636 v2.12 § 7.5",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "reserved_loopback_164": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 85,
+        "quote": "Reserved 00h",
+        "section": "SFF-8636 v2.12 § 7.5",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "reserved_loopback_169": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 85,
+        "quote": "Reserved 00h",
+        "section": "SFF-8636 v2.12 § 7.5",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "reserved_loopback_calibration_tail": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 85,
+        "quote": "Reserved 00h",
+        "section": "SFF-8636 v2.12 § 7.5",
+        "table": "Table 7-2"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "reserved_optical_calibration_tail": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 84,
+        "quote": "Reserved 00h",
+        "section": "SFF-8636 v2.12 § 7.4",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12"
+    },
+    "rx_power_delay_coefficient": {
+      "items": {
+        "contentEncoding": "base64",
+        "type": "string"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 89,
+        "quote": "Rx_Pwr_Dly(0) through Rx_Pwr_Dly(4)",
+        "section": "SFF-8636 v2.12 § 7.4.3",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "ns/dBm^degree"
+    },
+    "temperature_detune_offset": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 90,
+        "quote": "T_Detune_Offset",
+        "section": "SFF-8636 v2.12 § 7.4.4",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "0.1 nm"
+    },
+    "temperature_detune_slope": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 90,
+        "quote": "T_Detune_Slope",
+        "section": "SFF-8636 v2.12 § 7.4.4",
+        "table": "Table 7-1"
+      },
+      "x-openxcvr-since": "2.12",
+      "x-openxcvr-unit": "0.01 nm/deg C"
+    },
+    "timing_format_version": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'",
+        "pdf_page": 87,
+        "quote": "This version number shall be 01h",
+        "section": "SFF-8636 v2.12 § 7.3.1",
+        "table": "Table 7-3"
+      },
+      "x-openxcvr-since": "2.12"
+    }
+  },
+  "required": [
+    "format_id",
+    "timing_format_version",
+    "calibration_date_year",
+    "calibration_date_month",
+    "calibration_date_day_high",
+    "calibration_date_day_low",
+    "calibration_date_sequence",
+    "calibration_unique_identifier_oui",
+    "calibration_unique_identifier_osi",
+    "calibration_stratum",
+    "reserved_common_header",
+    "cc_calib"
+  ],
+  "title": "Sff8636Page22hHighAccuracyTiming",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92
+    ],
+    "spec": "SFF-8636 v2.12 § 7"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.12"
+  }
+}

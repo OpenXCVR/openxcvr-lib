@@ -1,0 +1,20 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis12Page43hMediaLaneProvisioningAdvertisement
+title: C-CMIS 1.2 Page 43h Media Lane Provisioning Advertisement
+spec:
+  id: c-cmis-1.2
+  revision: "01.2"
+  source: docs/stds/cmis/OIF-C-CMIS-01.2.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.2 § 7.6.3
+  pdf_pages: [36]
+page_address: "43h"
+size_bytes: 128
+fields:
+  - { name: reserved_128_7_2, offset: 128, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.2 § 7.6.3", pdf_page: 36, table: "Table 23" } }
+  - { name: lf_insertion_on_ld_enable_impl, offset: 128, bit_offset: 1, bit_width: 1, type: bool, access: ro, field_type: Informational, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=lfInsertionOnLdEnable on 31h:128.1 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.2 § 7.6.3", pdf_page: 36, table: "Table 23" } }
+  - { name: tx_filter_impl, offset: 128, bit_offset: 0, bit_width: 1, type: bool, access: ro, field_type: Informational, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=Tx filter provisioning on 31h:128.0,129,130 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.2 § 7.6.3", pdf_page: 36, table: "Table 23" } }
+  - { name: reserved_129_247, offset: 129, size_bytes: 119, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.2 § 7.6.3", pdf_page: 36, table: "Table 23" } }
+  - { name: custom, offset: 248, size_bytes: 8, type: bytes, access: rw, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Vendor defined custom bytes", provenance: { section: "OIF-C-CMIS-01.2 § 7.6.3", pdf_page: 36, table: "Table 23" } }

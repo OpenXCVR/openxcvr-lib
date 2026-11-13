@@ -1,0 +1,89 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024ConnectorType
+title: SFF-8024 Connector Types
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-3
+  pdf_pages: [19]
+entries:
+  - value: 0x00
+    name: unknown_or_unspecified
+    description: Unknown or unspecified
+  - value: 0x01
+    name: sc
+    description: SC Subscriber Connector
+  - value: 0x02
+    name: fibre_channel_style_1_copper
+    description: Fibre Channel Style 1 copper connector
+  - value: 0x03
+    name: fibre_channel_style_2_copper
+    description: Fibre Channel Style 2 copper connector
+  - value: 0x04
+    name: bnc_tnc
+    description: BNC/TNC connector
+  - value: 0x05
+    name: fibre_channel_coax_headers
+    description: Fibre Channel coax headers
+  - value: 0x06
+    name: fiber_jack
+    description: Fiber Jack
+  - value: 0x07
+    name: lc
+    description: LC Lucent Connector
+  - value: 0x08
+    name: mt_rj
+    description: MT-RJ Mechanical Transfer Registered Jack
+  - value: 0x09
+    name: mu
+    description: MU Multiple Optical
+  - value: 0x0a
+    name: sg
+    description: SG
+  - value: 0x0b
+    name: optical_pigtail
+    description: Optical pigtail
+  - value: 0x0c
+    name: mpo_1x12
+    description: MPO 1x12
+  - value: 0x0d
+    name: mpo_2x16
+    description: MPO 2x16
+  - value: 0x0e..0x1f
+    name: reserved_0e_1f
+    description: Reserved
+  - value: 0x20
+    name: hssdc_ii
+    description: HSSDC II
+  - value: 0x21
+    name: copper_pigtail
+    description: Copper pigtail
+  - value: 0x22
+    name: rj45
+    description: RJ45
+  - value: 0x23
+    name: no_separable_connector
+    description: No separable connector
+  - value: 0x24
+    name: mxc_2x16
+    description: MXC 2x16
+  - value: 0x25
+    name: cs_optical
+    description: CS optical connector
+  - value: 0x26
+    name: sn_optical
+    description: SN optical connector
+  - value: 0x27
+    name: mpo_2x12
+    description: MPO 2x12
+  - value: 0x28
+    name: mpo_1x16
+    description: MPO 1x16
+  - value: 0x29..0x7f
+    name: reserved_29_7f
+    description: Reserved
+  - value: 0x80..0xff
+    name: vendor_specific
+    description: Vendor specific

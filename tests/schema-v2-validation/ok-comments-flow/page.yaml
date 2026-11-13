@@ -1,0 +1,31 @@
+schema: openxcvr.page.v2
+kind: page
+id: CommentsAndFlow
+title: page.v2 positive fixture — inline comments, flow-style, out-of-block rev
+page_address: "00h"
+# A non-version `rev:` (here a provenance citation). The lint scopes rev-string
+# checks to changed_in/renamed_from/aliased_to blocks, so this non-CMIS value is
+# left alone — under the old line scanner it would have false-positive failed.
+provenance:
+  rev: "CMIS 5.3 Errata 1.0"
+fields:
+  - name: legacy_only
+    offset: 0
+    size_bytes: 1
+    type: u8
+    until: "4.0"  # dropped at CMIS 4.0
+  - name: added_in_4
+    offset: 1
+    size_bytes: 1
+    type: u8
+    since: "4.0"  # introduced at CMIS 4.0
+  - name: dpsm_state
+    offset: 2
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: dpsm-state
+    changed_in:
+      - rev: "5.0"  # widened at CMIS 5.0
+        enum_ref: dpsm-state-v4
+  # Flow-style field mapping: the `since` rev must still be validated inside `{ }`.
+  - { name: flow_field, offset: 3, size_bytes: 1, type: u8, since: "5.2" }

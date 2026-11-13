@@ -1,0 +1,361 @@
+fields:
+  - name: tx_bias
+    display_name: TxBias
+    offset: 100
+    size_bytes: 2
+    type: u16be
+    template: telemetry_module
+    tags: [Monitor, "Monitor::BiasCurrent"]
+    variants:
+      discriminator: { field: page_a0h_base_memory.externally_calibrated }
+      cases:
+        - when: { value: false }
+          encoding: { kind: scaled_unsigned, lsb_units: "2 uA" }
+        - when: { value: true }
+          encoding: { kind: external_calibration, constants_field: external_calibration_constants, slope_field: "external_calibration_linear_term[0]", offset_field: "external_calibration_linear_term[1]" }
+    provenance: { section: "SFF-8472 v12.5a §§ 9.3, 9.8", pdf_page: 46, table: "Table 9-16", quote: "TX Bias MSB/LSB" }
+
+  - name: tx_power
+    display_name: TxPower
+    offset: 102
+    size_bytes: 2
+    type: u16be
+    template: telemetry_module
+    tags: [Monitor, "Monitor::OpticalPower"]
+    variants:
+      discriminator: { field: page_a0h_base_memory.externally_calibrated }
+      cases:
+        - when: { value: false }
+          encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+        - when: { value: true }
+          encoding: { kind: external_calibration, constants_field: external_calibration_constants, slope_field: "external_calibration_linear_term[2]", offset_field: "external_calibration_linear_term[3]" }
+    provenance: { section: "SFF-8472 v12.5a §§ 9.3, 9.8", pdf_page: 46, table: "Table 9-16", quote: "TX Power MSB/LSB" }
+
+  - name: rx_power
+    display_name: RxPower
+    offset: 104
+    size_bytes: 2
+    type: u16be
+    template: telemetry_module
+    tags: [Monitor, "Monitor::OpticalPower"]
+    variants:
+      discriminator: { field: page_a0h_base_memory.externally_calibrated }
+      cases:
+        - when: { value: false }
+          encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+        - when: { value: true }
+          encoding: { kind: external_calibration, formula: poly4, constants_field: external_calibration_constants, coefficients: ["rx_power_coefficient[0]", "rx_power_coefficient[1]", "rx_power_coefficient[2]", "rx_power_coefficient[3]", "rx_power_coefficient[4]"] }
+    provenance: { section: "SFF-8472 v12.5a §§ 9.3, 9.8", pdf_page: 46, table: "Table 9-16", quote: "RX Power MSB/LSB" }
+
+  - name: optional_laser_temperature
+    display_name: OptionalLaserTempOrWavelength
+    offset: 106
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "1/256 deg C or vendor-defined wavelength units" }
+    template: telemetry_module
+    tags: [Monitor, "Monitor::Temperature", "Monitor::Frequency"]
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Optional Laser Temp/Wavelength MSB/LSB", lineage: "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'" }
+
+  - name: optional_tec_current
+    display_name: OptionalTecCurrent
+    offset: 108
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.1 mA" }
+    template: telemetry_module
+    tags: [Monitor, "Monitor::Current"]
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Optional TEC current MSB/LSB", lineage: "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'" }
+
+  # A2h byte 110, Table 9-16 "Optional Status/Control Bits": one field per
+  # spec row. The writable bits are the software controls (Soft TX Disable
+  # Select at 110.6, Soft Rate Select RS(0) at 110.3); the pin-mirror and
+  # status bits are read-only per the table, which is why 110.7 carries the
+  # pin STATE, not a write target (the spec's own control pointer is
+  # § 8.5: "Bits 3 and 6 of byte 110 ... allow the host to control the
+  # Rate_Select and TX_Disable functions").
+  - name: tx_disable_state
+    display_name: TxDisableState
+    offset: 110
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "TX Disable State - Digital state of the TX Disable Input Pin. Updated within 100 ms of change on pin" }
+
+  - name: soft_tx_disable_select
+    display_name: SoftTxDisableSelect
+    offset: 110
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Soft TX Disable Select - Read/write bit that allows software disable of laser. Writing '1' disables laser" }
+
+  - name: rs1_state
+    display_name: RS1State
+    offset: 110
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "RS(1) State - Digital state of SFP input pin AS(1) per SFF-8079 or RS(1) per SFF-8431" }
+
+  - name: rs0_state
+    display_name: RS0State
+    offset: 110
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Rate_Select State [aka. RS(0)] - Digital state of the module's Rate_Select Input Pin" }
+
+  - name: soft_rate_select_rs0
+    display_name: SoftRateSelectRS0
+    offset: 110
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Soft Rate_Select Select [aka. RS(0)] - Read/write bit that allows software rate select control. Writing '1' selects full bandwidth operation" }
+
+  - name: tx_fault_state
+    display_name: TxFaultState
+    offset: 110
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "TX Fault State - Digital state of the TX Fault Output Pin" }
+
+  - name: rx_los_state
+    display_name: RxLosState
+    offset: 110
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Rx_LOS State - Digital state of the RX_LOS Output Pin" }
+
+  - name: data_not_ready
+    display_name: DataNotReady
+    offset: 110
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Data_Not_Ready - Indicates module does not yet have valid monitor data", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.4: 'Modified name and definition of bit 0/byte110/A2h to clarify that this status refers to monitor data'" }
+
+  - name: reserved_a2h_111
+    display_name: ReservedA2h111
+    offset: 111
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.8", pdf_page: 46, table: "Table 9-16", quote: "Reserved" }
+
+  - name: alarm_warning_flag
+    display_name: <kind><monitor><severity>Flag
+    instances: { index: bit, start: 0, end: 31 }
+    offset_expr: "112 + (bit / 8) + (2 * ((bit / 16) % 2))"
+    bit_offset_expr: "7 - (bit % 8)"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag]
+    scope: { module: true }
+    behavior:
+      bit_order: "alarm temp/vcc/tx_bias/tx_power/rx_power/laser_temp/tec_current, then warning in same order"
+      reserved_bits: [14, 15, 30, 31]
+    provenance: { section: "SFF-8472 v12.5a § 9.9", pdf_page: 47, table: "Table 9-17", quote: "Alarm and Warning Flag Bits" }
+
+  - name: tx_input_equalization_control
+    display_name: TxInputEqualizationControl
+    offset: 114
+    size_bytes: 1
+    type: bitmap
+    template: control
+    scope: { module: true }
+    behavior: { high_nibble: "RATE=HIGH", low_nibble: "RATE=LOW", code_table: "Table 9-18" }
+    since: "12.3"
+    provenance: { section: "SFF-8472 v12.5a § 9.10", pdf_page: 49, table: "Table 9-18", quote: "Input Equalization", lineage: "Added at Rev 11.9b (SFF-8472 Rev 12.3 change history: 'Added Tx input EQ and RX output EMPH to bytes A2h 114-115'). 11.9b is not an admitted compliance revision (Table 8-8 codes name 11.4 then 12.3), so the window snaps to 12.3, the earliest compliance-code revision whose document defines the field (Rev 12.3 Table 9-13 'Input Equalization (Address A2H Byte 114)', p. 39)" }
+
+  - name: rx_output_emphasis_control
+    display_name: RxOutputEmphasisControl
+    offset: 115
+    size_bytes: 1
+    type: bitmap
+    template: control
+    scope: { module: true }
+    behavior: { high_nibble: "RATE=HIGH", low_nibble: "RATE=LOW", code_table: "Table 9-19" }
+    since: "12.3"
+    provenance: { section: "SFF-8472 v12.5a § 9.10", pdf_page: 49, table: "Table 9-19", quote: "Output Emphasis Control", lineage: "Added at Rev 11.9b (SFF-8472 Rev 12.3 change history: 'Added Tx input EQ and RX output EMPH to bytes A2h 114-115'). 11.9b is not an admitted compliance revision (Table 8-8 codes name 11.4 then 12.3), so the window snaps to 12.3, the earliest compliance-code revision whose document defines the field (Rev 12.3 Table 9-14 'Output Emphasis Control (Address A2H Byte 115)', p. 39)" }
+
+  # A2h bytes 118-119, Table 10-1 "Extended Module Control/Status Bytes":
+  # one field per spec row (reserved bits 5-7 of each byte are left as
+  # uncovered holes). The window of the former two-byte bitmap row (since
+  # 11.4) is inherited by every sub-field whose individual introduction the
+  # 12.5a change history does not pin down; bits the history does pin keep
+  # their cited windows (12.4 additions land at 12.4 — a compliance-code
+  # revision whose document is cached — and 11.9b-era additions at 12.3,
+  # the first compliance-code revision after them).
+  - name: adaptive_input_eq_fail_flag
+    display_name: AdaptiveInputEqFailFlag
+    offset: 118
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "Adaptive Input EQ Fail Flag - Tx Adaptive Input EQ fail status. 1b = Tx Adaptive Input EQ fail", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added bit 4, byte 118, A2h Adaptive Input EQ Fault indicator'; Rev 12.4 Table 10-1 (p. 41) defines byte 118 bit 4, Rev 12.3 Table 10-1 (p. 40) reserves byte 118 bits 4-7" }
+
+  - name: soft_rate_select_rs1
+    display_name: SoftRateSelectRS1
+    offset: 118
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "Soft RS(1) Select - Read/write bit that allows software Tx rate control. Writing '1' selects full speed Tx operation", lineage: "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Rate Select logic for 10G/8G with bypassable CDRs'" }
+
+  - name: power_level_4_enable
+    display_name: PowerLevel4Enable
+    offset: 118
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "Power Level 4 Enable - Value of 1 enables Power Level 4 if listed in A0h, Byte 64", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added bit 2, byte 118, A2h Enable Power Class 4'; Rev 12.4 Table 10-1 (p. 41) defines byte 118 bit 2, Rev 12.3 Table 10-1 (p. 40) reserves byte 118 bit 2" }
+
+  - name: power_level_operation_state
+    display_name: PowerLevelOperationState
+    offset: 118
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "Power Level Operation State - Optional. SFF-8431 Power Level (maximum power dissipation) status" }
+
+  - name: power_level_select
+    display_name: PowerLevelSelect
+    offset: 118
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "Power Level Select - Optional. SFF-8431 Power Level (maximum power dissipation) control bit" }
+
+  - name: pam4_mode_tx_configured
+    display_name: Pam4ModeTxConfigured
+    offset: 119
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    since: "12.3"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "PAM4 Mode Tx Configured - This status bit indicates the module Tx logic has finished configuring itself to 64GFC mode at 28.9 GBd", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.3: 'Added bits to support 64GFC speed negotiation'; Rev 12.3 Table 10-1 (p. 40) defines byte 119 bit 4 as '64GFC Mode Tx Configured'" }
+
+  - name: pam4_mode_rx_configured
+    display_name: Pam4ModeRxConfigured
+    offset: 119
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    since: "12.3"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "PAM4 Mode Rx Configured - This status bit indicates the module Rx logic has finished configuring itself to 64GFC mode at 28.9 GBd", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.3: 'Added bits to support 64GFC speed negotiation'; Rev 12.3 Table 10-1 (p. 40) defines byte 119 bit 3 as '64GFC Mode Rx Configured'" }
+
+  - name: gfc64_mode_select
+    display_name: Gfc64ModeSelect
+    offset: 119
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    since: "12.3"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "64GFC Mode - Writing a 1 to this bit selects 64GFC speed of operation at 28.9 GBd", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.3: 'Added bits to support 64GFC speed negotiation'; Rev 12.3 Table 10-1 (p. 40) defines byte 119 bit 2 as '64GFC Mode'" }
+
+  - name: optional_tx_cdr_unlocked
+    display_name: OptionalTxCdrUnlocked
+    offset: 119
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "Optional Tx CDR unlocked - Used when bit 64.3 (A0h) is set to 1. If the Tx side CDR is enabled, a value of 0 indicates that the CDR is locked" }
+
+  - name: optional_rx_cdr_unlocked
+    display_name: OptionalRxCdrUnlocked
+    offset: 119
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: status
+    scope: { module: true }
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 10.1", pdf_page: 50, table: "Table 10-1", quote: "Optional Rx CDR unlocked - Used when bit 64.3 (A0h) is set to 1. If the Rx side CDR is enabled, a value of 0 indicates that the CDR is locked" }
+
+  - name: vendor_specific_a2h_120_126
+    display_name: VendorSpecificA2h120To126
+    offset: 120
+    size_bytes: 7
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 10.2", pdf_page: 51, quote: "Vendor Specific" }
+
+  - name: page_select
+    display_name: PageSelect
+    offset: 127
+    size_bytes: 1
+    type: u8
+    template: control
+    scope: { module: true }
+    behavior: { page_select_for: "A2h bytes 128-255", default: "00h", unsupported_page: "reverts to 00h" }
+    provenance: { section: "SFF-8472 v12.5a § 10.3", pdf_page: 51, table: "Table 10-3", quote: "Page Select" }
+
+  - name: user_eeprom_or_paged_region
+    display_name: UserEepromOrPagedRegion
+    offset: 128
+    size_bytes: 120
+    type: bytes
+    template: storage
+    scope: { module: true }
+    behavior: { selected_by: page_select, page_00h_01h: "user EEPROM", page_02h_03h: "specialized optional pages" }
+    provenance: { section: "SFF-8472 v12.5a §§ 10.3-11", pdf_page: 51, quote: "Page select directs A2h bytes 128-255" }
+
+  - name: paged_region_vendor_specific_tail
+    display_name: PagedRegionVendorSpecificTail
+    offset: 248
+    size_bytes: 8
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 11.2", pdf_page: 52, table: "Table 11-2", quote: "Vendor specific control functions" }

@@ -1,0 +1,237 @@
+{
+  "$id": "cmis_vdm_observable_type.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "VDM instance is not active and presents no observable data",
+      "title": "not_used"
+    },
+    {
+      "const": 1,
+      "description": "Laser age from 0 percent at BOL to 100 percent at EOL for a media lane",
+      "title": "laser_age_media_lane"
+    },
+    {
+      "const": 2,
+      "description": "TEC current for the module",
+      "title": "tec_current_module",
+      "x-openxcvr-until": "5.3"
+    },
+    {
+      "const": 3,
+      "description": "Laser frequency error for a media lane",
+      "title": "laser_frequency_error_media_lane"
+    },
+    {
+      "const": 4,
+      "description": "Laser temperature for a media lane",
+      "title": "laser_temperature_media_lane",
+      "x-openxcvr-until": "5.3"
+    },
+    {
+      "const": 5,
+      "description": "SNR in dB for media input on a media lane",
+      "title": "snr_media_input_media_lane"
+    },
+    {
+      "const": 6,
+      "description": "SNR in dB for host input on a lane",
+      "title": "snr_host_input_lane"
+    },
+    {
+      "const": 7,
+      "description": "PAM4 level transition parameter for media input on a media lane",
+      "title": "pam4_level_transition_parameter_media_input"
+    },
+    {
+      "const": 8,
+      "description": "PAM4 level transition parameter for host input on a lane",
+      "title": "pam4_level_transition_parameter_host_input"
+    },
+    {
+      "const": 9,
+      "description": "Pre-FEC BER minimum sample for media input on a data path",
+      "title": "pre_fec_ber_min_media_input"
+    },
+    {
+      "const": 10,
+      "description": "Pre-FEC BER minimum sample for host input on a data path",
+      "title": "pre_fec_ber_min_host_input"
+    },
+    {
+      "const": 11,
+      "description": "Pre-FEC BER maximum sample for media input on a data path",
+      "title": "pre_fec_ber_max_media_input"
+    },
+    {
+      "const": 12,
+      "description": "Pre-FEC BER maximum sample for host input on a data path",
+      "title": "pre_fec_ber_max_host_input"
+    },
+    {
+      "const": 13,
+      "description": "Pre-FEC BER sample average for media input on a data path",
+      "title": "pre_fec_ber_average_media_input"
+    },
+    {
+      "const": 14,
+      "description": "Pre-FEC BER sample average for host input on a data path",
+      "title": "pre_fec_ber_average_host_input"
+    },
+    {
+      "const": 15,
+      "description": "Pre-FEC BER current sample for media input on a data path",
+      "title": "pre_fec_ber_current_media_input"
+    },
+    {
+      "const": 16,
+      "description": "Pre-FEC BER current sample for host input on a data path",
+      "title": "pre_fec_ber_current_host_input"
+    },
+    {
+      "const": 17,
+      "description": "FERC minimum sample value for media input on a data path",
+      "title": "ferc_min_media_input"
+    },
+    {
+      "const": 18,
+      "description": "FERC minimum sample value for host input on a data path",
+      "title": "ferc_min_host_input"
+    },
+    {
+      "const": 19,
+      "description": "FERC maximum sample value for media input on a data path",
+      "title": "ferc_max_media_input"
+    },
+    {
+      "const": 20,
+      "description": "FERC maximum sample value for host input on a data path",
+      "title": "ferc_max_host_input"
+    },
+    {
+      "const": 21,
+      "description": "FERC sample average value for media input on a data path",
+      "title": "ferc_average_media_input"
+    },
+    {
+      "const": 22,
+      "description": "FERC sample average value for host input on a data path",
+      "title": "ferc_average_host_input"
+    },
+    {
+      "const": 23,
+      "description": "FERC current sample value for media input on a data path",
+      "title": "ferc_current_media_input"
+    },
+    {
+      "const": 24,
+      "description": "FERC current sample value for host input on a data path",
+      "title": "ferc_current_host_input"
+    },
+    {
+      "const": 25,
+      "description": "FERC total accumulated value for media input on a data path",
+      "title": "ferc_total_accumulated_media_input"
+    },
+    {
+      "const": 26,
+      "description": "FERC total accumulated value for host input on a data path",
+      "title": "ferc_total_accumulated_host_input"
+    },
+    {
+      "const": 27,
+      "description": "SEWmax minimum sample value for media input on a data path",
+      "title": "sewmax_min_media_input"
+    },
+    {
+      "const": 28,
+      "description": "SEWmax minimum sample value for host input on a data path",
+      "title": "sewmax_min_host_input"
+    },
+    {
+      "const": 29,
+      "description": "SEWmax maximum sample value for media input on a data path",
+      "title": "sewmax_max_media_input"
+    },
+    {
+      "const": 30,
+      "description": "SEWmax maximum sample value for host input on a data path",
+      "title": "sewmax_max_host_input"
+    },
+    {
+      "const": 31,
+      "description": "SEWmax sample average value for media input on a data path",
+      "title": "sewmax_average_media_input"
+    },
+    {
+      "const": 32,
+      "description": "SEWmax sample average value for host input on a data path",
+      "title": "sewmax_average_host_input"
+    },
+    {
+      "const": 33,
+      "description": "SEWmax current sample value for media input on a data path",
+      "title": "sewmax_current_media_input"
+    },
+    {
+      "const": 34,
+      "description": "SEWmax current sample value for host input on a data path",
+      "title": "sewmax_current_host_input"
+    },
+    {
+      "const": 77,
+      "description": "Vcc2p6 voltage monitor for the module",
+      "title": "vcc2p6_voltage_monitor_module"
+    },
+    {
+      "const": 78,
+      "description": "Vcc1p8 voltage monitor for the module",
+      "title": "vcc1p8_voltage_monitor_module"
+    },
+    {
+      "const": 79,
+      "description": "Vcc1p2 voltage monitor for the module",
+      "title": "vcc1p2_voltage_monitor_module"
+    },
+    {
+      "const": 80,
+      "description": "Vcc0p9 voltage monitor for the module",
+      "title": "vcc0p9_voltage_monitor_module"
+    },
+    {
+      "const": 81,
+      "description": "Vcc0p7A voltage monitor for the module",
+      "title": "vcc0p7a_voltage_monitor_module"
+    },
+    {
+      "const": 82,
+      "description": "Vcc0p7B voltage monitor for the module",
+      "title": "vcc0p7b_voltage_monitor_module"
+    },
+    {
+      "const": 83,
+      "description": "Vcc12 voltage monitor for the module",
+      "title": "vcc12_voltage_monitor_module"
+    },
+    {
+      "const": 84,
+      "description": "ELS input power for lane or laser ID",
+      "title": "els_input_power_lane_laser_id"
+    }
+  ],
+  "title": "CmisVdmObservableType",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      274,
+      275
+    ],
+    "spec": "CMIS 5.3 § 8.22.1.2 / Tables 8-170 and 8-171"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

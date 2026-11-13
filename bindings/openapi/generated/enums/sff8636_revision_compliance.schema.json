@@ -1,0 +1,86 @@
+{
+  "$id": "sff8636_revision_compliance.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Revision not specified; not used for SFF-8636 rev 2.5 or higher",
+      "title": "revision_not_specified",
+      "x-openxcvr-since": "1.4"
+    },
+    {
+      "const": 1,
+      "description": "SFF-8436 Rev 4.8 or earlier",
+      "title": "sff8436_rev_4_8_or_earlier",
+      "x-openxcvr-since": "1.4"
+    },
+    {
+      "const": 2,
+      "description": "SFF-8436 Rev 4.8 or earlier except this byte and bytes 186-189 follow SFF-8636",
+      "title": "sff8436_rev_4_8_variant",
+      "x-openxcvr-since": "1.4"
+    },
+    {
+      "const": 3,
+      "description": "SFF-8636 Rev 1.3 or earlier",
+      "title": "sff8636_rev_1_3_or_earlier",
+      "x-openxcvr-since": "1.4"
+    },
+    {
+      "const": 4,
+      "description": "SFF-8636 Rev 1.4",
+      "title": "sff8636_rev_1_4",
+      "x-openxcvr-since": "1.4"
+    },
+    {
+      "const": 5,
+      "description": "SFF-8636 Rev 1.5",
+      "title": "sff8636_rev_1_5",
+      "x-openxcvr-since": "1.5"
+    },
+    {
+      "const": 6,
+      "description": "SFF-8636 Rev 2.0",
+      "title": "sff8636_rev_2_0",
+      "x-openxcvr-since": "2.0"
+    },
+    {
+      "const": 7,
+      "description": "SFF-8636 Rev 2.5, 2.6, and 2.7",
+      "title": "sff8636_rev_2_5_to_2_7",
+      "x-openxcvr-since": "2.5"
+    },
+    {
+      "const": 8,
+      "description": "SFF-8636 Rev 2.8, 2.9, and 2.10",
+      "title": "sff8636_rev_2_8_to_2_10",
+      "x-openxcvr-since": "2.8"
+    },
+    {
+      "const": 9,
+      "description": "SFF-8636 Rev 2.11",
+      "title": "sff8636_rev_2_11",
+      "x-openxcvr-since": "2.11"
+    },
+    {
+      "const": 10,
+      "description": "SFF-8636 Rev 2.12",
+      "title": "sff8636_rev_2_12",
+      "x-openxcvr-since": "2.12"
+    }
+  ],
+  "title": "Sff8636RevisionCompliance",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      31
+    ],
+    "spec": "SFF-8636 v2.11 § 6.2.2",
+    "table": "Table 6-4"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known SFF-8636 family domain (1.3, 1.4, 1.5, 2.0, 2.5, 2.8, 2.11, 2.12); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

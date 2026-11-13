@@ -1,0 +1,30 @@
+{
+  "$id": "sff8472_extended_identifier.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Extended identifier unspecified.",
+      "title": "unspecified"
+    },
+    {
+      "const": 4,
+      "description": "SFP or GBIC defined by two-wire interface ID only.",
+      "title": "two_wire_id_defined"
+    }
+  ],
+  "title": "Sff8472ExtendedIdentifier",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      21
+    ],
+    "spec": "SFF-8472 v12.5a § 5.2",
+    "table": "Table 5-2"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8472",
+    "revision": "12.5a"
+  }
+}

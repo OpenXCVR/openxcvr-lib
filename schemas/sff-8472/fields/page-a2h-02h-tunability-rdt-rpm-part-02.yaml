@@ -1,0 +1,97 @@
+fields:
+  - name: rpm_tx_control
+    since: "12.5"
+    display_name: RPMTxControl
+    offset: 212
+    size_bytes: 1
+    type: bitmap
+    template: control
+    scope: { module: true }
+    behavior: { layout: "TX state[7:4], enable local RPM[3], request send data[2], reserved[1], TX RPM enable[0]" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.7", pdf_page: 63, table: "Table 12-13", quote: "RPM Control Registers", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_rx_control
+    since: "12.5"
+    display_name: RPMRxControl
+    offset: 213
+    size_bytes: 1
+    type: bitmap
+    template: control
+    scope: { module: true }
+    behavior: { layout: "RX state[7:4], reserved[3:1], RX RPM enable[0]" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.7", pdf_page: 63, table: "Table 12-13", quote: "RPM Control Registers", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_data_transmission_enable
+    since: "12.5"
+    display_name: RPMDataTransmissionEnable
+    offset: 214
+    size_bytes: 1
+    type: bitmap
+    template: control
+    scope: { module: true }
+    behavior: { bit_order: "reserved, A2h.P03, A2h.P02.208-239, A2h.P02.128-191, A2h.P00, A2h.0-95/120-127, A0h.128-255, A0h.96-127" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.8", pdf_page: 64, table: "Table 12-14", quote: "RPM Data Transmission Control Registers", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_vendor_page_transmission_enable
+    since: "12.5"
+    display_name: RPMVendorPageTransmissionEnable
+    offset: 215
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.8", pdf_page: 64, table: "Table 12-14", quote: "Reserved for vendor pages to be sent in RPM", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_tx_security_inhibit
+    since: "12.5"
+    display_name: RPMTxSecurityInhibit
+    offset: 216
+    size_bytes: 2
+    type: bitmap
+    template: control
+    scope: { module: true }
+    behavior: { layout: "byte 216 range inhibit mask; byte 217 bit 7 global TX RPM disable; byte 217 bits 6-0 reserved" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.9", pdf_page: 65, table: "Table 12-15", quote: "RPM TX Security Features", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_rx_write_protection
+    since: "12.5"
+    display_name: RPMRxWriteProtection
+    offset: 218
+    size_bytes: 2
+    type: bitmap
+    template: control
+    scope: { module: true }
+    behavior: { layout: "byte 218 global/TxModIdx/RxCtrls/Tunable write protection; byte 219 reserved" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.9", pdf_page: 65, table: "Table 12-16", quote: "RPM RX Security Features", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: reserved_page_02h_220_239
+    since: "12.5"
+    display_name: ReservedPage02h220To239
+    offset: 220
+    size_bytes: 20
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.3", pdf_page: 57, table: "Table 12-5", quote: "Reserved", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_tx_user_data
+    since: "12.5"
+    display_name: RPMTxUserData
+    offset: 240
+    size_bytes: 8
+    type: bytes
+    template: control
+    scope: { module: true }
+    behavior: { trigger_on_write_to: 247, recommended_interval: "no more than once per second", overrun_flag: "rpm_latched_alarm[3]" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.10", pdf_page: 66, table: "Table 12-17", quote: "RemotePM TX User Data", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_rx_user_data
+    since: "12.5"
+    display_name: RPMRxUserData
+    offset: 248
+    size_bytes: 8
+    type: bytes
+    template: status
+    scope: { module: true }
+    behavior: { update_flags: ["rpm_latched_alarm[0]", "rpm_latched_alarm[1]"] }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.10", pdf_page: 66, table: "Table 12-17", quote: "RemotePM RX User Data", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }

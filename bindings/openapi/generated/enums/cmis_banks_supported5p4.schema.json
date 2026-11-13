@@ -1,0 +1,44 @@
+{
+  "$id": "cmis_banks_supported5p4.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "BanksSupported code set as printed by CMIS 5.4 Table 8-47: codes 0-2 keep the 5.3 meanings and code 3 is the escape code indicating that the number of supported banks is defined by the ExtraLaneBanksSupported field at 01h:174.4-0 (module supports more than 32 lanes). CmisBanksSupported keeps the pre-5.4 window, where code 3 is Reserved; this enum is the since-5.4 window. The 5.4 escape was introduced together with the lane-banking expansion to up to 32 banks (CMIS 5.4 § 4.1.1, § 8.4.4).",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Bank 0 supported (8 lanes)",
+      "title": "bank_0_with_8_lanes",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 1,
+      "description": "Banks 0 and 1 supported (16 lanes)",
+      "title": "banks_0_through_1_with_16_lanes",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 2,
+      "description": "Banks 0-3 supported (32 lanes)",
+      "title": "banks_0_through_3_with_32_lanes",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 3,
+      "description": "Escape code: the number of supported banks for lane-banked pages is defined by the ExtraLaneBanksSupported field at 01h:174.4-0 (module supports more than 32 lanes)",
+      "title": "bank_count_defined_in_01h_174",
+      "x-openxcvr-since": "5.4"
+    }
+  ],
+  "title": "CmisBanksSupported5p4",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      197
+    ],
+    "spec": "CMIS 5.4 § 8.4.4 / Table 8-47 (01h:142.1-0)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

@@ -1,0 +1,23 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisModuleFunctionType
+title: CMIS Module Function Type (8-bit)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.2.12 / Table 8-18
+  pdf_pages: [154]
+entries:
+  - value: 0x00
+    name: transmission_module
+    description: Transmission Module
+  - value: 0x01
+    name: elsfp_resource_module
+    description: ELSFP Resource Module
+  - value: 0x02..0x7f
+    name: reserved_02_7f
+    description: Reserved
+  - value: 0x80..0xff
+    name: custom_80_ff
+    description: Custom module function types

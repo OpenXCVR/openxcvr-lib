@@ -1,0 +1,37 @@
+schema: openxcvr.page.v1
+kind: page
+id: Sff8636Page02hUserEeprom
+title: SFF-8636 Upper Page 02h User EEPROM
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.5
+  pdf_pages: [58]
+page_address: 02h
+size_bytes: 128
+present_when: { field: "page_00h_upper_administrative.option_control_or_flag_support[page_02h_present]", equals: true }
+
+fields:
+  - name: clei_code
+    display_name: CLEICode
+    offset: 128
+    size_bytes: 10
+    type: ascii
+    access: rw
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    present_when: { field: page_00h_upper_administrative.clei_present, equals: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.5", pdf_page: 58, quote: "the first 10 bytes of Page 02h Bytes 128-137 are used to store the CLEI code" }
+
+  - name: user_eeprom
+    display_name: UserEEPROM
+    offset: 128
+    size_bytes: 128
+    type: bytes
+    template: storage
+    behavior:
+      standardized_subspan: "bytes 128-137 hold clei_code when page_00h_upper_administrative.clei_present is true"
+    provenance: { section: "SFF-8636 v2.11 § 6.5", pdf_page: 58, quote: "Page 02 is optionally provided as user-writable EEPROM." }

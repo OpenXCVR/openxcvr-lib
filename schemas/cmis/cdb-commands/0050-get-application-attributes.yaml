@@ -1,0 +1,171 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbGetApplicationAttributes
+title: CMIS CDB Command 0050h - Get Application Attributes
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.5.1
+  pdf_pages: [343]
+  table: Table 9-16
+cmd_id: 0x0050
+available_since: "5.3"
+cmd_id_group: application_information
+command_class: advertised
+description: >
+  Returns Application-dependent module properties (worst case module
+  power dissipation, programmable output power range, Pre-FEC BER
+  threshold and the Rx supervision thresholds). Introduced in CMIS 5.3
+  (5.3 revision history 'CDB Messages Changes: 0050h added Get
+  Application Attributes query'); the AppSelCode = 0 EPL reply mode
+  across Pages A0h-AEh, returning the attributes of all 15 NADs of the
+  addressed NAD block, is the CMIS 5.4 E7 extension ('CMD 0050h: Get
+  Application Attributes (new EPL variant)'). The command ID group
+  0050h-005Fh (Application Information) is Adv.; no dedicated
+  advertisement bit is defined for this command.
+  The EPL reply applies only when ApplicationNumber.AppSelCode = 0 (CMIS 5.4): each EPL page A0h+k, 1 <= k <= 15, carries the identical 20-byte Attributes structure (bytes 136-155) of the NAD for Application Number NADBlockIndex + k.
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 2
+    fields:
+      - name: application_number
+        offset: 136
+        size_bytes: 2
+        type: u16be
+        template: cdb_cmd_parameter
+        description: >
+          U16 Application Number: bits 15-12 reserved (0); bits 11-4
+          NADBlockIndex (0-254 at CMIS 5.4; bits 7-4, 0-15, through CMIS 5.3 -
+          widened with the 5.4 NAD expansion); bits 3-0 AppSelCode (1-15), or 0
+          to request the EPL reply. When ApplicationNumber is valid (AppSelCode
+          > 0), the attributes of that Application are returned into LPL. When
+          AppSelCode is zero and the NAD bank identified by NADBlockIndex is
+          supported, the attributes of all 15 NADs in that NAD block are returned
+          into 15 pages of EPL; for unused NADs all attributes are set to 0.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "5.3" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "5.3" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "5.3" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "5.3" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "5.3" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "5.3" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "5.3" }
+  lpl:
+    length: 20
+    fields:
+      - name: application_number
+        offset: 136
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          Unmodified CMD parameter.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: max_module_power
+        offset: 138
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16: Worst case module power dissipation when this Application is instantiated as often as possible in parallel (when applicable) with worst case configuration options. Unit: 0.25 W.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: prog_output_power_min
+        offset: 140
+        size_bytes: 2
+        type: i16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          S16: Minimum Programmable Output Power. Unit: 0.01 dBm.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: prog_output_power_max
+        offset: 142
+        size_bytes: 2
+        type: i16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          S16: Maximum Programmable Output Power. Unit: 0.01 dBm.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: pre_fec_ber_threshold
+        offset: 144
+        size_bytes: 2
+        type: f16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          F16: Pre FEC BER VDM high alarm threshold.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: rx_los_optical_power_thr
+        offset: 146
+        size_bytes: 2
+        type: i16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          S16: Optical power threshold for RxLOS alarm. Unit: 0.01 dBm.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: rx_power_high_alarm_thr
+        offset: 148
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16: OpticalPowerRxHighAlarmThreshold. Unit: 0.1 uW.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: rx_power_low_alarm_thr
+        offset: 150
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16: OpticalPowerRxLowAlarmThreshold. Unit: 0.1 uW.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: rx_power_high_warn_thr
+        offset: 152
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16: OpticalPowerRxHighWarningThreshold. Unit: 0.1 uW.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+      - name: rx_power_low_warn_thr
+        offset: 154
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U16: OpticalPowerRxLowWarningThreshold. Unit: 0.1 uW.
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+  epl:
+    length: 20
+    fields:
+      - name: attributes
+        offset: 136
+        size_bytes: 20
+        type: bytes
+        template: cdb_reply_field
+        tags: [CDB, Status, EPL]
+        description: >
+          Per-EPL-page Attributes structure, identical to the LPL reply Attributes; all zero for an unused NAD.
+        epl_page: A0h-AEh
+        provenance: { spec: "CMIS 5.4 § 9.5.1", table: "Table 9-16" }
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects:

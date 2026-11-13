@@ -1,0 +1,633 @@
+{
+  "$id": "sff8024_host_electrical_interface.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Undefined host electrical interface",
+      "title": "undefined"
+    },
+    {
+      "const": 1,
+      "description": "1000BASE-CX host interface",
+      "title": "base_1000_cx"
+    },
+    {
+      "const": 2,
+      "description": "XAUI host interface",
+      "title": "xaui"
+    },
+    {
+      "const": 3,
+      "description": "XFI host interface with application and lane rates spanning 9.95 to 11.18 Gb/s or GBd",
+      "title": "xfi"
+    },
+    {
+      "const": 4,
+      "description": "SFI host interface with application and lane rates spanning 9.95 to 11.18 Gb/s or GBd",
+      "title": "sfi"
+    },
+    {
+      "const": 5,
+      "description": "25GAUI C2M host interface",
+      "title": "gaui_25g_c2m"
+    },
+    {
+      "const": 6,
+      "description": "XLAUI C2M host interface",
+      "title": "xlaui_c2m"
+    },
+    {
+      "const": 7,
+      "description": "XLPPI host interface",
+      "title": "xlppi"
+    },
+    {
+      "const": 8,
+      "description": "LAUI-2 C2M host interface",
+      "title": "laui_2_c2m"
+    },
+    {
+      "const": 9,
+      "description": "50GAUI-2 C2M host interface",
+      "title": "gaui_50g_2_c2m"
+    },
+    {
+      "const": 10,
+      "description": "50GAUI-1 C2M host interface",
+      "title": "gaui_50g_1_c2m"
+    },
+    {
+      "const": 11,
+      "description": "CAUI-4 C2M host interface, not recommended for new designs",
+      "title": "caui_4_c2m"
+    },
+    {
+      "const": 12,
+      "description": "100GAUI-4 C2M host interface",
+      "title": "gaui_100g_4_c2m"
+    },
+    {
+      "const": 13,
+      "description": "100GAUI-2 C2M host interface",
+      "title": "gaui_100g_2_c2m"
+    },
+    {
+      "const": 14,
+      "description": "200GAUI-8 C2M host interface",
+      "title": "gaui_200g_8_c2m"
+    },
+    {
+      "const": 15,
+      "description": "200GAUI-4 C2M host interface",
+      "title": "gaui_200g_4_c2m"
+    },
+    {
+      "const": 16,
+      "description": "400GAUI-16 C2M host interface",
+      "title": "gaui_400g_16_c2m"
+    },
+    {
+      "const": 17,
+      "description": "400GAUI-8 C2M host interface",
+      "title": "gaui_400g_8_c2m"
+    },
+    {
+      "const": 18,
+      "description": "Reserved for Ethernet active modules",
+      "title": "reserved_12"
+    },
+    {
+      "const": 19,
+      "description": "10GBASE-CX4 host interface",
+      "title": "base_10g_cx4"
+    },
+    {
+      "const": 20,
+      "description": "25GBASE-CR CA-25G-L host interface",
+      "title": "base_25g_cr_ca_25g_l"
+    },
+    {
+      "const": 21,
+      "description": "25GBASE-CR or 25GBASE-CR-S CA-25G-S host interface",
+      "title": "base_25g_cr_ca_25g_s"
+    },
+    {
+      "const": 22,
+      "description": "25GBASE-CR or 25GBASE-CR-S CA-25G-N host interface",
+      "title": "base_25g_cr_ca_25g_n"
+    },
+    {
+      "const": 23,
+      "description": "40GBASE-CR4 host interface",
+      "title": "base_40g_cr4"
+    },
+    {
+      "const": 24,
+      "description": "50GBASE-CR host interface",
+      "title": "base_50g_cr"
+    },
+    {
+      "const": 25,
+      "description": "100GBASE-CR10 host interface",
+      "title": "base_100g_cr10"
+    },
+    {
+      "const": 26,
+      "description": "100GBASE-CR4 host interface",
+      "title": "base_100g_cr4"
+    },
+    {
+      "const": 27,
+      "description": "100GBASE-CR2 host interface",
+      "title": "base_100g_cr2"
+    },
+    {
+      "const": 28,
+      "description": "200GBASE-CR4 host interface",
+      "title": "base_200g_cr4"
+    },
+    {
+      "const": 29,
+      "description": "400G CR8 host interface",
+      "title": "base_400g_cr8"
+    },
+    {
+      "const": 30,
+      "description": "200GBASE-CR1 host interface",
+      "title": "base_200g_cr1"
+    },
+    {
+      "const": 31,
+      "description": "400GBASE-CR2 host interface",
+      "title": "base_400g_cr2"
+    },
+    {
+      "const": 32,
+      "description": "LEI-100G-PAM4-1 host interface",
+      "title": "lei_100g_pam4_1"
+    },
+    {
+      "const": 33,
+      "description": "LEI-200G-PAM4-2 host interface",
+      "title": "lei_200g_pam4_2"
+    },
+    {
+      "const": 34,
+      "description": "LEI-400G-PAM4-4 host interface",
+      "title": "lei_400g_pam4_4"
+    },
+    {
+      "const": 35,
+      "description": "LEI-800G-PAM4-8 host interface",
+      "title": "lei_800g_pam4_8"
+    },
+    {
+      "const": 36,
+      "description": "Reserved",
+      "title": "reserved_24"
+    },
+    {
+      "const": 37,
+      "description": "8G Fibre Channel host interface",
+      "title": "fc_8g"
+    },
+    {
+      "const": 38,
+      "description": "10G Fibre Channel host interface",
+      "title": "fc_10g"
+    },
+    {
+      "const": 39,
+      "description": "16G Fibre Channel host interface",
+      "title": "fc_16g"
+    },
+    {
+      "const": 40,
+      "description": "32G Fibre Channel host interface",
+      "title": "fc_32g"
+    },
+    {
+      "const": 41,
+      "description": "64G Fibre Channel host interface",
+      "title": "fc_64g"
+    },
+    {
+      "const": 42,
+      "description": "128G Fibre Channel FC-PI-6P host interface",
+      "title": "fc_128g_pi_6p"
+    },
+    {
+      "const": 43,
+      "description": "256G Fibre Channel FC-PI-7P host interface",
+      "title": "fc_256g_pi_7p"
+    },
+    {
+      "const": 44,
+      "description": "InfiniBand SDR host interface; lane counts may be 1, 2, 4, 8, or 12",
+      "title": "ib_sdr"
+    },
+    {
+      "const": 45,
+      "description": "InfiniBand DDR host interface; lane counts may be 1, 2, 4, 8, or 12",
+      "title": "ib_ddr"
+    },
+    {
+      "const": 46,
+      "description": "InfiniBand QDR host interface; lane counts may be 1, 2, 4, 8, or 12",
+      "title": "ib_qdr"
+    },
+    {
+      "const": 47,
+      "description": "InfiniBand FDR host interface; lane counts may be 1, 2, 4, 8, or 12",
+      "title": "ib_fdr"
+    },
+    {
+      "const": 48,
+      "description": "InfiniBand EDR host interface; lane counts may be 1, 2, 4, 8, or 12",
+      "title": "ib_edr"
+    },
+    {
+      "const": 49,
+      "description": "InfiniBand HDR host interface; lane counts may be 1, 2, 4, 8, or 12",
+      "title": "ib_hdr"
+    },
+    {
+      "const": 50,
+      "description": "InfiniBand NDR host interface; lane counts may be 1, 2, 4, 8, or 12",
+      "title": "ib_ndr"
+    },
+    {
+      "const": 51,
+      "description": "CPRI E.96 host interface",
+      "title": "cpri_e_96"
+    },
+    {
+      "const": 52,
+      "description": "CPRI E.99 host interface",
+      "title": "cpri_e_99"
+    },
+    {
+      "const": 53,
+      "description": "CPRI E.119 host interface",
+      "title": "cpri_e_119"
+    },
+    {
+      "const": 54,
+      "description": "CPRI E.238 host interface",
+      "title": "cpri_e_238"
+    },
+    {
+      "const": 55,
+      "description": "OTN OTL3.4 host interface",
+      "title": "otn_otl3_4"
+    },
+    {
+      "const": 56,
+      "description": "OTN OTL4.10 host interface",
+      "title": "otn_otl4_10"
+    },
+    {
+      "const": 57,
+      "description": "OTN OTL4.4 host interface",
+      "title": "otn_otl4_4"
+    },
+    {
+      "const": 58,
+      "description": "OTN OTLC.4 host interface",
+      "title": "otn_otlc_4"
+    },
+    {
+      "const": 59,
+      "description": "OTN FOIC1.4-MFI host interface",
+      "title": "otn_foic1_4_mfi"
+    },
+    {
+      "const": 60,
+      "description": "OTN FOIC1.2-MFI host interface",
+      "title": "otn_foic1_2_mfi"
+    },
+    {
+      "const": 61,
+      "description": "OTN FOIC2.8-MFI host interface",
+      "title": "otn_foic2_8_mfi"
+    },
+    {
+      "const": 62,
+      "description": "OTN FOIC2.4-MFI host interface",
+      "title": "otn_foic2_4_mfi"
+    },
+    {
+      "const": 63,
+      "description": "OTN FOIC4.16-MFI host interface",
+      "title": "otn_foic4_16_mfi"
+    },
+    {
+      "const": 64,
+      "description": "OTN FOIC4.8-MFI host interface",
+      "title": "otn_foic4_8_mfi"
+    },
+    {
+      "const": 65,
+      "description": "CAUI-4 C2M host interface without FEC",
+      "title": "caui_4_c2m_without_fec"
+    },
+    {
+      "const": 66,
+      "description": "CAUI-4 C2M host interface with RS(528,514) FEC",
+      "title": "caui_4_c2m_rs_528_514"
+    },
+    {
+      "const": 67,
+      "description": "50GBASE-CR2 host interface with RS(528,514) FEC",
+      "title": "base_50g_cr2_rs_528_514"
+    },
+    {
+      "const": 68,
+      "description": "50GBASE-CR2 host interface with BASE-R Fire code FEC",
+      "title": "base_50g_cr2_base_r_fire_code"
+    },
+    {
+      "const": 69,
+      "description": "50GBASE-CR2 host interface with no FEC",
+      "title": "base_50g_cr2_no_fec"
+    },
+    {
+      "const": 70,
+      "description": "100GBASE-CR1 host interface",
+      "title": "base_100g_cr1"
+    },
+    {
+      "const": 71,
+      "description": "200GBASE-CR2 host interface",
+      "title": "base_200g_cr2"
+    },
+    {
+      "const": 72,
+      "description": "400GBASE-CR4 host interface",
+      "title": "base_400g_cr4"
+    },
+    {
+      "const": 73,
+      "description": "800G-ETC-CR8 or 800GBASE-CR8 host interface",
+      "title": "base_800g_etc_cr8_or_800g_cr8"
+    },
+    {
+      "const": 74,
+      "description": "128G Fibre Channel FC-PI-8 host interface",
+      "title": "fc_128g_pi_8"
+    },
+    {
+      "const": 75,
+      "description": "100GAUI-1-S C2M host interface",
+      "title": "gaui_100g_1_s_c2m"
+    },
+    {
+      "const": 76,
+      "description": "100GAUI-1-L C2M host interface",
+      "title": "gaui_100g_1_l_c2m"
+    },
+    {
+      "const": 77,
+      "description": "200GAUI-2-S C2M host interface",
+      "title": "gaui_200g_2_s_c2m"
+    },
+    {
+      "const": 78,
+      "description": "200GAUI-2-L C2M host interface",
+      "title": "gaui_200g_2_l_c2m"
+    },
+    {
+      "const": 79,
+      "description": "400GAUI-4-S C2M host interface",
+      "title": "gaui_400g_4_s_c2m"
+    },
+    {
+      "const": 80,
+      "description": "400GAUI-4-L C2M host interface",
+      "title": "gaui_400g_4_l_c2m"
+    },
+    {
+      "const": 81,
+      "description": "800GAUI-8-S C2M host interface",
+      "title": "gaui_800g_8_s_c2m"
+    },
+    {
+      "const": 82,
+      "description": "800GAUI-8-L C2M host interface",
+      "title": "gaui_800g_8_l_c2m"
+    },
+    {
+      "const": 83,
+      "description": "OTN OTL4.2 host interface",
+      "title": "otn_otl4_2"
+    },
+    {
+      "const": 84,
+      "description": "Reserved",
+      "title": "reserved_54"
+    },
+    {
+      "const": 85,
+      "description": "1.6TAUI-16-S C2M host interface",
+      "title": "taui_1_6t_16_s_c2m"
+    },
+    {
+      "const": 86,
+      "description": "1.6TAUI-16-L C2M host interface",
+      "title": "taui_1_6t_16_l_c2m"
+    },
+    {
+      "const": 87,
+      "description": "800GBASE-CR4 host interface",
+      "title": "base_800g_cr4"
+    },
+    {
+      "const": 88,
+      "description": "1.6TBASE-CR8 host interface",
+      "title": "base_1_6t_cr8"
+    },
+    {
+      "const": 112,
+      "description": "PCIe 4.0 host interface; lane counts may be 1, 2, 4, 8, or 16",
+      "title": "pcie_4_0"
+    },
+    {
+      "const": 113,
+      "description": "PCIe 5.0 host interface; lane counts may be 1, 2, 4, 8, or 16",
+      "title": "pcie_5_0"
+    },
+    {
+      "const": 114,
+      "description": "PCIe 6.0 host interface; lane counts may be 1, 2, 4, 8, or 16",
+      "title": "pcie_6_0"
+    },
+    {
+      "const": 115,
+      "description": "PCIe 7.0 placeholder host interface; lane counts may be 1, 2, 4, 8, or 16",
+      "title": "pcie_7_0_placeholder"
+    },
+    {
+      "const": 116,
+      "description": "CEI-112G-LINEAR-PAM4 host interface with scalable n-lane notation in the table",
+      "title": "cei_112g_linear_pam4"
+    },
+    {
+      "const": 128,
+      "description": "200GAUI-1 C2M host interface",
+      "title": "gaui_200g_1_c2m"
+    },
+    {
+      "const": 129,
+      "description": "400GAUI-2 C2M host interface",
+      "title": "gaui_400g_2_c2m"
+    },
+    {
+      "const": 130,
+      "description": "800GAUI-4 C2M host interface",
+      "title": "gaui_800g_4_c2m"
+    },
+    {
+      "const": 131,
+      "description": "1.6TAUI-8 C2M host interface",
+      "title": "taui_1_6t_8_c2m"
+    },
+    {
+      "const": 144,
+      "description": "EEI-100G-RTLR-1-S host interface",
+      "title": "eei_100g_rtlr_1_s"
+    },
+    {
+      "const": 145,
+      "description": "EEI-100G-RTLR-1-L host interface",
+      "title": "eei_100g_rtlr_1_l"
+    },
+    {
+      "const": 146,
+      "description": "EEI-200G-RTLR-2-S host interface",
+      "title": "eei_200g_rtlr_2_s"
+    },
+    {
+      "const": 147,
+      "description": "EEI-200G-RTLR-2-L host interface",
+      "title": "eei_200g_rtlr_2_l"
+    },
+    {
+      "const": 148,
+      "description": "EEI-400G-RTLR-4-S host interface",
+      "title": "eei_400g_rtlr_4_s"
+    },
+    {
+      "const": 149,
+      "description": "EEI-400G-RTLR-4-L host interface",
+      "title": "eei_400g_rtlr_4_l"
+    },
+    {
+      "const": 150,
+      "description": "EEI-800G-RTLR-8-S host interface",
+      "title": "eei_800g_rtlr_8_s"
+    },
+    {
+      "const": 151,
+      "description": "EEI-800G-RTLR-8-L host interface",
+      "title": "eei_800g_rtlr_8_l"
+    },
+    {
+      "const": 152,
+      "description": "EEI-200G-RTLR-1 host interface",
+      "title": "eei_200g_rtlr_1"
+    },
+    {
+      "const": 153,
+      "description": "EEI-400G-RTLR-2 host interface",
+      "title": "eei_400g_rtlr_2"
+    },
+    {
+      "const": 154,
+      "description": "EEI-800G-RTLR-4 host interface",
+      "title": "eei_800g_rtlr_4"
+    },
+    {
+      "const": 155,
+      "description": "EEI-1.6T-RTLR-8 host interface",
+      "title": "eei_1_6t_rtlr_8"
+    },
+    {
+      "const": 160,
+      "description": "InfiniBand XDR placeholder host interface",
+      "title": "ib_xdr_placeholder"
+    },
+    {
+      "const": 176,
+      "description": "OTN FOIC1.1-MFI host interface",
+      "title": "otn_foic1_1_mfi"
+    },
+    {
+      "const": 177,
+      "description": "OTN FOIC4.4-MFI host interface",
+      "title": "otn_foic4_4_mfi"
+    },
+    {
+      "const": 178,
+      "description": "OTN FOIC8.8-MFI host interface",
+      "title": "otn_foic8_8_mfi"
+    },
+    {
+      "const": 179,
+      "description": "OTN FOIC1e.1-MFI host interface",
+      "title": "otn_foic1e_1_mfi"
+    },
+    {
+      "const": 180,
+      "description": "OTN FOIC4e.4-MFI host interface",
+      "title": "otn_foic4e_4_mfi"
+    },
+    {
+      "const": 181,
+      "description": "OTN FOIC1o.1-MFI host interface",
+      "title": "otn_foic1o_1_mfi"
+    },
+    {
+      "const": 182,
+      "description": "OTN FOIC4o.4-MFI host interface",
+      "title": "otn_foic4o_4_mfi"
+    },
+    {
+      "const": 183,
+      "description": "ITU-T G.9804.3 PON host interface",
+      "title": "pon_itu_t_g_9804_3"
+    },
+    {
+      "const": 190,
+      "description": "Escape to host electrical interface ID tables with nonzero GID; refer to the CMIS page 1Ch normalized application descriptor structure for the 12-bit Unique ID",
+      "title": "overflow_escape"
+    },
+    {
+      "const": 191,
+      "description": "Reserved",
+      "title": "reserved_bf"
+    },
+    {
+      "const": 255,
+      "description": "End of list marker",
+      "title": "end_of_list"
+    }
+  ],
+  "title": "Sff8024HostElectricalInterface",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "spec": "SFF-8024 4.14 Table 4-5"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8024",
+    "revision": "4.14"
+  }
+}

@@ -1,0 +1,250 @@
+entries:
+  - value: 0x54
+    name: otn_foic2_4_do
+    description: OTN FOIC2.4-DO coherent SMF media interface
+    tags: [otn, coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 63.1395, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 252.557871
+  - value: 0x55
+    name: base_400g_dr4_2
+    description: 400GBASE-DR4-2 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x56
+    name: base_800g_dr8
+    description: 800GBASE-DR8 SMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x57
+    name: base_800g_dr8_2
+    description: 800GBASE-DR8-2 SMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x58
+    name: zr400_ofec_8qam_hb
+    description: ZR400-OFEC-8QAM-HB coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 80.1847291, modulation: other:dp_8qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 481.108374
+  - value: 0x59
+    name: zr300_ofec_8qam_ha
+    description: ZR300-OFEC-8QAM-HA coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 60.1385468, modulation: other:dp_8qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 360.831281
+  - value: 0x5a
+    name: zr300_ofec_8qam_hb
+    description: ZR300-OFEC-8QAM-HB coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 60.1385468, modulation: other:dp_8qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 360.831281
+  - value: 0x5b
+    name: zr200_ofec_qpsk_ha
+    description: ZR200-OFEC-QPSK-HA coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 60.1385468, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 240.554187
+  - value: 0x5c
+    name: zr200_ofec_qpsk_hb
+    description: ZR200-OFEC-QPSK-HB coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 60.1385468, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 240.554187
+  - value: 0x5d
+    name: zr100_ofec_qpsk_ha
+    description: ZR100-OFEC-QPSK-HA coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 30.069273, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 120.277094
+  - value: 0x5e
+    name: zr100_ofec_qpsk_hb
+    description: ZR100-OFEC-QPSK-HB coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 30.069273, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 120.277094
+  - value: 0x5f
+    name: flexo_4_do_16qam_foic4_8_do
+    description: FLEXO-4-DO-16QAM/FOIC4.8-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 63.1394679, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 505.115743
+  - value: 0x60
+    name: flexo_3_do_8qam_foic3_6_do
+    description: FLEXO-3-DO-8QAM/FOIC3.6-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 63.1394679, modulation: other:dp_8qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 378.836807
+  - value: 0x61
+    name: flexo_2_do_qpsk_foic2_4_do
+    description: FLEXO-2-DO-QPSK/FOIC2.4-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 63.1394679, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 252.557871
+  - value: 0x62
+    name: flexo_2_do_16qam_foic2_8_do
+    description: FLEXO-2-DO-16QAM/FOIC2.8-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 31.569734, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 252.557871
+  - value: 0x63
+    name: flexo_1_do_qpsk_foic1_4_do
+    description: FLEXO-1-DO-QPSK/FOIC1.4-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 31.569734, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 126.278935
+  - value: 0x64
+    name: flexo_4e_do_qpsk_foic4e_4_do
+    description: FLEXO-4e-DO-QPSK/FOIC4e.4-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.203350603, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 472.813402412
+  - value: 0x65
+    name: flexo_4_do_qpsk_foic4_4_do
+    description: FLEXO-4-DO-QPSK/FOIC4.4-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 124.101712814, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 496.406851256
+  - value: 0x66
+    name: flexo_8e_do_16qam_foic8e_8_do
+    description: FLEXO-8e-DO-16QAM/FOIC8e.8-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.203350603, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 945.626804824
+  - value: 0x67
+    name: flexo_8_do_16qam_foic8_8_do
+    description: FLEXO-8-DO-16QAM/FOIC8.8-DO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 124.101712814, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 992.813702512
+  - value: 0x68
+    name: flexo_8e_dpo_16qam_foic8e_8_dpo
+    description: FLEXO-8e-DPO-16QAM/FOIC8e.8-DPO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 131.337056226, modulation: other:pcs4}
+    reach: {kind: smf}
+    bit_rate_gbps: 1050.696449808
+  - value: 0x69
+    name: flexo_8_dpo_16qam_foic8_8_dpo
+    description: FLEXO-8-DPO-16QAM/FOIC8.8-DPO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 131.348528160, modulation: other:pcs4}
+    reach: {kind: smf}
+    bit_rate_gbps: 1050.788225280
+  - value: 0x6a
+    name: flexo_6e_dpo_16qam_foic6e_8_dpo
+    description: FLEXO-6e-DPO-16QAM/FOIC6e.8-DPO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.749324509, modulation: other:pcs4}
+    reach: {kind: smf}
+    bit_rate_gbps: 949.994596072
+  - value: 0x6b
+    name: flexo_6_dp0_16qam_foic6_8_dpo
+    description: FLEXO-6-DP0-16QAM/FOIC6.8-DPO coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 124.674930887, modulation: other:pcs4}
+    reach: {kind: smf}
+    bit_rate_gbps: 997.399447096
+  - value: 0x6c
+    name: zr_800a
+    description: 800ZR-A 150 GHz DWDM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.203350603, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 945.626804824
+  - value: 0x6d
+    name: zr_800b
+    description: 800ZR-B 150 GHz DWDM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.203350603, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 945.626804824
+  - value: 0x6e
+    name: zr_800c
+    description: 800ZR-C 150 GHz DWDM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.203350603, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 945.626804824
+  - value: 0x6f
+    name: er4_400g_30
+    description: 400G-ER4-30 MSA SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x70
+    name: otn_1i1_5d1f
+    description: OTN 1I1-5D1F SMF media interface
+    tags: [otn]
+    signaling: {lane_count: 1, lane_rate_gbd: 55.90474, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 111.809474
+  - value: 0x71
+    name: otn_1r1_5d1f
+    description: OTN 1R1-5D1F SMF media interface
+    tags: [otn]
+    signaling: {lane_count: 1, lane_rate_gbd: 55.90474, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 111.809474
+  - value: 0x72
+    name: otn_foic1_1_rs
+    description: OTN FOIC1.1-RS SMF media interface
+    tags: [otn]
+    signaling: {lane_count: 1, lane_rate_gbd: 126.28}
+    reach: {kind: smf}
+    bit_rate_gbps: 126.278935
+  - value: 0x73
+    name: base_200g_dr1
+    description: 200GBASE-DR1 SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 212.50
+  - value: 0x74
+    name: base_200g_dr1_2
+    description: 200GBASE-DR1-2 SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 113.4375, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 212.50
+  - value: 0x75
+    name: base_400g_dr2
+    description: 400GBASE-DR2 SMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x76
+    name: base_400g_dr2_2
+    description: 400GBASE-DR2-2 SMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 113.4375, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x77
+    name: base_800g_dr4
+    description: 800GBASE-DR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x78
+    name: base_800g_dr4_2
+    description: 800GBASE-DR4-2 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 113.4375, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00

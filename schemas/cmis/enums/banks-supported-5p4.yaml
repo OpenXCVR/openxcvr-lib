@@ -1,0 +1,38 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisBanksSupported5p4
+title: CMIS Supported lane banks (2-bit, 01h:142.1-0)
+spec:
+  id: cmis
+  revision: "5.4"
+description: >
+  BanksSupported code set as printed by CMIS 5.4 Table 8-47: codes 0-2 keep
+  the 5.3 meanings and code 3 is the escape code indicating that the number
+  of supported banks is defined by the ExtraLaneBanksSupported field at
+  01h:174.4-0 (module supports more than 32 lanes). CmisBanksSupported keeps
+  the pre-5.4 window, where code 3 is Reserved; this enum is the since-5.4
+  window. The 5.4 escape was introduced together with the lane-banking
+  expansion to up to 32 banks (CMIS 5.4 § 4.1.1, § 8.4.4).
+provenance:
+  spec: CMIS 5.4 § 8.4.4 / Table 8-47 (01h:142.1-0)
+  pdf_pages: [197]
+entries:
+  - value: 0
+    name: bank_0_with_8_lanes
+    description: Bank 0 supported (8 lanes)
+    since: "5.4"
+  - value: 1
+    name: banks_0_through_1_with_16_lanes
+    description: Banks 0 and 1 supported (16 lanes)
+    since: "5.4"
+  - value: 2
+    name: banks_0_through_3_with_32_lanes
+    description: Banks 0-3 supported (32 lanes)
+    since: "5.4"
+  - value: 3
+    name: bank_count_defined_in_01h_174
+    description: >-
+      Escape code: the number of supported banks for lane-banked pages is
+      defined by the ExtraLaneBanksSupported field at 01h:174.4-0 (module
+      supports more than 32 lanes)
+    since: "5.4"

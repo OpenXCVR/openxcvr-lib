@@ -1,0 +1,47 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPageA1hCdbEplSegment2
+title: CMIS Page A1h CDB EPL Segment 2 (banked)
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.24
+  pdf_pages: [286]
+page_address: "A1h"
+size_bytes: 128
+present_when: "page_01h_advertising.cdb_instances_supported > 0"
+
+# EPL segment page for the CDB window. When CdbAutoPagingSupported is set
+# (01h:163.4), host READ/WRITE access past the end of an EPL page advances to
+# the next EPL page and wraps after the last supported segment.
+banking:
+  bank_count_field: page_01h_advertising.cdb_instances_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: cdb_instance
+  dimension_size: 1
+
+fields:
+  - name: epl_segment_2
+    display_name: EPLSegment2
+    offset: 128
+    size_bytes: 128
+    type: bytes
+    access: rw
+    field_type: Storage
+    tags: [CDB, EPL]
+    scope: { cdb_instance: 0 }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.24"
+      pdf_page: 286
+      table: "Table 8-181"
+      quote: "EPLSegment2 is the 2th 128 bytes segment of the overall Extended Payload (EPL) area, where 2 is a sequential segment number, starting with EPLSegment1 (on Page A0h) and counting up to EPLSegment16 (on Page AFh)."

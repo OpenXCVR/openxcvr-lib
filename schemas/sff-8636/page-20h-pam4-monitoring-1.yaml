@@ -1,0 +1,261 @@
+schema: openxcvr.page.v1
+kind: page
+id: Sff8636Page20hPam4Monitoring1
+title: SFF-8636 Page 20h PAM4/DWDM Monitoring
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.7.2
+  pdf_pages: [67, 68, 69, 70, 71, 72, 73, 74, 75, 76]
+page_address: 20h
+size_bytes: 128
+present_when: { field: "page_00h_upper_administrative.option_control_or_flag_support[pages_20h_21h_implemented]", equals: true }
+
+fields:
+  - name: param_high_alarm_flag
+    since: "2.11"
+    display_name: Param<param>HighAlarmFlag
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "128 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2)) + 3"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.2", pdf_page: 68, table: "Table 6-38", quote: "Latched Alarm/Warning Flags", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_low_alarm_flag
+    since: "2.11"
+    display_name: Param<param>LowAlarmFlag
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "128 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2)) + 2"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.2", pdf_page: 68, table: "Table 6-38", quote: "alarm low", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_high_warning_flag
+    since: "2.11"
+    display_name: Param<param>HighWarningFlag
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "128 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2)) + 1"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.2", pdf_page: 68, table: "Table 6-38", quote: "warning high", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_low_warning_flag
+    since: "2.11"
+    display_name: Param<param>LowWarningFlag
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "128 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2))"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.2", pdf_page: 68, table: "Table 6-38", quote: "warning low", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_high_alarm_mask
+    since: "2.11"
+    display_name: Param<param>HighAlarmMask
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "140 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2)) + 3"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.3", pdf_page: 69, table: "Table 6-39", quote: "Interrupt Mask Registers", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_low_alarm_mask
+    since: "2.11"
+    display_name: Param<param>LowAlarmMask
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "140 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2)) + 2"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.3", pdf_page: 69, table: "Table 6-39", quote: "alarm low", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_high_warning_mask
+    since: "2.11"
+    display_name: Param<param>HighWarningMask
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "140 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2)) + 1"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.3", pdf_page: 69, table: "Table 6-39", quote: "warning high", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_low_warning_mask
+    since: "2.11"
+    display_name: Param<param>LowWarningMask
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "140 + (param - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((param - 1) % 2))"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.3", pdf_page: 69, table: "Table 6-39", quote: "warning low", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: param_value
+    since: "2.11"
+    display_name: Param<param>Value
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "152 + 2 * (param - 1)"
+    size_bytes: 2
+    type: x16be
+    variants:
+      discriminator: { field: "parameter_type[param]" }
+      cases:
+        - { when: { value: 0x00 }, type: u16be, description: "Parameter not supported; value ignored" }
+        - { when: { value: 0x01 }, type: u16be, scale: "1/256", unit: dB, description: "SNR, line ingress" }
+        - { when: { value: 0x02 }, type: i16be, scale: 0.1, unit: ps/nm, description: "Residual ISI or dispersion" }
+        - { when: { value: 0x03 }, type: u16be, scale: "1/256", unit: dB, description: "PAM4 level transition parameter" }
+        - { when: { range: [0x04, 0x05] }, type: f16be, description: "Average BER or FER using SFF-8636 base-10 F16 encoding" }
+        - { when: { value: 0x06 }, type: i16be, scale: 0.1, unit: mA, description: "TEC current" }
+        - { when: { value: 0x07 }, type: i16be, scale: 10, unit: MHz, description: "Laser frequency difference" }
+        - { when: { value: 0x08 }, type: i16be, scale: "1/256", unit: deg_C, description: "Laser temperature difference" }
+        - { when: { range: [0x09, 0x10] }, type: f16be, description: "Latched, prior, or current BER/FER using SFF-8636 base-10 F16 encoding" }
+        - { when: { range: [0x11, 0xff] }, type: u16be, description: "Reserved or vendor-specific parameter carried as raw U16" }
+    template: telemetry_module
+    tags: [Monitor, PAM4]
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.4", pdf_page: 71, table: "Table 6-40", quote: "Real-Time Value Registers", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: parameter_threshold_id
+    since: "2.11"
+    display_name: Param<param>ThresholdID
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "200 + 2 * (param - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    template: capability_advertisement
+    scope: { parameter: param }
+    behavior: { value_range: "1..16 selects a threshold set on page 21h; 0 means not supported with parameter_type 0" }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.5", pdf_page: 73, table: "Table 6-42", quote: "Threshold ID", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: parameter_channel_specific
+    since: "2.11"
+    display_name: Param<param>ChannelSpecific
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "200 + 2 * (param - 1)"
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_advertisement
+    scope: { parameter: param }
+    enum_inline:
+      - { value: 0, name: global_module, description: "Parameter monitored globally for the module" }
+      - { value: 1, name: channel_specific, description: "Parameter monitored for a channel selected by bits 1:0" }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.5", pdf_page: 73, table: "Table 6-42", quote: "Parameter monitored at", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: parameter_channel
+    since: "2.11"
+    display_name: Param<param>Channel
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "200 + 2 * (param - 1)"
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    template: capability_advertisement
+    scope: { parameter: param }
+    behavior: { channel_numbering: "0..3 encodes channels 1..4 when parameter_channel_specific is true" }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.5", pdf_page: 73, table: "Table 6-42", quote: "Channel number", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: parameter_type
+    since: "2.11"
+    display_name: Param<param>Type
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "201 + 2 * (param - 1)"
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8636Pam4ParameterType
+    template: capability_advertisement
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.5", pdf_page: 73, table: "Table 6-43", quote: "Parameter Type Enumeration", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: electrical_to_optical_lane_mapping
+    since: "2.11"
+    display_name: ElectricalLane<lane>OpticalMapping
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "248 + (lane - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((lane - 1) % 2))"
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8636Pam4LaneMapping
+    template: informational
+    tags: [Information, PAM4]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.6", pdf_page: 74, table: "Table 6-45", quote: "Lane Mapping Enumeration", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: error_counter_reset
+    since: "2.11"
+    display_name: ErrorCounterReset
+    offset: 250
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: control
+    behavior: { write_trigger: self_clearing }
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.7", pdf_page: 75, table: "Table 6-46", quote: "Reset error counters", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: reserved_parameter_config_bit_3
+    since: "2.11"
+    display_name: ReservedParam<param>ConfigBit3
+    instances: { index: param, start: 1, end: 24 }
+    offset_expr: "200 + 2 * (param - 1)"
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: reserved
+    scope: { parameter: param }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.5", pdf_page: 73, table: "Table 6-42", quote: "Reserved", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: reserved_other_config_250_low_bits
+    since: "2.11"
+    display_name: ReservedOtherConfig250LowBits
+    offset: 250
+    bit_offset: 0
+    bit_width: 7
+    type: bitmap
+    access: rw
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.7", pdf_page: 75, table: "Table 6-46", quote: "Reserved", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }
+
+  - name: reserved_other_config_251_255
+    since: "2.11"
+    display_name: ReservedOtherConfig251To255
+    offset: 251
+    size_bytes: 5
+    type: bytes
+    access: rw
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.7.2.7", pdf_page: 75, table: "Table 6-46", quote: "Other Configuration Registers", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)" }

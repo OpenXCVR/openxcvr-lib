@@ -1,0 +1,68 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8472ComplianceCode
+title: SFF-8472 Revision Compliance Codes
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a § 8.11
+  table: "Table 8-8"
+  pdf_pages: [35]
+entries:
+  - value: 0x00
+    name: unspecified
+    description: SFF-8472 compliance not specified.
+  - value: 0x01
+    name: rev_9_3
+    description: Complies with SFF-8472 Rev 9.3.
+    since: "9.3"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 01h complies with SFF-8472 Rev 9.3"
+  - value: 0x02
+    name: rev_9_5
+    description: Complies with SFF-8472 Rev 9.5.
+    since: "9.5"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 02h complies with SFF-8472 Rev 9.5"
+  - value: 0x03
+    name: rev_10_2
+    description: Complies with SFF-8472 Rev 10.2.
+    since: "10.2"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 03h complies with SFF-8472 Rev 10.2"
+  - value: 0x04
+    name: rev_10_4
+    description: Complies with SFF-8472 Rev 10.4.
+    since: "10.4"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 04h complies with SFF-8472 Rev 10.4"
+  - value: 0x05
+    name: rev_11_0
+    description: Complies with SFF-8472 Rev 11.0.
+    since: "11.0"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 05h complies with SFF-8472 Rev 11.0"
+  - value: 0x06
+    name: rev_11_3
+    description: Complies with SFF-8472 Rev 11.3.
+    since: "11.3"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 06h complies with SFF-8472 Rev 11.3"
+  - value: 0x07
+    name: rev_11_4
+    description: Complies with SFF-8472 Rev 11.4.
+    since: "11.4"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 07h complies with SFF-8472 Rev 11.4"
+  - value: 0x08
+    name: rev_12_3
+    description: Complies with SFF-8472 Rev 12.3.
+    since: "12.3"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 08h complies with SFF-8472 Rev 12.3; identical in the Rev 12.3 document (Table 8-8, p. 28) and the Rev 12.4 document (Table 8-8, p. 26)"
+  - value: 0x09
+    name: rev_12_4
+    description: Complies with SFF-8472 Rev 12.4.
+    since: "12.4"
+    provenance: "SFF-8472 Rev 12.5a Table 8-8: code 09h complies with SFF-8472 Rev 12.4; first defined in the Rev 12.4 document (Table 8-8, p. 26; the Rev 12.3 document stops at 08h)"
+  - value: 0x0a
+    name: rev_12_5
+    description: Complies with SFF-8472 Rev 12.5.
+    since: "12.5"
+    provenance: "SFF-8472 Rev 12.5a change history, Rev 12.5: compliance code 0Ah for SFF-8472 Rev 12.5"
+  - value: 0x0b..0xff
+    name: reserved_0b_ff
+    description: Reserved.

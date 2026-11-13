@@ -1,0 +1,24 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8472ExtendedIdentifier
+title: SFF-8472 Extended Identifier Values
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a § 5.2
+  table: "Table 5-2"
+  pdf_pages: [21]
+entries:
+  - value: 0x00
+    name: unspecified
+    description: Extended identifier unspecified.
+  - value: 0x04
+    name: two_wire_id_defined
+    description: SFP or GBIC defined by two-wire interface ID only.
+  - value: 0x01..0x03
+    name: reserved_01_03
+    description: Reserved.
+  - value: 0x05..0xff
+    name: reserved_05_ff
+    description: Reserved.

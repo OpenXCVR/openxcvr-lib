@@ -1,0 +1,223 @@
+{
+  "$id": "cmis_page2_fh_vdm_advertisement.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "duty_cycle_support": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 311,
+        "quote": "1b: MonitoringDutyCycle is supported",
+        "section": "CMIS 5.4 § 8.27.8",
+        "table": "Table 8-186"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "fine_interval_length": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "Length of fine interval",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-unit": "0.1 ms"
+    },
+    "freeze_done": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "FreezeDone",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "freeze_request": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "FreezeRequest",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "monitoring_duty_cycle": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 311,
+        "quote": "U4: k, 0 <= k <= 10 (default). The module processes only a given fraction, min(k,10) - 10%, of the samples of each observable that would normally be processed.",
+        "section": "CMIS 5.4 § 8.27.8",
+        "table": "Table 8-186"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "power_saving_mode": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "PowerSavingMode",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "power_saving_support": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "PowerSavingMode is supported",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte_128_bits_7_3": {
+      "maximum": 31,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "Reserved",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-until": "5.3"
+    },
+    "reserved_byte_128_bits_7_4": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 311,
+        "quote": "Reserved",
+        "section": "CMIS 5.4 § 8.27.8",
+        "table": "Table 8-186"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_byte_144_bits_1_0": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 311,
+        "quote": "Reserved",
+        "section": "CMIS 5.4 § 8.27.8",
+        "table": "Table 8-186"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_byte_144_bits_5_0": {
+      "maximum": 63,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "Reserved",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-until": "5.3"
+    },
+    "reserved_byte_145_bits_5_0": {
+      "maximum": 63,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 281,
+        "quote": "Reserved",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "reserved_bytes_131_143": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "Reserved[13]",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "reserved_bytes_146_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 281,
+        "quote": "Reserved[110]",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "unfreeze_done": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 281,
+        "quote": "UnfreezeDone",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "vdm_support": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 280,
+        "quote": "VDMSupport",
+        "section": "CMIS 5.3 § 8.22.6",
+        "table": "Table 8-176"
+      },
+      "x-openxcvr-since": "4.0"
+    }
+  },
+  "required": [
+    "reserved_byte_128_bits_7_3",
+    "duty_cycle_support",
+    "reserved_byte_128_bits_7_4",
+    "power_saving_support",
+    "vdm_support",
+    "fine_interval_length",
+    "reserved_bytes_131_143",
+    "freeze_request",
+    "reserved_byte_144_bits_5_0",
+    "reserved_byte_144_bits_1_0",
+    "freeze_done",
+    "unfreeze_done",
+    "reserved_byte_145_bits_5_0",
+    "reserved_bytes_146_255"
+  ],
+  "title": "CmisPage2FhVdmAdvertisement",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      279,
+      280,
+      281
+    ],
+    "spec": "CMIS 5.3 § 8.22.6"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$id": "cmis_module_fault_cause_pre5p3.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "ModuleFaultCause code set as printed by CMIS 5.0, 5.1 and 5.2: codes 0-3 are defined and 4-31 are Reserved (fault codes). CMIS 5.3 defines codes 4-6 (Transmitter fault, Receiver fault, Temperature related fault); the full latest-revision code set remains CmisModuleFaultCause. This enum is the pre-5.3 window, selected per revision by the field's changed_in rev 5.0 enum_ref override and restored to the full enum by the rev 5.3 entry.",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "No fault detected, or the ModuleFaultCause field is not supported",
+      "title": "no_fault_detected_or_field_not_supported",
+      "x-openxcvr-since": "5.0",
+      "x-openxcvr-until": "5.3"
+    },
+    {
+      "const": 1,
+      "description": "Thermoelectric cooler runaway fault",
+      "title": "tec_runaway",
+      "x-openxcvr-since": "5.0",
+      "x-openxcvr-until": "5.3"
+    },
+    {
+      "const": 2,
+      "description": "Data memory corrupted fault",
+      "title": "data_memory_corrupted",
+      "x-openxcvr-since": "5.0",
+      "x-openxcvr-until": "5.3"
+    },
+    {
+      "const": 3,
+      "description": "Program memory corrupted fault",
+      "title": "program_memory_corrupted",
+      "x-openxcvr-since": "5.0",
+      "x-openxcvr-until": "5.3"
+    }
+  ],
+  "title": "CmisModuleFaultCausePre5p3",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      117
+    ],
+    "spec": "CMIS 5.0 § 8.2.10 / Table 8-15 (identical at 5.1 Table 8-15 p133 and 5.2 Table 8-16 p136)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.0"
+  }
+}

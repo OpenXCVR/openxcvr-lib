@@ -1,0 +1,18 @@
+{
+  "$id": "cmis_cdb_command_id5p4.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "CDB command ID group registry as printed by CMIS 5.4 Table 9-1 (p. 325). CmisCdbCommandId keeps the pre-5.4 window, where the whole 0x4100..0x7fff span is 'Restricted for use by OIF'; CMIS 5.4 allocates the first block, 0x4100..0x41ff, to the Coherent CMIS (C-CMIS) supplement and re-describes the remainder as OIF block allocation space for supplement documents. Revision-blind duplicate/overlap rules forbid splitting the span in place, so the since-5.4 group set lands here, following the CmisBanksSupported5p4 precedent (ADV-01).",
+  "title": "CmisCdbCommandId5p4",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      325
+    ],
+    "spec": "CMIS 5.4 § 9.1 / Table 9-1"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

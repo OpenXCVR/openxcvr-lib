@@ -1,0 +1,18 @@
+---
+schema: openxcvr.page.v1
+kind: page
+id: CmisLtPage08hGeneral
+title: "CMIS-LT 1.0 Page 08h General Advertisements and Configuration"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  source: "docs/stds/cmis/OIF-CMIS-LT-01.0.pdf"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 § 6.1 (Tables 4-7)"
+  pdf_pages: [33, 34, 35, 36, 37]
+page_address: "08h"
+size_bytes: 128
+field_includes:
+  - fields/page-08h-general-part-01.yaml
+fields: []

@@ -1,0 +1,117 @@
+// Reference output of the Python facade decode_sff8472 (bindings/python) on the exact
+// bytes Sff8472PaddingTests builds. Input: a 300-byte A0h (ShortA0h() bytes 0-99, i & 0xFF for i in 100..299; passed through verbatim, never truncated) + FullA2h() as A2h.
+// Regenerate from the repo root:
+//   python3 bindings/csharp/tests/OpenXcvr.Transceivers.Tests/gen-python-ref-sff8472.py
+{
+  "checksums": {
+    "cc_base": {
+      "computed": "0x3A",
+      "stored": "0x3A",
+      "valid": true
+    },
+    "cc_dmi": {
+      "computed": "0x00",
+      "stored": "0x00",
+      "valid": true
+    },
+    "cc_ext": {
+      "computed": "0x4C",
+      "stored": "0x4C",
+      "valid": true
+    }
+  },
+  "compliance": {
+    "raw_bytes_a0h_3_10": [
+      "0x03",
+      "0x04",
+      "0x05",
+      "0x06",
+      "0x07",
+      "0x08",
+      "0x09",
+      "0x0A"
+    ],
+    "reach": {
+      "om1_m": 0,
+      "om2_m": 0,
+      "om3_m": 0,
+      "om4_m": 0,
+      "smf_km": 0
+    },
+    "wavelength_nm": 8224
+  },
+  "decode_status": "ok",
+  "flags": {
+    "alarm_summary": {
+      "rx_power_high_alarm": false,
+      "rx_power_low_alarm": false,
+      "temp_high_alarm": false,
+      "temp_low_alarm": false,
+      "tx_bias_high_alarm": false,
+      "tx_bias_low_alarm": false,
+      "tx_power_high_alarm": false,
+      "tx_power_low_alarm": true,
+      "vcc_high_alarm": false,
+      "vcc_low_alarm": false
+    },
+    "warning_summary": {
+      "rx_power_high_warning": false,
+      "rx_power_low_warning": false,
+      "temp_high_warning": false,
+      "temp_low_warning": false,
+      "tx_bias_high_warning": false,
+      "tx_bias_low_warning": false,
+      "tx_power_high_warning": false,
+      "tx_power_low_warning": false,
+      "vcc_high_warning": false,
+      "vcc_low_warning": true
+    }
+  },
+  "identity": {
+    "date_code": "\u0000\u0000\u0000\u0000\u0000\u0000",
+    "vendor_name": "ACMEWIDGETSP\u0000\u0000\u0000\u0000",
+    "vendor_oui": "42:43:2D",
+    "vendor_pn": "123 A1      SN00",
+    "vendor_sn": "250113  \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  "lanes": [
+    {
+      "index": 1,
+      "rx_los": false,
+      "rx_power_mw": 0.3125,
+      "tx_bias_ma": 20.0,
+      "tx_disable": false,
+      "tx_fault": false,
+      "tx_power_mw": 0.1024
+    }
+  ],
+  "module": {
+    "calibration": {
+      "ddm_implemented": true,
+      "externally_calibrated": false,
+      "internally_calibrated": true,
+      "rx_power_kind": "oma"
+    },
+    "cmis_revision": null,
+    "connector": {
+      "name": "copper_pigtail",
+      "raw": "0x21"
+    },
+    "encoding": {
+      "name": "unspecified",
+      "raw": "0x00"
+    },
+    "identifier": {
+      "name": "sfp_sff8472",
+      "raw": "0x03"
+    },
+    "memory_model": null,
+    "module_state": null,
+    "module_type": null,
+    "nominal_bit_rate_gbps": 10.0
+  },
+  "monitoring": {
+    "module_temperature_c": 32.0,
+    "module_voltage_v": 3.3024
+  }
+}

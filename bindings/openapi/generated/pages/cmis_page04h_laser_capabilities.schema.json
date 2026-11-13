@@ -1,0 +1,291 @@
+{
+  "$id": "cmis_page04h_laser_capabilities.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "fine_tuning_high_offset": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "S16 highest fine-tuning offset in increments of 0.001 GHz",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "fine_tuning_low_offset": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "S16 lowest fine-tuning offset with resolution of 0.001 GHz",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "fine_tuning_resolution": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "U16 Fine-tuning resolution, increments of 0.001 GHz",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "fine_tuning_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "Module supports fine-tuning of laser frequency in the vicinity of an on-grid channel",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_high_channel": {
+      "description": "Grid index order is 0=3.125 GHz, 1=6.25 GHz, 2=12.5 GHz, 3=25 GHz, 4=50 GHz, 5=100 GHz, 6=33 GHz, 7=75 GHz, 8=150 GHz.",
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "S16 highest supported n for the channel spacing selected by grid",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_high_channel_300_ghz": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 214,
+        "quote": "S16 Highest supported n for 300 GHz spacing",
+        "section": "CMIS 5.4 § 8.7",
+        "table": "Table 8-68"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "grid_low_channel": {
+      "description": "Grid index order is 0=3.125 GHz, 1=6.25 GHz, 2=12.5 GHz, 3=25 GHz, 4=50 GHz, 5=100 GHz, 6=33 GHz, 7=75 GHz, 8=150 GHz.",
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "S16 lowest supported n for the channel spacing selected by grid",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_low_channel_300_ghz": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 214,
+        "quote": "S16 Lowest supported n for 300 GHz spacing",
+        "section": "CMIS 5.4 § 8.7",
+        "table": "Table 8-68"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "grid_supported_100_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 188,
+        "quote": "100 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_12p5_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "12.5 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_150_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "150 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_25_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "25 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_300_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 214,
+        "quote": "Bool: Indicates whether the module supports channel-based tuning on the 300 GHz grid defined as: Frequency (THz) = 193.1 + (n - 9) x 0.0125 where n must be an integer multiple of 24. 0b: 300 GHz Grid not supported 1b: 300 GHz Grid supported",
+        "section": "CMIS 5.4 § 8.7",
+        "table": "Table 8-68"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "grid_supported_33_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 188,
+        "quote": "33 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_3p125_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "3.125 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_50_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 188,
+        "quote": "50 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_6p25_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 189,
+        "quote": "6.25 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "grid_supported_75_ghz": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 188,
+        "quote": "75 GHz Grid supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "output_power_tx_relative_thresholds_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 214,
+        "quote": "1b/0b: 12h:216-217 is supported / not supported",
+        "section": "CMIS 5.4 § 8.7",
+        "table": "Table 8-68"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "page_checksum": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 190,
+        "quote": "Page Checksum over bytes 128-254",
+        "section": "CMIS 5.3 § 8.7"
+      }
+    },
+    "prog_output_power_max": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 190,
+        "quote": "S16 Maximum Programmable Output Power in increments of 0.01 dBm",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "prog_output_power_min": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 190,
+        "quote": "S16 Minimum Programmable Output Power in increments of 0.01 dBm",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    },
+    "prog_output_power_per_lane_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 190,
+        "quote": "Programmable output power per lane supported",
+        "section": "CMIS 5.3 § 8.7",
+        "table": "Table 8-66"
+      }
+    }
+  },
+  "required": [
+    "grid_supported_75_ghz",
+    "grid_supported_33_ghz",
+    "grid_supported_100_ghz",
+    "grid_supported_50_ghz",
+    "grid_supported_25_ghz",
+    "grid_supported_12p5_ghz",
+    "grid_supported_6p25_ghz",
+    "grid_supported_3p125_ghz",
+    "fine_tuning_supported",
+    "grid_supported_150_ghz",
+    "grid_supported_300_ghz",
+    "grid_low_channel",
+    "grid_low_channel_300_ghz",
+    "grid_high_channel_300_ghz",
+    "grid_high_channel",
+    "fine_tuning_resolution",
+    "fine_tuning_low_offset",
+    "fine_tuning_high_offset",
+    "prog_output_power_per_lane_supported",
+    "output_power_tx_relative_thresholds_supported",
+    "page_checksum"
+  ],
+  "title": "CmisPage04hLaserCapabilities",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      188,
+      189,
+      190
+    ],
+    "spec": "CMIS 5.3 § 8.7"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

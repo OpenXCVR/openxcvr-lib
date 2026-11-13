@@ -1,0 +1,27 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8636Page22hFormatId
+title: SFF-8636 Page 22h High Accuracy Timing Format IDs
+spec:
+  id: sff-8636
+  revision: "2.12"
+provenance:
+  spec: SFF-8636 v2.12 § 7
+  tables: ["Table 7-1", "Table 7-2"]
+  pdf_pages: [83, 84, 85]
+entries:
+  - value: 0xca1b
+    name: optical_module_calibration
+    description: Page 22h contains the calibration format for optical modules.
+  - value: 0x100b
+    name: loopback_module_calibration
+    description: Page 22h contains the calibration format for loopback modules.
+  - value: 0x0000..0x100a
+    name: reserved_or_invalid_low
+    description: Not a defined SFF-8636 page 22h high accuracy timing format ID.
+  - value: 0x100c..0xca1a
+    name: reserved_or_invalid_mid
+    description: Not a defined SFF-8636 page 22h high accuracy timing format ID.
+  - value: 0xca1c..0xffff
+    name: reserved_or_invalid_high
+    description: Not a defined SFF-8636 page 22h high accuracy timing format ID unless one of the explicit format values applies.

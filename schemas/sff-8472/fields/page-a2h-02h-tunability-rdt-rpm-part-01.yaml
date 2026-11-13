@@ -1,0 +1,263 @@
+fields:
+  - name: sff8690_tunability_feature_advertisement
+    since: "12.5"
+    display_name: Sff8690TunabilityFeatureAdvertisement
+    offset: 128
+    size_bytes: 1
+    type: bitmap
+    field_type: SupplementDefined
+    tags: [SupplementDefined, CapabilityAdvertisement]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8472 v12.5a § 12", pdf_page: 53, table: "Table 12-1", quote: "Feature Advertisement for Tunability", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_supported
+    since: "12.5"
+    display_name: RPMSupported
+    offset: 129
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.1.1", pdf_page: 53, table: "Table 12-2", quote: "RPM (Remote Performance Monitoring) Supported", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rdt_current_value_readable
+    since: "12.5"
+    display_name: RDTCurrValReadable
+    offset: 129
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.1.1", pdf_page: 53, table: "Table 12-2", quote: "RDT current value readable Advertisement", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rdt_revision_12_5_mode
+    since: "12.5"
+    display_name: RDTMode
+    offset: 129
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: legacy_rev_12_4_behavior, description: "RDT behaves per Rev 12.4" }
+      - { value: 1, name: rev_12_5_behavior, description: "RDT behaves per Rev 12.5" }
+    provenance: { section: "SFF-8472 v12.5a § 12.1.1", pdf_page: 53, table: "Table 12-2", quote: "RDT mode per Rev 12.5", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: reserved_page_02h_129_bits_7_3
+    since: "12.5"
+    display_name: ReservedPage02h129Bits7To3
+    offset: 129
+    bit_offset: 3
+    bit_width: 5
+    type: u5
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.1.1", pdf_page: 53, table: "Table 12-2", quote: "Reserved", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rdt_auto_mode
+    since: "12.5"
+    display_name: RDTAutoMode
+    offset: 130
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: manual, description: "Host controls RDT value through byte 131" }
+      - { value: 1, name: automatic, description: "Module control loop controls RDT" }
+    provenance: { section: "SFF-8472 v12.5a § 12.2", pdf_page: 54, table: "Table 12-3", quote: "RDT mode is automatic (module control loop)", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: reserved_page_02h_130_bits_7_1
+    since: "12.5"
+    display_name: ReservedPage02h130Bits7To1
+    offset: 130
+    bit_offset: 1
+    bit_width: 7
+    type: u7
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.2", pdf_page: 54, table: "Table 12-3", quote: "Reserved", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rdt_value
+    since: "11.4"
+    display_name: RDTValue
+    offset: 131
+    size_bytes: 1
+    type: i8
+    template: control
+    scope: { module: true }
+    encoding: { kind: formula, formula: "50% + (raw / 256) * 100%", examples: { "0x80": "0%", "0x00": "50%", "0x7f": "99.61%" } }
+    behavior: { access: "RW in manual or legacy mode; RO in Rev 12.5 automatic mode" }
+    provenance: { section: "SFF-8472 v12.5a § 12.2", pdf_page: 54, table: "Table 12-3", quote: "Optional RDT Value", lineage: "Optional support added at Rev 11.4 (SFF-8472 Rev 12.3 change history, Rev 11.4: 'Added optional support for: ... Variable Receiver Decision Threshold'). Rev 12.3 § 10.6 Table 10-6 (p. 42) defines A2h Page 02h byte 131 'Optional RDT Control', unchanged in Rev 12.4 § 10.6 Table 10-6 (p. 43); Rev 12.5 § 12.2 consolidates the RDT registers without changing the byte" }
+
+  - name: sff8690_module_capability_advertisement
+    since: "12.5"
+    display_name: Sff8690ModuleCapabilityAdvertisement
+    offset: 132
+    size_bytes: 10
+    type: bytes
+    field_type: SupplementDefined
+    tags: [SupplementDefined, CapabilityAdvertisement]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8472 v12.5a § 12", pdf_page: 53, table: "Table 12-1", quote: "Advertisement of Module Capabilities", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: sff8690_channel_tuning_controls
+    since: "12.5"
+    display_name: Sff8690ChannelTuningControls
+    offset: 144
+    size_bytes: 28
+    type: bytes
+    field_type: SupplementDefined
+    tags: [SupplementDefined, Control, "Control::Frequency"]
+    access: rw
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "SFF-8472 v12.5a § 12", pdf_page: 53, table: "Table 12-1", quote: "SFF-8690 Tunable Section", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: sff8690_tunability_latched_status
+    since: "12.5"
+    display_name: Sff8690TunabilityLatchedStatus
+    offset: 172
+    size_bytes: 2
+    type: bitmap
+    field_type: Flag
+    tags: [Flag, SupplementDefined]
+    access: ro
+    behavior: { latching: clear_on_read }
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "SFF-8472 v12.5a § 12", pdf_page: 53, table: "Table 12-1", quote: "Latched Status", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_latched_alarm
+    since: "12.5"
+    display_name: RPMLatchedAlarm<bit>
+    instances: { index: bit, start: 0, end: 15 }
+    offset_expr: "174 + (bit / 8)"
+    bit_offset_expr: "7 - (bit % 8)"
+    bit_width: 1
+    type: bool
+    template: flag
+    tags: [Flag, AlarmFlag, "Monitor::RPM"]
+    scope: { module: true }
+    behavior:
+      latching: clear_on_read_when_condition_clears
+      bit_order: "RxUserData, RxUserChanged, TxUserSending, TxUserDataOverrun, GlobalRxError, MsgError, TomError, FrameUnlock, reserved[4], 2ABTx, 2ABRx, 2A0NACK, 2A0ACK"
+    provenance: { section: "SFF-8472 v12.5a § 12.3.2", pdf_page: 58, table: "Table 12-6", quote: "Remote Performance COR Latched Alarms", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: reserved_page_02h_176_191
+    since: "12.5"
+    display_name: ReservedPage02h176To191
+    offset: 176
+    size_bytes: 16
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12", pdf_page: 53, table: "Table 12-1", quote: "Reserved", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_status
+    since: "12.5"
+    display_name: RPMStatus
+    offset: 192
+    size_bytes: 1
+    type: bitmap
+    template: status
+    scope: { module: true }
+    behavior: { special_write: "Writing 0xa5 resets error counters at bytes 198-207" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.3", pdf_page: 59, table: "Table 12-7", quote: "Remote Performance Monitoring Status Registers", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_last_rx_msg_content
+    since: "12.5"
+    display_name: RPMLastRxMsgContent
+    offset: 193
+    size_bytes: 3
+    type: bytes
+    template: status
+    scope: { module: true }
+    behavior: { payload_bits: 24, update_period: "about every 9.6 ms once RX framer is locked" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.3", pdf_page: 60, table: "Table 12-7", quote: "Most Recent Rx RPM MSG message value", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_last_rx_tom_value
+    since: "12.5"
+    display_name: RPMLastRxTomValue
+    offset: 196
+    size_bytes: 2
+    type: u16be
+    template: status
+    scope: { module: true }
+    encoding: { kind: bitfield, reserved_bits: "byte 196 bits 7-3", value_bits: 11 }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.3", pdf_page: 60, table: "Table 12-7", quote: "Most Recent Rx RPM TOM value", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_frame_lol_count
+    since: "12.5"
+    display_name: RPMFrameLolCount
+    offset: 198
+    size_bytes: 2
+    type: u16be
+    template: status
+    tags: [Status, "Monitor::ErrorCount"]
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.4", pdf_page: 61, table: "Table 12-8", quote: "Frame LOL Counter", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_frame_count
+    since: "12.5"
+    display_name: RPMFrameCount
+    offset: 200
+    size_bytes: 4
+    type: u32be
+    template: status
+    tags: [Status, "Monitor::BitsCount"]
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.4", pdf_page: 61, table: "Table 12-8", quote: "Frame Count", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_frame_tom_error_count
+    since: "12.5"
+    display_name: RPMFrameTomErrCount
+    offset: 204
+    size_bytes: 2
+    type: u16be
+    template: status
+    tags: [Status, "Monitor::ErrorCount"]
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.4", pdf_page: 61, table: "Table 12-8", quote: "frameTomErrCount", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_frame_msg_error_count
+    since: "12.5"
+    display_name: RPMFrameMsgErrCount
+    offset: 206
+    size_bytes: 2
+    type: u16be
+    template: status
+    tags: [Status, "Monitor::ErrorCount"]
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.4", pdf_page: 61, table: "Table 12-8", quote: "frameMsgErrCount", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_tx_control_message
+    since: "12.5"
+    display_name: RPMTxCtrlMsg
+    offset: 208
+    size_bytes: 3
+    type: bytes
+    template: control
+    scope: { module: true }
+    behavior: { trigger_on_write_to: 210, message_kind: "TOM=2A0h MSG payload" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.5", pdf_page: 61, table: "Table 12-9", quote: "Message content to send to remote transceiver", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }
+
+  - name: rpm_tx_modulation_index
+    since: "12.5"
+    display_name: RPMTxModIndex
+    offset: 211
+    bit_offset: 0
+    bit_width: 7
+    type: u7
+    template: control
+    scope: { module: true }
+    encoding: { kind: piecewise, zero: "TX RPM disabled", range_1_9: "reserved, treated as 1%", range_10_100: "1% to 10% modulation index" }
+    provenance: { section: "SFF-8472 v12.5a § 12.3.6", pdf_page: 62, table: "Table 12-10", quote: "Tx RPM Enable Tx Mod Index", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: Sections 12.1-12.3 define the A2h Page 02h feature advertisement, RDT and the new Remote Performance Monitoring memory map (RDT content previously Section 10.6 of Rev 12.4)" }

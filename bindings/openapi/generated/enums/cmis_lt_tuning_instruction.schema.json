@@ -1,0 +1,40 @@
+{
+  "$id": "cmis_lt_tuning_instruction.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Hold current value",
+      "title": "hold"
+    },
+    {
+      "const": 1,
+      "description": "Up by configured step size",
+      "title": "up"
+    },
+    {
+      "const": 2,
+      "description": "Down by configured step size",
+      "title": "down"
+    },
+    {
+      "const": 3,
+      "description": "Set explicitly given value (see the FFE taps / amplitude registers)",
+      "title": "set"
+    }
+  ],
+  "title": "CmisLtTuningInstruction",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      50,
+      65
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.3.2 and 6.5.2 (Tables 33, 34, 68, 69)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

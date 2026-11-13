@@ -1,0 +1,247 @@
+fields:
+  - name: rx_power_lane
+    display_name: RxPowerLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "34 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+    template: telemetry_lane
+    tags: [Monitor, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    behavior: { measurement_kind_source: "page_00h_upper_administrative.rx_power_average" }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.5", pdf_page: 36, table: "Table 6-9", quote: "Internally measured Rx input power" }
+
+  - name: tx_bias_lane
+    display_name: TxBiasLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "42 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "2 uA" }
+    template: telemetry_lane
+    tags: [Monitor, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.5", pdf_page: 36, table: "Table 6-9", quote: "Internally measured Tx bias" }
+
+  - name: tx_power_lane
+    display_name: TxPowerLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "50 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW" }
+    template: telemetry_lane
+    tags: [Monitor, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.5", pdf_page: 36, table: "Table 6-9", quote: "Internally measured Tx Power" }
+
+  - name: tx_disable_lane
+    display_name: Tx<lane>Disable
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 86
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Read/Write bit for software disable" }
+
+  - name: rx_rate_select_lane
+    display_name: Rx<lane>RateSelect
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 87
+    bit_offset_expr: "2 * (lane - 1)"
+    bit_width: 2
+    type: u2
+    enum_ref: Sff8636RateSelect
+    template: control
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Software rate select" }
+
+  - name: tx_rate_select_lane
+    display_name: Tx<lane>RateSelect
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 88
+    bit_offset_expr: "2 * (lane - 1)"
+    bit_width: 2
+    type: u2
+    enum_ref: Sff8636RateSelect
+    template: control
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Software rate select" }
+
+  - name: software_reset
+    display_name: SwReset
+    offset: 93
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: control
+    behavior: { write_trigger: self_clearing, reset_domain: module }
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Software reset is a self-clearing bit", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added SW reset control at byte 93, bit 7'" }
+
+  - name: high_power_class_enable_8
+    display_name: HighPwrClassEnable8
+    offset: 93
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    present_when: { field: page_00h_upper_administrative.power_class_8_implemented, equals: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Enables Power Class 8", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Control for High Power Class 8 at byte 93, bit 3' per SFF-8679" }
+
+  - name: high_power_class_enable_5_to_7
+    display_name: HighPwrClassEnable5To7
+    offset: 93
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Enables Power Classes 5 to 7", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Address 93 bit 2 High Power Class Enable'; byte 93 bits 7-2 reserved in the Rev 1.7 map" }
+
+  - name: power_set
+    display_name: PowerSet
+    offset: 93
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Power set to Low Power Mode" }
+
+  - name: power_override
+    display_name: PowerOverride
+    offset: 93
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 37, table: "Table 6-10", quote: "Override of LPMode/TxDis pad state" }
+
+  - name: tx_cdr_control_lane
+    display_name: Tx<lane>CDRControl
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 98
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: page_00h_upper_administrative.tx_cdr_present, equals: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 38, table: "Table 6-10", quote: "Channel Tx CDR Control" }
+
+  - name: rx_cdr_control_lane
+    display_name: Rx<lane>CDRControl
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 98
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: page_00h_upper_administrative.rx_cdr_present, equals: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 38, table: "Table 6-10", quote: "Channel Rx CDR Control" }
+
+  - name: lp_txdis_control
+    display_name: LPTxDisCtrl
+    offset: 99
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    present_when: { field: page_00h_upper_administrative.lpmode_txdis_configurable, equals: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 38, table: "Table 6-10", quote: "LPMode/TxDis input signal control", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Controls for reconfiguration at byte 99, bits 1-0' per SFF-8679; byte 99 reserved in the Rev 1.7 map" }
+
+  - name: intl_losl_control
+    display_name: IntLLOSLControl
+    offset: 99
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { module: true }
+    present_when: { field: page_00h_upper_administrative.intl_rx_losl_configurable, equals: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.6", pdf_page: 38, table: "Table 6-10", quote: "IntL/LOSL output signal control", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Controls for reconfiguration at byte 99, bits 1-0' per SFF-8679" }
+
+  - name: tx_los_mask
+    display_name: MTx<lane>LOSMask
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 100
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, "Status::LOS"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for Tx LOS indicator" }
+
+  - name: rx_los_mask
+    display_name: MRx<lane>LOSMask
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 100
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, "Status::LOS"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for Rx LOS indicator" }
+
+  - name: tx_adaptive_eq_fault_mask
+    display_name: MTx<lane>AdaptEQFaultMask
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 101
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, "Status::Equalization"]
+    scope: { lane: lane }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for Tx Adaptive EQ fault", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Tx Adaptive EQ Fault flag ... and masking bits in Address 101'" }
+
+  - name: tx_fault_mask
+    display_name: MTx<lane>TransmitterFaultMask
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 101
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: mask
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for Tx Transmitter fault" }
+
+  - name: tx_cdr_lol_mask
+    display_name: MTx<lane>CDRLOLMask
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 102
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, "Status::Lock"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for Tx CDR Loss of Lock" }
+
+  - name: rx_cdr_lol_mask
+    display_name: MRx<lane>CDRLOLMask
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 102
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: mask
+    tags: [Mask, "Status::Lock"]
+    scope: { lane: lane }
+    provenance: { section: "SFF-8636 v2.11 § 6.2.8", pdf_page: 41, table: "Table 6-13", quote: "Masking bit for Rx CDR Loss of Lock" }

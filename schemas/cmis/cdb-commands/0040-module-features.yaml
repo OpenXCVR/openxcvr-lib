@@ -1,0 +1,83 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbModuleFeatures
+title: CMIS CDB Command 0040h - Module Features
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.4.1
+  pdf_pages: [294, 295]
+  table: Table 9-8
+cmd_id: 0x0040
+available_since: "4.0"
+cmd_id_group: capabilities_inquiry
+command_class: required
+description: >
+  Queries support for module-level CDB commands in the 0000h-00FFh range.
+  The reply also advertises the maximum completion time across supported CDB
+  commands.
+advertisement:
+  bit: page_01h_advertising.cdb_instances_supported
+  meaning: Supported when the module advertises one or more CDB instances.
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: reply.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 0
+    fields: []
+reply:
+  status_codes:
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+  lpl:
+    length: 36
+    fields:
+      - name: cdb_flags
+        offset: 136
+        size_bytes: 1
+        type: bytes
+        template: cdb_reply_field
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        provenance: { spec: "CMIS 5.3 § 9.4.1", table: "Table 9-8" }
+      - name: reserved_137
+        offset: 137
+        size_bytes: 1
+        type: bytes
+        template: cdb_reply_field
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        provenance: { spec: "CMIS 5.3 § 9.4.1", table: "Table 9-8" }
+      - name: supported_cmds_0000_00ff
+        offset: 138
+        size_bytes: 32
+        type: bitmap
+        template: cdb_reply_field
+        field_type: CapabilityAdvertisement
+        tags: [CDB, CapabilityAdvertisement]
+        behavior:
+          bit_mapping: "CMD i is supported when bit (i mod 8) of byte 138 + floor(i / 8) is set."
+          required_commands_may_be_unset: deprecated
+        provenance: { spec: "CMIS 5.3 § 9.4.1", table: "Table 9-8" }
+      - name: max_completion_time
+        offset: 170
+        size_bytes: 2
+        type: u16be
+        encoding: { kind: scaled_unsigned, lsb_units: "1 ms" }
+        template: cdb_reply_field
+        field_type: CapabilityAdvertisement
+        tags: [CDB, CapabilityAdvertisement, Timing]
+        provenance: { spec: "CMIS 5.3 § 9.4.1", table: "Table 9-8" }
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects: []

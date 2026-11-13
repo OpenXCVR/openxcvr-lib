@@ -1,0 +1,41 @@
+schema: openxcvr.tom_message.v1
+kind: tom_message
+id: Sff8472TomExtendedIdle
+title: SFF-8472 TOM 2AAh — Extended Idle
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: "SFF-8472 v12.5a § 12.4.3"
+  pdf_pages: [70]
+  figure: "Figure 12-6"
+tom_code: 0x2AA
+description: |
+  TOM Extended Idle heartbeat frame. Transmitted continuously by the optical
+  transmitter when no data TOM message is pending. The 24-bit MSG is a
+  monotonically incrementing sequence counter; the receiver monitors this
+  counter to detect TOM channel continuity and synchronization loss.
+msg:
+  length_bits: 24
+  fields:
+    - name: sequence_counter
+      offset_bits: 0
+      size_bits: 24
+      type: u24
+      access: ro
+      field_type: OperationalParameter
+      tags: [OperationalParameter]
+      scope: { module: true }
+      flags:
+        is_required: true
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: true
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4.3"
+        quote: "24-bit sequence counter."
+      description: |
+        Monotonically incrementing 24-bit counter. Wraps at 0xFFFFFF → 0x000000.
+        Receiver declares synchronization loss when the counter fails to
+        increment between successive Extended Idle frames.

@@ -1,0 +1,194 @@
+name: publish-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-clippy-${{ hashFiles('**/Cargo.lock') }}
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+
+  # MSRV gate for the declared rust-version = 1.82 (workspace Cargo.toml).
+  #
+  # 1.82 is the effective floor, above thiserror 2.0.21's rust-version of
+  # 1.77 (that crate is not downgraded). rustc 1.77 rejects the workspace:
+  # E0716 at crates/openxcvr-cmis/src/managed_cdb.rs:1196, and
+  # Option::is_none_or in crates/openxcvr-codegen/tests/catalog_emit.rs
+  # (stable since 1.82). Both are accepted by rustc 1.82.0.
+  #
+  # This repo deliberately does not commit Cargo.lock, so a naive
+  # `cargo +1.82 check` resolves the newest crates.io versions, several of
+  # which now need edition2024 / cargo >= 1.85 (e.g. clap_lex 1.1.x). Instead:
+  # stable cargo generates the lockfile with the MSRV-aware resolver
+  # (CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS=fallback, stable since 1.84,
+  # prefers dependency versions whose rust-version fits this workspace's
+  # declared 1.82), and 1.82 then checks against that lockfile.
+  #
+  # Blocking. The previous continue-on-error covered the 1.75 E0716 gap.
+  # The source was not rewritten; the declared floor is the version that
+  # actually compiles it.
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@1.82
+      - name: Resolve dependency versions compatible with rust-version 1.82
+        run: CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS=fallback cargo +stable generate-lockfile
+      - name: Check workspace at MSRV
+        run: cargo +1.82 check --workspace --all-targets
+
+  # Verify the optional `linux-i2c` feature on openxcvr-core builds and
+  # tests cleanly on Linux. macOS / Windows runners do NOT exercise this
+  # job -- the feature is target_os="linux"-gated by design.
+  linux-i2c-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-linux-i2c-${{ hashFiles('**/Cargo.lock') }}
+      - name: Build with --features linux-i2c
+        run: cargo build -p openxcvr-core --features linux-i2c
+      - name: Compile-check linux-i2c integration tests
+        run: cargo test --no-run -p openxcvr-core --features linux-i2c
+      - name: Try to load i2c-stub for round-trip tests (best-effort)
+        id: stub
+        continue-on-error: true
+        run: |
+          set -eux
+          sudo modprobe i2c-stub chip_addr=0x50,0x51
+          BUS=$(i2cdetect -l 2>/dev/null | awk '/stub/ {print $1; exit}')
+          if [ -z "$BUS" ]; then
+            echo "i2c-stub not visible after modprobe; skipping ignored tests"
+            exit 0
+          fi
+          echo "LINUX_I2C_BUS=/dev/$BUS" >> "$GITHUB_ENV"
+          echo "LINUX_I2C_DUAL_ADDR=1" >> "$GITHUB_ENV"
+      - name: Run i2c-stub-backed integration tests (if available)
+        if: steps.stub.outcome == 'success' && env.LINUX_I2C_BUS != ''
+        run: cargo test -p openxcvr-core --features linux-i2c -- --ignored
+
+  python-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install Python binding and test deps
+        run: pip install -e "bindings/python[dev]"
+      - name: Run CMIS parity tests
+        working-directory: bindings/python
+        run: pytest tests/test_parity.py -v
+      - name: Run CMIS synthetic builder tests
+        run: python3 -m unittest tools.test_build_cmis_synthetics -v
+
+  go-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+      - name: Run CMIS Go parity tests
+        working-directory: bindings/go
+        run: go test ./... -run TestParity -count=1 -v
+
+  php-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+      - name: Install PHP binding dependencies
+        run: composer install --no-interaction --prefer-dist --working-dir=bindings/php
+      - name: Run CMIS PHP parity tests
+        working-directory: bindings/php
+        run: vendor/bin/phpunit --testdox
+
+  c-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Generate C binding (all three specs, so the build exercises
+          the freshly regenerated full surface — the committed generated pages
+          included)
+        run: |
+          cargo run -p openxcvr-codegen -- generate --lang c --spec cmis --out bindings/c/generated
+          cargo run -p openxcvr-codegen -- generate --lang c --spec sff-8636 --out bindings/c/generated
+          cargo run -p openxcvr-codegen -- generate --lang c --spec sff-8472 --out bindings/c/generated
+      - name: Configure C binding
+        run: cmake -S bindings/c -B /tmp/openxcvr-c-build
+      - name: Build C binding
+        run: cmake --build /tmp/openxcvr-c-build
+      - name: Run registered CTest suite
+        run: ctest --test-dir /tmp/openxcvr-c-build --output-on-failure
+      - name: Build and test optional rich C component
+        run: |
+          cmake -S bindings/c -B "$RUNNER_TEMP/openxcvr-c-rich" -DOPENXCVR_C_RICH=ON -DCMAKE_BUILD_TYPE=Release
+          cmake --build "$RUNNER_TEMP/openxcvr-c-rich" --parallel 2
+          ctest --test-dir "$RUNNER_TEMP/openxcvr-c-rich" --output-on-failure
+
+  codegen-equality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-regen-${{ hashFiles('**/Cargo.lock') }}
+      - name: Run regeneration equality unit tests
+        run: python3 -m unittest tools.test_check_regen_equality -v
+      - name: Run documentation generator unit tests
+        run: python3 -m unittest tools.test_gen_docs -v
+      - name: Verify regeneration equality
+        run: ./tools/check-regen-equality.sh --require-clean
+
+  # NOTE: a `publish-dry-run` job was removed here. It ran `cargo publish
+  # --dry-run` against the six workspace crates, but every one is deliberately
+  # `publish = false`, so the job could never pass ("package.publish must be set
+  # to true or a non-empty list"). It only ran on workflow_dispatch (never on
+  # PRs), so it never blocked review — it just left manual dispatches red. If
+  # crates.io publishing is adopted later, reintroduce this as a release-gated
+  # job (e.g. on `release`/tag triggers) once the crates are marked publishable.

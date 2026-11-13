@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <!-- generated/ is included explicitly below; disable SDK auto-globbing to
+         avoid NETSDK1022 duplicate Compile items. -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>OpenXcvr</RootNamespace>
+    <AssemblyName>OpenXcvr.Transceivers</AssemblyName>
+    <PackageId>OpenXcvr.Transceivers</PackageId>
+    <Version>0.2.0</Version>
+    <Description>Generated C# bindings for openxcvr transceiver memory maps (CMIS, SFF-8636, SFF-8472).</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="IsExternalInit.cs" />
+    <Compile Include="Decoder.cs" />
+    <Compile Include="generated/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- PadPage is tested directly by the padding tests (review follow-up
+         A2): the aggregate output exposes no field above byte 127, so the
+         padding helper's contract is pinned from the test assembly. -->
+    <InternalsVisibleTo Include="OpenXcvr.Transceivers.Tests" />
+  </ItemGroup>
+
+</Project>

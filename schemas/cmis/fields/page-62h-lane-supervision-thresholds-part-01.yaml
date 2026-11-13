@@ -1,0 +1,135 @@
+fields:
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.32.1 Output Power Warning and Alarm Thresholds (bytes
+  # 128-191) - Tables 8-193 and 8-194. Each OutputPowerThresholdsTx<n>
+  # register (n = 1..8) is a Quad of S16 thresholds for media lane Tx<n> in
+  # units of 0.01 dBm, the same units as the programmable Tx output power
+  # (unlike the 0.1 uW thresholds of § 8.5.2). Quad layout per Table 8-193:
+  # bytes 0-1 HiAlarm, 2-3 LoAlarm, 4-5 HiWarning, 6-7 LoWarning. Table
+  # 8-194 prints the last row's name as OutputPowerThresholdsTx7 twice; the
+  # 184-191 register is Tx8.
+  # ===========================================================================
+
+  - name: output_power_threshold_hi_alarm_tx
+    display_name: OutputPowerThresholdHiAlarmTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + 8 * (lane - 1)"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.01 dBm" }
+    since: "5.4"
+    description: "S16 high-alarm output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 0-1 of the lane's OutputPowerThresholdsTx register)."
+    access: ro
+    field_type: Threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, Monitor::OpticalPower]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.32.1"
+      pdf_page: 317
+      table: "Table 8-193 / Table 8-194"
+      quote: "OutputPowerThresholdHiAlarm: S16 output power thresholds for a media lane in units of 0.01 dBm"
+
+  - name: output_power_threshold_lo_alarm_tx
+    display_name: OutputPowerThresholdLoAlarmTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "130 + 8 * (lane - 1)"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.01 dBm" }
+    since: "5.4"
+    description: "S16 low-alarm output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 2-3 of the lane's OutputPowerThresholdsTx register)."
+    access: ro
+    field_type: Threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, Monitor::OpticalPower]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.32.1"
+      pdf_page: 317
+      table: "Table 8-193 / Table 8-194"
+      quote: "OutputPowerThresholdLoAlarm: S16 output power thresholds for a media lane in units of 0.01 dBm"
+
+  - name: output_power_threshold_hi_warning_tx
+    display_name: OutputPowerThresholdHiWarningTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "132 + 8 * (lane - 1)"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.01 dBm" }
+    since: "5.4"
+    description: "S16 high-warning output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 4-5 of the lane's OutputPowerThresholdsTx register)."
+    access: ro
+    field_type: Threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, Monitor::OpticalPower]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.32.1"
+      pdf_page: 317
+      table: "Table 8-193 / Table 8-194"
+      quote: "OutputPowerThresholdHiWarning: S16 output power thresholds for a media lane in units of 0.01 dBm"
+
+  - name: output_power_threshold_lo_warning_tx
+    display_name: OutputPowerThresholdLoWarningTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "134 + 8 * (lane - 1)"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.01 dBm" }
+    since: "5.4"
+    description: "S16 low-warning output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 6-7 of the lane's OutputPowerThresholdsTx register)."
+    access: ro
+    field_type: Threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, Monitor::OpticalPower]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.32.1"
+      pdf_page: 317
+      table: "Table 8-193 / Table 8-194"
+      quote: "OutputPowerThresholdLoWarning: S16 output power thresholds for a media lane in units of 0.01 dBm"
+
+  - name: reserved_page_62h_192_255
+    display_name: ReservedPage62h192To255
+    offset: 192
+    size_bytes: 64
+    type: bytes
+    since: "5.4"
+    description: "Reserved per Table 8-192 (which prints the reserved row's start byte as 132; the Output Power Thresholds of Table 8-194 end at byte 191)."
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.32"
+      pdf_page: 317
+      table: "Table 8-192 / Table 8-194"
+      quote: "Reserved [64]"

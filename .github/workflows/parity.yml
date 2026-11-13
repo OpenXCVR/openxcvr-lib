@@ -1,0 +1,131 @@
+name: parity
+
+# Cross-binding golden-fixture parity (openxcvr-enhancements Wave 5 follow-up).
+# Enforces the contract that every language binding decodes a fixture identically.
+# Complements publish-check.yml (Rust fmt/clippy/linux-i2c); this runs the
+# per-binding test runners across all eight languages, each in its own job so a
+# missing toolchain never masks another binding's result.
+#
+# There is no Makefile in this repo: each binding is exercised through its own
+# native runner (cargo test / go test / pytest / node --test / phpunit /
+# gradle / dotnet / the golden-schema validator).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  # Keep language failures independent: a Rust build must not delay or skip
+  # the much shorter Python/OpenAPI checks or the Go checks.
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pyyaml
+      - name: Schema validator + self-tests
+        run: |
+          python3 tools/validate-schemas.py
+          python3 tools/test_validate_schemas.py
+      - name: Generator CLI contracts (before compiling the full workspace)
+        run: cargo test -p openxcvr-codegen --test cli_orchestration
+      - name: Rust parity (cargo test)
+        run: cargo test --workspace
+
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: Go parity
+        run: cd bindings/go && go test ./...
+      - name: Go vet
+        run: cd bindings/go && go vet ./...
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pytest
+      - name: Python parity
+        run: cd bindings/python && python3 -m pytest tests/ -q
+      - name: Synthetic builder regression tests
+        run: python3 -m unittest tools.test_build_cmis_synthetics -v
+
+  openapi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install jsonschema pyyaml
+      - name: OpenAPI golden-schema validation
+        run: |
+          python3 tools/validate-golden-schema.py
+          python3 -m unittest tools.test_validate_golden_schema
+
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Package licence matches the repository licence
+        run: cmp LICENSE bindings/typescript/LICENSE
+      - name: TypeScript parity (build + node --test)
+        run: cd bindings/typescript && npm install --no-audit --no-fund && npm test
+
+  java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Java build (runs golden parity tests)
+        run: cd bindings/java && gradle build
+      - name: Java Maven package (pom route, runs the same tests)
+        run: cd bindings/java && mvn -B package
+      - name: Java consumer check (installed JAR only)
+        run: bash bindings/java/consumer-check/run-consumer-check.sh
+
+  csharp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0"
+      - name: C# structural build
+        run: cd bindings/csharp && dotnet build
+      - name: C# parity (xUnit golden parity)
+        run: cd bindings/csharp && dotnet test tests/OpenXcvr.Transceivers.Tests/OpenXcvr.Transceivers.Tests.csproj
+      - name: C# installed-artifact consumer check
+        run: bash bindings/csharp/tests/consumer-check/run-consumer-check.sh
+
+  php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+      - name: Install PHP deps
+        run: cd bindings/php && composer install --no-interaction --no-progress
+      - name: PHP parity (phpunit)
+        run: cd bindings/php && ./vendor/bin/phpunit

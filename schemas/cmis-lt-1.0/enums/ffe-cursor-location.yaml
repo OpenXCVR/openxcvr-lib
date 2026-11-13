@@ -1,0 +1,37 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtFfeCursorLocation
+title: "CMIS-LT 1.0 Transmitter FFE Cursor Location"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.1 and 6.4.1 (Tables 9, 44)"
+  pdf_pages: [39, 55]
+entries:
+  - value: 0x0
+    name: cursor_tap_1
+    description: "Cursor is tap 1 (no pre-cursor)"
+  - value: 0x1
+    name: cursor_tap_2
+    description: "Cursor is tap 2 (1 pre-cursor)"
+  - value: 0x2
+    name: cursor_tap_3
+    description: "Cursor is tap 3 (2 pre-cursors)"
+  - value: 0x3
+    name: cursor_tap_4
+    description: "Cursor is tap 4 (3 pre-cursors)"
+  - value: 0x4
+    name: cursor_tap_5
+    description: "Cursor is tap 5 (4 pre-cursors)"
+  - value: 0x5
+    name: cursor_tap_6
+    description: "Cursor is tap 6 (5 pre-cursors)"
+  - value: 0x6
+    name: cursor_tap_7
+    description: "Cursor is tap 7 (6 pre-cursors)"
+  - value: 0x7
+    name: cursor_tap_8
+    description: "Cursor is tap 8 (7 pre-cursors)"

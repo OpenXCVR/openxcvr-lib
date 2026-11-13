@@ -1,0 +1,37 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage62hLaneSupervisionThresholds
+title: CMIS Page 62h Lane Supervision Thresholds (banked)
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 8.32
+  pdf_pages: [317]
+page_address: "62h"
+size_bytes: 128
+present_when: "page_01h_advertising.page_62h_supported == true"
+
+# Banked across lanes per 's bank-relative scope convention. Each Bank
+# refers to 8 lanes (Table 8-192); lane-banked pages support up to 4 banks
+# through CMIS 5.3 and up to 32 banks (256 lanes) since CMIS 5.4 via the
+# BanksSupported escape code 11b (01h:142.1-0, CmisBanksSupported5p4) plus
+# ExtraLaneBanksSupported (01h:174.4-0). Every field on this page is windowed
+# since 5.4.
+#
+# NOTE on the 5.4 text: § 8.32's opening paragraph says the module supports
+# Page 62h "when advertised in 01h:174.6", which contradicts Table 8-58
+# (01h:174.7 Page60hSupported, 174.6 Page61hSupported, 174.5 Page62hSupported)
+# and the advertisement bit landed for 62h at 01h:174.5. This schema follows
+# Table 8-58. Table 8-192's reserved row prints the start byte as 132; per
+# Table 8-194 the threshold Quads occupy 128-191 and bytes 192-255 are
+# reserved.
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+field_includes:
+  - fields/page-62h-lane-supervision-thresholds-part-01.yaml
+fields: []

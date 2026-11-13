@@ -1,0 +1,1432 @@
+{
+  "$id": "cmis_page01h_advertising.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "adaptive_input_eq_fail_flag_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Tx Adaptive Input Eq Fail Flags supported",
+        "section": "CMIS 5.3 § 8.4.8"
+      }
+    },
+    "auto_squelch_disable_rx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "AutoSquelchDisableRx supported",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "auto_squelch_disable_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Host can disable automatic squelching of Tx outputs",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "aux1_mon_observable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "Aux 1 monitor observable selection",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "aux1_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Aux1Mon monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "aux2_mon_observable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "Aux 2 monitor observable selection",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "aux2_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Aux2Mon monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "aux3_mon_observable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "Aux 3 monitor observable selection",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "aux3_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Aux3Mon monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "bank_broadcast_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "BankBroadcastEnable control supported",
+        "section": "CMIS 5.3 § 8.4.7"
+      },
+      "x-openxcvr-since": "5.2"
+    },
+    "banks_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "Banks supported for Pages in range 10h-2Fh",
+        "section": "CMIS 5.3 § 8.4.4"
+      }
+    },
+    "base_length_smf": {
+      "maximum": 63,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 169,
+        "quote": "Base link length supported for SMF fiber",
+        "section": "CMIS 5.3 § 8.4.2"
+      }
+    },
+    "cdb_auto_paging_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 178,
+        "quote": "Auto Paging and Auto Page wrap supported",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_background_mode_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 178,
+        "quote": "Background CDB operation supported",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_command_trigger_method": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 179,
+        "quote": "Determines how the host triggers CDB command processing",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_ext_max_busy_time": {
+      "maximum": 31,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 179,
+        "quote": "Maximum CDB busy time when CdbMaxBusySpecMethod is 1b",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_instances_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 178,
+        "quote": "CDB functionality instances supported",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_max_busy_spec_method": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 179,
+        "quote": "Selects CdbMaxBusyTime or CdbExtMaxBusyTime for maximum CDB busy time",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_max_busy_time": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 179,
+        "quote": "Maximum CDB busy time when CdbMaxBusySpecMethod is 0b",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_max_pages_epl": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 178,
+        "quote": "Maximum supported EPL page range",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_read_write_length_extension": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 178,
+        "quote": "Allowable additional number of bytes in CDB READ or WRITE access",
+        "section": "CMIS 5.3 § 8.4.11"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdr_lol_flag_rx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Rx CDR Loss of Lock Flags supported",
+        "section": "CMIS 5.3 § 8.4.8"
+      }
+    },
+    "cdr_lol_flag_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Tx CDR Loss of Lock Flags supported",
+        "section": "CMIS 5.3 § 8.4.8"
+      }
+    },
+    "cdr_power_saved_per_lane": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "U8 minimum power consumption saved per CDR per lane",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "cmis_ff_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "CMIS-FF supplement is supported on Page 05h",
+        "section": "CMIS 5.3 § 8.4.4"
+      }
+    },
+    "coherent_pages_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "Banked Pages 30h-4Fh are partially supported",
+        "section": "CMIS 5.3 § 8.4.4"
+      }
+    },
+    "cooling_implemented": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "0b: Uncooled transmitter device",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "custom_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "CustomMon monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "default_input_polarity_tx_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "DefaultInputPolarityTx<i>: 0b: Module input lane <i> polarity is regular; 1b: Module input lane <i> polarity is inverted.",
+        "section": "CMIS 5.4 § 8.4.13",
+        "table": "Table 8-57"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "default_output_polarity_rx_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 206,
+        "quote": "DefaultOutputPolarityRx<i>: 0b: Module output lane <i> polarity is regular; 1b: Module output lane <i> polarity is inverted.",
+        "section": "CMIS 5.4 § 8.4.13",
+        "table": "Table 8-57"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "diagnostic_pages_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "Banked Pages 13h-14h are supported",
+        "section": "CMIS 5.3 § 8.4.4"
+      }
+    },
+    "e_pps_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "Support of the Enhanced Pulse Per Second timing signal",
+        "section": "CMIS 5.3 § 8.4.6"
+      },
+      "x-openxcvr-since": "5.0"
+    },
+    "extra_lane_banks_supported": {
+      "description": "The number n < 32 of non-trivially supported banks for lane-banked pages, indicating management register support for (n + 1) x 8 lanes. Valid only when 01h:142.1-0 = 11b (the 5.4 BanksSupported escape code).",
+      "maximum": 31,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "ExtraLaneBanksSupported: n: The number n < 32 of non-trivially supported banks for lane-banked pages, indicating management registers support for (n + 1) * 8 lanes. This field is valid only when 01h:142.1-0 = 11b",
+        "section": "CMIS 5.4 § 8.4.14",
+        "table": "Table 8-58"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "failure_flag_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Tx Fault Flags supported",
+        "section": "CMIS 5.3 § 8.4.8"
+      }
+    },
+    "forced_squelch_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Host can force squelching of Tx outputs",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "full_page_read_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 184,
+        "quote": "Full page read support",
+        "section": "CMIS 5.3 § 8.4.16"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "host_interface_id_app": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 183,
+        "quote": "HostInterfaceID field of additional Application Descriptor slot app",
+        "section": "CMIS 5.3 § 8.4.15"
+      }
+    },
+    "host_lane_assignment_options_app": {
+      "items": {
+        "contentEncoding": "base64",
+        "type": "string"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 183,
+        "quote": "Host lane assignment options bitmap for additional Application Descriptor slot app",
+        "section": "CMIS 5.3 § 8.4.15"
+      }
+    },
+    "host_lane_count_app": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 183,
+        "quote": "Host lane count for additional Application Descriptor slot app",
+        "section": "CMIS 5.3 § 8.4.15"
+      }
+    },
+    "host_lane_switching_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 184,
+        "quote": "Page 1Dh is supported",
+        "section": "CMIS 5.3 § 8.4.16"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "input_polarity_flip_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "InputPolarityFlipTx control supported",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "length_multiplier_smf": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 169,
+        "quote": "Link length multiplier for SMF fiber",
+        "section": "CMIS 5.3 § 8.4.2"
+      }
+    },
+    "length_multiplier_smf2": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 169,
+        "quote": "Link length multiplier for SMF fiber when 01h:132 is 11b",
+        "section": "CMIS 5.3 § 8.4.2"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "length_om2": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 169,
+        "quote": "The link length supported for OM2 fiber",
+        "section": "CMIS 5.3 § 8.4.2"
+      }
+    },
+    "length_om3": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 169,
+        "quote": "The link length supported for OM3 fiber",
+        "section": "CMIS 5.3 § 8.4.2"
+      }
+    },
+    "length_om4": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 169,
+        "quote": "The link length supported for OM4 fiber",
+        "section": "CMIS 5.3 § 8.4.2"
+      }
+    },
+    "length_om5": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 169,
+        "quote": "The link length supported for OM5 fiber",
+        "section": "CMIS 5.3 § 8.4.2"
+      }
+    },
+    "link_training_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 184,
+        "quote": "CMIS-LT functionality is supported",
+        "section": "CMIS 5.3 § 8.4.16"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "los_flag_rx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Rx Loss of Signal Flags supported",
+        "section": "CMIS 5.3 § 8.4.8"
+      }
+    },
+    "los_flag_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Tx Loss of Signal Flags supported",
+        "section": "CMIS 5.3 § 8.4.8"
+      }
+    },
+    "max_duration_bpc": {
+      "description": "Encoded value i gives the maximum bank or page switch time as tBPC / 2^i. This is a scalar encoded advertisement, not an exponent variant.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 181,
+        "quote": "Encoded scaling of maximum ACCESS hold-off duration after a PageMapping register change",
+        "section": "CMIS 5.3 § 8.4.12"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "max_duration_dp_deinit": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "Maximum duration of the DPDeinit state encoded as per Table 8-48",
+        "section": "CMIS 5.3 § 8.4.5"
+      }
+    },
+    "max_duration_dp_init": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "Maximum duration of the DPInit state encoded as per Table 8-48",
+        "section": "CMIS 5.3 § 8.4.5"
+      }
+    },
+    "max_duration_dp_tx_turn_off": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 181,
+        "quote": "Encoded maximum duration of the DPTxTurnOff state",
+        "section": "CMIS 5.3 § 8.4.12"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "max_duration_dp_tx_turn_on": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 181,
+        "quote": "Encoded maximum duration of the DPTxTurnOn state",
+        "section": "CMIS 5.3 § 8.4.12"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "max_duration_module_pwr_dn": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 181,
+        "quote": "Encoded maximum duration of the ModulePwrDn state",
+        "section": "CMIS 5.3 § 8.4.12"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "max_duration_module_pwr_up": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 181,
+        "quote": "Encoded maximum duration of the ModulePwrUp state",
+        "section": "CMIS 5.3 § 8.4.12"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "media_interface_id_app": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 183,
+        "quote": "MediaInterfaceID field of additional Application Descriptor slot app",
+        "section": "CMIS 5.3 § 8.4.15"
+      }
+    },
+    "media_lane_assignment_options_app": {
+      "items": {
+        "contentEncoding": "base64",
+        "type": "string"
+      },
+      "maxItems": 15,
+      "minItems": 15,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 182,
+        "quote": "Bits 0-7 form a bitmap of media lane assignment options for AppSel code app",
+        "section": "CMIS 5.3 § 8.4.14"
+      }
+    },
+    "media_lane_count_app": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 183,
+        "quote": "Media lane count for additional Application Descriptor slot app",
+        "section": "CMIS 5.3 § 8.4.15"
+      }
+    },
+    "media_lane_switching_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 210,
+        "quote": "MediaLaneSwitchingSupported: 0b/1b: Page 6Dh is not supported / supported",
+        "section": "CMIS 5.4 § 8.4.18",
+        "table": "Table 8-62"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "mod_sel_wait_time_exponent": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "ModSelWaitTime exponent in a special floating-point format",
+        "section": "CMIS 5.3 § 8.4.5"
+      }
+    },
+    "mod_sel_wait_time_mantissa": {
+      "maximum": 31,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "ModSelWaitTime mantissa in a special floating-point format",
+        "section": "CMIS 5.3 § 8.4.5"
+      }
+    },
+    "module_hardware_major_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 168,
+        "quote": "hardware major revision",
+        "section": "CMIS 5.3 § 8.4.1"
+      }
+    },
+    "module_hardware_minor_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 168,
+        "quote": "hardware minor revision",
+        "section": "CMIS 5.3 § 8.4.1"
+      }
+    },
+    "module_inactive_firmware_major_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 168,
+        "quote": "inactive firmware major revision",
+        "section": "CMIS 5.3 § 8.4.1"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "module_inactive_firmware_minor_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 168,
+        "quote": "inactive firmware minor revision",
+        "section": "CMIS 5.3 § 8.4.1"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "module_temp_max": {
+      "maximum": 127,
+      "minimum": -128,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "S8 maximum allowed module temperature",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "module_temp_min": {
+      "maximum": 127,
+      "minimum": -128,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "S8 minimum allowed module temperature",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "nad_banks_supported": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 182,
+        "quote": "Normalized Application Descriptor bank support",
+        "section": "CMIS 5.3 § 8.4.13"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "network_path_pages_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "Page 16h and NP-related parts of Page 17h are supported",
+        "section": "CMIS 5.3 § 8.4.4"
+      },
+      "x-openxcvr-since": "5.1"
+    },
+    "nominal_wavelength": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 170,
+        "quote": "U16 nominal transmitter output wavelength for a single wavelength module",
+        "section": "CMIS 5.3 § 8.4.3"
+      }
+    },
+    "operating_voltage_min": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "U8 minimum supported module operating voltage in 20 mV increments",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "optical_detector_type": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "0b: PIN detector",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "output_disable_rx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "OutputDisableRx supported",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "output_disable_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Host can disable Tx outputs using OutputDisableTx",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "output_polarity_flip_rx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "OutputPolarityFlipRx supported",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "page03h_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "User Page 03h supported",
+        "section": "CMIS 5.3 § 8.4.4"
+      }
+    },
+    "page_0ch_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "1b: Page 0Ch supported (see section 8.11)",
+        "section": "CMIS 5.4 § 8.4.14",
+        "table": "Table 8-58"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "page_0dh_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "1b: Page 0Dh supported (see section 8.12)",
+        "section": "CMIS 5.4 § 8.4.14",
+        "table": "Table 8-58"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "page_60h_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "1b: Page 60h supported (see section 8.30)",
+        "section": "CMIS 5.4 § 8.4.14",
+        "table": "Table 8-58"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "page_61h_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "1b: Page 61h supported (see section 8.31)",
+        "section": "CMIS 5.4 § 8.4.14",
+        "table": "Table 8-58"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "page_62h_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 207,
+        "quote": "1b: Page 62h supported (see section 8.32)",
+        "section": "CMIS 5.4 § 8.4.14",
+        "table": "Table 8-58"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "page_checksum": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 184,
+        "quote": "Low order 8 bits of the arithmetic sum of byte values from byte 130 to byte 254",
+        "section": "CMIS 5.3 § 8.4.17"
+      }
+    },
+    "password_entry_result_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 184,
+        "quote": "Password Entry Result support",
+        "section": "CMIS 5.3 § 8.4.16"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "password_entry_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 184,
+        "quote": "Password Entry support",
+        "section": "CMIS 5.3 § 8.4.16"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "propagation_delay": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "U16 propagation delay of a non-separable AOC in multiples of 10 ns",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "reserved_byte156_bits6_3_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte157_bits7_4_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte158_bits0_0_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte158_bits7_3_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte159_bits7_6_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte160_bits7_5_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte161_bits7_7_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "reserved_byte165_bits6_5_cmis53": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "5.3"
+    },
+    "rx_cdr_bypass_control_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Rx CDR Bypass control supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "rx_cdr_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Rx CDR supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "rx_los_is_fast": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "Module raises Rx LOS within regular or fast timing limits",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_los_type": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "Rx LOS response type",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_optical_power_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Rx Optical Input Power monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "rx_output_amplitude_control_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Rx Output Amplitude control supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "rx_output_eq_control_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Host control of Rx Output Eq targets",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "rx_output_eq_post_cursor_max": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "Maximum supported value of the Rx Output Eq Post-Cursor control",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_output_eq_pre_cursor_max": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "Maximum supported value of the Rx Output Eq Pre-Cursor control",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_output_eq_type": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "Rx output equalization type",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_output_level0_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "RxOutputLevel0 supported",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_output_level1_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "RxOutputLevel1 supported",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_output_level2_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "RxOutputLevel2 supported",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_output_level3_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "RxOutputLevel3 supported",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "rx_power_measurement_type": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "0b: OMA",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "scratch_pad_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 184,
+        "quote": "Host Scratchpad Area support",
+        "section": "CMIS 5.3 § 8.4.16"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "squelch_method_tx": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Tx output squelching method advertisement",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "staged_set1_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Staged Control Set 1 supported on Page 10h",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "temp_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "TempMon monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "timing_page15h_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "Timing characteristics Page 15h support",
+        "section": "CMIS 5.3 § 8.4.6"
+      },
+      "x-openxcvr-since": "5.0"
+    },
+    "transmitter_is_tunable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Transmitter is tunable; Pages 04h and 12h supported",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "tx_bias_current_scaling_factor": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Multiplier for 2uA Bias current increment used in Tx Bias current monitor and threshold registers",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "tx_bias_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Tx Bias monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "tx_cdr_bypass_control_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Tx CDR bypass control supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "tx_cdr_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Tx CDR supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "tx_disable_is_fast": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "Module responds to Tx Output Disable with regular or fast timing",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "tx_disable_is_module_wide": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "Tx output disable is controlled per lane or module-wide",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "tx_input_adaptive_eq_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Adaptive Tx Input Eq supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "tx_input_clocking_capabilities": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 173,
+        "quote": "Defines which Tx input lanes must be frequency synchronous",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "tx_input_eq_freeze_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Tx Input Eq Freeze supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "tx_input_eq_host_control_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Host-control of Tx Input Eq target supported",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "tx_input_eq_max": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 174,
+        "quote": "Maximum supported value of the Tx Input Equalization control",
+        "section": "CMIS 5.3 § 8.4.6"
+      }
+    },
+    "tx_input_eq_recall_buffers_supported": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Tx Input Eq Store/Recall buffer support",
+        "section": "CMIS 5.3 § 8.4.10"
+      }
+    },
+    "tx_optical_power_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Tx Output Optical Power monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "unidir_reconfig_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "Unidirectional reconfiguration controls supported for all supported Staged Control Sets",
+        "section": "CMIS 5.3 § 8.4.10"
+      },
+      "x-openxcvr-since": "5.2"
+    },
+    "vcc_mon_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "VccMon monitor supported",
+        "section": "CMIS 5.3 § 8.4.9"
+      }
+    },
+    "vdm_pages_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 171,
+        "quote": "VDM Pages 20h-2Fh are partially supported",
+        "section": "CMIS 5.3 § 8.4.4"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "versatile_control_set_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 177,
+        "quote": "CMIS-VCS functionality supported for all supported Staged Control Sets",
+        "section": "CMIS 5.3 § 8.4.10"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "wavelength_is_controllable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 175,
+        "quote": "Active wavelength control supported; active control does not imply tunability",
+        "section": "CMIS 5.3 § 8.4.7"
+      }
+    },
+    "wavelength_tolerance": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 170,
+        "quote": "U16 wavelength tolerance tol as the worst case +/-tol",
+        "section": "CMIS 5.3 § 8.4.3"
+      }
+    }
+  },
+  "required": [
+    "module_inactive_firmware_major_revision",
+    "module_inactive_firmware_minor_revision",
+    "module_hardware_major_revision",
+    "module_hardware_minor_revision",
+    "length_multiplier_smf",
+    "base_length_smf",
+    "length_om5",
+    "length_om4",
+    "length_om3",
+    "length_om2",
+    "length_multiplier_smf2",
+    "nominal_wavelength",
+    "wavelength_tolerance",
+    "network_path_pages_supported",
+    "vdm_pages_supported",
+    "diagnostic_pages_supported",
+    "coherent_pages_supported",
+    "cmis_ff_supported",
+    "page03h_supported",
+    "banks_supported",
+    "mod_sel_wait_time_exponent",
+    "mod_sel_wait_time_mantissa",
+    "max_duration_dp_deinit",
+    "max_duration_dp_init",
+    "cooling_implemented",
+    "e_pps_supported",
+    "timing_page15h_supported",
+    "aux3_mon_observable",
+    "aux2_mon_observable",
+    "aux1_mon_observable",
+    "tx_input_clocking_capabilities",
+    "module_temp_max",
+    "module_temp_min",
+    "propagation_delay",
+    "operating_voltage_min",
+    "optical_detector_type",
+    "rx_output_eq_type",
+    "rx_power_measurement_type",
+    "rx_los_type",
+    "rx_los_is_fast",
+    "tx_disable_is_fast",
+    "tx_disable_is_module_wide",
+    "cdr_power_saved_per_lane",
+    "rx_output_level3_supported",
+    "rx_output_level2_supported",
+    "rx_output_level1_supported",
+    "rx_output_level0_supported",
+    "tx_input_eq_max",
+    "rx_output_eq_post_cursor_max",
+    "rx_output_eq_pre_cursor_max",
+    "wavelength_is_controllable",
+    "transmitter_is_tunable",
+    "forced_squelch_tx_supported",
+    "auto_squelch_disable_tx_supported",
+    "output_disable_tx_supported",
+    "input_polarity_flip_tx_supported",
+    "squelch_method_tx",
+    "bank_broadcast_supported",
+    "auto_squelch_disable_rx_supported",
+    "output_disable_rx_supported",
+    "output_polarity_flip_rx_supported",
+    "adaptive_input_eq_fail_flag_tx_supported",
+    "cdr_lol_flag_tx_supported",
+    "los_flag_tx_supported",
+    "failure_flag_tx_supported",
+    "cdr_lol_flag_rx_supported",
+    "los_flag_rx_supported",
+    "custom_mon_supported",
+    "reserved_byte156_bits6_3_cmis53",
+    "reserved_byte157_bits7_4_cmis53",
+    "reserved_byte158_bits7_3_cmis53",
+    "reserved_byte158_bits0_0_cmis53",
+    "aux3_mon_supported",
+    "aux2_mon_supported",
+    "aux1_mon_supported",
+    "vcc_mon_supported",
+    "temp_mon_supported",
+    "tx_bias_current_scaling_factor",
+    "rx_optical_power_mon_supported",
+    "tx_optical_power_mon_supported",
+    "tx_bias_mon_supported",
+    "tx_input_eq_recall_buffers_supported",
+    "tx_input_eq_freeze_supported",
+    "reserved_byte159_bits7_6_cmis53",
+    "reserved_byte160_bits7_5_cmis53",
+    "tx_input_adaptive_eq_supported",
+    "tx_input_eq_host_control_supported",
+    "tx_cdr_bypass_control_supported",
+    "tx_cdr_supported",
+    "versatile_control_set_supported",
+    "unidir_reconfig_supported",
+    "staged_set1_supported",
+    "rx_output_eq_control_supported",
+    "rx_output_amplitude_control_supported",
+    "rx_cdr_bypass_control_supported",
+    "rx_cdr_supported",
+    "reserved_byte161_bits7_7_cmis53",
+    "cdb_instances_supported",
+    "cdb_background_mode_supported",
+    "cdb_auto_paging_supported",
+    "cdb_max_pages_epl",
+    "cdb_read_write_length_extension",
+    "cdb_command_trigger_method",
+    "cdb_ext_max_busy_time",
+    "cdb_max_busy_spec_method",
+    "cdb_max_busy_time",
+    "max_duration_module_pwr_dn",
+    "max_duration_module_pwr_up",
+    "reserved_byte165_bits6_5_cmis53",
+    "max_duration_dp_tx_turn_off",
+    "max_duration_dp_tx_turn_on",
+    "max_duration_bpc",
+    "default_input_polarity_tx_lane",
+    "default_output_polarity_rx_lane",
+    "page_0ch_supported",
+    "page_0dh_supported",
+    "page_60h_supported",
+    "page_61h_supported",
+    "page_62h_supported",
+    "extra_lane_banks_supported",
+    "nad_banks_supported",
+    "media_lane_assignment_options_app",
+    "host_interface_id_app",
+    "media_interface_id_app",
+    "host_lane_count_app",
+    "media_lane_count_app",
+    "host_lane_assignment_options_app",
+    "scratch_pad_supported",
+    "password_entry_supported",
+    "password_entry_result_supported",
+    "full_page_read_supported",
+    "host_lane_switching_supported",
+    "link_training_supported",
+    "media_lane_switching_supported",
+    "page_checksum"
+  ],
+  "title": "CmisPage01hAdvertising",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184
+    ],
+    "spec": "CMIS 5.3 § 8.4"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

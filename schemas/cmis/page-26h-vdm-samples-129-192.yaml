@@ -1,0 +1,48 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage26hVdmSamples129To192
+title: CMIS Page 26h VDM Samples 129-192
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.22.2
+  pdf_pages: [275]
+page_address: "26h"
+size_bytes: 128
+present_when: "page_2fh_vdm_advertisement.vdm_support >= 2"
+
+# Local instance index 1 maps to global VDM instance 129.
+fields:
+  - name: vdm_sample
+    display_name: VDMSample<vdm_instance>
+    since: "4.0"
+    instances: { index: vdm_instance, start: 1, end: 64 }
+    offset_expr: "128 + 2 * (vdm_instance - 1)"
+    size_bytes: 2
+    type: x16be
+    variants:
+      discriminator: { field: "page_22h_vdm_descriptors_129_192.observable_type[vdm_instance]" }
+      cases:
+        - { when: { value: 0x00 }, type: u16be, description: "Inactive VDM instance; sample value is ignored" }
+        - { when: { value: 0x01 }, type: u16be, description: "U16 Laser Age observable" }
+        - { when: { range: [0x02, 0x04] }, type: i16be, description: "S16 TEC current, laser frequency error, or laser temperature observable" }
+        - { when: { range: [0x05, 0x08] }, type: u16be, description: "U16 SNR or PAM4 level transition observable" }
+        - { when: { range: [0x09, 0x1a] }, type: f16be, description: "F16 Pre-FEC BER and FERC observable" }
+        - { when: { range: [0x1b, 0x22] }, type: u16be, description: "U16 SEWmax observable" }
+        - { when: { range: [0x23, 0x4c] }, type: u16be, description: "Reserved observable IDs carried as raw U16" }
+        - { when: { range: [0x4d, 0x53] }, type: u16be, description: "U16 voltage monitor observable" }
+        - { when: { value: 0x54 }, type: i16be, description: "S16 ELS input power observable" }
+        - { when: { range: [0x55, 0xff] }, type: u16be, description: "Reserved, custom, or restricted observable IDs carried as raw U16" }
+    template: vdm_sample_field
+    scope: { vdm_instance: vdm_instance }
+    behavior:
+      global_vdm_instance_formula: "128 + vdm_instance"
+    provenance:
+      section: "CMIS 5.3 § 8.22.2"
+      pdf_page: 275
+      table: "Table 8-171"
+      quote: "X16 Real-time value"

@@ -1,0 +1,31 @@
+{
+  "$id": "sff8472_page03h_format_id.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 51739,
+      "description": "Page 03h contains calibration format for optical modules.",
+      "title": "optical_module_calibration"
+    },
+    {
+      "const": 4107,
+      "description": "Page 03h contains calibration format for loopback modules.",
+      "title": "loopback_module_calibration"
+    }
+  ],
+  "title": "Sff8472Page03hFormatId",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      71,
+      72
+    ],
+    "spec": "SFF-8472 v12.5a § 13",
+    "table": "Tables 13-1 and 13-2"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8472",
+    "revision": "12.5a"
+  }
+}

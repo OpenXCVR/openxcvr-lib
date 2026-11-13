@@ -1,0 +1,39 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage61hLaneDatapathMonitoring
+title: CMIS Page 61h Lane and Datapath Monitoring (banked)
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 8.31
+  pdf_pages: [315, 316]
+page_address: "61h"
+size_bytes: 128
+present_when: "page_01h_advertising.page_61h_supported == true"
+
+# Banked across lanes per 's bank-relative scope convention. Each Bank
+# refers to a group of 8 lanes (Table 8-190); lane-banked pages support up to
+# 4 banks through CMIS 5.3 and up to 32 banks (256 lanes) since CMIS 5.4 via
+# the BanksSupported escape code 11b (01h:142.1-0, CmisBanksSupported5p4)
+# plus ExtraLaneBanksSupported (01h:174.4-0). Support for each counter
+# category is advertised on Page 60h:130 (Table 8-191 / § 8.31.1.3); the
+# counters saturate and are cleared automatically on entry to DPInit (or
+# NPInit). Every field on this page is windowed since 5.4.
+#
+# NOTE on the 5.4 text: the Overview Table 8-190 labels bytes 128-143 as
+# "Lane Acquisition Counters Rx" and 144-159 as "Tx", which contradicts the
+# register map of Table 8-191 (128-143 AcquisitionCounterTx[8], host lane
+# acquisitions; 144-159 AcquisitionCounterRx[8], media lane acquisitions).
+# This schema follows the register map (Table 8-191), the detailed
+# definition, matching Table 8-189's reset controls and § 8.31.1's host/media
+# direction semantics.
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+field_includes:
+  - fields/page-61h-lane-datapath-monitoring-part-01.yaml
+fields: []

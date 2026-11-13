@@ -1,0 +1,30 @@
+[package]
+name = "openxcvr"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Universal transceiver EEPROM decoder and library — supports SFF-8472, SFF-8636, and CMIS transceiver families"
+readme = "README.md"
+keywords = ["transceiver", "optics", "sfp", "qsfp", "eeprom"]
+categories = ["hardware-support", "encoding", "parser-implementations"]
+publish = false
+
+[dev-dependencies]
+serde_json = "1"
+
+[features]
+# Forward the openxcvr-core `linux-i2c` feature so consumers can opt into
+# the Linux /dev/i2c-N transport via `--features linux-i2c` on this crate.
+linux-i2c = ["openxcvr-core/linux-i2c"]
+
+[dependencies]
+openxcvr-transports = { path = "../openxcvr-transports", version = "0.2.0" }
+openxcvr-core = { path = "../openxcvr-core", version = "0.2.0" }
+thiserror = "2"
+openxcvr-cmis = { path = "../openxcvr-cmis", version = "0.2.0" }
+openxcvr-sff8636 = { path = "../openxcvr-sff8636", version = "0.2.0" }
+openxcvr-sff8472 = { path = "../openxcvr-sff8472", version = "0.2.0" }

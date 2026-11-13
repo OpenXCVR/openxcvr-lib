@@ -1,0 +1,24 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage0ChModuleManagement
+title: CMIS Page 0Ch Module Management
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 8.11
+  pdf_pages: [218, 219]
+page_address: "0Ch"
+size_bytes: 128
+present_when: "page_01h_advertising.page_0ch_supported == true"
+
+# Introduced by CMIS 5.4 (Table 8-2 lists 0Ch as a 1-bank RW page): a uniform
+# 256-page support map plus named-feature compliance advertisements. The
+# systematic map is redundant with the scattered advertisements in Lower
+# Memory bytes 2, 57 and Page 01h bytes 142, 145, 155, 162, 163, 173, 174,
+# 175, 252 at introduction (CMIS 5.4 § 8.11); every field on this page is
+# windowed since 5.4.
+
+field_includes:
+  - fields/page-0ch-module-management-part-01.yaml
+fields: []

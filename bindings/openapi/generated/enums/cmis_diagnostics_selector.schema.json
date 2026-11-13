@@ -1,0 +1,80 @@
+{
+  "$id": "cmis_diagnostics_selector.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "No diagnostics data selected; bytes 192-255 read as zeroes",
+      "title": "none"
+    },
+    {
+      "const": 1,
+      "description": "Real-time Host and Media input lane 1-8 BER values",
+      "title": "realtime_host_media_ber"
+    },
+    {
+      "const": 2,
+      "description": "Real-time Host lanes 1-4 error and total-bits counters",
+      "title": "realtime_host_lanes_1_4_errors_bits"
+    },
+    {
+      "const": 3,
+      "description": "Real-time Host lanes 5-8 error and total-bits counters",
+      "title": "realtime_host_lanes_5_8_errors_bits"
+    },
+    {
+      "const": 4,
+      "description": "Real-time Media lanes 1-4 error and total-bits counters",
+      "title": "realtime_media_lanes_1_4_errors_bits"
+    },
+    {
+      "const": 5,
+      "description": "Real-time Media lanes 5-8 error and total-bits counters",
+      "title": "realtime_media_lanes_5_8_errors_bits"
+    },
+    {
+      "const": 6,
+      "description": "Real-time Host and Media input lane 1-8 SNR values",
+      "title": "realtime_host_media_snr"
+    },
+    {
+      "const": 17,
+      "description": "Host and Media input lane 1-8 BER values for the most recently completed gating period",
+      "title": "gated_host_media_ber"
+    },
+    {
+      "const": 18,
+      "description": "Host lanes 1-4 error and total-bits counters for the most recently completed gating period",
+      "title": "gated_host_lanes_1_4_errors_bits"
+    },
+    {
+      "const": 19,
+      "description": "Host lanes 5-8 error and total-bits counters for the most recently completed gating period",
+      "title": "gated_host_lanes_5_8_errors_bits"
+    },
+    {
+      "const": 20,
+      "description": "Media lanes 1-4 error and total-bits counters for the most recently completed gating period",
+      "title": "gated_media_lanes_1_4_errors_bits"
+    },
+    {
+      "const": 21,
+      "description": "Media lanes 5-8 error and total-bits counters for the most recently completed gating period",
+      "title": "gated_media_lanes_5_8_errors_bits"
+    }
+  ],
+  "title": "CmisDiagnosticsSelector",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      244,
+      245
+    ],
+    "spec": "CMIS 5.3 § 8.13.1 / Table 8-127"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

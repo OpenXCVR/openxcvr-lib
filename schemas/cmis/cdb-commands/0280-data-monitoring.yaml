@@ -1,0 +1,82 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbDataMonitoringControls
+title: CMIS CDB Command 0280h - Data Monitoring and Recording Controls
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.9.1
+  pdf_pages: [338]
+  table: Table 9-44
+cmd_id: 0x0280
+available_since: "4.0"
+cmd_id_group: data_recording
+command_class: conditionally_required
+description: >
+  Controls data monitoring and recording state. In CMIS 5.3 the defined
+  operation clears all statistics for all monitored observables and lanes on a
+  best-effort simultaneous basis.
+
+  CMIS 5.4 declares this command obsolescent (pending removal in CMIS 5.6):
+  section 1.3.1 'Features Declared Obsolescent in CMIS 5.4' - 'CDB CMD 0280h:
+  As described in section 9.8.1, the scope of the ClearAllStatistics function
+  is not clearly defined. Also, it seems to be useless, as the PM Statistics
+  have their own clear command (CMD 0200h). The command is likely not widely
+  supported nor used.' Obsolescent is not removed: the command remains
+  available_since 4.0 with no available_until, and hosts should avoid new use.
+advertisement:
+  via_cmd: 0x0042
+  field: performance_monitoring_features.cmd_0280_supported
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 4
+    fields:
+      - name: reserved_136_137
+        offset: 136
+        size_bytes: 2
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        constraints: { equals: 0 }
+        provenance: { spec: "CMIS 5.3 § 9.9.1", table: "Table 9-44" }
+      - name: clear_all_statistics
+        offset: 138
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        provenance: { spec: "CMIS 5.3 § 9.9.1", table: "Table 9-44" }
+      - name: reserved_139
+        offset: 139
+        size_bytes: 1
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        constraints: { equals: 0 }
+        provenance: { spec: "CMIS 5.3 § 9.9.1", table: "Table 9-44" }
+reply:
+  status_codes:
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+  lpl:
+    length: 0
+    fields: []
+behavior:
+  abort_supported: true
+  retry_safe: false
+  side_effects:
+    - "May clear all minimum, average, and maximum statistics for all monitored observables."

@@ -1,0 +1,38 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage10hLaneControl
+title: CMIS Page 10h Lane Control and Data Path Control (banked)
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.9
+  pdf_pages: [192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207]
+page_address: "10h"
+size_bytes: 128
+
+# Banked across lanes per 's bank-relative scope convention. Each
+# bank carries a group of 8 lanes; module advertises support for additional
+# banks via Page 01h's BanksSupported field. Most fields are RW or WO controls.
+# CMIS 5.4 § 4.1.1 / § 8.1.2 expands lane banking to up to 32 banks
+# (256 lanes): BanksSupported = 11b (01h:142.1-0, CmisBanksSupported5p4)
+# is the escape code and 01h:174.4-0 ExtraLaneBanksSupported carries the
+# extra bank count. Through CMIS 5.3 the maximum is 4 banks (32 lanes).
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+field_includes:
+  - fields/page-10h-lane-control-part-01.yaml
+  - fields/page-10h-lane-control-part-02.yaml
+  - fields/page-10h-lane-control-part-03.yaml
+  - fields/page-10h-lane-control-part-04.yaml
+  - fields/page-10h-lane-control-part-05.yaml
+  - fields/page-10h-lane-control-part-06.yaml
+  - fields/page-10h-lane-control-part-07.yaml
+fields: []

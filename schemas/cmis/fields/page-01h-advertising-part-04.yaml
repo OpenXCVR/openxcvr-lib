@@ -1,0 +1,330 @@
+fields:
+  - name: optical_detector_type
+    display_name: OpticalDetectorType
+    offset: 151
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "151 OpticalDetectorType"
+          pdf_page: [168, 173, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 173
+      quote: "0b: PIN detector"
+
+  - name: rx_output_eq_type
+    display_name: RxOutputEqType
+    offset: 151
+    bit_offset: 5
+    bit_width: 2
+    type: u2
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "151 RxOutputEqType"
+          pdf_page: [168, 173, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 173
+      quote: "Rx output equalization type"
+
+  - name: rx_power_measurement_type
+    display_name: RxPowerMeasurementType
+    offset: 151
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "151 RxPowerMeasurementType"
+          pdf_page: [168, 173, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 173
+      quote: "0b: OMA"
+
+  - name: rx_los_type
+    display_name: RxLOSType
+    offset: 151
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "151 RxLOSType"
+          pdf_page: [168, 173, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "Rx LOS response type"
+
+  - name: rx_los_is_fast
+    display_name: RxLOSIsFast
+    offset: 151
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "151 RxLOSIsFast"
+          pdf_page: [168, 173, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "Module raises Rx LOS within regular or fast timing limits"
+
+  - name: tx_disable_is_fast
+    display_name: TxDisableIsFast
+    offset: 151
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "151 TxDisableIsFast"
+          pdf_page: [168, 173, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "Module responds to Tx Output Disable with regular or fast timing"
+
+  - name: tx_disable_is_module_wide
+    display_name: TxDisableIsModuleWide
+    offset: 151
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "151 TxDisableIsModuleWide"
+          pdf_page: [168, 173, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "Tx output disable is controlled per lane or module-wide"
+
+  - name: cdr_power_saved_per_lane
+    display_name: CDRPowerSavedPerLane
+    offset: 152
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "U8 minimum power consumption saved per CDR per lane"
+
+  - name: rx_output_level3_supported
+    display_name: RxOutputLevel3Supported
+    offset: 153
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "153 RxOutputLevel3Supported"
+          pdf_page: [168, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "RxOutputLevel3 supported"
+
+  - name: rx_output_level2_supported
+    display_name: RxOutputLevel2Supported
+    offset: 153
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "153 RxOutputLevel2Supported"
+          pdf_page: [168, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "RxOutputLevel2 supported"
+
+  - name: rx_output_level1_supported
+    display_name: RxOutputLevel1Supported
+    offset: 153
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "153 RxOutputLevel1Supported"
+          pdf_page: [168, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "RxOutputLevel1 supported"

@@ -1,0 +1,236 @@
+fields:
+  - name: media_side_input_snr_measurement_supported
+    display_name: MediaSideInputSNRMeasurementSupported
+    offset: 130
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::SNR"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.3", pdf_page: 226, table: "Table 8-103", quote: "Media side SNR measurement reported via DiagnosticsSelector value 06h is supported." }
+
+  - name: host_side_input_snr_measurement_supported
+    display_name: HostSideInputSNRMeasurementSupported
+    offset: 130
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::SNR"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.3", pdf_page: 226, table: "Table 8-103", quote: "Host side SNR measurement reported via DiagnosticsSelector value 06h is supported." }
+
+  - name: bits_and_errors_counting_supported
+    display_name: BitsAndErrorsCountingSupported
+    offset: 130
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BitsCount", "Monitor::ErrorCount"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.3", pdf_page: 226, table: "Table 8-103", quote: "DiagnosticsSelector values 02h-05h are supported." }
+
+  - name: bit_error_ratio_results_supported
+    display_name: BitErrorRatioResultsSupported
+    offset: 130
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, "Monitor::BER"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.3", pdf_page: 226, table: "Table 8-103", quote: "DiagnosticsSelector value 01h is supported." }
+
+  # ===========================================================================
+  # § 8.12.4 Pattern Generation and Checking Location (byte 131) — Table 8-104
+  # ===========================================================================
+
+  - name: prbs_generator_media_side_pre_fec_supported
+    display_name: PRBSGeneratorMediaSidePreFECSupported
+    offset: 131
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSGeneratorMediaSidePreFEC: supported." }
+
+  - name: prbs_generator_media_side_post_fec_supported
+    display_name: PRBSGeneratorMediaSidePostFECSupported
+    offset: 131
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSGeneratorMediaSidePostFEC: supported." }
+
+  - name: prbs_checker_media_side_pre_fec_supported
+    display_name: PRBSCheckerMediaSidePreFECSupported
+    offset: 131
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSCheckerMediaSidePreFEC: supported." }
+
+  - name: prbs_checker_media_side_post_fec_supported
+    display_name: PRBSCheckerMediaSidePostFECSupported
+    offset: 131
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSCheckerMediaSidePostFEC: supported." }
+
+  - name: prbs_generator_host_side_pre_fec_supported
+    display_name: PRBSGeneratorHostSidePreFECSupported
+    offset: 131
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSGeneratorHostSidePreFEC: supported." }
+
+  - name: prbs_generator_host_side_post_fec_supported
+    display_name: PRBSGeneratorHostSidePostFECSupported
+    offset: 131
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSGeneratorHostSidePostFEC: supported." }
+
+  - name: prbs_checker_host_side_pre_fec_supported
+    display_name: PRBSCheckerHostSidePreFECSupported
+    offset: 131
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSCheckerHostSidePreFEC: supported." }
+
+  - name: prbs_checker_host_side_post_fec_supported
+    display_name: PRBSCheckerHostSidePostFECSupported
+    offset: 131
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "CMIS 5.3 § 8.12.4", pdf_page: 227, table: "Table 8-104", quote: "PRBSCheckerHostSidePostFEC: supported." }
+
+  # ===========================================================================
+  # § 8.12.5 Pattern Generation and Checking Capabilities (bytes 132-142)
+  # ===========================================================================
+
+  - name: host_side_generator_supports_pattern
+    display_name: HostSideGeneratorSupportsPattern<pattern>
+    instances: { index: pattern, start: 0, end: 15 }
+    offset_expr: "132 + pattern / 8"
+    bit_offset_expr: "pattern % 8"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.5"
+      pdf_page: 228
+      table: "Table 8-106"
+      quote: "HostSideGeneratorSupportsPattern<i>: Pattern with ID <i> is supported."
+
+  - name: media_side_generator_supports_pattern
+    display_name: MediaSideGeneratorSupportsPattern<pattern>
+    instances: { index: pattern, start: 0, end: 15 }
+    offset_expr: "134 + pattern / 8"
+    bit_offset_expr: "pattern % 8"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.5"
+      pdf_page: 228
+      table: "Table 8-106"
+      quote: "MediaSideGeneratorSupportsPattern<i>: Pattern with ID <i> is supported."
+
+  - name: host_side_checker_supports_pattern
+    display_name: HostSideCheckerSupportsPattern<pattern>
+    instances: { index: pattern, start: 0, end: 15 }
+    offset_expr: "136 + pattern / 8"
+    bit_offset_expr: "pattern % 8"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.5"
+      pdf_page: 229
+      table: "Table 8-107"
+      quote: "HostSideCheckerSupportsPattern<i>: Pattern with ID <i> is supported."
+
+  - name: media_side_checker_supports_pattern
+    display_name: MediaSideCheckerSupportsPattern<pattern>
+    instances: { index: pattern, start: 0, end: 15 }
+    offset_expr: "138 + pattern / 8"
+    bit_offset_expr: "pattern % 8"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance:
+      section: "CMIS 5.3 § 8.12.5"
+      pdf_page: 229
+      table: "Table 8-107"
+      quote: "MediaSideCheckerSupportsPattern<i>: Pattern with ID <i> is supported."

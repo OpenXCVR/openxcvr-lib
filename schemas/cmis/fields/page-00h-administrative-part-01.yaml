@@ -1,0 +1,540 @@
+fields:
+
+  # ===========================================================================
+  # § 8.3.1 SFF-8024 Identifier Copy (byte 128)
+  # ===========================================================================
+
+  - name: sff8024_identifier_copy
+    display_name: SFF8024IdentifierCopy
+    offset: 128
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024Identifier
+    access: ro
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.1"
+          table: "Table 8-15; Table 8-16"
+          row: "128"
+          pdf_page: [94]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: unknown
+        read_effect_provenance: null
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.1"
+      pdf_page: 161
+      table: "Table 8-27"
+      quote: "This Byte shall contain the same value as the SFF8024 Identifier Byte 00h:0. See Byte 00h:0 for a description of its meaning."
+
+  # ===========================================================================
+  # § 8.3.2 Vendor Information (bytes 129-199)
+  # ===========================================================================
+
+  - name: vendor_name
+    display_name: VendorName
+    offset: 129
+    size_bytes: 16
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.1"
+      table: "Table 8-28"
+      row: "129-144 VendorName"
+      pdf_page: 161
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "129..144"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.1"
+          table: "Table 8-28"
+          row: "129-144 VendorName"
+          pdf_page: 161
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.1"
+      pdf_page: 162
+      quote: "The VendorName is a 16 character read-only field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h)."
+
+  - name: vendor_oui
+    display_name: VendorOUI
+    offset: 145
+    size_bytes: 3
+    type: bytes
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.2"
+      table: "Table 8-28"
+      row: "145-147 VendorOUI"
+      pdf_page: 161
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "145..147"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.2"
+          table: "Table 8-28"
+          row: "145-147 VendorOUI"
+          pdf_page: 161
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.2"
+      pdf_page: 162
+      quote: "The vendor organizationally unique identifier field (VendorOUI) is a 3-byte field that contains the IEEE Company Identifier for the vendor."
+
+  - name: vendor_pn
+    display_name: VendorPN
+    offset: 148
+    size_bytes: 16
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.3"
+      table: "Table 8-28"
+      row: "148-163 VendorPN"
+      pdf_page: 161
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "148..163"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.3"
+          table: "Table 8-28"
+          row: "148-163 VendorPN"
+          pdf_page: 161
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.3"
+      pdf_page: 162
+      quote: "The vendor part number (VendorPN) is a 16-byte field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h), defining the vendor part number or product name."
+
+  - name: vendor_rev
+    display_name: VendorRev
+    offset: 164
+    size_bytes: 2
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.4"
+      table: "Table 8-28"
+      row: "164-165 VendorRev"
+      pdf_page: 161
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "164..165"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.4"
+          table: "Table 8-28"
+          row: "164-165 VendorRev"
+          pdf_page: 161
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.4"
+      pdf_page: 162
+      quote: "The vendor revision number (VendorRev) is a 2-byte field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h), defining the vendor's product revision number."
+
+  - name: vendor_sn
+    display_name: VendorSN
+    offset: 166
+    size_bytes: 16
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.5"
+      table: "Table 8-28"
+      row: "166-181 VendorSN"
+      pdf_page: 161
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "166..181"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.5"
+          table: "Table 8-28"
+          row: "166-181 VendorSN"
+          pdf_page: 161
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.5"
+      pdf_page: 162
+      quote: "The vendor serial number (VendorSN) is a 16-character field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h), defining the vendor's serial number for the Product."
+
+  - name: date_code
+    display_name: DateCode
+    offset: 182
+    size_bytes: 8
+    type: composite
+    composite_ref: CmisDateCode
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.6"
+      table: "Table 8-28"
+      row: "182-189 DateCode"
+      pdf_page: 161
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "182..189"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.6"
+          table: "Table 8-28"
+          row: "182-189 DateCode"
+          pdf_page: 161
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.6"
+      pdf_page: 162
+      table: "Table 8-29"
+      quote: "The DateCode is an 8-byte field that contains the vendor's date code in ASCII characters. The date code is mandatory."
+
+  - name: date_code_year
+    display_name: DateCode.Year
+    offset: 182
+    size_bytes: 2
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.6"
+      table: "Table 8-29"
+      row: "182-183 Year"
+      pdf_page: 162
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "182..183"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.6"
+          table: "Table 8-29"
+          row: "182-183 Year"
+          pdf_page: 162
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.6"
+      pdf_page: 162
+      table: "Table 8-29"
+      quote: "ASCII two low order digits of year (00=2000)"
+
+  - name: date_code_month
+    display_name: DateCode.Month
+    offset: 184
+    size_bytes: 2
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.6"
+      table: "Table 8-29"
+      row: "184-185 Month"
+      pdf_page: 162
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "184..185"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.6"
+          table: "Table 8-29"
+          row: "184-185 Month"
+          pdf_page: 162
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.6"
+      pdf_page: 162
+      table: "Table 8-29"
+      quote: "ASCII digits of month (01=Jan through 12=Dec)"
+
+  - name: date_code_day_of_month
+    display_name: DateCode.DayOfMonth
+    offset: 186
+    size_bytes: 2
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.6"
+      table: "Table 8-29"
+      row: "186-187 DayOfMonth"
+      pdf_page: 162
+      access: "RO Rqd."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "186..187"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.6"
+          table: "Table 8-29"
+          row: "186-187 DayOfMonth"
+          pdf_page: 162
+          access: "RO Rqd."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.6"
+      pdf_page: 162
+      table: "Table 8-29"
+      quote: "ASCII day of month (01-31)"
+
+  - name: date_code_lot_code
+    display_name: DateCode.LotCode
+    offset: 188
+    size_bytes: 2
+    type: ascii
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§ 8.3.2.6"
+      table: "Table 8-29"
+      row: "188-189 LotCode"
+      pdf_page: 162
+      access: "RO Opt."
+      basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    changed_in:
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.3; §8.3.2-§8.3.7"
+          table: "Table 8-15"
+          row: "188..189"
+          pdf_page: [94, 95]
+          basis: "§8.3 specifies static read-only page-00h information; §8.3.15 describes the read-only static checksum data through byte 221. No read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§ 8.3.2.6"
+          table: "Table 8-29"
+          row: "188-189 LotCode"
+          pdf_page: 162
+          access: "RO Opt."
+          basis: "§ 8.1.3.6, Table 8-3 distinguishes plain RO from RO/COR side effects."
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.2.6"
+      pdf_page: 162
+      table: "Table 8-29"
+      quote: "ASCII custom lot code, may be blank"

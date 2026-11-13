@@ -1,0 +1,244 @@
+fields:
+  - name: hw_tx_disable_supported
+    display_name: HWTXDisableSupported
+    offset: 132
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Hardware TxDis/TxDisable implemented on SFP112, SFP-DD/SFP-DD112 media lane 1, QSFP112, and QSFP-DD/QSFP-DD800/QSFP-DD1600 modules"
+
+  - name: hw_tx_disable_dd_supported
+    display_name: HWTXDisableDDSupported
+    offset: 132
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Hardware TXDisableDD implemented on SFP-DD/SFP-DD112 media lane 2"
+
+  - name: digital_status_tx_disable
+    display_name: DigitalStatusTxDisable
+    offset: 132
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Register indicating digital status of TxDisable hardware signal"
+
+  - name: digital_status_tx_disable_dd
+    display_name: DigitalStatusTxDisableDD
+    offset: 132
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Register indicating digital status of TxDisableDD hardware signal on SFP-DD/SFP-DD112 lane 2"
+
+  - name: mask_hw_tx_disable
+    display_name: MaskHWTxDisable
+    offset: 132
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Register masking hardware TxDisable to allow controlling media lanes solely through CMIS OutputDisable1"
+
+  - name: mask_hw_tx_disable_dd
+    display_name: MaskHWTxDisableDD
+    offset: 132
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Register masking hardware TxDisableDD to allow controlling media lanes solely through CMIS OutputDisable2"
+
+  - name: tx_disable_modes
+    display_name: TxDisableModes
+    offset: 132
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Register configuring TxDisable mode of operation on SFP-DD/SFP-DD112"
+
+  - name: reserved_tx_disable_control
+    display_name: ReservedTxDisableControl
+    offset: 132
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 29
+      table: "Table 14"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 14" }
+      quote: "Reserved"
+
+  # ===========================================================================
+  # CMIS-FF § 7.7, Table 15: Fibre Channel Rate Select (bytes 133-134)
+  # ===========================================================================
+
+  - name: hw_rate_select_supported
+    display_name: HWRateSelectSupported
+    offset: 133
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Module supports hardware rate select"
+
+  - name: rate_select_mode
+    display_name: RateSelectMode
+    offset: 133
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Rate selection by HW signals"

@@ -1,0 +1,690 @@
+{
+  "$id": "cmis_page05h_form_factor_signals.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "cmis_ff_active_firmware_major_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "U8 Numeric representation of the module's RO active firmware major revision",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 16",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 16"
+      }
+    },
+    "cmis_ff_active_firmware_minor_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "U8 Numeric representation of the module's RO active firmware minor revision",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 16",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 16"
+      }
+    },
+    "custom_cmis_ff_245_254": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "Reserved for custom use",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 17",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 17"
+      }
+    },
+    "digital_status_tx_disable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Register indicating digital status of TxDisable hardware signal",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "digital_status_tx_disable_dd": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Register indicating digital status of TxDisableDD hardware signal on SFP-DD/SFP-DD112 lane 2",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "hw_rate_select_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Module supports hardware rate select",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "hw_rx_los_dd_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Hardware RXLOSDD implemented on SFP-DD/SFP-DD112 for media lane 2",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 12",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 12"
+      }
+    },
+    "hw_rx_los_module_wide": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Hardware RxLOS on SFP-DD/SFP-DD112 configured module wide",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 12",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 12"
+      }
+    },
+    "hw_rx_los_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Hardware RxLOS implemented on SFP-DD/SFP-DD112 for media lane 1",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 12",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 12"
+      }
+    },
+    "hw_status_1_dd": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Logical status of SFP-DD/SFP-DD112 lane 2 receive CDR rate",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "hw_status_speed_1": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Logical status of SFP-DD/SFP-DD112 lane 1 receive CDR rate",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "hw_status_speed_2": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Logical status of SFP-DD/SFP-DD112 lane 1 transmit CDR rate",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "hw_status_speed_2_dd": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Logical status of SFP-DD/SFP-DD112 lane 2 transmit CDR rate",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "hw_tx_disable_dd_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Hardware TXDisableDD implemented on SFP-DD/SFP-DD112 media lane 2",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "hw_tx_disable_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Hardware TxDis/TxDisable implemented on SFP112, SFP-DD/SFP-DD112 media lane 1, QSFP112, and QSFP-DD/QSFP-DD800/QSFP-DD1600 modules",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "hw_tx_fault_dd_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Hardware TXFaultDD implemented on SFP-DD/SFP-DD112 media lane 2",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 13",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 13"
+      }
+    },
+    "hw_tx_fault_mode": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Configure TXFault for SFP-DD/SFP-DD112 to be module wide (media lane 1 and 2)",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 13",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 13"
+      }
+    },
+    "hw_tx_fault_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Hardware TXFault implemented on SFP-DD/SFP-DD112 on media lane 1",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 13",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 13"
+      }
+    },
+    "mask_hw_tx_disable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Register masking hardware TxDisable to allow controlling media lanes solely through CMIS OutputDisable1",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "mask_hw_tx_disable_dd": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Register masking hardware TxDisableDD to allow controlling media lanes solely through CMIS OutputDisable2",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "page_checksum": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 25,
+        "quote": "Page Checksum of bytes 128-254",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 9",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 9"
+      }
+    },
+    "rate_select_mode": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Rate selection by HW signals",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "reserved_cmis_ff_137_244": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 25,
+        "quote": "Reserved [121]",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 9",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 9"
+      }
+    },
+    "reserved_dual_mode_hardware_support": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 26,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 10",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 10"
+      }
+    },
+    "reserved_dual_mode_pin_control_bit_7": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 27,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 11",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 11"
+      }
+    },
+    "reserved_dual_mode_pin_control_bits_1_0": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 27,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 11",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 11"
+      }
+    },
+    "reserved_rate_select_control": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "reserved_rate_select_status": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 30,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 15",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 15"
+      }
+    },
+    "reserved_sfp_dd_rx_los_control": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 12",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 12"
+      }
+    },
+    "reserved_sfp_dd_tx_fault_control": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 28,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 13",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 13"
+      }
+    },
+    "reserved_tx_disable_control": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Reserved",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "rx_losl_mode_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 26,
+        "quote": "SFP112, QSFP112, QSFP-DD/QSFP-DD800 RxLOSL is hardware supported",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 10",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 10"
+      }
+    },
+    "select_rx_losl": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 27,
+        "quote": "On SFP112 module select optional RxLOSL",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 11",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 11"
+      }
+    },
+    "select_rx_losl_q": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 27,
+        "quote": "On QSFP112, QSFP-DD/QSFP-DD800 change the default IntL Mode to optional RxLOSL",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 11",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 11"
+      }
+    },
+    "select_tx_disable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 27,
+        "quote": "On SFP112 module select optional TxDis",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 11",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 11"
+      }
+    },
+    "select_tx_disable_q": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 27,
+        "quote": "On QSFP112, QSFP-DD/QSFP-DD800 change the default LPMode to optional TxDis",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 11",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 11"
+      }
+    },
+    "select_tx_fault_dd": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 27,
+        "quote": "On SFP-DD/SFP-DD112 modules change the default IntL to TxFault",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 11",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 11"
+      }
+    },
+    "tx_disable_modes": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 29,
+        "quote": "Register configuring TxDisable mode of operation on SFP-DD/SFP-DD112",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 14",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 14"
+      }
+    },
+    "tx_fault_dd_mode_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 26,
+        "quote": "SFP-DD/SFP-DD112 TxFaultDD hardware is supported",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 10",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 10"
+      }
+    },
+    "tx_fault_mode_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 26,
+        "quote": "SFP-DD/SFP-DD112 TxFault hardware is supported",
+        "section": "§ 7.7",
+        "spec": "CMIS 5.3 § 8.8",
+        "supplement": {
+          "revision": "1.0",
+          "section": "§ 7.7 / Table 10",
+          "spec": "cmis-ff"
+        },
+        "table": "Table 10"
+      }
+    }
+  },
+  "required": [
+    "tx_fault_mode_supported",
+    "tx_fault_dd_mode_supported",
+    "rx_losl_mode_supported",
+    "reserved_dual_mode_hardware_support",
+    "reserved_dual_mode_pin_control_bit_7",
+    "select_tx_disable",
+    "select_rx_losl",
+    "select_tx_fault_dd",
+    "select_tx_disable_q",
+    "select_rx_losl_q",
+    "reserved_dual_mode_pin_control_bits_1_0",
+    "hw_rx_los_supported",
+    "hw_rx_los_dd_supported",
+    "hw_rx_los_module_wide",
+    "reserved_sfp_dd_rx_los_control",
+    "hw_tx_fault_supported",
+    "hw_tx_fault_dd_supported",
+    "hw_tx_fault_mode",
+    "reserved_sfp_dd_tx_fault_control",
+    "hw_tx_disable_supported",
+    "hw_tx_disable_dd_supported",
+    "digital_status_tx_disable",
+    "digital_status_tx_disable_dd",
+    "mask_hw_tx_disable",
+    "mask_hw_tx_disable_dd",
+    "tx_disable_modes",
+    "reserved_tx_disable_control",
+    "hw_rate_select_supported",
+    "rate_select_mode",
+    "reserved_rate_select_control",
+    "hw_status_speed_1",
+    "hw_status_speed_2",
+    "hw_status_1_dd",
+    "hw_status_speed_2_dd",
+    "reserved_rate_select_status",
+    "cmis_ff_active_firmware_major_revision",
+    "cmis_ff_active_firmware_minor_revision",
+    "reserved_cmis_ff_137_244",
+    "custom_cmis_ff_245_254",
+    "page_checksum"
+  ],
+  "title": "CmisPage05hFormFactorSignals",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      191
+    ],
+    "spec": "CMIS 5.3 § 8.8",
+    "supplement": {
+      "pdf_pages": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "revision": "1.0",
+      "section": "§ 7.7",
+      "source": "docs/stds/cmis/OIF-CMIS-FF-01.0.pdf",
+      "spec": "cmis-ff"
+    }
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

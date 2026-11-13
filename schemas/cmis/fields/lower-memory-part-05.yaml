@@ -1,0 +1,250 @@
+fields:
+  - name: vcc_mon_voltage
+    display_name: VccMonVoltage
+    offset: 16
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "100 uV" }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::Voltage"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.5"
+      pdf_page: 147
+      quote: "U16 Supply Voltage Monitor (Current Value)."
+
+  - name: aux1_mon_value
+    display_name: Aux1MonValue
+    offset: 18
+    size_bytes: 2
+    type: i16be
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.5"
+      pdf_page: 147
+      table: "Table 8-49"
+      quote: "S16 Aux1 Monitor (see Table 8-49) (Current Value)."
+
+  - name: aux2_mon_value
+    display_name: Aux2MonValue
+    offset: 20
+    size_bytes: 2
+    type: i16be
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.5"
+      pdf_page: 147
+      table: "Table 8-49"
+      quote: "S16 Aux2 Monitor (see Table 8-49) (Current Value)."
+
+  - name: aux3_mon_value
+    display_name: Aux3MonValue
+    offset: 22
+    size_bytes: 2
+    type: i16be
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.5"
+      pdf_page: 147
+      table: "Table 8-49"
+      quote: "S16 Aux3 Monitor (see Table 8-49) (Current Value)."
+
+  - name: custom_mon_value
+    display_name: CustomMonValue
+    offset: 24
+    size_bytes: 2
+    # Sign depends on vendor. Encoded as raw bytes; adapter chooses signedness.
+    type: u16be
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, CustomField]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.5"
+      pdf_page: 147
+      quote: "S16 or U16: Custom monitor (Current Value)."
+
+  # ===========================================================================
+  # § 8.2.6 Module-Level Controls (bytes 26-30)
+  # ===========================================================================
+
+  - name: software_reset
+    display_name: SoftwareReset
+    offset: 26
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, "Control::WriteTrigger"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.6"
+      pdf_page: 148
+      quote: "Self-clearing trigger bit that causes the module to be reset when 1b is written to it."
+
+  - name: low_pwr_request_sw
+    display_name: LowPwrRequestSW
+    offset: 26
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.6"
+      pdf_page: 148
+      quote: "1b: Request for the module to stay in, or to return into, Low Power mode."
+
+  - name: squelch_method_select
+    display_name: SquelchMethodSelect
+    offset: 26
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: reduce_oma, description: "Squelching of Tx output reduces OMA" }
+      - { value: 1, name: reduce_pav, description: "Squelching of Tx output reduces Pav" }
+    provenance:
+      section: "§ 8.2.6"
+      pdf_page: 148
+      quote: "0b: Squelching of Tx output reduces OMA; 1b: Squelching of Tx output reduces Pav."
+
+  - name: low_pwr_allow_request_hw
+    display_name: LowPwrAllowRequestHW
+    offset: 26
+    bit_offset: 6
+    bit_width: 1
+    since: "4.0"
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.6"
+      pdf_page: 148
+      quote: "Enables evaluation of the LowPwrRequestHW hardware signal."
+
+  - name: bank_broadcast_enable
+    display_name: BankBroadcastEnable
+    offset: 26
+    bit_offset: 7
+    bit_width: 1
+    since: "5.2"
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.6"
+      pdf_page: 148
+      quote: "0b: Bank broadcast for lane-banked pages disabled; 1b: Bank broadcast for lane-banked pages enabled."
+
+  - name: mci_speed_configuration
+    display_name: MciSpeedConfiguration
+    offset: 27
+    bit_offset: 0
+    bit_width: 4
+    since: "5.3"
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.6"
+      pdf_page: 149
+      quote: "The host configures the speed used for SPI bus transactions."
+
+  # ===========================================================================
+  # § 8.2.7 Module-Level Masks (bytes 31-36)
+  #
+  # Mask bits map 1:1 to the latched flags from § 8.2.4. Same physical layout
+  # offset by 23 bytes (8 → 31, 9 → 32, 10 → 33, 11 → 34). Each entry is RW.
+  # Not collapsible: each mask refers to a uniquely-named flag.
+  # ===========================================================================

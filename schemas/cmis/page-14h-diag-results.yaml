@@ -1,0 +1,46 @@
+schema: openxcvr.page.v2
+kind: page
+id: CmisPage14hDiagnosticsResults
+title: CMIS Page 14h Module Performance Diagnostics Results (banked)
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.13
+  pdf_pages: [244, 245, 246, 247, 248]
+  since_origin:
+    spec: CMIS 4.0 § 8.11
+    pdf_pages: [179, 180, 181, 182, 183, 184]
+    tables: ["Table 8-92", "Table 8-94"]
+    note: >-
+      Page 14h diagnostics and the DiagnosticsSelector-controlled
+      Diagnostics Data window (bytes 192-255) first appear in CMIS 4.0;
+      every field on this page carries since: "4.0" for that reason. The
+      4.0 peak-detect regions under selector 06h are NOT modeled as
+      reserved: this schema follows 5.3 Table 8-129 for the shared
+      SNR/BER/counter offsets (CMIS 4.0 Table 8-94, printed pp. 181-184,
+      supplies the same little-endian ordering and 1/256 dB SNR encoding).
+page_address: "14h"
+size_bytes: 128
+
+# Banked across lanes per 's bank-relative scope convention. The
+# Diagnostics Data window is selector-dependent and may expose host and media
+# lane results for the selected bank.
+# CMIS 5.4 § 4.1.1 / § 8.1.2 expands lane banking to up to 32 banks
+# (256 lanes): BanksSupported = 11b (01h:142.1-0, CmisBanksSupported5p4)
+# is the escape code and 01h:174.4-0 ExtraLaneBanksSupported carries the
+# extra bank count. Through CMIS 5.3 the maximum is 4 banks (32 lanes).
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+field_includes:
+  - fields/page-14h-diag-results-part-01.yaml
+  - fields/page-14h-diag-results-part-02.yaml
+  - fields/page-14h-diag-results-part-03.yaml
+fields: []

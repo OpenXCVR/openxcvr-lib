@@ -1,0 +1,378 @@
+{
+  "$id": "cmis_page0_ch_module_management.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "abnormal_indication_supported": {
+      "description": "1b: Abnormal Firmware Indication is supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "AbnormalIndicationSupported: 1b: Abnormal Firmware Indication is supported",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "consolidated_pm_feature_support": {
+      "description": "FeatureSupport byte of the ConsolidatedPmFeature FeatureAdvertisement: 0 = Consolidated Performance Monitoring feature is not supported; >0 = CmisRevision of the feature definition (U4 major, U4 minor, upper nibble major per the CmisRevision convention).",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "FeatureSupport: 0: Feature is not supported; >0: CmisRevision of the feature definition (U4 major, U4 minor)",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-71 / Table 8-72"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "consolidated_pm_options_profile_compliance": {
+      "description": "OptionsProfileCompliance of the ConsolidatedPmFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the NaSupportRegister is set to 10111100b (byte 192).",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "OptionsProfileCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-71 / Table 8-72"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "consolidated_pm_requirements_compliance": {
+      "description": "RequirementsCompliance of the ConsolidatedPmFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the module fulfills all requirements defined in CMIS 5.4 § 7.10.3.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "RequirementsCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-71 / Table 8-72"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "dual_bank_supported": {
+      "description": "1b: Banks A and B are supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "DualBankSupported: 1b: Banks A and B are supported",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "firmware_load_tag_supported": {
+      "description": "1b: Persistent Firmware Load Tag is supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "FirmwareLoadTagSupported: 1b: Persistent Firmware Load Tag is supported",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "fixed_firmware_fallback": {
+      "description": "1b: A fixed firmware load with basic firmware download capabilities is available. Recommended FW Management option (FwSupportOptions).",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "FixedFirmwareFallback: 1b: A fixed firmware load with basic firmware download capabilities is available",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "load_management_feature_support": {
+      "description": "FeatureSupport byte of the LoadManagementFeature FeatureAdvertisement: 0 = Consolidated Firmware Load Management feature is not supported; >0 = CmisRevision of the feature definition (U4 major, U4 minor, upper nibble major per the CmisRevision convention).",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "FeatureSupport: 0: Feature is not supported; >0: CmisRevision of the feature definition (U4 major, U4 minor)",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-71 / Table 8-72"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "load_management_options_profile_compliance": {
+      "description": "OptionsProfileCompliance of the LoadManagementFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the FwSupportDetails register is set to 11110000b (byte 194).",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "OptionsProfileCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-71 / Table 8-72"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "load_management_requirements_compliance": {
+      "description": "RequirementsCompliance of the LoadManagementFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the module fulfills all behavioral requirements defined in CMIS 5.4 § 7.11.2.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "RequirementsCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-71 / Table 8-72"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "map_of_supported_pages": {
+      "description": "1b: the Page with Page Index <page_index> is supported; 0b: not supported.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 256,
+      "minItems": 256,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "MapOfSupportedPages: U8[32] bit mask array indicating supported Pages: Bit k (0-7) in byte 128+ n (0-31) set to 1 indicates that the Page with Page Index j = n * 8+k, 0 <= j <= 255 is supported.",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-70"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "na_feeds_averages": {
+      "description": "1b: NA values feed average computations.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "NaFeedsAverages: 1b: NA values feed average computations",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "na_feeds_counter_stats": {
+      "description": "1b: NA values feed event counter stats.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "NaFeedsCounterStats: 1b: NA values feed event counter stats",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "na_feeds_diagnostics": {
+      "description": "0b: NA values are not fed to diagnostics statistics observables.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "NaFeedsDiagnostics: 0b: NA not fed to diagnostics statistics observables",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "na_feeds_range_stats": {
+      "description": "1b: NA values feed range statistics min and max.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "NaFeedsRangeStats: 1b: NA values feed range statistics min and max",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "na_feeds_supervision": {
+      "description": "0b: NA values are not fed to / ignored by threshold detectors.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "NaFeedsSupervision: 0b: NA values not fed to / ignored by threshold detectors",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "na_saturates_totals": {
+      "description": "1b: NA values saturate non-random totals.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "NaSaturatesTotals: 1b: NA values saturate non-random totals",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "na_supported": {
+      "description": "1b: NA values are supported for observable samples.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "NaSupported: 1b: NA values are supported for observable samples",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reject_unsupported_activation": {
+      "description": "1b: Module rejects activation if it would have unwanted side effects.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "RejectUnsupportedActivation: 1b: Module rejects if activation has unwanted side effects",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0ch_164_191": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "Bytes 164-191: Reserved [30]",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-72"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0ch_192_bits_0": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "Byte 192 bit 0: 0b: Reserved",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0ch_193": {
+      "contentEncoding": "base64",
+      "description": "NaSupportOptions: Reserved.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "Byte 193: NaSupportOptions: Reserved",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0ch_194_bits_1_0": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "Byte 194 bits 1-0: Reserved",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0ch_195_bits_6_0": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "Byte 195 bits 6-0: Reserved",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0ch_196_223": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "Bytes 196-223: Reserved [28]",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0ch_224_255": {
+      "contentEncoding": "base64",
+      "description": "Control and Status subject area: Reserved at CMIS 5.4 introduction (Table 8-69).",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 218,
+        "quote": "Bytes 224-255: Control and Status: Reserved",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-69"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "transfer_is_harmless": {
+      "description": "1b: Transfer does not impact mission integrity and quality.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "TransferIsHarmless: 1b: Transfer does not impact mission integrity and quality",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "unique_load_version_supported": {
+      "description": "1b: Version information is characteristic of the entire load.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 219,
+        "quote": "UniqueLoadVersionSupported: 1b: Version information is characteristic of entire load",
+        "section": "CMIS 5.4 § 8.11",
+        "table": "Table 8-73"
+      },
+      "x-openxcvr-since": "5.4"
+    }
+  },
+  "required": [
+    "map_of_supported_pages",
+    "consolidated_pm_feature_support",
+    "consolidated_pm_options_profile_compliance",
+    "consolidated_pm_requirements_compliance",
+    "load_management_feature_support",
+    "load_management_options_profile_compliance",
+    "load_management_requirements_compliance",
+    "reserved_page_0ch_164_191",
+    "na_supported",
+    "na_feeds_supervision",
+    "na_feeds_range_stats",
+    "na_feeds_averages",
+    "na_feeds_counter_stats",
+    "na_saturates_totals",
+    "na_feeds_diagnostics",
+    "reserved_page_0ch_192_bits_0",
+    "reserved_page_0ch_193",
+    "unique_load_version_supported",
+    "dual_bank_supported",
+    "firmware_load_tag_supported",
+    "abnormal_indication_supported",
+    "transfer_is_harmless",
+    "reject_unsupported_activation",
+    "reserved_page_0ch_194_bits_1_0",
+    "fixed_firmware_fallback",
+    "reserved_page_0ch_195_bits_6_0",
+    "reserved_page_0ch_196_223",
+    "reserved_page_0ch_224_255"
+  ],
+  "title": "CmisPage0ChModuleManagement",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      218,
+      219
+    ],
+    "spec": "CMIS 5.4 § 8.11"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

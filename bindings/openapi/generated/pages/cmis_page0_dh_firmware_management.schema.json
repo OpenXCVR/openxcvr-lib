@@ -1,0 +1,387 @@
+{
+  "$id": "cmis_page0_dh_firmware_management.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "administrative_status_a": {
+      "description": "Commit state of the Load in Bank A.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "AdministrativeStatusA: 0b / 1b: Load in Bank A is uncommitted / committed",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "administrative_status_b": {
+      "description": "Commit state of the Load in Bank B.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "AdministrativeStatusB: 0b / 1b: Load in Bank B is uncommitted / committed",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "bank_a_supported": {
+      "description": "1b: Loadable Bank A supported (required for Download).",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "BankASupported: 1b: Loadable Bank A supported (required for Download)",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "bank_b_supported": {
+      "description": "1b: Loadable Bank B supported (requires BankASupported).",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "BankBSupported: 1b: Loadable Bank B supported (requires BankASupported)",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "build_number_fixed_load": {
+      "description": "U16 build number of the Load stored in the Fixed Bank.",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "BuildNumber: U16 build number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "build_number_load_a": {
+      "description": "U16 build number of the Load stored in Bank A.",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "BuildNumber: U16 build number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "build_number_load_b": {
+      "description": "U16 build number of the Load stored in Bank B.",
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "BuildNumber: U16 build number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "cdb_download_supported": {
+      "description": "1b: CDB-based download is supported by the Running Load.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "CdbDownloadSupported: 1b: CDB-based download is supported by Running Load",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "description_fixed_load": {
+      "description": "ASCII[32] descriptive string for the Load stored in the Fixed Bank.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Description: ASCII[32] descriptive string for Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "description_load_a": {
+      "description": "ASCII[32] descriptive string for the Load stored in Bank A.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Description: ASCII[32] descriptive string for Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "description_load_b": {
+      "description": "ASCII[32] descriptive string for the Load stored in Bank B.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Description: ASCII[32] descriptive string for Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "fixed_bank_supported": {
+      "description": "1b: Fixed Bank for Fixed Firmware Load supported.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "FixedBankSupported: 1b: Fixed Bank for Fixed Firmware Load supported",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "fixed_load_provides_service": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "FixedLoadProvidesService: 0b: Fixed Load provides auxiliary firmware mgmt. facilities; 1b: Fixed Load additionally provides transmission",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "major_version_fixed_load": {
+      "description": "U8 major revision number of the Load stored in the Fixed Bank.",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MajorVersion: U8 major revision number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "major_version_load_a": {
+      "description": "U8 major revision number of the Load stored in Bank A.",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MajorVersion: U8 major revision number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "major_version_load_b": {
+      "description": "U8 major revision number of the Load stored in Bank B.",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MajorVersion: U8 major revision number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "minor_version_fixed_load": {
+      "description": "U8 minor revision number of the Load stored in the Fixed Bank.",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MinorVersion: U8 minor revision number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "minor_version_load_a": {
+      "description": "U8 minor revision number of the Load stored in Bank A.",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MinorVersion: U8 minor revision number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "minor_version_load_b": {
+      "description": "U8 minor revision number of the Load stored in Bank B.",
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "MinorVersion: U8 minor revision number of Load stored in given Bank",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-75 / Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "operational_status_a": {
+      "description": "Running state of the Load in Bank A.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "OperationalStatusA: 0b / 1b: Load in Bank A is not running / running",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "operational_status_b": {
+      "description": "Running state of the Load in Bank B.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "OperationalStatusB: 0b / 1b: Load in Bank B is not running / running",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0dh_128_bits_6_4": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Byte 128 bits 6-4: Reserved",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0dh_129_131": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Bytes 129-131: Reserved [3]",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0dh_132_135": {
+      "contentEncoding": "base64",
+      "description": "Control subject area: Reserved [4], RW per Table 8-76.",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Bytes 132-135: Reserved [4] (RW)",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0dh_136_bit_3": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Byte 136 bit 3: Reserved",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0dh_136_bit_7": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Byte 136 bit 7: Reserved",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_0dh_137_147": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "Bytes 137-147: Reserved [11]",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "validity_status_a": {
+      "description": "Validity of the Load in Bank A.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "ValidityStatusA: 0b / 1b: Load in Bank A is valid / invalid",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "validity_status_b": {
+      "description": "Validity of the Load in Bank B.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 220,
+        "quote": "ValidityStatusB: 0b / 1b: Load in Bank B is valid / invalid",
+        "section": "CMIS 5.4 § 8.12",
+        "table": "Table 8-76"
+      },
+      "x-openxcvr-since": "5.4"
+    }
+  },
+  "required": [
+    "cdb_download_supported",
+    "reserved_page_0dh_128_bits_6_4",
+    "fixed_load_provides_service",
+    "fixed_bank_supported",
+    "bank_b_supported",
+    "bank_a_supported",
+    "reserved_page_0dh_129_131",
+    "reserved_page_0dh_132_135",
+    "reserved_page_0dh_136_bit_7",
+    "validity_status_b",
+    "administrative_status_b",
+    "operational_status_b",
+    "reserved_page_0dh_136_bit_3",
+    "validity_status_a",
+    "administrative_status_a",
+    "operational_status_a",
+    "reserved_page_0dh_137_147",
+    "major_version_load_a",
+    "minor_version_load_a",
+    "build_number_load_a",
+    "description_load_a",
+    "major_version_load_b",
+    "minor_version_load_b",
+    "build_number_load_b",
+    "description_load_b",
+    "major_version_fixed_load",
+    "minor_version_fixed_load",
+    "build_number_fixed_load",
+    "description_fixed_load"
+  ],
+  "title": "CmisPage0DhFirmwareManagement",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      220
+    ],
+    "spec": "CMIS 5.4 § 8.12"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

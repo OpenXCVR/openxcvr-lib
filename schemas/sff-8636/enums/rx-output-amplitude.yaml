@@ -1,0 +1,27 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8636RxOutputAmplitude
+title: SFF-8636 Rx Output Amplitude Control Codes
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.6.3
+  table: "Table 6-31"
+  pdf_pages: [63]
+entries:
+  - value: 0x0
+    name: mv_100_to_400
+    description: Receiver output differential amplitude 100-400 mV p-p
+  - value: 0x1
+    name: mv_300_to_600
+    description: Receiver output differential amplitude 300-600 mV p-p
+  - value: 0x2
+    name: mv_400_to_800
+    description: Receiver output differential amplitude 400-800 mV p-p
+  - value: 0x3
+    name: mv_600_to_1200
+    description: Receiver output differential amplitude 600-1200 mV p-p
+  - value: 0x4..0xf
+    name: reserved
+    description: Reserved

@@ -1,0 +1,462 @@
+fields:
+  - name: max_duration_dp_tx_turn_off
+    display_name: MaxDurationDPTxTurnOff
+    offset: 168
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    since: "4.0"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.12"
+      pdf_page: 181
+      quote: "Encoded maximum duration of the DPTxTurnOff state"
+
+  - name: max_duration_dp_tx_turn_on
+    display_name: MaxDurationDPTxTurnOn
+    offset: 168
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "4.0"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.12"
+      pdf_page: 181
+      quote: "Encoded maximum duration of the DPTxTurnOn state"
+
+  - name: max_duration_bpc
+    display_name: MaxDurationBPC
+    offset: 169
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "5.3"
+    description: >
+      Encoded value i gives the maximum bank or page switch time as tBPC / 2^i. This is a scalar encoded advertisement, not an exponent variant.
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.12"
+      pdf_page: 181
+      quote: "Encoded scaling of maximum ACCESS hold-off duration after a PageMapping register change"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.4.13 Host Lane Polarity Inversion Indication - Table 8-57
+  # (bytes 171-172, allocated from the 5.3 reserved bytes 170-174)
+  # ===========================================================================
+
+  - name: default_input_polarity_tx_lane
+    display_name: DefaultInputPolarityTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 171
+    bit_offset_expr: "8 - lane"
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.4.13"
+      pdf_page: 206
+      table: "Table 8-57"
+      quote: "DefaultInputPolarityTx<i>: 0b: Module input lane <i> polarity is regular; 1b: Module input lane <i> polarity is inverted."
+
+  - name: default_output_polarity_rx_lane
+    display_name: DefaultOutputPolarityRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 172
+    bit_offset_expr: "8 - lane"
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.4.13"
+      pdf_page: 206
+      table: "Table 8-57"
+      quote: "DefaultOutputPolarityRx<i>: 0b: Module output lane <i> polarity is regular; 1b: Module output lane <i> polarity is inverted."
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.4.14 Supported Pages and Banks Advertisement - Table 8-58
+  # (bytes 173-174, allocated from the 5.3 reserved bytes 170-174)
+  # ===========================================================================
+
+  - name: page_0ch_supported
+    display_name: PageChSupported
+    offset: 173
+    bit_offset: 7
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.4.14"
+      pdf_page: 207
+      table: "Table 8-58"
+      quote: "1b: Page 0Ch supported (see section 8.11)"
+
+  - name: page_0dh_supported
+    display_name: PageDhSupported
+    offset: 173
+    bit_offset: 6
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.4.14"
+      pdf_page: 207
+      table: "Table 8-58"
+      quote: "1b: Page 0Dh supported (see section 8.12)"
+
+  - name: page_60h_supported
+    display_name: Page60hSupported
+    offset: 174
+    bit_offset: 7
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.4.14"
+      pdf_page: 207
+      table: "Table 8-58"
+      quote: "1b: Page 60h supported (see section 8.30)"
+
+  - name: page_61h_supported
+    display_name: Page61hSupported
+    offset: 174
+    bit_offset: 6
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.4.14"
+      pdf_page: 207
+      table: "Table 8-58"
+      quote: "1b: Page 61h supported (see section 8.31)"
+
+  - name: page_62h_supported
+    display_name: Page62hSupported
+    offset: 174
+    bit_offset: 5
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.4.14"
+      pdf_page: 207
+      table: "Table 8-58"
+      quote: "1b: Page 62h supported (see section 8.32)"
+
+  - name: extra_lane_banks_supported
+    display_name: ExtraLaneBanksSupported
+    offset: 174
+    bit_offset: 0
+    bit_width: 5
+    since: "5.4"
+    type: u5
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    description: >
+      The number n < 32 of non-trivially supported banks for lane-banked pages,
+      indicating management register support for (n + 1) x 8 lanes. Valid only
+      when 01h:142.1-0 = 11b (the 5.4 BanksSupported escape code).
+    provenance:
+      section: "CMIS 5.4 § 8.4.14"
+      pdf_page: 207
+      table: "Table 8-58"
+      quote: "ExtraLaneBanksSupported: n: The number n < 32 of non-trivially supported banks for lane-banked pages, indicating management registers support for (n + 1) * 8 lanes. This field is valid only when 01h:142.1-0 = 11b"
+
+  - name: nad_banks_supported
+    display_name: NADBanksSupported
+    offset: 175
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "5.3"
+    access: ro
+    changed_in:
+      - rev: "5.4"
+        bit_width: 8
+        provenance:
+          section: "CMIS 5.4 § 8.4.15"
+          pdf_page: 208
+          table: "Table 8-59"
+          quote: "NADBanksSupported: U8 n = number of supported NAD banks. Up to n * 15 Applications can be advertised in n groups of 15 NADs each. The maximum number of Applications that can be supported is 255 * 15 = 3825"
+          basis: "The NADBanksSupported register was defined as a 4-bit field prior to CMIS revision 5.4; 5.4 expands it to the full byte 175 bits 7-0."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.13"
+      pdf_page: 182
+      quote: "Normalized Application Descriptor bank support"
+
+  - name: media_lane_assignment_options_app
+    display_name: MediaLaneAssignmentOptionsApp<app>
+    instances: { index: app, start: 1, end: 15 }
+    offset_expr: "175 + app"
+    size_bytes: 1
+    type: bitmap
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.14"
+      pdf_page: 182
+      quote: "Bits 0-7 form a bitmap of media lane assignment options for AppSel code app"
+
+  - name: host_interface_id_app
+    display_name: HostInterfaceIDApp<app>
+    instances: { index: app, start: 1, end: 7 }
+    offset_expr: "223 + 4 * (app - 1)"
+    size_bytes: 1
+    type: u8
+    enum_ref: Sff8024HostElectricalInterface
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.15"
+      pdf_page: 183
+      quote: "HostInterfaceID field of additional Application Descriptor slot app"
+
+  - name: media_interface_id_app
+    display_name: MediaInterfaceIDApp<app>
+    instances: { index: app, start: 1, end: 7 }
+    offset_expr: "224 + 4 * (app - 1)"
+    size_bytes: 1
+    type: u8
+    variants:
+      discriminator: { field: lower_memory.media_type }
+      cases:
+        - when: { value: 0x01 }
+          enum_ref: Sff8024MmfMediaInterface
+        - when: { value: 0x02 }
+          enum_ref: Sff8024SmfMediaInterface
+        - when: { value: 0x03 }
+          enum_ref: Sff8024PassiveCableCodes
+        - when: { value: 0x04 }
+          enum_ref: Sff8024ActiveCableCodes
+        - when: { value: 0x05 }
+          enum_ref: Sff8024BaseTCodes
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.15"
+      pdf_page: 183
+      quote: "MediaInterfaceID field of additional Application Descriptor slot app"
+
+  - name: host_lane_count_app
+    display_name: HostLaneCountApp<app>
+    instances: { index: app, start: 1, end: 7 }
+    offset_expr: "225 + 4 * (app - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.15"
+      pdf_page: 183
+      quote: "Host lane count for additional Application Descriptor slot app"
+
+  - name: media_lane_count_app
+    display_name: MediaLaneCountApp<app>
+    instances: { index: app, start: 1, end: 7 }
+    offset_expr: "225 + 4 * (app - 1)"
+    size_bytes: 1
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.15"
+      pdf_page: 183
+      quote: "Media lane count for additional Application Descriptor slot app"
+
+  - name: host_lane_assignment_options_app
+    display_name: HostLaneAssignmentOptionsApp<app>
+    instances: { index: app, start: 1, end: 7 }
+    offset_expr: "226 + 4 * (app - 1)"
+    size_bytes: 1
+    type: bitmap
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.15"
+      pdf_page: 183
+      quote: "Host lane assignment options bitmap for additional Application Descriptor slot app"
+
+  - name: scratch_pad_supported
+    display_name: ScratchPadSupported
+    offset: 251
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    since: "5.3"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.16"
+      pdf_page: 184
+      quote: "Host Scratchpad Area support"

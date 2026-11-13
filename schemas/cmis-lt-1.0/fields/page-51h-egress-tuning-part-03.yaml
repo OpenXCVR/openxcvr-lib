@@ -1,0 +1,97 @@
+fields:
+
+  - name: host_out_invoke_tuning_flag
+    display_name: "HostOut<lane>InvokeTuningFlag"
+    description: "Tuning procedure invoked per lane: 0: no tuning request for lane <lane>, 1: tuning request for lane <lane>; the type of tuning requested (amplitude or taps) is programmed in HostOut<lane>TuningType. M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 226
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Tuning, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 52, table: "Table 38" }
+
+  - name: host_out_tuning_completed_trig
+    display_name: "HostOut<lane>TuningCompletedTrig"
+    description: "The host notifies the module about completion of a tuning procedure for lane <lane> (with or without success): 0: no tuning requested or not yet completed, 1: requested operation completed. H2M message bit, self-clearing."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 227
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Tuning, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 52, table: "Table 39" }
+
+  - name: host_out_training_done_flag
+    display_name: "HostOut<lane>TrainingDoneFlag"
+    description: "Flag to the host after completion of egress training: 0: egress training not started or not yet completed, 1: egress training completed; the host should examine training status (Table 15) and training result (Table 16). M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 228
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Session, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 53, table: "Table 40" }
+
+  - name: mod_hsin_sqm_alarm_flag
+    display_name: "ModHsIn<lane>SqmAlarmFlag"
+    description: "SQM degraded alarm indicator to the host: 0: no SQM degraded alarm latched since last read, 1: SQM degraded alarm latched since last read. The table is titled '(Page 50h)' in the parsed spec but the register is defined in section 6.3.6 on page 51h byte 229; recorded on page 51h (see namespace README)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 229
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, SQM, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 53, table: "Table 41" }
+
+  - name: reserved_230_231
+    offset: 230
+    size_bytes: 2
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 53, table: "Table 41" }
+
+  - name: mod_hsin_current_sqm
+    display_name: "ModHsIn<lane>CurrentSQM"
+    description: "Current SQM readout on ModHsIn receive lane <lane>; a U8 value of s encodes the SQM value 10 + s/10. There are no notifications to the host when values change; it is the host's responsibility to monitor these registers when needed."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "232 + (lane - 1)"
+    type: u8
+    access: ro
+    units: "0.1 SQM"
+    field_type: Monitor
+    tags: [CMIS-LT, SQM, Monitor, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 53, table: "Table 42" }
+
+  - name: reserved_240_255
+    offset: 240
+    size_bytes: 16
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 53, table: "Table 42" }

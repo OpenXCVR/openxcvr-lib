@@ -1,0 +1,28 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis12Page38hDataPathHostIfConfig
+title: C-CMIS 1.2 Page 38h Data Path Host Interface Configuration
+spec:
+  id: c-cmis-1.2
+  revision: "01.2"
+  source: docs/stds/cmis/OIF-C-CMIS-01.2.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.2 § 7.5.1
+  pdf_pages: [26]
+page_address: "38h"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: data_path
+fields:
+  - { name: fdd_act_ber_thresh, offset: 128, size_bytes: 2, type: f16be, access: rw, field_type: Control, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold to activate host FDD (CMIS f16be format: m*10^(s-24))", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: fdd_clr_ber_thresh, offset: 130, size_bytes: 2, type: f16be, access: rw, field_type: Control, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold for FEC Detected Degrade (FDD) to clear on the data path host interface. Data format: F16.", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: fed_act_ber_thresh, offset: 132, size_bytes: 2, type: f16be, access: rw, field_type: Control, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold for FEC Excessive Degrade (FED) to become active on the data path host interface. Data format: F16.", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: fed_clr_ber_thresh, offset: 134, size_bytes: 2, type: f16be, access: rw, field_type: Control, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold for FEC Excessive Degrade (FED) to clear on the data path host interface. Data format: F16.", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: reserved_136_7_3, offset: 136, bit_offset: 3, bit_width: 5, type: u5, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: lf_insertion_on_ld_enable, offset: 136, bit_offset: 2, bit_width: 1, type: bool, access: rw, field_type: Control, tags: [C-CMIS, LocalDegrade, ConsequentAction], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable LF insertion on Local Degrade detection; default is 0", provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: fed_mon_enable, offset: 136, bit_offset: 1, bit_width: 1, type: bool, access: rw, field_type: Control, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable for FEC Excessive Degrade (FED) monitoring feature.", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: fdd_mon_enable, offset: 136, bit_offset: 0, bit_width: 1, type: bool, access: rw, field_type: Control, tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable for FEC Detected Degrade (FDD) monitoring feature", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: reserved_137_247, offset: 137, size_bytes: 111, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }
+  - { name: custom, offset: 248, size_bytes: 8, type: bytes, access: rw, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Vendor defined custom bytes", provenance: { section: "OIF-C-CMIS-01.2 § 7.5.1", pdf_page: 26, table: "Table 17" } }

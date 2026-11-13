@@ -1,0 +1,59 @@
+schema: openxcvr.tom_message.v1
+kind: tom_message
+id: Sff8472TomSecurityIdle
+title: SFF-8472 TOM 2ABh — Security Idle
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: "SFF-8472 v12.5a § 12.4.4"
+  pdf_pages: [70]
+  figure: "Figure 12-7"
+tom_code: 0x2AB
+description: |
+  TOM Security Idle frame. Used during the security handshake phase. The
+  8-bit sequence_number (D7–D0) is the edit counter; D23–D8 are reserved
+  and shall be set to 0.
+msg:
+  length_bits: 24
+  fields:
+    - name: reserved_flags
+      offset_bits: 8
+      size_bits: 16
+      type: bitmap
+      access: ro
+      field_type: Reserved
+      tags: [Reserved]
+      flags:
+        is_required: false
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: false
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4.4"
+        quote: "Reserved. All other bits undefined shall be reserved and set to 0."
+      constraints:
+        - { type: fixed_value, value: 0x0000 }
+
+    - name: sequence_number
+      offset_bits: 0
+      size_bits: 8
+      type: u8
+      access: ro
+      field_type: OperationalParameter
+      tags: [OperationalParameter]
+      scope: { module: true }
+      flags:
+        is_required: true
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: true
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4.4"
+        quote: "8-bit sequence number (edit counter)."
+      description: |
+        Edit counter. Incremented each time a security-related TOM 2ABh
+        exchange completes. Receiver uses this to detect replayed or
+        out-of-order security frames.

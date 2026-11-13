@@ -1,0 +1,15 @@
+schema: openxcvr.page.v2
+kind: page
+id: BadEnumRef
+title: page.v2 fixture whose changed_in enum_ref does not resolve
+page_address: "00h"
+fields:
+  - name: dpsm_state
+    offset: 0
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: dpsm-state
+    changed_in:
+      - rev: "4.0"
+        enum_ref: dpsm-state-missing
+        note: "points at an enum id that is not declared"

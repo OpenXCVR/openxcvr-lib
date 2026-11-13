@@ -1,0 +1,236 @@
+fields:
+  - name: sff8024_identifier_copy
+    display_name: SFF8024IdentifierCopy
+    offset: 128
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024Identifier
+    template: informational
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.1", pdf_page: 46, table: "Table 6-15", quote: "Identifier Type of free side device" }
+
+  - name: power_class_low
+    display_name: ExtIdentifierPowerClassLow
+    offset: 129
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    template: operational_parameter
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: classes_1_to_4, description: "Power classes 1-4 selected by bits 7-6" }
+      - { value: 1, name: class_5, description: "Power class 5, 4.0 W max" }
+      - { value: 2, name: class_6, description: "Power class 6, 4.5 W max" }
+      - { value: 3, name: class_7, description: "Power class 7, 5.0 W max" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.2", pdf_page: 46, table: "Table 6-16", quote: "Power Class" }
+
+  - name: rx_cdr_present
+    display_name: RxCDRPresent
+    offset: 129
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.2", pdf_page: 46, table: "Table 6-16", quote: "CDR present in Rx path" }
+
+  - name: tx_cdr_present
+    display_name: TxCDRPresent
+    offset: 129
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.2", pdf_page: 46, table: "Table 6-16", quote: "CDR present in Tx path" }
+
+  - name: clei_present
+    display_name: CLEIPresent
+    offset: 129
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.2", pdf_page: 46, table: "Table 6-16", quote: "CLEI code present in Page 02h" }
+
+  - name: power_class_8_implemented
+    display_name: PowerClass8Implemented
+    offset: 129
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.11"
+    provenance: { section: "SFF-8636 v2.11 § 6.3.2", pdf_page: 46, table: "Table 6-16", quote: "Power Class 8 implemented", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.10: power class 8 per SFF-8679" }
+
+  - name: power_class_high
+    display_name: ExtIdentifierPowerClassHigh
+    offset: 129
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    template: operational_parameter
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: class_1, description: "Power class 1, 1.5 W max" }
+      - { value: 1, name: class_2, description: "Power class 2, 2.0 W max" }
+      - { value: 2, name: class_3, description: "Power class 3, 2.5 W max" }
+      - { value: 3, name: class_4_or_higher, description: "Power class 4 or higher, 3.5 W or more" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.2", pdf_page: 46, table: "Table 6-16", quote: "Extended Identifier Values" }
+
+  - name: connector_type
+    display_name: ConnectorType
+    offset: 130
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024ConnectorType
+    template: operational_parameter
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.3", pdf_page: 47, table: "Table 6-15", quote: "Connector Type" }
+
+  - name: compliance_extended
+    display_name: ComplianceExtended
+    offset: 131
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    behavior: { interpretation_dispatch: "sff8024_identifier_copy", extended_code_field: ext_spec_compliance }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Extended: See section 6.3.23." }
+
+  - name: compliance_10gbase_lrm
+    display_name: Compliance10GBASELRM
+    offset: 131
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "10GBASE-LRM" }
+
+  - name: compliance_10gbase_lr
+    display_name: Compliance10GBASELR
+    offset: 131
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "10GBASE-LR" }
+
+  - name: compliance_10gbase_sr
+    display_name: Compliance10GBASESR
+    offset: 131
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "10GBASE-SR" }
+
+  - name: compliance_40gbase_cr4
+    display_name: Compliance40GBASECR4
+    offset: 131
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "40GBASE-CR4" }
+
+  - name: compliance_40gbase_sr4
+    display_name: Compliance40GBASESR4
+    offset: 131
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "40GBASE-SR4" }
+
+  - name: compliance_40gbase_lr4
+    display_name: Compliance40GBASELR4
+    offset: 131
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "40GBASE-LR4" }
+
+  - name: compliance_40g_active_cable
+    display_name: Compliance40GActiveCable
+    offset: 131
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "40G Active Cable" }
+
+  - name: compliance_oc48_long_reach
+    display_name: ComplianceOC48LongReach
+    offset: 132
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "OC-48 long reach" }
+
+  - name: compliance_oc48_intermediate_reach
+    display_name: ComplianceOC48IntermediateReach
+    offset: 132
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "OC-48 intermediate reach" }
+
+  - name: compliance_oc48_short_reach
+    display_name: ComplianceOC48ShortReach
+    offset: 132
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "OC-48 short reach" }
+
+  - name: compliance_sas_rate
+    display_name: ComplianceSASRate<rate>
+    instances: { index: rate, start: 0, end: 3 }
+    offset: 133
+    bit_offset_expr: "7 - rate"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: sas_24gbps, description: "SAS 24.0 Gbps" }
+      - { value: 1, name: sas_12gbps, description: "SAS 12.0 Gbps" }
+      - { value: 2, name: sas_6gbps, description: "SAS 6.0 Gbps" }
+      - { value: 3, name: sas_3gbps, description: "SAS 3.0 Gbps" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "SAS/SATA compliance codes" }
+
+  - name: compliance_1000base
+    display_name: Compliance1000BASE<kind>
+    instances: { index: kind, start: 0, end: 3 }
+    offset: 134
+    bit_offset_expr: "3 - kind"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: t, description: "1000BASE-T" }
+      - { value: 1, name: cx, description: "1000BASE-CX" }
+      - { value: 2, name: lx, description: "1000BASE-LX" }
+      - { value: 3, name: sx, description: "1000BASE-SX" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Gigabit Ethernet compliance codes" }

@@ -1,0 +1,328 @@
+{
+  "$id": "sff8636_page20h_pam4_monitoring1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "electrical_to_optical_lane_mapping": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 74,
+        "quote": "Lane Mapping Enumeration",
+        "section": "SFF-8636 v2.11 § 6.7.2.6",
+        "table": "Table 6-45"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "error_counter_reset": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 75,
+        "quote": "Reset error counters",
+        "section": "SFF-8636 v2.11 § 6.7.2.7",
+        "table": "Table 6-46"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_high_alarm_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 68,
+        "quote": "Latched Alarm/Warning Flags",
+        "section": "SFF-8636 v2.11 § 6.7.2.2",
+        "table": "Table 6-38"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_high_alarm_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 69,
+        "quote": "Interrupt Mask Registers",
+        "section": "SFF-8636 v2.11 § 6.7.2.3",
+        "table": "Table 6-39"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_high_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 68,
+        "quote": "warning high",
+        "section": "SFF-8636 v2.11 § 6.7.2.2",
+        "table": "Table 6-38"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_high_warning_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 69,
+        "quote": "warning high",
+        "section": "SFF-8636 v2.11 § 6.7.2.3",
+        "table": "Table 6-39"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_low_alarm_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 68,
+        "quote": "alarm low",
+        "section": "SFF-8636 v2.11 § 6.7.2.2",
+        "table": "Table 6-38"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_low_alarm_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 69,
+        "quote": "alarm low",
+        "section": "SFF-8636 v2.11 § 6.7.2.3",
+        "table": "Table 6-39"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_low_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 68,
+        "quote": "warning low",
+        "section": "SFF-8636 v2.11 § 6.7.2.2",
+        "table": "Table 6-38"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_low_warning_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 69,
+        "quote": "warning low",
+        "section": "SFF-8636 v2.11 § 6.7.2.3",
+        "table": "Table 6-39"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "param_value": {
+      "items": {
+        "x-openxcvr-note": "polymorphic float/int union — see schema YAML for full constraints"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 71,
+        "quote": "Real-Time Value Registers",
+        "section": "SFF-8636 v2.11 § 6.7.2.4",
+        "table": "Table 6-40"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "parameter_channel": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 73,
+        "quote": "Channel number",
+        "section": "SFF-8636 v2.11 § 6.7.2.5",
+        "table": "Table 6-42"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "parameter_channel_specific": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 73,
+        "quote": "Parameter monitored at",
+        "section": "SFF-8636 v2.11 § 6.7.2.5",
+        "table": "Table 6-42"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "parameter_threshold_id": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 73,
+        "quote": "Threshold ID",
+        "section": "SFF-8636 v2.11 § 6.7.2.5",
+        "table": "Table 6-42"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "parameter_type": {
+      "items": {
+        "$ref": "../enums/sff8636_pam4_parameter_type.schema.json"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 73,
+        "quote": "Parameter Type Enumeration",
+        "section": "SFF-8636 v2.11 § 6.7.2.5",
+        "table": "Table 6-43"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "reserved_other_config_250_low_bits": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 75,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.7.2.7",
+        "table": "Table 6-46"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "reserved_other_config_251_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 75,
+        "quote": "Other Configuration Registers",
+        "section": "SFF-8636 v2.11 § 6.7.2.7",
+        "table": "Table 6-46"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "reserved_parameter_config_bit_3": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 73,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.7.2.5",
+        "table": "Table 6-42"
+      },
+      "x-openxcvr-since": "2.11"
+    }
+  },
+  "required": [
+    "param_high_alarm_flag",
+    "param_low_alarm_flag",
+    "param_high_warning_flag",
+    "param_low_warning_flag",
+    "param_high_alarm_mask",
+    "param_low_alarm_mask",
+    "param_high_warning_mask",
+    "param_low_warning_mask",
+    "param_value",
+    "parameter_threshold_id",
+    "parameter_channel_specific",
+    "parameter_channel",
+    "parameter_type",
+    "electrical_to_optical_lane_mapping",
+    "error_counter_reset",
+    "reserved_parameter_config_bit_3",
+    "reserved_other_config_250_low_bits",
+    "reserved_other_config_251_255"
+  ],
+  "title": "Sff8636Page20hPam4Monitoring1",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76
+    ],
+    "spec": "SFF-8636 v2.11 § 6.7.2"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

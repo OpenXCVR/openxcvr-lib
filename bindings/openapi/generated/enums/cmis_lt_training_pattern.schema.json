@@ -1,0 +1,62 @@
+{
+  "$id": "cmis_lt_training_pattern.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "PRBS13 (NRZ)",
+      "title": "prbs_13_nrz"
+    },
+    {
+      "const": 1,
+      "description": "PRBS13Q (PAM4 without precoding)",
+      "title": "prbs_13q_pam4_no_precoding"
+    },
+    {
+      "const": 2,
+      "description": "PRBS13Q (PAM4 with precoding)",
+      "title": "prbs_13q_pam4_precoding"
+    },
+    {
+      "const": 3,
+      "description": "PRBS31 (NRZ)",
+      "title": "prbs_31_nrz"
+    },
+    {
+      "const": 4,
+      "description": "PRBS31Q (PAM4 without precoding)",
+      "title": "prbs_31q_pam4_no_precoding"
+    },
+    {
+      "const": 5,
+      "description": "PRBS31Q (PAM4 with precoding)",
+      "title": "prbs_31q_pam4_precoding"
+    },
+    {
+      "const": 14,
+      "description": "Sub-rate clock pattern (1/64 of baud rate)",
+      "title": "sub_rate_clock_pattern"
+    },
+    {
+      "const": 15,
+      "description": "User pattern",
+      "title": "user_pattern"
+    }
+  ],
+  "title": "CmisLtTrainingPattern",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      44,
+      45,
+      59,
+      60
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.2.4/6.2.5 and 6.4.4/6.4.5 (Tables 18, 21, 53, 56)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

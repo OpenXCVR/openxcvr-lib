@@ -1,0 +1,326 @@
+schema: openxcvr.tom_message.v1
+kind: tom_message
+id: Sff8472TomCtrlCmdRsp
+title: SFF-8472 TOM 2A0h — Control / Command / Response
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: "SFF-8472 v12.5a § 12.4.1"
+  pdf_pages: [67, 68]
+  figures: ["Figure 12-3", "Figure 12-4"]
+tom_code: 0x2A0
+description: |
+  TOM Control/Command/Response frame. The message_type bit (D20) selects
+  between two structurally different MSG bodies:
+
+    message_type=0b (RequestPageData): host requests the transmitter to start
+      or continue sending page data via TOM 2A8h/2A9h frames. Specifies the
+      page device and encoding, repeat count, and which octet groups to send.
+
+    message_type=1b (WriteRemoteMemory): host commands the receiver to write
+      a single byte to its A2h memory map, or the receiver acknowledges (ACKs
+      or NACKs) a previous write command.
+
+  The 1-bit reserved field at D23 shall always be 0.
+msg:
+  length_bits: 24
+  fields:
+    - name: reserved
+      offset_bits: 23
+      size_bits: 1
+      type: bool
+      access: ro
+      field_type: Reserved
+      tags: [Reserved]
+      flags:
+        is_required: false
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: false
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4"
+        quote: "1 bit of reserved."
+      constraints:
+        - { type: fixed_value, value: 0 }
+
+    - name: message_type
+      offset_bits: 20
+      size_bits: 1
+      type: bool
+      access: ro
+      field_type: Control
+      tags: [Control]
+      flags:
+        is_required: true
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: false
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4"
+        quote: "22 bits of message content that is dependent on the message type field (d20)."
+      description: |
+        Discriminator for MSG body interpretation.
+        0b = RequestPageData: request the far end to transmit page data.
+        1b = WriteRemoteMemory: write a byte to remote A2h memory (or ACK/NACK thereof).
+
+  variants:
+    discriminator:
+      field: message_type
+    cases:
+      - value: 0
+        id: RequestPageData
+        title: Request Page Data (msgType=0b)
+        provenance:
+          section: "SFF-8472 v12.5a § 12.4.1.1"
+          pdf_pages: [67, 68]
+          figure: "Figure 12-3"
+        fields:
+          - name: page_encoding
+            offset_bits: 21
+            size_bits: 2
+            type: u2
+            access: ro
+            field_type: Control
+            tags: [Control]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: false
+              is_ever_writable: false
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.1"
+              quote: "pgEnc (page Encoding) and pgDev (page Devices) indicates which page data to be transmitted."
+            description: |
+              Selects which sub-region of the page_device to transmit.
+              Combined with page_device to identify one of up to 8 distinct
+              page regions. See page_device for the full decode table.
+            encoding:
+              kind: enumerated
+              values:
+                - { value: 0, name: region_0, meaning: "Low region (bytes 0–127) or A0h low" }
+                - { value: 1, name: region_1, meaning: "High region (bytes 128–255) or A0h high" }
+                - { value: 2, name: vendor_0, meaning: "Reserved for Vendor Page" }
+                - { value: 3, name: vendor_1, meaning: "Reserved for Vendor Page" }
+
+          - name: page_device
+            offset_bits: 19
+            size_bits: 1
+            type: bool
+            access: ro
+            field_type: Control
+            tags: [Control]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: false
+              is_ever_writable: false
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.1"
+              quote: "pgDev 0 pgEnc 0: Send A0h Low data (Bytes 0 to 127). pgDev 1 pgEnc 0: Send A2h Low data, (Bytes 0 to 127)."
+            description: |
+              Selects the target memory device.
+              0 = A0h device (base ID memory).
+              1 = A2h device (diagnostic + paged memory).
+              Combined with page_encoding:
+                pgDev=0 pgEnc=0: A0h bytes 0–127
+                pgDev=0 pgEnc=1: A0h bytes 128–255
+                pgDev=0 pgEnc=2: Reserved for Vendor Page
+                pgDev=0 pgEnc=3: Reserved for Vendor Page
+                pgDev=1 pgEnc=0: A2h bytes 0–127
+                pgDev=1 pgEnc=1: A2h Page 00h/01h bytes 128–255
+                pgDev=1 pgEnc=2: A2h Page 02h bytes 128–255
+                pgDev=1 pgEnc=3: Reserved (potentially A2h Page 03h)
+
+          - name: repeat_encoding
+            offset_bits: 16
+            size_bits: 3
+            type: u3
+            access: ro
+            field_type: Control
+            tags: [Control]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: false
+              is_ever_writable: false
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.1"
+              quote: "repeatEnc defines how many times the page data shall be sent. Value of 0 mean to stop sending the data. Values between 1 to 6 is to tell the receiver to transmit data set repeatedly 1 to 6 times. Value of 7 mean that the data set requested shall be sent repeatedly (Remote DDM data)."
+            description: |
+              Number of times the transmitter should repeat the page data set.
+              0: stop sending page data.
+              1–6: transmit the data set the specified number of times.
+              7: transmit continuously (Remote DDM / live monitoring mode).
+            encoding:
+              kind: scaled_unsigned
+              lsb_units: "repetitions (0=stop, 7=continuous)"
+
+          - name: bytes_to_send
+            offset_bits: 0
+            size_bits: 16
+            type: bitmap
+            access: ro
+            field_type: Control
+            tags: [Control]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: false
+              is_ever_writable: false
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.1"
+              quote: "bytesToSendEnc defines a 16-bit mask. Each bit defines an 8 byte group (octet) of addresses within the page. The start address of the octet in the page = 8*bitpos. (Values are 0,8,16,...,112,120). This is a 7 bit address, so this represents the lower 7 bits address in the upper I2C address space."
+            description: |
+              16-bit bitmask. Bit N=1 requests that the transmitter send the
+              8-byte octet starting at byte address N×8 within the selected
+              page region. Bit 0 → bytes 0–7, bit 1 → bytes 8–15, …,
+              bit 15 → bytes 120–127. All 16 bits set requests the full 128
+              bytes. Bit pattern must be consistent with the bytes available
+              in the selected page_device + page_encoding region.
+
+      - value: 1
+        id: WriteRemoteMemory
+        title: Write Remote Memory (msgType=1b)
+        provenance:
+          section: "SFF-8472 v12.5a § 12.4.1.2"
+          pdf_pages: [68]
+          figure: "Figure 12-4"
+        fields:
+          - name: write_page
+            offset_bits: 21
+            size_bits: 2
+            type: u2
+            access: rw
+            field_type: Control
+            tags: [Control]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: true
+              is_ever_writable: true
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.2"
+              quote: "wrPg 2 bit encoded field. wrPg 0: Write to A2h Page 00h/01h low. wrPg 1: Write to A2h Page 00h/01h high. wrPg 2: Write to A2h Page 02h. wrPg 3: Vendor defined."
+            encoding:
+              kind: enumerated
+              values:
+                - { value: 0, name: page_00h_01h_low,  meaning: "Write to A2h Page 00h/01h bytes 0–127" }
+                - { value: 1, name: page_00h_01h_high, meaning: "Write to A2h Page 00h/01h bytes 128–255" }
+                - { value: 2, name: page_02h,          meaning: "Write to A2h Page 02h" }
+                - { value: 3, name: vendor_defined,    meaning: "Vendor defined" }
+
+          - name: command_response
+            offset_bits: 19
+            size_bits: 1
+            type: bool
+            access: ro
+            field_type: Status
+            tags: [Status]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: false
+              is_ever_writable: false
+              is_dynamic: true
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.2"
+              quote: "cmdRsp flag. 0 bit indicates this is a command. 1 bit indicates this is a response message to the command."
+            description: |
+              Distinguishes command from response.
+              0 = CMD: host is issuing a write command to the remote module.
+              1 = RSP: remote module is replying to a previous write command.
+
+          - name: acknowledge
+            offset_bits: 18
+            size_bits: 1
+            type: bool
+            access: ro
+            field_type: Status
+            tags: [Status]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: false
+              is_ever_writable: false
+              is_dynamic: true
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.2"
+              quote: "Ack or Nack flag. In a CMD message, cmdRsp=0, this bit shall be set to 0. In a RSP message, cmdRsp=1, this bit shall indicate 0 (NACK) or 1 (ACK). The NACK mean that the action was not taken. The reason for the NACK is not defined. An ACK mean that the action was taken."
+            description: |
+              Valid only in response frames (command_response=1).
+              0 = NACK: write action was not taken (reason not defined by spec).
+              1 = ACK: write action was taken successfully.
+              Shall be 0 in command frames (command_response=0).
+
+          - name: reserved_inner
+            offset_bits: 15
+            size_bits: 3
+            type: u3
+            access: ro
+            field_type: Reserved
+            tags: [Reserved]
+            flags:
+              is_required: false
+              is_readable: true
+              is_writable: false
+              is_ever_writable: false
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.2"
+              quote: "All other bits undefined shall be reserved and set to 0."
+            constraints:
+              - { type: fixed_value, value: 0 }
+
+          - name: write_offset
+            offset_bits: 8
+            size_bits: 7
+            type: u7
+            access: rw
+            field_type: Control
+            tags: [Control]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: true
+              is_ever_writable: true
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.2"
+              quote: "Woffset. This is the 7-bit address within the page to be written. If writing to upper page, then this is the lowest 7 bit of the address."
+            description: |
+              Byte address within the selected write_page region (7-bit, 0–127).
+              For upper-page targets (write_page ≠ 0) this is the lower 7 bits
+              of the upper-page byte address (i.e., offset within the 128-byte
+              upper page region, not the flat A2h address space).
+            constraints:
+              - { type: range, min: 0, max: 127 }
+
+          - name: write_data
+            offset_bits: 0
+            size_bits: 8
+            type: u8
+            access: rw
+            field_type: Control
+            tags: [Control]
+            flags:
+              is_required: true
+              is_readable: true
+              is_writable: true
+              is_ever_writable: true
+              is_dynamic: false
+            provenance:
+              section: "SFF-8472 v12.5a § 12.4.1.2"
+              quote: "Wdata. This is the 8-bit data (byte) of the byte to be written. All other bits undefined shall be reserved and set to 0."
+            description: |
+              Byte value to write at write_offset within write_page.
+              In response frames (command_response=1) this field is echoed
+              back from the command to allow the host to match response to
+              command.

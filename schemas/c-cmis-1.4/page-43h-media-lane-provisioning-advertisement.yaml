@@ -1,0 +1,25 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmisPage43hMediaLaneProvisioningAdvertisement
+title: C-CMIS 1.4 Page 43h Media Lane Provisioning Advertisement
+spec:
+  id: c-cmis-1.4
+  revision: "01.4"
+  source: docs/stds/cmis/OIF-C-CMIS-01.4_IA.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.4 § 7.6.4
+  pdf_pages: [41, 42]
+page_address: "43h"
+size_bytes: 128
+fields:
+  - { name: "reserved_128_7", offset: 128, bit_offset: 7, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "tx_payload_type_impl", offset: 128, bit_offset: 6, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=txPyldType on 31h:139 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "rx_payload_type_exp_val_impl", offset: 128, bit_offset: 5, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=rxPyldTypeExpVal on 31h:140 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "cd_target_set_impl", offset: 128, bit_offset: 4, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=CDTargetSet on 31h:137-138 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "tx_mnt_insertion_impl", offset: 128, bit_offset: 3, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=txSTATMNTInsertion on 31h:136 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "p_tmm_cons_act_enable_impl", offset: 128, bit_offset: 2, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=pTMMConsActEnable on 31h:128.2 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "lf_insertion_on_ld_enable_impl", offset: 128, bit_offset: 1, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=lfInsertionOnLdEnable on 31h:128.1 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "tx_filter_impl", offset: 128, bit_offset: 0, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=Tx filter provisioning on 31h:128.0,129,130 implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 41, table: "Table 24" } }
+  - { name: "reserved_129_247", offset: 129, size_bytes: 119, type: "bytes", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 42, table: "Table 24" } }
+  - { name: "custom", offset: 248, size_bytes: 8, type: "bytes", access: "rw", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Vendor defined custom bytes", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.4", pdf_page: 42, table: "Table 24" } }

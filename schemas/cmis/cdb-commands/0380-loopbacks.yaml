@@ -1,0 +1,59 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbLoopbacks
+title: CMIS CDB Command 0380h - Loopbacks
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.11.1
+  pdf_pages: [342]
+  table: Table 9-49
+cmd_id: 0x0380
+available_since: "4.0"
+available_until: "5.3"
+cmd_id_group: diagnostics_debug
+command_class: advertised
+description: >
+  Reserved command for additional loopback capabilities beyond the Page 13h
+  and Page 14h loopback control and result fields. CMIS 5.3 defines no command
+  payload or reply payload for this opcode.
+  CMIS 5.4 removes the command definition entirely: the 5.4 § 9.1 group table
+  (Table 9-1) folds 0300h-03FFh into "Reserved for diagnostics features" with
+  no CMD 0380h table anywhere in chapter 9 (5.3 § 9.11.1 / Table 9-49 is gone;
+  the string 0380h appears nowhere in OIF-CMIS-05.4), and the CMD 0043h reply
+  advertises the space only as a generic CMDs 0300h-03FFh bit array. Like
+  CMD 0281h, the opcode carries available_until 5.3 so the runtime gate
+  refuses it on CMIS 5.4 modules; loopback controls remain on Page 13h.
+advertisement:
+  via_cmd: 0x0043
+  field: bert_and_diagnostics_features.cmd_0380_supported
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: configurable
+cmd:
+  lpl:
+    length: 0
+    fields: []
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "4.0" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "4.0" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "4.0" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+  lpl:
+    length: 0
+    fields: []
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects: []

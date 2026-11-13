@@ -1,0 +1,138 @@
+---
+schema: openxcvr.page.v1
+kind: page
+id: ElsfpPage1bhLaneControlsMonitors
+title: ELSFP-CMIS 1.0 Page 1Bh Lane Controls and Monitors
+spec:
+  id: elsfp-1.0
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-ELSFP-CMIS-01.0.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-ELSFP-CMIS-01.0 § 9
+  pdf_pages: [28, 29, 30, 31, 32]
+page_address: "1Bh"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+fields:
+  - name: bias_current_setpoint
+    display_name: BiasCurrentSetpoint<lane>
+    description: Bias current setpoint for indexed lane <lane>, encoded in 100 uA per LSB.
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 2"
+    type: u16be
+    access: rw
+    field_type: Control
+    tags: [ELSFP, Control]
+    scope: { lane: lane }
+    units: "100 µA/LSB"
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 28, table: "Table 11" }
+
+  - name: opt_power_setpoint
+    display_name: OptPowerSetpoint<lane>
+    description: Optical power setpoint for indexed lane <lane>, encoded in 10 uW per LSB.
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "144 + (lane - 1) * 2"
+    type: u16be
+    access: rw
+    field_type: Control
+    tags: [ELSFP, Control]
+    scope: { lane: lane }
+    units: "10 µW/LSB"
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 29, table: "Table 11" }
+
+  - name: reserved_160_183
+    display_name: Reserved160183
+    description: Reserved bytes 160 through 183.
+    offset: 160
+    size_bytes: 24
+    type: bytes
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 30, table: "Table 11" }
+
+  - name: bias_current_monitor
+    display_name: BiasCurrentMonitor<lane>
+    description: Laser bias current monitor for indexed lane <lane>, encoded in 100 uA per LSB.
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "184 + (lane - 1) * 2"
+    type: u16be
+    access: ro
+    field_type: Monitor
+    tags: [ELSFP, Monitor]
+    scope: { lane: lane }
+    units: "100 µA/LSB"
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 30, table: "Table 12" }
+
+  - name: opt_power_monitor
+    display_name: OptPowerMonitor<lane>
+    description: Optical output power monitor for indexed lane <lane>, encoded in 10 uW per LSB.
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "200 + (lane - 1) * 2"
+    type: u16be
+    access: ro
+    field_type: Monitor
+    tags: [ELSFP, Monitor]
+    scope: { lane: lane }
+    units: "10 µW/LSB"
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 30, table: "Table 12" }
+
+  - name: reserved_216_231
+    display_name: Reserved216231
+    description: Reserved bytes 216 through 231.
+    offset: 216
+    size_bytes: 16
+    type: bytes
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 31, table: "Table 12" }
+
+  - name: voltage_monitor
+    display_name: VoltageMonitor<lane>
+    description: Laser voltage monitor for indexed lane <lane>, encoded in 15 mV per LSB.
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "232 + (lane - 1)"
+    bit_width: 8
+    type: u8
+    access: ro
+    field_type: Monitor
+    tags: [ELSFP, Monitor]
+    scope: { lane: lane }
+    units: "15 mV/LSB"
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 31, table: "Table 12" }
+
+  - name: icc_monitor
+    display_name: IccMonitor
+    description: Optional module Vcc current monitor, encoded in 200 uA per LSB.
+    offset: 240
+    type: u16be
+    access: ro
+    field_type: Monitor
+    tags: [ELSFP, Monitor]
+    scope: { module: true }
+    units: "200 µA/LSB"
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 32, table: "Table 12" }
+
+  - name: reserved_242_255
+    display_name: Reserved242255
+    description: Reserved bytes 242 through 255.
+    offset: 242
+    size_bytes: 14
+    type: bytes
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-ELSFP-CMIS-01.0 § 9", pdf_page: 32, table: "Table 12" }

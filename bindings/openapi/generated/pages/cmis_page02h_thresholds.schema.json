@@ -1,0 +1,191 @@
+{
+  "$id": "cmis_page02h_thresholds.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "aux1_mon_threshold": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 185,
+        "quote": "S16 thresholds for TEC Current monitor or custom Aux 1 monitor",
+        "section": "CMIS 5.3 § 8.5.1",
+        "table": "Table 8-62"
+      }
+    },
+    "aux2_mon_threshold": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 185,
+        "quote": "S16 thresholds for TEC Current or Laser Temperature monitor",
+        "section": "CMIS 5.3 § 8.5.1",
+        "table": "Table 8-62"
+      }
+    },
+    "aux3_mon_threshold": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 185,
+        "quote": "S16 thresholds for Laser Temperature or additional supply voltage monitor",
+        "section": "CMIS 5.3 § 8.5.1",
+        "table": "Table 8-62"
+      }
+    },
+    "custom_mon_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 186,
+        "quote": "S16 or U16 custom monitor thresholds. The wire field is authored as u16be; consumers interpret signedness according to vendor or firmware configuration.",
+        "section": "CMIS 5.3 § 8.5.1",
+        "table": "Table 8-62"
+      }
+    },
+    "laser_bias_current_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 186,
+        "quote": "U16 thresholds for Tx laser bias monitor in 2 uA increments before the 01h:160[4..3] scaling factor is applied",
+        "section": "CMIS 5.3 § 8.5.2",
+        "table": "Table 8-63"
+      }
+    },
+    "optical_power_rx_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 186,
+        "quote": "U16 thresholds for Rx optical power monitor in 0.1 uW increments",
+        "section": "CMIS 5.3 § 8.5.2",
+        "table": "Table 8-63"
+      }
+    },
+    "optical_power_tx_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 186,
+        "quote": "U16 thresholds for Tx optical power monitor in 0.1 uW increments",
+        "section": "CMIS 5.3 § 8.5.2",
+        "table": "Table 8-63"
+      }
+    },
+    "page_checksum": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 186,
+        "quote": "The Page Checksum code shall be the low order 8 bits of the arithmetic sum of all byte values from byte 128 to byte 254, inclusive.",
+        "section": "CMIS 5.3 § 8.5.3"
+      }
+    },
+    "temp_mon_threshold": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 185,
+        "quote": "S16 thresholds for internal temperature monitor in 1/256 degree Celsius increments",
+        "section": "CMIS 5.3 § 8.5.1",
+        "table": "Table 8-62"
+      }
+    },
+    "vcc_mon_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 185,
+        "quote": "U16 thresholds for internal 3.3 volt input supply voltage monitor in 100 uV increments",
+        "section": "CMIS 5.3 § 8.5.1",
+        "table": "Table 8-62"
+      }
+    }
+  },
+  "required": [
+    "temp_mon_threshold",
+    "vcc_mon_threshold",
+    "aux1_mon_threshold",
+    "aux2_mon_threshold",
+    "aux3_mon_threshold",
+    "custom_mon_threshold",
+    "optical_power_tx_threshold",
+    "laser_bias_current_threshold",
+    "optical_power_rx_threshold",
+    "page_checksum"
+  ],
+  "title": "CmisPage02hThresholds",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      185,
+      186
+    ],
+    "spec": "CMIS 5.3 § 8.5"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

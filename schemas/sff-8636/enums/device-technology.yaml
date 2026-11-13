@@ -1,0 +1,75 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8636DeviceTechnology
+title: SFF-8636 Device Technology Codes
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.3.13
+  table: "Table 6-20"
+  pdf_pages: [51]
+entries:
+  - value: 0x0
+    name: nm850_vcsel
+    description: 850 nm VCSEL
+    tags: [optical]
+  - value: 0x1
+    name: nm1310_vcsel
+    description: 1310 nm VCSEL
+    tags: [optical]
+  - value: 0x2
+    name: nm1550_vcsel
+    description: 1550 nm VCSEL
+    tags: [optical]
+  - value: 0x3
+    name: nm1310_fp
+    description: 1310 nm FP laser
+    tags: [optical]
+  - value: 0x4
+    name: nm1310_dfb
+    description: 1310 nm DFB laser
+    tags: [optical]
+  - value: 0x5
+    name: nm1550_dfb
+    description: 1550 nm DFB laser
+    tags: [optical]
+  - value: 0x6
+    name: nm1310_eml
+    description: 1310 nm EML
+    tags: [optical]
+  - value: 0x7
+    name: nm1550_eml
+    description: 1550 nm EML
+    tags: [optical]
+  - value: 0x8
+    name: other_or_undefined
+    description: Other or undefined transmitter technology
+  - value: 0x9
+    name: nm1490_dfb
+    description: 1490 nm DFB laser
+    tags: [optical]
+  - value: 0xa
+    name: copper_unequalized
+    description: Copper cable unequalized
+    reach: {kind: passive_copper}
+  - value: 0xb
+    name: copper_passive_equalized
+    description: Copper cable passive equalized
+    reach: {kind: passive_copper}
+  - value: 0xc
+    name: copper_near_far_limiting_active_equalizers
+    description: Copper cable with near and far end limiting active equalizers
+    reach: {kind: active_copper}
+  - value: 0xd
+    name: copper_far_limiting_active_equalizers
+    description: Copper cable with far end limiting active equalizers
+    reach: {kind: active_copper}
+  - value: 0xe
+    name: copper_near_limiting_active_equalizers
+    description: Copper cable with near end limiting active equalizers
+    reach: {kind: active_copper}
+  - value: 0xf
+    name: copper_linear_active_equalizers
+    description: Copper cable with linear active equalizers
+    reach: {kind: active_copper}

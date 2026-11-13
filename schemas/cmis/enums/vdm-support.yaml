@@ -1,0 +1,23 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVdmSupport
+title: CMIS VDM Groups Supported Advertisement
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.22.6 / Table 8-176
+  pdf_pages: [280]
+entries:
+  - value: 0x0
+    name: group_1
+    description: Group 1 is supported; Pages 20h, 24h, 28h and the first quarter of Pages 2Ch and 2Dh are available
+  - value: 0x1
+    name: groups_1_2
+    description: Groups 1-2 are supported; Pages 20h-21h, 24h-25h, 28h-29h and the first half of Pages 2Ch and 2Dh are available
+  - value: 0x2
+    name: groups_1_3
+    description: Groups 1-3 are supported; Pages 20h-22h, 24h-26h, 28h-2Ah and the first three quarters of Pages 2Ch and 2Dh are available
+  - value: 0x3
+    name: groups_1_4
+    description: Groups 1-4 are supported; Pages 20h-23h, 24h-27h, 28h-2Bh, 2Ch and 2Dh are available

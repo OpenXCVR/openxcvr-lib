@@ -1,0 +1,101 @@
+schema: openxcvr.tom_message.v1
+kind: tom_message
+id: Sff8472TomSendPageData
+title: SFF-8472 TOM 2A8h / 2A9h — Send Page Data
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: "SFF-8472 v12.5a § 12.4.2"
+  pdf_pages: [69]
+  figure: "Figure 12-5"
+tom_code_set:
+  - 0x2A8   # TOM 2A8h: transmit A0h page data
+  - 0x2A9   # TOM 2A9h: transmit A2h page data
+description: |
+  TOM Send Page Data frames. Two TOM codes share this MSG layout:
+  2A8h transmits data from the A0h memory map; 2A9h transmits data from
+  the A2h memory map. Each TOM 2A8h/2A9h frame carries 2 consecutive bytes
+  from the selected page, identified by register_address (the index of the
+  2-byte pair within the page). The host assembles a full page by collecting
+  16 such frames (16 pairs × 2 bytes = 32 bytes minimum; bytesToSendEnc from
+  TOM 2A0h selects which octet groups are transmitted).
+msg:
+  length_bits: 24
+  fields:
+    - name: page_encoding
+      offset_bits: 22
+      size_bits: 2
+      type: u2
+      access: ro
+      field_type: Control
+      tags: [Control]
+      flags:
+        is_required: true
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: false
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4.2"
+        quote: "pgEnc 2-bit encoded field."
+      description: |
+        Selects which region of the device memory is being transmitted.
+        For TOM 2A8h: 0 = A0h low (bytes 0–127), 1 = A0h high (bytes 128–255),
+        2–3 = vendor-specific. For TOM 2A9h: 0 = A2h low (bytes 0–127),
+        1 = A2h page 00h/01h (bytes 128–255), 2 = A2h page 02h, 3 = reserved.
+      encoding:
+        kind: enumerated
+        values:
+          - { value: 0, name: low_region,   meaning: "Bytes 0–127 of the selected device map" }
+          - { value: 1, name: high_region,  meaning: "Bytes 128–255 of the selected device map" }
+          - { value: 2, name: vendor_page,  meaning: "Vendor-specific page (2A8h) / A2h Page 02h (2A9h)" }
+          - { value: 3, name: reserved,     meaning: "Reserved" }
+
+    - name: register_address
+      offset_bits: 16
+      size_bits: 6
+      type: u6
+      access: ro
+      field_type: OperationalParameter
+      tags: [OperationalParameter]
+      flags:
+        is_required: true
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: true
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4.2"
+        quote: "regAddr 6-bit encoded field. Address of page data to be sent. data[regAddr*2+1] and data[regAddr*2]."
+      description: |
+        Index of the 2-byte pair within the selected page region.
+        Byte addresses carried in this frame: regAddr×2 (low byte, D7–D0 of
+        page_data) and regAddr×2+1 (high byte, D15–D8 of page_data).
+        Valid range: 0–63 (covering all 128 bytes of a 128-byte region in
+        64 consecutive 2-byte pairs).
+      constraints:
+        - { type: range, min: 0, max: 63 }
+
+    - name: page_data
+      offset_bits: 0
+      size_bits: 16
+      type: u16be
+      access: ro
+      field_type: Storage
+      tags: [Storage]
+      scope: { module: true }
+      flags:
+        is_required: true
+        is_readable: true
+        is_writable: false
+        is_ever_writable: false
+        is_dynamic: true
+      provenance:
+        section: "SFF-8472 v12.5a § 12.4.2"
+        quote: "data[regAddr*2+1] | data[regAddr*2] — two consecutive page bytes."
+      description: |
+        Two consecutive bytes from the selected page region. D15–D8 carry
+        the byte at address register_address×2+1 (the higher address); D7–D0
+        carry the byte at register_address×2 (the lower address). Big-endian
+        pair: higher address in the MSB byte of the 16-bit field.

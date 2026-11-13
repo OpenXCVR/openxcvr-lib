@@ -1,0 +1,48 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8472RateIdentifier
+title: SFF-8472 Rate Identifier Values
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a § 5.7
+  table: "Table 5-6"
+  pdf_pages: [26]
+entries:
+  - value: 0x00
+    name: unspecified
+    description: Unspecified rate select behavior.
+  - value: 0x01
+    name: sff_8079_4_2_1
+    description: Rate select behavior per SFF-8079 section 4.2.1.
+  - value: 0x02
+    name: sff_8431_rx_rate_select
+    description: Rx rate select only, per SFF-8431.
+  - value: 0x04
+    name: sff_8431_tx_rx_rate_select
+    description: Tx and Rx rate select, per SFF-8431.
+  - value: 0x08
+    name: rate_select_8_16_32_gfc
+    description: Fibre Channel rate select behavior for 8G/16G/32GFC modules.
+  - value: 0x10
+    name: application_select_sff_8079
+    description: Application select behavior per SFF-8079.
+  - value: 0x20
+    name: pmd_based
+    description: PMD-based rate select behavior.
+  - value: 0x03
+    name: reserved_03
+    description: Reserved.
+  - value: 0x05..0x07
+    name: reserved_05_07
+    description: Reserved.
+  - value: 0x09..0x0f
+    name: reserved_09_0f
+    description: Reserved.
+  - value: 0x11..0x1f
+    name: reserved_11_1f
+    description: Reserved.
+  - value: 0x21..0xff
+    name: reserved_21_ff
+    description: Reserved.

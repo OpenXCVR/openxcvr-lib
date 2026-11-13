@@ -1,0 +1,80 @@
+{
+  "$id": "cmis_config_status5p4.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Configuration Command Execution and Result Status code set as printed by CMIS 5.4 Table 8-101 (p. 244). CmisConfigStatus keeps the pre-5.4 window, where code 8h is Reserved (other validation failures); CMIS 5.4 allocates 8h to ConfigRejectedNoEmulation, the DP Emulation rejection code added with the Network Path errata incorporation (CMIS 5.4 revision history M1/M2, § 7.6.9.3: a module that does not support DP Emulation of a nominal NP Application shall reject the DP configuration and report \"preferably, ConfigRejectedNoEmulation\" in ConfigStatusLane<i>). Revision-blind duplicate/overlap rules forbid re-covering the 8h-Bh span in place, so the since-5.4 code set lands here, following the CmisBanksSupported5p4 / CmisVdmObservableType5p4 precedent (ADV-01).",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "ConfigUndefined — no status information available (initial register value)",
+      "title": "config_undefined",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 1,
+      "description": "ConfigSuccess — the last accepted configuration command has been completed successfully",
+      "title": "config_success",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 2,
+      "description": "ConfigRejected — configuration rejected, unspecific validation failure (negative result status 2h-Bh, Dh-Fh)",
+      "title": "config_rejected",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 3,
+      "description": "ConfigRejectedInvalidAppSel — configuration rejected, invalid AppSel code",
+      "title": "config_rejected_invalid_app_sel",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 4,
+      "description": "ConfigRejectedInvalidDataPath — configuration rejected, invalid set of lanes for AppSel",
+      "title": "config_rejected_invalid_data_path",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 5,
+      "description": "ConfigRejectedInvalidSI — configuration rejected, invalid SI control settings",
+      "title": "config_rejected_invalid_si",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 6,
+      "description": "ConfigRejectedLanesInUse — configuration rejected, some lanes not in DPDeactivated",
+      "title": "config_rejected_lanes_in_use",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 7,
+      "description": "ConfigRejectedPartialDataPath — configuration rejected, lanes are only a subset of the Data Path",
+      "title": "config_rejected_partial_data_path",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 8,
+      "description": "ConfigRejectedNoEmulation — configuration rejected: DataPath emulation not supported (see section 7.6.9 for a description of DP Emulation)",
+      "title": "config_rejected_no_emulation",
+      "x-openxcvr-since": "5.4"
+    },
+    {
+      "const": 12,
+      "description": "ConfigInProgress — a configuration command is still being processed by the module; new commands are ignored for this lane while ConfigInProgress",
+      "title": "config_in_progress",
+      "x-openxcvr-since": "5.4"
+    }
+  ],
+  "title": "CmisConfigStatus5p4",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      244
+    ],
+    "spec": "CMIS 5.4 § 8.14.5 / Table 8-101"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

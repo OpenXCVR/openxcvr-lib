@@ -1,0 +1,40 @@
+{
+  "$id": "cmis_lt_training_status.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "No link training active on the lane",
+      "title": "no_training"
+    },
+    {
+      "const": 1,
+      "description": "Link training in progress on the lane",
+      "title": "in_progress"
+    },
+    {
+      "const": 2,
+      "description": "Link training completed with success on the lane",
+      "title": "success"
+    },
+    {
+      "const": 3,
+      "description": "Link training failed on the lane",
+      "title": "failed"
+    }
+  ],
+  "title": "CmisLtTrainingStatus",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      42,
+      58
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 15, 50)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

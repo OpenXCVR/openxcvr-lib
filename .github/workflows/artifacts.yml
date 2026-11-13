@@ -1,0 +1,854 @@
+name: artifacts
+
+# Maintained-platform artifact builds for the C SDK, with package-level proof.
+#
+# Four legs (ubuntu x86_64 baseline, macOS arm64, macOS x86_64 cross,
+# Windows x86_64 MSVC ABI) each:
+#   1. record the ACTUAL runner OS + arch (the caption that goes into
+#      manifest.json and docs/versioning.md — windows-latest is Windows Server,
+#      not native Windows 11),
+#   2. run an early `cargo check --workspace --target <triple>` portability
+#      gate BEFORE any full build (the codegen case-sensitivity fix 04a646a
+#      is an ancestor of the base this workflow landed on; the check gate is
+#      where target-specific breakage fails loudly instead of after a full
+#      release build),
+#   3. build `cargo build --release --workspace` for the target triple and
+#      run the workspace tests: the native legs run `cargo test --workspace`
+#      without `--target` (host triple implicit, matching parity.yml's own
+#      invocation); the other legs use explicit `--target`. No leg applies
+#      command-line test filters,
+#   4. build the C SDK (`bindings/c`), run its registered CTest suite,
+#      install to a staging prefix, and package a defined distributable
+#      (never a Cargo target-dir dump),
+#   5. package-verify: tar the package, unpack into a clean fresh directory,
+#      compile + link + run a no-hardware consumer against the unpacked
+#      package (bindings/c/tests/package_smoke.c over the golden dispatch
+#      rows), assert the architecture and library resolution, and fail on
+#      any mismatch.
+#
+# Rich component: `-DOPENXCVR_C_RICH=ON` only on the Linux baseline leg.
+# bindings/c/cmake/rich.cmake fails closed (FATAL_ERROR) off native 64-bit
+# GNU/Linux with GCC/Clang — that refusal is a designed ABI qualification
+# gate, not a bug, so the macOS/Windows legs build the standalone C SDK
+# (rich=OFF, the default) and their manifests record rich_component: false.
+#
+# macOS x86_64 approach and its evidence: GitHub retired the Intel
+# (macos-13) runner image, so the only hosted macOS runners are arm64
+# (Apple silicon). macOS hosted runners have no container runtime, so the
+# Docker-based `cross` tool cannot run there; the supported cross route on
+# the arm64 runner is the Xcode toolchain itself — rustup target
+# x86_64-apple-darwin + `cargo --target` — with Rosetta 2 executing the
+# x86_64 test binaries, the CTest suite and the package-verify consumer.
+# Viability is gated in-workflow by the early cargo check on the cross
+# target; if that check (or any later step) fails, the job fails loudly —
+# the architecture is never silently dropped.
+#
+# Publication remains operator-gated (docs/versioning.md): this workflow only
+# attaches build artifacts to the workflow run; nothing is published to any
+# registry or external host.
+#
+# Artifact names embed SHORT_SHA (7 chars of GITHUB_SHA); on pull_request
+# events that is the merge-ref SHA, not the branch head — expected.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # ---------------- Linux x86_64 baseline (native + rich component) --------
+  linux-x86_64:
+    runs-on: ubuntu-latest
+    env:
+      OPENXCVR_PACKAGE_PLATFORM: linux
+      ARCH: x86_64
+      RUST_TARGET: x86_64-unknown-linux-gnu
+      PYTHON: python3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable channel (branch "stable" tip, commit "toolchain: stable")
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-artifacts-${{ hashFiles('**/Cargo.lock') }}
+      # R2: `emitters::go::tests::test_format_go` asserts gofmt-formatted
+      # output, and `format_go()` falls back to the raw code when gofmt is
+      # absent from PATH. Install the same Go toolchain parity.yml uses on
+      # every leg so the gofmt the golden is asserted against is identical
+      # on all four runners (macOS images ship none).
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5 (v5.6.0)
+        with:
+          go-version: stable
+      - name: Record actual runner OS + arch
+        run: |
+          set -euxo pipefail
+          echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+          echo "RUNNER_OS_CAPTION=$(grep '^PRETTY_NAME' /etc/os-release | cut -d'"' -f2)" >> "$GITHUB_ENV"
+          echo "RUNNER_ARCH=$(uname -m)" >> "$GITHUB_ENV"
+          echo "RUNNER_KERNEL=$(uname -sr)" >> "$GITHUB_ENV"
+      - name: Early portability gate (cargo check before any full build)
+        run: cargo check --workspace --target "$RUST_TARGET"
+      - name: Release build
+        run: cargo build --release --workspace --target "$RUST_TARGET"
+      # Native host invocation, matching parity.yml.
+      - name: Workspace tests
+        run: cargo test --workspace
+      - name: C SDK build + CTest + install (rich)
+        run: |
+          set -euxo pipefail
+          cmake -S bindings/c -B build-c -DOPENXCVR_C_RICH=ON -DCMAKE_BUILD_TYPE=Release
+          cmake --build build-c --parallel "$(nproc)"
+          ctest --test-dir build-c --output-on-failure
+          cmake --install build-c --prefix "$PWD/pkgroot"
+      - name: Stage defined package
+        run: |
+          set -euxo pipefail
+          DIST="openxcvr-c-$OPENXCVR_PACKAGE_PLATFORM-$ARCH"
+          mkdir -p "dist/$DIST"
+          # The cmake install prefix IS the defined SDK surface: headers,
+          # libraries and .pc files. Nothing from the Cargo target dir
+          # enters the package.
+          mv pkgroot/include "dist/$DIST/include"
+          mv pkgroot/lib "dist/$DIST/lib"
+          # Relocatable .pc (the autotools convention): the absolute install
+          # prefix becomes ${pcfiledir}-relative so the unpacked package
+          # resolves wherever it was unpacked.
+          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
+            dist/"$DIST"/lib/pkgconfig/*.pc
+          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          echo "DIST=$DIST" >> "$GITHUB_ENV"
+      - name: Write manifest.json
+        run: |
+          set -euxo pipefail
+          export C_CAPTION="$(cc --version | head -1)"
+          export CMAKE_CAPTION="$(cmake --version | head -1)"
+          "$PYTHON" - <<'PYEOF'
+          import hashlib, json, os, re
+
+          dist = os.environ["DIST"]
+          root = os.path.join("dist", dist)
+          version = re.search(r"project\(openxcvr_c VERSION (\S+)",
+                              open("bindings/c/CMakeLists.txt").read()).group(1)
+          files = []
+          for dirpath, _dirs, names in os.walk(root):
+              for n in sorted(names):
+                  p = os.path.join(dirpath, n)
+                  files.append({
+                      "path": os.path.relpath(p, root),
+                      "bytes": os.path.getsize(p),
+                      "sha256": hashlib.sha256(open(p, "rb").read()).hexdigest(),
+                  })
+          manifest = {
+              "package": "openxcvr-c",
+              "version": version,
+              "platform": os.environ["OPENXCVR_PACKAGE_PLATFORM"],
+              "arch": os.environ["ARCH"],
+              "rust_target": os.environ["RUST_TARGET"],
+              "runner_os_caption": os.environ["RUNNER_OS_CAPTION"],
+              "runner_kernel": os.environ["RUNNER_KERNEL"],
+              "runner_arch": os.environ["RUNNER_ARCH"],
+              "source_sha": os.environ["GITHUB_SHA"],
+              "cmake": os.environ["CMAKE_CAPTION"],
+              "c_compiler": os.environ["C_CAPTION"],
+              "rich_component": True,
+              "rust_rlibs_included": False,
+              "notes": "Rich component built per bindings/c/cmake/rich.cmake "
+                       "and installed by its install rules; libopenxcvr_rich_ffi.a "
+                       "is the Rust FFI bridge compiled as a static library, not a "
+                       "raw rlib. Core Rust crates are source-consumed per "
+                       "docs/versioning.md and are not packaged.",
+              "files": sorted(files, key=lambda f: f["path"]),
+          }
+          with open(os.path.join(root, "manifest.json"), "w") as f:
+              json.dump(manifest, f, indent=2, sort_keys=True)
+              f.write("\n")
+          print(json.dumps({k: v for k, v in manifest.items() if k != "files"},
+                           indent=2, sort_keys=True))
+          PYEOF
+      - name: Package-verify from a clean unpack
+        run: |
+          set -euxo pipefail
+          ARTIFACT="openxcvr-c-$OPENXCVR_PACKAGE_PLATFORM-$ARCH-$SHORT_SHA.tar.gz"
+          tar -C dist -czf "$ARTIFACT" "$DIST"
+          rm -rf fresh && mkdir fresh
+          tar -C fresh -xzf "$ARTIFACT"
+          PKG="$PWD/fresh/$DIST"
+          export PKG_CONFIG_LIBDIR="$PKG/lib/pkgconfig"
+          # pkg-config expands ${pcfiledir} but does not normalize the
+          # path: normalize before asserting the prefix resolves to the
+          # unpacked package root.
+          test "$(cd "$(pkg-config --variable=prefix openxcvr-c)" && pwd)" = "$PKG"
+          cc -Wall -Wextra -Werror -o smoke bindings/c/tests/package_smoke.c \
+            -Wl,-rpath,"$PKG/lib" $(pkg-config --cflags --libs openxcvr-c)
+          file smoke | grep -q "ELF 64-bit LSB .* x86-64"
+          file "$PKG/lib/libopenxcvr_c.so" | grep -q "ELF 64-bit LSB .* x86-64"
+          ldd smoke | grep -q "libopenxcvr_c.so => $PKG/lib/libopenxcvr_c.so"
+          ./smoke bindings/c/tests/dispatch_table.txt
+      - name: Upload package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}
+          path: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}.tar.gz
+          if-no-files-found: error
+          retention-days: 90
+
+  # ---------------- macOS arm64 (native) ------------------------------------
+  macos-arm64:
+    runs-on: macos-latest
+    env:
+      OPENXCVR_PACKAGE_PLATFORM: macos
+      ARCH: arm64
+      RUST_TARGET: aarch64-apple-darwin
+      PYTHON: python3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable channel (branch "stable" tip, commit "toolchain: stable")
+        with:
+          targets: aarch64-apple-darwin
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-artifacts-arm64-${{ hashFiles('**/Cargo.lock') }}
+      # R2: same pinned Go toolchain as the linux leg (macOS images ship no
+      # gofmt, and `format_go()` silently falls back to unformatted output).
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5 (v5.6.0)
+        with:
+          go-version: stable
+      - name: Record actual runner OS + arch
+        run: |
+          set -euxo pipefail
+          echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+          echo "RUNNER_OS_CAPTION=macOS $(sw_vers -productVersion)" >> "$GITHUB_ENV"
+          echo "RUNNER_ARCH=$(uname -m)" >> "$GITHUB_ENV"
+          echo "RUNNER_KERNEL=$(uname -sr)" >> "$GITHUB_ENV"
+      - name: Early portability gate (cargo check before any full build)
+        run: cargo check --workspace --target "$RUST_TARGET"
+      - name: Release build
+        run: cargo build --release --workspace --target "$RUST_TARGET"
+      # Native host invocation, matching parity.yml.
+      - name: Workspace tests
+        run: cargo test --workspace
+      # rich.cmake fails closed off native GNU/Linux, so macOS legs build the
+      # standalone C SDK (rich=OFF, the default).
+      - name: C SDK build + CTest + install
+        run: |
+          set -euxo pipefail
+          cmake -S bindings/c -B build-c -DCMAKE_BUILD_TYPE=Release
+          cmake --build build-c --parallel
+          ctest --test-dir build-c --output-on-failure
+          cmake --install build-c --prefix "$PWD/pkgroot"
+          test "$(lipo -archs build-c/openxcvr_c_checked_linkage_cpp | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PWD/pkgroot/lib/libopenxcvr_c.dylib" | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PWD/pkgroot/lib/libopenxcvr_c.a" | tr -d '[:space:]')" = "$ARCH"
+      - name: Stage defined package
+        run: |
+          set -euxo pipefail
+          DIST="openxcvr-c-$OPENXCVR_PACKAGE_PLATFORM-$ARCH"
+          mkdir -p "dist/$DIST"
+          mv pkgroot/include "dist/$DIST/include"
+          mv pkgroot/lib "dist/$DIST/lib"
+          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
+            dist/"$DIST"/lib/pkgconfig/*.pc
+          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          # Relocatable dylib: the installed id (absolute staging prefix)
+          # becomes @rpath/... so the unpacked package loads wherever the
+          # consumer's rpath points.
+          install_name_tool -id "@rpath/libopenxcvr_c.dylib" \
+            dist/"$DIST"/lib/libopenxcvr_c.dylib
+          echo "DIST=$DIST" >> "$GITHUB_ENV"
+      - name: Write manifest.json
+        run: |
+          set -euxo pipefail
+          export C_CAPTION="$(cc --version | head -1)"
+          export CMAKE_CAPTION="$(cmake --version | head -1)"
+          "$PYTHON" - <<'PYEOF'
+          import hashlib, json, os, re
+
+          dist = os.environ["DIST"]
+          root = os.path.join("dist", dist)
+          version = re.search(r"project\(openxcvr_c VERSION (\S+)",
+                              open("bindings/c/CMakeLists.txt").read()).group(1)
+          files = []
+          for dirpath, _dirs, names in os.walk(root):
+              for n in sorted(names):
+                  p = os.path.join(dirpath, n)
+                  files.append({
+                      "path": os.path.relpath(p, root),
+                      "bytes": os.path.getsize(p),
+                      "sha256": hashlib.sha256(open(p, "rb").read()).hexdigest(),
+                  })
+          manifest = {
+              "package": "openxcvr-c",
+              "version": version,
+              "platform": os.environ["OPENXCVR_PACKAGE_PLATFORM"],
+              "arch": os.environ["ARCH"],
+              "rust_target": os.environ["RUST_TARGET"],
+              "runner_os_caption": os.environ["RUNNER_OS_CAPTION"],
+              "runner_kernel": os.environ["RUNNER_KERNEL"],
+              "runner_arch": os.environ["RUNNER_ARCH"],
+              "source_sha": os.environ["GITHUB_SHA"],
+              "cmake": os.environ["CMAKE_CAPTION"],
+              "c_compiler": os.environ["C_CAPTION"],
+              "rich_component": False,
+              "rust_rlibs_included": False,
+              "notes": "Standalone C SDK; the rich component is not built "
+                       "(bindings/c/cmake/rich.cmake qualifies it for native "
+                       "GNU/Linux only). No Rust rlibs packaged: core Rust "
+                       "crates are source-consumed per docs/versioning.md.",
+              "files": sorted(files, key=lambda f: f["path"]),
+          }
+          with open(os.path.join(root, "manifest.json"), "w") as f:
+              json.dump(manifest, f, indent=2, sort_keys=True)
+              f.write("\n")
+          print(json.dumps({k: v for k, v in manifest.items() if k != "files"},
+                           indent=2, sort_keys=True))
+          PYEOF
+      - name: Package-verify from a clean unpack
+        run: |
+          set -euxo pipefail
+          ARTIFACT="openxcvr-c-$OPENXCVR_PACKAGE_PLATFORM-$ARCH-$SHORT_SHA.tar.gz"
+          tar -C dist -czf "$ARTIFACT" "$DIST"
+          rm -rf fresh && mkdir fresh
+          tar -C fresh -xzf "$ARTIFACT"
+          PKG="$PWD/fresh/$DIST"
+          export PKG_CONFIG_LIBDIR="$PKG/lib/pkgconfig"
+          # See the linux-x86_64 leg: normalize pkg-config's ${pcfiledir}
+          # expansion before the prefix assert.
+          test "$(cd "$(pkg-config --variable=prefix openxcvr-c)" && pwd)" = "$PKG"
+          cc -Wall -Wextra -Werror -arch "$ARCH" -o smoke \
+            bindings/c/tests/package_smoke.c -Wl,-rpath,"$PKG/lib" \
+            $(pkg-config --cflags --libs openxcvr-c)
+          test "$(lipo -archs smoke | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PKG/lib/libopenxcvr_c.dylib" | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PKG/lib/libopenxcvr_c.a" | tr -d '[:space:]')" = "$ARCH"
+          file smoke | grep -q "Mach-O 64-bit .* $ARCH"
+          file "$PKG/lib/libopenxcvr_c.dylib" | grep -q "Mach-O 64-bit .* $ARCH"
+          otool -D "$PKG/lib/libopenxcvr_c.dylib" | grep -q "@rpath/libopenxcvr_c.dylib"
+          otool -L smoke | grep -q "@rpath/libopenxcvr_c.dylib"
+          ./smoke bindings/c/tests/dispatch_table.txt
+      - name: Upload package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}
+          path: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}.tar.gz
+          if-no-files-found: error
+          retention-days: 90
+
+  # ---------------- macOS x86_64 (cross from the arm64 runner) -------------
+  # Intel (macos-13) runners are retired; see the evidence block at the top
+  # of this file. Every step below fails loudly — the arch is never dropped.
+  macos-x86_64-cross:
+    runs-on: macos-latest
+    env:
+      OPENXCVR_PACKAGE_PLATFORM: macos
+      ARCH: x86_64
+      RUST_TARGET: x86_64-apple-darwin
+      PYTHON: python3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable channel (branch "stable" tip, commit "toolchain: stable")
+        with:
+          targets: x86_64-apple-darwin
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-artifacts-x86_64-${{ hashFiles('**/Cargo.lock') }}
+      # R2: same pinned Go toolchain as the linux leg (macOS images ship no
+      # gofmt, and `format_go()` silently falls back to unformatted output).
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5 (v5.6.0)
+        with:
+          go-version: stable
+      - name: Record actual runner OS + arch (the build host is arm64)
+        run: |
+          set -euxo pipefail
+          echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+          echo "RUNNER_OS_CAPTION=macOS $(sw_vers -productVersion)" >> "$GITHUB_ENV"
+          echo "RUNNER_ARCH=$(uname -m)" >> "$GITHUB_ENV"
+          echo "RUNNER_KERNEL=$(uname -sr)" >> "$GITHUB_ENV"
+      # Rosetta 2 executes the cross-built x86_64 test binaries, the CTest
+      # suite and the package-verify consumer on the arm64 host.
+      - name: Ensure Rosetta 2 (runs the x86_64 binaries)
+        run: |
+          set -euxo pipefail
+          if [ ! -f /Library/Apple/usr/share/rosetta/rosetta ]; then
+            sudo softwareupdate --install-rosetta --agree-to-license
+          fi
+      - name: Early portability gate (cross-target viability check first)
+        run: cargo check --workspace --target "$RUST_TARGET"
+      - name: Release build (cross)
+        run: cargo build --release --workspace --target "$RUST_TARGET"
+      - name: Workspace tests (under Rosetta 2)
+        run: cargo test --workspace --target "$RUST_TARGET"
+      # Arch forcing is two mechanisms, because one does not cover both kinds
+      # of compiler invocation in this leg.
+      #
+      # (a) Forced-arch compiler identity (F2). The installed-consumer and
+      #     portability tests (openxcvr_c_installed_shared_link,
+      #     openxcvr_c_installed_f16_consumer,
+      #     openxcvr_c_installed_checked_consumer,
+      #     openxcvr_c_checked_page_portability) invoke ${CMAKE_C_COMPILER}
+      #     directly with their own flag lists and ignore CMAKE_C_FLAGS, so on
+      #     this arm64 host they would compile arm64 by default and fail the
+      #     link against the x86_64 dylib or static archive with a Mach-O
+      #     mismatch. They are covered by forcing the arch at the compiler
+      #     identity itself: `cc` and `c++` wrappers that prepend -arch
+      #     x86_64 are recorded as CMAKE_C_COMPILER and CMAKE_CXX_COMPILER,
+      #     so configure-time probes (check_language(CXX)) and those raw test
+      #     invocations target x86_64.
+      #
+      # (b) CMAKE_OSX_ARCHITECTURES (now passed, x86_64). An earlier note
+      #     here said it was deliberately omitted because it would merely
+      #     duplicate -arch on CMake-driven compiles; runner evidence
+      #     supersedes that. Run 43131999275 (job macos-x86_64-cross) failed
+      #     the A3 assertion because `lipo -archs
+      #     build-c/openxcvr_c_checked_linkage_cpp` reported "x86_64 arm64" —
+      #     the C++ smoke binary was UNIVERSAL, so the clang driver received
+      #     both -arch x86_64 (the wrapper) and -arch arm64 from somewhere
+      #     else. Wrapper-only forcing leaves the second -arch to CMake's own
+      #     Apple-Silicon default: on an arm64 host
+      #     Modules/Platform/Darwin-Initialize.cmake sets the internal
+      #     _CMAKE_APPLE_ARCHS_DEFAULT to CMAKE_HOST_SYSTEM_PROCESSOR, and the
+      #     generator adds -arch <that> whenever CMAKE_OSX_ARCHITECTURES is
+      #     empty. Passing CMAKE_OSX_ARCHITECTURES=x86_64 makes the generator
+      #     emit x86_64 instead of the host default, so both mechanisms now
+      #     say x86_64 and clang deduplicates the repeated identical -arch.
+      #     The build-matrix discipline is unchanged: no universal binaries,
+      #     and every A3/A4 assertion still demands pure x86_64.
+      #
+      # Ambient arch carriers (CFLAGS / CXXFLAGS / CPPFLAGS / LDFLAGS /
+      # ARCHFLAGS / CMAKE_OSX_ARCHITECTURES / SDKROOT) are echoed and then
+      # unset at the top of the step, so no inherited value can add an arch and
+      # any inherited one is named in the log; the build is VERBOSE and the
+      # artifact archs are echoed before they are asserted, so a remaining
+      # universal binary names its own culprit.
+      # rich=OFF: see macos-arm64.
+      - name: C SDK build + CTest + install (x86_64 via wrappers + CMAKE_OSX_ARCHITECTURES)
+        run: |
+          set -euxo pipefail
+          echo "env arch carriers: CFLAGS=${CFLAGS:-unset} CXXFLAGS=${CXXFLAGS:-unset} CPPFLAGS=${CPPFLAGS:-unset}"
+          echo "env arch carriers: LDFLAGS=${LDFLAGS:-unset} ARCHFLAGS=${ARCHFLAGS:-unset}"
+          echo "env arch carriers: CMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES:-unset} SDKROOT=${SDKROOT:-unset}"
+          unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS ARCHFLAGS
+          mkdir -p "$PWD/cc-x86_64"
+          printf '#!/bin/sh\nexec /usr/bin/cc -arch x86_64 "$@"\n' \
+            > "$PWD/cc-x86_64/cc"
+          printf '#!/bin/sh\nexec /usr/bin/c++ -arch x86_64 "$@"\n' \
+            > "$PWD/cc-x86_64/c++"
+          chmod +x "$PWD/cc-x86_64/cc" "$PWD/cc-x86_64/c++"
+          cmake -S bindings/c -B build-c -DCMAKE_BUILD_TYPE=Release \
+            "-DCMAKE_OSX_ARCHITECTURES=$ARCH" \
+            "-DCMAKE_C_COMPILER=$PWD/cc-x86_64/cc" \
+            "-DCMAKE_CXX_COMPILER=$PWD/cc-x86_64/c++"
+          grep -F "CMAKE_C_COMPILER" build-c/CMakeCache.txt | grep -F "$PWD/cc-x86_64/cc"
+          grep -F "CMAKE_CXX_COMPILER" build-c/CMakeCache.txt | grep -F "$PWD/cc-x86_64/c++"
+          # The host-arch default must be overridden, not merely shadowed.
+          grep -F "CMAKE_OSX_ARCHITECTURES" build-c/CMakeCache.txt | grep -F "=$ARCH"
+          # VERBOSE=1 (Unix Makefiles) prints every compile/link command, so a
+          # stray -arch in the next run log names the command carrying it.
+          cmake --build build-c --parallel -- VERBOSE=1
+          ctest --test-dir build-c --output-on-failure
+          cmake --install build-c --prefix "$PWD/pkgroot"
+          echo "archs: cpp smoke = $(lipo -archs build-c/openxcvr_c_checked_linkage_cpp)"
+          echo "archs: dylib     = $(lipo -archs "$PWD/pkgroot/lib/libopenxcvr_c.dylib")"
+          echo "archs: archive   = $(lipo -archs "$PWD/pkgroot/lib/libopenxcvr_c.a")"
+          test "$(lipo -archs build-c/openxcvr_c_checked_linkage_cpp | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PWD/pkgroot/lib/libopenxcvr_c.dylib" | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PWD/pkgroot/lib/libopenxcvr_c.a" | tr -d '[:space:]')" = "$ARCH"
+      - name: Stage defined package
+        run: |
+          set -euxo pipefail
+          DIST="openxcvr-c-$OPENXCVR_PACKAGE_PLATFORM-$ARCH"
+          mkdir -p "dist/$DIST"
+          mv pkgroot/include "dist/$DIST/include"
+          mv pkgroot/lib "dist/$DIST/lib"
+          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
+            dist/"$DIST"/lib/pkgconfig/*.pc
+          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          install_name_tool -id "@rpath/libopenxcvr_c.dylib" \
+            dist/"$DIST"/lib/libopenxcvr_c.dylib
+          echo "DIST=$DIST" >> "$GITHUB_ENV"
+      - name: Write manifest.json
+        run: |
+          set -euxo pipefail
+          export C_CAPTION="$PWD/cc-x86_64/cc ($("$PWD/cc-x86_64/cc" --version | head -1))"
+          export CMAKE_CAPTION="$(cmake --version | head -1)"
+          "$PYTHON" - <<'PYEOF'
+          import hashlib, json, os, re
+
+          dist = os.environ["DIST"]
+          root = os.path.join("dist", dist)
+          version = re.search(r"project\(openxcvr_c VERSION (\S+)",
+                              open("bindings/c/CMakeLists.txt").read()).group(1)
+          files = []
+          for dirpath, _dirs, names in os.walk(root):
+              for n in sorted(names):
+                  p = os.path.join(dirpath, n)
+                  files.append({
+                      "path": os.path.relpath(p, root),
+                      "bytes": os.path.getsize(p),
+                      "sha256": hashlib.sha256(open(p, "rb").read()).hexdigest(),
+                  })
+          manifest = {
+              "package": "openxcvr-c",
+              "version": version,
+              "platform": os.environ["OPENXCVR_PACKAGE_PLATFORM"],
+              "arch": os.environ["ARCH"],
+              "rust_target": os.environ["RUST_TARGET"],
+              "runner_os_caption": os.environ["RUNNER_OS_CAPTION"],
+              "runner_kernel": os.environ["RUNNER_KERNEL"],
+              "runner_arch": os.environ["RUNNER_ARCH"],
+              "source_sha": os.environ["GITHUB_SHA"],
+              "cmake": os.environ["CMAKE_CAPTION"],
+              "c_compiler": os.environ["C_CAPTION"],
+              "rich_component": False,
+              "rust_rlibs_included": False,
+              "notes": "Cross-built x86_64 on an arm64 macOS runner with the "
+                       "Xcode toolchain (Intel runners are retired; macOS "
+                       "runners have no container runtime, so the Docker-based "
+                       "cross tool cannot run there). Binaries execute under "
+                       "Rosetta 2. CMake-driven builds, configure probes and "
+                       "CTest invocations go through the forced-arch cc/c++ "
+                       "wrappers; the package-verify consumer is compiled with "
+                       "the system compiler plus an explicit -arch flag for "
+                       "the leg's architecture. The rich component is not built "
+                       "(Linux-only qualification, bindings/c/cmake/rich.cmake). "
+                       "No Rust rlibs packaged: core Rust crates are source-consumed "
+                       "per docs/versioning.md.",
+              "files": sorted(files, key=lambda f: f["path"]),
+          }
+          with open(os.path.join(root, "manifest.json"), "w") as f:
+              json.dump(manifest, f, indent=2, sort_keys=True)
+              f.write("\n")
+          print(json.dumps({k: v for k, v in manifest.items() if k != "files"},
+                           indent=2, sort_keys=True))
+          PYEOF
+      - name: Package-verify from a clean unpack
+        run: |
+          set -euxo pipefail
+          # Same defensive sanitization as the C SDK step: the consumer here
+          # passes -arch "$ARCH" itself, and no inherited flag may add one.
+          unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS ARCHFLAGS
+          ARTIFACT="openxcvr-c-$OPENXCVR_PACKAGE_PLATFORM-$ARCH-$SHORT_SHA.tar.gz"
+          tar -C dist -czf "$ARTIFACT" "$DIST"
+          rm -rf fresh && mkdir fresh
+          tar -C fresh -xzf "$ARTIFACT"
+          PKG="$PWD/fresh/$DIST"
+          export PKG_CONFIG_LIBDIR="$PKG/lib/pkgconfig"
+          # See the linux-x86_64 leg: normalize pkg-config's ${pcfiledir}
+          # expansion before the prefix assert.
+          test "$(cd "$(pkg-config --variable=prefix openxcvr-c)" && pwd)" = "$PKG"
+          cc -Wall -Wextra -Werror -arch "$ARCH" -o smoke \
+            bindings/c/tests/package_smoke.c -Wl,-rpath,"$PKG/lib" \
+            $(pkg-config --cflags --libs openxcvr-c)
+          echo "archs: smoke     = $(lipo -archs smoke)"
+          echo "archs: dylib     = $(lipo -archs "$PKG/lib/libopenxcvr_c.dylib")"
+          echo "archs: archive   = $(lipo -archs "$PKG/lib/libopenxcvr_c.a")"
+          test "$(lipo -archs smoke | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PKG/lib/libopenxcvr_c.dylib" | tr -d '[:space:]')" = "$ARCH"
+          test "$(lipo -archs "$PKG/lib/libopenxcvr_c.a" | tr -d '[:space:]')" = "$ARCH"
+          file smoke | grep -q "Mach-O 64-bit .* $ARCH"
+          file "$PKG/lib/libopenxcvr_c.dylib" | grep -q "Mach-O 64-bit .* $ARCH"
+          otool -D "$PKG/lib/libopenxcvr_c.dylib" | grep -q "@rpath/libopenxcvr_c.dylib"
+          otool -L smoke | grep -q "@rpath/libopenxcvr_c.dylib"
+          ./smoke bindings/c/tests/dispatch_table.txt
+      - name: Upload package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}
+          path: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}.tar.gz
+          if-no-files-found: error
+          retention-days: 90
+
+  # ---------------- Windows x86_64 (Clang / MSVC ABI) -----------------------
+  # windows-latest is Windows SERVER — the OS caption recorded below is the
+  # honest one and goes into manifest.json and docs/versioning.md. ctest here
+  # excludes the four install/portability tests that structurally require
+  # pkg-config and GCC/Clang-only link flags (they run on the POSIX legs);
+  # the package-verify step performs the equivalent installed-consumer
+  # proof on Windows itself: cl + import library + DLL run, plus a static
+  # link, plus dumpbin architecture asserts.
+  windows-x86_64:
+    runs-on: windows-latest
+    # R1: the steps in this job are written in bash. Under the image default
+    # (pwsh) `"$RUST_TARGET"` is an unset PowerShell variable, so cargo was
+    # invoked with an empty --target and failed with "target was empty". The
+    # job therefore runs every step through bash (present on the Windows
+    # runners); steps that need another shell say so explicitly (pwsh for the
+    # OS-caption probe, cmd for the cl-based package verify).
+    defaults:
+      run:
+        shell: bash
+    env:
+      # Package OS must not collide with MSVC's case-insensitive Platform variable.
+      OPENXCVR_PACKAGE_PLATFORM: windows
+      ARCH: x86_64
+      RUST_TARGET: x86_64-pc-windows-msvc
+      PYTHON: python
+    steps:
+      # CRLF root cause (run 43131999275, job windows-x86_64, step "Workspace
+      # tests"): `dispatch_table_matches_checked_in_golden`
+      # (crates/openxcvr/tests/dispatch_table.rs) byte-compares its renderer
+      # output (LF) against the checked-in golden
+      # bindings/c/tests/dispatch_table.txt, and the package-verify smoke
+      # reads the same file. This image checks out with core.autocrlf=true and
+      # the repo carries no .gitattributes, so the golden arrives as CRLF and
+      # the compare fails on line endings alone. Disabling conversion here —
+      # before checkout, so it applies to the files this job reads — keeps the
+      # checked-in LF bytes intact. A repo-wide `.gitattributes`
+      # (`* text eol=lf`) normalization is a lib-owned follow-up, deliberately
+      # not done on this branch. The other legs' git defaults do not convert,
+      # so the step is Windows-only. actions/checkout's own config cleanup
+      # does not touch autocrlf.
+      - name: Disable CRLF conversion before checkout
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable channel (branch "stable" tip, commit "toolchain: stable")
+        with:
+          targets: x86_64-pc-windows-msvc
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-artifacts-${{ hashFiles('**/Cargo.lock') }}
+      # R2: same pinned Go toolchain as the linux leg, so the gofmt the Go
+      # emitter golden is asserted against exists here too.
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5 (v5.6.0)
+        with:
+          go-version: stable
+      - name: Record actual runner OS + arch
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $caption = (Get-CimInstance Win32_OperatingSystem).Caption
+          Add-Content $env:GITHUB_ENV "SHORT_SHA=$($env:GITHUB_SHA.Substring(0,7))"
+          Add-Content $env:GITHUB_ENV "RUNNER_OS_CAPTION=$caption"
+          Add-Content $env:GITHUB_ENV "RUNNER_ARCH=$env:PROCESSOR_ARCHITECTURE"
+      # Each command is its own step: under the default pwsh shell only the
+      # LAST command's exit code fails the step, so a failed configure/test
+      # must never be masked by a later successful command.
+      - name: Early portability gate (cargo check before any full build)
+        run: cargo check --workspace --target "$RUST_TARGET"
+      - name: Release build
+        run: cargo build --release --workspace --target "$RUST_TARGET"
+      - name: Workspace tests
+        run: cargo test --workspace --target "$RUST_TARGET"
+      # Evaluated upstream v1.13.0: finds VS/vcvarsall and exports the MSVC
+      # SDK/CRT environment. No workflow permissions beyond contents: read.
+      - uses: ilammy/msvc-dev-cmd@0b201ec74fa43914dc39ae48a89fd1d8cb592756 # v1.13.0
+        with:
+          arch: x64
+      # GNU-style LLVM drivers preserve -Wextra/-Werror, -UNDEBUG and the
+      # freestanding compile gate. The explicit triple is MSVC, never MinGW.
+      # Export-all-symbols retains the existing DLL function-export surface;
+      # public data (openxcvr_cmis_vdm_page_tags) is still static-only.
+      - name: Discover LLVM + MSVC SDK and configure C SDK (Ninja)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          # Get-Command can return multiple installations; preserve PATH precedence.
+          $clang = (Get-Command clang.exe -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
+          $clangxx = (Get-Command clang++.exe -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
+          foreach ($tool in @($clang, $clangxx, 'ninja.exe', 'link.exe', 'lld-link.exe', 'cl.exe', 'dumpbin.exe')) {
+            $path = (Get-Command $tool -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
+            Write-Host "tool: $path"
+          }
+          if (!$env:WindowsSdkDir -or !$env:WindowsSDKVersion -or !$env:VCToolsInstallDir) {
+            throw 'MSVC SDK/CRT environment is missing'
+          }
+          foreach ($path in @(
+            (Join-Path $env:WindowsSdkDir "Include/$($env:WindowsSDKVersion)/um/Windows.h"),
+            (Join-Path $env:WindowsSdkDir "Lib/$($env:WindowsSDKVersion)/ucrt/x64/ucrt.lib"),
+            (Join-Path $env:VCToolsInstallDir 'lib/x64/msvcrt.lib'))) {
+            if (!(Test-Path $path)) { throw "SDK/CRT file missing: $path" }
+            Write-Host "SDK/CRT: $path"
+          }
+          & $clang --version
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          & $clangxx --version
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $triple = & $clang "--target=$env:RUST_TARGET" -dumpmachine
+          if ($LASTEXITCODE -or $triple -notmatch "^$([regex]::Escape($env:RUST_TARGET))([0-9.]+)?$") {
+            throw "unexpected LLVM target: $triple"
+          }
+          Write-Host "C SDK target: $triple; dynamic MSVC CRT: MultiThreadedDLL (/MD-equivalent)"
+          cmake -S bindings/c -B build-c -G Ninja -DCMAKE_BUILD_TYPE=Release `
+            "-DCMAKE_C_COMPILER=$clang" "-DCMAKE_CXX_COMPILER=$clangxx" `
+            "-DCMAKE_C_COMPILER_TARGET=$env:RUST_TARGET" "-DCMAKE_CXX_COMPILER_TARGET=$env:RUST_TARGET" `
+            -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL `
+            -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          # Read actual CMake compiler metadata, not a guessed cache type.
+          @'
+          file(GLOB metadata "build-c/CMakeFiles/*/CMakeCCompiler.cmake")
+          list(LENGTH metadata count)
+          if(NOT count EQUAL 1)
+            message(FATAL_ERROR "expected one CMake compiler metadata file")
+          endif()
+          include(${metadata})
+          if(NOT CMAKE_C_COMPILER_ID STREQUAL "Clang" OR
+              NOT CMAKE_C_SIMULATE_ID STREQUAL "MSVC" OR
+              NOT CMAKE_C_COMPILER_FRONTEND_VARIANT STREQUAL "GNU")
+            message(FATAL_ERROR "expected GNU-style Clang with MSVC ABI")
+          endif()
+          message(STATUS "C SDK: ${CMAKE_C_COMPILER} ${CMAKE_C_COMPILER_VERSION}; ${CMAKE_C_SIMULATE_ID}; ${CMAKE_C_COMPILER_FRONTEND_VARIANT}; linker ${CMAKE_LINKER}")
+          file(WRITE "build-c/compiler-path.txt" "${CMAKE_C_COMPILER}")
+          '@ | Set-Content build-c/compiler-metadata.cmake
+          cmake -P build-c/compiler-metadata.cmake
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: C SDK build (static + shared + all CTest targets)
+        run: cmake --build build-c --parallel 2 --verbose
+      - name: Assert actual object CRT directives
+        shell: cmd
+        run: |
+          dumpbin /directives build-c\CMakeFiles\openxcvr_catalog_obs.dir\src\catalog.c.obj > build-c\crt-directives.txt || exit /b 1
+          type build-c\crt-directives.txt
+          findstr /i /c:"DEFAULTLIB:msvcrt" build-c\crt-directives.txt || exit /b 1
+      # Excluded here, run on the POSIX legs: the four install/portability
+      # tests above drive pkg-config and GCC/Clang-only link flags and are
+      # structurally Unix-oriented. The package-verify step below performs
+      # the equivalent installed-consumer proof on Windows itself.
+      - name: C SDK tests
+        run: ctest --test-dir build-c -C Release --output-on-failure -E "openxcvr_c_installed_shared_link|openxcvr_c_installed_f16_consumer|openxcvr_c_checked_page_portability|openxcvr_c_installed_checked_consumer"
+      - name: C SDK install to staging prefix
+        run: cmake --install build-c --config Release --prefix pkgroot
+      - name: Stage defined package
+        shell: bash
+        run: |
+          set -euxo pipefail
+          DIST="openxcvr-c-$OPENXCVR_PACKAGE_PLATFORM-$ARCH"
+          test -f pkgroot/bin/openxcvr_c.dll
+          test -f pkgroot/lib/openxcvr_c.lib
+          test -f pkgroot/lib/openxcvr_c_static.lib
+          mkdir -p "dist/$DIST"
+          mv pkgroot/include "dist/$DIST/include"
+          mv pkgroot/lib "dist/$DIST/lib"
+          mv pkgroot/bin "dist/$DIST/bin"
+          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
+            dist/"$DIST"/lib/pkgconfig/*.pc
+          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          echo "DIST=$DIST" >> "$GITHUB_ENV"
+      - name: Write manifest.json
+        shell: bash
+        run: |
+          set -euxo pipefail
+          C_CAPTION="$(cat build-c/compiler-path.txt)"
+          CMAKE_CAPTION="$(cmake --version | head -1)"
+          export C_CAPTION CMAKE_CAPTION
+          "$PYTHON" - <<'PYEOF'
+          import hashlib, json, os, re, subprocess
+
+          dist = os.environ["DIST"]
+          root = os.path.join("dist", dist)
+          version = re.search(r"project\(openxcvr_c VERSION (\S+)",
+                              open("bindings/c/CMakeLists.txt").read()).group(1)
+          compiler = os.environ["C_CAPTION"]
+          caption = subprocess.run([compiler, "--version"], capture_output=True,
+                                   text=True, check=True, timeout=60).stdout.splitlines()[0]
+          target = os.environ["RUST_TARGET"]
+          commands = json.load(open("build-c/compile_commands.json"))
+          for entry in commands:
+              command = entry["command"]
+              assert f"--target={target}" in command, command
+              assert "-D_DLL" in command and "-D_MT" in command, command
+              assert "--dependent-lib=msvcrt" in command, command
+          header = next(e["command"] for e in commands
+                        if e["file"].endswith("dpsm_projection_header.c"))
+          assert all(flag in header for flag in ("-ffreestanding", "-Wall", "-Wextra", "-Werror")), header
+          projection = next(e["command"] for e in commands
+                            if e["file"].endswith("dpsm_projection.c"))
+          assert projection.index("-UNDEBUG") > projection.index("-DNDEBUG"), projection
+          compiler = f"{caption}; target={target}; CRT=MultiThreadedDLL (/MD-equivalent)"
+          print(compiler)
+          print("SDK:", os.environ["WindowsSdkDir"], os.environ["WindowsSDKVersion"])
+          print("CRT:", os.environ["VCToolsInstallDir"])
+          files = []
+          for dirpath, _dirs, names in os.walk(root):
+              for n in sorted(names):
+                  p = os.path.join(dirpath, n)
+                  files.append({
+                      "path": os.path.relpath(p, root),
+                      "bytes": os.path.getsize(p),
+                      "sha256": hashlib.sha256(open(p, "rb").read()).hexdigest(),
+                  })
+          manifest = {
+              "package": "openxcvr-c",
+              "version": version,
+              "platform": os.environ["OPENXCVR_PACKAGE_PLATFORM"],
+              "arch": os.environ["ARCH"],
+              "rust_target": os.environ["RUST_TARGET"],
+              "runner_os_caption": os.environ["RUNNER_OS_CAPTION"],
+              "runner_arch": os.environ["RUNNER_ARCH"],
+              "source_sha": os.environ["GITHUB_SHA"],
+              "cmake": os.environ["CMAKE_CAPTION"],
+              "c_compiler": compiler,
+              "rich_component": False,
+              "rust_rlibs_included": False,
+              "notes": "Clang GNU-driver build with MSVC ABI and dynamic MSVC CRT; "
+                       "staged-package consumers validated separately with cl /W4 /MD. "
+                       "windows-latest is Windows Server (see "
+                       "runner_os_caption), not native Windows 11. "
+                       "lib/openxcvr_c.lib is the DLL import library; the "
+                       "static archive is built/installed as lib/openxcvr_c_static.lib. "
+                       "The DLL's exports come "
+                       "from CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON (the C SDK "
+                       "declares no dllexport): function symbols only, so "
+                       "public data symbols such as "
+                       "openxcvr_cmis_vdm_page_tags are reachable through "
+                       "the static archive, not the DLL. The rich component is not "
+                       "built (Linux-only qualification, "
+                       "bindings/c/cmake/rich.cmake). No Rust rlibs packaged: "
+                       "core Rust crates are source-consumed per "
+                       "docs/versioning.md.",
+              "files": sorted(files, key=lambda f: f["path"]),
+          }
+          assert manifest["platform"] == "windows", manifest["platform"]
+          with open(os.path.join(root, "manifest.json"), "w") as f:
+              json.dump(manifest, f, indent=2, sort_keys=True)
+              f.write("\n")
+          print(json.dumps({k: v for k, v in manifest.items() if k != "files"},
+                           indent=2, sort_keys=True))
+          PYEOF
+      - name: Package-verify from a clean unpack
+        shell: cmd
+        run: |
+          rem MSVC environment was established by the pinned setup action.
+          where cl || exit /b 1
+          where dumpbin || exit /b 1
+          set DIST=openxcvr-c-%OPENXCVR_PACKAGE_PLATFORM%-%ARCH%
+          tar -C dist -czf openxcvr-c-%OPENXCVR_PACKAGE_PLATFORM%-%ARCH%-%SHORT_SHA%.tar.gz %DIST% || exit /b 1
+          if exist fresh rmdir /s /q fresh
+          mkdir fresh || exit /b 1
+          tar -C fresh -xzf openxcvr-c-%OPENXCVR_PACKAGE_PLATFORM%-%ARCH%-%SHORT_SHA%.tar.gz || exit /b 1
+          rem Clang's MSVC-ABI objects explicitly use MultiThreadedDLL
+          rem (/MD-equivalent); actual cl consumers must match that CRT,
+          rem above all for the static-archive link.
+          cl /nologo /W4 /MD /I "fresh\%DIST%\include" bindings\c\tests\package_smoke.c /Fe:smoke.exe /link /LIBPATH:"fresh\%DIST%\lib" openxcvr_c.lib || exit /b 1
+          copy /y "fresh\%DIST%\bin\openxcvr_c.dll" . >nul || exit /b 1
+          dumpbin /headers smoke.exe | findstr /c:"machine (x64)" || exit /b 1
+          dumpbin /headers "fresh\%DIST%\bin\openxcvr_c.dll" | findstr /c:"machine (x64)" || exit /b 1
+          dumpbin /dependents smoke.exe | findstr /c:"openxcvr_c.dll" || exit /b 1
+          smoke.exe bindings\c\tests\dispatch_table.txt || exit /b 1
+          cl /nologo /W4 /MD /I "fresh\%DIST%\include" bindings\c\tests\package_smoke.c /Fe:smoke_static.exe /link /LIBPATH:"fresh\%DIST%\lib" openxcvr_c_static.lib || exit /b 1
+          smoke_static.exe bindings\c\tests\dispatch_table.txt || exit /b 1
+      - name: Upload package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}
+          path: openxcvr-c-${{ env.OPENXCVR_PACKAGE_PLATFORM }}-${{ env.ARCH }}-${{ env.SHORT_SHA }}.tar.gz
+          if-no-files-found: error
+          retention-days: 90

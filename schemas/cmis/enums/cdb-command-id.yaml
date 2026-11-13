@@ -1,0 +1,60 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisCdbCommandId
+title: CMIS CDB Command ID Groups (before CMIS 5.4)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 9.1 / Table 9-1
+  pdf_pages: [286, 287]
+entries:
+  - value: 0x0000..0x003f
+    name: module_commands
+    description: Module-level CDB commands
+  - value: 0x0040..0x005f
+    name: capabilities_inquiry
+    description: Query advertised CDB features and capabilities
+  - value: 0x0060..0x006f
+    name: reserved_bulk_read_banks_pages
+    description: Reserved for Bulk Read of Banks and Pages
+  - value: 0x0070..0x007f
+    name: reserved_bulk_write_banks_pages
+    description: Reserved for Bulk Write of Banks and Pages
+  - value: 0x0080..0x00ff
+    name: reserved_module_level_commands
+    description: Reserved for module-level commands
+  - value: 0x0100..0x011f
+    name: firmware_management
+    description: CDB Firmware Management
+  - value: 0x0120..0x01ff
+    name: reserved_0120_01ff
+    description: Reserved CDB command IDs
+  - value: 0x0200..0x027f
+    name: performance_monitoring
+    description: CDB Performance Monitoring
+  - value: 0x0280..0x02ff
+    name: data_recording
+    description: Non-volatile Data Recording and Monitoring
+  - value: 0x0300..0x037f
+    name: reserved_bert_functionality
+    description: Reserved for BERT functionality
+  - value: 0x0380..0x03ff
+    name: diagnostics_and_debug
+    description: Reserved for Diagnostics and Debug commands
+  - value: 0x0400..0x04ff
+    name: security_features
+    description: Security-related CDB commands
+  - value: 0x0500..0x3fff
+    name: reserved_0500_3fff
+    description: Reserved CDB command IDs
+  - value: 0x4000..0x40ff
+    name: versatile_control_set
+    description: Module-defined and possibly application-specific SI parameters in control sets
+  - value: 0x4100..0x7fff
+    name: restricted_oif
+    description: Restricted for use by OIF
+    until: "5.3"
+  - value: 0x8000..0xffff
+    name: custom
+    description: Custom CDB command IDs

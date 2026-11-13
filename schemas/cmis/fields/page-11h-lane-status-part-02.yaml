@@ -1,0 +1,240 @@
+fields:
+  - name: optical_power_low_alarm_flag_tx
+    display_name: OpticalPowerLowAlarmFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 140
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 210
+      table: "Table 8-87"
+      quote: "Latched Tx output power Low alarm, media lane <i>. Advertisement: 01h:160.1."
+
+  - name: optical_power_high_warning_flag_tx
+    display_name: OpticalPowerHighWarningFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 141
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 211
+      table: "Table 8-87"
+      quote: "Latched Tx output power High warning, media lane <i>. Advertisement: 01h:160.1."
+
+  - name: optical_power_low_warning_flag_tx
+    display_name: OpticalPowerLowWarningFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 142
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 211
+      table: "Table 8-87"
+      quote: "Latched Tx output power Low warning, media lane <i>. Advertisement: 01h:160.1."
+
+  - name: laser_bias_high_alarm_flag_tx
+    display_name: LaserBiasHighAlarmFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 143
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 211
+      table: "Table 8-87"
+      quote: "Latched Tx Bias High Alarm, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: laser_bias_low_alarm_flag_tx
+    display_name: LaserBiasLowAlarmFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 144
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 211
+      table: "Table 8-87"
+      quote: "Latched Tx Bias Low alarm, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: laser_bias_high_warning_flag_tx
+    display_name: LaserBiasHighWarningFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 145
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 211
+      table: "Table 8-87"
+      quote: "Latched Tx Bias High warning, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: laser_bias_low_warning_flag_tx
+    display_name: LaserBiasLowWarningFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 146
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 211
+      table: "Table 8-87"
+      quote: "Latched Tx Bias Low warning, media lane <i>. Advertisement: 01h:160.0."
+
+  - name: los_flag_rx
+    display_name: LOSFlagRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 147
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 212
+      table: "Table 8-88"
+      quote: "Latched Rx LOS Flag, media lane <i>. Advertisement: 01h:158.1."
+
+  - name: cdr_lol_flag_rx
+    display_name: CDRLOLFlagRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 148
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 212
+      table: "Table 8-88"
+      quote: "Latched Rx CDR LOL Flag, media lane <i>. Advertisement: 01h:158.2."
+
+  - name: optical_power_high_alarm_flag_rx
+    display_name: OpticalPowerHighAlarmFlagRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 149
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 212
+      table: "Table 8-88"
+      quote: "Latched Rx input power High alarm, media lane <i>. Advertisement: 01h:160.2."

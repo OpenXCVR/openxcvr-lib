@@ -1,0 +1,105 @@
+fields:
+  # ===========================================================================
+  # OIF-CMIS-FF-01.0 § 7.7, Table 10: Dual Mode Hardware Support Advertising
+  # (byte 128)
+  # ===========================================================================
+
+  - name: tx_fault_mode_supported
+    display_name: TxFaultModeSupported
+    description: >-
+      SFP-DD/SFP-DD112 TxFault hardware is supported (0b: No, 1b: Yes).
+    offset: 128
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-FF, Advertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 26
+      table: "Table 10"
+      quote: "SFP-DD/SFP-DD112 TxFault hardware is supported 0b: No 1b: Yes"
+
+  - name: tx_fault_dd_mode_supported
+    display_name: TxFaultDDModeSupported
+    description: >-
+      SFP-DD/SFP-DD112 TxFaultDD hardware is supported (0b: No, 1b: Yes).
+    offset: 128
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-FF, Advertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 26
+      table: "Table 10"
+      quote: "SFP-DD/SFP-DD112 TxFaultDD hardware is supported 0b: No 1b: Yes"
+
+  - name: rx_losl_mode_supported
+    display_name: RxLOSLModeSupported
+    description: >-
+      SFP112, QSFP112, QSFP-DD/QSFP-DD800 RxLOSL is hardware supported
+      (0b: No, 1b: Yes).
+    offset: 128
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-FF, Advertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 26
+      table: "Table 10"
+      quote: "SFP112, QSFP112, QSFP-DD/QSFP-DD800 RxLOSL is hardware supported 0b: No 1b: Yes"
+
+  - name: reserved_128_4_0
+    display_name: Reserved128Bits4To0
+    description: Reserved bits 4 through 0 of byte 128.
+    offset: 128
+    bit_offset: 0
+    bit_width: 5
+    type: bitmap
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 26
+      table: "Table 10"
+      quote: "Reserved"

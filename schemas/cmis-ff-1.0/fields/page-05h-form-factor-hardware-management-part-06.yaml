@@ -1,0 +1,145 @@
+fields:
+  # ===========================================================================
+  # OIF-CMIS-FF-01.0 § 7.7, Table 16: CMIS-FF Module Firmware Version
+  # (bytes 135-136)
+  # ===========================================================================
+
+  - name: cmis_ff_active_firmware_major_revision
+    display_name: CMISFFActiveFirmwareMajorRevision
+    description: >-
+      Numeric representation of the module's active firmware major revision.
+      Major Revision 0 with Minor Revision 0 indicates that the module does
+      not have any firmware; FFh with FFh indicates the active firmware
+      image is invalid.
+    offset: 135
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: Informational
+    tags: [CMIS-FF, Firmware]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 31
+      table: "Table 16"
+      quote: "U8 Numeric representation of the module's RO active firmware major revision"
+
+  - name: cmis_ff_active_firmware_minor_revision
+    display_name: CMISFFActiveFirmwareMinorRevision
+    description: >-
+      Numeric representation of the module's active firmware minor revision.
+      Major Revision 0 with Minor Revision 0 indicates that the module does
+      not have any firmware; FFh with FFh indicates the active firmware
+      image is invalid.
+    offset: 136
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: Informational
+    tags: [CMIS-FF, Firmware]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 31
+      table: "Table 16"
+      quote: "U8 Numeric representation of the module's RO active firmware minor revision"
+
+  # ===========================================================================
+  # OIF-CMIS-FF-01.0 § 7.7, Table 9 overview: bytes 134-254 are marked
+  # "Reserved [121]"; the detailed tables override parts of that span
+  # (Table 16 defines 135-136, Table 17 defines 245-254 for custom use and
+  # Table 9 reserves byte 255 for the page checksum). The remaining reserved
+  # region is recorded as bytes 137-244.
+  # ===========================================================================
+
+  - name: reserved_137_244
+    display_name: Reserved137To244
+    description: Reserved bytes 137 through 244.
+    offset: 137
+    size_bytes: 108
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 25
+      table: "Table 9"
+      quote: "Reserved [121]"
+
+  # ===========================================================================
+  # OIF-CMIS-FF-01.0 § 7.7, Table 17: CMIS-FF Custom Pages. The table marks
+  # bytes 245-255 for custom use; byte 255 carries the page checksum per
+  # Table 9, so the custom region is recorded as bytes 245-254.
+  # ===========================================================================
+
+  - name: custom
+    display_name: Custom
+    description: >-
+      Vendor-defined custom bytes, reserved for custom use under the control
+      of each individual module vendor.
+    offset: 245
+    size_bytes: 10
+    type: bytes
+    access: rw
+    field_type: VendorSpecific
+    tags: [CMIS-FF, Custom]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 31
+      table: "Table 17"
+      quote: "Reserved for custom use"
+
+  - name: page_checksum
+    display_name: PageChecksum
+    description: Page checksum of bytes 128-254.
+    offset: 255
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: Informational
+    tags: [CMIS-FF, Checksum]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    encoding: { kind: checksum, covers: "Page 05h bytes 128-254", covers_range: [128, 254], algorithm: sum8 }
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 25
+      table: "Table 9"
+      quote: "Page Checksum of bytes 128-254"

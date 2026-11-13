@@ -1,0 +1,29 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis10Page34hMediaLaneFecPm
+title: C-CMIS 1.0 Page 34h Media Lane FEC Performance Monitoring
+spec:
+  id: c-cmis-1.0
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-C-CMIS-01.0.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.0 § 7.4.7
+  pdf_pages: [20]
+page_address: "34h"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+fields:
+  - { name: rx_bits_pm, offset: 128, size_bytes: 8, type: u64be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Bits received during prior PM interval; C-CMIS wire order is MSB at lowest byte", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_bits_sub_int_pm, offset: 136, size_bytes: 8, type: u64be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Bits received during any sub-interval of prior PM interval; C-CMIS wire order is MSB at lowest byte", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_corr_bits_pm, offset: 144, size_bytes: 8, type: u64be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Corrected bits during prior PM interval; C-CMIS wire order is MSB at lowest byte", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_min_corr_bits_sub_int_pm, offset: 152, size_bytes: 8, type: u64be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Minimum corrected bits during any sub-interval; C-CMIS wire order is MSB at lowest byte", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_max_corr_bits_sub_int_pm, offset: 160, size_bytes: 8, type: u64be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Maximum corrected bits during any sub-interval; C-CMIS wire order is MSB at lowest byte", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_frames_pm, offset: 168, size_bytes: 4, type: u32be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Frames received during prior PM interval", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_frames_sub_int_pm, offset: 172, size_bytes: 4, type: u32be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Frames received during any sub-interval", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_frames_uncorr_err_pm, offset: 176, size_bytes: 4, type: u32be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Frames with uncorrectable errors during prior PM interval", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_min_frames_uncorr_err_subint_pm, offset: 180, size_bytes: 4, type: u32be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Minimum uncorrectable error frames during any sub-interval", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: rx_max_frames_uncorr_err_subint_pm, offset: 184, size_bytes: 4, type: u32be, access: ro, field_type: Telemetry, tags: [C-CMIS, FEC, PM], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }, description: "Maximum uncorrectable error frames during any sub-interval", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }
+  - { name: reserved_188_255, offset: 188, size_bytes: 68, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.0 § 7.4.7", pdf_page: 20, table: "Table 13" } }

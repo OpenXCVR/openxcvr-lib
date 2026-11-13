@@ -1,0 +1,255 @@
+schema: openxcvr.state_machine.v1
+kind: state_machine
+id: CmisNetworkPathStateMachine
+title: CMIS Network Path State Machine
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: "CMIS 5.3 § 7.6.7"
+  pdf_pages: [124, 125, 126, 127, 256, 258]
+  figure: "Figure 7-6"
+state_enum: CmisNetworkPathState
+parent_machine: CmisDataPathStateMachine
+lifecycle_dependency: "NPSM only runs for NP applications while the MSM is in ModuleReady; host-path DPSMs are decoupled."
+scope:
+  kind: per_network_path
+  cardinality_field: page_01h_advertising.network_path_pages_supported
+initial_state: NPDeactivated
+states:
+  - name: NPDeactivated
+    enum_name: np_deactivated
+    enum_value: 0x1
+    is_initial: true
+    is_terminal: false
+    description: >
+      Ground state where no Network Path is initialized for the associated
+      host lane group or the lane is unused.
+    invariants:
+      - "Network Path resources are not initialized for traffic."
+    timeout: null
+  - name: NPInit
+    enum_name: np_init
+    enum_value: 0x2
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where the module initializes all resources associated
+      with the Network Path.
+    invariants:
+      - "NPInitPendingLane is resolved while in NPInit."
+    timeout:
+      duration_ms_field: page_16h_network_path.max_duration_np_init
+      on_expiry: NPDeinit
+  - name: NPDeinit
+    enum_name: np_deinit
+    enum_value: 0x3
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where Network Path resources are deinitialized.
+    invariants:
+      - "Network Path is leaving initialized or active operation."
+    timeout:
+      duration_ms_field: page_16h_network_path.max_duration_np_deinit
+      on_expiry: NPDeactivated
+  - name: NPActivated
+    enum_name: np_activated
+    enum_value: 0x4
+    is_initial: false
+    is_terminal: false
+    description: >
+      Steady operational state where the Network Path is initialized and Tx
+      output is active unless separately limited by signal conditions.
+    invariants:
+      - "Network Path resources are initialized."
+      - "Tx output turn-on has completed."
+    timeout: null
+  - name: NPTxTurnOn
+    enum_name: np_tx_turn_on
+    enum_value: 0x5
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where Tx output is being turned on for the Network Path.
+    invariants:
+      - "Tx output enable sequencing is in progress."
+    timeout:
+      duration_ms_field: page_16h_network_path.max_duration_np_tx_turn_on
+      on_expiry: NPTxTurnOff
+  - name: NPTxTurnOff
+    enum_name: np_tx_turn_off
+    enum_value: 0x6
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where Tx output is being turned off before returning to an
+      initialized but non-active Network Path state.
+    invariants:
+      - "Tx output disable or squelch sequencing is in progress."
+    timeout:
+      duration_ms_field: page_16h_network_path.max_duration_np_tx_turn_off
+      on_expiry: NPInitialized
+  - name: NPInitialized
+    enum_name: np_initialized
+    enum_value: 0x7
+    is_initial: false
+    is_terminal: false
+    description: >
+      Steady initialized state where the Network Path configuration has been
+      realized but Tx output is not yet active.
+    invariants:
+      - "Active Network Path configuration matches initialized hardware."
+    timeout: null
+transitions:
+  - id: np_deactivated_to_np_init
+    from: NPDeactivated
+    to: NPInit
+    trigger:
+      kind: register_write
+      register: page_16h_network_path.np_deinit_lane
+      value: 0
+      condition: "NPDeinitS is FALSE for every host lane in the Network Path."
+    guard:
+      - { field: lower_memory.module_state, equals: ModuleReady }
+      - { field: page_16h_network_path.scs0_np_in_use_lane, equals: true }
+      - { field: page_16h_network_path.np_deinit_lane, equals: false }
+    side_effects:
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPInit }
+      - { kind: start_timer, timer: NPInitMaxDuration, duration_ms_field: page_16h_network_path.max_duration_np_init }
+      - { kind: log_event, event_id: npsm_init_started }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Equation 7-2"
+      quote: "NPDeinitS = ( NOT NPInUseT ) OR"
+  - id: np_init_to_np_initialized
+    from: NPInit
+    to: NPInitialized
+    trigger:
+      kind: internal
+      condition: "NPInit complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: NPInitMaxDuration }
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPInitialized }
+      - { kind: state_change, target: page_16h_network_path.np_init_pending_lane, operation: clear }
+      - { kind: log_event, event_id: npsm_initialized }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Figure 7-6"
+      quote: "NPInit complete"
+  - id: np_initialized_to_np_deinit
+    from: NPInitialized
+    to: NPDeinit
+    trigger:
+      kind: internal
+      condition: "NPDeinitS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPDeinit }
+      - { kind: start_timer, timer: NPDeinitMaxDuration, duration_ms_field: page_16h_network_path.max_duration_np_deinit }
+      - { kind: log_event, event_id: npsm_deinit_started }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Equation 7-2"
+      quote: "NPDeinitS = ( NOT NPInUseT ) OR"
+  - id: np_initialized_to_np_tx_turn_on
+    from: NPInitialized
+    to: NPTxTurnOn
+    trigger:
+      kind: internal
+      condition: "NPDeactivateS is FALSE."
+    guard:
+      - { field: page_10h_lane_control.output_disable_tx, equals: false }
+      - { field: page_10h_lane_control.output_squelch_force_tx, equals: false }
+    side_effects:
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPTxTurnOn }
+      - { kind: start_timer, timer: NPTxTurnOnMaxDuration, duration_ms_field: page_16h_network_path.max_duration_np_tx_turn_on }
+      - { kind: log_event, event_id: npsm_tx_turn_on_started }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Figure 7-6"
+      quote: "NPDeactivateS FALSE"
+  - id: np_tx_turn_on_to_np_activated
+    from: NPTxTurnOn
+    to: NPActivated
+    trigger:
+      kind: internal
+      condition: "NPTxTurnOn complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: NPTxTurnOnMaxDuration }
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPActivated }
+      - { kind: log_event, event_id: npsm_activated }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Figure 7-6"
+      quote: "NPTxTurnOn complete"
+  - id: np_activated_to_np_tx_turn_off
+    from: NPActivated
+    to: NPTxTurnOff
+    trigger:
+      kind: internal
+      condition: "NPDeactivateS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPTxTurnOff }
+      - { kind: start_timer, timer: NPTxTurnOffMaxDuration, duration_ms_field: page_16h_network_path.max_duration_np_tx_turn_off }
+      - { kind: log_event, event_id: npsm_tx_turn_off_started }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Equation 7-6"
+      quote: "NPDeactivateS = NPDeinitS OR NPTxDisableT OR NPTxForceSquelchT"
+  - id: np_tx_turn_off_to_np_initialized
+    from: NPTxTurnOff
+    to: NPInitialized
+    trigger:
+      kind: internal
+      condition: "NPTxTurnOff complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: NPTxTurnOffMaxDuration }
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPInitialized }
+      - { kind: log_event, event_id: npsm_tx_off_complete }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Figure 7-6"
+      quote: "NPTxTurnOff complete"
+  - id: np_deinit_to_np_deactivated
+    from: NPDeinit
+    to: NPDeactivated
+    trigger:
+      kind: internal
+      condition: "NPDeinit complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: NPDeinitMaxDuration }
+      - { kind: state_change, target: page_16h_network_path.np_state_host_lane, operation: assign, value: NPDeactivated }
+      - { kind: log_event, event_id: npsm_deactivated }
+    provenance:
+      section: "CMIS 5.3 § 7.6.7.1"
+      table: "Figure 7-6"
+      quote: "NPDeinit complete"
+  # INTENTIONAL OMISSION: SCS1 trigger (page_16h_network_path.scs1_apply_np_init_lane) produces
+  # the same transition shape as SCS0 for np_apply_init_pending_from_initialized. Omitted as a
+  # mechanical duplication of the SCS0 transition; see _FLAGS_101_103.md for rationale.
+  - id: np_apply_init_pending_from_initialized
+    from: NPInitialized
+    to: NPDeinit
+    trigger:
+      kind: register_write
+      register: page_16h_network_path.scs0_apply_np_init_lane
+      value: 1
+      condition: "Successful ApplyNPInit sets NPInitPending; NP deinitialization remains governed by NPDeinitS."
+    guard:
+      - { field: page_16h_network_path.scs0_np_in_use_lane, equals: true }
+    side_effects:
+      - { kind: state_change, target: page_16h_network_path.np_init_pending_lane, operation: set }
+      - { kind: log_event, event_id: npsm_reinit_requested }
+    provenance:
+      section: "CMIS 5.3 § 8.15.4"
+      table: "Table 8-145"
+      quote: "NPInitPendingLane<i>: 1b means commissioning"

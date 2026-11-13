@@ -1,0 +1,662 @@
+{
+  "$id": "cmis_lt_page52h_ingress_config.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "host_in_sqm_alarm_threshold": {
+      "description": "SQM degraded alarm threshold for HostIn receive lane <lane>.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 48"
+      }
+    },
+    "host_in_target_sqm": {
+      "description": "Target SQM for HostIn receive lane <lane>; a U8 value of s encodes the SQM value 10 + s/10. Mirrored ingress-management register (relevant for host visibility, not for the module).",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 47"
+      },
+      "x-openxcvr-unit": "0.1 SQM"
+    },
+    "ingress_lt_enabled_lane": {
+      "description": "When link training is enabled on lane <lane>, the procedure selected by IngressLTProtocolLane<lane> is executed. Mirrored ingress-management register.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 58,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 49"
+      }
+    },
+    "ingress_lt_protocol_lane": {
+      "description": "Link training protocol/procedure used when link training is enabled on ingress lane <lane>.",
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 45"
+      }
+    },
+    "ingress_lt_retries_lane": {
+      "description": "Maximum number of retries after which the controlling link training entity terminates the session on ingress lane <lane>.",
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 45"
+      }
+    },
+    "ingress_lt_timeout_lane": {
+      "description": "Maximum duration after which the controlling link training entity times out and terminates the session on ingress lane <lane>.",
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 45"
+      }
+    },
+    "mod_hsout_ffe_cursor_location": {
+      "description": "FFE cursor location L of ModHsOut lane <lane>, encoded as L = [register] + 1.",
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 44"
+      }
+    },
+    "mod_hsout_ffe_length": {
+      "description": "FFE length N of ModHsOut lane <lane>, encoded as N = [register] + 1.",
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 44"
+      }
+    },
+    "mod_hsout_invoke_load_preset_trig": {
+      "description": "Preset configuration change request per lane: 0: no preset configuration change on lane <lane>, 1: preset configuration change on lane <lane>; requested preset in ModHsOut<lane>PresetRequested. H2M message bit, self-clearing.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 61,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 60"
+      }
+    },
+    "mod_hsout_invoke_set_pattern_trig": {
+      "description": "Pattern configuration change request per lane: 0: no pattern configuration change for lane <lane>, 1: pattern configuration change for lane <lane>; requested pattern in ModHsOut<lane>PatternRequested. H2M message bit, self-clearing.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 61,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 59"
+      }
+    },
+    "mod_hsout_invoke_set_precoder_trig": {
+      "description": "Precoder configuration change request per lane: 0: no precoder configuration change for lane <lane>, 1: precoder configuration change for lane <lane>; request in ModHsOut<lane>PrecoderConfigured. H2M message bit, self-clearing.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 61,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 61"
+      }
+    },
+    "mod_hsout_load_preset_completed_flag": {
+      "description": "The module notifies the host about completion of a preset configuration procedure (with or without success). M2H message bit, clear on read.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 62,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 63"
+      }
+    },
+    "mod_hsout_out_tuning_step": {
+      "description": "Nominal p-p differential amplitude step size for ModHsOut lane <lane>; reported amplitude values have only 50 mV resolution.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 46"
+      }
+    },
+    "mod_hsout_pattern_configured": {
+      "description": "Configured pattern of ModHsOut on lane <lane> after the last change; maintained by the module responder.",
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 60,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 56"
+      }
+    },
+    "mod_hsout_pattern_requested": {
+      "description": "(Desired) pattern for ModHsOut on lane <lane>, written by the host requester engine.",
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 53"
+      }
+    },
+    "mod_hsout_precoder_configured": {
+      "description": "Actual precoder configuration status maintained by the module: 0: precoder off, 1: precoder on. The module must keep this register current with the actual precoder configuration.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 61,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 58"
+      }
+    },
+    "mod_hsout_precoder_requested": {
+      "description": "0: precoder off for lane <lane>, 1: precoder on for lane <lane>. The precoder is of type 1/(1+D) mod 4 as defined in IEEE 802.3 clause 135.5.7.2.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 60,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 55"
+      }
+    },
+    "mod_hsout_preset_configured": {
+      "description": "Identifier of the actual ModHsOut preset loaded on lane <lane> in response to a request.",
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 60,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 57"
+      }
+    },
+    "mod_hsout_preset_requested": {
+      "description": "Requested preset configuration for ModHsOut lane <lane>; the module does not return failure when a preset is not supported.",
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 54"
+      }
+    },
+    "mod_hsout_set_pattern_completed_flag": {
+      "description": "The module notifies the host about completion of a pattern configuration procedure (with or without success). The host clears the bits fetched and optionally compares actual and requested configuration. M2H message bit, clear on read.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 62,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 62"
+      }
+    },
+    "mod_hsout_set_pattern_completed_mask": {
+      "description": "Mask bits for the ModHsOut<lane>SetPatternCompletedFlag (page 52h byte 246). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 52"
+      }
+    },
+    "mod_hsout_set_precoder_completed_flag": {
+      "description": "The module notifies the host about completion of a precoder configuration procedure (with or without success). The parsed description text names HostOut<lane>PrecoderSettingCompletedTrig; the register lives on the ingress map at byte 248 (see namespace README). M2H message bit, clear on read.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 62,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 64"
+      }
+    },
+    "mod_hsout_set_precoder_completed_mask": {
+      "description": "Mask bits for the ModHsOut<lane>SetPrecoderCompletedFlag (page 52h byte 248). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 52"
+      }
+    },
+    "mod_hsout_set_preset_completed_mask": {
+      "description": "Mask bits for the ModHsOut<lane>LoadPresetCompletedFlag (page 52h byte 247). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 52"
+      }
+    },
+    "mod_hsout_set_sqm_alarm_thr_completed_mask": {
+      "description": "Mask bits for the corresponding SQM alarm threshold procedure completion Flag; no matching Flag register is recorded in the parsed OIF-CMIS-LT-01.0 map (see namespace README). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 52"
+      }
+    },
+    "mod_hsout_set_sqm_target_completed_mask": {
+      "description": "Mask bits for the corresponding SQM target procedure completion Flag; no matching Flag register is recorded in the parsed OIF-CMIS-LT-01.0 map (see namespace README). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 52"
+      }
+    },
+    "mod_hsout_tap_tuning_step": {
+      "description": "ModHsOut transmit FFE tap tuning step size; reported tap values have only 0.01 resolution.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 46"
+      }
+    },
+    "mod_hsout_training_result": {
+      "description": "Ingress link training diagnostic failure codes per lane; reset to 00b when a new link training is started.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 58,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 51"
+      }
+    },
+    "mod_hsout_training_status": {
+      "description": "Status of ingress link training per lane, reported by the host; meaningful only when host visibility is enabled.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 58,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 50"
+      }
+    },
+    "mod_hsout_tuning_completed_mask": {
+      "description": "Mask bits for the ModHsOut<lane>TuningCompletedFlag (page 53h byte 227). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 52"
+      }
+    },
+    "reserved_178_185": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 48"
+      }
+    },
+    "reserved_187": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 58,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 49"
+      }
+    },
+    "reserved_198_203": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 59,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 52"
+      }
+    },
+    "reserved_213_221": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 60,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 55"
+      }
+    },
+    "reserved_231_239": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 61,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 58"
+      }
+    },
+    "reserved_243_245": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 61,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 61"
+      }
+    },
+    "reserved_249_255": {
+      "contentEncoding": "base64",
+      "description": "Reserved bytes 249-255 (Table 64 lists the row as Reserved with an unexplained RO/COR Adv. type marking in the parsed spec, which is not recorded as a field here).",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 62,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 64"
+      }
+    },
+    "reserved_ingress_lt_params_bits_7_6": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 45"
+      }
+    },
+    "reserved_ingress_lt_protocol_bits_7_4": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 45"
+      }
+    },
+    "reserved_mod_hsout_ffe_cursor_bits_7_3": {
+      "description": "Reserved bits 7-3 of the ModHsOut FfeCursorLocation byte (same parsed-table gap as the FfeLength byte).",
+      "items": {
+        "maximum": 31,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 44"
+      }
+    },
+    "reserved_mod_hsout_ffe_length_bits_7_3": {
+      "description": "Reserved bits 7-3 of the ModHsOut FfeLength byte. The parsed table lists bits 7-4 as reserved next to the 2-0 field, leaving bit 3 unassigned; reserved is modeled as bits 7-3.",
+      "items": {
+        "maximum": 31,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 44"
+      }
+    },
+    "reserved_mod_hsout_tuning_params_bits_7_4": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "section": "OIF-CMIS-LT-01.0 § 6.4",
+        "table": "Table 46"
+      }
+    }
+  },
+  "required": [
+    "mod_hsout_ffe_length",
+    "reserved_mod_hsout_ffe_length_bits_7_3",
+    "mod_hsout_ffe_cursor_location",
+    "reserved_mod_hsout_ffe_cursor_bits_7_3",
+    "reserved_ingress_lt_protocol_bits_7_4",
+    "ingress_lt_protocol_lane",
+    "reserved_ingress_lt_params_bits_7_6",
+    "ingress_lt_timeout_lane",
+    "ingress_lt_retries_lane",
+    "reserved_mod_hsout_tuning_params_bits_7_4",
+    "mod_hsout_tap_tuning_step",
+    "mod_hsout_out_tuning_step",
+    "host_in_target_sqm",
+    "host_in_sqm_alarm_threshold",
+    "reserved_178_185",
+    "ingress_lt_enabled_lane",
+    "reserved_187",
+    "mod_hsout_training_status",
+    "mod_hsout_training_result",
+    "mod_hsout_set_pattern_completed_mask",
+    "mod_hsout_set_preset_completed_mask",
+    "mod_hsout_set_precoder_completed_mask",
+    "mod_hsout_set_sqm_target_completed_mask",
+    "mod_hsout_set_sqm_alarm_thr_completed_mask",
+    "mod_hsout_tuning_completed_mask",
+    "reserved_198_203",
+    "mod_hsout_pattern_requested",
+    "mod_hsout_preset_requested",
+    "mod_hsout_precoder_requested",
+    "reserved_213_221",
+    "mod_hsout_pattern_configured",
+    "mod_hsout_preset_configured",
+    "mod_hsout_precoder_configured",
+    "reserved_231_239",
+    "mod_hsout_invoke_set_pattern_trig",
+    "mod_hsout_invoke_load_preset_trig",
+    "mod_hsout_invoke_set_precoder_trig",
+    "reserved_243_245",
+    "mod_hsout_set_pattern_completed_flag",
+    "mod_hsout_load_preset_completed_flag",
+    "mod_hsout_set_precoder_completed_flag",
+    "reserved_249_255"
+  ],
+  "title": "CmisLtPage52hIngressConfig",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62
+    ],
+    "spec": "OIF-CMIS-LT-01.0 § 6.4 (Tables 43-64)"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

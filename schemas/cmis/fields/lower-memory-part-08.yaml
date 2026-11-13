@@ -1,0 +1,288 @@
+fields:
+  - name: module_fault_cause
+    display_name: ModuleFaultCause
+    offset: 41
+    size_bytes: 1
+    since: "5.0"
+    type: u8
+    enum_ref: CmisModuleFaultCause
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.10"
+      pdf_page: 153
+      quote: "Reason of entering the ModuleFault state."
+    changed_in:
+      - rev: "5.0"
+        enum_ref: CmisModuleFaultCausePre5p3
+        provenance:
+          section: "§ 8.2.10"
+          table: "Table 8-15"
+          pdf_page: 117
+          quote: "Reason of entering the ModuleFault state. 4-31: Reserved (fault codes); 32-63: Custom (fault codes); 64-255: Reserved (general)"
+      - rev: "5.1"
+        enum_ref: CmisModuleFaultCausePre5p3
+        provenance:
+          section: "§ 8.2.10"
+          table: "Table 8-15"
+          pdf_page: 133
+          quote: "Reason of entering the ModuleFault state. 4-31: Reserved (fault codes); 32-63: Custom (fault codes); 64-255: Reserved (general)"
+      - rev: "5.2"
+        enum_ref: CmisModuleFaultCausePre5p3
+        provenance:
+          section: "§ 8.2.10"
+          table: "Table 8-16"
+          pdf_page: 136
+          quote: "Reason of entering the ModuleFault state. 4-31: Reserved (fault codes); 32-63: Custom (fault codes); 64-255: Reserved (general)"
+      - rev: "5.3"
+        enum_ref: CmisModuleFaultCause
+        provenance:
+          section: "§ 8.2.10"
+          table: "Table 8-16 (Lower Memory)"
+          pdf_page: 153
+          quote: "Reason of entering the ModuleFault state. 4: Transmitter fault; 5: Receiver fault; 6: Temperature related fault; 7-31: Reserved (fault codes)"
+
+  # ===========================================================================
+  # § 8.2.11 Miscellaneous Status Information (bytes 42-45)
+  # ===========================================================================
+
+  - name: password_cmd_result
+    display_name: PasswordCmdResult
+    offset: 42
+    bit_offset: 0
+    bit_width: 4
+    since: "5.3"
+    type: u4
+    enum_ref: CmisPasswordCmdResult
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.11"
+      pdf_page: 154
+      quote: "Results status for the most recent password entry or password change entry in 00h:118-125."
+
+  # ===========================================================================
+  # § 8.2.12 Extended Module Information (bytes 56-63)
+  # ===========================================================================
+
+  - name: cmis_sm_support
+    display_name: CmisSmSupport
+    offset: 56
+    size_bytes: 1
+    since: "5.3"
+    type: u8
+    enum_ref: CmisSmSupport
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 154
+      quote: "CMIS State Machines (SM) dynamics supported."
+
+  - name: module_function_type
+    display_name: ModuleFunctionType
+    offset: 57
+    size_bytes: 1
+    since: "5.3"
+    type: u8
+    enum_ref: CmisModuleFunctionType
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 154
+      quote: "0: Transmission Module."
+
+  - name: sff8024_module_subtype
+    display_name: SFF8024ModuleSubtype
+    offset: 60
+    bit_offset: 0
+    bit_width: 4
+    since: "5.3"
+    type: u4
+    enum_ref: Sff8024TransceiverSubtype
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 154
+      quote: "SFF8024ModuleSubtype is an SFF-8024 module subtype identifier, with meaning defined in the Transceiver Sub-type codes table in [5]."
+
+  # CMIS 5.4 Table 8-18: byte 61 bits 7-4, allocated from the 5.3 reserved bits 7-2.
+  - name: sff8024_heatsink_type
+    display_name: SFF8024HeatsinkType
+    offset: 61
+    bit_offset: 4
+    bit_width: 4
+    since: "5.4"
+    type: u4
+    enum_ref: Sff8024HeatsinkType
+    access: ro
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 181
+      quote: "A non-zero SFF8024HeatsinkType value indicates the type of heatsink as per the Heatsink Type Codes table in [5]."
+
+  - name: sff8024_fiber_face_type
+    display_name: SFF8024FiberFaceType
+    offset: 61
+    bit_offset: 0
+    bit_width: 2
+    since: "5.3"
+    type: u2
+    enum_ref: Sff8024FiberFaceType
+    access: ro
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 154
+      quote: "Physical contact specification at optical connectors (assumed to be the same for all optical interfaces)."
+
+  - name: low_power_restrictions_validity
+    display_name: LowPowerRestrictions.ValidityIndication
+    offset: 62
+    bit_offset: 7
+    bit_width: 1
+    since: "5.3"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 155
+      table: "Table 8-19"
+      quote: "0b: Advertisements in this byte are uncertain (legacy modules only)."
+
+  - name: low_power_restrictions_cdb_query_unsupported
+    display_name: LowPowerRestrictions.CdbQueryUnsupported
+    offset: 62
+    bit_offset: 3
+    bit_width: 1
+    since: "5.3"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 155
+      table: "Table 8-19"
+      quote: "1b: CDB query commands are not generally supported in ModuleLowPwr state."
+
+  - name: low_power_restrictions_cdb_fw_query_unsupported
+    display_name: LowPowerRestrictions.CdbFwQueryUnsupported
+    offset: 62
+    bit_offset: 2
+    bit_width: 1
+    since: "5.3"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 155
+      table: "Table 8-19"
+      quote: "1b: CDB query commands for FW management are not generally supported in ModuleLowPwr state."
+
+  - name: low_power_restrictions_cdb_cmds_unsupported
+    display_name: LowPowerRestrictions.CdbCmdsUnsupported
+    offset: 62
+    bit_offset: 1
+    bit_width: 1
+    since: "5.3"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 155
+      table: "Table 8-19"
+      quote: "1b: CDB commands that can cause state changes in the module are not generally supported in ModuleLowPwr state."

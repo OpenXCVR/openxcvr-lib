@@ -1,0 +1,26 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: c-cmis-1.5
+  title: OIF-C-CMIS
+  revision: "01.5"
+  source: docs/stds/cmis/OIF-C-CMIS-01.5.pdf
+imports:
+  - ../cmis/_index.yaml
+kind: memory_map
+includes:
+  - enums/vdm-observable-type.yaml
+  - page-30h-media-lane-configurable-thresholds.yaml
+  - page-31h-media-lane-provisioning.yaml
+  - page-32h-media-lane-flag-masks.yaml
+  - page-33h-media-lane-flags-and-status.yaml
+  - page-34h-media-lane-fec-pm.yaml
+  - page-35h-media-lane-link-pm.yaml
+  - page-38h-data-path-host-if-config.yaml
+  - page-3ah-data-path-host-if-pm.yaml
+  - page-3bh-data-path-host-if-flags-and-masks.yaml
+  - page-40h-applications-advertisement.yaml
+  - page-41h-rx-signal-power-advertisement.yaml
+  - page-42h-pm-advertisement.yaml
+  - page-43h-media-lane-provisioning-advertisement.yaml
+  - page-44h-alarm-advertisement.yaml
+  - page-45h-host-lane-provisioning-advertisement.yaml

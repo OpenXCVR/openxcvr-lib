@@ -1,0 +1,240 @@
+fields:
+  - name: reserved_rate_select_control
+    display_name: ReservedRateSelectControl
+    offset: 133
+    bit_offset: 0
+    bit_width: 6
+    type: bitmap
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Reserved"
+
+  - name: hw_status_speed_1
+    display_name: HWStatusSpeed1
+    offset: 134
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 1 receive CDR rate"
+
+  - name: hw_status_speed_2
+    display_name: HWStatusSpeed2
+    offset: 134
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 1 transmit CDR rate"
+
+  - name: hw_status_1_dd
+    display_name: HWStatus1DD
+    offset: 134
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 2 receive CDR rate"
+
+  - name: hw_status_speed_2_dd
+    display_name: HWStatusSpeed2DD
+    offset: 134
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 2 transmit CDR rate"
+
+  - name: reserved_rate_select_status
+    display_name: ReservedRateSelectStatus
+    offset: 134
+    bit_offset: 0
+    bit_width: 4
+    type: bitmap
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 15" }
+      quote: "Reserved"
+
+  # ===========================================================================
+  # CMIS-FF § 7.7, Table 16-17: Firmware version, reserved, custom, checksum
+  # ===========================================================================
+
+  - name: cmis_ff_active_firmware_major_revision
+    display_name: CMISFFActiveFirmwareMajorRevision
+    offset: 135
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 31
+      table: "Table 16"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 16" }
+      quote: "U8 Numeric representation of the module's RO active firmware major revision"
+
+  - name: cmis_ff_active_firmware_minor_revision
+    display_name: CMISFFActiveFirmwareMinorRevision
+    offset: 136
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 31
+      table: "Table 16"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 16" }
+      quote: "U8 Numeric representation of the module's RO active firmware minor revision"
+
+  - name: reserved_cmis_ff_137_244
+    display_name: ReservedCMISFF137To244
+    offset: 137
+    size_bytes: 108
+    type: bytes
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 25
+      table: "Table 9"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 9" }
+      quote: "Reserved [121]"
+
+  - name: custom_cmis_ff_245_254
+    display_name: CustomCMISFF245To254
+    offset: 245
+    size_bytes: 10
+    type: bytes
+    access: rw
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 31
+      table: "Table 17"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 17" }
+      quote: "Reserved for custom use"

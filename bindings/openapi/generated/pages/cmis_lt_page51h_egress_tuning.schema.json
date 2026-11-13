@@ -1,0 +1,607 @@
+{
+  "$id": "cmis_lt_page51h_egress_tuning.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "host_out_amplitude": {
+      "description": "Encoded differential peak-peak amplitude at TP1a for HostOut lane <lane>; shared-memory in/out parameter of the amplitude setting and tuning procedures.",
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 32"
+      }
+    },
+    "host_out_amplitude_tune": {
+      "description": "Amplitude tuning instruction requested for HostOut lane <lane>; default step size 50 mV; value 3 sets the amplitude given in HostOut<lane>Amplitude.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 34"
+      }
+    },
+    "host_out_ffe_tap_1": {
+      "description": "SM8-encoded FFE tap 1 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_1_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 1 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_1_tune": {
+      "description": "Tuning instruction for FFE tap 1 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_ffe_tap_2": {
+      "description": "SM8-encoded FFE tap 2 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_2_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 2 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_2_tune": {
+      "description": "Tuning instruction for FFE tap 2 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_ffe_tap_3": {
+      "description": "SM8-encoded FFE tap 3 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_3_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 3 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_3_tune": {
+      "description": "Tuning instruction for FFE tap 3 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_ffe_tap_4": {
+      "description": "SM8-encoded FFE tap 4 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_4_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 4 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_4_tune": {
+      "description": "Tuning instruction for FFE tap 4 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_ffe_tap_5": {
+      "description": "SM8-encoded FFE tap 5 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_5_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 5 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_5_tune": {
+      "description": "Tuning instruction for FFE tap 5 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_ffe_tap_6": {
+      "description": "SM8-encoded FFE tap 6 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_6_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 6 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_6_tune": {
+      "description": "Tuning instruction for FFE tap 6 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_ffe_tap_7": {
+      "description": "SM8-encoded FFE tap 7 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_7_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 7 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_7_tune": {
+      "description": "Tuning instruction for FFE tap 7 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_ffe_tap_8": {
+      "description": "SM8-encoded FFE tap 8 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 31"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "host_out_ffe_tap_8_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 8 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 36"
+      }
+    },
+    "host_out_ffe_tap_8_tune": {
+      "description": "Tuning instruction for FFE tap 8 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 33"
+      }
+    },
+    "host_out_invoke_tuning_flag": {
+      "description": "Tuning procedure invoked per lane: 0: no tuning request for lane <lane>, 1: tuning request for lane <lane>; the type of tuning requested (amplitude or taps) is programmed in HostOut<lane>TuningType. M2H message bit, clear on read.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 38"
+      }
+    },
+    "host_out_output_saturated": {
+      "description": "Indicates that the output amplitude of HostOut lane <lane> saturated at the minimum or maximum amplitude during an adjustment request; a permanent status indication.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 37"
+      }
+    },
+    "host_out_training_done_flag": {
+      "description": "Flag to the host after completion of egress training: 0: egress training not started or not yet completed, 1: egress training completed; the host should examine training status (Table 15) and training result (Table 16). M2H message bit, clear on read.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 40"
+      }
+    },
+    "host_out_tuning_completed_trig": {
+      "description": "The host notifies the module about completion of a tuning procedure for lane <lane> (with or without success): 0: no tuning requested or not yet completed, 1: requested operation completed. H2M message bit, self-clearing.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 39"
+      }
+    },
+    "host_out_tuning_type": {
+      "description": "Type of tuning requested for lane <lane> when the tuning procedure is invoked: 0: FFE tap tuning (Table 33), 1: output amplitude tuning (Table 34).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 35"
+      }
+    },
+    "mod_hsin_current_sqm": {
+      "description": "Current SQM readout on ModHsIn receive lane <lane>; a U8 value of s encodes the SQM value 10 + s/10. There are no notifications to the host when values change; it is the host's responsibility to monitor these registers when needed.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 42"
+      },
+      "x-openxcvr-unit": "0.1 SQM"
+    },
+    "mod_hsin_sqm_alarm_flag": {
+      "description": "SQM degraded alarm indicator to the host: 0: no SQM degraded alarm latched since last read, 1: SQM degraded alarm latched since last read. The table is titled '(Page 50h)' in the parsed spec but the register is defined in section 6.3.6 on page 51h byte 229; recorded on page 51h (see namespace README).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 41"
+      }
+    },
+    "reserved_215": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 35"
+      }
+    },
+    "reserved_225": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 37"
+      }
+    },
+    "reserved_230_231": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 41"
+      }
+    },
+    "reserved_240_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "section": "OIF-CMIS-LT-01.0 § 6.3",
+        "table": "Table 42"
+      }
+    }
+  },
+  "required": [
+    "host_out_ffe_tap_1",
+    "host_out_ffe_tap_2",
+    "host_out_ffe_tap_3",
+    "host_out_ffe_tap_4",
+    "host_out_ffe_tap_5",
+    "host_out_ffe_tap_6",
+    "host_out_ffe_tap_7",
+    "host_out_ffe_tap_8",
+    "host_out_amplitude",
+    "host_out_ffe_tap_1_tune",
+    "host_out_ffe_tap_2_tune",
+    "host_out_ffe_tap_3_tune",
+    "host_out_ffe_tap_4_tune",
+    "host_out_ffe_tap_5_tune",
+    "host_out_ffe_tap_6_tune",
+    "host_out_ffe_tap_7_tune",
+    "host_out_ffe_tap_8_tune",
+    "host_out_amplitude_tune",
+    "host_out_tuning_type",
+    "reserved_215",
+    "host_out_ffe_tap_1_saturated",
+    "host_out_ffe_tap_2_saturated",
+    "host_out_ffe_tap_3_saturated",
+    "host_out_ffe_tap_4_saturated",
+    "host_out_ffe_tap_5_saturated",
+    "host_out_ffe_tap_6_saturated",
+    "host_out_ffe_tap_7_saturated",
+    "host_out_ffe_tap_8_saturated",
+    "host_out_output_saturated",
+    "reserved_225",
+    "host_out_invoke_tuning_flag",
+    "host_out_tuning_completed_trig",
+    "host_out_training_done_flag",
+    "mod_hsin_sqm_alarm_flag",
+    "reserved_230_231",
+    "mod_hsin_current_sqm",
+    "reserved_240_255"
+  ],
+  "title": "CmisLtPage51hEgressTuning",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "spec": "OIF-CMIS-LT-01.0 § 6.3 (Tables 30-42)"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@openxcvr/transceivers",
+  "version": "0.2.0",
+  "description": "Generated TypeScript bindings for openxcvr transceiver memory maps (CMIS, SFF-8636, SFF-8472).",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && tsc -p tsconfig.test.json && node --test tests/*.test.mjs",
+    "gen:types": "openapi-typescript \"${OPENXCVR_OPENAPI_SCHEMA:-../openapi/openxcvr.openapi.yaml}\" -o \"${OPENXCVR_TS_OPENAPI_OUT:-generated/openapi/cmis.ts}\""
+  },
+  "devDependencies": {
+    "openapi-typescript": "7.13.0",
+    "typescript": "^5.4.0"
+  }
+}

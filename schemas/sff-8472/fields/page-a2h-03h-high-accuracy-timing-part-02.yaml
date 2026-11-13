@@ -1,0 +1,83 @@
+fields:
+  - name: loopback_tx_to_rx_delay
+    since: "12.5"
+    display_name: TxToRxDelay
+    offset: 155
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5.2", pdf_page: 78, table: "Table 13-2", quote: "Tx_to_Rx Delay", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: reserved_loopback_159
+    since: "12.5"
+    display_name: ReservedLoopback159
+    offset: 159
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5", pdf_page: 72, table: "Table 13-2", quote: "Reserved 00h", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: loopback_tx_to_mon_delay
+    since: "12.5"
+    display_name: TxToMonDelay
+    offset: 160
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5.3", pdf_page: 78, table: "Table 13-2", quote: "Tx_to_Mon Delay", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: reserved_loopback_164
+    since: "12.5"
+    display_name: ReservedLoopback164
+    offset: 164
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5", pdf_page: 72, table: "Table 13-2", quote: "Reserved 00h", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: loopback_rx_to_mon_delay
+    since: "12.5"
+    display_name: RxToMonDelay
+    offset: 165
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5.4", pdf_page: 78, table: "Table 13-2", quote: "Rx_to_Mon Delay", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: reserved_loopback_calibration_tail
+    since: "12.5"
+    display_name: ReservedLoopbackCalibrationTail
+    offset: 169
+    size_bytes: 86
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5", pdf_page: 72, table: "Table 13-2", quote: "Reserved 00h", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: cc_calib
+    since: "12.5"
+    display_name: CC_CALIB
+    offset: 255
+    size_bytes: 1
+    type: u8
+    encoding: { kind: checksum, covers: "A2h Page 03h bytes 128-254", covers_range: [128, 254], algorithm: sum8 }
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 13", pdf_page: 71, tables: ["Table 13-1", "Table 13-2"], quote: "Checkcode over bytes 128-254", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }

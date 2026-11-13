@@ -1,0 +1,201 @@
+fields:
+
+  - name: host_in_target_sqm
+    display_name: "HostIn<lane>TargetSQM"
+    description: "Target SQM for HostIn receive lane <lane>; a U8 value of s encodes the SQM value 10 + s/10. Mirrored ingress-management register (relevant for host visibility, not for the module)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "168 + (lane - 1)"
+    type: u8
+    access: rw
+    units: "0.1 SQM"
+    field_type: Configuration
+    tags: [CMIS-LT, SQM, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 57, table: "Table 47" }
+
+  - name: host_in_sqm_alarm_threshold
+    display_name: "HostIn<lane>SqmAlarmThreshold"
+    description: "SQM degraded alarm threshold for HostIn receive lane <lane>."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "176 + (lane - 1) / 4"
+    bit_offset_expr: "((lane - 1) % 4) * 2"
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtSqmAlarmThreshold
+    access: rw
+    field_type: Configuration
+    tags: [CMIS-LT, SQM, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 57, table: "Table 48" }
+
+  - name: reserved_178_185
+    offset: 178
+    size_bytes: 8
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 57, table: "Table 48" }
+
+  - name: ingress_lt_enabled_lane
+    display_name: "IngressLTEnabledLane<lane>"
+    description: "When link training is enabled on lane <lane>, the procedure selected by IngressLTProtocolLane<lane> is executed. Mirrored ingress-management register."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 186
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Configuration
+    tags: [CMIS-LT, Session, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 58, table: "Table 49" }
+
+  - name: reserved_187
+    offset: 187
+    size_bytes: 1
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 58, table: "Table 49" }
+
+  - name: mod_hsout_training_status
+    display_name: "ModHsOut<lane>TrainingStatus"
+    description: "Status of ingress link training per lane, reported by the host; meaningful only when host visibility is enabled."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "188 + (lane - 1) / 4"
+    bit_offset_expr: "((lane - 1) % 4) * 2"
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTrainingStatus
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Status, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 58, table: "Table 50" }
+
+  - name: mod_hsout_training_result
+    display_name: "ModHsOut<lane>TrainingResult"
+    description: "Ingress link training diagnostic failure codes per lane; reset to 00b when a new link training is started."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "190 + (lane - 1) / 4"
+    bit_offset_expr: "((lane - 1) % 4) * 2"
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTrainingResult
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Status, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 58, table: "Table 51" }
+
+  - name: mod_hsout_set_pattern_completed_mask
+    display_name: "ModHsOut<lane>SetPatternCompletedMask"
+    description: "Mask bits for the ModHsOut<lane>SetPatternCompletedFlag (page 52h byte 246). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 192
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-LT, Mask, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 52" }
+
+  - name: mod_hsout_set_preset_completed_mask
+    display_name: "ModHsOut<lane>SetPresetCompletedMask"
+    description: "Mask bits for the ModHsOut<lane>LoadPresetCompletedFlag (page 52h byte 247). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 193
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-LT, Mask, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 52" }
+
+  - name: mod_hsout_set_precoder_completed_mask
+    display_name: "ModHsOut<lane>SetPrecoderCompletedMask"
+    description: "Mask bits for the ModHsOut<lane>SetPrecoderCompletedFlag (page 52h byte 248). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 194
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-LT, Mask, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 52" }
+
+  - name: mod_hsout_set_sqm_target_completed_mask
+    display_name: "ModHsOut<lane>SetSqmTargetCompletedMask"
+    description: "Mask bits for the corresponding SQM target procedure completion Flag; no matching Flag register is recorded in the parsed OIF-CMIS-LT-01.0 map (see namespace README). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 195
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-LT, Mask, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 52" }
+
+  - name: mod_hsout_set_sqm_alarm_thr_completed_mask
+    display_name: "ModHsOut<lane>SetSqmAlmThrCompletedMask"
+    description: "Mask bits for the corresponding SQM alarm threshold procedure completion Flag; no matching Flag register is recorded in the parsed OIF-CMIS-LT-01.0 map (see namespace README). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 196
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-LT, Mask, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 52" }
+
+  - name: mod_hsout_tuning_completed_mask
+    display_name: "ModHsOut<lane>TuningCompletedMask"
+    description: "Mask bits for the ModHsOut<lane>TuningCompletedFlag (page 53h byte 227). 1 (default): interrupt generation disabled, 0: interrupt generation enabled (unmasked)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 197
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [CMIS-LT, Mask, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 52" }
+
+  - name: reserved_198_203
+    offset: 198
+    size_bytes: 6
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 52" }

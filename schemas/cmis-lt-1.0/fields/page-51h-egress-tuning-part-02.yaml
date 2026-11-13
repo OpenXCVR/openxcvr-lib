@@ -1,0 +1,317 @@
+fields:
+
+  - name: host_out_ffe_tap_1_tune
+    display_name: "HostOut<lane>FfeTap1Tune"
+    description: "Tuning instruction for FFE tap 1 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "194 + 2 * lane"
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_ffe_tap_2_tune
+    display_name: "HostOut<lane>FfeTap2Tune"
+    description: "Tuning instruction for FFE tap 2 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "194 + 2 * lane"
+    bit_offset: 2
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_ffe_tap_3_tune
+    display_name: "HostOut<lane>FfeTap3Tune"
+    description: "Tuning instruction for FFE tap 3 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "194 + 2 * lane"
+    bit_offset: 4
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_ffe_tap_4_tune
+    display_name: "HostOut<lane>FfeTap4Tune"
+    description: "Tuning instruction for FFE tap 4 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "194 + 2 * lane"
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_ffe_tap_5_tune
+    display_name: "HostOut<lane>FfeTap5Tune"
+    description: "Tuning instruction for FFE tap 5 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "195 + 2 * lane"
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_ffe_tap_6_tune
+    display_name: "HostOut<lane>FfeTap6Tune"
+    description: "Tuning instruction for FFE tap 6 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "195 + 2 * lane"
+    bit_offset: 2
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_ffe_tap_7_tune
+    display_name: "HostOut<lane>FfeTap7Tune"
+    description: "Tuning instruction for FFE tap 7 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "195 + 2 * lane"
+    bit_offset: 4
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_ffe_tap_8_tune
+    display_name: "HostOut<lane>FfeTap8Tune"
+    description: "Tuning instruction for FFE tap 8 of HostOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "195 + 2 * lane"
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 33" }
+
+  - name: host_out_amplitude_tune
+    display_name: "HostOut<lane>AmplitudeTune"
+    description: "Amplitude tuning instruction requested for HostOut lane <lane>; default step size 50 mV; value 3 sets the amplitude given in HostOut<lane>Amplitude."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "212 + (lane - 1) / 4"
+    bit_offset_expr: "((lane - 1) % 4) * 2"
+    bit_width: 2
+    type: u2
+    enum_ref: CmisLtTuningInstruction
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Amplitude, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 50, table: "Table 34" }
+
+  - name: host_out_tuning_type
+    display_name: "HostOut<lane>TuningType"
+    description: "Type of tuning requested for lane <lane> when the tuning procedure is invoked: 0: FFE tap tuning (Table 33), 1: output amplitude tuning (Table 34)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 214
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Tuning, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 35" }
+
+  - name: reserved_215
+    offset: 215
+    size_bytes: 1
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 35" }
+
+  - name: host_out_ffe_tap_1_saturated
+    display_name: "HostOut<lane>FfeTap1Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 1 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_ffe_tap_2_saturated
+    display_name: "HostOut<lane>FfeTap2Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 2 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_ffe_tap_3_saturated
+    display_name: "HostOut<lane>FfeTap3Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 3 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_ffe_tap_4_saturated
+    display_name: "HostOut<lane>FfeTap4Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 4 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_ffe_tap_5_saturated
+    display_name: "HostOut<lane>FfeTap5Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 5 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_ffe_tap_6_saturated
+    display_name: "HostOut<lane>FfeTap6Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 6 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_ffe_tap_7_saturated
+    display_name: "HostOut<lane>FfeTap7Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 7 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_ffe_tap_8_saturated
+    display_name: "HostOut<lane>FfeTap8Saturated"
+    description: "Indicates that the tap value limit was reached on FFE tap 8 of HostOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "216 + (lane - 1)"
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 36" }
+
+  - name: host_out_output_saturated
+    display_name: "HostOut<lane>OutputSaturated"
+    description: "Indicates that the output amplitude of HostOut lane <lane> saturated at the minimum or maximum amplitude during an adjustment request; a permanent status indication."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 224
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Tuning, Amplitude, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 37" }
+
+  - name: reserved_225
+    offset: 225
+    size_bytes: 1
+    type: bytes
+    access: rw
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 51, table: "Table 37" }

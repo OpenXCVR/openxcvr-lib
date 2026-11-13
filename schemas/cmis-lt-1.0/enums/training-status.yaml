@@ -1,0 +1,25 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTrainingStatus
+title: "CMIS-LT 1.0 Link Training Operational Status"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 15, 50)"
+  pdf_pages: [42, 58]
+entries:
+  - value: 0x0
+    name: no_training
+    description: "No link training active on the lane"
+  - value: 0x1
+    name: in_progress
+    description: "Link training in progress on the lane"
+  - value: 0x2
+    name: success
+    description: "Link training completed with success on the lane"
+  - value: 0x3
+    name: failed
+    description: "Link training failed on the lane"

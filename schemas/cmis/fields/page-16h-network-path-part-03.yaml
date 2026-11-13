@@ -1,0 +1,93 @@
+fields:
+  - name: replace_hp_signal_rx_supported
+    display_name: ReplaceHPSignalRxSupported
+    offset: 226
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.2"
+      pdf_page: 258
+      table: "Table 8-147"
+      quote: "ReplaceHPSignalRxSupported: 0b not supported; 1b Rx replacement signals for NP outputs are supported."
+
+  - name: mux_granularity
+    display_name: MuxGranularity<mux>
+    instances: { index: mux, start: 1, end: 4 }
+    offset_expr: "227 + mux"
+    size_bytes: 1
+    type: u8
+    enum_ref: Sff8024HostElectricalInterface
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.5"
+      pdf_page: 261
+      table: "Table 8-150"
+      quote: "MuxGranularity<i>: 0 not supported; >0 HostInterfaceID indicating the lane data rate and multiplex rate granularity."
+
+  - name: mux_structs_supported
+    display_name: MuxStructsSupported<mux>
+    instances: { index: mux, start: 1, end: 4 }
+    offset_expr: "232 + 4 * (mux - 1)"
+    size_bytes: 4
+    type: bitmap
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.5"
+      pdf_page: 261
+      table: "Table 8-151"
+      quote: "MuxStructsSupported<i> contains a bit mask where each bit <j> set indicates support for the multiplex structure ID <j> as defined in Table 8-149."
+
+  - name: ext_app_descriptor
+    display_name: ExtAppDescriptor<app>
+    instances: { index: app, start: 1, end: 15 }
+    offset_expr: "249 - app / 8"
+    bit_offset_expr: "app % 8"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    enum_inline:
+      - { value: 0, name: dp_application, description: "Application Descriptor describes a supported DP Application" }
+      - { value: 1, name: np_application, description: "Application Descriptor partly describes a supported NP Application" }
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.3"
+      pdf_page: 259
+      table: "Table 8-148"
+      quote: "ExtAppDescriptor<i>: 0b describes a supported DP Application; 1b (partially) describes a supported NP Application."

@@ -1,0 +1,20 @@
+fields:
+  - name: custom_administrative_223_255
+    display_name: CustomAdministrative223To255
+    offset: 223
+    size_bytes: 33
+    type: bytes
+    access: ro
+    field_type: VendorSpecific
+    tags: [VendorSpecific]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "§ 8.3.12"
+      pdf_page: 167
+      quote: "Bytes 223-255 are allocated in non-volatile storage for information provided by the original manufacturer of the module or the module reseller."

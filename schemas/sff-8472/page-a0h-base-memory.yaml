@@ -1,0 +1,17 @@
+schema: openxcvr.page.v1
+kind: page
+id: page_a0h_base_memory
+title: SFF-8472 A0h Base Memory
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a §§ 5-8
+  pdf_pages: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+page_address: A0h
+size_bytes: 256
+
+field_includes:
+  - fields/page-a0h-base-memory-part-01.yaml
+  - fields/page-a0h-base-memory-part-02.yaml
+fields: []

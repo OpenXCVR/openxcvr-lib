@@ -1,0 +1,17 @@
+schema: openxcvr.page.v1
+kind: page
+id: page_a2h_diagnostics_base
+title: SFF-8472 A2h Diagnostics Base
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a §§ 9-10
+  pdf_pages: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+page_address: A2h
+size_bytes: 256
+
+field_includes:
+  - fields/page-a2h-diagnostics-base-part-01.yaml
+  - fields/page-a2h-diagnostics-base-part-02.yaml
+fields: []

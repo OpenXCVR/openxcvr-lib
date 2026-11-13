@@ -1,0 +1,34 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTrainingRetries
+title: "CMIS-LT 1.0 Training Session Retry Limit"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 10, 45)"
+  pdf_pages: [40, 56]
+entries:
+  - value: 0x0
+    name: engine_choice
+    description: "Let the training engine choose the number of retries N"
+  - value: 0x1
+    name: n_1
+    description: "N=1"
+  - value: 0x2
+    name: n_3
+    description: "N=3"
+  - value: 0x3
+    name: n_5
+    description: "N=5"
+  - value: 0x4
+    name: n_10
+    description: "N=10"
+  - value: 0x5
+    name: n_16
+    description: "N=16"
+  - value: 0x6..0x7
+    name: reserved
+    description: "Reserved"

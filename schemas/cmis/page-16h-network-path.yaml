@@ -1,0 +1,34 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage16hNetworkPath
+title: CMIS Page 16h Network Path Functionality (banked)
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.15
+  pdf_pages: [250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261]
+page_address: "16h"
+size_bytes: 128
+
+# Banked across host lanes per 's bank-relative scope convention.
+# Despite the Network Path name, each bank carries 8 lanes. Module advertises
+# Page 16h support via Page 01h:142.7 (NetworkPathPagesSupported).
+# CMIS 5.4 § 4.1.1 / § 8.1.2 expands lane banking to up to 32 banks
+# (256 lanes): BanksSupported = 11b (01h:142.1-0, CmisBanksSupported5p4)
+# is the escape code and 01h:174.4-0 ExtraLaneBanksSupported carries the
+# extra bank count. Through CMIS 5.3 the maximum is 4 banks (32 lanes).
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+field_includes:
+  - fields/page-16h-network-path-part-01.yaml
+  - fields/page-16h-network-path-part-02.yaml
+  - fields/page-16h-network-path-part-03.yaml
+fields: []

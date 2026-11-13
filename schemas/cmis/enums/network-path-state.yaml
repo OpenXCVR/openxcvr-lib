@@ -1,0 +1,38 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisNetworkPathState
+title: CMIS Network Path State (4-bit per-lane NPSM state)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.15.4 / Table 8-144
+  pdf_pages: [256]
+entries:
+  - value: 0x0
+    name: reserved_0
+    description: Reserved
+  - value: 0x1
+    name: np_deactivated
+    description: NPDeactivated (or unused lane) - no Network Path is initialized on that lane
+  - value: 0x2
+    name: np_init
+    description: NPInit - Network Path is initializing
+  - value: 0x3
+    name: np_deinit
+    description: NPDeinit - Network Path is de-initializing
+  - value: 0x4
+    name: np_activated
+    description: NPActivated - Network Path is active
+  - value: 0x5
+    name: np_tx_turn_on
+    description: NPTxTurnOn - Tx is being turned on
+  - value: 0x6
+    name: np_tx_turn_off
+    description: NPTxTurnOff - Tx is being turned off
+  - value: 0x7
+    name: np_initialized
+    description: NPInitialized - Network Path is initialized but Tx not yet enabled
+  - value: 0x8..0xf
+    name: reserved_8_f
+    description: Reserved

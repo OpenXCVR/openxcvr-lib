@@ -1,0 +1,50 @@
+# cargo-deny configuration for the openxcvr-lib workspace.
+#
+# Tuned against the actual dependency tree (cargo deny check, 2026-04):
+#   (MIT OR Apache-2.0) x39+4, MIT x5, (MIT OR Apache-2.0) AND Unicode-3.0
+#   (unicode-ident), Apache-2.0 OR BSL-1.0 (ryu),
+#   Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT (rustix, linux-raw-sys),
+#   Unlicense OR MIT (byteorder, memchr, winapi-util, same-file, walkdir).
+#
+# The repository does not commit Cargo.lock (gitignored by convention);
+# cargo-deny resolves the tree itself, so this check always reflects
+# current crates.io state.
+
+[graph]
+# Evaluate only the targets this workspace actually builds and ships:
+# CI (ubuntu), Windows (windows-sys/hidapi consumers), macOS (darwin).
+# This deliberately drops target-gated-only deps that never enter a shipped
+# build (e.g. r-efi via getrandom on uefi targets, which carries
+# LGPL-2.1-or-later that a statically linked MIT library must not ingest).
+targets = [
+    "x86_64-unknown-linux-gnu",
+    "x86_64-pc-windows-msvc",
+    "aarch64-apple-darwin",
+]
+
+[advisories]
+version = 2
+yanked = "deny"
+
+[licenses]
+version = 2
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSL-1.0",
+    "Unicode-3.0",
+    "Unlicense",
+]
+
+[bans]
+multiple-versions = "warn"
+# Workspace members depend on each other by bare path (openxcvr-core =
+# { path = "../openxcvr-core" }); those are not external wildcards.
+allow-wildcard-paths = true
+wildcards = "deny"
+highlight = "all"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

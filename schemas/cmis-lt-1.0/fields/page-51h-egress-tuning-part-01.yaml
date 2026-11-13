@@ -1,0 +1,129 @@
+fields:
+
+  - name: host_out_ffe_tap_1
+    display_name: "HostOut<lane>FfeTap1"
+    description: "SM8-encoded FFE tap 1 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 0"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_ffe_tap_2
+    display_name: "HostOut<lane>FfeTap2"
+    description: "SM8-encoded FFE tap 2 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 1"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_ffe_tap_3
+    display_name: "HostOut<lane>FfeTap3"
+    description: "SM8-encoded FFE tap 3 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 2"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_ffe_tap_4
+    display_name: "HostOut<lane>FfeTap4"
+    description: "SM8-encoded FFE tap 4 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 3"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_ffe_tap_5
+    display_name: "HostOut<lane>FfeTap5"
+    description: "SM8-encoded FFE tap 5 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 4"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_ffe_tap_6
+    display_name: "HostOut<lane>FfeTap6"
+    description: "SM8-encoded FFE tap 6 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 5"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_ffe_tap_7
+    display_name: "HostOut<lane>FfeTap7"
+    description: "SM8-encoded FFE tap 7 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 6"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_ffe_tap_8
+    display_name: "HostOut<lane>FfeTap8"
+    description: "SM8-encoded FFE tap 8 value for HostOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter of the tap setting and tuning procedures; when advertised, the host keeps the register current under tuning operations and preset loading."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) * 8 + 7"
+    type: u8
+    access: rww
+    units: "0.01 (tap magnitude; bit 7 is the sign)"
+    field_type: Control
+    tags: [CMIS-LT, FFE, Tap, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 31" }
+
+  - name: host_out_amplitude
+    display_name: "HostOut<lane>Amplitude"
+    description: "Encoded differential peak-peak amplitude at TP1a for HostOut lane <lane>; shared-memory in/out parameter of the amplitude setting and tuning procedures."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "192 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtAmplitudeCode
+    access: rww
+    field_type: Control
+    tags: [CMIS-LT, Amplitude, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.3", pdf_page: 49, table: "Table 32" }

@@ -1,0 +1,236 @@
+{
+  "$id": "cmis_page6_dh_media_lane_switching.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "commit_media_lane_redirection": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "CommitMediaLaneRedirection: 1b: Commit configuration in the RedirectionOfMediaLane register to HW. Traffic integrity on media lanes with unchanged redirection shall not be affected.",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "enable_media_lane_redirection": {
+      "description": "0b: disabled, commit command is without effect; 1b: enabled, commit command is effective. Initially, or after enabling for the first time, the RedirectStatusOfMediaLane register shows the trivial (unpermuted) media lane switch configuration; the commit command is not executed automatically on enable. When disabled, the current switch configuration remains in effect.",
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "EnableMediaLaneRedirection: 0b: disabled: commit command is without effect; 1b: enabled: commit command is effective",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "max_redirection_commit_duration": {
+      "description": "Encoded as defined in CMIS 5.4 Table 8-49 (State Duration Encoding).",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "MaxRedirectionCommitDuration: Maximum duration of the execution of a CommitMediaLaneRedirection command being in progress, encoded as defined in Table 8-49.",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "redirect_status_of_media_lane": {
+      "description": "Value is the media lane number m in {1..8} of the external media lane to which the internal media lane with lane number <lane> is redirected; default value is m = lane.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 319,
+        "quote": "RedirectStatusOfLane<n> contains the media lane number <m> in {1, ..., 8} of the external media lane to which the internal media lane with lane number <n> is redirected. Default value: <m> = <n>",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "redirection_commit_result": {
+      "description": "Result of the last (or current) media lane switching commit command on media lane <lane>.",
+      "items": {
+        "$ref": "../enums/cmis_redirection_commit_result.schema.json"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 319,
+        "quote": "RedirectionCommitResult<n> encodes the result of the last (or current) host lane switching commit command on lane <n>",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "redirection_of_media_lane": {
+      "description": "Value is the media lane number j in {1..8} of the external media lane to which the internal media lane with lane number <lane> is to be redirected. A valid redirection is consistent with the granularity of active Data Paths or Network Paths including lane ordering within, and it is a permutation of the media lanes.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "RedirectionOfLane<i> contains the media lane number j in {1, ..., 8} of the external media lane to which the internal media lane with lane number <i> is to be redirected.",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_128_bits_3_0": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Byte 128 bits 3-0: Reserved",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_129_135": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Bytes 129-135: Reserved [7]",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_144_151": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Bytes 144-151: Reserved [8]",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_152_bits_7_1": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Byte 152 bits 7-1: Reserved",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_153_159": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Bytes 153-159: Reserved [7]",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_160_bits_7_1": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Byte 160 bits 7-1: Reserved",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_161_167": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Bytes 161-167: Reserved [7]",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_176_183": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 319,
+        "quote": "Bytes 176-183: Reserved [8]",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_192_199": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 319,
+        "quote": "Bytes 192-199: Reserved [8]",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-196"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_6dh_200_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 318,
+        "quote": "Bytes 200-255: Reserved [56]",
+        "section": "CMIS 5.4 § 8.33",
+        "table": "Table 8-195"
+      },
+      "x-openxcvr-since": "5.4"
+    }
+  },
+  "required": [
+    "max_redirection_commit_duration",
+    "reserved_page_6dh_128_bits_3_0",
+    "reserved_page_6dh_129_135",
+    "redirection_of_media_lane",
+    "reserved_page_6dh_144_151",
+    "reserved_page_6dh_152_bits_7_1",
+    "enable_media_lane_redirection",
+    "reserved_page_6dh_153_159",
+    "reserved_page_6dh_160_bits_7_1",
+    "commit_media_lane_redirection",
+    "reserved_page_6dh_161_167",
+    "redirection_commit_result",
+    "reserved_page_6dh_176_183",
+    "redirect_status_of_media_lane",
+    "reserved_page_6dh_192_199",
+    "reserved_page_6dh_200_255"
+  ],
+  "title": "CmisPage6DhMediaLaneSwitching",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      318,
+      319
+    ],
+    "spec": "CMIS 5.4 § 8.33"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

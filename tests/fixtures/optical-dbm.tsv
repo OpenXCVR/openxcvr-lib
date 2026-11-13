@@ -1,0 +1,31 @@
+# Synthetic mathematical reference vectors; no device/protocol revision.
+# name state input_kind watts result_kind result_state dbm
+# States follow C observation.h; 7 tests Rust WriteOnlyRefused / C opaque non-Valid pass-through.
+# Result kinds: Value=0 Unavailable=1 NotConvertible=2 NoPower=3.
+# Reference: 80-digit Decimal.log10 of the binary64 input, rounded to binary64.
+milliwatt 0 0 0.001 0 0 9.040569998937066e-17
+ten_milliwatts 0 0 0.01 0 0 10.0
+two_milliwatts 0 0 0.002 0 0 3.010299956639812
+microwatt 0 0 0.000001 0 0 -30.0
+below_legacy_floor 0 0 0.0000001 0 0 -40.0
+tiny 0 0 1e-300 0 0 -2970.0
+subnormal 0 0 4.9406564584124654e-324 0 0 -3203.062153431158
+largest 0 0 1.7976931348623157e308 0 0 3112.5471555991676
+one_watt 0 0 1 0 0 30.0
+calibrated_rx 0 0 0.0003 0 0 -5.228787452803376
+zero 0 0 0 3 0 0
+negative_zero 0 0 -0 3 0 0
+negative 0 0 -0.001 1 5 0
+nan 0 0 NaN 1 5 0
+positive_inf 0 0 inf 1 5 0
+negative_inf 0 0 -inf 1 5 0
+volt 0 1 NaN 2 0 0
+raw 0 2 NaN 2 0 0
+absent 0 3 NaN 2 0 0
+not_supplied 1 0 NaN 1 1 0
+uncalibrated 2 0 NaN 1 2 0
+unsupported_revision 3 0 NaN 1 3 0
+clear_on_read_refused 4 0 NaN 1 4 0
+invalid 5 0 NaN 1 5 0
+unsupported_field 6 0 NaN 1 6 0
+write_only_refused 7 0 NaN 1 7 0

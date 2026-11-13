@@ -1,0 +1,240 @@
+{
+  "_metadata": {
+    "authored_at": "2026-10-22",
+    "authored_by": "ras + builder agent via tools/build-cmis-3-0-synthetic.py",
+    "cmis_version": "3.0",
+    "fixture": "synthetic-cmis-3-0-qsfp-dd-dp-reserved",
+    "monitoring_stale": true,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "cmis-5.3",
+    "spec_revision": "5.3",
+    "synthetic": true,
+    "synthetic_note": "Limited synthetic parity golden, NOT a hardware oracle: every byte is hand-authored by tools/build-cmis-3-0-synthetic.py and the expected semantics derive from the CMIS 3.0 spec (CMIS3p0_Third_Party_Spec.pdf) applied to those bytes, not from a decoder run. Device revision is CMIS 3.0 (Lower:1=0x30); the canonical schema namespace every generated decoder is emitted from is cmis-5.3 (schemas/cmis) \u2014 no cmis-3.0 namespace exists. This variant exercises CMIS 3.0 \u00a7 1.7.7.1 Table 66 reserved Data Path State encodings: the Page 11h lane vector (lanes 1..8) is 0h, 5h, 6h, 7h, 3h, 4h, 0h, 3h \u2014 packed per Table 65 as 50 76 43 30 \u2014 so 5h/6h/7h are Reserved in 3.0 and render Unknown5/Unknown6/Unknown7 (the DPTxTurnOn/DPTxTurnOff/DPInitialized meanings only exist from CMIS 4.0 Table 8-58 on), while the controls render 0h Reserved (Reserved0), 3h Deinit (DpDeinit) and 4h Activated (DpActivated). Fields verified to agree in offsets and encodings between CMIS 3.0 and CMIS 5.2/5.3 are as the baseline fixture: rev byte and Flat_mem (Table 18), ModuleState 000b=Reserved and Interrupt bit (Tables 18/19), module flags byte 9 (Table 21), temp/voltage monitors bytes 14-17 (Table 22), AppSel 1-8 descriptors at Lower 86-117 (Table 26), Data Path State packing and Table 66 meanings (Tables 65/66), lane monitors and the Page 01h:160 bias multiplier (Tables 70/45). The remaining Page 11h bytes are zero: lane flags (Tables 67-69) and lane monitors (Table 70) carry no content. Nonconformance disclosure: the all-zero Application advertisement is an intentional nonconforming fixture \u2014 CMIS 3.0 \u00a7 1.7.2.7 requires every module to advertise at least one Application and requires FFh in the Host Electrical Code of the first unused Table 26 entry, and this fixture does neither. The authored bytes are preserved as-is; the golden's applications:null and decode_status:\"ok\" are the structural decode of those bytes \u2014 \"ok\" is decode-success, not conformance. Do not use as a field-round-trip or vendor-identity oracle.",
+    "vendor_strings_synthetic": true
+  },
+  "applications": null,
+  "checksums": null,
+  "decode_status": "ok",
+  "flags": {
+    "data_not_ready": null,
+    "interrupt_asserted": true,
+    "lanes": [
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      }
+    ],
+    "supply_high_alarm": false,
+    "supply_low_alarm": false,
+    "temp_high_alarm": false,
+    "temp_low_alarm": false
+  },
+  "identity": {
+    "date_code": "180918",
+    "vendor_name": "CMIS_3_0_SYNTH",
+    "vendor_oui": "00:00:00",
+    "vendor_pn": "FIXTURE-30-SYNTH",
+    "vendor_rev": "00",
+    "vendor_sn": "SYNTHETIC0000003"
+  },
+  "lanes": [
+    {
+      "dp_state": "Reserved0",
+      "index": 1,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Unknown5",
+      "index": 2,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Unknown6",
+      "index": 3,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Unknown7",
+      "index": 4,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpDeinit",
+      "index": 5,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpActivated",
+      "index": 6,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 7,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "DpDeinit",
+      "index": 8,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    }
+  ],
+  "module": {
+    "cmis_revision": "3.0",
+    "connector": {
+      "name": "unknown_or_unspecified",
+      "raw": "0x00"
+    },
+    "identifier": {
+      "name": "qsfp_dd",
+      "raw": "0x18"
+    },
+    "memory_model": "paged",
+    "module_state": "Reserved0",
+    "module_type": null
+  },
+  "monitoring": {
+    "module_temperature_c": 0.0,
+    "module_voltage_v": 0.0
+  }
+}

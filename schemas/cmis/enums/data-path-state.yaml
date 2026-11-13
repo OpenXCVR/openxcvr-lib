@@ -1,0 +1,41 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisDataPathState
+title: CMIS Data Path State (4-bit per-lane DPSM state)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.10.1 / Table 8-84; CMIS 4.0 Table 8-58; CMIS 3.0 § 1.7.7.1 Table 66
+  pdf_pages: [208]
+entries:
+  - value: 0x0
+    name: reserved_0
+    description: Reserved
+  - value: 0x1
+    name: dp_deactivated
+    description: DPDeactivated (or unused lane) — no Data Path is initialized on that lane
+  - value: 0x2
+    name: dp_init
+    description: DPInit — Data Path is initializing
+  - value: 0x3
+    name: dp_deinit
+    description: DPDeinit — Data Path is de-initializing
+  - value: 0x4
+    name: dp_activated
+    description: DPActivated — Data Path is active
+  - value: 0x5
+    name: dp_tx_turn_on
+    description: DPTxTurnOn — Tx is being turned on
+    since: "4.0"
+  - value: 0x6
+    name: dp_tx_turn_off
+    description: DPTxTurnOff — Tx is being turned off
+    since: "4.0"
+  - value: 0x7
+    name: dp_initialized
+    description: DPInitialized — Data Path is initialized but Tx not yet enabled
+    since: "4.0"
+  - value: 0x8..0xf
+    name: reserved_8_f
+    description: Reserved

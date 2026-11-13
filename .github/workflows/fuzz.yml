@@ -1,0 +1,32 @@
+name: fuzz
+
+# Nightly coverage-guided campaign for the landed cargo-fuzz targets.
+# The in-tree proptest suites stay on the ordinary cargo-test path; this
+# job is the bounded libFuzzer pass documented in fuzz/README.md.
+# Budget is -max_total_time=60 per target (seconds). timeout-minutes is
+# only a hang backstop around toolchain install plus those four runs.
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cargo-fuzz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz --locked
+      - name: Run landed targets for 60 seconds each
+        working-directory: fuzz
+        run: |
+          set -euo pipefail
+          for target in cmis_page_decode sff8636_page_decode sff8472_page_decode cdb_reply_parse; do
+            cargo fuzz run "$target" -- -max_total_time=60
+          done

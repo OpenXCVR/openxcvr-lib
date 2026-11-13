@@ -1,0 +1,621 @@
+fields:
+  - name: low_power_restrictions_cdb_fw_cmds_unsupported
+    display_name: LowPowerRestrictions.CdbFwCmdsUnsupported
+    offset: 62
+    bit_offset: 0
+    bit_width: 1
+    since: "5.3"
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.12"
+      pdf_page: 155
+      table: "Table 8-19"
+      quote: "1b: CDB commands that can cause FW state changes in the module are not generally supported in ModuleLowPwr state."
+
+  # ===========================================================================
+  # § 8.2.13 Applications Advertising (bytes 85-117)
+  #
+  # MediaType discriminator at byte 85 followed by 8 Application Descriptors,
+  # 4 bytes each starting at byte 86. Per-app fields collapse to 6 entries
+  # using 's `instances:` mechanism.
+  #
+  # MediaType is the discriminator that selects which SFF-8024 media table
+  # MediaInterfaceID values come from. Polymorphic-variant resolution (per
+  #) applies at L2 — adapter dispatches MediaInterfaceID lookup
+  # based on MediaType.
+  # ===========================================================================
+
+  - name: media_type
+    display_name: MediaType
+    offset: 85
+    size_bytes: 1
+    type: u8
+    enum_ref: CmisMediaType
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§8.2.13"
+      table: "Table 8-21"
+      row: "85 bits 7:0 Module Type Encoding / MediaType"
+      pdf_page: [157]
+      basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    changed_in:
+      - rev: "3.0"
+        read_effect: unknown
+        read_effect_provenance: null
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.2.9"
+          table: "Table 8-12"
+          row: "85 bits 7:0 Module Type Encoding / MediaType"
+          pdf_page: [91]
+          basis: "§8.2.9 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.0 (CMIS5p0_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-17"
+          row: "85 bits 7:0 Module Type Encoding / MediaType"
+          pdf_page: [118]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.1"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.1 (CMIS5p1_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-17"
+          row: "85 bits 7:0 Module Type Encoding / MediaType"
+          pdf_page: [134]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.2"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.2"
+          section: "§8.2.11"
+          table: "Table 8-18"
+          row: "85 bits 7:0 Module Type Encoding / MediaType"
+          pdf_page: [137]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.2.13"
+          table: "Table 8-21"
+          row: "85 bits 7:0 Module Type Encoding / MediaType"
+          pdf_page: [157]
+          basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.13"
+      pdf_page: 157
+      quote: "The MediaType field defines the interpretation of MediaInterfaceID values in the following Application Descriptors."
+
+  - name: host_interface_id_app
+    display_name: HostInterfaceIDApp<app>
+    instances: { index: app, start: 1, end: 8 }
+    offset_expr: "86 + 4 * (app - 1)"
+    size_bytes: 1
+    type: u8
+    enum_ref: Sff8024HostElectricalInterface
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§8.2.13"
+      table: "Table 8-23"
+      row: "86 + 4*(app-1), bits 7:0 Host Electrical Interface ID / HostInterfaceID, app 1..8"
+      pdf_page: [157, 158]
+      basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    changed_in:
+      - rev: "3.0"
+        read_effect: unknown
+        read_effect_provenance: null
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.2.9"
+          table: "Table 8-13"
+          row: "86 + 4*(app-1), bits 7:0 Host Electrical Interface ID / HostInterfaceID, app 1..8"
+          pdf_page: [92]
+          basis: "§8.2.9 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.0 (CMIS5p0_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "86 + 4*(app-1), bits 7:0 Host Electrical Interface ID / HostInterfaceID, app 1..8"
+          pdf_page: [119, 120]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.1"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.1 (CMIS5p1_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "86 + 4*(app-1), bits 7:0 Host Electrical Interface ID / HostInterfaceID, app 1..8"
+          pdf_page: [135, 136]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.2"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.2"
+          section: "§8.2.11"
+          table: "Table 8-20"
+          row: "86 + 4*(app-1), bits 7:0 Host Electrical Interface ID / HostInterfaceID, app 1..8"
+          pdf_page: [138, 139]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.2.13"
+          table: "Table 8-23"
+          row: "86 + 4*(app-1), bits 7:0 Host Electrical Interface ID / HostInterfaceID, app 1..8"
+          pdf_page: [157, 158]
+          basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      # CMIS 5.4 Table 8-22 designates ID BEh as the escape code for the 12-bit
+      # interface UID: BEh means the Host Interface GID is non-zero and the
+      # corresponding NAD (Page 1Ch) must be consulted. The ID BEh is not
+      # associated with any SFF-8024 standard.
+      - rev: "5.4"
+        behavior:
+          gid_escape_code: 0xBE
+          on_escape: "the GID of the Host Interface UID is non-zero; consult the NAD (Page 1Ch) for the 12-bit Host Interface UID"
+        provenance:
+          section: "CMIS 5.4 § 8.2.13"
+          table: "Table 8-22"
+          pdf_page: 183
+          quote: "BEh: the GID of the Host Interface UID is non-zero and hence the corresponding NAD must be consulted. Note: The ID BEh is not associated with any standard."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.13"
+      pdf_page: 157
+      quote: "HostInterfaceID ID from [5] or FFh to mark as unused (empty Application Descriptor)."
+
+  - name: media_interface_id_app
+    display_name: MediaInterfaceIDApp<app>
+    instances: { index: app, start: 1, end: 8 }
+    offset_expr: "87 + 4 * (app - 1)"
+    size_bytes: 1
+    type: u8
+    # The interpretation of this byte is polymorphic on `media_type`:
+    # see (variants:) — adapter dispatches the SFF-8024 media-table
+    # lookup based on MediaType. Schema-side variant boundaries:
+    variants:
+      discriminator: { field: media_type }
+      cases:
+        - when: { value: 0x01 }   # Optical interfaces (MMF)
+          enum_ref: Sff8024MmfMediaInterface
+        - when: { value: 0x02 }   # Optical interfaces (SMF)
+          enum_ref: Sff8024SmfMediaInterface
+        - when: { value: 0x03 }   # Passive copper cable
+          enum_ref: Sff8024PassiveCableCodes
+        - when: { value: 0x04 }   # Active copper cable
+          enum_ref: Sff8024ActiveCableCodes
+        - when: { value: 0x05 }   # BASE-T
+          enum_ref: Sff8024BaseTCodes
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§8.2.13"
+      table: "Table 8-23"
+      row: "87 + 4*(app-1), bits 7:0 Module Media Interface ID / MediaInterfaceID, app 1..8"
+      pdf_page: [157, 158]
+      basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    changed_in:
+      - rev: "3.0"
+        read_effect: unknown
+        read_effect_provenance: null
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.2.9"
+          table: "Table 8-13"
+          row: "87 + 4*(app-1), bits 7:0 Module Media Interface ID / MediaInterfaceID, app 1..8"
+          pdf_page: [92]
+          basis: "§8.2.9 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.0 (CMIS5p0_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "87 + 4*(app-1), bits 7:0 Module Media Interface ID / MediaInterfaceID, app 1..8"
+          pdf_page: [119, 120]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.1"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.1 (CMIS5p1_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "87 + 4*(app-1), bits 7:0 Module Media Interface ID / MediaInterfaceID, app 1..8"
+          pdf_page: [135, 136]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.2"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.2"
+          section: "§8.2.11"
+          table: "Table 8-20"
+          row: "87 + 4*(app-1), bits 7:0 Module Media Interface ID / MediaInterfaceID, app 1..8"
+          pdf_page: [138, 139]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.2.13"
+          table: "Table 8-23"
+          row: "87 + 4*(app-1), bits 7:0 Module Media Interface ID / MediaInterfaceID, app 1..8"
+          pdf_page: [157, 158]
+          basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      # CMIS 5.4 Table 8-22 designates ID BEh as the escape code for the 12-bit
+      # interface UID: BEh means the Media Interface GID is non-zero and the
+      # corresponding NAD (Page 1Ch) must be consulted. The ID BEh is not
+      # associated with any SFF-8024 standard.
+      - rev: "5.4"
+        behavior:
+          gid_escape_code: 0xBE
+          on_escape: "the corresponding NAD must be consulted because of non-zero MediaInterfaceGID"
+        provenance:
+          section: "CMIS 5.4 § 8.2.13"
+          table: "Table 8-22"
+          pdf_page: 183
+          quote: "BEh: the corresponding NAD must be consulted because of non-zero MediaInterfaceGID. Note: The ID BEh is not associated with any standard."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.13"
+      pdf_page: 157
+      quote: "MediaInterfaceID ID from a suitable table of IDs in [5] that is identified by the MediaType Byte 00h:85."
+
+  - name: host_lane_count_app
+    display_name: HostLaneCountApp<app>
+    instances: { index: app, start: 1, end: 8 }
+    offset_expr: "88 + 4 * (app - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§8.2.13"
+      table: "Table 8-23"
+      row: "88 + 4*(app-1), bits 7:4 Host Lane Count / HostLaneCount, app 1..8"
+      pdf_page: [157, 158]
+      basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    changed_in:
+      - rev: "3.0"
+        read_effect: unknown
+        read_effect_provenance: null
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.2.9"
+          table: "Table 8-13"
+          row: "88 + 4*(app-1), bits 7:4 Host Lane Count / HostLaneCount, app 1..8"
+          pdf_page: [92]
+          basis: "§8.2.9 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.0 (CMIS5p0_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "88 + 4*(app-1), bits 7:4 Host Lane Count / HostLaneCount, app 1..8"
+          pdf_page: [119, 120]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.1"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.1 (CMIS5p1_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "88 + 4*(app-1), bits 7:4 Host Lane Count / HostLaneCount, app 1..8"
+          pdf_page: [135, 136]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.2"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.2"
+          section: "§8.2.11"
+          table: "Table 8-20"
+          row: "88 + 4*(app-1), bits 7:4 Host Lane Count / HostLaneCount, app 1..8"
+          pdf_page: [138, 139]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.2.13"
+          table: "Table 8-23"
+          row: "88 + 4*(app-1), bits 7:4 Host Lane Count / HostLaneCount, app 1..8"
+          pdf_page: [157, 158]
+          basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.13"
+      pdf_page: 157
+      quote: "HostLaneCount: 0000b = lane count defined by interface ID; 0001b..1000b = 1..8 lanes."
+
+  - name: media_lane_count_app
+    display_name: MediaLaneCountApp<app>
+    instances: { index: app, start: 1, end: 8 }
+    offset_expr: "88 + 4 * (app - 1)"
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§8.2.13"
+      table: "Table 8-23"
+      row: "88 + 4*(app-1), bits 3:0 Media Lane Count / MediaLaneCount, app 1..8"
+      pdf_page: [157, 158]
+      basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    changed_in:
+      - rev: "3.0"
+        read_effect: unknown
+        read_effect_provenance: null
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.2.9"
+          table: "Table 8-13"
+          row: "88 + 4*(app-1), bits 3:0 Media Lane Count / MediaLaneCount, app 1..8"
+          pdf_page: [92]
+          basis: "§8.2.9 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.0 (CMIS5p0_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "88 + 4*(app-1), bits 3:0 Media Lane Count / MediaLaneCount, app 1..8"
+          pdf_page: [119, 120]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.1"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.1 (CMIS5p1_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "88 + 4*(app-1), bits 3:0 Media Lane Count / MediaLaneCount, app 1..8"
+          pdf_page: [135, 136]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.2"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.2"
+          section: "§8.2.11"
+          table: "Table 8-20"
+          row: "88 + 4*(app-1), bits 3:0 Media Lane Count / MediaLaneCount, app 1..8"
+          pdf_page: [138, 139]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.2.13"
+          table: "Table 8-23"
+          row: "88 + 4*(app-1), bits 3:0 Media Lane Count / MediaLaneCount, app 1..8"
+          pdf_page: [157, 158]
+          basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.13"
+      pdf_page: 157
+      quote: "MediaLaneCount: 1000b = 8 lanes."
+
+  - name: host_lane_assignment_options_app
+    display_name: HostLaneAssignmentOptionsApp<app>
+    instances: { index: app, start: 1, end: 8 }
+    offset_expr: "89 + 4 * (app - 1)"
+    size_bytes: 1
+    type: bitmap
+    access: ro
+    read_effect: none
+    read_effect_provenance:
+      source: "OIF-CMIS-05.3"
+      section: "§8.2.13"
+      table: "Table 8-23"
+      row: "89 + 4*(app-1), bits 7:0 Host Lane Assignment Options / HostLaneAssignmentOptions, app 1..8"
+      pdf_page: [157, 158]
+      basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+    changed_in:
+      - rev: "3.0"
+        read_effect: unknown
+        read_effect_provenance: null
+      - rev: "4.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 4.0 (CMIS4p0_Third_Party_Spec)"
+          section: "§8.2.9"
+          table: "Table 8-13"
+          row: "89 + 4*(app-1), bits 7:0 Host Lane Assignment Options / HostLaneAssignmentOptions, app 1..8"
+          pdf_page: [92]
+          basis: "§8.2.9 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.0"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.0 (CMIS5p0_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "89 + 4*(app-1), bits 7:0 Host Lane Assignment Options / HostLaneAssignmentOptions, app 1..8"
+          pdf_page: [119, 120]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.1"
+        read_effect: none
+        read_effect_provenance:
+          source: "CMIS 5.1 (CMIS5p1_Third_Party_Spec)"
+          section: "§8.2.11"
+          table: "Table 8-19"
+          row: "89 + 4*(app-1), bits 7:0 Host Lane Assignment Options / HostLaneAssignmentOptions, app 1..8"
+          pdf_page: [135, 136]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.2"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.2"
+          section: "§8.2.11"
+          table: "Table 8-20"
+          row: "89 + 4*(app-1), bits 7:0 Host Lane Assignment Options / HostLaneAssignmentOptions, app 1..8"
+          pdf_page: [138, 139]
+          basis: "§8.2.11 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.2.13"
+          table: "Table 8-23"
+          row: "89 + 4*(app-1), bits 7:0 Host Lane Assignment Options / HostLaneAssignmentOptions, app 1..8"
+          pdf_page: [157, 158]
+          basis: "§8.2.13 describes supported-application advertising, with plain RO (not RO/COR) access in the cited table. These are static interface capabilities, not status or controls; no read-triggered action is assigned."
+      # CMIS 5.4 splits the descriptor format per memory model: on Paged Memory
+      # modules byte 3 stays HostLaneAssignmentOptions (Table 8-22), while on
+      # Flat Memory modules bits 7-4 of byte 3 are defined as HostInterfaceGID
+      # and bits 3-0 remain Reserved (Table 8-23). The paged-meaning bitmap
+      # keeps covering the whole byte; the flat-memory nibble meaning is
+      # recorded here as behavior because the two meanings are multiplexed on
+      # the MemoryModel bit, not on the revision.
+      - rev: "5.4"
+        behavior:
+          memory_model_multiplexed: true
+          flat_bits_7_4: "HostInterfaceGID: the Group ID of the table in [5] defining the HostInterfaceID"
+          flat_bits_3_0: "Reserved"
+        provenance:
+          section: "CMIS 5.4 § 8.2.13"
+          table: "Table 8-23"
+          pdf_page: 183
+          quote: "HostInterfaceGID: The Group ID of the table in [5] defining the HostInterfaceID"
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "§ 8.2.13"
+      pdf_page: 157
+      quote: "Bits 0-7 form a bit map corresponding to Host Lanes 1-8. A set bit indicates that the Application may begin on the corresponding host lane."
+
+  # ===========================================================================
+  # § 8.2.14 Password Entry and Change (bytes 118-125)
+  # ===========================================================================
+
+  - name: password_change_entry_area
+    display_name: PasswordChangeEntryArea
+    offset: 118
+    size_bytes: 4
+    type: u32be
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, BlindControl, "BlindControl::Password"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.14"
+      pdf_page: 159
+      quote: "U32: new password value."
+
+  - name: password_entry_area
+    display_name: PasswordEntryArea
+    offset: 122
+    size_bytes: 4
+    type: u32be
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, BlindControl, "BlindControl::Password"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.14"
+      pdf_page: 159
+      quote: "U32: password value."
+
+  # ===========================================================================
+  # § 8.2.15 Page Mapping (bytes 126-127)
+  #
+  # The ultimate cross-page predicate anchor: every banked / paged field
+  # elsewhere has present_when references that resolve through bank_select
+  # and page_select. Decoders must read these last (per CMIS § 6.6) since
+  # writes to PageSelect change which upper-memory page is mapped.
+  # ===========================================================================

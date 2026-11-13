@@ -1,0 +1,32 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024TransceiverSubtype
+title: SFF-8024 Transceiver Subtype Codes
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-11
+  pdf_pages: [36]
+entries:
+  - value: 0x00
+    name: unknown_or_unspecified
+    description: Unknown or unspecified transceiver subtype
+  - value: 0x01
+    name: type_1
+    description: Type 1 subtype across QSFP+, QSFP-DD, SFP-DD, OSFP, and OSFP-XD families
+  - value: 0x02
+    name: type_2
+    description: Type 2 subtype across QSFP+, QSFP-DD, SFP-DD, OSFP, and OSFP-XD families
+  - value: 0x03
+    name: type_2a_or_osfp_type_3
+    description: Type 2A for QSFP+ and QSFP-DD; Type 3 for OSFP; reserved for SFP-DD and OSFP-XD
+  - value: 0x04
+    name: type_2b
+    description: Type 2B for QSFP+ and QSFP-DD; reserved for SFP-DD, OSFP, and OSFP-XD
+  - value: 0x05
+    name: qsfp_dd_type_2c
+    description: Type 2C for QSFP-DD; reserved for QSFP+, SFP-DD, OSFP, and OSFP-XD
+  - value: 0x06..0x0f
+    name: reserved_06_0f
+    description: Reserved

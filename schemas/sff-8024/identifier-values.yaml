@@ -1,0 +1,134 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024Identifier
+title: SFF-8024 Identifier Values
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-1
+  pdf_pages: [17]
+entries:
+  - value: 0x00
+    name: unknown_or_unspecified
+    description: Unknown or unspecified
+  - value: 0x01
+    name: gbic
+    description: GBIC
+  - value: 0x02
+    name: soldered_module_sff8472
+    description: Module or connector soldered to motherboard using SFF-8472
+  - value: 0x03
+    name: sfp_sff8472
+    description: SFP, SFP+, SFP28, and later with SFF-8472 management interface
+  - value: 0x04
+    name: xbi_300_pin
+    description: 300 pin XBI
+  - value: 0x05
+    name: xenpak
+    description: XENPAK
+  - value: 0x06
+    name: xfp
+    description: XFP
+  - value: 0x07
+    name: xff
+    description: XFF
+  - value: 0x08
+    name: xfp_e
+    description: XFP-E
+  - value: 0x09
+    name: xpak
+    description: XPAK
+  - value: 0x0a
+    name: x2
+    description: X2
+  - value: 0x0b
+    name: dwdm_sfp_without_sff8472
+    description: DWDM-SFP or SFP+ not using SFF-8472
+  - value: 0x0c
+    name: qsfp_inf8438
+    description: QSFP with INF-8438 management
+  - value: 0x0d
+    name: qsfp_plus_sff8636
+    description: QSFP+ or later with SFF-8636 or SFF-8436 management interface
+  - value: 0x0e
+    name: cxp
+    description: CXP or later
+  - value: 0x0f
+    name: shielded_mini_multilane_hd_4x
+    description: Shielded Mini Multilane HD 4X
+  - value: 0x10
+    name: shielded_mini_multilane_hd_8x
+    description: Shielded Mini Multilane HD 8X
+  - value: 0x11
+    name: qsfp28_sff8636
+    description: QSFP28 or later with SFF-8636 management interface
+  - value: 0x12
+    name: cxp2
+    description: CXP2, also known as CXP28, or later
+  - value: 0x13
+    name: cdfp_style_1_2
+    description: CDFP Style 1 or Style 2
+  - value: 0x14
+    name: shielded_mini_multilane_hd_4x_fanout
+    description: Shielded Mini Multilane HD 4X fanout cable
+  - value: 0x15
+    name: shielded_mini_multilane_hd_8x_fanout
+    description: Shielded Mini Multilane HD 8X fanout cable
+  - value: 0x16
+    name: cdfp_style_3
+    description: CDFP Style 3
+  - value: 0x17
+    name: micro_qsfp
+    description: microQSFP
+  - value: 0x18
+    name: qsfp_dd
+    description: QSFP-DD Double Density 8X pluggable transceiver
+  - value: 0x19
+    name: osfp
+    description: OSFP 8X pluggable transceiver
+  - value: 0x1a
+    name: sfp_dd_sfp_dd_management
+    description: SFP-DD with SFP-DD management interface specification
+  - value: 0x1b
+    name: dsfp
+    description: DSFP dual small form factor pluggable transceiver
+  - value: 0x1c
+    name: x4_minilink_oculink
+    description: x4 MiniLink or OcuLink
+  - value: 0x1d
+    name: x8_minilink
+    description: x8 MiniLink
+  - value: 0x1e
+    name: qsfp_plus_cmis
+    description: QSFP+ or later with CMIS
+  - value: 0x1f
+    name: sfp_dd_cmis
+    description: SFP-DD with CMIS
+  - value: 0x20
+    name: sfp_plus_cmis
+    description: SFP+ and later with CMIS
+  - value: 0x21
+    name: osfp_xd_cmis
+    description: OSFP-XD with CMIS
+  - value: 0x22
+    name: oif_elsfp_cmis
+    description: OIF-ELSFP with CMIS
+  - value: 0x23
+    name: cdfp_x4_pcie_cmis
+    description: CDFP x4 PCIe with CMIS
+  - value: 0x24
+    name: cdfp_x8_pcie_cmis
+    description: CDFP x8 PCIe with CMIS
+  - value: 0x25
+    name: cdfp_x16_pcie_cmis
+    description: CDFP x16 PCIe with CMIS
+  - value: 0x26
+    name: xpo
+    description: XPO
+  - value: 0x27..0x7f
+    name: reserved
+    description: Reserved
+  - value: 0x80..0xff
+    name: vendor_specific
+    description: Vendor specific

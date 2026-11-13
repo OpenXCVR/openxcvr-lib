@@ -1,0 +1,19 @@
+schema: openxcvr.page.v1
+kind: page
+id: Sff8636LowerMemory
+title: SFF-8636 Lower Page (00h:0..127)
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.2
+  pdf_pages: [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
+page_address: lower
+size_bytes: 128
+
+field_includes:
+  - fields/lower-memory-part-01.yaml
+  - fields/lower-memory-part-02.yaml
+  - fields/lower-memory-part-03.yaml
+  - fields/lower-memory-part-04.yaml
+fields: []

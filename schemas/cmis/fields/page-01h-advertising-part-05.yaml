@@ -1,0 +1,341 @@
+fields:
+  - name: rx_output_level0_supported
+    display_name: RxOutputLevel0Supported
+    offset: 153
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "153 RxOutputLevel0Supported"
+          pdf_page: [168, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "RxOutputLevel0 supported"
+
+  - name: tx_input_eq_max
+    display_name: TxInputEqMax
+    offset: 153
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "153 TxInputEqMax"
+          pdf_page: [168, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "Maximum supported value of the Tx Input Equalization control"
+
+  - name: rx_output_eq_post_cursor_max
+    display_name: RxOutputEqPostCursorMax
+    offset: 154
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "154 RxOutputEqPostCursorMax"
+          pdf_page: [168, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "Maximum supported value of the Rx Output Eq Post-Cursor control"
+
+  - name: rx_output_eq_pre_cursor_max
+    display_name: RxOutputEqPreCursorMax
+    offset: 154
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.6"
+          table: "Table 8-49"
+          row: "154 RxOutputEqPreCursorMax"
+          pdf_page: [168, 174]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-49 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.6"
+      pdf_page: 174
+      quote: "Maximum supported value of the Rx Output Eq Pre-Cursor control"
+
+  - name: wavelength_is_controllable
+    display_name: WavelengthIsControllable
+    offset: 155
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.7"
+          table: "Table 8-50"
+          row: "155 WavelengthIsControllable"
+          pdf_page: [168, 175]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-50 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.7"
+      pdf_page: 175
+      quote: "Active wavelength control supported; active control does not imply tunability"
+
+  - name: transmitter_is_tunable
+    display_name: TransmitterIsTunable
+    offset: 155
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.7"
+          table: "Table 8-50"
+          row: "155 TransmitterIsTunable"
+          pdf_page: [168, 175]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-50 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.7"
+      pdf_page: 175
+      quote: "Transmitter is tunable; Pages 04h and 12h supported"
+
+  - name: forced_squelch_tx_supported
+    display_name: ForcedSquelchTxSupported
+    offset: 155
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.7"
+          table: "Table 8-50"
+          row: "155 ForcedSquelchTxSupported"
+          pdf_page: [168, 175]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-50 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.7"
+      pdf_page: 175
+      quote: "Host can force squelching of Tx outputs"
+
+  - name: auto_squelch_disable_tx_supported
+    display_name: AutoSquelchDisableTxSupported
+    offset: 155
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.7"
+          table: "Table 8-50"
+          row: "155 AutoSquelchDisableTxSupported"
+          pdf_page: [168, 175]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-50 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.7"
+      pdf_page: 175
+      quote: "Host can disable automatic squelching of Tx outputs"
+
+  - name: output_disable_tx_supported
+    display_name: OutputDisableTxSupported
+    offset: 155
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.7"
+          table: "Table 8-50"
+          row: "155 OutputDisableTxSupported"
+          pdf_page: [168, 175]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-50 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.7"
+      pdf_page: 175
+      quote: "Host can disable Tx outputs using OutputDisableTx"
+
+  - name: input_polarity_flip_tx_supported
+    display_name: InputPolarityFlipTxSupported
+    offset: 155
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.7"
+          table: "Table 8-50"
+          row: "155 InputPolarityFlipTxSupported"
+          pdf_page: [168, 175]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-50 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.7"
+      pdf_page: 175
+      quote: "InputPolarityFlipTx control supported"
+
+  - name: squelch_method_tx
+    display_name: SquelchMethodTx
+    offset: 155
+    bit_offset: 4
+    bit_width: 2
+    type: u2
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.7"
+          table: "Table 8-50"
+          row: "155 SquelchMethodTx"
+          pdf_page: [168, 175]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-50 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.7"
+      pdf_page: 175
+      quote: "Tx output squelching method advertisement"

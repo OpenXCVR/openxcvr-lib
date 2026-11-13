@@ -1,0 +1,23 @@
+fields:
+  - name: output_status_changed_mask_rx
+    display_name: OutputStatusChangedMaskRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 232
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 207
+      table: "Table 8-81"
+      quote: "OutputStatusChangedMaskRx<i>: Mask for OutputStatusChangedFlagRx<i>, media lane <i>."

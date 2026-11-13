@@ -1,0 +1,238 @@
+fields:
+
+  # ===========================================================================
+  # § 8.10.1 Data Path States (bytes 128-131) — Table 8-83
+  # 4-bit per-lane state; lanes packed 2 per byte (lane (2k-1) low, 2k high).
+  # ===========================================================================
+
+  - name: dp_state_host_lane
+    display_name: DPStateHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisDataPathState
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.1"
+      pdf_page: 208
+      table: "Table 8-83"
+      quote: "Data Path State of host lane <i> (see Table 8-84)."
+
+  # ===========================================================================
+  # § 8.10.2 Lane Output Status Indications (bytes 132-133) — Table 8-85
+  # ===========================================================================
+
+  - name: output_status_rx
+    display_name: OutputStatusRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 132
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    since: "5.0"
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: invalid_or_muted, description: "Rx output signal invalid or muted" }
+      - { value: 1, name: valid, description: "Rx output signal valid" }
+    provenance:
+      section: "§ 8.10.2"
+      pdf_page: 209
+      table: "Table 8-85"
+      quote: "OutputStatusRx<i>: 0b: Rx<i> output signal invalid or muted; 1b: Rx<i> output signal valid."
+
+  - name: output_status_tx
+    display_name: OutputStatusTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 133
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    since: "5.0"
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: muted_or_invalid, description: "Tx output signal muted or invalid" }
+      - { value: 1, name: valid, description: "Tx output signal valid" }
+    provenance:
+      section: "§ 8.10.2"
+      pdf_page: 209
+      table: "Table 8-85"
+      quote: "OutputStatusTx<i>: 0b: Tx<i> output signal muted or invalid; 1b: Tx<i> output signal valid."
+
+  # ===========================================================================
+  # § 8.10.3 Lane-Specific Flags (bytes 134-153)
+  # All RO/COR (clear-on-read latched flags).
+  # Tables 8-86, 8-87, 8-88.
+  # ===========================================================================
+
+  - name: dp_state_changed_flag
+    display_name: DPStateChangedFlag<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 134
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 210
+      table: "Table 8-86"
+      quote: "Latched Data Path State Changed Flag, host lane <i>."
+
+  - name: failure_flag_tx
+    display_name: FailureFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 135
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 210
+      table: "Table 8-87"
+      quote: "Latched Tx Failure Flag, affecting media lane <i>. Indicates an internal failure causing unspecified malfunction in the Tx facility used by media lane <i>. Formerly named Tx Fault. Advertisement: 01h:157.0."
+
+  - name: los_flag_tx
+    display_name: LOSFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 136
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 210
+      table: "Table 8-87"
+      quote: "Latched Tx LOS Flag, host lane <i>. Advertisement: 01h:157.1."
+
+  - name: cdr_lol_flag_tx
+    display_name: CDRLOLFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 137
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 210
+      table: "Table 8-87"
+      quote: "Latched Tx CDR LOL Flag, host lane <i>. Advertisement: 01h:157.2."
+
+  - name: adaptive_input_eq_fail_flag_tx
+    display_name: AdaptiveInputEqFailFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 138
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 210
+      table: "Table 8-87"
+      quote: "Latched Tx Adaptive Input Eq Fail, host lane <i>. Advertisement: 01h:157.3."
+
+  - name: optical_power_high_alarm_flag_tx
+    display_name: OpticalPowerHighAlarmFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 139
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.3"
+      pdf_page: 210
+      table: "Table 8-87"
+      quote: "Latched Tx output power High Alarm, media lane <i>. Advertisement: 01h:160.1."

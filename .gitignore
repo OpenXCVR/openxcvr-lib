@@ -1,0 +1,42 @@
+# Rust build artifacts
+target/
+**/target/
+Cargo.lock
+
+# Python tooling byproducts
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local generated scratch/output directories. Canonical generated binding
+# surfaces committed under bindings/ remain tracked.
+**/build/
+**/dist/
+**/*.egg-info/
+
+# Local standards PDFs and large scratch fixtures
+*.pdf
+docs/stds/**/*.pdf
+tests/fixtures/**/large/
+
+# Local environment and editor/OS cruft
+.env
+.env.local
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local agent worktrees
+.worktrees/
+
+# Local harness/session state
+/.pi/
+/.serena/
+
+/.claude/*
+!/.claude/agents/

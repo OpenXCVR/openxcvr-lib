@@ -1,0 +1,41 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisModuleFaultCause
+title: CMIS Module Fault Cause (8-bit)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.2.10 / Table 8-16
+  pdf_pages: [153]
+entries:
+  - value: 0x00
+    name: no_fault_detected_or_field_not_supported
+    description: No fault detected, or the ModuleFaultCause field is not supported
+  - value: 0x01
+    name: tec_runaway
+    description: Thermoelectric cooler runaway fault
+  - value: 0x02
+    name: data_memory_corrupted
+    description: Data memory corrupted fault
+  - value: 0x03
+    name: program_memory_corrupted
+    description: Program memory corrupted fault
+  - value: 0x04
+    name: transmitter_fault
+    description: Transmitter fault
+  - value: 0x05
+    name: receiver_fault
+    description: Receiver fault
+  - value: 0x06
+    name: temperature_related_fault
+    description: Temperature related fault
+  - value: 0x07..0x1f
+    name: reserved_07_1f
+    description: Reserved fault codes
+  - value: 0x20..0x3f
+    name: custom_20_3f
+    description: Custom fault codes
+  - value: 0x40..0xff
+    name: reserved_40_ff
+    description: Reserved general codes

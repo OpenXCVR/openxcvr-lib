@@ -1,0 +1,116 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CCmisVdmObservableType
+title: C-CMIS 1.4 VDM Observable Type (Coherent Monitors)
+spec:
+  id: c-cmis-1.4
+  revision: "01.4"
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.4 § 7.3.1 Table 8
+  pdf_pages: [15, 16]
+entries:
+  - value: 0x80
+    name: modulator_bias_xi
+    description: Modulator bias for XI component
+    tags: [data_type:u16, unit:%, lsb_scaling:100/65535, instance:basic]
+  - value: 0x81
+    name: modulator_bias_xq
+    description: Modulator bias for XQ component
+    tags: [data_type:u16, unit:%, lsb_scaling:100/65535, instance:basic]
+  - value: 0x82
+    name: modulator_bias_yi
+    description: Modulator bias for YI component
+    tags: [data_type:u16, unit:%, lsb_scaling:100/65535, instance:basic]
+  - value: 0x83
+    name: modulator_bias_yq
+    description: Modulator bias for YQ component
+    tags: [data_type:u16, unit:%, lsb_scaling:100/65535, instance:basic]
+  - value: 0x84
+    name: modulator_bias_x_phase
+    description: Modulator bias for X phase
+    tags: [data_type:u16, unit:%, lsb_scaling:100/65535, instance:basic]
+  - value: 0x85
+    name: modulator_bias_y_phase
+    description: Modulator bias for Y phase
+    tags: [data_type:u16, unit:%, lsb_scaling:100/65535, instance:basic]
+  - value: 0x86
+    name: cd_high_granularity_short_link
+    description: Chromatic dispersion, high granularity, short link
+    tags: [data_type:s16, unit:ps/nm, lsb_scaling:1, instance:basic]
+  - value: 0x87
+    name: cd_low_granularity_long_link
+    description: Chromatic dispersion, low granularity, long link
+    tags: [data_type:s16, unit:ps/nm, lsb_scaling:20, instance:basic]
+  - value: 0x88
+    name: dgd
+    description: Differential group delay
+    tags: [data_type:u16, unit:ps, lsb_scaling:0.01, instance:basic]
+  - value: 0x89
+    name: sopmd_high_granularity
+    description: Second-order polarization mode dispersion, high granularity
+    tags: [data_type:u16, "unit:ps²", lsb_scaling:0.01, instance:basic]
+  - value: 0x8a
+    name: pdl
+    description: Polarization dependent loss
+    tags: [data_type:u16, unit:dB, lsb_scaling:0.1, instance:basic]
+  - value: 0x8b
+    name: osnr
+    description: Optical signal-to-noise ratio
+    tags: [data_type:u16, unit:dB, lsb_scaling:0.1, instance:basic]
+  - value: 0x8c
+    name: esnr
+    description: Electrical signal-to-noise ratio
+    tags: [data_type:u16, unit:dB, lsb_scaling:0.1, instance:basic]
+  - value: 0x8d
+    name: cfo
+    description: Carrier frequency offset
+    tags: [data_type:s16, unit:MHz, lsb_scaling:1, instance:basic]
+  - value: 0x8e
+    name: evm
+    description: Error vector magnitude
+    tags: [data_type:u16, unit:%, lsb_scaling:100/65535, instance:basic]
+  - value: 0x8f
+    name: tx_power
+    description: Transmit optical power
+    tags: [data_type:s16, unit:dBm, lsb_scaling:0.01, instance:basic]
+  - value: 0x90
+    name: rx_total_power
+    description: Receive total optical power
+    tags: [data_type:s16, unit:dBm, lsb_scaling:0.01, instance:basic]
+  - value: 0x91
+    name: rx_signal_power
+    description: Receive signal optical power
+    tags: [data_type:s16, unit:dBm, lsb_scaling:0.01, instance:basic]
+  - value: 0x92
+    name: sop_roc
+    description: State of polarization rate of change
+    tags: [data_type:u16, unit:krad/s, lsb_scaling:1, instance:basic]
+  - value: 0x93
+    name: mer
+    description: Modulation error ratio
+    tags: [data_type:u16, unit:dB, lsb_scaling:0.1, instance:basic]
+  - value: 0x94
+    name: clock_recovery_loop
+    description: Clock recovery loop status
+    tags: [data_type:s16, unit:%, lsb_scaling:100/32767, instance:basic]
+  - value: 0x95
+    name: sopmd_low_granularity
+    description: Second-order polarization mode dispersion, low granularity
+    tags: [data_type:u16, "unit:ps²", lsb_scaling:1, instance:basic]
+  - value: 0x96
+    name: snr_margin
+    description: SNR margin
+    tags: [data_type:s16, unit:dB, lsb_scaling:0.1, instance:basic]
+  - value: 0x97
+    name: q_factor
+    description: Q factor
+    tags: [data_type:u16, unit:dB, lsb_scaling:0.1, instance:basic]
+  - value: 0x98
+    name: q_margin
+    description: Q margin
+    tags: [data_type:s16, unit:dB, lsb_scaling:0.1, instance:basic]
+  - value: 0x99
+    name: cfo_low_granularity
+    description: Carrier frequency offset, low granularity
+    tags: [data_type:s16, unit:MHz, lsb_scaling:5, instance:basic]

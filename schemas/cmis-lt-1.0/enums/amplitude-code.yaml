@@ -1,0 +1,55 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtAmplitudeCode
+title: "CMIS-LT 1.0 Differential Peak-Peak Output Amplitude Code"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.3.1 and 6.5.1 (Tables 32, 67)"
+  pdf_pages: [49, 64]
+entries:
+  - value: 0x0..0x1
+    name: reserved
+    description: "Reserved"
+  - value: 0x2
+    name: mv_350
+    description: "350 +/- 25 mV"
+  - value: 0x3
+    name: mv_400
+    description: "400 +/- 25 mV"
+  - value: 0x4
+    name: mv_450
+    description: "450 +/- 25 mV"
+  - value: 0x5
+    name: mv_500
+    description: "500 +/- 25 mV"
+  - value: 0x6
+    name: mv_550
+    description: "550 +/- 25 mV"
+  - value: 0x7
+    name: mv_600
+    description: "600 +/- 25 mV"
+  - value: 0x8
+    name: mv_650
+    description: "650 +/- 25 mV"
+  - value: 0x9
+    name: mv_700
+    description: "700 +/- 25 mV"
+  - value: 0xa
+    name: mv_750
+    description: "750 +/- 25 mV"
+  - value: 0xb
+    name: mv_800
+    description: "800 +/- 25 mV"
+  - value: 0xc
+    name: mv_850
+    description: "850 +/- 25 mV"
+  - value: 0xd
+    name: mv_900
+    description: "900 +/- 25 mV"
+  - value: 0xe..0xf
+    name: reserved_2
+    description: "Reserved. Amplitude greater than 700 mV may exceed the maximum limits of OIF 112G-VSR/IEEE 100 GbE C2M specifications for low FFE tap values at TP1a."

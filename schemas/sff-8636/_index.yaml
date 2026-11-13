@@ -1,0 +1,122 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: sff-8636
+  title: SFF-8636
+  revision: "2.12"
+  source: docs/stds/sff-8636/SFF-8636-Rev2.12.pdf
+imports:
+  - ../sff-8024/_index.yaml
+kind: memory_map
+includes:
+  - enums/revision-compliance.yaml
+  - enums/device-technology.yaml
+  - enums/rate-select.yaml
+  - enums/rx-output-amplitude.yaml
+  - enums/tx-input-equalization.yaml
+  - enums/rx-output-emphasis.yaml
+  - enums/pam4-parameter-type.yaml
+  - enums/pam4-lane-mapping.yaml
+  - enums/page-22h-format-id.yaml
+  - lower-memory.yaml
+  - page-00h-upper-administrative.yaml
+  - page-02h-user-eeprom.yaml
+  - page-03h-thresholds-and-controls.yaml
+  - page-20h-pam4-monitoring-1.yaml
+  - page-21h-pam4-monitoring-2.yaml
+  - page-22h-high-accuracy-timing.yaml
+
+templates:
+  informational:
+    field_type: Informational
+    tags: [Information]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  vendor_info:
+    field_type: Informational
+    tags: ["Information::Vendor"]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  operational_parameter:
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  capability_flag:
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+
+  capability_advertisement:
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+
+  telemetry_module:
+    field_type: Telemetry
+    tags: [Monitor]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  telemetry_lane:
+    field_type: Telemetry
+    tags: [Monitor]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  status:
+    field_type: Status
+    tags: [Status]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  flag:
+    field_type: Flag
+    tags: [Flag]
+    access: ro
+    behavior: { latching: clear_on_read }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+
+  mask:
+    field_type: Mask
+    tags: [Mask]
+    access: rw
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+
+  control:
+    field_type: Control
+    tags: [Control]
+    access: rw
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+
+  threshold:
+    field_type: Threshold
+    tags: [AlarmThreshold, AlarmThresholdValue]
+    access: ro
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+
+  storage:
+    field_type: Storage
+    tags: [Storage]
+    access: rw
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+
+  reserved:
+    field_type: Reserved
+    tags: [Reserved]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+
+  vendor_specific:
+    field_type: VendorSpecific
+    tags: [VendorSpecific]
+    access: ro
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }

@@ -1,0 +1,921 @@
+{
+  "$id": "sff8636_page00h_upper_administrative.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "active_wavelength_control": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Active wavelength control",
+        "section": "SFF-8636 v2.11 § 6.3.13",
+        "table": "Table 6-19"
+      }
+    },
+    "apd_detector": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "APD detector",
+        "section": "SFF-8636 v2.11 § 6.3.13",
+        "table": "Table 6-19"
+      }
+    },
+    "cc_base": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "quote": "Check code for base ID fields",
+        "section": "SFF-8636 v2.11 § 6.3.22",
+        "table": "Table 6-15"
+      }
+    },
+    "cc_ext": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "quote": "Check code for the Extended ID Fields",
+        "section": "SFF-8636 v2.11 § 6.3.29",
+        "table": "Table 6-15"
+      }
+    },
+    "clei_present": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "CLEI code present in Page 02h",
+        "section": "SFF-8636 v2.11 § 6.3.2",
+        "table": "Table 6-16"
+      }
+    },
+    "compliance_1000base": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Gigabit Ethernet compliance codes",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_10gbase_lr": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "10GBASE-LR",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_10gbase_lrm": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "10GBASE-LRM",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_10gbase_sr": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "10GBASE-SR",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_40g_active_cable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "40G Active Cable",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_40gbase_cr4": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "40GBASE-CR4",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_40gbase_lr4": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "40GBASE-LR4",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_40gbase_sr4": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "40GBASE-SR4",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_extended": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Extended: See section 6.3.23.",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fc_electrical_inter_enclosure": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Fibre Channel transmitter technology",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fc_electrical_intra_enclosure": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Fibre Channel transmitter technology",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fc_longwave_laser": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Fibre Channel transmitter technology",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fc_shortwave_laser_with_ofc": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Fibre Channel transmitter technology",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fc_shortwave_laser_without_ofc": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Fibre Channel transmitter technology",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fibre_channel_link_length": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Fibre Channel link length",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fibre_channel_media": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "quote": "Fibre Channel transmission media",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_fibre_channel_speed": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "quote": "Fibre Channel speed",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_oc48_intermediate_reach": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "OC-48 intermediate reach",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_oc48_long_reach": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "OC-48 long reach",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_oc48_short_reach": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "OC-48 short reach",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "compliance_sas_rate": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "SAS/SATA compliance codes",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "connector_type": {
+      "$ref": "../enums/sff8024_connector_type.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 47,
+        "quote": "Connector Type",
+        "section": "SFF-8636 v2.11 § 6.3.3",
+        "table": "Table 6-15"
+      }
+    },
+    "cooled_transmitter": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Cooled transmitter",
+        "section": "SFF-8636 v2.11 § 6.3.13",
+        "table": "Table 6-19"
+      }
+    },
+    "date_code": {
+      "type": "object",
+      "x-openxcvr-note": "complex type — see schema YAML for full constraints",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "Vendor's manufacturing date code",
+        "section": "SFF-8636 v2.11 § 6.3.26",
+        "table": "Table 6-23"
+      }
+    },
+    "date_code_day": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "ASCII code, day of month",
+        "section": "SFF-8636 v2.11 § 6.3.26",
+        "table": "Table 6-23"
+      }
+    },
+    "date_code_lot_code": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "Vendor Specific lot code",
+        "section": "SFF-8636 v2.11 § 6.3.26",
+        "table": "Table 6-23"
+      }
+    },
+    "date_code_month": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "ASCII code, digits of month",
+        "section": "SFF-8636 v2.11 § 6.3.26",
+        "table": "Table 6-23"
+      }
+    },
+    "date_code_year": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "ASCII code, two low order digits of year",
+        "section": "SFF-8636 v2.11 § 6.3.26",
+        "table": "Table 6-23"
+      }
+    },
+    "device_technology": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Transmitter technology",
+        "section": "SFF-8636 v2.11 § 6.3.13",
+        "table": "Table 6-20"
+      }
+    },
+    "encoding": {
+      "$ref": "../enums/sff8024_encoding.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "quote": "Encoding",
+        "section": "SFF-8636 v2.11 § 6.3.5",
+        "table": "Table 6-15"
+      }
+    },
+    "enhanced_option": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "quote": "Enhanced Options",
+        "section": "SFF-8636 v2.11 § 6.3.28",
+        "table": "Table 6-25"
+      }
+    },
+    "ext_baud_rate": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "250 MBd",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "quote": "Extended Baud Rate: Nominal",
+        "section": "SFF-8636 v2.11 § 6.3.28",
+        "table": "Table 6-26"
+      }
+    },
+    "ext_spec_compliance": {
+      "$ref": "../enums/sff8024_extended_spec_compliance.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "quote": "Extended Specification Compliance Codes",
+        "section": "SFF-8636 v2.11 § 6.3.23",
+        "table": "Table 6-15"
+      }
+    },
+    "extended_rate_select_version": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.0: 'Added Version 2 to address 141' (Version 2 Rate Select)",
+        "pdf_page": 49,
+        "quote": "Extended Rate Select Compliance",
+        "section": "SFF-8636 v2.11 § 6.3.7",
+        "table": "Table 6-18"
+      },
+      "x-openxcvr-since": "2.0"
+    },
+    "infiniband_compliance": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Extended Module Code Values",
+        "section": "SFF-8636 v2.11 § 6.3.15",
+        "table": "Table 6-21"
+      }
+    },
+    "intl_rx_losl_configurable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits at Page 00h, Byte 193, bits 6-5' per SFF-8679",
+        "pdf_page": 54,
+        "quote": "IntL/RxLOSL output signal is configurable",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "length_cable_or_om4": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Length: Cable Assembly or Optical Fiber",
+        "section": "SFF-8636 v2.11 § 6.3.12",
+        "table": "Table 6-15"
+      }
+    },
+    "length_om1_or_copper_attenuation_25p78ghz": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Length (OM1) or Copper Cable Attenuation",
+        "section": "SFF-8636 v2.11 § 6.3.11",
+        "table": "Table 6-15"
+      }
+    },
+    "length_om2_1m": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 m",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Length (OM2)",
+        "section": "SFF-8636 v2.11 § 6.3.10",
+        "table": "Table 6-15"
+      }
+    },
+    "length_om3_2m": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "2 m",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Length (OM3)",
+        "section": "SFF-8636 v2.11 § 6.3.9",
+        "table": "Table 6-15"
+      }
+    },
+    "length_smf_km": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 km",
+      "x-openxcvr-provenance": {
+        "pdf_page": 50,
+        "quote": "Length (Standard SM Fiber) -km",
+        "section": "SFF-8636 v2.11 § 6.3.8",
+        "table": "Table 6-15"
+      }
+    },
+    "lpmode_txdis_configurable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising bits at Page 00h, Byte 193, bits 6-5' per SFF-8679",
+        "pdf_page": 54,
+        "quote": "LPMode/TxDis input signal is configurable",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "max_case_temperature": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 deg C",
+      "x-openxcvr-provenance": {
+        "pdf_page": 53,
+        "quote": "Maximum Case Temperature",
+        "section": "SFF-8636 v2.11 § 6.3.21",
+        "table": "Table 6-15"
+      }
+    },
+    "nominal_signaling_rate": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "100 MBd",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "quote": "Nominal Signaling Rate",
+        "section": "SFF-8636 v2.11 § 6.3.6",
+        "table": "Table 6-15"
+      }
+    },
+    "option_control_or_flag_support": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 54,
+        "quote": "Optional features implemented",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      }
+    },
+    "power_class_8_implemented": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: power class 8 per SFF-8679",
+        "pdf_page": 46,
+        "quote": "Power Class 8 implemented",
+        "section": "SFF-8636 v2.11 § 6.3.2",
+        "table": "Table 6-16"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "power_class_high": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Extended Identifier Values",
+        "section": "SFF-8636 v2.11 § 6.3.2",
+        "table": "Table 6-16"
+      }
+    },
+    "power_class_low": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Power Class",
+        "section": "SFF-8636 v2.11 § 6.3.2",
+        "table": "Table 6-16"
+      }
+    },
+    "reserved_compliance_sas_low_bits": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "reserved_compliance_sonet_high_bits": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 48,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.3.4",
+        "table": "Table 6-17"
+      }
+    },
+    "reserved_diagnostic_monitoring_type": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.3.27",
+        "table": "Table 6-24"
+      }
+    },
+    "reserved_enhanced_options_high": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 56,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.3.28",
+        "table": "Table 6-25"
+      }
+    },
+    "reserved_extended_rate_select": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 49,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.3.7",
+        "table": "Table 6-18"
+      }
+    },
+    "rx_cdr_present": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "CDR present in Rx path",
+        "section": "SFF-8636 v2.11 § 6.3.2",
+        "table": "Table 6-16"
+      }
+    },
+    "rx_output_amplitude_capable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 54,
+        "quote": "Rx output amplitude fixed-programmable settings",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      }
+    },
+    "rx_output_emphasis_capable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 54,
+        "quote": "Rx output emphasis fixed-programmable settings",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      }
+    },
+    "rx_power_average": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "Received power measurement type",
+        "section": "SFF-8636 v2.11 § 6.3.27",
+        "table": "Table 6-24"
+      }
+    },
+    "sff8024_identifier_copy": {
+      "$ref": "../enums/sff8024_identifier.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "Identifier Type of free side device",
+        "section": "SFF-8636 v2.11 § 6.3.1",
+        "table": "Table 6-15"
+      }
+    },
+    "temperature_monitoring_implemented": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "Temperature monitoring implemented",
+        "section": "SFF-8636 v2.11 § 6.3.27",
+        "table": "Table 6-24"
+      }
+    },
+    "transmitter_tunable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Transmitter tunable",
+        "section": "SFF-8636 v2.11 § 6.3.13",
+        "table": "Table 6-19"
+      }
+    },
+    "tx_adaptive_equalizer_capable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Adaptive EQ indicator in Address 193 bit 3'; bits 7-3 reserved in the Rev 1.7 map",
+        "pdf_page": 54,
+        "quote": "Tx input equalizers auto-adaptive capable",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      },
+      "x-openxcvr-since": "2.0"
+    },
+    "tx_cdr_present": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 46,
+        "quote": "CDR present in Tx path",
+        "section": "SFF-8636 v2.11 § 6.3.2",
+        "table": "Table 6-16"
+      }
+    },
+    "tx_equalizer_freeze_capable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.9 publication: 'Changed byte 193 bit 4 from reserved to Tx Input Adaptive Equalizer Freeze Capable'",
+        "pdf_page": 54,
+        "quote": "Tx input adaptive equalizers freeze capable",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      },
+      "x-openxcvr-since": "2.8"
+    },
+    "tx_fixed_equalizer_capable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 54,
+        "quote": "Tx input equalizers fixed-programmable settings",
+        "section": "SFF-8636 v2.11 § 6.3.24",
+        "table": "Table 6-22"
+      }
+    },
+    "tx_power_monitoring_implemented": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Address 220 bit 2 to identify Tx Power diagnostic monitoring supported'",
+        "pdf_page": 55,
+        "quote": "Transmitter power measurement supported",
+        "section": "SFF-8636 v2.11 § 6.3.27",
+        "table": "Table 6-24"
+      },
+      "x-openxcvr-since": "2.0"
+    },
+    "vendor_name": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 51,
+        "quote": "Free side device vendor name",
+        "section": "SFF-8636 v2.11 § 6.3.14",
+        "table": "Table 6-15"
+      }
+    },
+    "vendor_oui": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "quote": "Vendor OUI",
+        "section": "SFF-8636 v2.11 § 6.3.16",
+        "table": "Table 6-15"
+      }
+    },
+    "vendor_pn": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "quote": "Vendor PN",
+        "section": "SFF-8636 v2.11 § 6.3.17",
+        "table": "Table 6-15"
+      }
+    },
+    "vendor_rev": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "quote": "Vendor rev",
+        "section": "SFF-8636 v2.11 § 6.3.18",
+        "table": "Table 6-15"
+      }
+    },
+    "vendor_sn": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "Vendor SN",
+        "section": "SFF-8636 v2.11 § 6.3.25",
+        "table": "Table 6-15"
+      }
+    },
+    "vendor_specific": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 57,
+        "quote": "Vendor Specific EEPROM",
+        "section": "SFF-8636 v2.11 § 6.3.30",
+        "table": "Table 6-15"
+      }
+    },
+    "voltage_monitoring_implemented": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 55,
+        "quote": "Supply voltage monitoring implemented",
+        "section": "SFF-8636 v2.11 § 6.3.27",
+        "table": "Table 6-24"
+      }
+    },
+    "wavelength_or_copper_attenuation_2p5_5ghz": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "quote": "Wavelength or Copper Cable Attenuation",
+        "section": "SFF-8636 v2.11 § 6.3.19",
+        "table": "Table 6-15"
+      }
+    },
+    "wavelength_tolerance_or_copper_attenuation_7_12p9ghz": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 52,
+        "quote": "Wavelength Tolerance or Copper Cable Attenuation",
+        "section": "SFF-8636 v2.11 § 6.3.20",
+        "table": "Table 6-15"
+      }
+    }
+  },
+  "required": [
+    "sff8024_identifier_copy",
+    "power_class_low",
+    "rx_cdr_present",
+    "tx_cdr_present",
+    "clei_present",
+    "power_class_8_implemented",
+    "power_class_high",
+    "connector_type",
+    "compliance_extended",
+    "compliance_10gbase_lrm",
+    "compliance_10gbase_lr",
+    "compliance_10gbase_sr",
+    "compliance_40gbase_cr4",
+    "compliance_40gbase_sr4",
+    "compliance_40gbase_lr4",
+    "compliance_40g_active_cable",
+    "compliance_oc48_long_reach",
+    "compliance_oc48_intermediate_reach",
+    "compliance_oc48_short_reach",
+    "compliance_sas_rate",
+    "compliance_1000base",
+    "compliance_fibre_channel_link_length",
+    "compliance_fc_longwave_laser",
+    "compliance_fc_electrical_inter_enclosure",
+    "compliance_fc_electrical_intra_enclosure",
+    "compliance_fc_shortwave_laser_without_ofc",
+    "compliance_fc_shortwave_laser_with_ofc",
+    "compliance_fibre_channel_media",
+    "compliance_fibre_channel_speed",
+    "encoding",
+    "nominal_signaling_rate",
+    "extended_rate_select_version",
+    "length_smf_km",
+    "length_om3_2m",
+    "length_om2_1m",
+    "length_om1_or_copper_attenuation_25p78ghz",
+    "length_cable_or_om4",
+    "device_technology",
+    "active_wavelength_control",
+    "cooled_transmitter",
+    "apd_detector",
+    "transmitter_tunable",
+    "vendor_name",
+    "infiniband_compliance",
+    "vendor_oui",
+    "vendor_pn",
+    "vendor_rev",
+    "wavelength_or_copper_attenuation_2p5_5ghz",
+    "wavelength_tolerance_or_copper_attenuation_7_12p9ghz",
+    "max_case_temperature",
+    "cc_base",
+    "ext_spec_compliance",
+    "lpmode_txdis_configurable",
+    "intl_rx_losl_configurable",
+    "tx_equalizer_freeze_capable",
+    "tx_adaptive_equalizer_capable",
+    "tx_fixed_equalizer_capable",
+    "rx_output_emphasis_capable",
+    "rx_output_amplitude_capable",
+    "option_control_or_flag_support",
+    "vendor_sn",
+    "date_code",
+    "date_code_year",
+    "date_code_month",
+    "date_code_day",
+    "date_code_lot_code",
+    "temperature_monitoring_implemented",
+    "voltage_monitoring_implemented",
+    "rx_power_average",
+    "tx_power_monitoring_implemented",
+    "enhanced_option",
+    "ext_baud_rate",
+    "cc_ext",
+    "vendor_specific",
+    "reserved_compliance_sonet_high_bits",
+    "reserved_compliance_sas_low_bits",
+    "reserved_extended_rate_select",
+    "reserved_diagnostic_monitoring_type",
+    "reserved_enhanced_options_high"
+  ],
+  "title": "Sff8636Page00hUpperAdministrative",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57
+    ],
+    "spec": "SFF-8636 v2.11 § 6.3"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

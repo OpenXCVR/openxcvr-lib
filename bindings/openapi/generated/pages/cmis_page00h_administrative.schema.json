@@ -1,0 +1,489 @@
+{
+  "$id": "cmis_page00h_administrative.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "attenuation_at_12p9ghz": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 dB",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "U8 cable attenuation at 12.9 GHz in 1 dB increments",
+        "section": "§ 8.3.6",
+        "table": "Table 8-34"
+      }
+    },
+    "attenuation_at_25p8ghz": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 dB",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "U8 cable attenuation at 25.8 GHz in 1 dB increments",
+        "section": "§ 8.3.6",
+        "table": "Table 8-34"
+      }
+    },
+    "attenuation_at_53p1ghz": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 dB",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "U8 cable attenuation at 53.125 GHz in 1 dB increments.",
+        "section": "§ 8.3.6",
+        "table": "Table 8-34"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "attenuation_at_5ghz": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 dB",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "U8 cable attenuation at 5 GHz in 1 dB increments",
+        "section": "§ 8.3.6",
+        "table": "Table 8-34"
+      }
+    },
+    "attenuation_at_7ghz": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1 dB",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "U8 cable attenuation at 7 GHz in 1 dB increments",
+        "section": "§ 8.3.6",
+        "table": "Table 8-34"
+      }
+    },
+    "base_length": {
+      "maximum": 63,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 163,
+        "quote": "Link length base value in meters. To calculate actual link length use multiplier in bits 7-6.",
+        "section": "§ 8.3.4",
+        "table": "Table 8-32"
+      }
+    },
+    "clei_code": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "The CLEI (Common Language Equipment Identification) code is a 10-byte field that contains the vendor's CLEI code in ASCII characters.",
+        "section": "§ 8.3.2.7",
+        "table": "Table 8-30"
+      }
+    },
+    "connector_type": {
+      "$ref": "../enums/sff8024_connector_type.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 163,
+        "quote": "Type of connector present in the module. See Table 4-3 in [5] for Connector Type codes.",
+        "section": "§ 8.3.5",
+        "table": "Table 8-33"
+      }
+    },
+    "custom_administrative_221": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 161,
+        "quote": "Custom [1]",
+        "section": "§ 8.3",
+        "table": "Table 8-26"
+      }
+    },
+    "custom_administrative_223_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 167,
+        "quote": "Bytes 223-255 are allocated in non-volatile storage for information provided by the original manufacturer of the module or the module reseller.",
+        "section": "§ 8.3.12"
+      }
+    },
+    "date_code": {
+      "type": "object",
+      "x-openxcvr-note": "complex type — see schema YAML for full constraints",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "The DateCode is an 8-byte field that contains the vendor's date code in ASCII characters. The date code is mandatory.",
+        "section": "§ 8.3.2.6",
+        "table": "Table 8-29"
+      }
+    },
+    "date_code_day_of_month": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "ASCII day of month (01-31)",
+        "section": "§ 8.3.2.6",
+        "table": "Table 8-29"
+      }
+    },
+    "date_code_lot_code": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "ASCII custom lot code, may be blank",
+        "section": "§ 8.3.2.6",
+        "table": "Table 8-29"
+      }
+    },
+    "date_code_month": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "ASCII digits of month (01=Jan through 12=Dec)",
+        "section": "§ 8.3.2.6",
+        "table": "Table 8-29"
+      }
+    },
+    "date_code_year": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "ASCII two low order digits of year (00=2000)",
+        "section": "§ 8.3.2.6",
+        "table": "Table 8-29"
+      }
+    },
+    "far_end_configuration": {
+      "maximum": 31,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 165,
+        "quote": "Configuration of the far end module breakout. See Table 8-38 for configuration codes",
+        "section": "§ 8.3.8",
+        "table": "Table 8-36 / Table 8-38"
+      }
+    },
+    "length_multiplier": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 163,
+        "quote": "Multiplier for value in bits 5-0: 00: multiplier 0.1 01: multiplier 1 10: multiplier 10 11: multiplier 100",
+        "section": "§ 8.3.4",
+        "table": "Table 8-32"
+      }
+    },
+    "max_power": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "0.25 W",
+      "x-openxcvr-provenance": {
+        "pdf_page": 163,
+        "quote": "Maximum power consumption in multiples of 0.25 W rounded up to the next whole multiple of 0.25 W",
+        "section": "§ 8.3.3",
+        "table": "Table 8-31"
+      }
+    },
+    "mci_flow_control_duration": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 167,
+        "quote": "Used by both host and module to compute the number of dummy bytes sent by the host during the Flow Control phase, in encoding dependent manner",
+        "section": "§ 8.3.10",
+        "table": "Table 8-41"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "mci_flow_control_duration_encoding": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 167,
+        "quote": "Defines the method to determine the duration of the Flow Control Phase 0b: static (given as number of bytes) 1b: speed-dependent (given as a duration)",
+        "section": "§ 8.3.10",
+        "table": "Table 8-41"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "media_interface_technology": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 166,
+        "quote": "Media Interface Technology as per Table 8-40",
+        "section": "§ 8.3.9",
+        "table": "Table 8-39 / Table 8-40"
+      }
+    },
+    "media_lane_unsupported_lane_1": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "media_lane_unsupported_lane_2": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "media_lane_unsupported_lane_3": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "media_lane_unsupported_lane_4": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "media_lane_unsupported_lane_5": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "media_lane_unsupported_lane_6": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "media_lane_unsupported_lane_7": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "media_lane_unsupported_lane_8": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "0b: Media Lane <i> supported 1b: Media Lane <i> not supported",
+        "section": "§ 8.3.7",
+        "table": "Table 8-35"
+      }
+    },
+    "module_power_class": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 163,
+        "quote": "The ModulePowerClass field provides a form factor specific classification of the MaxPower value.",
+        "section": "§ 8.3.3",
+        "table": "Table 8-31"
+      }
+    },
+    "page_checksum": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 167,
+        "quote": "The page checksum value shall be the low order 8 bits of the arithmetic sum of all byte values from byte 128 to byte 221, inclusive.",
+        "section": "§ 8.3.11"
+      }
+    },
+    "reserved_administrative_215_220": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 161,
+        "quote": "Reserved [6]",
+        "section": "§ 8.3",
+        "table": "Table 8-26"
+      }
+    },
+    "reserved_cable_assembly_information": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 165,
+        "quote": "Reserved",
+        "section": "§ 8.3.8",
+        "table": "Table 8-36"
+      }
+    },
+    "reserved_copper_cable_attenuation": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 164,
+        "quote": "Reserved",
+        "section": "§ 8.3.6",
+        "table": "Table 8-34"
+      }
+    },
+    "reserved_mci_related_advertisement": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 167,
+        "quote": "Reserved",
+        "section": "§ 8.3.10",
+        "table": "Table 8-41"
+      }
+    },
+    "reserved_module_power_characteristics": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 163,
+        "quote": "Reserved",
+        "section": "§ 8.3.3",
+        "table": "Table 8-31"
+      }
+    },
+    "sff8024_identifier_copy": {
+      "$ref": "../enums/sff8024_identifier.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 161,
+        "quote": "This Byte shall contain the same value as the SFF8024 Identifier Byte 00h:0. See Byte 00h:0 for a description of its meaning.",
+        "section": "§ 8.3.1",
+        "table": "Table 8-27"
+      }
+    },
+    "vendor_name": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "The VendorName is a 16 character read-only field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h).",
+        "section": "§ 8.3.2.1"
+      }
+    },
+    "vendor_oui": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "The vendor organizationally unique identifier field (VendorOUI) is a 3-byte field that contains the IEEE Company Identifier for the vendor.",
+        "section": "§ 8.3.2.2"
+      }
+    },
+    "vendor_pn": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "The vendor part number (VendorPN) is a 16-byte field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h), defining the vendor part number or product name.",
+        "section": "§ 8.3.2.3"
+      }
+    },
+    "vendor_rev": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "The vendor revision number (VendorRev) is a 2-byte field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h), defining the vendor's product revision number.",
+        "section": "§ 8.3.2.4"
+      }
+    },
+    "vendor_sn": {
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 162,
+        "quote": "The vendor serial number (VendorSN) is a 16-character field that contains ASCII characters, left aligned and padded on the right with ASCII spaces (20h), defining the vendor's serial number for the Product.",
+        "section": "§ 8.3.2.5"
+      }
+    }
+  },
+  "required": [
+    "sff8024_identifier_copy",
+    "vendor_name",
+    "vendor_oui",
+    "vendor_pn",
+    "vendor_rev",
+    "vendor_sn",
+    "date_code",
+    "date_code_year",
+    "date_code_month",
+    "date_code_day_of_month",
+    "date_code_lot_code",
+    "clei_code",
+    "module_power_class",
+    "reserved_module_power_characteristics",
+    "max_power",
+    "length_multiplier",
+    "base_length",
+    "connector_type",
+    "attenuation_at_5ghz",
+    "attenuation_at_7ghz",
+    "attenuation_at_12p9ghz",
+    "attenuation_at_25p8ghz",
+    "attenuation_at_53p1ghz",
+    "reserved_copper_cable_attenuation",
+    "media_lane_unsupported_lane_1",
+    "media_lane_unsupported_lane_2",
+    "media_lane_unsupported_lane_3",
+    "media_lane_unsupported_lane_4",
+    "media_lane_unsupported_lane_5",
+    "media_lane_unsupported_lane_6",
+    "media_lane_unsupported_lane_7",
+    "media_lane_unsupported_lane_8",
+    "reserved_cable_assembly_information",
+    "far_end_configuration",
+    "media_interface_technology",
+    "mci_flow_control_duration_encoding",
+    "mci_flow_control_duration",
+    "reserved_mci_related_advertisement",
+    "reserved_administrative_215_220",
+    "custom_administrative_221",
+    "page_checksum",
+    "custom_administrative_223_255"
+  ],
+  "title": "CmisPage00hAdministrative",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167
+    ],
+    "spec": "CMIS 5.3 § 8.3"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

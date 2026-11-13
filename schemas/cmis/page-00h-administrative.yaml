@@ -1,0 +1,23 @@
+schema: openxcvr.page.v2
+kind: page
+id: CmisPage00hAdministrative
+title: CMIS Page 00h Administrative Information
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.3
+  pdf_pages: [161, 162, 163, 164, 165, 166, 167]
+page_address: 00h
+size_bytes: 128
+
+field_includes:
+  - fields/page-00h-administrative-part-01.yaml
+  - fields/page-00h-administrative-part-02.yaml
+  - fields/page-00h-administrative-part-03.yaml
+  - fields/page-00h-administrative-part-04.yaml
+  - fields/page-00h-administrative-part-05.yaml
+fields: []

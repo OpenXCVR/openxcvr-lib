@@ -1,0 +1,214 @@
+fields:
+  # ===========================================================================
+  # OIF-CMIS-FF-01.0 § 7.7, Table 15: Fibre Channel Rate Select
+  # (bytes 133-134)
+  # ===========================================================================
+
+  - name: hw_rate_select_supported
+    display_name: HWRateSelectSupported
+    description: >-
+      Module supports hardware rate select (0b: not supported, 1b:
+      supported).
+    offset: 133
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CMIS-FF, Advertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Module supports hardware rate select 0b: Not supported 1b: Supported"
+
+  - name: rate_select_mode
+    display_name: RateSelectMode
+    description: >-
+      Rate selection by hardware signals (0b: enabled — the state of the rate
+      select hardware signal(s) determines which preprogrammed CMIS staged
+      control set is applied during configuration (ApplyDPInit) or applied on
+      state change of these signals (ApplyImmediate); 1b: disabled — the rate
+      selection hardware signals are not evaluated and the module behaves
+      like a regular CMIS module).
+    offset: 133
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [CMIS-FF, Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Rate selection by HWsignals 0b: Enabled. The state of the rate select hardware signal(s) determines which preprogrammed CMIS staged control set is applied during configuration (ApplyDPInit) or applied on state change of these signals (ApplyImmediate). 1b: Disabled."
+
+  - name: reserved_133_5_0
+    display_name: Reserved133Bits5To0
+    description: Reserved bits 5 through 0 of byte 133.
+    offset: 133
+    bit_offset: 0
+    bit_width: 6
+    type: bitmap
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Reserved"
+
+  - name: hw_status_speed_1
+    display_name: HWStatusSpeed1
+    description: >-
+      Logical status of SFP-DD/SFP-DD112 lane 1 receive CDR rate (0b: 16 GFC,
+      1b: 32 GFC).
+    offset: 134
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [CMIS-FF, Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 1 receive CDR rate 0b: 16 GFC 1b: 32 GFC"
+
+  - name: hw_status_speed_2
+    display_name: HWStatusSpeed2
+    description: >-
+      Logical status of SFP-DD/SFP-DD112 lane 1 transmit CDR rate (0b: 16 GFC,
+      1b: 32 GFC).
+    offset: 134
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [CMIS-FF, Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 1 transmit CDR rate 0b: 16 GFC 1b: 32 GFC"
+
+  - name: hw_status_1_dd
+    display_name: HWStatus1DD
+    description: >-
+      Logical status of SFP-DD/SFP-DD112 lane 2 receive CDR rate (0b: 16 GFC,
+      1b: 32 GFC). The field name HWStatus1DD is recorded as printed in
+      Table 15.
+    offset: 134
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [CMIS-FF, Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 2 receive CDR rate 0b: 16 GFC 1b: 32 GFC"
+
+  - name: hw_status_speed_2_dd
+    display_name: HWStatusSpeed2DD
+    description: >-
+      Logical status of SFP-DD/SFP-DD112 lane 2 transmit CDR rate (0b: 16 GFC,
+      1b: 32 GFC).
+    offset: 134
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [CMIS-FF, Status]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Logical status of SFP-DD/SFP-DD112 lane 2 transmit CDR rate 0b: 16 GFC 1b: 32 GFC"
+
+  - name: reserved_134_3_0
+    display_name: Reserved134Bits3To0
+    description: Reserved bits 3 through 0 of byte 134.
+    offset: 134
+    bit_offset: 0
+    bit_width: 4
+    type: bitmap
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      spec: OIF-CMIS-FF-01.0
+      section: "§ 7.7"
+      pdf_page: 30
+      table: "Table 15"
+      quote: "Reserved"

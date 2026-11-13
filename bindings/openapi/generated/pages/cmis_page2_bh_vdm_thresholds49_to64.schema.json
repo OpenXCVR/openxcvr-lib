@@ -1,0 +1,99 @@
+{
+  "$id": "cmis_page2_bh_vdm_thresholds49_to64.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "high_alarm_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 277,
+        "quote": "HighAlarmThreshold49",
+        "section": "CMIS 5.3 § 8.22.3",
+        "table": "Table 8-172"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "high_warning_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 277,
+        "quote": "HighWarningThreshold64",
+        "section": "CMIS 5.3 § 8.22.3",
+        "table": "Table 8-172"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "low_alarm_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 277,
+        "quote": "LowAlarmThreshold64",
+        "section": "CMIS 5.3 § 8.22.3",
+        "table": "Table 8-172"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "low_warning_threshold": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 277,
+        "quote": "LowWarningThreshold64",
+        "section": "CMIS 5.3 § 8.22.3",
+        "table": "Table 8-172"
+      },
+      "x-openxcvr-since": "4.0"
+    }
+  },
+  "required": [
+    "high_alarm_threshold",
+    "low_alarm_threshold",
+    "high_warning_threshold",
+    "low_warning_threshold"
+  ],
+  "title": "CmisPage2BhVdmThresholds49To64",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      276,
+      277
+    ],
+    "spec": "CMIS 5.3 § 8.22.3"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

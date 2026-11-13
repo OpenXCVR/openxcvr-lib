@@ -1,0 +1,39 @@
+{
+  "$id": "sff8024_fiber_face_type.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Unknown or unspecified fiber face type",
+      "title": "unknown_or_unspecified"
+    },
+    {
+      "const": 1,
+      "description": "Physical or ultra physical contact fiber face",
+      "title": "pc_upc"
+    },
+    {
+      "const": 2,
+      "description": "Angled physical contact fiber face",
+      "title": "apc"
+    },
+    {
+      "const": 3,
+      "description": "Reserved",
+      "title": "reserved_03"
+    }
+  ],
+  "title": "Sff8024FiberFaceType",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      36
+    ],
+    "spec": "SFF-8024 4.14 Table 4-12"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8024",
+    "revision": "4.14"
+  }
+}

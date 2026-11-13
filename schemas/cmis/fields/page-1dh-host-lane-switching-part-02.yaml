@@ -1,0 +1,195 @@
+fields:
+  - name: reserved_page_1dh_161_167
+    display_name: ReservedPage1Dh161To167
+    offset: 161
+    size_bytes: 7
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.21"
+      pdf_page: 270
+      table: "Table 8-166"
+      quote: "Bytes 161-167: Reserved [7]"
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.21 Command Results (bytes 168-183) - Table 8-166
+  # ===========================================================================
+
+  - name: redirection_commit_result
+    display_name: RedirectionCommitResult
+    offset: 168
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: CmisRedirectionCommitResult
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lanes: [1, 2, 3, 4, 5, 6, 7, 8] }
+    until: "5.4"
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.21"
+      pdf_page: 270
+      table: "Table 8-166"
+      quote: "RedirectionCommitResult<i> encodes the result of the last (or current) host lane switching commit command on lane <i>."
+
+  - name: reserved_page_1dh_169_183
+    display_name: ReservedPage1Dh169To183
+    offset: 169
+    size_bytes: 15
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    until: "5.4"
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.21"
+      pdf_page: 270
+      table: "Table 8-166"
+      quote: "Bytes 169-183: Reserved [15]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.25 Table 8-176: RedirectionCommitResult[8] becomes a
+  # per-lane byte array across 168-175 (5.3 encoded a single result byte at
+  # 168); the reserved tail shrinks from 169-183 to 176-183.
+  # ===========================================================================
+
+  - name: redirection_commit_result_lane
+    display_name: RedirectionCommitResultLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "168 + (lane - 1)"
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: CmisRedirectionCommitResult
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    since: "5.4"
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.25"
+      pdf_page: 299
+      table: "Table 8-176"
+      quote: "RedirectionCommitResult<i> encodes the result of the last (or current) host lane switching commit command on lane <i>"
+
+  - name: reserved_page_1dh_176_183
+    display_name: ReservedPage1Dh176To183
+    offset: 176
+    size_bytes: 8
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    since: "5.4"
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.25"
+      pdf_page: 299
+      table: "Table 8-176"
+      quote: "Bytes 176-183: Reserved [8]"
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.21 Configuration Status (bytes 184-199) - Table 8-166
+  # ===========================================================================
+
+  - name: redirect_status_of_lane
+    display_name: RedirectStatusOfLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "184 + (lane - 1)"
+    size_bytes: 1
+    type: u8
+    description: "Value is the nominal host lane number j in {1..8} to which electrical host lane <lane> is currently redirected; default value is j = lane."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.21"
+      pdf_page: 270
+      table: "Table 8-166"
+      quote: "RedirectStatusOfLane<i> contains the nominal lane number j in {1, ..., 8} to which the electrical host lane <i> is redirected. Default value: j = i."
+
+  - name: reserved_page_1dh_192_199
+    display_name: ReservedPage1Dh192To199
+    offset: 192
+    size_bytes: 8
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.21"
+      pdf_page: 270
+      table: "Table 8-166"
+      quote: "Bytes 192-199: Reserved [8]"
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.21 Page 1Dh reserved tail - Table 8-165
+  # ===========================================================================
+
+  - name: reserved_page_1dh_200_255
+    display_name: ReservedPage1Dh200To255
+    offset: 200
+    size_bytes: 56
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.21"
+      pdf_page: 269
+      table: "Table 8-165"
+      quote: "Bytes 200-255: Reserved [56]"

@@ -1,0 +1,86 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbFirmwareDownloadStart
+title: CMIS CDB Command 0101h - Start Firmware Download
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.7.2
+  pdf_pages: [310, 311]
+  table: Table 9-20
+cmd_id: 0x0101
+available_since: "4.0"
+cmd_id_group: firmware_management
+command_class: conditionally_required
+description: >
+  Starts a firmware update transaction and optionally supplies the first
+  vendor-defined image header bytes. On success, subsequent firmware image
+  blocks may be written with the advertised LPL or EPL write commands.
+advertisement:
+  via_cmd: 0x0041
+  field: firmware_management_features.write_mechanism
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+  - { field: lower_memory.module_state, equals: module_ready }
+max_completion_time:
+  source: advertised
+  field: firmware_management_features.max_duration_start
+processing_mode: configurable
+cmd:
+  lpl:
+    length: variable
+    fields:
+      - name: image_size
+        offset: 136
+        size_bytes: 4
+        type: u32be
+        template: cdb_cmd_parameter
+        provenance: { spec: "CMIS 5.3 § 9.7.2", table: "Table 9-20" }
+      - name: reserved_140_143
+        offset: 140
+        size_bytes: 4
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        constraints: { equals: 0 }
+        provenance: { spec: "CMIS 5.3 § 9.7.2", table: "Table 9-20" }
+      - name: vendor_data
+        offset: 144
+        size_bytes: 112
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: VendorSpecific
+        tags: [CDB, Firmware, VendorSpecific]
+        length_from: page_9fh_cdb_message.lpl_length
+        provenance: { spec: "CMIS 5.3 § 9.7.2", table: "Table 9-20" }
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "4.0" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "4.0" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "4.0" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+    - { value: 0x60, name: reject_unspecific, meaning: "Unspecific reason to reject execution (Table 9-19 Reject, code 32)", since: "5.4" }
+    - { value: 0x61, name: reject_invalid_load_format, meaning: "Load format not valid (Table 9-19 RejectInvalidLoadFormat, code 33)", since: "5.4" }
+    - { value: 0x62, name: reject_invalid_load_checksum, meaning: "Load internal checksum(s) not valid (Table 9-19 RejectInvalidLoadChecksum, code 34)", since: "5.4" }
+    - { value: 0x63, name: reject_invalid_load_authentication, meaning: "Load authentication has failed (Table 9-19 RejectInvalidLoadAuthentication, code 35)", since: "5.4" }
+    - { value: 0x64, name: reject_invalid_load_target, meaning: "Load not suitable for this hardware (Table 9-19 RejectInvalidLoadTarget, code 36)", since: "5.4" }
+    - { value: 0x65, name: reject_invalid_load, meaning: "Load not supported, other unspecific reason (Table 9-19 RejectInvalidLoad, code 37)", since: "5.4" }
+    - { value: 0x66, name: reject_hitless_activation_not_available, meaning: "Hitless load activation not available (Table 9-19 RejectHitlessActivationNotAvailable, code 38)", since: "5.4" }
+    - { value: 0x67, name: reject_config_preservation_not_available, meaning: "Load activation with configuration preservation not available (Table 9-19 RejectConfigPreservationNotAvailable, code 39)", since: "5.4" }
+  lpl:
+    length: 0
+    fields: []
+behavior:
+  abort_supported: true
+  retry_safe: false
+  side_effects:
+    - "Initializes or resets the firmware download transaction state."
+    - "May erase or prepare the target firmware image storage."

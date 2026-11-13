@@ -1,0 +1,99 @@
+{
+  "$id": "cmis_diagnostics_pattern_id.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "PRBS-31Q, as defined in IEEE 802.3-2018 clause 120.5.11.2.2",
+      "title": "prbs_31q"
+    },
+    {
+      "const": 1,
+      "description": "PRBS-31",
+      "title": "prbs_31"
+    },
+    {
+      "const": 2,
+      "description": "PRBS-23Q, ITU-T Recommendation O.172, 2005",
+      "title": "prbs_23q"
+    },
+    {
+      "const": 3,
+      "description": "PRBS-23",
+      "title": "prbs_23"
+    },
+    {
+      "const": 4,
+      "description": "PRBS-15Q, x^15 + x^14 + 1",
+      "title": "prbs_15q"
+    },
+    {
+      "const": 5,
+      "description": "PRBS-15",
+      "title": "prbs_15"
+    },
+    {
+      "const": 6,
+      "description": "PRBS-13Q, as defined in IEEE 802.3-2018 clause 120.5.11.2.1",
+      "title": "prbs_13q"
+    },
+    {
+      "const": 7,
+      "description": "PRBS-13",
+      "title": "prbs_13"
+    },
+    {
+      "const": 8,
+      "description": "PRBS-9Q, as defined in IEEE 802.3-2018 clause 120.5.11",
+      "title": "prbs_9q"
+    },
+    {
+      "const": 9,
+      "description": "PRBS-9",
+      "title": "prbs_9"
+    },
+    {
+      "const": 10,
+      "description": "PRBS-7Q, x^7 + x^6 + 1",
+      "title": "prbs_7q"
+    },
+    {
+      "const": 11,
+      "description": "PRBS-7",
+      "title": "prbs_7"
+    },
+    {
+      "const": 12,
+      "description": "SSPRQ, as defined in IEEE 802.3-2018 clause 120.5.11.2.3",
+      "title": "ssprq"
+    },
+    {
+      "const": 13,
+      "description": "Reserved",
+      "title": "reserved_0d"
+    },
+    {
+      "const": 14,
+      "description": "Vendor-defined custom pattern",
+      "title": "custom"
+    },
+    {
+      "const": 15,
+      "description": "Programmable user pattern provided in Page 13h bytes 224-255",
+      "title": "user_pattern"
+    }
+  ],
+  "title": "CmisDiagnosticsPatternId",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      228
+    ],
+    "spec": "CMIS 5.3 § 8.12.5 / Table 8-105"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

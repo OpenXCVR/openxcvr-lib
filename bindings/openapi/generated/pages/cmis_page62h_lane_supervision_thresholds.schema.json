@@ -1,0 +1,113 @@
+{
+  "$id": "cmis_page62h_lane_supervision_thresholds.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "output_power_threshold_hi_alarm_tx": {
+      "description": "S16 high-alarm output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 0-1 of the lane's OutputPowerThresholdsTx register).",
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.01 dBm",
+      "x-openxcvr-provenance": {
+        "pdf_page": 317,
+        "quote": "OutputPowerThresholdHiAlarm: S16 output power thresholds for a media lane in units of 0.01 dBm",
+        "section": "CMIS 5.4 § 8.32.1",
+        "table": "Table 8-193 / Table 8-194"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "output_power_threshold_hi_warning_tx": {
+      "description": "S16 high-warning output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 4-5 of the lane's OutputPowerThresholdsTx register).",
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.01 dBm",
+      "x-openxcvr-provenance": {
+        "pdf_page": 317,
+        "quote": "OutputPowerThresholdHiWarning: S16 output power thresholds for a media lane in units of 0.01 dBm",
+        "section": "CMIS 5.4 § 8.32.1",
+        "table": "Table 8-193 / Table 8-194"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "output_power_threshold_lo_alarm_tx": {
+      "description": "S16 low-alarm output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 2-3 of the lane's OutputPowerThresholdsTx register).",
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.01 dBm",
+      "x-openxcvr-provenance": {
+        "pdf_page": 317,
+        "quote": "OutputPowerThresholdLoAlarm: S16 output power thresholds for a media lane in units of 0.01 dBm",
+        "section": "CMIS 5.4 § 8.32.1",
+        "table": "Table 8-193 / Table 8-194"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "output_power_threshold_lo_warning_tx": {
+      "description": "S16 low-warning output power threshold for media lane Tx<lane> in units of 0.01 dBm (Quad bytes 6-7 of the lane's OutputPowerThresholdsTx register).",
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.01 dBm",
+      "x-openxcvr-provenance": {
+        "pdf_page": 317,
+        "quote": "OutputPowerThresholdLoWarning: S16 output power thresholds for a media lane in units of 0.01 dBm",
+        "section": "CMIS 5.4 § 8.32.1",
+        "table": "Table 8-193 / Table 8-194"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_62h_192_255": {
+      "contentEncoding": "base64",
+      "description": "Reserved per Table 8-192 (which prints the reserved row's start byte as 132; the Output Power Thresholds of Table 8-194 end at byte 191).",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 317,
+        "quote": "Reserved [64]",
+        "section": "CMIS 5.4 § 8.32",
+        "table": "Table 8-192 / Table 8-194"
+      },
+      "x-openxcvr-since": "5.4"
+    }
+  },
+  "required": [
+    "output_power_threshold_hi_alarm_tx",
+    "output_power_threshold_lo_alarm_tx",
+    "output_power_threshold_hi_warning_tx",
+    "output_power_threshold_lo_warning_tx",
+    "reserved_page_62h_192_255"
+  ],
+  "title": "CmisPage62hLaneSupervisionThresholds",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      317
+    ],
+    "spec": "CMIS 5.4 § 8.32"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

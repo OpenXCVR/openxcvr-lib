@@ -1,0 +1,261 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVdmObservableType5p4
+title: CMIS VDM Observable Type (CMIS 5.4 and later)
+spec:
+  id: cmis
+  revision: "5.4"
+description: >
+  VDM observable type code set as printed by CMIS 5.4 Table 8-180 (p. 304).
+  CmisVdmObservableType keeps the pre-5.4 window, where type 2 is TEC Current
+  for the module and type 4 is absolute Laser Temperature; CMIS 5.4 corrects
+  type 2 to a media-lane(s) observable (the 5.3 text had described it as
+  module-only) and redefines type 4 as Laser Temperature Deviation (the
+  deviation against the target temperature, S16, 1/256 degC). Revision-blind
+  duplicate-value rules forbid two value-2/value-4 entries in one enum, so
+  the since-5.4 meanings land here, following the CmisBanksSupported5p4
+  precedent (ADV-01). Every other code point is unchanged from 5.3.
+provenance:
+  spec: CMIS 5.4 § 8.27.3.2 / Table 8-180
+  pdf_pages: [304]
+entries:
+  - value: 0x00
+    name: not_used
+    since: "5.4"
+    description: VDM instance is not active and presents no observable data
+    tags: [data_type:none]
+  - value: 0x01
+    name: laser_age_media_lane
+    since: "5.4"
+    description: Laser age from 0 percent at BOL to 100 percent at EOL for a media lane
+    tags: [data_type:u16, instance:basic]
+  - value: 0x02
+    name: tec_current_media_lanes
+    since: "5.4"
+    description: TEC current, reported for a media lane or group of media lanes (see CMIS 5.4 § 7.1.6.1)
+    tags: [data_type:s16, instance:basic]
+  - value: 0x03
+    name: laser_frequency_error_media_lane
+    since: "5.4"
+    description: Laser frequency error for a media lane
+    tags: [data_type:s16, instance:basic]
+  - value: 0x04
+    name: laser_temperature_deviation_media_lane
+    since: "5.4"
+    description: Laser temperature deviation from the target temperature for a media lane (see CMIS 5.4 § 7.1.6.3)
+    tags: [data_type:s16, instance:basic]
+  - value: 0x05
+    name: snr_media_input_media_lane
+    since: "5.4"
+    description: SNR in dB for media input on a media lane
+    tags: [data_type:u16, instance:basic]
+  - value: 0x06
+    name: snr_host_input_lane
+    since: "5.4"
+    description: SNR in dB for host input on a lane
+    tags: [data_type:u16, instance:basic]
+  - value: 0x07
+    name: pam4_level_transition_parameter_media_input
+    since: "5.4"
+    description: PAM4 level transition parameter for media input on a media lane
+    tags: [data_type:u16, instance:basic]
+  - value: 0x08
+    name: pam4_level_transition_parameter_host_input
+    since: "5.4"
+    description: PAM4 level transition parameter for host input on a lane
+    tags: [data_type:u16, instance:basic]
+  - value: 0x09
+    name: pre_fec_ber_min_media_input
+    since: "5.4"
+    description: Pre-FEC BER minimum sample for media input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x0a
+    name: pre_fec_ber_min_host_input
+    since: "5.4"
+    description: Pre-FEC BER minimum sample for host input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x0b
+    name: pre_fec_ber_max_media_input
+    since: "5.4"
+    description: Pre-FEC BER maximum sample for media input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x0c
+    name: pre_fec_ber_max_host_input
+    since: "5.4"
+    description: Pre-FEC BER maximum sample for host input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x0d
+    name: pre_fec_ber_average_media_input
+    since: "5.4"
+    description: Pre-FEC BER sample average for media input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x0e
+    name: pre_fec_ber_average_host_input
+    since: "5.4"
+    description: Pre-FEC BER sample average for host input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x0f
+    name: pre_fec_ber_current_media_input
+    since: "5.4"
+    description: Pre-FEC BER current sample for media input on a data path
+    tags: [data_type:f16, instance:basic]
+  - value: 0x10
+    name: pre_fec_ber_current_host_input
+    since: "5.4"
+    description: Pre-FEC BER current sample for host input on a data path
+    tags: [data_type:f16, instance:basic]
+  - value: 0x11
+    name: ferc_min_media_input
+    since: "5.4"
+    description: FERC minimum sample value for media input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x12
+    name: ferc_min_host_input
+    since: "5.4"
+    description: FERC minimum sample value for host input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x13
+    name: ferc_max_media_input
+    since: "5.4"
+    description: FERC maximum sample value for media input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x14
+    name: ferc_max_host_input
+    since: "5.4"
+    description: FERC maximum sample value for host input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x15
+    name: ferc_average_media_input
+    since: "5.4"
+    description: FERC sample average value for media input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x16
+    name: ferc_average_host_input
+    since: "5.4"
+    description: FERC sample average value for host input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x17
+    name: ferc_current_media_input
+    since: "5.4"
+    description: FERC current sample value for media input on a data path
+    tags: [data_type:f16, instance:basic]
+  - value: 0x18
+    name: ferc_current_host_input
+    since: "5.4"
+    description: FERC current sample value for host input on a data path
+    tags: [data_type:f16, instance:basic]
+  - value: 0x19
+    name: ferc_total_accumulated_media_input
+    since: "5.4"
+    description: FERC total accumulated value for media input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x1a
+    name: ferc_total_accumulated_host_input
+    since: "5.4"
+    description: FERC total accumulated value for host input on a data path
+    tags: [data_type:f16, instance:statistic]
+  - value: 0x1b
+    name: sewmax_min_media_input
+    since: "5.4"
+    description: SEWmax minimum sample value for media input on a data path
+    tags: [data_type:u16, instance:statistic]
+  - value: 0x1c
+    name: sewmax_min_host_input
+    since: "5.4"
+    description: SEWmax minimum sample value for host input on a data path
+    tags: [data_type:u16, instance:statistic]
+  - value: 0x1d
+    name: sewmax_max_media_input
+    since: "5.4"
+    description: SEWmax maximum sample value for media input on a data path
+    tags: [data_type:u16, instance:statistic]
+  - value: 0x1e
+    name: sewmax_max_host_input
+    since: "5.4"
+    description: SEWmax maximum sample value for host input on a data path
+    tags: [data_type:u16, instance:statistic]
+  - value: 0x1f
+    name: sewmax_average_media_input
+    since: "5.4"
+    description: SEWmax sample average value for media input on a data path
+    tags: [data_type:u16, instance:statistic]
+  - value: 0x20
+    name: sewmax_average_host_input
+    since: "5.4"
+    description: SEWmax sample average value for host input on a data path
+    tags: [data_type:u16, instance:statistic]
+  - value: 0x21
+    name: sewmax_current_media_input
+    since: "5.4"
+    description: SEWmax current sample value for media input on a data path
+    tags: [data_type:u16, instance:basic]
+  - value: 0x22
+    name: sewmax_current_host_input
+    since: "5.4"
+    description: SEWmax current sample value for host input on a data path
+    tags: [data_type:u16, instance:basic]
+  - value: 0x23..0x4c
+    name: reserved_35_76
+    since: "5.4"
+    description: Reserved observable type IDs
+    tags: [data_type:reserved]
+  - value: 0x4d
+    name: vcc2p6_voltage_monitor_module
+    since: "5.4"
+    description: Vcc2p6 voltage monitor for the module
+    tags: [data_type:u16, instance:basic]
+  - value: 0x4e
+    name: vcc1p8_voltage_monitor_module
+    since: "5.4"
+    description: Vcc1p8 voltage monitor for the module
+    tags: [data_type:u16, instance:basic]
+  - value: 0x4f
+    name: vcc1p2_voltage_monitor_module
+    since: "5.4"
+    description: Vcc1p2 voltage monitor for the module
+    tags: [data_type:u16, instance:basic]
+  - value: 0x50
+    name: vcc0p9_voltage_monitor_module
+    since: "5.4"
+    description: Vcc0p9 voltage monitor for the module
+    tags: [data_type:u16, instance:basic]
+  - value: 0x51
+    name: vcc0p7a_voltage_monitor_module
+    since: "5.4"
+    description: Vcc0p7A voltage monitor for the module
+    tags: [data_type:u16, instance:basic]
+  - value: 0x52
+    name: vcc0p7b_voltage_monitor_module
+    since: "5.4"
+    description: Vcc0p7B voltage monitor for the module
+    tags: [data_type:u16, instance:basic]
+  - value: 0x53
+    name: vcc12_voltage_monitor_module
+    since: "5.4"
+    description: Vcc12 voltage monitor for the module
+    tags: [data_type:u16, instance:basic]
+  - value: 0x54
+    name: els_input_power_lane_laser_id
+    since: "5.4"
+    description: ELS input power for lane or laser ID
+    tags: [data_type:s16, instance:basic]
+  - value: 0x55..0x63
+    name: reserved_cpo_85_99
+    since: "5.4"
+    description: Reserved for CPO observables
+    tags: [data_type:reserved]
+  - value: 0x64..0x7f
+    name: custom_observables_100_127
+    since: "5.4"
+    description: Custom observables
+    tags: [data_type:custom]
+  - value: 0x80..0x99
+    name: c_cmis_coherent_monitors_128_153
+    since: "5.4"
+    description: "C-CMIS 1.4 § 7.3 Table 8 coherent monitor identifiers — see CCmisVdmObservableType"
+    tags: [data_type:restricted]
+  - value: 0x9a..0xff
+    name: reserved_oif_154_255
+    since: "5.4"
+    description: Reserved OIF observable type IDs (0x9a–0xff)
+    tags: [data_type:reserved]

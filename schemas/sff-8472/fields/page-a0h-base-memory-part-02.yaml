@@ -1,0 +1,164 @@
+fields:
+  - name: signaling_rate_max
+    display_name: SignalingRateMax
+    offset: 66
+    size_bytes: 1
+    type: u8
+    template: operational_parameter
+    scope: { module: true }
+    encoding: { kind: dual, description: "Percent above nominal, or nominal rate in 250 MBd units when byte 12 is FFh" }
+    provenance: { section: "SFF-8472 v12.5a § 8.4", pdf_page: 33, quote: "Signaling Rate, Max" }
+
+  - name: signaling_rate_min
+    display_name: SignalingRateMin
+    offset: 67
+    size_bytes: 1
+    type: u8
+    template: operational_parameter
+    scope: { module: true }
+    encoding: { kind: dual, description: "Percent below nominal, or +/-1% range when byte 12 is FFh" }
+    provenance: { section: "SFF-8472 v12.5a § 8.5", pdf_page: 33, quote: "Signaling Rate, Min" }
+
+  - name: vendor_sn
+    display_name: VendorSN
+    offset: 68
+    size_bytes: 16
+    type: ascii
+    template: vendor_info
+    provenance: { section: "SFF-8472 v12.5a § 8.6", pdf_page: 33, quote: "Vendor serial number" }
+
+  - name: date_code
+    display_name: DateCode
+    offset: 84
+    size_bytes: 8
+    type: ascii
+    template: vendor_info
+    behavior: { layout: "YYMMDDLL, where LL is vendor lot code" }
+    provenance: { section: "SFF-8472 v12.5a § 8.7", pdf_page: 33, table: "Table 8-4", quote: "Date Code" }
+
+  - name: diagnostic_monitoring_type
+    display_name: DiagnosticMonitoringType
+    offset: 92
+    size_bytes: 1
+    type: bitmap
+    template: capability_advertisement
+    tags: [CapabilityAdvertisement, CapabilityFlag, "Monitor::Capability"]
+    scope: { module: true }
+    behavior:
+      bit_order: "reserved, DDM implemented, internally calibrated, externally calibrated, Rx power average/OMA, address change required, RPM implemented, reserved"
+    provenance: { section: "SFF-8472 v12.5a § 8.8", pdf_page: 34, table: "Table 8-5", quote: "Diagnostic Monitoring Type" }
+
+  - name: digital_diagnostics_implemented
+    display_name: DDMImplemented
+    offset: 92
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.8", pdf_page: 34, table: "Table 8-5", quote: "Digital diagnostic monitoring implemented" }
+
+  - name: internally_calibrated
+    display_name: InternallyCalibrated
+    offset: 92
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.8", pdf_page: 34, table: "Table 8-5", quote: "Internally calibrated" }
+
+  - name: externally_calibrated
+    display_name: ExternallyCalibrated
+    offset: 92
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.8", pdf_page: 34, table: "Table 8-5", quote: "Externally calibrated" }
+
+  - name: rx_power_average
+    display_name: RxPowerAverage
+    offset: 92
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: oma, description: "Rx power measurement is OMA" }
+      - { value: 1, name: average_power, description: "Rx power measurement is average optical power" }
+    provenance: { section: "SFF-8472 v12.5a § 8.8", pdf_page: 34, table: "Table 8-5", quote: "Received power measurement type" }
+
+  - name: address_change_required
+    display_name: AddressChangeRequired
+    offset: 92
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.8", pdf_page: 34, table: "Table 8-5", quote: "Address change required" }
+
+  - name: remote_performance_monitoring_supported
+    display_name: RemotePerformanceMonitoringSupported
+    offset: 92
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "12.5"
+    provenance: { section: "SFF-8472 v12.5a § 8.8", pdf_page: 34, table: "Table 8-5", quote: "Remote Performance Monitoring implemented", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Added bit to advertisement for Remote Performance Monitoring Registers, in A0h Byte 92 Table 8-5'" }
+
+  - name: enhanced_options
+    display_name: EnhancedOption<bit>
+    instances: { index: bit, start: 0, end: 7 }
+    offset: 93
+    bit_offset_expr: "7 - bit"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    behavior:
+      bit_order: "alarm flags, soft Tx disable, soft Tx fault, soft Rx LOS, soft rate select, app select SFF-8079, soft rate select SFF-8431, reserved"
+    provenance: { section: "SFF-8472 v12.5a § 8.10", pdf_page: 34, table: "Table 8-6", quote: "Enhanced Options" }
+
+  - name: sff8472_compliance
+    display_name: SFF8472Compliance
+    offset: 94
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8472ComplianceCode
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.11", pdf_page: 34, table: "Table 8-8", quote: "SFF-8472 Compliance" }
+
+  - name: cc_ext
+    display_name: CC_EXT
+    offset: 95
+    size_bytes: 1
+    type: u8
+    encoding: { kind: checksum, covers: "A0h bytes 64-94", covers_range: [64, 94], algorithm: sum8 }
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.12", pdf_page: 35, quote: "CC_EXT" }
+
+  - name: vendor_specific_a0h_96_127
+    display_name: VendorSpecificA0h96To127
+    offset: 96
+    size_bytes: 32
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a §§ 5-8", pdf_page: 35, quote: "A0h bytes 96-127 are outside the base identification/checksum region" }
+
+  - name: vendor_specific_a0h_128_255
+    display_name: VendorSpecificA0h128To255
+    offset: 128
+    size_bytes: 128
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a §§ 5-8", pdf_page: 35, quote: "A0h upper memory is vendor or legacy-defined outside the SFF-8472 base fields" }

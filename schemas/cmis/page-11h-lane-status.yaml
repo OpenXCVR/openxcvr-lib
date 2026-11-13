@@ -1,0 +1,36 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage11hLaneStatus
+title: CMIS Page 11h Lane Status and Data Path Status (banked)
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.10
+  pdf_pages: [208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220]
+page_address: "11h"
+size_bytes: 128
+
+# Banked across lanes per 's bank-relative scope convention. Each
+# bank carries a group of 8 lanes; module advertises support for additional
+# banks via Page 01h's BanksSupported field. All fields are RO.
+# CMIS 5.4 § 4.1.1 / § 8.1.2 expands lane banking to up to 32 banks
+# (256 lanes): BanksSupported = 11b (01h:142.1-0, CmisBanksSupported5p4)
+# is the escape code and 01h:174.4-0 ExtraLaneBanksSupported carries the
+# extra bank count. Through CMIS 5.3 the maximum is 4 banks (32 lanes).
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+field_includes:
+  - fields/page-11h-lane-status-part-01.yaml
+  - fields/page-11h-lane-status-part-02.yaml
+  - fields/page-11h-lane-status-part-03.yaml
+  - fields/page-11h-lane-status-part-04.yaml
+  - fields/page-11h-lane-status-part-05.yaml
+fields: []

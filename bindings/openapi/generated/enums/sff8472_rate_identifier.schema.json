@@ -1,0 +1,60 @@
+{
+  "$id": "sff8472_rate_identifier.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Unspecified rate select behavior.",
+      "title": "unspecified"
+    },
+    {
+      "const": 1,
+      "description": "Rate select behavior per SFF-8079 section 4.2.1.",
+      "title": "sff_8079_4_2_1"
+    },
+    {
+      "const": 2,
+      "description": "Rx rate select only, per SFF-8431.",
+      "title": "sff_8431_rx_rate_select"
+    },
+    {
+      "const": 4,
+      "description": "Tx and Rx rate select, per SFF-8431.",
+      "title": "sff_8431_tx_rx_rate_select"
+    },
+    {
+      "const": 8,
+      "description": "Fibre Channel rate select behavior for 8G/16G/32GFC modules.",
+      "title": "rate_select_8_16_32_gfc"
+    },
+    {
+      "const": 16,
+      "description": "Application select behavior per SFF-8079.",
+      "title": "application_select_sff_8079"
+    },
+    {
+      "const": 32,
+      "description": "PMD-based rate select behavior.",
+      "title": "pmd_based"
+    },
+    {
+      "const": 3,
+      "description": "Reserved.",
+      "title": "reserved_03"
+    }
+  ],
+  "title": "Sff8472RateIdentifier",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      26
+    ],
+    "spec": "SFF-8472 v12.5a § 5.7",
+    "table": "Table 5-6"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8472",
+    "revision": "12.5a"
+  }
+}

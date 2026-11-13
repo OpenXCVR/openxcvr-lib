@@ -1,0 +1,73 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisVcs10Page19hActiveOverflow
+title: CMIS-VCS 1.0 Page 19h Active Control Set VCS Overflow
+spec:
+  id: cmis-vcs-1.0
+  revision: "01.0"
+  source: docs/stds/cmis/OIF-CMIS-VCS-01.0.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-CMIS-VCS-01.0 § 4.4
+  pdf_pages: [18]
+page_address: "19h"
+size_bytes: 128
+
+# Banked across lanes per the CMIS base Page 19h convention: each bank carries
+# a group of 8 lanes selected through the lower-memory bank select. Bytes
+# 128-151 of Page 19h (direction-specific provisioned data path configuration
+# and Active Control Set application descriptor block indices) belong to the
+# CMIS base namespace and are not re-modeled here. All VCS content on Page 19h
+# is read-only: the Active Control Set reports provisioned settings.
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+
+fields:
+
+  # ===========================================================================
+  # OIF-CMIS-VCS-01.0 § 4.4 Table 4-1 — Active Control Set overflow space
+  # (page 19h bytes 152-207). The CMIS base schema reserves this region as
+  # SupplementDefined (ACS Versatile Control Set Parameter Space, CMIS 5.3
+  # § 8.18); this supplement defines its VCS semantics.
+  # ===========================================================================
+
+  - name: acs_vcs_overflow_space
+    display_name: AcsVcsOverflowSpace
+    description: >-
+      Active Control Set VCS overflow space, page 19h bytes 152-207
+      (Table 4-1). Read-only VCS Parameters are populated in the Active
+      Control Set memory space only, after all read-write VCS Parameters
+      have been allocated (§ 4.4): they are advertised by the read-only VCS
+      Descriptor CDB command (CMD 4002h, § 6.5; § 4.4's cross-reference
+      says § 6.4, which is the read-write command) in order, and the ones
+      that do not fit in the page 11h Active Control Set register space
+      (Table 4-1 bytes 214-234) appear here. The layout inside this space
+      is module-advertised: offsets are computed from the accumulated
+      MemoryLength attributes of the advertised VCS Descriptors, and a VCS
+      Parameter must be fully contained within a page (§ 4.4), so
+      individual parameter offsets and lengths inside this space are not
+      recorded. Where read-write VCS Parameters themselves overflow the
+      Active Control Set in-page space is not recorded: § 4.4 states
+      read-write register offsets are the same for all Control Sets, but
+      the staged overflow is page 18h bytes 144-255 while page 19h bytes
+      144-151 carry the CMIS 5.3 base NAD block indices, and the
+      specification does not state the Active placement. A note under
+      Appendix B Table B-4 calls the Active Control Set location page 10h;
+      Table 4-1 and Table B-4's header place it on page 11h, which is the
+      page recorded here. Register formats per parameter are recorded in
+      the CmisVcs10ParameterId enum.
+    offset: 152
+    size_bytes: 56
+    type: bytes
+    access: ro
+    field_type: SupplementDefined
+    tags: [VCS, SupplementDefined, ControlSet]
+    scope: { control_set: { kind: active } }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance:
+      section: "OIF-CMIS-VCS-01.0 § 4.4"
+      pdf_page: 18
+      table: "Table 4-1"

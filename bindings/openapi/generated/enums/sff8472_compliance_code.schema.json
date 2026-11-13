@@ -1,0 +1,85 @@
+{
+  "$id": "sff8472_compliance_code.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "SFF-8472 compliance not specified.",
+      "title": "unspecified"
+    },
+    {
+      "const": 1,
+      "description": "Complies with SFF-8472 Rev 9.3.",
+      "title": "rev_9_3",
+      "x-openxcvr-since": "9.3"
+    },
+    {
+      "const": 2,
+      "description": "Complies with SFF-8472 Rev 9.5.",
+      "title": "rev_9_5",
+      "x-openxcvr-since": "9.5"
+    },
+    {
+      "const": 3,
+      "description": "Complies with SFF-8472 Rev 10.2.",
+      "title": "rev_10_2",
+      "x-openxcvr-since": "10.2"
+    },
+    {
+      "const": 4,
+      "description": "Complies with SFF-8472 Rev 10.4.",
+      "title": "rev_10_4",
+      "x-openxcvr-since": "10.4"
+    },
+    {
+      "const": 5,
+      "description": "Complies with SFF-8472 Rev 11.0.",
+      "title": "rev_11_0",
+      "x-openxcvr-since": "11.0"
+    },
+    {
+      "const": 6,
+      "description": "Complies with SFF-8472 Rev 11.3.",
+      "title": "rev_11_3",
+      "x-openxcvr-since": "11.3"
+    },
+    {
+      "const": 7,
+      "description": "Complies with SFF-8472 Rev 11.4.",
+      "title": "rev_11_4",
+      "x-openxcvr-since": "11.4"
+    },
+    {
+      "const": 8,
+      "description": "Complies with SFF-8472 Rev 12.3.",
+      "title": "rev_12_3",
+      "x-openxcvr-since": "12.3"
+    },
+    {
+      "const": 9,
+      "description": "Complies with SFF-8472 Rev 12.4.",
+      "title": "rev_12_4",
+      "x-openxcvr-since": "12.4"
+    },
+    {
+      "const": 10,
+      "description": "Complies with SFF-8472 Rev 12.5.",
+      "title": "rev_12_5",
+      "x-openxcvr-since": "12.5"
+    }
+  ],
+  "title": "Sff8472ComplianceCode",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      35
+    ],
+    "spec": "SFF-8472 v12.5a § 8.11",
+    "table": "Table 8-8"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known SFF-8472 family domain (9.3, 9.5, 10.2, 10.4, 11.0, 11.3, 11.4, 12.3, 12.4, 12.5); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "sff-8472",
+    "revision": "12.5a"
+  }
+}

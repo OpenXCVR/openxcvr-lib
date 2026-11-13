@@ -1,0 +1,59 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisDiagnosticsPatternId
+title: CMIS Diagnostics Pattern ID
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.12.5 / Table 8-105
+  pdf_pages: [228]
+entries:
+  - value: 0x0
+    name: prbs_31q
+    description: PRBS-31Q, as defined in IEEE 802.3-2018 clause 120.5.11.2.2
+  - value: 0x1
+    name: prbs_31
+    description: PRBS-31
+  - value: 0x2
+    name: prbs_23q
+    description: PRBS-23Q, ITU-T Recommendation O.172, 2005
+  - value: 0x3
+    name: prbs_23
+    description: PRBS-23
+  - value: 0x4
+    name: prbs_15q
+    description: PRBS-15Q, x^15 + x^14 + 1
+  - value: 0x5
+    name: prbs_15
+    description: PRBS-15
+  - value: 0x6
+    name: prbs_13q
+    description: PRBS-13Q, as defined in IEEE 802.3-2018 clause 120.5.11.2.1
+  - value: 0x7
+    name: prbs_13
+    description: PRBS-13
+  - value: 0x8
+    name: prbs_9q
+    description: PRBS-9Q, as defined in IEEE 802.3-2018 clause 120.5.11
+  - value: 0x9
+    name: prbs_9
+    description: PRBS-9
+  - value: 0xa
+    name: prbs_7q
+    description: PRBS-7Q, x^7 + x^6 + 1
+  - value: 0xb
+    name: prbs_7
+    description: PRBS-7
+  - value: 0xc
+    name: ssprq
+    description: SSPRQ, as defined in IEEE 802.3-2018 clause 120.5.11.2.3
+  - value: 0xd
+    name: reserved_0d
+    description: Reserved
+  - value: 0xe
+    name: custom
+    description: Vendor-defined custom pattern
+  - value: 0xf
+    name: user_pattern
+    description: Programmable user pattern provided in Page 13h bytes 224-255

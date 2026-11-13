@@ -1,0 +1,1046 @@
+{
+  "$id": "sff8636_lower_memory.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "advanced_low_power_mode": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 44,
+        "quote": "Advanced Low Power Mode",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      }
+    },
+    "data_not_ready": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "Data_Not_Ready",
+        "section": "SFF-8636 v2.11 § 6.2.2",
+        "table": "Table 6-3"
+      }
+    },
+    "data_path_init_max_duration": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 44,
+        "quote": "DataPathInit MaxDuration",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      }
+    },
+    "far_end_implementation": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Added Byte 113 bits 6-4 Far End Implementation'",
+        "pdf_page": 44,
+        "quote": "Far-End Implementation",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.5"
+    },
+    "far_side_managed": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 44,
+        "quote": "Far Side Managed",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      }
+    },
+    "fiber_face_type": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.11: 'Added ... Fiber Face type code Page 00h, byte 117'",
+        "pdf_page": 45,
+        "quote": "Fiber Face Type code",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "flat_memory": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "Flat_mem",
+        "section": "SFF-8636 v2.11 § 6.2.2",
+        "table": "Table 6-3"
+      }
+    },
+    "high_power_class_enable_5_to_7": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Address 93 bit 2 High Power Class Enable'; byte 93 bits 7-2 reserved in the Rev 1.7 map",
+        "pdf_page": 37,
+        "quote": "Enables Power Classes 5 to 7",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      },
+      "x-openxcvr-since": "2.0"
+    },
+    "high_power_class_enable_8": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Control for High Power Class 8 at byte 93, bit 3' per SFF-8679",
+        "pdf_page": 37,
+        "quote": "Enables Power Class 8",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "init_complete_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Initialization complete flag to Byte 6 bit 0'",
+        "pdf_page": 32,
+        "quote": "Init Complete Flag",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-6"
+      },
+      "x-openxcvr-since": "2.0"
+    },
+    "interrupt_deasserted": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "IntL",
+        "section": "SFF-8636 v2.11 § 6.2.2",
+        "table": "Table 6-3"
+      }
+    },
+    "intl_losl_control": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Controls for reconfiguration at byte 99, bits 1-0' per SFF-8679",
+        "pdf_page": 38,
+        "quote": "IntL/LOSL output signal control",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "lp_txdis_control": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Controls for reconfiguration at byte 99, bits 1-0' per SFF-8679; byte 99 reserved in the Rev 1.7 map",
+        "pdf_page": 38,
+        "quote": "LPMode/TxDis input signal control",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "max_power_consumption": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "0.1 W",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Advertising Max Power Consumption at byte 107'; byte 107 reserved in the Rev 1.7 map",
+        "pdf_page": 43,
+        "quote": "Maximum power consumption of module",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "min_operating_voltage": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 44,
+        "quote": "Min Operating Voltage",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      }
+    },
+    "modsel_wait_time_exponent": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added ModSelL wait time advertising field'",
+        "pdf_page": 45,
+        "quote": "ModSelL wait time exponent",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "modsel_wait_time_mantissa": {
+      "maximum": 31,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added ModSelL wait time advertising field'",
+        "pdf_page": 45,
+        "quote": "ModSelL wait time mantissa",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "near_end_implementation": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Added Byte 113 bits 3-0 Near End Implementation'",
+        "pdf_page": 44,
+        "quote": "Near-End Implementation",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.5"
+    },
+    "page_select": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 45,
+        "quote": "Byte 127 is used to select the upper page.",
+        "section": "SFF-8636 v2.11 § 6.2.11"
+      }
+    },
+    "password_change_entry": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 45,
+        "quote": "Bytes 119-126 are reserved for an optional password entry function",
+        "section": "SFF-8636 v2.11 § 6.2.10"
+      }
+    },
+    "password_entry": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 45,
+        "quote": "The password entry field shall be set to 00000000h on power-up and reset.",
+        "section": "SFF-8636 v2.11 § 6.2.10"
+      }
+    },
+    "pcie_assigned": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.1: 'Assigned Page 00h Bytes 111-112 for use by PCI-SIG'",
+        "pdf_page": 44,
+        "quote": "Assigned for use by PCI Express",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.5"
+    },
+    "power_override": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "quote": "Override of LPMode/TxDis pad state",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      }
+    },
+    "power_set": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "quote": "Power set to Low Power Mode",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      }
+    },
+    "propagation_delay": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "10 ns",
+      "x-openxcvr-provenance": {
+        "pdf_page": 43,
+        "quote": "Propagation Delay",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      }
+    },
+    "reserved_channel_monitor_set_4": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 36,
+        "quote": "Reserved channel monitor set 4",
+        "section": "SFF-8636 v2.11 § 6.2.5",
+        "table": "Table 6-9"
+      }
+    },
+    "reserved_channel_monitor_set_5": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Table 6-8 added Bytes 66-73 description for reserved channel monitor set 5'; vendor-specific in the Rev 1.7 map",
+        "pdf_page": 36,
+        "quote": "Reserved channel monitor set 5",
+        "section": "SFF-8636 v2.11 § 6.2.5",
+        "table": "Table 6-9"
+      },
+      "x-openxcvr-since": "2.5"
+    },
+    "reserved_lower_118": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.2",
+        "table": "Table 6-2"
+      }
+    },
+    "reserved_lower_15_21": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.2",
+        "table": "Table 6-2"
+      }
+    },
+    "reserved_lower_24_25": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.2.4",
+        "table": "Table 6-8"
+      }
+    },
+    "reserved_lower_28_29": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.2.4",
+        "table": "Table 6-8"
+      }
+    },
+    "reserved_lower_82_85": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.2",
+        "table": "Table 6-2"
+      }
+    },
+    "reserved_lower_89_92": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "Reserved only from Rev 2.10; SFF-8079 application select before that (tier-2 legacy window)",
+        "pdf_page": 37,
+        "quote": "Prior to Rev 2.10 used for SFF-8079",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "reserved_lower_94_97": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8079 Tx application select through Rev 2.9, reserved from Rev 2.10 (tier-2 legacy window)",
+        "pdf_page": 38,
+        "quote": "Reserved",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "revision_compliance": {
+      "$ref": "../enums/sff8636_revision_compliance.schema.json",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 1.4: 'Added Revision Compliance Byte'",
+        "pdf_page": 31,
+        "quote": "Revision Compliance",
+        "section": "SFF-8636 v2.11 § 6.2.2",
+        "table": "Table 6-4"
+      },
+      "x-openxcvr-since": "1.4"
+    },
+    "rx_cdr_control_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 38,
+        "quote": "Channel Rx CDR Control",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      }
+    },
+    "rx_cdr_lol_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 32,
+        "quote": "Latched Rx CDR loss-of-lock",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-5"
+      }
+    },
+    "rx_cdr_lol_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for Rx CDR Loss of Lock",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "rx_los_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 32,
+        "quote": "Latched Rx LOS indicator",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-5"
+      }
+    },
+    "rx_los_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for Rx LOS indicator",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "rx_power_alarm_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 33,
+        "quote": "Channel Monitor Interrupt Flags",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-7"
+      }
+    },
+    "rx_power_lane": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.1 uW",
+      "x-openxcvr-provenance": {
+        "pdf_page": 36,
+        "quote": "Internally measured Rx input power",
+        "section": "SFF-8636 v2.11 § 6.2.5",
+        "table": "Table 6-9"
+      }
+    },
+    "rx_rate_select_lane": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "quote": "Software rate select",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      }
+    },
+    "secondary_extended_spec_compliance": {
+      "$ref": "../enums/sff8024_extended_spec_compliance.schema.json",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added a Secondary Extended Spec Compliance Code byte'",
+        "pdf_page": 45,
+        "quote": "Secondary Extended Specification Compliance Codes",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "sff8024_identifier": {
+      "$ref": "../enums/sff8024_identifier.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 31,
+        "quote": "Identifier (See SFF-8024 Transceiver Management)",
+        "section": "SFF-8636 v2.11 § 6.2.1",
+        "table": "Table 6-2"
+      }
+    },
+    "sff8079_rx_application_select": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.9 Table 5-3/6-9; removed in Rev 2.10 — v2.11 Table 6-10 byte 89-92: 'Prior to Rev 2.10 used for SFF-8079' (tier-2 legacy window, 2.9 PDF)",
+        "pdf_page": 37,
+        "quote": "Software Application Select per SFF-8079, Rx channels",
+        "section": "SFF-8636 Rev 2.9 § 6.2.6",
+        "table": "Table 6-9"
+      },
+      "x-openxcvr-until": "2.11"
+    },
+    "sff8079_tx_application_select": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.9 Table 5-3/6-9; removed in Rev 2.10 — v2.11 Table 6-10 reserves bytes 94-97 (tier-2 legacy window, 2.9 PDF)",
+        "pdf_page": 37,
+        "quote": "Software Application Select per SFF-8079, Tx channels",
+        "section": "SFF-8636 Rev 2.9 § 6.2.6",
+        "table": "Table 6-9"
+      },
+      "x-openxcvr-until": "2.11"
+    },
+    "software_reset": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10: 'Added SW reset control at byte 93, bit 7'",
+        "pdf_page": 37,
+        "quote": "Software reset is a self-clearing bit",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "supply_voltage": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "100 uV",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "quote": "Internally measured supply voltage",
+        "section": "SFF-8636 v2.11 § 6.2.4",
+        "table": "Table 6-8"
+      }
+    },
+    "tc_readiness_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.9 publication: 'Added byte 6, bit 1 for TEC readiness flag'",
+        "pdf_page": 32,
+        "quote": "TC Readiness Flag",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-6"
+      },
+      "x-openxcvr-since": "2.8"
+    },
+    "tc_readiness_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for TC readiness flag",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "temp_mon_alarm_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 32,
+        "quote": "Free Side Monitor Interrupt Flags",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-6"
+      }
+    },
+    "temp_mon_alarm_warning_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for temperature alarm or warning",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "temperature": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1/256 deg C",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "quote": "Internally measured temperature",
+        "section": "SFF-8636 v2.11 § 6.2.4",
+        "table": "Table 6-8"
+      }
+    },
+    "transceiver_subtype": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.11: 'Added Transceiver Subtype code ... Page 00h, byte 117'",
+        "pdf_page": 45,
+        "quote": "Transceiver Sub-type code",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "tx_adaptive_eq_fault_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Tx Adaptive EQ Fault flag'; reserved in the Rev 1.7 map",
+        "pdf_page": 32,
+        "quote": "Latched Tx input Adaptive EQ fault",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-5"
+      },
+      "x-openxcvr-since": "2.0"
+    },
+    "tx_adaptive_eq_fault_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Tx Adaptive EQ Fault flag ... and masking bits in Address 101'",
+        "pdf_page": 41,
+        "quote": "Masking bit for Tx Adaptive EQ fault",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      },
+      "x-openxcvr-since": "2.0"
+    },
+    "tx_bias_alarm_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 33,
+        "quote": "Channel Monitor Interrupt Flags",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-7"
+      }
+    },
+    "tx_bias_lane": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "2 uA",
+      "x-openxcvr-provenance": {
+        "pdf_page": 36,
+        "quote": "Internally measured Tx bias",
+        "section": "SFF-8636 v2.11 § 6.2.5",
+        "table": "Table 6-9"
+      }
+    },
+    "tx_cdr_control_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 38,
+        "quote": "Channel Tx CDR Control",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      }
+    },
+    "tx_cdr_lol_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 32,
+        "quote": "Latched Tx CDR loss-of-lock",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-5"
+      }
+    },
+    "tx_cdr_lol_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for Tx CDR Loss of Lock",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "tx_disable_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "quote": "Read/Write bit for software disable",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      }
+    },
+    "tx_fault_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 32,
+        "quote": "Latched Tx transmitter fault",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-5"
+      }
+    },
+    "tx_fault_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for Tx Transmitter fault",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "tx_los_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 32,
+        "quote": "Latched Tx LOS indicator",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-5"
+      }
+    },
+    "tx_los_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for Tx LOS indicator",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "tx_power_alarm_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 33,
+        "quote": "Channel Monitor Interrupt Flags",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-7"
+      }
+    },
+    "tx_power_lane": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.1 uW",
+      "x-openxcvr-provenance": {
+        "pdf_page": 36,
+        "quote": "Internally measured Tx Power",
+        "section": "SFF-8636 v2.11 § 6.2.5",
+        "table": "Table 6-9"
+      }
+    },
+    "tx_rate_select_lane": {
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 37,
+        "quote": "Software rate select",
+        "section": "SFF-8636 v2.11 § 6.2.6",
+        "table": "Table 6-10"
+      }
+    },
+    "tx_turn_on_max_duration": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 44,
+        "quote": "Tx_TurnOn MaxDuration",
+        "section": "SFF-8636 v2.11 § 6.2.9",
+        "table": "Table 6-14"
+      }
+    },
+    "vcc_mon_alarm_warning_flag": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 32,
+        "quote": "Free Side Monitor Interrupt Flags",
+        "section": "SFF-8636 v2.11 § 6.2.3",
+        "table": "Table 6-6"
+      }
+    },
+    "vcc_mon_alarm_warning_mask": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 41,
+        "quote": "Masking bit for Vcc alarm or warning",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "vendor_specific_channel_monitor": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 36,
+        "quote": "Vendor Specific",
+        "section": "SFF-8636 v2.11 § 6.2.5",
+        "table": "Table 6-9"
+      }
+    },
+    "vendor_specific_lower_105_106": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 42,
+        "quote": "Vendor Specific",
+        "section": "SFF-8636 v2.11 § 6.2.8",
+        "table": "Table 6-13"
+      }
+    },
+    "vendor_specific_lower_30_33": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 35,
+        "quote": "Vendor Specific",
+        "section": "SFF-8636 v2.11 § 6.2.4",
+        "table": "Table 6-8"
+      }
+    }
+  },
+  "required": [
+    "sff8024_identifier",
+    "revision_compliance",
+    "flat_memory",
+    "interrupt_deasserted",
+    "data_not_ready",
+    "tx_los_flag",
+    "rx_los_flag",
+    "tx_adaptive_eq_fault_flag",
+    "tx_fault_flag",
+    "tx_cdr_lol_flag",
+    "rx_cdr_lol_flag",
+    "temp_mon_alarm_warning_flag",
+    "tc_readiness_flag",
+    "init_complete_flag",
+    "vcc_mon_alarm_warning_flag",
+    "rx_power_alarm_warning_flag",
+    "tx_bias_alarm_warning_flag",
+    "tx_power_alarm_warning_flag",
+    "temperature",
+    "supply_voltage",
+    "rx_power_lane",
+    "tx_bias_lane",
+    "tx_power_lane",
+    "tx_disable_lane",
+    "rx_rate_select_lane",
+    "tx_rate_select_lane",
+    "software_reset",
+    "high_power_class_enable_5_to_7",
+    "power_set",
+    "power_override",
+    "tx_los_mask",
+    "rx_los_mask",
+    "tx_adaptive_eq_fault_mask",
+    "tx_fault_mask",
+    "tx_cdr_lol_mask",
+    "rx_cdr_lol_mask",
+    "temp_mon_alarm_warning_mask",
+    "tc_readiness_mask",
+    "vcc_mon_alarm_warning_mask",
+    "max_power_consumption",
+    "propagation_delay",
+    "advanced_low_power_mode",
+    "far_side_managed",
+    "min_operating_voltage",
+    "pcie_assigned",
+    "far_end_implementation",
+    "near_end_implementation",
+    "tx_turn_on_max_duration",
+    "data_path_init_max_duration",
+    "modsel_wait_time_exponent",
+    "modsel_wait_time_mantissa",
+    "secondary_extended_spec_compliance",
+    "transceiver_subtype",
+    "fiber_face_type",
+    "password_change_entry",
+    "password_entry",
+    "page_select",
+    "reserved_lower_15_21",
+    "reserved_lower_24_25",
+    "reserved_lower_28_29",
+    "vendor_specific_lower_30_33",
+    "reserved_channel_monitor_set_4",
+    "reserved_channel_monitor_set_5",
+    "vendor_specific_channel_monitor",
+    "reserved_lower_82_85",
+    "sff8079_rx_application_select",
+    "sff8079_tx_application_select",
+    "reserved_lower_89_92",
+    "reserved_lower_94_97",
+    "vendor_specific_lower_105_106",
+    "reserved_lower_118"
+  ],
+  "title": "Sff8636LowerMemory",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "spec": "SFF-8636 v2.11 § 6.2"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

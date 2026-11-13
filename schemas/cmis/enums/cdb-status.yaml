@@ -1,0 +1,93 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisCdbStatus
+title: CMIS CDB Status Byte
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.2.8 / Table 8-14
+  pdf_pages: [151, 152]
+description: >
+  CdbStatus is an 8-bit status byte with bit 7 indicating busy, bit 6
+  indicating failed after completion, and bits 5-0 carrying the command
+  result. When bit 7 is set, bit 6 is ignored by the coarse status rules.
+entries:
+  - value: 0x00
+    name: success_reserved_0
+    description: Reserved success result code
+  - value: 0x01
+    name: success
+    description: Command completed successfully
+  - value: 0x02
+    name: success_reserved_2
+    description: Reserved success result code
+  - value: 0x03
+    name: aborted_by_abort_command
+    description: Previous CMD was aborted by CMD Abort
+  - value: 0x04..0x2f
+    name: success_reserved_4_2f
+    description: Reserved success result codes
+  - value: 0x30..0x3f
+    name: success_custom
+    description: Custom success result codes
+  - value: 0x40
+    name: failed_no_specific
+    description: Failed, no specific failure
+  - value: 0x41
+    name: cmdid_unknown
+    description: CMDID unknown
+  - value: 0x42
+    name: parameter_range_error
+    description: Parameter range error or parameter not supported
+  - value: 0x43
+    name: previous_cmd_not_aborted
+    description: Previous CMD was not properly aborted by CMD Abort
+  - value: 0x44
+    name: command_checking_timeout
+    description: Command checking timed out
+  - value: 0x45
+    name: cdb_chk_code_error
+    description: CdbChkCode error
+  - value: 0x46
+    name: password_error
+    description: Password related error with command-specific meaning
+  - value: 0x47
+    name: incompatible_operating_status
+    description: Command not compatible with operating status
+  - value: 0x48..0x4f
+    name: failed_reserved_checking_error
+    description: Reserved for standard command checking errors
+  - value: 0x50..0x5f
+    name: failed_reserved
+    description: Reserved failure result codes
+  - value: 0x60..0x6f
+    name: failed_individual_task_error
+    description: Individual command or task error
+  - value: 0x70..0x7f
+    name: failed_custom
+    description: Custom failure result codes
+  - value: 0x80
+    name: in_progress_reserved_0
+    description: Reserved in-progress result code
+  - value: 0x81
+    name: busy_capturing_command
+    description: Command is captured but not processed
+  - value: 0x82
+    name: busy_checking_command
+    description: Command checking is in progress
+  - value: 0x83
+    name: busy_executing_command
+    description: Command execution is in progress
+  - value: 0x84..0xaf
+    name: in_progress_reserved_4_2f
+    description: Reserved in-progress result codes with CdbHasFailed cleared
+  - value: 0xb0..0xbf
+    name: in_progress_custom
+    description: Custom in-progress result codes with CdbHasFailed cleared
+  - value: 0xc0..0xff
+    name: in_progress_failed_bit_ignored
+    description: In-progress encodings where CdbIsBusy is set and CdbHasFailed is ignored

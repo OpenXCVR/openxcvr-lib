@@ -1,0 +1,113 @@
+{
+  "_metadata": {
+    "authored_at": "2026-05-26",
+    "authored_by": "ras + claude-sonnet-4-6 (gen-synthetic-fixtures.py)",
+    "cmis_version": null,
+    "fixture": "synthetic-qsfp-dac-40g-passive-cu",
+    "monitoring_stale": true,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "sff-8636",
+    "spec_revision": "2.11",
+    "vendor_strings_synthetic": true
+  },
+  "checksums": {
+    "cc_base": {
+      "computed": "0x13",
+      "stored": "0x13",
+      "valid": true
+    },
+    "cc_ext": {
+      "computed": "0xCF",
+      "stored": "0xCF",
+      "valid": true
+    }
+  },
+  "compliance": {
+    "bits_set": [],
+    "device_technology": {
+      "name": "copper_unequalized",
+      "raw": "0xA"
+    },
+    "ext_spec_byte_192": null,
+    "raw_bytes_page_00h_3_10": [
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00",
+      "0x00"
+    ],
+    "reach": {
+      "om1_m": 0,
+      "om2_m": 0,
+      "om3_2m_units": 0,
+      "om4_or_copper_m": 0,
+      "smf_km": 0
+    }
+  },
+  "decode_status": "ok",
+  "flags": {
+    "data_not_ready": false,
+    "interrupt_asserted": false
+  },
+  "identity": {
+    "date_code": "260526",
+    "vendor_name": "OPENXCVR",
+    "vendor_oui": "00:00:00",
+    "vendor_pn": "SYN-QSFP-DAC-3M",
+    "vendor_rev": "",
+    "vendor_sn": "SYNTH000004"
+  },
+  "lanes": [
+    {
+      "index": 1,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0
+    },
+    {
+      "index": 2,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0
+    },
+    {
+      "index": 3,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0
+    },
+    {
+      "index": 4,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_power_mw": 0.0
+    }
+  ],
+  "module": {
+    "cmis_revision": null,
+    "connector": {
+      "name": "copper_pigtail",
+      "raw": "0x21"
+    },
+    "encoding": {
+      "name": "sixty_four_b_sixty_six_b_or_legacy_manchester",
+      "raw": "0x06"
+    },
+    "extended_identifier": "0x00",
+    "identifier": {
+      "name": "qsfp_plus_sff8636",
+      "raw": "0x0D"
+    },
+    "memory_model": "paged",
+    "module_state": null,
+    "module_type": null,
+    "nominal_bit_rate_gbps": 10.3
+  },
+  "monitoring": {
+    "module_temperature_c": 0.0,
+    "module_voltage_v": 0.0
+  }
+}

@@ -1,0 +1,169 @@
+# SFF-8472 v12.5a Calibration: Internal vs External
+#
+# Two calibration modes are available, distinguished by bits 5 and 4
+# of byte 92 in the A0h Base Memory page.
+#
+# Internal calibration (byte 92 bit 5 = 1):
+#   The module uses fixed scaling factors defined by the SFF-8472 spec.
+#   Raw telemetry values are converted using the standard LSB units
+#   (e.g. 1/256 deg C for temperature, 100 uV for voltage).
+#   Bytes 56-94 of the A2h page are reserved (not used for calibration).
+#
+# External calibration (byte 92 bit 4 = 1):
+#   The module provides per-unit calibration constants stored in the
+#   A2h page, allowing higher accuracy by compensating for component
+#   variations. Rx power uses a degree-4 polynomial; tx bias, tx power,
+#   temperature, and voltage use linear (slope/offset) conversion.
+#
+# Note: Both bits can be set (module supports both modes), but only
+# one mode is active at a time. The choice is typically determined
+# by the host system's requirements.
+
+schema: openxcvr.calibration.v1
+kind: calibration
+id: calibration_internal_vs_external
+title: SFF-8472 Internal vs External Calibration
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a §§ 6.2.20, 9.5, 9.8
+  pdf_pages: [18, 40, 46, 47]
+
+calibration_mode:
+  field: page_a0h_base_memory
+  offset: 92
+  page_address: A0h
+  size_bytes: 1
+  bits:
+    - position: 5
+      mask: 0x20
+      name: internally_calibrated
+      description: "Set when module uses internal (fixed) calibration constants"
+    - position: 4
+      mask: 0x10
+      name: externally_calibrated
+      description: "Set when module uses external (per-unit) calibration constants"
+
+internal_mode:
+  description: "Fixed scaling per SFF-8472 spec — no per-unit calibration data"
+  a2h_bytes_56_94: reserved
+  telemetry_encoding:
+    temperature:
+      type: i16be
+      lsb_units: "1/256 deg C"
+      raw_offset: 96
+      description: "Standard 1/256 deg C encoding"
+    supply_voltage:
+      type: u16be
+      lsb_units: "100 uV"
+      raw_offset: 98
+      description: "Standard 100 uV encoding"
+    tx_bias:
+      type: u16be
+      lsb_units: "2 uA"
+      raw_offset: 100
+      description: "Standard 2 uA encoding"
+    tx_power:
+      type: u16be
+      lsb_units: "0.1 uW"
+      raw_offset: 102
+      description: "Standard 0.1 uW encoding"
+    rx_power:
+      type: u16be
+      lsb_units: "0.1 uW"
+      raw_offset: 104
+      description: "Standard 0.1 uW encoding"
+
+external_mode:
+  description: "Per-unit calibration constants in A2h page bytes 56-94"
+  linear_constants:
+    base_offset: 76
+    page_address: A2h
+    entries:
+      - name: tx_bias
+        index: 0
+        offset: 76
+        size_bytes: 4
+        layout:
+          - field: slope
+            bytes: [0, 1]
+            type: u16be
+            encoding: "8.8 fixed-point (divide by 256)"
+            unit: "2 uA per raw LSB"
+          - field: offset
+            bytes: [2, 3]
+            type: i16be
+            encoding: "twos-complement in parameter LSB units"
+            unit: "2 uA"
+      - name: tx_power
+        index: 1
+        offset: 80
+        size_bytes: 4
+        layout:
+          - field: slope
+            bytes: [0, 1]
+            type: u16be
+            encoding: "8.8 fixed-point (divide by 256)"
+            unit: "0.1 uW per raw LSB"
+          - field: offset
+            bytes: [2, 3]
+            type: i16be
+            encoding: "twos-complement in parameter LSB units"
+            unit: "0.1 uW"
+      - name: temperature
+        index: 2
+        offset: 84
+        size_bytes: 4
+        layout:
+          - field: slope
+            bytes: [0, 1]
+            type: u16be
+            encoding: "8.8 fixed-point (divide by 256)"
+            unit: "1/256 deg C per raw LSB"
+          - field: offset
+            bytes: [2, 3]
+            type: i16be
+            encoding: "twos-complement in parameter LSB units"
+            unit: "1/256 deg C"
+      - name: supply_voltage
+        index: 3
+        offset: 88
+        size_bytes: 4
+        layout:
+          - field: slope
+            bytes: [0, 1]
+            type: u16be
+            encoding: "8.8 fixed-point (divide by 256)"
+            unit: "100 uV per raw LSB"
+          - field: offset
+            bytes: [2, 3]
+            type: i16be
+            encoding: "twos-complement in parameter LSB units"
+            unit: "100 uV"
+    total_size_bytes: 16
+
+  rx_power_polynomial:
+    base_offset: 56
+    page_address: A2h
+    size_bytes: 20
+    coefficients: 5
+    coefficient_size: 4
+    encoding: "IEEE 754 float32 big-endian"
+    description: |
+      Degree-4 polynomial for Rx power conversion.
+      Coefficients[0] = degree 4 term (byte 56-59)
+      Coefficients[1] = degree 3 term (byte 60-63)
+      Coefficients[2] = degree 2 term (byte 64-67)
+      Coefficients[3] = degree 1 term (byte 68-71)
+      Coefficients[4] = degree 0 term (byte 72-75)
+      Formula: P(r) = c[0]*r^4 + c[1]*r^3 + c[2]*r^2 + c[3]*r + c[4]
+      where r is the raw 16-bit ADC reading.
+
+conversion_formula:
+  linear: |
+    calibrated = (slope / 256.0) * raw + offset
+    where slope is u16 8.8 fixed-point and offset is i16 in LSB units.
+  polynomial: |
+    P(r) = c[0]*r^4 + c[1]*r^3 + c[2]*r^2 + c[3]*r + c[4]
+    where r is the raw 16-bit reading and c[i] are IEEE 754 float32 coefficients.

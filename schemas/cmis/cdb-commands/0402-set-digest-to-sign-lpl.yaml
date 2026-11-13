@@ -1,0 +1,74 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbSetDigestToSignLpl
+title: CMIS CDB Command 0402h - Set Digest To Sign in LPL
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.12.4
+  pdf_pages: [347]
+  table: Table 9-54
+cmd_id: 0x0402
+available_since: "5.3"
+cmd_id_group: security
+command_class: advertised
+description: >
+  Supplies a message digest through LPL for the module to sign. The digest
+  length is the command LPLLength and must match the digest length advertised
+  by CMD 0044h.
+advertisement:
+  via_cmd: 0x0044
+  field: security_features.cmd_0402_supported
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+  - { field: security_features.digest_length, in_range: [1, 4] }
+max_completion_time:
+  source: advertised
+  field: security_features.signature_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: variable
+    fields:
+      - name: digest_data
+        offset: 136
+        size_bytes: 120
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Control
+        tags: [CDB, Security, Control]
+        length_from: page_9fh_cdb_message.lpl_length
+        provenance: { spec: "CMIS 5.3 § 9.12.4", table: "Table 9-54" }
+reply:
+  status_codes:
+    - { value: 0x01, name: success, meaning: "Operation successful; inspect ResultStatus for security result", since: "5.3" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "5.3" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "5.3" }
+  detailed_status_codes:
+    - { value: 0x0000, name: ok, meaning: "Successful command completion", since: "5.3" }
+    - { value: 0x0001, name: communication_error, meaning: "General internal communication error", since: "5.3" }
+    - { value: 0x0002, name: unexpected_error, meaning: "General unspecific error", since: "5.3" }
+    - { value: 0x0010, name: user_command_data_error, meaning: "General command data error", since: "5.3" }
+    - { value: 0x0012, name: user_not_ready_error, meaning: "Signature request during processing", since: "5.3" }
+    - { value: 0x0020, name: sec_invalid_private_key, meaning: "Invalid private key", since: "5.3" }
+    - { value: 0x0022, name: sec_device_not_found, meaning: "Security device not present or not operational", since: "5.3" }
+    - { value: 0x0024, name: sec_device_write_error, meaning: "Security device write error", since: "5.3" }
+  lpl:
+    length: 2
+    fields:
+      - name: result_status
+        offset: 136
+        size_bytes: 2
+        type: u16be
+        template: cdb_reply_field
+        provenance: { spec: "CMIS 5.3 § 9.12.4", table: "Table 9-54" }
+behavior:
+  abort_supported: false
+  retry_safe: false
+  side_effects:
+    - "Replaces any previous digest pending signature generation."
+    - "Starts or queues signature generation before CMD 0404h retrieves the result."

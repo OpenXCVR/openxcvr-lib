@@ -1,0 +1,28 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisBanksSupported
+title: CMIS Supported lane banks (2-bit)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.4.4 / Table 8-46
+  pdf_pages: [171]
+entries:
+  - value: 0
+    name: bank_0_with_8_lanes
+    description: Bank 0 supported (8 lanes)
+    since: "5.3"
+  - value: 1
+    name: banks_0_through_1_with_16_lanes
+    description: Banks 0 and 1 supported (16 lanes)
+    since: "5.3"
+  - value: 2
+    name: banks_0_through_3_with_32_lanes
+    description: Banks 0-3 supported (32 lanes)
+    since: "5.3"
+  - value: 3
+    name: reserved
+    description: Reserved; no bank count is defined
+    since: "5.3"
+    until: "5.4"

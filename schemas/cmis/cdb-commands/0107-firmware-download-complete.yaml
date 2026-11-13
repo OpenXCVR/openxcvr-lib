@@ -1,0 +1,79 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbFirmwareDownloadComplete
+title: CMIS CDB Command 0107h - Complete Firmware Download
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.7.8
+  pdf_pages: [317]
+  table: Table 9-26
+cmd_id: 0x0107
+available_since: "4.0"
+cmd_id_group: firmware_management
+command_class: conditionally_required
+description: >
+  Closes a firmware download sequence. The module validates the complete
+  firmware image (typically a CRC or signature check over all received
+  blocks) and returns success or failure. Per CMIS 5.3 § 9.7.8, this
+  command may also be used to abort an incomplete firmware download —
+  the module detects the incompleteness and returns a failure status.
+advertisement:
+  via_cmd: 0x0040
+  field: cdb_command_supported_bitmap[0x0107]
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+  - { field: firmware_download_state, in_set: [started, in_progress] }
+max_completion_time:
+  source: variable
+  note: >
+    Validation time depends on image size and module hash/signature
+    implementation. Hosts should poll CdbCmdCompleteFlag with the
+    advertised polling interval until completion or until
+    firmware_management_features.max_duration_complete (if advertised)
+    elapses.
+processing_mode: background
+length_extensibility:
+  cmd_extensible: false
+  reply_extensible: false
+cmd:
+  lpl:
+    length: 0
+    fields: []
+  epl:
+    length: 0
+    fields: []
+reply:
+  status_codes:
+    - { value: 0x01, name: success, meaning: "Image validated and committed", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure (most commonly checksum/signature mismatch)", since: "4.0" }
+    - { value: 0x42, name: parameter_range_or_not_supported, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+    - { value: 0x81, name: in_progress_captured, meaning: "Busy processing command, CMD captured", since: "4.0" }
+    - { value: 0x82, name: in_progress_checking, meaning: "Busy processing command, CMD checking", since: "4.0" }
+    - { value: 0x83, name: in_progress_execution, meaning: "Busy processing command, CMD execution", since: "4.0" }
+    - { value: 0x60, name: reject_unspecific, meaning: "Unspecific reason to reject execution (Table 9-19 Reject, code 32)", since: "5.4" }
+    - { value: 0x61, name: reject_invalid_load_format, meaning: "Load format not valid (Table 9-19 RejectInvalidLoadFormat, code 33)", since: "5.4" }
+    - { value: 0x62, name: reject_invalid_load_checksum, meaning: "Load internal checksum(s) not valid (Table 9-19 RejectInvalidLoadChecksum, code 34)", since: "5.4" }
+    - { value: 0x63, name: reject_invalid_load_authentication, meaning: "Load authentication has failed (Table 9-19 RejectInvalidLoadAuthentication, code 35)", since: "5.4" }
+    - { value: 0x64, name: reject_invalid_load_target, meaning: "Load not suitable for this hardware (Table 9-19 RejectInvalidLoadTarget, code 36)", since: "5.4" }
+    - { value: 0x65, name: reject_invalid_load, meaning: "Load not supported, other unspecific reason (Table 9-19 RejectInvalidLoad, code 37)", since: "5.4" }
+    - { value: 0x66, name: reject_hitless_activation_not_available, meaning: "Hitless load activation not available (Table 9-19 RejectHitlessActivationNotAvailable, code 38)", since: "5.4" }
+    - { value: 0x67, name: reject_config_preservation_not_available, meaning: "Load activation with configuration preservation not available (Table 9-19 RejectConfigPreservationNotAvailable, code 39)", since: "5.4" }
+  lpl:
+    length: 0
+    fields: []
+  epl:
+    length: 0
+    fields: []
+behavior:
+  abort_supported: false
+  retry_safe: false
+  side_effects:
+    - "On Success: image becomes the committed firmware image candidate"
+    - "On Failure: pending firmware download state is invalidated; host must restart with CMD 0101h Start Firmware Download to retry"
+    - "Implicit-abort use: passing this command before all blocks have been received cancels the in-flight download and returns failure"

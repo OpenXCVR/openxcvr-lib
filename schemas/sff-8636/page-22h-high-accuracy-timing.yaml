@@ -1,0 +1,23 @@
+schema: openxcvr.page.v1
+kind: page
+id: Sff8636Page22hHighAccuracyTiming
+title: SFF-8636 Page 22h High Accuracy Timing
+spec:
+  id: sff-8636
+  revision: "2.12"
+provenance:
+  spec: SFF-8636 v2.12 § 7
+  pdf_pages: [83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
+page_address: 22h
+size_bytes: 128
+
+# Optional page (Table 6-1 "Pages 22h (Optional) - High Accuracy Timing").
+# The host discovers the page by reading and validating the Format ID bytes
+# 128-129 and the CC_CALIB checksum (§ 7 "Format ID" and "CC_CALIB"); there is
+# no option advertisement bit. The page is read-only to the host; the module
+# vendor writes it through a manufacturer-defined method (§ 7, closing note).
+
+field_includes:
+  - fields/page-22h-high-accuracy-timing-part-01.yaml
+  - fields/page-22h-high-accuracy-timing-part-02.yaml
+fields: []

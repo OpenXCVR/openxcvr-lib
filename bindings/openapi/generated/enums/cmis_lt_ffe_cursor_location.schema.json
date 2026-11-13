@@ -1,0 +1,60 @@
+{
+  "$id": "cmis_lt_ffe_cursor_location.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Cursor is tap 1 (no pre-cursor)",
+      "title": "cursor_tap_1"
+    },
+    {
+      "const": 1,
+      "description": "Cursor is tap 2 (1 pre-cursor)",
+      "title": "cursor_tap_2"
+    },
+    {
+      "const": 2,
+      "description": "Cursor is tap 3 (2 pre-cursors)",
+      "title": "cursor_tap_3"
+    },
+    {
+      "const": 3,
+      "description": "Cursor is tap 4 (3 pre-cursors)",
+      "title": "cursor_tap_4"
+    },
+    {
+      "const": 4,
+      "description": "Cursor is tap 5 (4 pre-cursors)",
+      "title": "cursor_tap_5"
+    },
+    {
+      "const": 5,
+      "description": "Cursor is tap 6 (5 pre-cursors)",
+      "title": "cursor_tap_6"
+    },
+    {
+      "const": 6,
+      "description": "Cursor is tap 7 (6 pre-cursors)",
+      "title": "cursor_tap_7"
+    },
+    {
+      "const": 7,
+      "description": "Cursor is tap 8 (7 pre-cursors)",
+      "title": "cursor_tap_8"
+    }
+  ],
+  "title": "CmisLtFfeCursorLocation",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      39,
+      55
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.2.1 and 6.4.1 (Tables 9, 44)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

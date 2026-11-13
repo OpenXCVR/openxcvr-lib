@@ -1,0 +1,28 @@
+---
+schema: openxcvr.page.v1
+kind: page
+id: CmisLtPage50hEgressConfig
+title: "CMIS-LT 1.0 Page 50h Egress Link Training Configuration Registers (banked)"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  source: "docs/stds/cmis/OIF-CMIS-LT-01.0.pdf"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 § 6.2 (Tables 8-29)"
+  pdf_pages: [38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]
+page_address: "50h"
+size_bytes: 128
+
+# Lane-banked upper-memory page (CMIS-LT 1.0 § 3.2); CMIS 5.3 lower memory and
+# page selection are inherited through the cmis import chain in _index.yaml.
+banking:
+  bank_count_field: page_01h_advertising.banks_supported
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+  dimension_size: 8
+field_includes:
+  - fields/page-50h-egress-config-part-01.yaml
+  - fields/page-50h-egress-config-part-02.yaml
+  - fields/page-50h-egress-config-part-03.yaml
+fields: []

@@ -1,0 +1,20 @@
+schema: openxcvr.page.v1
+kind: page
+id: page_a2h_03h_high_accuracy_timing
+title: SFF-8472 A2h Page 03h High Accuracy Timing
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a § 13
+  pdf_pages: [71, 72, 73, 74, 75, 76, 77, 78]
+page_address: A2h
+page_select: 03h
+page_select_field: page_a2h_diagnostics_base.page_select
+size_bytes: 256
+present_when: "page_a2h_diagnostics_base.page_select == 0x03"
+
+field_includes:
+  - fields/page-a2h-03h-high-accuracy-timing-part-01.yaml
+  - fields/page-a2h-03h-high-accuracy-timing-part-02.yaml
+fields: []

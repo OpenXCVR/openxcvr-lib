@@ -1,0 +1,11 @@
+schema: openxcvr.page.v2
+kind: page
+id: BadRev
+title: page.v2 fixture with an invalid since rev string
+page_address: "00h"
+fields:
+  - name: typo_field
+    offset: 0
+    size_bytes: 1
+    type: u8
+    since: "v4.0"

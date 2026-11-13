@@ -1,0 +1,64 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbGetModuleTime
+title: CMIS CDB Command 0005h - Get Module Time
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.3.5
+  pdf_pages: [332]
+  table: Table 9-7
+cmd_id: 0x0005
+available_since: "5.4"
+cmd_id_group: module_commands
+command_class: advertised
+description: >
+  Returns the time maintained by the module's internal clock, expressed
+  as S64 nanoseconds passed since the POSIX epoch (01.01.1970 00:00:00
+  UTC). Modules supporting get/set module time have an internal clock
+  for auxiliary purposes like time stamping of diagnostics log records
+  (CMIS 5.4 revision history: 'CMD 0005h/0006h: Get/Set Module Time
+  (new)'). The command is mainly intended to allow hosts to monitor and
+  then possibly adjust the internal clock in the module.
+advertisement:
+  via_cmd: 0x0040
+  field: cdb_module_features.supported_cmds_0000_00ff
+  bit: 'CMD ID 0005h - byte 138 bit 5 of the 0040h reply bitmap'
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 0
+    fields: []
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "5.4" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "5.4" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "5.4" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "5.4" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "5.4" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "5.4" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "5.4" }
+  lpl:
+    length: 8
+    fields:
+      - name: module_time
+        offset: 136
+        size_bytes: 8
+        type: bytes
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          S64: Current Module Time in ns. ModuleTime represents the
+          nanoseconds that have passed since the POSIX epoch 01.01.1970 00:00:00
+          (time anchor).
+        provenance: { spec: "CMIS 5.4 § 9.3.5", table: "Table 9-7" }
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects:

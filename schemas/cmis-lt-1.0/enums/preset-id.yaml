@@ -1,0 +1,46 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtPresetId
+title: "CMIS-LT 1.0 Transmitter Preset Identifier"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.4/6.2.5 and 6.4.4/6.4.5 (Tables 19, 22, 54, 57)"
+  pdf_pages: [44, 45, 59, 60]
+entries:
+  - value: 0x0
+    name: pseudo_preset_tuning
+    description: "Preset 0, pseudo-preset for tuning (no change when loaded)"
+  - value: 0x1
+    name: default_setting
+    description: "Preset 1, host default setting"
+  - value: 0x2
+    name: final_ffe_taps_last_training
+    description: "Preset 2, final FFE taps in last successful training"
+  - value: 0x3
+    name: preset_3
+    description: "Preset 3, Taps[1:5] = [0, 0, 0, 1, 0]"
+  - value: 0x4
+    name: preset_4
+    description: "Preset 4, Taps[1:5] = [0, 0, 0, 0.5, 0]"
+  - value: 0x5
+    name: preset_5
+    description: "Preset 5, Taps[1:5] = [0, 0, -0.075, 0.75, 0]"
+  - value: 0x6
+    name: preset_6
+    description: "Preset 6, Taps[1:5] = [0, 0.05, -0.2, 0.75, 0]"
+  - value: 0x7
+    name: preset_7
+    description: "Preset 7, Taps[1:5] = [-0.025, 0.075, -0.25, 0.65, 0]"
+  - value: 0x8
+    name: preset_8
+    description: "Preset 8, Taps[1:5] = [0, 0, 0, 0.75, 0]"
+  - value: 0x9..0xb
+    name: reserved
+    description: "Reserved"
+  - value: 0xc..0xf
+    name: user_defined
+    description: "User defined presets"

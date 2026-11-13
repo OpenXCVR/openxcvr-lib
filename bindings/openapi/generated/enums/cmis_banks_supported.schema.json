@@ -1,0 +1,44 @@
+{
+  "$id": "cmis_banks_supported.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Bank 0 supported (8 lanes)",
+      "title": "bank_0_with_8_lanes",
+      "x-openxcvr-since": "5.3"
+    },
+    {
+      "const": 1,
+      "description": "Banks 0 and 1 supported (16 lanes)",
+      "title": "banks_0_through_1_with_16_lanes",
+      "x-openxcvr-since": "5.3"
+    },
+    {
+      "const": 2,
+      "description": "Banks 0-3 supported (32 lanes)",
+      "title": "banks_0_through_3_with_32_lanes",
+      "x-openxcvr-since": "5.3"
+    },
+    {
+      "const": 3,
+      "description": "Reserved; no bank count is defined",
+      "title": "reserved",
+      "x-openxcvr-since": "5.3",
+      "x-openxcvr-until": "5.4"
+    }
+  ],
+  "title": "CmisBanksSupported",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      171
+    ],
+    "spec": "CMIS 5.3 § 8.4.4 / Table 8-46"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

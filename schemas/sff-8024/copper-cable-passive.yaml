@@ -1,0 +1,38 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024PassiveCableCodes
+title: SFF-8024 Passive and Linear Active Copper Cable Codes
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-8
+  pdf_pages: [35]
+entries:
+  - value: 0x00
+    name: undefined
+    description: Undefined passive or linear active copper media interface
+    reach: {kind: none}
+  - value: 0x01
+    name: copper_cable
+    description: Copper cable; host electrical details are defined by Table 4-5 codes
+    tags: [passive]
+    reach: {kind: passive_copper}
+  - value: 0x02..0xbe
+    name: reserved_02_be
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xbf
+    name: passive_loopback_module
+    description: Passive loopback module
+    tags: [passive, loopback]
+    reach: {kind: passive_copper}
+  - value: 0xc0
+    name: linear_active_copper_loopback_module
+    description: Linear active copper loopback module
+    tags: [linear_active, loopback]
+    reach: {kind: passive_copper}
+  - value: 0xc1..0xff
+    name: vendor_specific
+    description: Vendor specific/custom passive or linear active copper media interface
+    reach: {kind: passive_copper}

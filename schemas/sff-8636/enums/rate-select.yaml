@@ -1,0 +1,24 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8636RateSelect
+title: SFF-8636 Two-Bit Rate Select Codes
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.2.7.2
+  table: "Table 6-12"
+  pdf_pages: [40]
+entries:
+  - value: 0x0
+    name: low_rate
+    description: Version 1 less than 2.2 GBd; Version 2 less than 12 GBd
+  - value: 0x1
+    name: mid_rate
+    description: Version 1 from 2.2 to 6.6 GBd; Version 2 from 12 to 24 GBd
+  - value: 0x2
+    name: high_rate
+    description: Version 1 6.6 GBd and above; Version 2 from 24 to 26 GBd
+  - value: 0x3
+    name: highest_or_reserved
+    description: Version 1 reserved; Version 2 26 GBd and above

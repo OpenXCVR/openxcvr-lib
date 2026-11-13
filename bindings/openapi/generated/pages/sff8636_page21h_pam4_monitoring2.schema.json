@@ -1,0 +1,88 @@
+{
+  "$id": "sff8636_page21h_pam4_monitoring2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "pam4_threshold_high_alarm": {
+      "items": {
+        "x-openxcvr-note": "polymorphic float/int union — see schema YAML for full constraints"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 76,
+        "quote": "High Alarm Threshold",
+        "section": "SFF-8636 v2.11 § 6.7.2.8",
+        "table": "Table 6-47"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "pam4_threshold_high_warning": {
+      "items": {
+        "x-openxcvr-note": "polymorphic float/int union — see schema YAML for full constraints"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 76,
+        "quote": "High Warning Threshold",
+        "section": "SFF-8636 v2.11 § 6.7.2.8",
+        "table": "Table 6-47"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "pam4_threshold_low_alarm": {
+      "items": {
+        "x-openxcvr-note": "polymorphic float/int union — see schema YAML for full constraints"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 76,
+        "quote": "Low Alarm Threshold",
+        "section": "SFF-8636 v2.11 § 6.7.2.8",
+        "table": "Table 6-47"
+      },
+      "x-openxcvr-since": "2.11"
+    },
+    "pam4_threshold_low_warning": {
+      "items": {
+        "x-openxcvr-note": "polymorphic float/int union — see schema YAML for full constraints"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8636 Rev 2.12 change history, Rev 2.10/2.11: 'Added PAM4 monitoring Upper Pages 20h and 21h' (settled design W1)",
+        "pdf_page": 76,
+        "quote": "Low Warning Threshold",
+        "section": "SFF-8636 v2.11 § 6.7.2.8",
+        "table": "Table 6-47"
+      },
+      "x-openxcvr-since": "2.11"
+    }
+  },
+  "required": [
+    "pam4_threshold_high_alarm",
+    "pam4_threshold_low_alarm",
+    "pam4_threshold_high_warning",
+    "pam4_threshold_low_warning"
+  ],
+  "title": "Sff8636Page21hPam4Monitoring2",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      76
+    ],
+    "spec": "SFF-8636 v2.11 § 6.7.2.8"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

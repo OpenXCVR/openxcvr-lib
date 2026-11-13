@@ -1,0 +1,247 @@
+entries:
+  - value: 0x55
+    name: taui_1_6t_16_s_c2m
+    description: 1.6TAUI-16-S C2M host interface
+    signaling: {lane_count: 16, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 1700.00
+  - value: 0x56
+    name: taui_1_6t_16_l_c2m
+    description: 1.6TAUI-16-L C2M host interface
+    signaling: {lane_count: 16, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 1700.00
+  - value: 0x57
+    name: base_800g_cr4
+    description: 800GBASE-CR4 host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 850.00
+  - value: 0x58
+    name: base_1_6t_cr8
+    description: 1.6TBASE-CR8 host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 1700.00
+  - value: 0x59..0x5f
+    name: reserved_59_5f
+    description: Reserved
+    reach: {kind: none}
+  - value: 0x60..0x67
+    name: reserved_60_67
+    description: Reserved for future Fibre Channel codes
+    reach: {kind: none}
+  - value: 0x68..0x6f
+    name: reserved_68_6f
+    description: Reserved
+    reach: {kind: none}
+  - value: 0x70
+    name: pcie_4_0
+    description: PCIe 4.0 host interface; lane counts may be 1, 2, 4, 8, or 16
+    signaling: {lane_rate_gbd: 16, modulation: nrz}
+    reach: {kind: c2m}
+  - value: 0x71
+    name: pcie_5_0
+    description: PCIe 5.0 host interface; lane counts may be 1, 2, 4, 8, or 16
+    signaling: {lane_rate_gbd: 32, modulation: nrz}
+    reach: {kind: c2m}
+  - value: 0x72
+    name: pcie_6_0
+    description: PCIe 6.0 host interface; lane counts may be 1, 2, 4, 8, or 16
+    signaling: {lane_rate_gbd: 32, modulation: pam4}
+    reach: {kind: c2m}
+  - value: 0x73
+    name: pcie_7_0_placeholder
+    description: PCIe 7.0 placeholder host interface; lane counts may be 1, 2, 4, 8, or 16
+    signaling: {lane_rate_gbd: 64, modulation: pam4}
+    reach: {kind: c2m}
+  - value: 0x74
+    name: cei_112g_linear_pam4
+    description: CEI-112G-LINEAR-PAM4 host interface with scalable n-lane notation in the table
+    signaling: {modulation: pam4}
+    reach: {kind: c2m}
+  - value: 0x75..0x7f
+    name: reserved_75_7f
+    description: Reserved
+    reach: {kind: none}
+  - value: 0x80
+    name: gaui_200g_1_c2m
+    description: 200GAUI-1 C2M host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.50
+  - value: 0x81
+    name: gaui_400g_2_c2m
+    description: 400GAUI-2 C2M host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425.00
+  - value: 0x82
+    name: gaui_800g_4_c2m
+    description: 800GAUI-4 C2M host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 850.00
+  - value: 0x83
+    name: taui_1_6t_8_c2m
+    description: 1.6TAUI-8 C2M host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 1700.00
+  - value: 0x84..0x8f
+    name: reserved_84_8f
+    description: Reserved for Ethernet active modules
+    reach: {kind: none}
+  - value: 0x90
+    name: eei_100g_rtlr_1_s
+    description: EEI-100G-RTLR-1-S host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.25
+  - value: 0x91
+    name: eei_100g_rtlr_1_l
+    description: EEI-100G-RTLR-1-L host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.25
+  - value: 0x92
+    name: eei_200g_rtlr_2_s
+    description: EEI-200G-RTLR-2-S host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.5
+  - value: 0x93
+    name: eei_200g_rtlr_2_l
+    description: EEI-200G-RTLR-2-L host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.5
+  - value: 0x94
+    name: eei_400g_rtlr_4_s
+    description: EEI-400G-RTLR-4-S host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425
+  - value: 0x95
+    name: eei_400g_rtlr_4_l
+    description: EEI-400G-RTLR-4-L host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425
+  - value: 0x96
+    name: eei_800g_rtlr_8_s
+    description: EEI-800G-RTLR-8-S host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 850
+  - value: 0x97
+    name: eei_800g_rtlr_8_l
+    description: EEI-800G-RTLR-8-L host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 850
+  - value: 0x98
+    name: eei_200g_rtlr_1
+    description: EEI-200G-RTLR-1 host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.5
+  - value: 0x99
+    name: eei_400g_rtlr_2
+    description: EEI-400G-RTLR-2 host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425
+  - value: 0x9a
+    name: eei_800g_rtlr_4
+    description: EEI-800G-RTLR-4 host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 850
+  - value: 0x9b
+    name: eei_1_6t_rtlr_8
+    description: EEI-1.6T-RTLR-8 host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 1700
+  - value: 0x9c..0x9f
+    name: reserved_9c_9f
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xa0
+    name: ib_xdr_placeholder
+    description: InfiniBand XDR placeholder host interface
+    signaling: {lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+  - value: 0xa1..0xa7
+    name: reserved_a1_a7
+    description: Reserved for future InfiniBand codes
+    reach: {kind: none}
+  - value: 0xa8..0xaf
+    name: reserved_a8_af
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xb0
+    name: otn_foic1_1_mfi
+    description: OTN FOIC1.1-MFI host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 55.9047, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 112
+  - value: 0xb1
+    name: otn_foic4_4_mfi
+    description: OTN FOIC4.4-MFI host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 55.9047, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 447
+  - value: 0xb2
+    name: otn_foic8_8_mfi
+    description: OTN FOIC8.8-MFI host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 55.9047, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 894
+  - value: 0xb3
+    name: otn_foic1e_1_mfi
+    description: OTN FOIC1e.1-MFI host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.5
+  - value: 0xb4
+    name: otn_foic4e_4_mfi
+    description: OTN FOIC4e.4-MFI host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 426
+  - value: 0xb5
+    name: otn_foic1o_1_mfi
+    description: OTN FOIC1o.1-MFI host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.34375, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.6875
+  - value: 0xb6
+    name: otn_foic4o_4_mfi
+    description: OTN FOIC4o.4-MFI host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.34375, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 426.75
+  - value: 0xb7
+    name: pon_itu_t_g_9804_3
+    description: ITU-T G.9804.3 PON host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 49.7664, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 50
+  - value: 0xb8..0xbd
+    name: reserved_b8_bd
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xbe
+    name: overflow_escape
+    description: Escape to host electrical interface ID tables with nonzero GID; refer to the CMIS page 1Ch normalized application descriptor structure for the 12-bit Unique ID
+    reach: {kind: none}
+  - value: 0xbf
+    name: reserved_bf
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xc0..0xfe
+    name: vendor_specific
+    description: Vendor specific/custom host electrical interface
+    reach: {kind: c2m}

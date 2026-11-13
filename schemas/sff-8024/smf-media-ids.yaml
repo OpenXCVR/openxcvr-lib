@@ -1,0 +1,17 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024SmfMediaInterface
+title: SFF-8024 SMF Media Interface IDs
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-7
+  pdf_pages: [30, 31, 32, 33, 34]
+entry_includes:
+  - entries/smf-media-ids-part-01.yaml
+  - entries/smf-media-ids-part-02.yaml
+  - entries/smf-media-ids-part-03.yaml
+  - entries/smf-media-ids-part-04.yaml
+  - entries/smf-media-ids-part-05.yaml
+entries: []

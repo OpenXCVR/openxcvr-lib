@@ -1,0 +1,28 @@
+[workspace]
+members = [
+    "crates/openxcvr-core",
+    "crates/openxcvr-transports",
+    "crates/openxcvr-codegen",
+    "crates/openxcvr-sff8636",
+    "crates/openxcvr-sff8472",
+    "crates/openxcvr-cmis",
+    "crates/openxcvr",
+    "bindings/c/rich-ffi",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
+# Effective floor is 1.82. thiserror 2.0.21 only requires 1.77, but
+# catalog_emit uses Option::is_none_or (stable in 1.82), and rustc 1.77
+# still rejects the temporary in managed_cdb.rs (E0716) that 1.82 accepts.
+# Do not lower this while either remains. thiserror is not downgraded.
+rust-version = "1.82"
+repository = "https://github.com/OpenXCVR/openxcvr-lib"
+homepage = "https://github.com/OpenXCVR/openxcvr-lib"
+authors = ["OpenXCVR contributors"]
+license = "MIT"
+
+[profile.release]
+opt-level = 3

@@ -1,0 +1,50 @@
+{
+  "$id": "cmis_lt_training_timeout.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "No timeout",
+      "title": "no_timeout"
+    },
+    {
+      "const": 1,
+      "description": "10 seconds",
+      "title": "s_10"
+    },
+    {
+      "const": 2,
+      "description": "30 seconds",
+      "title": "s_30"
+    },
+    {
+      "const": 3,
+      "description": "1 minute",
+      "title": "min_1"
+    },
+    {
+      "const": 4,
+      "description": "2 minutes",
+      "title": "min_2"
+    },
+    {
+      "const": 5,
+      "description": "5 minutes",
+      "title": "min_5"
+    }
+  ],
+  "title": "CmisLtTrainingTimeout",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      40,
+      56
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 10, 45)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

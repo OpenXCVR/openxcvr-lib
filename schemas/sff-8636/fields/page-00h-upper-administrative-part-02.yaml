@@ -1,0 +1,245 @@
+fields:
+  - name: compliance_fibre_channel_link_length
+    display_name: ComplianceFibreChannelLinkLength<length>
+    instances: { index: length, start: 0, end: 4 }
+    offset: 135
+    bit_offset_expr: "7 - length"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: very_long, description: "Very long distance" }
+      - { value: 1, name: short, description: "Short distance" }
+      - { value: 2, name: intermediate, description: "Intermediate distance" }
+      - { value: 3, name: long, description: "Long distance" }
+      - { value: 4, name: medium, description: "Medium distance" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Fibre Channel link length" }
+
+  - name: compliance_fc_longwave_laser
+    display_name: ComplianceFibreChannelLongwaveLaser
+    offset: 135
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Fibre Channel transmitter technology" }
+
+  - name: compliance_fc_electrical_inter_enclosure
+    display_name: ComplianceFibreChannelElectricalInterEnclosure
+    offset: 135
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Fibre Channel transmitter technology" }
+
+  - name: compliance_fc_electrical_intra_enclosure
+    display_name: ComplianceFibreChannelElectricalIntraEnclosure
+    offset: 136
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Fibre Channel transmitter technology" }
+
+  - name: compliance_fc_shortwave_laser_without_ofc
+    display_name: ComplianceFibreChannelShortwaveLaserWithoutOfc
+    offset: 136
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Fibre Channel transmitter technology" }
+
+  - name: compliance_fc_shortwave_laser_with_ofc
+    display_name: ComplianceFibreChannelShortwaveLaserWithOfc
+    offset: 136
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Fibre Channel transmitter technology" }
+
+  - name: compliance_fibre_channel_media
+    display_name: ComplianceFibreChannelMedia<media>
+    instances: { index: media, start: 0, end: 7 }
+    offset: 137
+    bit_offset_expr: "7 - media"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: twin_axial_pair, description: "Twin axial pair" }
+      - { value: 1, name: shielded_twisted_pair, description: "Shielded twisted pair" }
+      - { value: 2, name: miniature_coax, description: "Miniature coax" }
+      - { value: 3, name: video_coax, description: "Video coax" }
+      - { value: 4, name: multimode_62p5um, description: "Multi-mode 62.5 um" }
+      - { value: 5, name: multimode_50um, description: "Multi-mode 50 um" }
+      - { value: 6, name: multimode_50um_om3, description: "Multi-mode 50 um OM3" }
+      - { value: 7, name: single_mode, description: "Single mode" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 49, table: "Table 6-17", quote: "Fibre Channel transmission media" }
+
+  - name: compliance_fibre_channel_speed
+    display_name: ComplianceFibreChannelSpeed<speed>
+    instances: { index: speed, start: 0, end: 7 }
+    offset: 138
+    bit_offset_expr: "7 - speed"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: mbps_1200, description: "1200 MBps" }
+      - { value: 1, name: mbps_800, description: "800 MBps" }
+      - { value: 2, name: mbps_1600, description: "1600 MBps" }
+      - { value: 3, name: mbps_400, description: "400 MBps" }
+      - { value: 4, name: mbps_3200, description: "3200 MBps" }
+      - { value: 5, name: mbps_200, description: "200 MBps" }
+      - { value: 6, name: extended_speed, description: "Extended speed in byte 192" }
+      - { value: 7, name: mbps_100, description: "100 MBps" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 49, table: "Table 6-17", quote: "Fibre Channel speed" }
+
+  - name: encoding
+    display_name: Encoding
+    offset: 139
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024Encoding
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.5", pdf_page: 49, table: "Table 6-15", quote: "Encoding" }
+
+  - name: nominal_signaling_rate
+    display_name: NominalSignalingRate
+    offset: 140
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "100 MBd" }
+    template: operational_parameter
+    scope: { module: true }
+    behavior: { extended_value: "0xff means use ext_baud_rate" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.6", pdf_page: 49, table: "Table 6-15", quote: "Nominal Signaling Rate" }
+
+  - name: extended_rate_select_version
+    display_name: ExtendedRateSelectVersion
+    offset: 141
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    template: capability_advertisement
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: no_extended_rate_select, description: "Extended rate selection not declared" }
+      - { value: 1, name: version_1, description: "Extended rate select Version 1" }
+      - { value: 2, name: version_2, description: "Extended rate select Version 2" }
+      - { value: 3, name: reserved, description: "Reserved" }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.3.7", pdf_page: 49, table: "Table 6-18", quote: "Extended Rate Select Compliance", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.0: 'Added Version 2 to address 141' (Version 2 Rate Select)" }
+
+  - name: length_smf_km
+    display_name: LengthSMFKm
+    offset: 142
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 km" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.8", pdf_page: 50, table: "Table 6-15", quote: "Length (Standard SM Fiber) -km" }
+
+  - name: length_om3_2m
+    display_name: LengthOM3TwoMeters
+    offset: 143
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "2 m" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.9", pdf_page: 50, table: "Table 6-15", quote: "Length (OM3)" }
+
+  - name: length_om2_1m
+    display_name: LengthOM2OneMeter
+    offset: 144
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 m" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.10", pdf_page: 50, table: "Table 6-15", quote: "Length (OM2)" }
+
+  - name: length_om1_or_copper_attenuation_25p78ghz
+    display_name: LengthOM1OrCopperAttenuation25p78GHz
+    offset: 145
+    size_bytes: 1
+    type: u8
+    template: operational_parameter
+    scope: { module: true }
+    behavior: { optical_units: "1 m OM1", copper_units: "1 dB at 25.78 GHz", interpretation_source: "device_technology" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.11", pdf_page: 50, table: "Table 6-15", quote: "Length (OM1) or Copper Cable Attenuation" }
+
+  - name: length_cable_or_om4
+    display_name: LengthCableOrOM4
+    offset: 146
+    size_bytes: 1
+    type: u8
+    template: operational_parameter
+    scope: { module: true }
+    behavior: { cable_units: "1 m", optical_units: "2 m OM4", interpretation_source: "device_technology" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.12", pdf_page: 50, table: "Table 6-15", quote: "Length: Cable Assembly or Optical Fiber" }
+
+  - name: device_technology
+    display_name: DeviceTechnology
+    offset: 147
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8636DeviceTechnology
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.13", pdf_page: 51, table: "Table 6-20", quote: "Transmitter technology" }
+
+  - name: active_wavelength_control
+    display_name: ActiveWavelengthControl
+    offset: 147
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.13", pdf_page: 51, table: "Table 6-19", quote: "Active wavelength control" }
+
+  - name: cooled_transmitter
+    display_name: CooledTransmitter
+    offset: 147
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.13", pdf_page: 51, table: "Table 6-19", quote: "Cooled transmitter" }
+
+  - name: apd_detector
+    display_name: APDDetector
+    offset: 147
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.13", pdf_page: 51, table: "Table 6-19", quote: "APD detector" }
+
+  - name: transmitter_tunable
+    display_name: TxTunable
+    offset: 147
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.13", pdf_page: 51, table: "Table 6-19", quote: "Transmitter tunable" }

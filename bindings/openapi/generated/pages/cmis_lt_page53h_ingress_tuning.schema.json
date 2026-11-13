@@ -1,0 +1,607 @@
+{
+  "$id": "cmis_lt_page53h_ingress_tuning.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "host_in_current_sqm": {
+      "description": "Current SQM readout on HostIn receive lane <lane>; a U8 value of s encodes the SQM value 10 + s/10. Mirrored ingress-management register (visibility only); the overview table records RW Adv. access.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 68,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 77"
+      },
+      "x-openxcvr-unit": "0.1 SQM"
+    },
+    "host_in_sqm_alarm_ind": {
+      "description": "SQM degraded alarm indicator: 0: no SQM degraded alarm latched since last read, 1: SQM degraded alarm latched since last read. Mirrored ingress-management register (visibility only).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 68,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 76"
+      }
+    },
+    "mod_hsout_amplitude": {
+      "description": "Encoded differential peak-peak amplitude at TP1a for ModHsOut lane <lane>; shared-memory in/out parameter of the amplitude setting and tuning procedures.",
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 67"
+      }
+    },
+    "mod_hsout_amplitude_tune": {
+      "description": "Amplitude tuning instruction requested for ModHsOut lane <lane>; default step size 50 mV; value 3 sets the amplitude given in ModHsOut<lane>Amplitude.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 69"
+      }
+    },
+    "mod_hsout_ffe_tap_1": {
+      "description": "SM8-encoded FFE tap 1 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_1_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 1 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_1_tune": {
+      "description": "Tuning instruction for FFE tap 1 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_ffe_tap_2": {
+      "description": "SM8-encoded FFE tap 2 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_2_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 2 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_2_tune": {
+      "description": "Tuning instruction for FFE tap 2 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_ffe_tap_3": {
+      "description": "SM8-encoded FFE tap 3 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_3_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 3 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_3_tune": {
+      "description": "Tuning instruction for FFE tap 3 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_ffe_tap_4": {
+      "description": "SM8-encoded FFE tap 4 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_4_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 4 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_4_tune": {
+      "description": "Tuning instruction for FFE tap 4 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_ffe_tap_5": {
+      "description": "SM8-encoded FFE tap 5 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_5_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 5 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_5_tune": {
+      "description": "Tuning instruction for FFE tap 5 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_ffe_tap_6": {
+      "description": "SM8-encoded FFE tap 6 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_6_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 6 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_6_tune": {
+      "description": "Tuning instruction for FFE tap 6 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_ffe_tap_7": {
+      "description": "SM8-encoded FFE tap 7 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_7_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 7 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_7_tune": {
+      "description": "Tuning instruction for FFE tap 7 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_ffe_tap_8": {
+      "description": "SM8-encoded FFE tap 8 value for ModHsOut lane <lane>: sign in bit 7 (0 positive, 1 negative), magnitude 0..127 in bits 6-0 with 0.01 per LSB, i.e. a tap value range of -1.27 to +1.27. Shared-memory in/out parameter; when advertised, the module keeps the register current under tuning operations and preset loading.",
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 64,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 66"
+      },
+      "x-openxcvr-unit": "0.01 (tap magnitude; bit 7 is the sign)"
+    },
+    "mod_hsout_ffe_tap_8_saturated": {
+      "description": "Indicates that the tap value limit was reached on FFE tap 8 of ModHsOut lane <lane> during an increment/decrement tuning request; the request fails and leaves the tap value unchanged.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 71"
+      }
+    },
+    "mod_hsout_ffe_tap_8_tune": {
+      "description": "Tuning instruction for FFE tap 8 of ModHsOut lane <lane>, inside the atomically updated U16 per-lane tuning register at bytes 196-211; instructions for unused taps are ignored. Default step size 0.02.",
+      "items": {
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 65,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 68"
+      }
+    },
+    "mod_hsout_invoke_tuning_trig": {
+      "description": "Host indicates a Tuning Request Raised (TRR) for lane <lane>; the module clears the bit when it reads (self-clearing). 0: no tuning request, 1: tuning request for lane <lane>. H2M message bit.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 67,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 73"
+      }
+    },
+    "mod_hsout_output_saturated": {
+      "description": "Indicates that the output amplitude of ModHsOut lane <lane> saturated at the minimum or maximum amplitude during an adjustment request; a permanent status indication.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 72"
+      }
+    },
+    "mod_hsout_training_done_ind": {
+      "description": "Indicator after completion of ingress training: 0: ingress training not started or not yet completed, 1: ingress training completed, examine training status and result. Visibility-only register, not relevant for the module (see namespace README for the overview/table ordering note).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 67,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 75"
+      }
+    },
+    "mod_hsout_tuning_completed_flag": {
+      "description": "Module indicates tuning procedure completion for lane <lane>: 0: no tuning requested or not yet completed, 1: requested operation completed. M2H message bit, clear on read.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 67,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 74"
+      }
+    },
+    "mod_hsout_tuning_type": {
+      "description": "Type of tuning requested for lane <lane> when the tuning procedure is invoked: 0: FFE tap tuning (Table 68), 1: output amplitude tuning (Table 69).",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 70"
+      }
+    },
+    "reserved_215": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 70"
+      }
+    },
+    "reserved_225": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 66,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 72"
+      }
+    },
+    "reserved_230_231": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 68,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 76"
+      }
+    },
+    "reserved_240_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 68,
+        "section": "OIF-CMIS-LT-01.0 § 6.5",
+        "table": "Table 77"
+      }
+    }
+  },
+  "required": [
+    "mod_hsout_ffe_tap_1",
+    "mod_hsout_ffe_tap_2",
+    "mod_hsout_ffe_tap_3",
+    "mod_hsout_ffe_tap_4",
+    "mod_hsout_ffe_tap_5",
+    "mod_hsout_ffe_tap_6",
+    "mod_hsout_ffe_tap_7",
+    "mod_hsout_ffe_tap_8",
+    "mod_hsout_amplitude",
+    "mod_hsout_ffe_tap_1_tune",
+    "mod_hsout_ffe_tap_2_tune",
+    "mod_hsout_ffe_tap_3_tune",
+    "mod_hsout_ffe_tap_4_tune",
+    "mod_hsout_ffe_tap_5_tune",
+    "mod_hsout_ffe_tap_6_tune",
+    "mod_hsout_ffe_tap_7_tune",
+    "mod_hsout_ffe_tap_8_tune",
+    "mod_hsout_amplitude_tune",
+    "mod_hsout_tuning_type",
+    "reserved_215",
+    "mod_hsout_ffe_tap_1_saturated",
+    "mod_hsout_ffe_tap_2_saturated",
+    "mod_hsout_ffe_tap_3_saturated",
+    "mod_hsout_ffe_tap_4_saturated",
+    "mod_hsout_ffe_tap_5_saturated",
+    "mod_hsout_ffe_tap_6_saturated",
+    "mod_hsout_ffe_tap_7_saturated",
+    "mod_hsout_ffe_tap_8_saturated",
+    "mod_hsout_output_saturated",
+    "reserved_225",
+    "mod_hsout_invoke_tuning_trig",
+    "mod_hsout_tuning_completed_flag",
+    "mod_hsout_training_done_ind",
+    "host_in_sqm_alarm_ind",
+    "reserved_230_231",
+    "host_in_current_sqm",
+    "reserved_240_255"
+  ],
+  "title": "CmisLtPage53hIngressTuning",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      63,
+      64,
+      65,
+      66,
+      67,
+      68
+    ],
+    "spec": "OIF-CMIS-LT-01.0 § 6.5 (Tables 65-77)"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

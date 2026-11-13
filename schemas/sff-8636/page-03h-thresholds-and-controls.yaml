@@ -1,0 +1,17 @@
+schema: openxcvr.page.v1
+kind: page
+id: Sff8636Page03hThresholdsAndControls
+title: SFF-8636 Upper Page 03h Thresholds and Controls
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.6
+  pdf_pages: [59, 60, 61, 62, 63, 64, 65, 66]
+page_address: 03h
+size_bytes: 128
+
+field_includes:
+  - fields/page-03h-thresholds-and-controls-part-01.yaml
+  - fields/page-03h-thresholds-and-controls-part-02.yaml
+fields: []

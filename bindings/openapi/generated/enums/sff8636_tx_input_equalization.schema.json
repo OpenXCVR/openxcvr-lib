@@ -1,0 +1,75 @@
+{
+  "$id": "sff8636_tx_input_equalization.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "0 dB; no equalization",
+      "title": "db_0"
+    },
+    {
+      "const": 1,
+      "description": "1 dB",
+      "title": "db_1"
+    },
+    {
+      "const": 2,
+      "description": "2 dB",
+      "title": "db_2"
+    },
+    {
+      "const": 3,
+      "description": "3 dB",
+      "title": "db_3"
+    },
+    {
+      "const": 4,
+      "description": "4 dB",
+      "title": "db_4"
+    },
+    {
+      "const": 5,
+      "description": "5 dB",
+      "title": "db_5"
+    },
+    {
+      "const": 6,
+      "description": "6 dB",
+      "title": "db_6"
+    },
+    {
+      "const": 7,
+      "description": "7 dB",
+      "title": "db_7"
+    },
+    {
+      "const": 8,
+      "description": "8 dB",
+      "title": "db_8"
+    },
+    {
+      "const": 9,
+      "description": "9 dB",
+      "title": "db_9"
+    },
+    {
+      "const": 10,
+      "description": "10 dB",
+      "title": "db_10"
+    }
+  ],
+  "title": "Sff8636TxInputEqualization",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      63
+    ],
+    "spec": "SFF-8636 v2.11 § 6.6.3",
+    "table": "Table 6-32"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

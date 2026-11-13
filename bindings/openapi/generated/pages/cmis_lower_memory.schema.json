@@ -1,0 +1,1210 @@
+{
+  "$id": "cmis_lower_memory.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "abnormal_fw_indication_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 172,
+        "quote": "Latched Flag indicating that the currently running Firmware content deviates from the Load identified by the active firmware version information.",
+        "section": "§ 8.2.4"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "abnormal_fw_indication_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 176,
+        "quote": "Mask bit for AbnormalFwIndicationFlag.",
+        "section": "§ 8.2.7"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "auto_commissioning": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 143,
+        "quote": "This field allows modules to support just one of the two intervention-free reconfiguration procedures, either the regular (automatic DPSM state changing) one or the hot one (staying in DPSM state).",
+        "section": "§ 8.2.1"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "aux1_mon_high_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Aux 1 monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux1_mon_high_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux1MonHighAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux1_mon_high_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Aux 1 monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux1_mon_high_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux1MonHighWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux1_mon_low_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Aux 1 monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux1_mon_low_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux1MonLowAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux1_mon_low_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Aux 1 monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux1_mon_low_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux1MonLowWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux1_mon_value": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 147,
+        "quote": "S16 Aux1 Monitor (see Table 8-49) (Current Value).",
+        "section": "§ 8.2.5",
+        "table": "Table 8-49"
+      }
+    },
+    "aux2_mon_high_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Aux 2 monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux2_mon_high_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux2MonHighAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux2_mon_high_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Aux 2 monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux2_mon_high_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux2MonHighWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux2_mon_low_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Aux 2 monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux2_mon_low_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux2MonLowAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux2_mon_low_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Aux 2 monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux2_mon_low_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux2MonLowWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux2_mon_value": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 147,
+        "quote": "S16 Aux2 Monitor (see Table 8-49) (Current Value).",
+        "section": "§ 8.2.5",
+        "table": "Table 8-49"
+      }
+    },
+    "aux3_mon_high_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Aux 3 monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux3_mon_high_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux3MonHighAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux3_mon_high_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Aux 3 monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux3_mon_high_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux3MonHighWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux3_mon_low_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Aux 3 monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux3_mon_low_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux3MonLowAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux3_mon_low_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Aux 3 monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "aux3_mon_low_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for Aux3MonLowWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "aux3_mon_value": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 147,
+        "quote": "S16 Aux3 Monitor (see Table 8-49) (Current Value).",
+        "section": "§ 8.2.5",
+        "table": "Table 8-49"
+      }
+    },
+    "bank_broadcast_enable": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 148,
+        "quote": "0b: Bank broadcast for lane-banked pages disabled; 1b: Bank broadcast for lane-banked pages enabled.",
+        "section": "§ 8.2.6"
+      },
+      "x-openxcvr-since": "5.2"
+    },
+    "bank_select": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 159,
+        "quote": "Bank Index of Page mapped to Upper Memory (if applicable).",
+        "section": "§ 8.2.15"
+      }
+    },
+    "cdb_cmd_complete_flag_1": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag to indicate completion of a CDB command for CDB instance 1.",
+        "section": "§ 8.2.4"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_cmd_complete_flag_2": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag to indicate completion of a CDB command for CDB instance 2.",
+        "section": "§ 8.2.4"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_cmd_complete_mask_1": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for CdbCmdCompleteFlag1.",
+        "section": "§ 8.2.7"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_cmd_complete_mask_2": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for CdbCmdCompleteFlag2.",
+        "section": "§ 8.2.7"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "cdb_status_1": {
+      "type": "object",
+      "x-openxcvr-note": "complex type — see schema YAML for full constraints",
+      "x-openxcvr-provenance": {
+        "pdf_page": 151,
+        "quote": "Status of the most recent CDB command in CDB instance 1.",
+        "section": "§ 8.2.8",
+        "table": "Table 8-14"
+      }
+    },
+    "cdb_status_2": {
+      "type": "object",
+      "x-openxcvr-note": "complex type — see schema YAML for full constraints",
+      "x-openxcvr-provenance": {
+        "pdf_page": 151,
+        "quote": "Status of the most recent CDB command in CDB instance 2.",
+        "section": "§ 8.2.8",
+        "table": "Table 8-14"
+      }
+    },
+    "cmis_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 142,
+        "quote": "CMIS revision number (decimal): The upper nibble (bits 7-4) is the integer part (major number), the lower nibble (bits 3-0) is the decimal part (minor number).",
+        "section": "§ 8.2.1"
+      }
+    },
+    "cmis_sm_support": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 154,
+        "quote": "CMIS State Machines (SM) dynamics supported.",
+        "section": "§ 8.2.12"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "custom_mon_high_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Vendor Defined Monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "custom_mon_high_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for CustomMonHighAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "custom_mon_high_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high Vendor Defined Monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "custom_mon_high_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for CustomMonHighWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "custom_mon_low_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Vendor Defined Monitor alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "custom_mon_low_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for CustomMonLowAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "custom_mon_low_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low Vendor Defined Monitor warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "custom_mon_low_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for CustomMonLowWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "custom_mon_value": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 147,
+        "quote": "S16 or U16: Custom monitor (Current Value).",
+        "section": "§ 8.2.5"
+      }
+    },
+    "data_path_firmware_error_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag to indicate that subordinated firmware in an auxiliary device for processing transmitted or received signals (e.g. a DSP) has failed.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "data_path_firmware_error_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for DataPathFirmwareErrorFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "flags_summary_page_11h": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 145,
+        "quote": "1b: at least one Flag is set on Bank <bank>, Page 11h.",
+        "section": "§ 8.2.3",
+        "table": "Table 8-8"
+      }
+    },
+    "flags_summary_page_12h": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 145,
+        "quote": "1b: at least one Flag is set on Bank <bank>, Page 12h.",
+        "section": "§ 8.2.3",
+        "table": "Table 8-8"
+      }
+    },
+    "flags_summary_page_14h": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 145,
+        "quote": "1b: at least one Flag is set on Bank <bank>, Page 14h.",
+        "section": "§ 8.2.3",
+        "table": "Table 8-8"
+      }
+    },
+    "flags_summary_page_2ch": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 145,
+        "quote": "1b: at least one Flag is set on Bank <bank>, Page 2Ch.",
+        "section": "§ 8.2.3",
+        "table": "Table 8-8"
+      }
+    },
+    "host_interface_id_app": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 157,
+        "quote": "HostInterfaceID ID from [5] or FFh to mark as unused (empty Application Descriptor).",
+        "section": "§ 8.2.13"
+      }
+    },
+    "host_lane_assignment_options_app": {
+      "items": {
+        "contentEncoding": "base64",
+        "type": "string"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 157,
+        "quote": "Bits 0-7 form a bit map corresponding to Host Lanes 1-8. A set bit indicates that the Application may begin on the corresponding host lane.",
+        "section": "§ 8.2.13"
+      }
+    },
+    "host_lane_count_app": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 157,
+        "quote": "HostLaneCount: 0000b = lane count defined by interface ID; 0001b..1000b = 1..8 lanes.",
+        "section": "§ 8.2.13"
+      }
+    },
+    "interrupt_deasserted": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 144,
+        "quote": "Status of Interrupt output signal. 1b: Interrupt not asserted (default); 0b: Interrupt asserted.",
+        "section": "§ 8.2.2"
+      }
+    },
+    "low_power_restrictions_cdb_cmds_unsupported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 155,
+        "quote": "1b: CDB commands that can cause state changes in the module are not generally supported in ModuleLowPwr state.",
+        "section": "§ 8.2.12",
+        "table": "Table 8-19"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "low_power_restrictions_cdb_fw_cmds_unsupported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 155,
+        "quote": "1b: CDB commands that can cause FW state changes in the module are not generally supported in ModuleLowPwr state.",
+        "section": "§ 8.2.12",
+        "table": "Table 8-19"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "low_power_restrictions_cdb_fw_query_unsupported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 155,
+        "quote": "1b: CDB query commands for FW management are not generally supported in ModuleLowPwr state.",
+        "section": "§ 8.2.12",
+        "table": "Table 8-19"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "low_power_restrictions_cdb_query_unsupported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 155,
+        "quote": "1b: CDB query commands are not generally supported in ModuleLowPwr state.",
+        "section": "§ 8.2.12",
+        "table": "Table 8-19"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "low_power_restrictions_validity": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 155,
+        "quote": "0b: Advertisements in this byte are uncertain (legacy modules only).",
+        "section": "§ 8.2.12",
+        "table": "Table 8-19"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "low_pwr_allow_request_hw": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 148,
+        "quote": "Enables evaluation of the LowPwrRequestHW hardware signal.",
+        "section": "§ 8.2.6"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "low_pwr_request_sw": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 148,
+        "quote": "1b: Request for the module to stay in, or to return into, Low Power mode.",
+        "section": "§ 8.2.6"
+      }
+    },
+    "mci_max_speed": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 143,
+        "quote": "Indicates maximum supported clock speed of Management Communication Interface (MCI). I2CMCI: 0: up to 400 kHz; 1: up to 1 MHz; 2: up to 3.4 MHz; 3-15: Reserved.",
+        "section": "§ 8.2.1"
+      }
+    },
+    "mci_speed_configuration": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 149,
+        "quote": "The host configures the speed used for SPI bus transactions.",
+        "section": "§ 8.2.6"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "media_interface_id_app": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 157,
+        "quote": "MediaInterfaceID ID from a suitable table of IDs in [5] that is identified by the MediaType Byte 00h:85.",
+        "section": "§ 8.2.13"
+      }
+    },
+    "media_lane_count_app": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 157,
+        "quote": "MediaLaneCount: 1000b = 8 lanes.",
+        "section": "§ 8.2.13"
+      }
+    },
+    "media_type": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 157,
+        "quote": "The MediaType field defines the interpretation of MediaInterfaceID values in the following Application Descriptors.",
+        "section": "§ 8.2.13"
+      }
+    },
+    "memory_model": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 142,
+        "quote": "Indicator of the memory model of the module: 0b: Paged memory (Pages 00h-02h, 10h-11h supported); 1b: Flat memory (Page 00h supported only).",
+        "section": "§ 8.2.1"
+      }
+    },
+    "module_active_firmware_major_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 153,
+        "quote": "U8 Numeric representation of the module's active firmware major revision.",
+        "section": "§ 8.2.9"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "module_active_firmware_minor_revision": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 153,
+        "quote": "U8 Numeric representation of the module's active firmware minor revision.",
+        "section": "§ 8.2.9"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "module_fault_cause": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 153,
+        "quote": "Reason of entering the ModuleFault state.",
+        "section": "§ 8.2.10"
+      },
+      "x-openxcvr-since": "5.0"
+    },
+    "module_firmware_error_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag to indicate that self-supervision of the main module firmware has detected a failure in the main module firmware itself.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "module_firmware_error_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for ModuleFirmwareErrorFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "module_function_type": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 154,
+        "quote": "0: Transmission Module.",
+        "section": "§ 8.2.12"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "module_state": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 144,
+        "quote": "Current Module State (see Table 8-7 for encoding and section 6.3.2 for a description of the meaning of ModuleState).",
+        "section": "§ 8.2.2",
+        "table": "Table 8-7"
+      }
+    },
+    "module_state_changed_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag to indicate a Module State Change.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "module_state_changed_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for ModuleStateChangedFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "page_select": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 159,
+        "quote": "Page Index of Page mapped to Upper Memory.",
+        "section": "§ 8.2.15"
+      }
+    },
+    "password_change_entry_area": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 159,
+        "quote": "U32: new password value.",
+        "section": "§ 8.2.14"
+      }
+    },
+    "password_cmd_result": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 154,
+        "quote": "Results status for the most recent password entry or password change entry in 00h:118-125.",
+        "section": "§ 8.2.11"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "password_entry_area": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 159,
+        "quote": "U32: password value.",
+        "section": "§ 8.2.14"
+      }
+    },
+    "reserved_management_bit6_cmis4": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-until": "5.0"
+    },
+    "reserved_management_bits1_0_cmis4": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-until": "5.0"
+    },
+    "reserved_management_bits5_4_cmis4": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-until": "5.0"
+    },
+    "reserved_module_status_cmis4": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-until": "5.0"
+    },
+    "sff8024_fiber_face_type": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 154,
+        "quote": "Physical contact specification at optical connectors (assumed to be the same for all optical interfaces).",
+        "section": "§ 8.2.12"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "sff8024_heatsink_type": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 181,
+        "quote": "A non-zero SFF8024HeatsinkType value indicates the type of heatsink as per the Heatsink Type Codes table in [5].",
+        "section": "§ 8.2.12"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "sff8024_identifier": {
+      "$ref": "../enums/sff8024_identifier.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 142,
+        "quote": "SFF8024Identifier is an SFF-8024 module type Identifier from Table 4-1 in [5] which allows to infer both physical form factor and management protocol of the module.",
+        "section": "§ 8.2.1"
+      }
+    },
+    "sff8024_module_subtype": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 154,
+        "quote": "SFF8024ModuleSubtype is an SFF-8024 module subtype identifier, with meaning defined in the Transceiver Sub-type codes table in [5].",
+        "section": "§ 8.2.12"
+      },
+      "x-openxcvr-since": "5.3"
+    },
+    "software_reset": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 148,
+        "quote": "Self-clearing trigger bit that causes the module to be reset when 1b is written to it.",
+        "section": "§ 8.2.6"
+      }
+    },
+    "squelch_method_select": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 148,
+        "quote": "0b: Squelching of Tx output reduces OMA; 1b: Squelching of Tx output reduces Pav.",
+        "section": "§ 8.2.6"
+      }
+    },
+    "stepped_config_only": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 142,
+        "quote": "Indicates which reconfiguration procedures are supported: 0b: Module supports all types of reconfigurations; 1b: Module supports the essential step-by-step reconfiguration but none or only one of the two intervention-free reconfiguration types.",
+        "section": "§ 8.2.1"
+      },
+      "x-openxcvr-since": "5.0"
+    },
+    "temp_mon_high_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high temperature alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "temp_mon_high_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for TempMonHighAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "temp_mon_high_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high temperature warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "temp_mon_high_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for TempMonHighWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "temp_mon_low_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low temperature alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "temp_mon_low_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for TempMonLowAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "temp_mon_low_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low temperature warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "temp_mon_low_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for TempMonLowWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "temp_mon_value": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "1/256 degC",
+      "x-openxcvr-provenance": {
+        "pdf_page": 147,
+        "quote": "S16 Module Temperature Monitor (Current Value).",
+        "section": "§ 8.2.5"
+      }
+    },
+    "vcc_mon_high_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high supply voltage alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "vcc_mon_high_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for VccMonHighAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "vcc_mon_high_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for high supply voltage warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "vcc_mon_high_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for VccMonHighWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "vcc_mon_low_alarm_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low supply voltage alarm.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "vcc_mon_low_alarm_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for VccMonLowAlarmFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "vcc_mon_low_warning_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 146,
+        "quote": "Latched Flag for low supply voltage warning.",
+        "section": "§ 8.2.4"
+      }
+    },
+    "vcc_mon_low_warning_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 150,
+        "quote": "Mask bit for VccMonLowWarningFlag.",
+        "section": "§ 8.2.7"
+      }
+    },
+    "vcc_mon_voltage": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-lsb-units": "100 uV",
+      "x-openxcvr-provenance": {
+        "pdf_page": 147,
+        "quote": "U16 Supply Voltage Monitor (Current Value).",
+        "section": "§ 8.2.5"
+      }
+    }
+  },
+  "required": [
+    "sff8024_identifier",
+    "cmis_revision",
+    "memory_model",
+    "reserved_management_bit6_cmis4",
+    "reserved_management_bits5_4_cmis4",
+    "reserved_management_bits1_0_cmis4",
+    "stepped_config_only",
+    "mci_max_speed",
+    "auto_commissioning",
+    "reserved_module_status_cmis4",
+    "module_state",
+    "interrupt_deasserted",
+    "flags_summary_page_11h",
+    "flags_summary_page_12h",
+    "flags_summary_page_14h",
+    "flags_summary_page_2ch",
+    "module_state_changed_flag",
+    "module_firmware_error_flag",
+    "data_path_firmware_error_flag",
+    "abnormal_fw_indication_flag",
+    "cdb_cmd_complete_flag_1",
+    "cdb_cmd_complete_flag_2",
+    "temp_mon_high_alarm_flag",
+    "temp_mon_low_alarm_flag",
+    "temp_mon_high_warning_flag",
+    "temp_mon_low_warning_flag",
+    "vcc_mon_high_alarm_flag",
+    "vcc_mon_low_alarm_flag",
+    "vcc_mon_high_warning_flag",
+    "vcc_mon_low_warning_flag",
+    "aux1_mon_high_alarm_flag",
+    "aux1_mon_low_alarm_flag",
+    "aux1_mon_high_warning_flag",
+    "aux1_mon_low_warning_flag",
+    "aux2_mon_high_alarm_flag",
+    "aux2_mon_low_alarm_flag",
+    "aux2_mon_high_warning_flag",
+    "aux2_mon_low_warning_flag",
+    "aux3_mon_high_alarm_flag",
+    "aux3_mon_low_alarm_flag",
+    "aux3_mon_high_warning_flag",
+    "aux3_mon_low_warning_flag",
+    "custom_mon_high_alarm_flag",
+    "custom_mon_low_alarm_flag",
+    "custom_mon_high_warning_flag",
+    "custom_mon_low_warning_flag",
+    "temp_mon_value",
+    "vcc_mon_voltage",
+    "aux1_mon_value",
+    "aux2_mon_value",
+    "aux3_mon_value",
+    "custom_mon_value",
+    "software_reset",
+    "low_pwr_request_sw",
+    "squelch_method_select",
+    "low_pwr_allow_request_hw",
+    "bank_broadcast_enable",
+    "mci_speed_configuration",
+    "module_state_changed_mask",
+    "module_firmware_error_mask",
+    "data_path_firmware_error_mask",
+    "abnormal_fw_indication_mask",
+    "cdb_cmd_complete_mask_1",
+    "cdb_cmd_complete_mask_2",
+    "temp_mon_high_alarm_mask",
+    "temp_mon_low_alarm_mask",
+    "temp_mon_high_warning_mask",
+    "temp_mon_low_warning_mask",
+    "vcc_mon_high_alarm_mask",
+    "vcc_mon_low_alarm_mask",
+    "vcc_mon_high_warning_mask",
+    "vcc_mon_low_warning_mask",
+    "aux1_mon_high_alarm_mask",
+    "aux1_mon_low_alarm_mask",
+    "aux1_mon_high_warning_mask",
+    "aux1_mon_low_warning_mask",
+    "aux2_mon_high_alarm_mask",
+    "aux2_mon_low_alarm_mask",
+    "aux2_mon_high_warning_mask",
+    "aux2_mon_low_warning_mask",
+    "aux3_mon_high_alarm_mask",
+    "aux3_mon_low_alarm_mask",
+    "aux3_mon_high_warning_mask",
+    "aux3_mon_low_warning_mask",
+    "custom_mon_high_alarm_mask",
+    "custom_mon_low_alarm_mask",
+    "custom_mon_high_warning_mask",
+    "custom_mon_low_warning_mask",
+    "cdb_status_1",
+    "cdb_status_2",
+    "module_active_firmware_major_revision",
+    "module_active_firmware_minor_revision",
+    "module_fault_cause",
+    "password_cmd_result",
+    "cmis_sm_support",
+    "module_function_type",
+    "sff8024_module_subtype",
+    "sff8024_heatsink_type",
+    "sff8024_fiber_face_type",
+    "low_power_restrictions_validity",
+    "low_power_restrictions_cdb_query_unsupported",
+    "low_power_restrictions_cdb_fw_query_unsupported",
+    "low_power_restrictions_cdb_cmds_unsupported",
+    "low_power_restrictions_cdb_fw_cmds_unsupported",
+    "media_type",
+    "host_interface_id_app",
+    "media_interface_id_app",
+    "host_lane_count_app",
+    "media_lane_count_app",
+    "host_lane_assignment_options_app",
+    "password_change_entry_area",
+    "password_entry_area",
+    "bank_select",
+    "page_select"
+  ],
+  "title": "CmisLowerMemory",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
+    ],
+    "spec": "CMIS 5.3 § 8.2"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

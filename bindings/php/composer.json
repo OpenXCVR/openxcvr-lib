@@ -1,0 +1,22 @@
+{
+    "name": "petabitscale/openxcvr",
+    "description": "CMIS transceiver EEPROM decoder — PHP binding",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Openxcvr\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Openxcvr\\Tests\\": "tests/"
+        }
+    }
+}

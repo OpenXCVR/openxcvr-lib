@@ -1,0 +1,26 @@
+[package]
+name = "openxcvr-transports"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Generic HID and addressed I2C memory access for OpenXCVR"
+readme = "README.md"
+publish = false
+
+[features]
+default = []
+# hid also takes libc: its host-state diagnosis checks node permission with access(2).
+hid = ["dep:hidapi", "dep:libc"]
+# Keep-bound Linux i2c-dev bus (openxcvr_transports::i2cdev::I2cDevBus) over
+# the I2cBus -> paged::Memory path. Linux-only; shares openxcvr-core's
+# pure-Rust i2c-dev access layer, so it also enables core's linux-i2c.
+linux-i2c = ["openxcvr-core/linux-i2c", "dep:libc"]
+
+[dependencies]
+libc = { version = "0.2", optional = true }
+openxcvr-core = { path = "../openxcvr-core" }
+hidapi = { version = "=2.6.7", optional = true, default-features = false, features = ["linux-static-hidraw", "windows-native"] }

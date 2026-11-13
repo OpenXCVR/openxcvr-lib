@@ -1,0 +1,236 @@
+fields:
+  - name: scs1_explicit_control_lane
+    display_name: SCS1ExplicitControlLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "180 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.2"
+      pdf_page: 203
+      table: "Table 8-77"
+      quote: "SCS1::DPConfigLane<i> ExplicitControlLane<i>: see CMIS 5.3 § 8.9.3.2 and Table 8-71."
+
+  - name: scs1_adaptive_input_eq_enable_tx
+    display_name: SCS1AdaptiveInputEqEnableTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 188
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 203
+      table: "Table 8-78"
+      quote: "SCS1::AdaptiveInputEqEnableTx<i>: 1b Enable; 0b Disable (allow host-controlled equalization)."
+
+  - name: scs1_adaptive_input_eq_recall_tx
+    display_name: SCS1AdaptiveInputEqRecallTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "189 + (lane - 1) / 4"
+    bit_offset_expr: "((lane - 1) % 4) * 2"
+    bit_width: 2
+    type: u2
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: do_not_recall, description: "Do not recall" }
+      - { value: 1, name: recall_buffer_1, description: "Recall from recall buffer 1" }
+      - { value: 2, name: recall_buffer_2, description: "Recall from recall buffer 2" }
+      - { value: 3, name: reserved, description: "Reserved" }
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 203
+      table: "Table 8-78"
+      quote: "SCS1::AdaptiveInputEqRecallTx<i>: recall stored Tx input equalizer adaptation settings when copied to Active Control Set."
+
+  - name: scs1_host_controlled_input_eq_target_tx
+    display_name: SCS1HostControlledInputEqTargetTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "191 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 203
+      table: "Table 8-78"
+      quote: "SCS1::HostControlledInputEqTargetTx<i>: host-controlled Tx input equalizer target encoded as described in Table 6-6."
+
+  - name: scs1_cdr_enable_tx
+    display_name: SCS1CDREnableTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 195
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 203
+      table: "Table 8-78"
+      quote: "SCS1::CDREnableTx<i>: 1b CDR enabled; 0b CDR bypassed."
+
+  - name: scs1_cdr_enable_rx
+    display_name: SCS1CDREnableRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 196
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 203
+      table: "Table 8-79"
+      quote: "SCS1::CDREnableRx<i>: 1b CDR enabled; 0b CDR bypassed."
+
+  - name: scs1_output_eq_pre_cursor_target_rx
+    display_name: SCS1OutputEqPreCursorTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "197 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 204
+      table: "Table 8-79"
+      quote: "SCS1::OutputEqPreCursorTargetRx<i>: Rx output equalization pre-cursor target."
+
+  - name: scs1_output_eq_post_cursor_target_rx
+    display_name: SCS1OutputEqPostCursorTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "201 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 204
+      table: "Table 8-79"
+      quote: "SCS1::OutputEqPostCursorTargetRx<i>: Rx output equalization post-cursor target, or pre-cursor target when only pre-cursor is advertised."
+
+  - name: scs1_output_amplitude_target_rx
+    display_name: SCS1OutputAmplitudeTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "205 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.3"
+      pdf_page: 204
+      table: "Table 8-79"
+      quote: "SCS1::OutputAmplitudeTargetRx<i>: Rx output amplitude encoding."
+
+  - name: scs1_apply_immediate_tx
+    display_name: SCS1ApplyImmediateTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 211
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.4"
+      pdf_page: 204
+      table: "Table 8-80"
+      quote: "SCS1::ApplyImmediateTx<i>: 1b triggers the Provision-and-Commission procedure for Tx. Condition: UnidirReconfigSupported (01h:162.6) = 1b."

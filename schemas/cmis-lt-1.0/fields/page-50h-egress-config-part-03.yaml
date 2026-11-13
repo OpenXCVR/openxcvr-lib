@@ -1,0 +1,230 @@
+fields:
+
+  - name: host_out_pattern_requested
+    display_name: "HostOut<lane>PatternRequested"
+    description: "(Desired) pattern for HostOut on lane <lane>, written by the module's requester engine."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "204 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtTrainingPattern
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Request, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 44, table: "Table 18" }
+
+  - name: host_out_preset_requested
+    display_name: "HostOut<lane>PresetRequested"
+    description: "Requested preset configuration for HostOut lane <lane>; the host does not return failure when a preset is not supported."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "208 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtPresetId
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Request, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 44, table: "Table 19" }
+
+  - name: host_out_precoder_requested
+    display_name: "HostOut<lane>PrecoderRequested"
+    description: "0: precoder off for lane <lane>, 1: precoder on for lane <lane>. The precoder is of type 1/(1+D) mod 4 as defined in IEEE 802.3 clause 135.5.7.2."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 212
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Request, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 44, table: "Table 20" }
+
+  - name: reserved_213_221
+    offset: 213
+    size_bytes: 9
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 44, table: "Table 20" }
+
+  - name: host_out_pattern_configured
+    display_name: "HostOut<lane>PatternConfigured"
+    description: "Configured pattern of HostOut on lane <lane> after the last change; maintained by the host responder."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "222 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtTrainingPattern
+    access: rw
+    field_type: Control
+    tags: [CMIS-LT, Configured, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 45, table: "Table 21" }
+
+  - name: host_out_preset_configured
+    display_name: "HostOut<lane>PresetConfigured"
+    description: "Identifier of the actual HostOut preset loaded on lane <lane> in response to a request."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "226 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtPresetId
+    access: rw
+    field_type: Control
+    tags: [CMIS-LT, Configured, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 45, table: "Table 22" }
+
+  - name: host_out_precoder_configured
+    display_name: "HostOut<lane>PrecoderConfigured"
+    description: "Actual precoder configuration status maintained by the host: 0: precoder off, 1: precoder on. The host must keep this register current with the actual precoder configuration."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 230
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [CMIS-LT, Configured, Egress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 45, table: "Table 23" }
+
+  - name: reserved_231_239
+    offset: 231
+    size_bytes: 9
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 45, table: "Table 23" }
+
+  - name: host_out_invoke_set_pattern_flag
+    display_name: "HostOut<lane>InvokeSetPatternFlag"
+    description: "Pattern configuration change request per lane: 0: no pattern configuration change for lane <lane>, 1: pattern configuration change for lane <lane>; requested pattern in HostOut<lane>PatternRequested. M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 240
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 46, table: "Table 24" }
+
+  - name: host_out_invoke_load_preset_flag
+    display_name: "HostOut<lane>InvokeLoadPresetFlag"
+    description: "Preset configuration change request per lane: 0: no preset configuration change on lane <lane>, 1: preset configuration change on lane <lane>; requested preset in HostOut<lane>PresetRequested. M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 241
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 46, table: "Table 25" }
+
+  - name: host_out_invoke_set_precoder_flag
+    display_name: "HostOut<lane>InvokeSetPrecoderFlag"
+    description: "Precoder configuration change request per lane: 0: no precoder configuration change for lane <lane>, 1: precoder configuration change for lane <lane>; requested setting in HostOut<lane>PrecoderConfigured. M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 242
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 46, table: "Table 26" }
+
+  - name: reserved_243_245
+    offset: 243
+    size_bytes: 3
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 46, table: "Table 26" }
+
+  - name: host_out_pattern_setting_completed_trig
+    display_name: "HostOut<lane>PatternSettingCompletedTrig"
+    description: "The host notifies the module about completion of a pattern configuration procedure (with or without success). The module clears the bits fetched and optionally compares actual and requested configuration. H2M message bit, self-clearing."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 246
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 47, table: "Table 27" }
+
+  - name: host_out_preset_setting_completed_trig
+    display_name: "HostOut<lane>PresetSettingCompletedTrig"
+    description: "The host notifies the module about completion of a preset configuration procedure (with or without success). H2M message bit, self-clearing."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 247
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 47, table: "Table 28" }
+
+  - name: host_out_precoder_setting_completed_trig
+    display_name: "HostOut<lane>PrecoderSettingCompletedTrig"
+    description: "The host notifies the module about completion of a precoder configuration procedure (with or without success). H2M message bit, self-clearing."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 248
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Egress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 48, table: "Table 29" }
+
+  - name: reserved_249_255
+    description: "Reserved bytes 249-255 (Table 29 lists 249-251 as Reserved, Table 8 lists 252-255 as Reserved; the parsed Table 29 row for 249-251 carries an unexplained WO/SC Adv. type marking, which is not recorded as a field here)."
+    offset: 249
+    size_bytes: 7
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.2", pdf_page: 48, table: "Table 29" }

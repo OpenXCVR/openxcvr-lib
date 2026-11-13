@@ -1,0 +1,44 @@
+{
+  "$id": "cmis_sm_support.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Undefined transceiver or muxceiver behavior; legacy value used before CMIS 5.3",
+      "title": "undefined_legacy"
+    },
+    {
+      "const": 1,
+      "description": "No CMIS state machine dynamics supported, for example a passive cable",
+      "title": "no_state_machine_supported"
+    },
+    {
+      "const": 2,
+      "description": "Module State Machine only, for example a resource module or fixed transceiver",
+      "title": "msm_only"
+    },
+    {
+      "const": 3,
+      "description": "Module State Machine and Data Path State Machine supported; programmable transceiver",
+      "title": "msm_dpsm"
+    },
+    {
+      "const": 4,
+      "description": "Module State Machine, Data Path State Machine, and Network Path State Machine supported; muxceiver",
+      "title": "msm_dpsm_npsm"
+    }
+  ],
+  "title": "CmisSmSupport",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      154
+    ],
+    "spec": "CMIS 5.3 § 8.2.12 / Table 8-18"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

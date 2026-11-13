@@ -1,0 +1,403 @@
+fields:
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.33 Advertisement (bytes 128-135) - Table 8-196
+  # ===========================================================================
+
+  - name: max_redirection_commit_duration
+    display_name: MaxRedirectionCommitDuration
+    offset: 128
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    since: "5.4"
+    description: "Encoded as defined in CMIS 5.4 Table 8-49 (State Duration Encoding)."
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "MaxRedirectionCommitDuration: Maximum duration of the execution of a CommitMediaLaneRedirection command being in progress, encoded as defined in Table 8-49."
+
+  - name: reserved_page_6dh_128_bits_3_0
+    display_name: ReservedPage6Dh128Bits3To0
+    offset: 128
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "Byte 128 bits 3-0: Reserved"
+
+  - name: reserved_page_6dh_129_135
+    display_name: ReservedPage6Dh129To135
+    offset: 129
+    size_bytes: 7
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "Bytes 129-135: Reserved [7]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.33 Provisioning (bytes 136-151) - Table 8-196
+  # ===========================================================================
+
+  - name: redirection_of_media_lane
+    display_name: RedirectionOfMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "136 + (lane - 1)"
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "Value is the media lane number j in {1..8} of the external media lane to which the internal media lane with lane number <lane> is to be redirected. A valid redirection is consistent with the granularity of active Data Paths or Network Paths including lane ordering within, and it is a permutation of the media lanes."
+    access: rw
+    field_type: OperationalParameter
+    tags: [OperationalParameter]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "RedirectionOfLane<i> contains the media lane number j in {1, ..., 8} of the external media lane to which the internal media lane with lane number <i> is to be redirected."
+
+  - name: reserved_page_6dh_144_151
+    display_name: ReservedPage6Dh144To151
+    offset: 144
+    size_bytes: 8
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "Bytes 144-151: Reserved [8]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.33 Configuration (bytes 152-159) - Table 8-196
+  # ===========================================================================
+
+  - name: reserved_page_6dh_152_bits_7_1
+    display_name: ReservedPage6Dh152Bits7To1
+    offset: 152
+    bit_offset: 1
+    bit_width: 7
+    type: u7
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "Byte 152 bits 7-1: Reserved"
+
+  - name: enable_media_lane_redirection
+    display_name: EnableMediaLaneRedirection
+    offset: 152
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "0b: disabled, commit command is without effect; 1b: enabled, commit command is effective. Initially, or after enabling for the first time, the RedirectStatusOfMediaLane register shows the trivial (unpermuted) media lane switch configuration; the commit command is not executed automatically on enable. When disabled, the current switch configuration remains in effect."
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: disabled, description: "Commit command is without effect" }
+      - { value: 1, name: enabled, description: "Commit command is effective" }
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "EnableMediaLaneRedirection: 0b: disabled: commit command is without effect; 1b: enabled: commit command is effective"
+
+  - name: reserved_page_6dh_153_159
+    display_name: ReservedPage6Dh153To159
+    offset: 153
+    size_bytes: 7
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "Bytes 153-159: Reserved [7]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.33 Commands (bytes 160-167) - Table 8-196. WO/SC: the
+  # command is validated prior to execution and nothing is changed in case
+  # of a validation failure; traffic integrity on media lanes with unchanged
+  # redirection shall not be affected.
+  # ===========================================================================
+
+  - name: reserved_page_6dh_160_bits_7_1
+    display_name: ReservedPage6Dh160Bits7To1
+    offset: 160
+    bit_offset: 1
+    bit_width: 7
+    type: u7
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "Byte 160 bits 7-1: Reserved"
+
+  - name: commit_media_lane_redirection
+    display_name: CommitMediaLaneRedirection
+    offset: 160
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    access: wo_sc
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 1, name: commit, description: "Commit configuration in the RedirectionOfMediaLane register to HW" }
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "CommitMediaLaneRedirection: 1b: Commit configuration in the RedirectionOfMediaLane register to HW. Traffic integrity on media lanes with unchanged redirection shall not be affected."
+
+  - name: reserved_page_6dh_161_167
+    display_name: ReservedPage6Dh161To167
+    offset: 161
+    size_bytes: 7
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-196"
+      quote: "Bytes 161-167: Reserved [7]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.33 Command Results (bytes 168-183) - Table 8-196. Result
+  # codes reuse the CmisRedirectionCommitResult code set of Page 1Dh
+  # (Table 8-196 prints the identical 0..6 code list; >6 is reserved).
+  # ===========================================================================
+
+  - name: redirection_commit_result
+    display_name: RedirectionCommitResult<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "168 + (lane - 1)"
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: CmisRedirectionCommitResult
+    since: "5.4"
+    description: "Result of the last (or current) media lane switching commit command on media lane <lane>."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 319
+      table: "Table 8-196"
+      quote: "RedirectionCommitResult<n> encodes the result of the last (or current) host lane switching commit command on lane <n>"
+
+  - name: reserved_page_6dh_176_183
+    display_name: ReservedPage6Dh176To183
+    offset: 176
+    size_bytes: 8
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 319
+      table: "Table 8-196"
+      quote: "Bytes 176-183: Reserved [8]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.33 Configuration Status (bytes 184-199) - Table 8-196
+  # ===========================================================================
+
+  - name: redirect_status_of_media_lane
+    display_name: RedirectStatusOfMediaLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "184 + (lane - 1)"
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    description: "Value is the media lane number m in {1..8} of the external media lane to which the internal media lane with lane number <lane> is redirected; default value is m = lane."
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 319
+      table: "Table 8-196"
+      quote: "RedirectStatusOfLane<n> contains the media lane number <m> in {1, ..., 8} of the external media lane to which the internal media lane with lane number <n> is redirected. Default value: <m> = <n>"
+
+  - name: reserved_page_6dh_192_199
+    display_name: ReservedPage6Dh192To199
+    offset: 192
+    size_bytes: 8
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 319
+      table: "Table 8-196"
+      quote: "Bytes 192-199: Reserved [8]"
+
+  - name: reserved_page_6dh_200_255
+    display_name: ReservedPage6Dh200To255
+    offset: 200
+    size_bytes: 56
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.33"
+      pdf_page: 318
+      table: "Table 8-195"
+      quote: "Bytes 200-255: Reserved [56]"

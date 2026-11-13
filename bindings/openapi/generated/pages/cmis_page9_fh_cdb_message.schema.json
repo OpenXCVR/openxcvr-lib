@@ -1,0 +1,114 @@
+{
+  "$id": "cmis_page9_fh_cdb_message.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "cdb_chk_code": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 282,
+        "quote": "CdbChkCode is computed by the host as the one's complement of the arithmetic sum of Bytes 9Fh:128 to 9Fh:(136+LPLLength-1) excluding Bytes 9Fh:133-135.",
+        "section": "CMIS 5.3 § 8.23",
+        "table": "Table 8-178"
+      }
+    },
+    "cmdid": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 282,
+        "quote": "U16 CDB Command Code (CMDID) identifies a CDB command to be executed",
+        "section": "CMIS 5.3 § 8.23",
+        "table": "Table 8-178"
+      }
+    },
+    "epl_length": {
+      "maximum": 65535,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 282,
+        "quote": "U16 Extended Payload Length (EPLLength) specifies the host-written number of command message body bytes in EPL, in Pages A0h-AFh. Valid lengths are 0-2048.",
+        "section": "CMIS 5.3 § 8.23",
+        "table": "Table 8-178"
+      }
+    },
+    "lpl": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 283,
+        "quote": "Local Payload (LPL): Message body area sufficient for lengths not exceeding 120 bytes for host-written CMD data or module-written REPLY data",
+        "section": "CMIS 5.3 § 8.23",
+        "table": "Table 8-180"
+      }
+    },
+    "lpl_length": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 282,
+        "quote": "U8 Local Payload Length (LPLLength) specifies the host-written number of command message body bytes in LPL, on this Page 9Fh. Valid lengths are 0-120.",
+        "section": "CMIS 5.3 § 8.23",
+        "table": "Table 8-178"
+      }
+    },
+    "rpl_chk_code": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 283,
+        "quote": "RPLChkCode is computed by the module",
+        "section": "CMIS 5.3 § 8.23",
+        "table": "Table 8-179"
+      }
+    },
+    "rpl_length": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 283,
+        "quote": "RPLLength is computed by the module and encodes the length of REPLY data returned",
+        "section": "CMIS 5.3 § 8.23",
+        "table": "Table 8-179"
+      }
+    }
+  },
+  "required": [
+    "cmdid",
+    "epl_length",
+    "lpl_length",
+    "cdb_chk_code",
+    "rpl_length",
+    "rpl_chk_code",
+    "lpl"
+  ],
+  "title": "CmisPage9FhCdbMessage",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      281,
+      282,
+      283,
+      284,
+      285,
+      286
+    ],
+    "spec": "CMIS 5.3 § 8.23"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

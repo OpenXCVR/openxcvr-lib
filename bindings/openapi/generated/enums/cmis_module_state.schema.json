@@ -1,0 +1,53 @@
+{
+  "$id": "cmis_module_state.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Reserved",
+      "title": "reserved_0"
+    },
+    {
+      "const": 1,
+      "description": "ModuleLowPwr - steady state where the management interface is initialized and operational while the module remains in Low Power mode",
+      "title": "module_low_pwr"
+    },
+    {
+      "const": 2,
+      "description": "ModulePwrUp - transient state where the module is powering up to High Power mode before reaching ModuleReady",
+      "title": "module_pwr_up"
+    },
+    {
+      "const": 3,
+      "description": "ModuleReady - steady operational state; flat memory modules always report this state",
+      "title": "module_ready"
+    },
+    {
+      "const": 4,
+      "description": "ModulePwrDn - transient state where the module returns to Low Power mode before transitioning to ModuleLowPwr",
+      "title": "module_pwr_dn"
+    },
+    {
+      "const": 5,
+      "description": "ModuleFault - steady fault state entered for implementation-dependent safety or damage-prevention conditions",
+      "title": "module_fault"
+    }
+  ],
+  "title": "CmisModuleState",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      80,
+      81,
+      82,
+      83,
+      144
+    ],
+    "spec": "CMIS 5.3 § 6.3.2 / Table 8-7"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

@@ -1,0 +1,265 @@
+fields:
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.15.1 Network Path Provisioning
+  # NP Staged Control Sets 0 and 1 - Tables 8-133, 8-134, 8-135
+  # ===========================================================================
+
+  - name: scs0_npid_lane
+    display_name: SCS0NPIDLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 3
+    type: u3
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.1"
+      pdf_page: 251
+      table: "Table 8-133"
+      quote: "SCS<k>::NPIDLane<i>: Network Path ID of that Network Path, defined as the number of the first host lane feeding the Network Path, decremented by one."
+
+  - name: scs0_np_in_use_lane
+    display_name: SCS0NPInUseLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    # CMIS 5.4 § 8.19.1 (corrigendum first published in the CMIS 5.3 Errata
+    # 01.0, § 7.6.9 background): the default configuration of the
+    # SCS<k>::NPInUseLane<i> bits shall always be initialized to zero on exit
+    # from the MgmtInit state of the MSM, so nominal NP Applications present
+    # standard Data Path behavior to NP-unaware hosts by default.
+    changed_in:
+      - rev: "5.4"
+        behavior:
+          default_on_mgmt_init_exit: 0
+        provenance:
+          section: "CMIS 5.4 § 8.19.1 / § 7.6.9.3"
+          pdf_page: 280
+          table: "Table 8-144"
+          quote: "both the default configuration of the SCS<k>::NPInUseLane<i> bits and the default configuration status of the ACS::NPInUseLane<i> bits in the NP part of the Active Control Set (ACS) shall always be initialized as zero on exit from MgmtInit state of the Module State Machine (MSM)"
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: dp_or_unused, description: "Host lane is part of a DP Application Data Path or is unused" }
+      - { value: 1, name: np_in_use, description: "Host lane is part of a Host Path feeding the Network Path identified by NPID" }
+    provenance:
+      section: "CMIS 5.3 § 8.15.1"
+      pdf_page: 251
+      table: "Table 8-133"
+      quote: "SCS<k>::NPInUseLane<i>: 0b host lane <i> is either part of the Data Path of a DP Application or it is unused; 1b host lane <i> is part of a Host Path that feeds the Network Path identified by NPID."
+
+  - name: scs1_npid_lane
+    display_name: SCS1NPIDLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "136 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 3
+    type: u3
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.1"
+      pdf_page: 252
+      table: "Table 8-135"
+      quote: "SCS1::NPConfigLane<i> NPIDLane<i>: see CMIS 5.3 § 8.15.1 Table 8-133."
+
+  - name: scs1_np_in_use_lane
+    display_name: SCS1NPInUseLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "136 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    # CMIS 5.4 § 8.19.1: SCS1 carries the same MgmtInit-exit zero default as
+    # SCS0 (see scs0_np_in_use_lane above).
+    changed_in:
+      - rev: "5.4"
+        behavior:
+          default_on_mgmt_init_exit: 0
+        provenance:
+          section: "CMIS 5.4 § 8.19.1 / § 7.6.9.3"
+          pdf_page: 280
+          table: "Table 8-145"
+          quote: "both the default configuration of the SCS<k>::NPInUseLane<i> bits and the default configuration status of the ACS::NPInUseLane<i> bits in the NP part of the Active Control Set (ACS) shall always be initialized as zero on exit from MgmtInit state of the Module State Machine (MSM)"
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: dp_or_unused, description: "Host lane is part of a DP Application Data Path or is unused" }
+      - { value: 1, name: np_in_use, description: "Host lane is part of a Host Path feeding the Network Path identified by NPID" }
+    provenance:
+      section: "CMIS 5.3 § 8.15.1"
+      pdf_page: 252
+      table: "Table 8-135"
+      quote: "SCS1::NPConfigLane<i> NPInUseLane<i>: see CMIS 5.3 § 8.15.1 Table 8-133."
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.15.2 Network Path Control (bytes 160-163)
+  # Tables 8-136 and 8-137
+  # ===========================================================================
+
+  - name: np_deinit_lane
+    display_name: NPDeinitLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 160
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: initialize, description: "Initialize the Network Path associated with host lane <lane>" }
+      - { value: 1, name: deinitialize, description: "Deinitialize the Network Path associated with host lane <lane>" }
+    provenance:
+      section: "CMIS 5.3 § 8.15.2"
+      pdf_page: 253
+      table: "Table 8-136"
+      quote: "NPDeinitLane<i>: 0b Initialize the Network Path associated with host lane <i>; 1b Deinitialize the Network Path associated with host lane <i>."
+
+  - name: hp_source_rx
+    display_name: HPSourceRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 162
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: network_path_signal, description: "Signal received from Network Path" }
+      - { value: 1, name: replacement_signal, description: "Internally generated client replacement signal" }
+    provenance:
+      section: "CMIS 5.3 § 8.15.2"
+      pdf_page: 253
+      table: "Table 8-137"
+      quote: "HPSourceRx<i>: controls the signal source feeding host lane <i> in Rx direction. Advertisement: 16h:226.0."
+
+  - name: np_source_tx
+    display_name: NPSourceTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 163
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: host_path_signal, description: "Signal received from Host Path" }
+      - { value: 1, name: replacement_signal, description: "Internally generated client replacement signal" }
+    provenance:
+      section: "CMIS 5.3 § 8.15.2"
+      pdf_page: 253
+      table: "Table 8-137"
+      quote: "NPSourceTx<i>: controls the signal source feeding the Network Path input related to the HP containing host lane <i>. Advertisement: 16h:226.1."
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.15.3 Network Path Commands (bytes 176-181)
+  # Tables 8-138, 8-139, 8-140, 8-141
+  # ===========================================================================
+
+  - name: scs0_apply_np_init_lane
+    display_name: SCS0ApplyNPInitLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 176
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.3"
+      pdf_page: 254
+      table: "Table 8-138"
+      quote: "SCS0::ApplyNPInitLane<i>: 1b triggers the Provision procedure using NP Staged Control Set 0 settings for host lane <i>, with feedback in NPConfigStatusLane<i>."
+
+  - name: scs1_apply_np_init_lane
+    display_name: SCS1ApplyNPInitLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 177
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.3"
+      pdf_page: 254
+      table: "Table 8-139"
+      quote: "SCS1::ApplyNPInitLane<i>: 1b triggers the Provision procedure using NP Staged Control Set 1 settings for host lane <i>, with feedback in NPConfigStatusLane<i>."

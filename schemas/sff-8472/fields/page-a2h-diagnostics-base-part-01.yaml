@@ -1,0 +1,243 @@
+fields:
+  - name: temperature_threshold
+    display_name: Temperature<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "2 * severity"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "1/256 deg C", severity_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::Temperature"]
+    provenance: { section: "SFF-8472 v12.5a § 9.4", pdf_page: 39, table: "Table 9-5", quote: "Temp High/Low Alarm and Warning" }
+
+  - name: supply_voltage_threshold
+    display_name: Vcc<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "8 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "100 uV", severity_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::Voltage"]
+    provenance: { section: "SFF-8472 v12.5a § 9.4", pdf_page: 39, table: "Table 9-5", quote: "Voltage High/Low Alarm and Warning" }
+
+  - name: tx_bias_threshold
+    display_name: TxBias<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "16 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "2 uA", severity_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::BiasCurrent"]
+    provenance: { section: "SFF-8472 v12.5a § 9.4", pdf_page: 39, table: "Table 9-5", quote: "Bias High/Low Alarm and Warning" }
+
+  - name: tx_power_threshold
+    display_name: TxPower<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "24 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW", severity_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::OpticalPower"]
+    provenance: { section: "SFF-8472 v12.5a § 9.4", pdf_page: 39, table: "Table 9-5", quote: "TX Power High/Low Alarm and Warning" }
+
+  - name: rx_power_threshold
+    display_name: RxPower<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "32 + 2 * severity"
+    size_bytes: 2
+    type: u16be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 uW", severity_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::OpticalPower"]
+    provenance: { section: "SFF-8472 v12.5a § 9.4", pdf_page: 39, table: "Table 9-5", quote: "RX Power High/Low Alarm and Warning" }
+
+  - name: optional_laser_temperature_threshold
+    display_name: OptionalLaserTemp<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "40 + 2 * severity"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "1/256 deg C", severity_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::Temperature", "Monitor::Frequency"]
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.4", pdf_page: 39, table: "Table 9-5", quote: "Optional Laser Temp High/Low Alarm and Warning", lineage: "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'" }
+
+  - name: optional_tec_current_threshold
+    display_name: OptionalTecCurrent<severity>Threshold
+    instances: { index: severity, start: 0, end: 3 }
+    offset_expr: "48 + 2 * severity"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.1 mA", severity_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    template: threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, "Monitor::Current"]
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "11.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.4", pdf_page: 39, table: "Table 9-5", quote: "Optional TEC Current High/Low Alarm and Warning", lineage: "SFF-8472 Rev 12.5a change history, Rev 11.4: 'Laser temperature and TEC current alarms and warnings'" }
+
+  - name: external_calibration_constants
+    display_name: ExternalCalibrationConstants
+    offset: 56
+    size_bytes: 36
+    type: composite
+    template: informational
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 1"
+    behavior: { conversion_source: "Used by telemetry variants for A2h bytes 96-105 when externally calibrated" }
+    provenance: { section: "SFF-8472 v12.5a § 9.5", pdf_page: 40, table: "Table 9-6", quote: "Calibration Constants for External Calibration Option" }
+
+  - name: rx_power_coefficient
+    display_name: RxPwrCoeff<degree>
+    instances: { index: degree, start: 0, end: 4 }
+    offset_expr: "72 - 4 * degree"
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: ieee754_float32, coefficient_order: "wire stores degree 4 at byte 56 down to degree 0 at byte 72" }
+    template: informational
+    tags: [Information, "Monitor::OpticalPower"]
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 1"
+    provenance: { section: "SFF-8472 v12.5a § 9.5", pdf_page: 40, table: "Table 9-6", quote: "Rx_PWR(4) through Rx_PWR(0)" }
+
+  - name: external_calibration_linear_term
+    display_name: ExternalCal<parameter><term>
+    instances: { index: term, start: 0, end: 7 }
+    offset_expr: "76 + 2 * term"
+    size_bytes: 2
+    type: u16be
+    encoding:
+      kind: external_calibration_slope_or_offset
+      term_order: "tx_bias_slope, tx_bias_offset, tx_power_slope, tx_power_offset, temp_slope, temp_offset, vcc_slope, vcc_offset"
+      slope_format: "unsigned 8.8 fixed-point"
+      offset_format: "signed twos-complement in parameter LSB units"
+    template: informational
+    tags: [Information, "Monitor::Calibration"]
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 1"
+    provenance: { section: "SFF-8472 v12.5a § 9.5", pdf_page: 40, table: "Table 9-6", quote: "Slopes and offsets for Tx bias, Tx power, temperature, and voltage" }
+
+  - name: enhanced_controls_advertisement
+    display_name: EnhancedControlsAdvertisement
+    offset: 56
+    size_bytes: 2
+    type: bitmap
+    template: capability_advertisement
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.6", pdf_page: 42, table: "Table 9-12", quote: "Enhanced Control Advertisement", lineage: "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 on Additional Enhanced Features ... Tables 9-12 (Enhanced Control Advertisement)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 56-57 'Enhanced Controls Advertisements'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)" }
+
+  - name: enhanced_flags_advertisement
+    display_name: EnhancedFlagsAdvertisement
+    offset: 58
+    size_bytes: 2
+    type: bitmap
+    template: capability_advertisement
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.6", pdf_page: 42, table: "Table 9-13", quote: "Enhanced Flags Advertisement", lineage: "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Tables 9-13 (Enhanced Flag Advertisement)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 58-59 'Enhanced Status Advertisements'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)" }
+
+  - name: signal_integrity_control_advertisement
+    display_name: SignalIntegrityControlAdvertisement
+    offset: 60
+    size_bytes: 6
+    type: bitmap
+    template: capability_advertisement
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.6", pdf_page: 43, table: "Table 9-14", quote: "Enhanced Signal Integrity Control Advertisement", lineage: "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Tables 9-14 (Enhanced Signal Integrity Control Advertisement)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 60-65 'Enhanced Signal Integrity Controls Advertisement'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)" }
+
+  - name: max_power_consumption
+    display_name: MaxPowerConsumption
+    offset: 66
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "0.1 W" }
+    template: operational_parameter
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.6", pdf_page: 42, table: "Table 9-11", quote: "Max Power Consumption", lineage: "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Table 9-11 with definitions for all bytes used'). Rev 12.4 § 9.6 Table 9-11 (p. 34) defines A2h byte 66 'Max Power Consumption'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)" }
+
+  - name: secondary_extended_specification_compliance
+    display_name: SecondaryExtSpecCompliance
+    offset: 67
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024ExtendedSpecCompliance
+    template: capability_advertisement
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.6", pdf_page: 42, table: "Table 9-11", quote: "Secondary Extended Spec compliance", lineage: "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Table 9-11 with definitions for all bytes used'). Rev 12.4 § 9.6 Table 9-11 (p. 34) defines A2h byte 67 'Secondary Extended Spec compliance'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)" }
+
+  - name: enhanced_control_registers
+    display_name: EnhancedControlRegisters
+    offset: 71
+    size_bytes: 4
+    type: bitmap
+    template: control
+    scope: { module: true }
+    present_when: "page_a0h_base_memory.externally_calibrated == 0"
+    behavior: { controls: "Tx input EQ adaptation, Rx output EQ/amplitude, RS0/RS1 pin ignore, Rx/Tx squelch" }
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 9.6", pdf_page: 44, table: "Table 9-15", quote: "Enhanced Control Registers", lineage: "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'Added Section 9.6 ... Tables 9-15 (Enhanced Control)'). Rev 12.4 § 9.6 Table 9-11 (p. 34) allocates A2h bytes 71-74 'Enhanced Control Registers'; the Rev 12.3 document has no Section 9.6 (its 9.6 is CC_DMI)" }
+
+  - name: reserved_calibration_or_enhanced_tail
+    display_name: ReservedCalibrationOrEnhancedTail
+    offset: 75
+    size_bytes: 20
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    behavior: { external_calibration_reserved: "bytes 92-94", internal_calibration_reserved: "bytes 75-94" }
+    provenance: { section: "SFF-8472 v12.5a §§ 9.5-9.6", pdf_page: 42, tables: ["Table 9-6", "Table 9-11"], quote: "Reserved" }
+
+  - name: cc_dmi
+    display_name: CC_DMI
+    offset: 95
+    size_bytes: 1
+    type: u8
+    encoding: { kind: checksum, covers: "A2h bytes 0-94", covers_range: [0, 94], algorithm: sum8 }
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 9.7", pdf_page: 45, quote: "CC_DMI" }
+
+  - name: temperature
+    display_name: Temperature
+    offset: 96
+    size_bytes: 2
+    type: i16be
+    template: telemetry_module
+    tags: [Monitor, "Monitor::Temperature"]
+    variants:
+      discriminator: { field: page_a0h_base_memory.externally_calibrated }
+      cases:
+        - when: { value: false }
+          encoding: { kind: scaled_signed, lsb_units: "1/256 deg C" }
+        - when: { value: true }
+          encoding: { kind: external_calibration, constants_field: external_calibration_constants, slope_field: "external_calibration_linear_term[4]", offset_field: "external_calibration_linear_term[5]" }
+    provenance: { section: "SFF-8472 v12.5a §§ 9.3, 9.8", pdf_page: 46, table: "Table 9-16", quote: "Temperature MSB/LSB" }
+
+  - name: supply_voltage
+    display_name: Vcc
+    offset: 98
+    size_bytes: 2
+    type: u16be
+    template: telemetry_module
+    tags: [Monitor, "Monitor::Voltage"]
+    variants:
+      discriminator: { field: page_a0h_base_memory.externally_calibrated }
+      cases:
+        - when: { value: false }
+          encoding: { kind: scaled_unsigned, lsb_units: "100 uV" }
+        - when: { value: true }
+          encoding: { kind: external_calibration, constants_field: external_calibration_constants, slope_field: "external_calibration_linear_term[6]", offset_field: "external_calibration_linear_term[7]" }
+    provenance: { section: "SFF-8472 v12.5a §§ 9.3, 9.8", pdf_page: 46, table: "Table 9-16", quote: "Vcc MSB/LSB" }

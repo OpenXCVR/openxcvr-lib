@@ -1,0 +1,40 @@
+{
+  "$id": "cmis_lt_tap_tuning_step.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "0.02 (default)",
+      "title": "v_0_02"
+    },
+    {
+      "const": 1,
+      "description": "0.01",
+      "title": "v_0_01"
+    },
+    {
+      "const": 2,
+      "description": "Reserved",
+      "title": "reserved"
+    },
+    {
+      "const": 3,
+      "description": "0.04",
+      "title": "v_0_04"
+    }
+  ],
+  "title": "CmisLtTapTuningStep",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      41,
+      57
+    ],
+    "spec": "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 11, 46)"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis-lt-1.0",
+    "revision": "01.0"
+  }
+}

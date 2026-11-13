@@ -1,0 +1,295 @@
+fields:
+
+  - name: grid_supported_75_ghz
+    display_name: GridSupported75GHz
+    offset: 128
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 188
+      table: "Table 8-66"
+      quote: "75 GHz Grid supported"
+
+  - name: grid_supported_33_ghz
+    display_name: GridSupported33GHz
+    offset: 128
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 188
+      table: "Table 8-66"
+      quote: "33 GHz Grid supported"
+
+  - name: grid_supported_100_ghz
+    display_name: GridSupported100GHz
+    offset: 128
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 188
+      table: "Table 8-66"
+      quote: "100 GHz Grid supported"
+
+  - name: grid_supported_50_ghz
+    display_name: GridSupported50GHz
+    offset: 128
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 188
+      table: "Table 8-66"
+      quote: "50 GHz Grid supported"
+
+  - name: grid_supported_25_ghz
+    display_name: GridSupported25GHz
+    offset: 128
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "25 GHz Grid supported"
+
+  - name: grid_supported_12p5_ghz
+    display_name: GridSupported12p5GHz
+    offset: 128
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "12.5 GHz Grid supported"
+
+  - name: grid_supported_6p25_ghz
+    display_name: GridSupported6p25GHz
+    offset: 128
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "6.25 GHz Grid supported"
+
+  - name: grid_supported_3p125_ghz
+    display_name: GridSupported3p125GHz
+    offset: 128
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "3.125 GHz Grid supported"
+
+  - name: fine_tuning_supported
+    display_name: FineTuningSupported
+    offset: 129
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "Module supports fine-tuning of laser frequency in the vicinity of an on-grid channel"
+
+  - name: grid_supported_150_ghz
+    display_name: GridSupported150GHz
+    offset: 129
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "150 GHz Grid supported"
+
+  - name: grid_supported_300_ghz
+    display_name: GridSupported300GHz
+    since: "5.4"
+    offset: 129
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.7"
+      pdf_page: 214
+      table: "Table 8-68"
+      quote: "Bool: Indicates whether the module supports channel-based tuning on the 300 GHz grid defined as: Frequency (THz) = 193.1 + (n - 9) x 0.0125 where n must be an integer multiple of 24. 0b: 300 GHz Grid not supported 1b: 300 GHz Grid supported"
+
+  - name: grid_low_channel
+    display_name: GridLowChannel<grid>
+    instances: { index: grid, start: 0, end: 8 }
+    offset_expr: "130 + 4 * grid"
+    size_bytes: 2
+    type: i16be
+    description: >
+      Grid index order is 0=3.125 GHz, 1=6.25 GHz, 2=12.5 GHz, 3=25 GHz, 4=50 GHz, 5=100 GHz, 6=33 GHz, 7=75 GHz, 8=150 GHz.
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "S16 lowest supported n for the channel spacing selected by grid"
+
+  # CMIS 5.4 Table 8-68: the 300 GHz grid channels continue the channel
+  # register series as its 10th entry (166-167/168-169 would be grid index 9 of
+  # the <grid> instance series). Modeled as named scalars so the through-5.3
+  # instance series (grids 0-8, bytes 130-165) is untouched; the 5.3 reserved
+  # span 166-189 loses its first four bytes to these fields.
+  - name: grid_low_channel_300_ghz
+    display_name: GridLowChannel300GHz
+    since: "5.4"
+    offset: 166
+    size_bytes: 2
+    type: i16be
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.7"
+      pdf_page: 214
+      table: "Table 8-68"
+      quote: "S16 Lowest supported n for 300 GHz spacing"

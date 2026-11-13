@@ -1,0 +1,59 @@
+{
+  "$id": "cmis_network_path_state.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Reserved",
+      "title": "reserved_0"
+    },
+    {
+      "const": 1,
+      "description": "NPDeactivated (or unused lane) - no Network Path is initialized on that lane",
+      "title": "np_deactivated"
+    },
+    {
+      "const": 2,
+      "description": "NPInit - Network Path is initializing",
+      "title": "np_init"
+    },
+    {
+      "const": 3,
+      "description": "NPDeinit - Network Path is de-initializing",
+      "title": "np_deinit"
+    },
+    {
+      "const": 4,
+      "description": "NPActivated - Network Path is active",
+      "title": "np_activated"
+    },
+    {
+      "const": 5,
+      "description": "NPTxTurnOn - Tx is being turned on",
+      "title": "np_tx_turn_on"
+    },
+    {
+      "const": 6,
+      "description": "NPTxTurnOff - Tx is being turned off",
+      "title": "np_tx_turn_off"
+    },
+    {
+      "const": 7,
+      "description": "NPInitialized - Network Path is initialized but Tx not yet enabled",
+      "title": "np_initialized"
+    }
+  ],
+  "title": "CmisNetworkPathState",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      256
+    ],
+    "spec": "CMIS 5.3 § 8.15.4 / Table 8-144"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

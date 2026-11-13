@@ -1,0 +1,10 @@
+schema: openxcvr.page.v2
+kind: page
+id: BadFlowRev
+title: page.v2 negative fixture — invalid since rev inside a flow-style field mapping
+page_address: "00h"
+fields:
+  # Flow-style mapping with a bad `since` rev. The old line scanner only matched
+  # `since:` at the start of a stripped line, so it silently passed this. The
+  # regex-based scan now reaches rev keys inside `{ }` and flags the bad value.
+  - { name: flow_field, offset: 0, size_bytes: 1, type: u8, since: "v4.0" }

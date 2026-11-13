@@ -1,0 +1,97 @@
+fields:
+
+  - name: mod_hsout_invoke_tuning_trig
+    display_name: "ModHsOut<lane>InvokeTuningTrig"
+    description: "Host indicates a Tuning Request Raised (TRR) for lane <lane>; the module clears the bit when it reads (self-clearing). 0: no tuning request, 1: tuning request for lane <lane>. H2M message bit."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 226
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Tuning, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.5", pdf_page: 67, table: "Table 73" }
+
+  - name: mod_hsout_tuning_completed_flag
+    display_name: "ModHsOut<lane>TuningCompletedFlag"
+    description: "Module indicates tuning procedure completion for lane <lane>: 0: no tuning requested or not yet completed, 1: requested operation completed. M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 227
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Tuning, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.5", pdf_page: 67, table: "Table 74" }
+
+  - name: mod_hsout_training_done_ind
+    display_name: "ModHsOut<lane>TrainingDoneInd"
+    description: "Indicator after completion of ingress training: 0: ingress training not started or not yet completed, 1: ingress training completed, examine training status and result. Visibility-only register, not relevant for the module (see namespace README for the overview/table ordering note)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 228
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Status
+    tags: [CMIS-LT, Session, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.5", pdf_page: 67, table: "Table 75" }
+
+  - name: host_in_sqm_alarm_ind
+    display_name: "HostIn<lane>SqmAlarmInd"
+    description: "SQM degraded alarm indicator: 0: no SQM degraded alarm latched since last read, 1: SQM degraded alarm latched since last read. Mirrored ingress-management register (visibility only)."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 229
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Flag
+    tags: [CMIS-LT, SQM, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.5", pdf_page: 68, table: "Table 76" }
+
+  - name: reserved_230_231
+    offset: 230
+    size_bytes: 2
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.5", pdf_page: 68, table: "Table 76" }
+
+  - name: host_in_current_sqm
+    display_name: "HostIn<lane>CurrentSQM"
+    description: "Current SQM readout on HostIn receive lane <lane>; a U8 value of s encodes the SQM value 10 + s/10. Mirrored ingress-management register (visibility only); the overview table records RW Adv. access."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "232 + (lane - 1)"
+    type: u8
+    access: rw
+    units: "0.1 SQM"
+    field_type: Monitor
+    tags: [CMIS-LT, SQM, Monitor, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.5", pdf_page: 68, table: "Table 77" }
+
+  - name: reserved_240_255
+    offset: 240
+    size_bytes: 16
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.5", pdf_page: 68, table: "Table 77" }

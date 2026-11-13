@@ -1,0 +1,29 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisSmSupport
+title: CMIS State Machine Support (8-bit)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.2.12 / Table 8-18
+  pdf_pages: [154]
+entries:
+  - value: 0x00
+    name: undefined_legacy
+    description: Undefined transceiver or muxceiver behavior; legacy value used before CMIS 5.3
+  - value: 0x01
+    name: no_state_machine_supported
+    description: No CMIS state machine dynamics supported, for example a passive cable
+  - value: 0x02
+    name: msm_only
+    description: Module State Machine only, for example a resource module or fixed transceiver
+  - value: 0x03
+    name: msm_dpsm
+    description: Module State Machine and Data Path State Machine supported; programmable transceiver
+  - value: 0x04
+    name: msm_dpsm_npsm
+    description: Module State Machine, Data Path State Machine, and Network Path State Machine supported; muxceiver
+  - value: 0x05..0xff
+    name: reserved_05_ff
+    description: Reserved

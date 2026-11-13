@@ -1,0 +1,223 @@
+fields:
+  - name: tx_input_equalizer_control_lane
+    display_name: Tx<lane>InputEqualizerControl
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "234 + (lane - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((lane - 1) % 2))"
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8636TxInputEqualization
+    template: control
+    scope: { lane: lane }
+    present_when: { field: page_00h_upper_administrative.tx_fixed_equalizer_capable, equals: true }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Tx input equalizer control", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Page 03h Bytes 226-241 Optional Channel Controls'" }
+
+  - name: rx_output_emphasis_control_lane
+    display_name: Rx<lane>OutputEmphasisControl
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "236 + (lane - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((lane - 1) % 2))"
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8636RxOutputEmphasis
+    template: control
+    scope: { lane: lane }
+    present_when: { field: page_00h_upper_administrative.rx_output_emphasis_capable, equals: true }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Rx output emphasis control", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Page 03h Bytes 226-241 Optional Channel Controls'" }
+
+  - name: rx_output_amplitude_control_lane
+    display_name: Rx<lane>OutputAmplitudeControl
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "238 + (lane - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((lane - 1) % 2))"
+    bit_width: 4
+    type: u4
+    enum_ref: Sff8636RxOutputAmplitude
+    template: control
+    scope: { lane: lane }
+    present_when: { field: page_00h_upper_administrative.rx_output_amplitude_capable, equals: true }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Rx output amplitude control", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Page 03h Bytes 226-241 Optional Channel Controls'" }
+
+  - name: rx_squelch_disable_lane
+    display_name: Rx<lane>SquelchDisable
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 240
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: "page_00h_upper_administrative.option_control_or_flag_support[rx_squelch_disable]", equals: true }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Disable Rx squelch", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Page 03h Bytes 226-241 Optional Channel Controls'" }
+
+  - name: tx_squelch_disable_lane
+    display_name: Tx<lane>SquelchDisable
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 240
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: "page_00h_upper_administrative.option_control_or_flag_support[tx_squelch_disable]", equals: true }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Disable Tx squelch", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Page 03h Bytes 226-241 Optional Channel Controls'" }
+
+  - name: rx_output_disable_lane
+    display_name: Rx<lane>OutputDisable
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 241
+    bit_offset_expr: "lane + 3"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: "page_00h_upper_administrative.option_control_or_flag_support[rx_output_disable]", equals: true }
+    since: "2.5"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Disable Rx output", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.5: 'Page 03h Bytes 226-241 Optional Channel Controls'" }
+
+  - name: tx_adaptive_eq_control_lane
+    display_name: Tx<lane>AdaptiveEQControl
+    instances: { index: lane, start: 1, end: 4 }
+    offset: 241
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    template: control
+    scope: { lane: lane }
+    present_when: { field: page_00h_upper_administrative.tx_adaptive_equalizer_capable, equals: true }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Tx input adaptive equalizer", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Tx Adaptive EQ (per ch) control bits in Page 03h, Address 241 bits 3-0'" }
+
+  - name: rx_power_alarm_warning_mask
+    display_name: MRx<lane>Power<severity>Mask
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "242 + (lane - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((lane - 1) % 2))"
+    bit_width: 4
+    type: bitmap
+    template: mask
+    tags: [Mask, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    behavior: { nibble_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.4", pdf_page: 65, table: "Table 6-35", quote: "Channel Monitor Masks" }
+
+  - name: tx_bias_alarm_warning_mask
+    display_name: MTx<lane>Bias<severity>Mask
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "244 + (lane - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((lane - 1) % 2))"
+    bit_width: 4
+    type: bitmap
+    template: mask
+    tags: [Mask, "Monitor::BiasCurrent"]
+    scope: { lane: lane }
+    behavior: { nibble_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.4", pdf_page: 65, table: "Table 6-35", quote: "Channel Monitor Masks" }
+
+  - name: tx_power_alarm_warning_mask
+    display_name: MTx<lane>Power<severity>Mask
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "246 + (lane - 1) / 2"
+    bit_offset_expr: "4 * (1 - ((lane - 1) % 2))"
+    bit_width: 4
+    type: bitmap
+    template: mask
+    tags: [Mask, "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    behavior: { nibble_order: "high_alarm, low_alarm, high_warning, low_warning" }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.4", pdf_page: 65, table: "Table 6-35", quote: "Channel Monitor Masks" }
+
+  - name: reserved_thresholds_136_143
+    display_name: ReservedThresholds136To143
+    offset: 136
+    size_bytes: 8
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 59, table: "Table 6-28", quote: "Reserved" }
+
+  - name: reserved_thresholds_152_159
+    display_name: ReservedThresholds152To159
+    offset: 152
+    size_bytes: 8
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 59, table: "Table 6-28", quote: "Reserved" }
+
+  - name: vendor_specific_thresholds_160_175
+    display_name: VendorSpecificThresholds160To175
+    offset: 160
+    size_bytes: 16
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 59, table: "Table 6-28", quote: "Vendor Specific" }
+
+  - name: reserved_thresholds_200_215
+    display_name: ReservedThresholds200To215
+    offset: 200
+    size_bytes: 16
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 60, table: "Table 6-28", quote: "Reserved thresholds for channel parameter sets 4 and 5" }
+
+  - name: vendor_specific_thresholds_216_223
+    display_name: VendorSpecificThresholds216To223
+    offset: 216
+    size_bytes: 8
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.1", pdf_page: 60, table: "Table 6-28", quote: "Vendor Specific" }
+
+  - name: reserved_equalizer_byte_226
+    display_name: ReservedEqualizerByte226
+    offset: 226
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.2", pdf_page: 61, table: "Table 6-29", quote: "Reserved" }
+
+  - name: reserved_control_byte_232
+    display_name: ReservedControlByte232
+    offset: 232
+    size_bytes: 1
+    type: bytes
+    access: rw
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.3", pdf_page: 62, table: "Table 6-30", quote: "Reserved" }
+
+  - name: reserved_channel_monitor_masks_248_251
+    display_name: ReservedChannelMonitorMasks248To251
+    offset: 248
+    size_bytes: 4
+    type: bytes
+    access: rw
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.6.4", pdf_page: 66, table: "Table 6-35", quote: "Reserved channel monitor masks" }
+
+  - name: reserved_page03_252_255
+    display_name: ReservedPage03Bytes252To255
+    offset: 252
+    size_bytes: 4
+    type: bytes
+    access: rw
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "SFF-8636 v2.11 § 6.6", pdf_page: 59, table: "Table 6-27", quote: "Reserved" }

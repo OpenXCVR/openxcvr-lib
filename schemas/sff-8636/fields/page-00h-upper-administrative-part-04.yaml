@@ -1,0 +1,148 @@
+fields:
+  - name: date_code_lot_code
+    display_name: DateCode.LotCode
+    offset: 218
+    size_bytes: 2
+    type: ascii
+    template: vendor_info
+    provenance: { section: "SFF-8636 v2.11 § 6.3.26", pdf_page: 55, table: "Table 6-23", quote: "Vendor Specific lot code" }
+
+  - name: temperature_monitoring_implemented
+    display_name: TemperatureMonitoringImplemented
+    offset: 220
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.27", pdf_page: 55, table: "Table 6-24", quote: "Temperature monitoring implemented" }
+
+  - name: voltage_monitoring_implemented
+    display_name: VoltageMonitoringImplemented
+    offset: 220
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.27", pdf_page: 55, table: "Table 6-24", quote: "Supply voltage monitoring implemented" }
+
+  - name: rx_power_average
+    display_name: RxPowerAverage
+    offset: 220
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: oma, description: "Received power measured as OMA" }
+      - { value: 1, name: average_power, description: "Received power measured as average power" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.27", pdf_page: 55, table: "Table 6-24", quote: "Received power measurement type" }
+
+  - name: tx_power_monitoring_implemented
+    display_name: TxPowerMonitoringImplemented
+    offset: 220
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    since: "2.0"
+    provenance: { section: "SFF-8636 v2.11 § 6.3.27", pdf_page: 55, table: "Table 6-24", quote: "Transmitter power measurement supported", lineage: "SFF-8636 Rev 2.12 change history, Rev 1.9: 'Added Address 220 bit 2 to identify Tx Power diagnostic monitoring supported'" }
+
+  - name: enhanced_option
+    display_name: EnhancedOption<option>
+    instances: { index: option, start: 0, end: 3 }
+    offset: 221
+    bit_offset_expr: "4 - option"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: init_complete_flag, description: "Initialization Complete Flag implemented" }
+      - { value: 1, name: extended_rate_select_declaration, description: "Extended rate selection declaration implemented" }
+      - { value: 2, name: tc_readiness_flag, description: "TC readiness flag implemented" }
+      - { value: 3, name: software_reset, description: "Software reset implemented" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.28", pdf_page: 56, table: "Table 6-25", quote: "Enhanced Options" }
+
+  - name: ext_baud_rate
+    display_name: ExtBaudRate
+    offset: 222
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "250 MBd" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.28", pdf_page: 56, table: "Table 6-26", quote: "Extended Baud Rate: Nominal" }
+
+  - name: cc_ext
+    display_name: CC_EXT
+    offset: 223
+    size_bytes: 1
+    type: u8
+    encoding: { kind: checksum, covers: "Page 00h bytes 192-222", covers_range: [192, 222], algorithm: sum8 }
+    template: informational
+    scope: { module: true }
+    behavior: { checksum: "low 8 bits of bytes 192-222" }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.29", pdf_page: 57, table: "Table 6-15", quote: "Check code for the Extended ID Fields" }
+
+  - name: vendor_specific
+    display_name: VendorSpecific
+    offset: 224
+    size_bytes: 32
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.30", pdf_page: 57, table: "Table 6-15", quote: "Vendor Specific EEPROM" }
+
+  - name: reserved_compliance_sonet_high_bits
+    display_name: ReservedComplianceSonetHighBits
+    offset: 132
+    bit_offset: 3
+    bit_width: 5
+    type: bitmap
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Reserved" }
+
+  - name: reserved_compliance_sas_low_bits
+    display_name: ReservedComplianceSasLowBits
+    offset: 133
+    bit_offset: 0
+    bit_width: 4
+    type: bitmap
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.4", pdf_page: 48, table: "Table 6-17", quote: "Reserved" }
+
+  - name: reserved_extended_rate_select
+    display_name: ReservedExtendedRateSelect
+    offset: 141
+    bit_offset: 2
+    bit_width: 6
+    type: bitmap
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.7", pdf_page: 49, table: "Table 6-18", quote: "Reserved" }
+
+  - name: reserved_diagnostic_monitoring_type
+    display_name: ReservedDiagnosticMonitoringType
+    offset: 220
+    bit_offset: 6
+    bit_width: 2
+    type: bitmap
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.27", pdf_page: 55, table: "Table 6-24", quote: "Reserved" }
+
+  - name: reserved_enhanced_options_high
+    display_name: ReservedEnhancedOptionsHigh
+    offset: 221
+    bit_offset: 5
+    bit_width: 3
+    type: bitmap
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.11 § 6.3.28", pdf_page: 56, table: "Table 6-25", quote: "Reserved" }

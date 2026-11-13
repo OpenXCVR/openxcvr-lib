@@ -1,0 +1,397 @@
+fields:
+  - name: aux3_mon_supported
+    display_name: Aux3MonSupported
+    offset: 159
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "159 Aux3MonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "Aux3Mon monitor supported"
+
+  - name: aux2_mon_supported
+    display_name: Aux2MonSupported
+    offset: 159
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "159 Aux2MonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "Aux2Mon monitor supported"
+
+  - name: aux1_mon_supported
+    display_name: Aux1MonSupported
+    offset: 159
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "159 Aux1MonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "Aux1Mon monitor supported"
+
+  - name: vcc_mon_supported
+    display_name: VccMonSupported
+    offset: 159
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "159 VccMonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "VccMon monitor supported"
+
+  - name: temp_mon_supported
+    display_name: TempMonSupported
+    offset: 159
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "159 TempMonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "TempMon monitor supported"
+
+  - name: tx_bias_current_scaling_factor
+    display_name: TxBiasCurrentScalingFactor
+    offset: 160
+    bit_offset: 3
+    bit_width: 2
+    type: u2
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "160 TxBiasCurrentScalingFactor"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement, Monitor::BiasCurrent]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "Multiplier for 2uA Bias current increment used in Tx Bias current monitor and threshold registers"
+
+  - name: rx_optical_power_mon_supported
+    display_name: RxOpticalPowerMonSupported
+    offset: 160
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "160 RxOpticalPowerMonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, Monitor::OpticalPower]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "Rx Optical Input Power monitor supported"
+
+  - name: tx_optical_power_mon_supported
+    display_name: TxOpticalPowerMonSupported
+    offset: 160
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "160 TxOpticalPowerMonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, Monitor::OpticalPower]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "Tx Output Optical Power monitor supported"
+
+  - name: tx_bias_mon_supported
+    display_name: TxBiasMonSupported
+    offset: 160
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "160 TxBiasMonSupported"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, Monitor::BiasCurrent]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.9"
+      pdf_page: 176
+      quote: "Tx Bias monitor supported"
+
+  - name: tx_input_eq_recall_buffers_supported
+    display_name: TxInputEqRecallBuffersSupported
+    offset: 161
+    bit_offset: 5
+    bit_width: 2
+    type: u2
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.10"
+          table: "Table 8-53"
+          row: "161 TxInputEqRecallBuffersSupported"
+          pdf_page: [168, 177]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-53 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.10"
+      pdf_page: 177
+      quote: "Tx Input Eq Store/Recall buffer support"
+
+  - name: tx_input_eq_freeze_supported
+    display_name: TxInputEqFreezeSupported
+    offset: 161
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.10"
+          table: "Table 8-53"
+          row: "161 TxInputEqFreezeSupported"
+          pdf_page: [168, 177]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-53 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.10"
+      pdf_page: 177
+      quote: "Tx Input Eq Freeze supported"
+
+  - name: reserved_byte159_bits7_6_cmis53
+    display_name: ReservedByte159Bits7To6Cmis53
+    offset: 159
+    bit_offset: 6
+    bit_width: 2
+    since: "5.3"
+    type: bitmap
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "159 bits 7-6 Reserved"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 reserves these physical bits without assigning feature semantics or a read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+
+  - name: reserved_byte160_bits7_5_cmis53
+    display_name: ReservedByte160Bits7To5Cmis53
+    offset: 160
+    bit_offset: 5
+    bit_width: 3
+    since: "5.3"
+    type: bitmap
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.9"
+          table: "Table 8-52"
+          row: "160 bits 7-5 Reserved"
+          pdf_page: [168, 176]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-52 reserves these physical bits without assigning feature semantics or a read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false

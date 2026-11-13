@@ -1,0 +1,264 @@
+fields:
+  - name: module_state_changed_mask
+    display_name: ModuleStateChangedMask
+    offset: 31
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for ModuleStateChangedFlag." }
+
+  - name: module_firmware_error_mask
+    display_name: ModuleFirmwareErrorMask
+    offset: 31
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for ModuleFirmwareErrorFlag." }
+
+  - name: data_path_firmware_error_mask
+    display_name: DataPathFirmwareErrorMask
+    offset: 31
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for DataPathFirmwareErrorFlag." }
+
+  # CMIS 5.4 Table 8-12: byte 31 bit 3, allocated from the 5.3 reserved bits 5-2.
+  - name: abnormal_fw_indication_mask
+    display_name: AbnormalFwIndicationMask
+    offset: 31
+    bit_offset: 3
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 176, quote: "Mask bit for AbnormalFwIndicationFlag." }
+
+  - name: cdb_cmd_complete_mask_1
+    display_name: CdbCmdCompleteMask1
+    offset: 31
+    bit_offset: 6
+    bit_width: 1
+    since: "4.0"
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for CdbCmdCompleteFlag1." }
+
+  - name: cdb_cmd_complete_mask_2
+    display_name: CdbCmdCompleteMask2
+    offset: 31
+    bit_offset: 7
+    bit_width: 1
+    since: "4.0"
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for CdbCmdCompleteFlag2." }
+
+  - name: temp_mon_high_alarm_mask
+    display_name: TempMonHighAlarmMask
+    offset: 32
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for TempMonHighAlarmFlag." }
+
+  - name: temp_mon_low_alarm_mask
+    display_name: TempMonLowAlarmMask
+    offset: 32
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for TempMonLowAlarmFlag." }
+
+  - name: temp_mon_high_warning_mask
+    display_name: TempMonHighWarningMask
+    offset: 32
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for TempMonHighWarningFlag." }
+
+  - name: temp_mon_low_warning_mask
+    display_name: TempMonLowWarningMask
+    offset: 32
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for TempMonLowWarningFlag." }
+
+  - name: vcc_mon_high_alarm_mask
+    display_name: VccMonHighAlarmMask
+    offset: 32
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for VccMonHighAlarmFlag." }
+
+  - name: vcc_mon_low_alarm_mask
+    display_name: VccMonLowAlarmMask
+    offset: 32
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for VccMonLowAlarmFlag." }
+
+  - name: vcc_mon_high_warning_mask
+    display_name: VccMonHighWarningMask
+    offset: 32
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for VccMonHighWarningFlag." }
+
+  - name: vcc_mon_low_warning_mask
+    display_name: VccMonLowWarningMask
+    offset: 32
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for VccMonLowWarningFlag." }
+
+  - name: aux1_mon_high_alarm_mask
+    display_name: Aux1MonHighAlarmMask
+    offset: 33
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for Aux1MonHighAlarmFlag." }
+
+  - name: aux1_mon_low_alarm_mask
+    display_name: Aux1MonLowAlarmMask
+    offset: 33
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for Aux1MonLowAlarmFlag." }
+
+  - name: aux1_mon_high_warning_mask
+    display_name: Aux1MonHighWarningMask
+    offset: 33
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for Aux1MonHighWarningFlag." }
+
+  - name: aux1_mon_low_warning_mask
+    display_name: Aux1MonLowWarningMask
+    offset: 33
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for Aux1MonLowWarningFlag." }
+
+  - name: aux2_mon_high_alarm_mask
+    display_name: Aux2MonHighAlarmMask
+    offset: 33
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for Aux2MonHighAlarmFlag." }
+
+  - name: aux2_mon_low_alarm_mask
+    display_name: Aux2MonLowAlarmMask
+    offset: 33
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "§ 8.2.7", pdf_page: 150, quote: "Mask bit for Aux2MonLowAlarmFlag." }

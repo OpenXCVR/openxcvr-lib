@@ -1,0 +1,263 @@
+fields:
+  - name: format_id
+    since: "2.12"
+    display_name: FormatID
+    offset: 128
+    size_bytes: 2
+    type: enum_ref
+    enum_ref: Sff8636Page22hFormatId
+    template: informational
+    scope: { module: true }
+    behavior: { valid_values: ["0xca1b optical module calibration", "0x100b loopback module calibration"], discovery: "host validates format ID and CC_CALIB before using page data" }
+    provenance: { section: "SFF-8636 v2.12 § 7", pdf_page: 83, tables: ["Table 7-1", "Table 7-2"], quote: "Format ID determines if page 22h contains a valid entry", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: timing_format_version
+    since: "2.12"
+    display_name: Version
+    offset: 130
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    behavior: { expected_value: 0x01 }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.1", pdf_page: 87, table: "Table 7-3", quote: "This version number shall be 01h", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_date_year
+    since: "2.12"
+    display_name: CalibrationDateYear
+    offset: 131
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    encoding: { kind: offset_year, base_year: 2000, invalid_value: 0xff }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.2", pdf_page: 87, table: "Table 7-4", quote: "YEAR = Byte131 + 2000", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_date_month
+    since: "2.12"
+    display_name: CalibrationDateMonth
+    offset: 132
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.2", pdf_page: 87, table: "Table 7-4", quote: "MONTH = Byte132.7-4", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_date_day_high
+    since: "2.12"
+    display_name: CalibrationDateDayHigh
+    offset: 132
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.2", pdf_page: 87, table: "Table 7-4", quote: "Upper four bits of the 5-bit day value", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_date_day_low
+    since: "2.12"
+    display_name: CalibrationDateDayLow
+    offset: 133
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.2", pdf_page: 87, table: "Table 7-4", quote: "Least significant bit of the day encoding", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_date_sequence
+    since: "2.12"
+    display_name: CalibrationDateNumber
+    offset: 133
+    bit_offset: 0
+    bit_width: 7
+    type: u7
+    template: informational
+    scope: { module: true }
+    encoding: { valid_range: "0..126", invalid_value: 127 }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.2", pdf_page: 87, table: "Table 7-4", quote: "Number in the range 0 to 126", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_unique_identifier_oui
+    since: "2.12"
+    display_name: CUIOUI
+    offset: 134
+    size_bytes: 3
+    type: bytes
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.3", pdf_page: 88, table: "Table 7-5", quote: "Organization Unique Identifier Company ID", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_unique_identifier_osi
+    since: "2.12"
+    display_name: CUIOSI
+    offset: 137
+    size_bytes: 3
+    type: bytes
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.3", pdf_page: 88, table: "Table 7-5", quote: "Organization Specific Identifier", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: calibration_stratum
+    since: "2.12"
+    display_name: Stratum
+    offset: 140
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    encoding: { kind: generation, zero: "highest precision primary calibrator", ff: "unused or undefined" }
+    provenance: { section: "SFF-8636 v2.12 § 7.3.4", pdf_page: 88, quote: "Calibration accuracy decreases with each calibrator generation", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: reserved_common_header
+    since: "2.12"
+    display_name: ReservedCommonHeader
+    offset: 141
+    size_bytes: 9
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.12 § 7.3", pdf_page: 87, table: "Table 7-3", quote: "Common header section. Reserved 00h.", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  # ── Calibration format for Optical Modules (Format ID CA1Bh) ──────────────
+
+  - name: optical_number_of_lanes
+    since: "2.12"
+    display_name: NbLanes
+    offset: 150
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    behavior: { expected_value: 4, reason: "SFF-8636 supports four lanes" }
+    provenance: { section: "SFF-8636 v2.12 § 7.4.1", pdf_page: 89, table: "Table 7-1", quote: "For SFF-8636 this value is 4", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: optical_operational_mode_id
+    since: "2.12"
+    display_name: OpModeId
+    offset: 151
+    size_bytes: 1
+    type: u8
+    template: operational_parameter
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    behavior: { default_value: 0, reason: "single operational mode is in scope" }
+    provenance: { section: "SFF-8636 v2.12 § 7.4.2", pdf_page: 89, table: "Table 7-1", quote: "For SFF-8636 this value is 0", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: rx_power_delay_coefficient
+    since: "2.12"
+    display_name: RxPwrDly<degree>
+    instances: { index: degree, start: 0, end: 4 }
+    offset_expr: "152 + 3 * degree"
+    size_bytes: 3
+    type: bytes
+    encoding: { kind: q8_16_signed, unit: "ns/dBm^degree" }
+    template: informational
+    tags: [Information, "Monitor::OpticalPower"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    behavior: { formula: "Rx_Pwr_Dly_Cor = sum(Rx_Pwr_Dly(k) * Rx_PWR_dBm^k), k=0..4" }
+    provenance: { section: "SFF-8636 v2.12 § 7.4.3", pdf_page: 89, table: "Table 7-1", quote: "Rx_Pwr_Dly(0) through Rx_Pwr_Dly(4)", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: temperature_detune_offset
+    since: "2.12"
+    display_name: TDetuneOffset
+    offset: 167
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: q8_8_signed, unit: "0.1 nm" }
+    template: informational
+    tags: [Information, "Monitor::Frequency"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8636 v2.12 § 7.4.4", pdf_page: 90, table: "Table 7-1", quote: "T_Detune_Offset", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: temperature_detune_slope
+    since: "2.12"
+    display_name: TDetuneSlope
+    offset: 169
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: q8_8_signed, unit: "0.01 nm/deg C" }
+    template: informational
+    tags: [Information, "Monitor::Frequency"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8636 v2.12 § 7.4.4", pdf_page: 90, table: "Table 7-1", quote: "T_Detune_Slope", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: delta_rx_max
+    since: "2.12"
+    display_name: DeltaRxMax
+    offset: 171
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8636 v2.12 § 7.4.5", pdf_page: 90, table: "Table 7-1", quote: "Delta_Rx_Max", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: delta_tx_max
+    since: "2.12"
+    display_name: DeltaTxMax
+    offset: 175
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8636 v2.12 § 7.4.5", pdf_page: 90, table: "Table 7-1", quote: "Delta_Tx_Max", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: average_rx_lane_delay
+    since: "2.12"
+    display_name: AvgRxLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "179 + 8 * (lane - 1)"
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: lane }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8636 v2.12 § 7.4.6", pdf_page: 91, table: "Table 7-1", quote: "Average Receiving delay on Lane", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: average_tx_lane_delay
+    since: "2.12"
+    display_name: AvgTxLane<lane>
+    instances: { index: lane, start: 1, end: 4 }
+    offset_expr: "183 + 8 * (lane - 1)"
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: lane }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8636 v2.12 § 7.4.7", pdf_page: 91, table: "Table 7-1", quote: "Average Transmitting delay on Lane", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: reserved_optical_calibration_tail
+    since: "2.12"
+    display_name: ReservedOpticalCalibrationTail
+    offset: 211
+    size_bytes: 44
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8636 v2.12 § 7.4", pdf_page: 84, table: "Table 7-1", quote: "Reserved 00h", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }
+
+  - name: cc_calib
+    since: "2.12"
+    display_name: CC_CALIB
+    offset: 255
+    size_bytes: 1
+    type: u8
+    encoding: { kind: checksum, covers: "Page 22h bytes 128-254", covers_range: [128, 254], algorithm: sum8 }
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8636 v2.12 § 7", pdf_page: 83, tables: ["Table 7-1", "Table 7-2"], quote: "Checkcode over bytes 128-254", lineage: "SFF-8636 Rev 2.12 change history, Rev 2.12: 'Added new section 7 with optional High Accuracy Timing registers using page 22h'" }

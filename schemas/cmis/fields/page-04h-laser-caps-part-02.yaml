@@ -1,0 +1,224 @@
+fields:
+  # CMIS 5.4 Table 8-68: continuation of the 300 GHz grid channel pair
+  # (see page-04h-laser-caps-part-01.yaml for the series rationale).
+  - name: grid_high_channel_300_ghz
+    display_name: GridHighChannel300GHz
+    since: "5.4"
+    offset: 168
+    size_bytes: 2
+    type: i16be
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.7"
+      pdf_page: 214
+      table: "Table 8-68"
+      quote: "S16 Highest supported n for 300 GHz spacing"
+
+  - name: grid_high_channel
+    display_name: GridHighChannel<grid>
+    instances: { index: grid, start: 0, end: 8 }
+    offset_expr: "132 + 4 * grid"
+    size_bytes: 2
+    type: i16be
+    description: >
+      Grid index order is 0=3.125 GHz, 1=6.25 GHz, 2=12.5 GHz, 3=25 GHz, 4=50 GHz, 5=100 GHz, 6=33 GHz, 7=75 GHz, 8=150 GHz.
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "S16 highest supported n for the channel spacing selected by grid"
+
+  - name: fine_tuning_resolution
+    display_name: FineTuningResolution
+    offset: 190
+    size_bytes: 2
+    type: u16be
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "U16 Fine-tuning resolution, increments of 0.001 GHz"
+
+  - name: fine_tuning_low_offset
+    display_name: FineTuningLowOffset
+    offset: 192
+    size_bytes: 2
+    type: i16be
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "S16 lowest fine-tuning offset with resolution of 0.001 GHz"
+
+  - name: fine_tuning_high_offset
+    display_name: FineTuningHighOffset
+    offset: 194
+    size_bytes: 2
+    type: i16be
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 189
+      table: "Table 8-66"
+      quote: "S16 highest fine-tuning offset in increments of 0.001 GHz"
+
+  - name: prog_output_power_per_lane_supported
+    display_name: ProgOutputPowerPerLaneSupported
+    offset: 196
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 190
+      table: "Table 8-66"
+      quote: "Programmable output power per lane supported"
+
+  # CMIS 5.4 Table 8-68: byte 196 bit 6, allocated from the 5.3 reserved
+  # bits 5-0 of byte 196 (the 5.4 table retains a stale duplicate "196 6-0
+  # Reserved" row; the named row defines bit 6).
+  - name: output_power_tx_relative_thresholds_supported
+    display_name: OutputPowerTxRelativeThresholdsSupported
+    since: "5.4"
+    offset: 196
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.7"
+      pdf_page: 214
+      table: "Table 8-68"
+      quote: "1b/0b: 12h:216-217 is supported / not supported"
+
+  - name: prog_output_power_min
+    display_name: ProgOutputPowerMin
+    offset: 198
+    size_bytes: 2
+    type: i16be
+    present_when: { field: prog_output_power_per_lane_supported, equals: true }
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 190
+      table: "Table 8-66"
+      quote: "S16 Minimum Programmable Output Power in increments of 0.01 dBm"
+
+  - name: prog_output_power_max
+    display_name: ProgOutputPowerMax
+    offset: 200
+    size_bytes: 2
+    type: i16be
+    present_when: { field: prog_output_power_per_lane_supported, equals: true }
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 190
+      table: "Table 8-66"
+      quote: "S16 Maximum Programmable Output Power in increments of 0.01 dBm"
+
+  - name: page_checksum
+    display_name: PageChecksum
+    offset: 255
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: Informational
+    tags: [Information]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    encoding: { kind: checksum, covers: "Page 04h bytes 128-254", covers_range: [128, 254], algorithm: sum8 }
+    provenance:
+      section: "CMIS 5.3 § 8.7"
+      pdf_page: 190
+      quote: "Page Checksum over bytes 128-254"

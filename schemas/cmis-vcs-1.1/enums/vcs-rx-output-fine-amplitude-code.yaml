@@ -1,0 +1,82 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcsRxOutputFineAmplitudeCode
+title: CMIS-VCS 1.1 Rx Output Fine Amplitude Code
+spec:
+  id: cmis-vcs-1.1
+  revision: "01.1"
+  parity_deferred: true
+description: >-
+  Code values of the OutputAmplitudeSettingRx<i> register (VCS Parameter
+  ID 0Eh), OIF-CMIS-VCS-01.1 § 5.16 Table 5-35. The fine amplitude setting
+  has 50 mV peak-to-peak resolution from 250 mV to 1000 mV, finer than the
+  CMIS base amplitude target codes. The amplitude is measured without Rx
+  output equalization at a test point defined by the relevant standard.
+provenance:
+  spec: OIF-CMIS-VCS-01.1 § 5.16 Table 5-35
+  pdf_pages: [49]
+entries:
+  - value: 0x00
+    name: amplitude_250_mv
+    description: 250 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:250]
+  - value: 0x01
+    name: amplitude_300_mv
+    description: 300 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:300]
+  - value: 0x02
+    name: amplitude_350_mv
+    description: 350 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:350]
+  - value: 0x03
+    name: amplitude_400_mv
+    description: 400 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:400]
+  - value: 0x04
+    name: amplitude_450_mv
+    description: 450 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:450]
+  - value: 0x05
+    name: amplitude_500_mv
+    description: 500 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:500]
+  - value: 0x06
+    name: amplitude_550_mv
+    description: 550 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:550]
+  - value: 0x07
+    name: amplitude_600_mv
+    description: 600 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:600]
+  - value: 0x08
+    name: amplitude_650_mv
+    description: 650 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:650]
+  - value: 0x09
+    name: amplitude_700_mv
+    description: 700 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:700]
+  - value: 0x0a
+    name: amplitude_750_mv
+    description: 750 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:750]
+  - value: 0x0b
+    name: amplitude_800_mv
+    description: 800 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:800]
+  - value: 0x0c
+    name: amplitude_850_mv
+    description: 850 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:850]
+  - value: 0x0d
+    name: amplitude_900_mv
+    description: 900 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:900]
+  - value: 0x0e
+    name: amplitude_950_mv
+    description: 950 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:950]
+  - value: 0x0f
+    name: amplitude_1000_mv
+    description: 1000 mV peak-to-peak
+    tags: [unit:mV_P-P, mv:1000]

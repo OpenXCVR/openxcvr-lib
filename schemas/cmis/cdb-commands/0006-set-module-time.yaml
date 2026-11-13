@@ -1,0 +1,83 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbSetModuleTime
+title: CMIS CDB Command 0006h - Set Module Time
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.3.6
+  pdf_pages: [332]
+  table: Table 9-8
+cmd_id: 0x0006
+available_since: "5.4"
+cmd_id_group: module_commands
+command_class: advertised
+description: >
+  Sets or adjusts the module's internal clock. TimeSpec is either the
+  new absolute ModuleTime (IsIncrement = 0) or an increment added to the
+  current ModuleTime (IsIncrement = 1); the reply returns the new
+  ModuleTime. Time accuracy, actual time resolution and allowable drift
+  are not specified, nor is behavior after module reset or firmware
+  restart (CMIS 5.4 revision history: 'CMD 0005h/0006h: Get/Set Module
+  Time (new)').
+advertisement:
+  via_cmd: 0x0040
+  field: cdb_module_features.supported_cmds_0000_00ff
+  bit: 'CMD ID 0006h - byte 138 bit 6 of the 0040h reply bitmap'
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 9
+    fields:
+      - name: time_spec
+        offset: 136
+        size_bytes: 8
+        type: bytes
+        template: cdb_cmd_parameter
+        description: >
+          S64: Time in ns to set or adjust ModuleTime. IsIncrement 0:
+          ModuleTime = TimeSpec; IsIncrement 1: ModuleTime = ModuleTime +
+          TimeSpec.
+        provenance: { spec: "CMIS 5.4 § 9.3.6", table: "Table 9-8" }
+      - name: is_increment
+        offset: 144
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        enum_inline:
+          - { value: 0, name: absolute, description: "TimeSpec is the new Module Time" }
+          - { value: 1, name: increment, description: "TimeSpec is added to current Module Time" }
+        provenance: { spec: "CMIS 5.4 § 9.3.6", table: "Table 9-8" }
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "5.4" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "5.4" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "5.4" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "5.4" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "5.4" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "5.4" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "5.4" }
+  lpl:
+    length: 8
+    fields:
+      - name: module_time
+        offset: 136
+        size_bytes: 8
+        type: bytes
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          S64: New Module Time in ns since the POSIX epoch 01.01.1970 00:00:00 (time anchor).
+        provenance: { spec: "CMIS 5.4 § 9.3.6", table: "Table 9-8" }
+behavior:
+  abort_supported: true
+  retry_safe: false
+  side_effects:
+    - "Sets or adjusts the module's internal clock."

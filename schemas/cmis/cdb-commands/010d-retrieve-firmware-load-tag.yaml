@@ -1,0 +1,88 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbRetrieveFirmwareLoadTag
+title: CMIS CDB Command 010Dh - Retrieve Firmware Load Tag
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.6.15
+  pdf_pages: [363]
+  table: Table 9-33
+cmd_id: 0x010d
+available_since: "5.4"
+cmd_id_group: firmware_management
+command_class: advertised
+description: >
+  Retrieves the module-stored 64-byte Firmware Load Tag vector for
+  the load in Bank A or Bank B. See section 7.11.1. New in CMIS 5.4
+  ('CMD 010Dh: Retrieve Firmware Load Tag (new)'). Advertised by the
+  Persistent Firmware Load Tag support bit, Page 0Ch FwSupportDetails
+  194.5 (FirmwareLoadTagSupported). The Table 9-18 Type cell prints
+  blank in the parsed 5.4 text; the command is recorded as advertised.
+  Table 9-33 prints REPLY RPLLength 0 while the reply defines Bank at 136 and HostTag at 138-201 (66 bytes); the field layout is recorded and the printed value noted here.
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 1
+    fields:
+      - name: bank
+        offset: 136
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        enum_inline:
+          - { value: 0, name: bank_a, description: "Return the Firmware Load Tag of the Load in Bank A" }
+          - { value: 1, name: bank_b, description: "Return the Firmware Load Tag of the Load in Bank B" }
+        provenance: { spec: "CMIS 5.4 § 9.6.15", table: "Table 9-33" }
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "5.4" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "5.4" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "5.4" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "5.4" }
+    - { value: 0x41, name: failed_cmd_not_supported, meaning: "Command not supported (Table 9-19 FailedCmdNotSupported)", since: "5.4" }
+    - { value: 0x44, name: failed_timeout, meaning: "Command checking timeout (Table 9-19 FailedTimeout)", since: "5.4" }
+    - { value: 0x46, name: reject_privileged, meaning: "Privilege related error, e.g. password required (Table 9-19 RejectPrivileged)", since: "5.4" }
+    - { value: 0x47, name: reject_not_now, meaning: "Cannot execute command in current situation (Table 9-19 RejectNotNow)", since: "5.4" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed to validate or execute, no specific failure", since: "5.4" }
+    - { value: 0x60, name: reject_unspecific, meaning: "Unspecific reason to reject execution (Table 9-19 Reject, code 32)", since: "5.4" }
+    - { value: 0x61, name: reject_invalid_load_format, meaning: "Load format not valid (Table 9-19 RejectInvalidLoadFormat, code 33)", since: "5.4" }
+    - { value: 0x62, name: reject_invalid_load_checksum, meaning: "Load internal checksum(s) not valid (Table 9-19 RejectInvalidLoadChecksum, code 34)", since: "5.4" }
+    - { value: 0x63, name: reject_invalid_load_authentication, meaning: "Load authentication has failed (Table 9-19 RejectInvalidLoadAuthentication, code 35)", since: "5.4" }
+    - { value: 0x64, name: reject_invalid_load_target, meaning: "Load not suitable for this hardware (Table 9-19 RejectInvalidLoadTarget, code 36)", since: "5.4" }
+    - { value: 0x65, name: reject_invalid_load, meaning: "Load not supported, other unspecific reason (Table 9-19 RejectInvalidLoad, code 37)", since: "5.4" }
+    - { value: 0x66, name: reject_hitless_activation_not_available, meaning: "Hitless load activation not available (Table 9-19 RejectHitlessActivationNotAvailable, code 38)", since: "5.4" }
+    - { value: 0x67, name: reject_config_preservation_not_available, meaning: "Load activation with configuration preservation not available (Table 9-19 RejectConfigPreservationNotAvailable, code 39)", since: "5.4" }
+  lpl:
+    length: 66
+    fields:
+      - name: bank
+        offset: 136
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          Unmodified input parameter.
+        provenance: { spec: "CMIS 5.4 § 9.6.15", table: "Table 9-33" }
+      - name: host_tag
+        offset: 138
+        size_bytes: 64
+        type: bytes
+        template: cdb_reply_field
+        tags: [CDB, Status]
+        description: >
+          U8[64] module-stored Firmware Load Tag vector.
+        provenance: { spec: "CMIS 5.4 § 9.6.15", table: "Table 9-33" }
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects:

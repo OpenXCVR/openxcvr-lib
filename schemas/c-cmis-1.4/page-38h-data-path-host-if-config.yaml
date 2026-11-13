@@ -1,0 +1,134 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmisPage38hDataPathHostIfConfig
+title: C-CMIS 1.4 Page 38h Data Path Host Interface Configuration
+spec:
+  id: c-cmis-1.4
+  revision: "01.4"
+  source: docs/stds/cmis/OIF-C-CMIS-01.4_IA.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.4 § 7.5.1
+  pdf_pages: [28, 29, 30]
+page_address: "38h"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: data_path
+fields:
+  - { name: "fdd_act_ber_thresh", offset: 128, size_bytes: 2, type: "f16be", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold to activate host FDD (CMIS f16be format: m*10^(s-24))", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "fdd_clr_ber_thresh", offset: 130, size_bytes: 2, type: "f16be", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "fed_act_ber_thresh", offset: 132, size_bytes: 2, type: "f16be", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "fed_clr_ber_thresh", offset: 134, size_bytes: 2, type: "f16be", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "reserved_136_7_6", offset: 136, bit_offset: 6, bit_width: 2, type: "u2", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "txfed_cons_act_enable", offset: 136, bit_offset: 5, bit_width: 1, type: "bool", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable consequent action on host FED; default=1", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "rxfed_cons_act_enable", offset: 136, bit_offset: 4, bit_width: 1, type: "bool", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "rxlf_insertion_on_csf_enable", offset: 136, bit_offset: 3, bit_width: 1, type: "bool", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "txlf_insertion_on_ld_enable", offset: 136, bit_offset: 2, bit_width: 1, type: "bool", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "fed_mon_enable", offset: 136, bit_offset: 1, bit_width: 1, type: "bool", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "fdd_mon_enable", offset: 136, bit_offset: 0, bit_width: 1, type: "bool", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - name: "rx_cons_act"
+    offset: 137
+    bit_offset: 4
+    bit_width: 4
+    type: "u4"
+    access: "rw"
+    field_type: "Control"
+    tags: [C-CMIS]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    scope: { data_path: data_path }
+    provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" }
+    enum_inline:
+      - { value: 0, name: none, description: "No consequent action" }
+      - { value: 1, name: lf, description: "Insert LF" }
+      - { value: 2, name: pcs_idle, description: "Insert PCS idle" }
+      - { value: 3..11, name: reserved_3_11, description: "Reserved" }
+      - { value: 12, name: "custom_12", description: "Custom action" }
+      - { value: 13, name: "custom_13", description: "Custom action" }
+      - { value: 14, name: "custom_14", description: "Custom action" }
+      - { value: 15, name: "custom_15", description: "Custom action" }
+  - name: "tx_cons_act"
+    offset: 137
+    bit_offset: 0
+    bit_width: 4
+    type: "u4"
+    access: "rw"
+    field_type: "Control"
+    tags: [C-CMIS]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    scope: { data_path: data_path }
+    provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" }
+    enum_inline:
+      - { value: 0, name: none, description: "No consequent action" }
+      - { value: 1, name: lf, description: "Insert LF" }
+      - { value: 2, name: pcs_idle, description: "Insert PCS idle" }
+      - { value: 3..11, name: reserved_3_11, description: "Reserved" }
+      - { value: 12, name: "custom_12", description: "Custom action" }
+      - { value: 13, name: "custom_13", description: "Custom action" }
+      - { value: 14, name: "custom_14", description: "Custom action" }
+      - { value: 15, name: "custom_15", description: "Custom action" }
+  - { name: "reserved_138_140", offset: 138, size_bytes: 3, type: "bytes", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 29, table: "Table 17" } }
+  - { name: "rx_cons_act_hold_off_tmr", offset: 141, size_bytes: 2, type: "u16be", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Media->host hold-off timer; 0=disabled", units: "10 ms", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" } }
+  - { name: "tx_cons_act_hold_off_tmr", offset: 143, size_bytes: 2, type: "u16be", access: "rw", field_type: "Control", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, units: "10 ms", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" } }
+  - name: "rx_rplc_sig_insertion"
+    offset: 145
+    bit_offset: 4
+    bit_width: 4
+    type: "u4"
+    access: "rw"
+    field_type: "Control"
+    tags: [C-CMIS]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    scope: { data_path: data_path }
+    provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" }
+    enum_inline:
+      - { value: 0, name: none, description: "No consequent action" }
+      - { value: 1, name: lf, description: "Insert LF" }
+      - { value: 2, name: pcs_idle, description: "Insert PCS idle" }
+      - { value: 3..11, name: reserved_3_11, description: "Reserved" }
+      - { value: 12, name: "custom_12", description: "Custom action" }
+      - { value: 13, name: "custom_13", description: "Custom action" }
+      - { value: 14, name: "custom_14", description: "Custom action" }
+      - { value: 15, name: "custom_15", description: "Custom action" }
+  - name: "tx_rplc_sig_insertion"
+    offset: 145
+    bit_offset: 0
+    bit_width: 4
+    type: "u4"
+    access: "rw"
+    field_type: "Control"
+    tags: [C-CMIS]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    scope: { data_path: data_path }
+    provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" }
+    enum_inline:
+      - { value: 0, name: none, description: "No consequent action" }
+      - { value: 1, name: lf, description: "Insert LF" }
+      - { value: 2, name: pcs_idle, description: "Insert PCS idle" }
+      - { value: 3..11, name: reserved_3_11, description: "Reserved" }
+      - { value: 12, name: "custom_12", description: "Custom action" }
+      - { value: 13, name: "custom_13", description: "Custom action" }
+      - { value: 14, name: "custom_14", description: "Custom action" }
+      - { value: 15, name: "custom_15", description: "Custom action" }
+  - { name: "reserved_146_7_4", offset: 146, bit_offset: 4, bit_width: 4, type: "u4", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" } }
+  - name: "tx_cstat_lck_insertion"
+    offset: 146
+    bit_offset: 0
+    bit_width: 4
+    type: "u4"
+    access: "rw"
+    field_type: "Control"
+    tags: [C-CMIS]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    scope: { data_path: data_path }
+    provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" }
+    enum_inline:
+      - { value: 0, name: none, description: "No insertion" }
+      - { value: 1, name: lck, description: "Insert LCK" }
+      - { value: 2..11, name: reserved_2_11, description: "Reserved" }
+      - { value: 12, name: "custom_12", description: "Custom insertion" }
+      - { value: 13, name: "custom_13", description: "Custom insertion" }
+      - { value: 14, name: "custom_14", description: "Custom insertion" }
+      - { value: 15, name: "custom_15", description: "Custom insertion" }
+  - { name: "reserved_147_247", offset: 147, size_bytes: 101, type: "bytes", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" } }
+  - { name: custom, offset: 248, size_bytes: 8, type: "bytes", access: "rw", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Vendor defined custom bytes", scope: { data_path: data_path }, provenance: { section: "OIF-C-CMIS-01.4 § 7.5.1", pdf_page: 30, table: "Table 17" } }

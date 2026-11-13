@@ -1,0 +1,235 @@
+fields:
+  - name: scs1_apply_immediate_rx
+    display_name: SCS1ApplyImmediateRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 212
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo
+    behavior: { write_trigger: self_clearing }
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.4.4"
+      pdf_page: 204
+      table: "Table 8-80"
+      quote: "SCS1::ApplyImmediateRx<i>: 1b triggers the Provision-and-Commission procedure for Rx. Condition: UnidirReconfigSupported (01h:162.6) = 1b."
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.9.5 Lane-Specific Masks (bytes 213-232) - Table 8-81
+  # ===========================================================================
+
+  - name: dp_state_changed_mask
+    display_name: DPStateChangedMask<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 213
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 205
+      table: "Table 8-81"
+      quote: "DPStateChangedMask<i>: Mask for DPStateChangedFlag<i> for Data Path of host lane <i>."
+
+  - name: failure_mask_tx
+    display_name: FailureMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 214
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 205
+      table: "Table 8-81"
+      quote: "FailureMaskTx<i>: Mask for FailureFlagTx<i>, affecting media lane <i>. Advertisement: 01h:157.0."
+
+  - name: los_mask_tx
+    display_name: LOSMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 215
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 205
+      table: "Table 8-81"
+      quote: "LOSMaskTx<i>: Mask for LOSFlagTx, lane <i>. Advertisement: 01h:157.1."
+
+  - name: cdr_lol_mask_tx
+    display_name: CDRLOLMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 216
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 205
+      table: "Table 8-81"
+      quote: "CDRLOLMaskTx<i>: Mask for CDRLOLFlagTx<i>, lane <i>. Advertisement: 01h:157.2."
+
+  - name: adaptive_input_eq_fail_mask_tx
+    display_name: AdaptiveInputEqFailMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 217
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 205
+      table: "Table 8-81"
+      quote: "AdaptiveInputEqFailMaskTx<i>: Mask for AdaptiveInputEqFailFlagTx<i>, lane <i>. Advertisement: 01h:157.3."
+
+  - name: optical_power_high_alarm_mask_tx
+    display_name: OpticalPowerHighAlarmMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 218
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 205
+      table: "Table 8-81"
+      quote: "OpticalPowerHighAlarmMaskTx<i>: Mask for OpticalPowerHighAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.1."
+
+  - name: optical_power_low_alarm_mask_tx
+    display_name: OpticalPowerLowAlarmMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 219
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "OpticalPowerLowAlarmMaskTx<i>: Mask for OpticalPowerLowAlarmFlagTx<i>, media lane <i>. Advertisement: 01h:160.1."
+
+  - name: optical_power_high_warning_mask_tx
+    display_name: OpticalPowerHighWarningMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 220
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "OpticalPowerHighWarningMaskTx<i>: Mask for OpticalPowerHighWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.1."
+
+  - name: optical_power_low_warning_mask_tx
+    display_name: OpticalPowerLowWarningMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 221
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask", "Monitor::OpticalPower"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.9.5"
+      pdf_page: 206
+      table: "Table 8-81"
+      quote: "OpticalPowerLowWarningMaskTx<i>: Mask for OpticalPowerLowWarningFlagTx<i>, media lane <i>. Advertisement: 01h:160.1."

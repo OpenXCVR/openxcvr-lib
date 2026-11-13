@@ -1,0 +1,127 @@
+fields:
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.31.1 Acquisition Counters - Table 8-191. Four U16[8]
+  # saturating counter arrays, two bytes per lane/DP. Support is advertised
+  # on Page 60h:130 (Table 8-188); the host may clear them through the
+  # Table 8-189 reset bitmasks on Page 60h. The module clears all counters
+  # related to a DP (or NP) on entry to the DPInit (or NPInit) state.
+  # ===========================================================================
+
+  - name: acquisition_counter_tx
+    display_name: AcquisitionCounterTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    since: "5.4"
+    description: "Saturating counter of host lane acquisitions after commissioning the relevant DP: automatically reset when the associated DPSM enters the DPInit state, incremented when the host lane receiver declares lock to the incoming signal. Advertisement: 60h:130.6."
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.31.1"
+      pdf_page: 316
+      table: "Table 8-191"
+      quote: "AcquisitionCounterTx<i>: Saturating counter of host lane acquisitions after commissioning the relevant DP: The module automatically resets the counter when the associated DPSM enters the DPInit state, and it increments the counter when the host lane receiver declares lock to the incoming signal."
+
+  - name: acquisition_counter_rx
+    display_name: AcquisitionCounterRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "144 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: u16be
+    since: "5.4"
+    description: "Saturating counter of media lane acquisitions after commissioning the relevant DP or NP: automatically reset when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, incremented when the media lane receiver declares lock to the incoming signal. Advertisement: 60h:130.7."
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.31.1"
+      pdf_page: 316
+      table: "Table 8-191"
+      quote: "AcquisitionCounterRx<i>: Saturating counter of media lane acquisitions after commissioning the relevant DP or NP: The module automatically resets the counter when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, and it increments the counter when the media lane receiver declares lock to the incoming signal."
+
+  - name: dp_acquisition_counter_tx
+    display_name: DpAcquisitionCounterTx<dp_index>
+    instances: { index: dp_index, start: 1, end: 8 }
+    offset_expr: "160 + 2 * (dp_index - 1)"
+    size_bytes: 2
+    type: u16be
+    since: "5.4"
+    description: "Saturating counter of host side DP acquisitions after commissioning the DP: automatically reset when the associated DPSM enters the DPInit state, incremented when the host side DP receiver declares lock to the incoming single- or multi-lane signal. Advertisement: 60h:130.4."
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { data_path: dp_index }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.31.1"
+      pdf_page: 316
+      table: "Table 8-191"
+      quote: "DpAcquisitionCounterTx<i>: Saturating counter of host side DP acquisitions after commissioning the DP: The module automatically resets the counter when the associated DPSM enters the DPInit state, and it increments the counter when the host side DP receiver declares lock to the incoming signal."
+
+  - name: dp_acquisition_counter_rx
+    display_name: DpAcquisitionCounterRx<dp_index>
+    instances: { index: dp_index, start: 1, end: 8 }
+    offset_expr: "176 + 2 * (dp_index - 1)"
+    size_bytes: 2
+    type: u16be
+    since: "5.4"
+    description: "Saturating counter of media side DP (or NP) acquisitions after commissioning the DP (or NP): automatically reset when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, incremented when the media side DP (or NP) receiver declares lock to the incoming signal. Advertisement: 60h:130.5."
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor]
+    scope: { data_path: dp_index }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.4 § 8.31.1"
+      pdf_page: 316
+      table: "Table 8-191"
+      quote: "DpAcquisitionCounterRx<i>: Saturating counter of media side DP (or NP) acquisitions after commissioning the DP (or NP): The module automatically resets the counter when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, and it increments the counter when the media side DP (or NP) receiver declares lock to the incoming signal."
+
+  - name: reserved_page_61h_192_255
+    display_name: ReservedPage61h192To255
+    offset: 192
+    size_bytes: 64
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.31"
+      pdf_page: 315
+      table: "Table 8-190"
+      quote: "Bytes 192-255: Reserved [64]"

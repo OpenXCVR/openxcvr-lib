@@ -1,0 +1,244 @@
+fields:
+  - name: media_side_checker_data_invert
+    display_name: MediaSideCheckerDataInvertLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 169
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.9", pdf_page: 234, table: "Table 8-115", quote: "Invert the selected media side checker pattern." }
+
+  - name: media_side_checker_swap_symbol_bits
+    display_name: MediaSideCheckerSwapSymbolBitsLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 170
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.9", pdf_page: 234, table: "Table 8-115", quote: "Swap MSB and LSB for PAM4 patterns." }
+
+  - name: media_side_checker_post_fec_enable
+    display_name: MediaSideCheckerPostFECEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 171
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.9", pdf_page: 234, table: "Table 8-115", quote: "Check the selected encoded pattern at the output from the internal FEC decoder when set." }
+
+  - name: media_side_checker_pattern_select
+    display_name: MediaSideCheckerPatternSelectLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "172 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisDiagnosticsPatternId
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.9", pdf_page: 234, table: "Table 8-116", quote: "Selected pattern to be checked on each lane." }
+
+  # ===========================================================================
+  # § 8.12.10 Clocking and Measurement Controls (bytes 176-179) — Table 8-117
+  # ===========================================================================
+
+  - name: host_prbs_generator_clock_source
+    display_name: HostPRBSGeneratorClockSource
+    offset: 176
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    enum_inline:
+      - { value: 0x0, name: internal_clock_all_lanes, description: "All lanes use Internal Clock" }
+      - { value: 0x1..0x8, name: reference_clock_media_lane_i, description: "All lanes use Reference Clock Media Lane i" }
+      - { value: 0x9..0xe, name: reserved_9_e, description: "Reserved" }
+      - { value: 0xf, name: recovered_clock_per_media_lane_or_data_path, description: "Recovered clock per Media Lane or Data Path" }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 235, table: "Table 8-117", quote: "Clock source for Host Side PRBS Pattern Generation." }
+
+  - name: media_prbs_generator_clock_source
+    display_name: MediaPRBSGeneratorClockSource
+    offset: 176
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    enum_inline:
+      - { value: 0x0, name: internal_clock_all_lanes, description: "All lanes use Internal Clock" }
+      - { value: 0x1, name: reference_clock_all_lanes, description: "All lanes use Reference Clock" }
+      - { value: 0x2..0x9, name: reference_clock_host_lane_i_minus_1, description: "All lanes use Reference Clock Host Lane i-1" }
+      - { value: 0xa..0xe, name: reserved_a_e, description: "Reserved" }
+      - { value: 0xf, name: recovered_clock_per_host_lane_or_data_path, description: "Recovered clock per Host Lane or Data Path" }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 235, table: "Table 8-117", quote: "Clock source for Media Side PRBS Pattern Generation." }
+
+  - name: start_stop_is_global
+    display_name: StartStopIsGlobal
+    offset: 177
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 235, table: "Table 8-117", quote: "Controls whether writing a measurement Start/Stop control on one Bank globally starts or stops measurements across all Banks." }
+
+  - name: reset_error_information
+    display_name: ResetErrorInformation
+    offset: 177
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: rw
+    behavior: { write_trigger: edge_triggered }
+    field_type: Control
+    tags: [Control, "Control::WriteTrigger"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 235, table: "Table 8-117", quote: "This bit has effects on error information, and on gating timers when the value changes." }
+
+  - name: auto_restart_gating
+    display_name: AutoRestartGating
+    offset: 177
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 236, table: "Table 8-117", quote: "When Gate Time expires, update error counter results, clear internal counters, and restart the Gate Timer." }
+
+  - name: measurement_time
+    display_name: MeasurementTime
+    offset: 177
+    bit_offset: 1
+    bit_width: 3
+    type: u3
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    enum_inline:
+      - { value: 0x0, name: ungated, description: "Ungated, counters accrue indefinitely" }
+      - { value: 0x1, name: gate_time_5_sec, description: "5 second gate time" }
+      - { value: 0x2, name: gate_time_10_sec, description: "10 second gate time" }
+      - { value: 0x3, name: gate_time_30_sec, description: "30 second gate time" }
+      - { value: 0x4, name: gate_time_60_sec, description: "60 second gate time" }
+      - { value: 0x5, name: gate_time_120_sec, description: "120 second gate time" }
+      - { value: 0x6, name: gate_time_300_sec, description: "300 second gate time" }
+      - { value: 0x7, name: custom, description: "Custom gate time" }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 236, table: "Table 8-117", quote: "Measurement gating time for one complete result over a defined measurement period." }
+
+  - name: update_period_select
+    display_name: UpdatePeriodSelect
+    offset: 177
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    enum_inline:
+      - { value: 0, name: one_second, description: "1 second update interval" }
+      - { value: 1, name: five_seconds, description: "5 second update interval" }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 236, table: "Table 8-117", quote: "Time between incremental updates to intermediate error counting results during a longer gating period." }
+
+  - name: host_prbs_checker_clock_source
+    display_name: HostPRBSCheckerClockSource
+    offset: 178
+    bit_offset: 2
+    bit_width: 2
+    type: u2
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    enum_inline:
+      - { value: 0x0, name: recovered_clocks_from_host_lanes_or_data_paths, description: "Recovered clocks from Host Lane/Data paths" }
+      - { value: 0x1, name: internal_clock_all_lanes, description: "All lanes use Internal Clock" }
+      - { value: 0x2, name: reference_clock_all_lanes, description: "All lanes use Reference Clock" }
+      - { value: 0x3, name: reserved, description: "Reserved" }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 236, table: "Table 8-117", quote: "Clock source used for the Host PRBS Pattern Checker." }
+
+  - name: media_prbs_checker_clock_source
+    display_name: MediaPRBSCheckerClockSource
+    offset: 178
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    enum_inline:
+      - { value: 0x0, name: recovered_clocks_from_media_lanes_or_data_paths, description: "Recovered clocks from Media Lane/Data paths" }
+      - { value: 0x1, name: internal_clock_all_lanes, description: "All lanes use Internal Clock" }
+      - { value: 0x2, name: reference_clock_all_lanes, description: "All lanes use Reference Clock" }
+      - { value: 0x3, name: reserved, description: "Reserved" }
+    provenance: { section: "CMIS 5.3 § 8.12.10", pdf_page: 236, table: "Table 8-117", quote: "Clock source used for the Media PRBS Pattern Checker." }
+
+  # ===========================================================================
+  # § 8.12.12 Loopback Controls (bytes 180-183) — Table 8-121
+  # ===========================================================================
+
+  - name: media_side_output_loopback_enable
+    display_name: MediaSideOutputLoopbackEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 180
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.12", pdf_page: 240, table: "Table 8-121", quote: "MediaSideOutputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled." }
+
+  - name: media_side_input_loopback_enable
+    display_name: MediaSideInputLoopbackEnableLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 181
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "CMIS 5.3 § 8.12.12", pdf_page: 240, table: "Table 8-121", quote: "MediaSideInputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled." }

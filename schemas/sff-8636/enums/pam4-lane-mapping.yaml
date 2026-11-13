@@ -1,0 +1,39 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8636Pam4LaneMapping
+title: SFF-8636 PAM4 Electrical-to-Optical Lane Mapping
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.7.2.6
+  table: "Table 6-45"
+  pdf_pages: [74]
+entries:
+  - value: 0x0
+    name: not_determined_or_not_supported
+    description: Lane mapping not determined or not supported
+  - value: 0x1
+    name: optical_lane_1_lsb
+    description: Electrical lane appears on optical lane 1 in the LSB
+  - value: 0x2
+    name: optical_lane_1_msb
+    description: Electrical lane appears on optical lane 1 in the MSB
+  - value: 0x3
+    name: optical_lane_2_lsb
+    description: Electrical lane appears on optical lane 2 in the LSB
+  - value: 0x4
+    name: optical_lane_2_msb
+    description: Electrical lane appears on optical lane 2 in the MSB
+  - value: 0x5
+    name: optical_lane_1_unspecified_split
+    description: Electrical lane appears on optical lane 1; split between LSB and MSB is unspecified
+  - value: 0x6
+    name: optical_lane_2_unspecified_split
+    description: Electrical lane appears on optical lane 2; split between LSB and MSB is unspecified
+  - value: 0x7..0xc
+    name: reserved
+    description: Reserved
+  - value: 0xd..0xf
+    name: vendor_specific
+    description: Vendor specific mapping

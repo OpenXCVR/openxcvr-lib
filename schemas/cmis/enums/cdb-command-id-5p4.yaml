@@ -1,0 +1,84 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisCdbCommandId5p4
+title: CMIS CDB Command ID Groups (CMIS 5.4 and later)
+spec:
+  id: cmis
+  revision: "5.4"
+description: >
+  CDB command ID group registry as printed by CMIS 5.4 Table 9-1 (p. 325).
+  CmisCdbCommandId keeps the pre-5.4 window, where the whole 0x4100..0x7fff
+  span is 'Restricted for use by OIF'; CMIS 5.4 allocates the first block,
+  0x4100..0x41ff, to the Coherent CMIS (C-CMIS) supplement and re-describes
+  the remainder as OIF block allocation space for supplement documents.
+  Revision-blind duplicate/overlap rules forbid splitting the span in place,
+  so the since-5.4 group set lands here, following the
+  CmisBanksSupported5p4 precedent (ADV-01).
+provenance:
+  spec: CMIS 5.4 § 9.1 / Table 9-1
+  pdf_pages: [325]
+entries:
+  - value: 0x0000..0x003f
+    name: module_commands
+    description: "[64] Module level commands (Rqd., section 9.3)"
+    since: "5.4"
+  - value: 0x0040..0x004f
+    name: capabilities_inquiry
+    description: "[16] Query support of CDB features and capabilities (Rqd., 9.3.5)"
+    since: "5.4"
+  - value: 0x0050..0x005f
+    name: application_information
+    description: "[16] Query attributes of Applications and Interfaces (Adv., 9.5)"
+    since: "5.4"
+  - value: 0x0060..0x00ff
+    name: reserved_bulk_read_write
+    description: "[160] Reserved"
+    since: "5.4"
+  - value: 0x0100..0x011f
+    name: firmware_management
+    description: "[32] Commands for Firmware Management (Adv., 9.6)"
+    since: "5.4"
+  - value: 0x0120..0x01ff
+    name: reserved_0120_01ff
+    description: "[224] Reserved"
+    since: "5.4"
+  - value: 0x0200..0x027f
+    name: performance_monitoring
+    description: "[128] Commands for volatile performance statistics (Adv., 9.7)"
+    since: "5.4"
+  - value: 0x0280..0x02ff
+    name: data_recording
+    description: "[128] Commands for non-volatile data recording (Adv., 9.8)"
+    since: "5.4"
+  - value: 0x0300..0x03ff
+    name: reserved_diagnostics
+    description: "[256] Reserved for diagnostics features"
+    since: "5.4"
+  - value: 0x0400..0x04ff
+    name: security_features
+    description: "[256] Commands related to security (Adv., 9.9)"
+    since: "5.4"
+  - value: 0x0500..0x3fff
+    name: reserved_0500_3fff
+    description: "[15104] Reserved"
+    since: "5.4"
+  - value: 0x4000..0x40ff
+    name: versatile_control_set
+    description: "[256] Restricted for CDB commands defined in the CMIS-VCS supplement [6] (Adv.)"
+    since: "5.4"
+  - value: 0x4100..0x41ff
+    name: coherent_cmis_supplement
+    description: "[256] Restricted for CDB commands defined in the C-CMIS supplement [7] (Adv.)"
+    since: "5.4"
+  - value: 0x4200..0x7fff
+    name: restricted_oif_supplement_blocks
+    description: >-
+      [15872] Restricted for use by OIF intended to allocate blocks of
+      (usually 256) CMD IDs for separate supplement documents, allowing
+      independent evolution and life cycle of the command catalogue of
+      supplements
+    since: "5.4"
+  - value: 0x8000..0xffff
+    name: custom
+    description: "[32768] Custom CDB command IDs"
+    since: "5.4"

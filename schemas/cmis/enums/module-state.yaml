@@ -1,0 +1,32 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisModuleState
+title: CMIS Module State (3-bit)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 6.3.2 / Table 8-7
+  pdf_pages: [80, 81, 82, 83, 144]
+entries:
+  - value: 0x0
+    name: reserved_0
+    description: Reserved
+  - value: 0x1
+    name: module_low_pwr
+    description: ModuleLowPwr - steady state where the management interface is initialized and operational while the module remains in Low Power mode
+  - value: 0x2
+    name: module_pwr_up
+    description: ModulePwrUp - transient state where the module is powering up to High Power mode before reaching ModuleReady
+  - value: 0x3
+    name: module_ready
+    description: ModuleReady - steady operational state; flat memory modules always report this state
+  - value: 0x4
+    name: module_pwr_dn
+    description: ModulePwrDn - transient state where the module returns to Low Power mode before transitioning to ModuleLowPwr
+  - value: 0x5
+    name: module_fault
+    description: ModuleFault - steady fault state entered for implementation-dependent safety or damage-prevention conditions
+  - value: 0x6..0x7
+    name: reserved_6_7
+    description: Reserved

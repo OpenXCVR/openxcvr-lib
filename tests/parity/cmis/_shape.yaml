@@ -1,0 +1,28 @@
+# tests/parity/cmis/_shape.yaml — canonical parity-spec schema.
+schema: openxcvr.parity.v1
+kind: parity_spec_shape
+description: |
+  Each fixture group asserts that a set of canonical fields decoded
+  through the rev-transparent API matches across the listed revs.
+fields:
+  - name: group
+    type: ascii
+    description: logical group name; arbitrary
+  - name: fixtures
+    type: list
+    items:
+      type: mapping
+      keys: [rev, path, golden]
+      description: |
+        rev = "3.0"/"4.0"/.../"5.3"; path = absolute or
+        repo-relative .bin path; golden = repo-relative .json golden
+        that the rev-transparent decoder must produce.
+  - name: canonical_assertions
+    type: list
+    items:
+      type: ascii
+    description: |
+      List of accessor paths (e.g. "identity.vendor_name",
+      "dpsm_state") that MUST decode to equal values across every
+      fixture in `fixtures`. Projection-to-canonical happens inside
+      the adapter; the runner just compares.

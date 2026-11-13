@@ -1,0 +1,448 @@
+{
+ "_metadata": {
+  "schema_version": "openxcvr.golden.v1",
+  "fixture": "synthetic-cmis-5-4-qsfp-dd-vdm",
+  "cmis_version": "5.4",
+  "spec": "cmis-5.4",
+  "spec_revision": "5.4",
+  "synthetic": true,
+  "monitoring_stale": true,
+  "authored_at": "2026-11-11",
+  "authored_by": "ras + engineer via tools/build-cmis-5-4-synthetic.py",
+  "synthetic_note": "Synthetic VDM parity golden, NOT a hardware oracle: every byte is hand-authored by tools/build-cmis-5-4-synthetic.py and the expected semantics derive from the CMIS 5.4 spec (OIF-CMIS-05.4.pdf, section 8.27, Tables 8-177..8-186) applied to those bytes, not from a decoder run. The `vdm` block is a fixture-scoped extension: the CmisDecodeResult OpenAPI schema admits additional properties, and no generated decoder output is compared against this block today - it pins the authored bytes' VDM semantics (descriptor layout, sample dispatch, threshold quad layout, TC flag/mask nibble packing, 2Fh controls) for fixture audit and future harness use. The zeroed non-VDM pages carry no field-content semantics; the standard blocks decode them honestly (ModuleState Reserved0, 0.0 monitors, no advertised Applications)."
+ },
+ "decode_status": "ok",
+ "identity": {
+  "vendor_name": "CMIS_5_4_VDM_SYN",
+  "vendor_oui": "00:00:00",
+  "vendor_pn": "FIXTURE-SYNTH-V1",
+  "vendor_rev": "00",
+  "vendor_sn": "SYNTHETIC0000002",
+  "date_code": "251111"
+ },
+ "module": {
+  "cmis_revision": "5.4",
+  "identifier": {
+   "name": "qsfp_dd",
+   "raw": "0x18"
+  },
+  "connector": {
+   "name": "unknown_or_unspecified",
+   "raw": "0x00"
+  },
+  "memory_model": "paged",
+  "module_state": "Reserved0",
+  "module_type": null
+ },
+ "monitoring": {
+  "module_temperature_c": 0.0,
+  "module_voltage_v": 0.0
+ },
+ "applications": null,
+ "checksums": null,
+ "lanes": [
+  {
+   "index": 1,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  },
+  {
+   "index": 2,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  },
+  {
+   "index": 3,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  },
+  {
+   "index": 4,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  },
+  {
+   "index": 5,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  },
+  {
+   "index": 6,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  },
+  {
+   "index": 7,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  },
+  {
+   "index": 8,
+   "dp_state": "Reserved0",
+   "tx_power_mw": 0.0,
+   "rx_power_mw": 0.0,
+   "tx_bias_ma": 0.0,
+   "rx_los": false,
+   "tx_fault": false
+  }
+ ],
+ "flags": {
+  "interrupt_asserted": true,
+  "data_not_ready": null,
+  "temp_high_alarm": false,
+  "temp_low_alarm": false,
+  "supply_high_alarm": false,
+  "supply_low_alarm": false,
+  "lanes": [
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   },
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   },
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   },
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   },
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   },
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   },
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   },
+   {
+    "rx_power_high_alarm": false,
+    "rx_power_high_warning": false,
+    "rx_power_low_alarm": false,
+    "rx_power_low_warning": false,
+    "tx_bias_high_alarm": false,
+    "tx_bias_high_warning": false,
+    "tx_bias_low_alarm": false,
+    "tx_bias_low_warning": false,
+    "tx_power_high_alarm": false,
+    "tx_power_high_warning": false,
+    "tx_power_low_alarm": false,
+    "tx_power_low_warning": false
+   }
+  ]
+ },
+ "vdm": {
+  "support": {
+   "vdm_support": 3,
+   "vdm_support_name": "groups_1_4",
+   "groups_advertised": 4,
+   "duty_cycle_support": true,
+   "power_saving_support": true,
+   "fine_interval_length_0p1ms": 100,
+   "freeze_request": false,
+   "power_saving_mode": false,
+   "monitoring_duty_cycle_k": 5,
+   "freeze_done": false,
+   "unfreeze_done": false
+  },
+  "observables": [
+   {
+    "instance": 1,
+    "group": 1,
+    "threshold_set_id": 0,
+    "global_threshold_set_id": 1,
+    "monitored_resource": 0,
+    "observable_type": 1,
+    "active": true,
+    "sample_raw": "0x0064",
+    "sample": {
+     "storage": "u16",
+     "value": 100
+    }
+   },
+   {
+    "instance": 2,
+    "group": 1,
+    "threshold_set_id": 1,
+    "global_threshold_set_id": 2,
+    "monitored_resource": 1,
+    "observable_type": 4,
+    "active": true,
+    "sample_raw": "0x0100",
+    "sample": {
+     "storage": "i16",
+     "value": 256
+    }
+   },
+   {
+    "instance": 3,
+    "group": 1,
+    "threshold_set_id": 2,
+    "global_threshold_set_id": 3,
+    "monitored_resource": 0,
+    "observable_type": 9,
+    "active": true,
+    "sample_raw": "0x98FA",
+    "sample": {
+     "storage": "f16",
+     "value": 0.0025
+    }
+   },
+   {
+    "instance": 4,
+    "group": 1,
+    "threshold_set_id": 3,
+    "global_threshold_set_id": 4,
+    "monitored_resource": 15,
+    "observable_type": 77,
+    "active": true,
+    "sample_raw": "0x0A28",
+    "sample": {
+     "storage": "u16",
+     "value": 2600
+    }
+   },
+   {
+    "instance": 65,
+    "group": 2,
+    "threshold_set_id": 0,
+    "global_threshold_set_id": 17,
+    "monitored_resource": 1,
+    "observable_type": 26,
+    "active": true,
+    "sample_raw": "0xC001",
+    "sample": {
+     "storage": "f16",
+     "value": 1.0
+    }
+   },
+   {
+    "instance": 129,
+    "group": 3,
+    "threshold_set_id": 0,
+    "global_threshold_set_id": 33,
+    "monitored_resource": 2,
+    "observable_type": 84,
+    "active": true,
+    "sample_raw": "0xFFCE",
+    "sample": {
+     "storage": "i16",
+     "value": -50
+    }
+   },
+   {
+    "instance": 255,
+    "group": 4,
+    "threshold_set_id": 0,
+    "global_threshold_set_id": 49,
+    "monitored_resource": 3,
+    "observable_type": 27,
+    "active": true,
+    "sample_raw": "0x0007",
+    "sample": {
+     "storage": "u16",
+     "value": 7
+    }
+   }
+  ],
+  "threshold_quads": [
+   {
+    "page": "28h",
+    "set": 1,
+    "high_alarm": "0x1000",
+    "low_alarm": "0x0800",
+    "high_warning": "0x0C00",
+    "low_warning": "0x0900"
+   },
+   {
+    "page": "29h",
+    "set": 1,
+    "high_alarm": "0x1111",
+    "low_alarm": "0x2222",
+    "high_warning": "0x3333",
+    "low_warning": "0x4444"
+   },
+   {
+    "page": "2Ah",
+    "set": 1,
+    "high_alarm": "0x00FF",
+    "low_alarm": "0x00AA",
+    "high_warning": "0x00EE",
+    "low_warning": "0x00BB"
+   },
+   {
+    "page": "2Bh",
+    "set": 1,
+    "high_alarm": "0x7FFF",
+    "low_alarm": "0x8000",
+    "high_warning": "0x6000",
+    "low_warning": "0xA000"
+   }
+  ],
+  "tc_flags": [
+   {
+    "instance": 1,
+    "high_alarm": true,
+    "low_alarm": false,
+    "high_warning": false,
+    "low_warning": true
+   },
+   {
+    "instance": 2,
+    "high_alarm": true,
+    "low_alarm": false,
+    "high_warning": false,
+    "low_warning": false
+   },
+   {
+    "instance": 129,
+    "high_alarm": false,
+    "low_alarm": false,
+    "high_warning": true,
+    "low_warning": false
+   },
+   {
+    "instance": 255,
+    "high_alarm": false,
+    "low_alarm": true,
+    "high_warning": false,
+    "low_warning": false
+   }
+  ],
+  "tc_masks": [
+   {
+    "instance": 1,
+    "high_alarm": true,
+    "low_alarm": true,
+    "high_warning": true,
+    "low_warning": true
+   },
+   {
+    "instance": 2,
+    "high_alarm": false,
+    "low_alarm": false,
+    "high_warning": true,
+    "low_warning": true
+   },
+   {
+    "instance": 129,
+    "high_alarm": false,
+    "low_alarm": true,
+    "high_warning": true,
+    "low_warning": true
+   },
+   {
+    "instance": 255,
+    "high_alarm": true,
+    "low_alarm": true,
+    "high_warning": true,
+    "low_warning": true
+   }
+  ]
+ }
+}

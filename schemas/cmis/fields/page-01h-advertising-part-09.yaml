@@ -1,0 +1,359 @@
+fields:
+  - name: cdb_instances_supported
+    display_name: CdbInstancesSupported
+    offset: 163
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "163 CdbInstancesSupported"
+          pdf_page: [168, 178]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 178
+      quote: "CDB functionality instances supported"
+
+  - name: cdb_background_mode_supported
+    display_name: CdbBackgroundModeSupported
+    offset: 163
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "163 CdbBackgroundModeSupported"
+          pdf_page: [168, 178]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 178
+      quote: "Background CDB operation supported"
+
+  - name: cdb_auto_paging_supported
+    display_name: CdbAutoPagingSupported
+    offset: 163
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "163 CdbAutoPagingSupported"
+          pdf_page: [168, 178]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 178
+      quote: "Auto Paging and Auto Page wrap supported"
+
+  - name: cdb_max_pages_epl
+    display_name: CdbMaxPagesEPL
+    offset: 163
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "163 CdbMaxPagesEPL"
+          pdf_page: [168, 178]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 178
+      quote: "Maximum supported EPL page range"
+
+  - name: cdb_read_write_length_extension
+    display_name: CdbReadWriteLengthExtension
+    offset: 164
+    size_bytes: 1
+    type: u8
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "164 CdbReadWriteLengthExtension"
+          pdf_page: [168, 178, 179]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 178
+      quote: "Allowable additional number of bytes in CDB READ or WRITE access"
+
+  - name: cdb_command_trigger_method
+    display_name: CdbCommandTriggerMethod
+    offset: 165
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "165 CdbCommandTriggerMethod"
+          pdf_page: [168, 179]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 179
+      quote: "Determines how the host triggers CDB command processing"
+
+  - name: cdb_ext_max_busy_time
+    display_name: CdbExtMaxBusyTime
+    offset: 165
+    bit_offset: 0
+    bit_width: 5
+    type: u5
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "165 CdbExtMaxBusyTime"
+          pdf_page: [168, 179]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 179
+      quote: "Maximum CDB busy time when CdbMaxBusySpecMethod is 1b"
+
+  - name: cdb_max_busy_spec_method
+    display_name: CdbMaxBusySpecMethod
+    offset: 166
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "166 CdbMaxBusySpecMethod"
+          pdf_page: [168, 179]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 179
+      quote: "Selects CdbMaxBusyTime or CdbExtMaxBusyTime for maximum CDB busy time"
+
+  - name: cdb_max_busy_time
+    display_name: CdbMaxBusyTime
+    offset: 166
+    bit_offset: 0
+    bit_width: 7
+    type: u7
+    since: "4.0"
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "166 CdbMaxBusyTime"
+          pdf_page: [168, 179]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 defines this field as plain RO with no read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.11"
+      pdf_page: 179
+      quote: "Maximum CDB busy time when CdbMaxBusySpecMethod is 0b"
+
+  - name: max_duration_module_pwr_dn
+    display_name: MaxDurationModulePwrDn
+    offset: 167
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    since: "4.0"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.12"
+      pdf_page: 181
+      quote: "Encoded maximum duration of the ModulePwrDn state"
+
+  - name: max_duration_module_pwr_up
+    display_name: MaxDurationModulePwrUp
+    offset: 167
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "4.0"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.4.12"
+      pdf_page: 181
+      quote: "Encoded maximum duration of the ModulePwrUp state"
+
+  - name: reserved_byte165_bits6_5_cmis53
+    display_name: ReservedByte165Bits6To5Cmis53
+    offset: 165
+    bit_offset: 5
+    bit_width: 2
+    since: "5.3"
+    type: bitmap
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: none
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.4; §8.4.11"
+          table: "Table 8-54"
+          row: "165 bits 6-5 Reserved"
+          pdf_page: [168, 179]
+          basis: "§8.4 states all Page 01h fields are read-only and static; Table 8-54 reserves these physical bits without assigning feature semantics or a read-triggered action. Qualification is CMIS 5.3 only."
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false

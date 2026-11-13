@@ -1,0 +1,86 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8636Pam4ParameterType
+title: SFF-8636 PAM4 Parameter Type Enumeration
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.7.2.5
+  table: "Table 6-43"
+  pdf_pages: [73]
+entries:
+  - value: 0x00
+    name: not_supported
+    description: Parameter not supported; no data is presented
+    reach: {kind: none}
+  - value: 0x01
+    name: snr_line_ingress
+    description: SNR, line ingress
+    tags: [snr, pam4]
+  - value: 0x02
+    name: residual_isi_dispersion_line_ingress
+    description: Residual ISI or dispersion, line ingress
+    tags: [dispersion, pam4]
+  - value: 0x03
+    name: pam4_level_transition_line_ingress
+    description: PAM4 level transition parameter, line ingress
+    tags: [pam4]
+  - value: 0x04
+    name: pre_fec_ber_average_line_ingress
+    description: Pre-FEC BER average, line ingress
+    tags: [ber, pam4]
+  - value: 0x05
+    name: fer_average_line_ingress
+    description: FER average, line ingress
+    tags: [fer, pam4]
+  - value: 0x06
+    name: tec_current
+    description: TEC current
+    tags: [dwdm]
+  - value: 0x07
+    name: laser_frequency
+    description: Laser frequency difference
+    tags: [dwdm]
+  - value: 0x08
+    name: laser_temperature
+    description: Laser temperature difference
+    tags: [dwdm]
+  - value: 0x09
+    name: pre_fec_ber_latched_min_line_ingress
+    description: Pre-FEC BER latched minimum since last read, line ingress
+    tags: [ber, pam4, latched]
+  - value: 0x0a
+    name: pre_fec_ber_latched_max_line_ingress
+    description: Pre-FEC BER latched maximum since last read, line ingress
+    tags: [ber, pam4, latched]
+  - value: 0x0b
+    name: pre_fec_ber_prior_period_line_ingress
+    description: Pre-FEC BER prior period, line ingress
+    tags: [ber, pam4]
+  - value: 0x0c
+    name: pre_fec_ber_current_line_ingress
+    description: Pre-FEC BER current value, line ingress
+    tags: [ber, pam4]
+  - value: 0x0d
+    name: fer_latched_min_line_ingress
+    description: FER latched minimum since last read, line ingress
+    tags: [fer, pam4, latched]
+  - value: 0x0e
+    name: fer_latched_max_line_ingress
+    description: FER latched maximum since last read, line ingress
+    tags: [fer, pam4, latched]
+  - value: 0x0f
+    name: fer_prior_period_line_ingress
+    description: FER prior period, line ingress
+    tags: [fer, pam4]
+  - value: 0x10
+    name: fer_current_line_ingress
+    description: FER current value, line ingress
+    tags: [fer, pam4]
+  - value: 0x11..0xbf
+    name: reserved
+    description: Reserved
+  - value: 0xc0..0xff
+    name: vendor_specific
+    description: Vendor specific

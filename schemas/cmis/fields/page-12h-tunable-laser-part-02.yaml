@@ -1,0 +1,248 @@
+fields:
+  - name: laser_tuning_flag_summary_tx
+    display_name: LaserTuningFlagSummaryTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 230
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [Status, Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Laser tuning Flag summary for media lane <n>=1-8. The bit <n>-1 is set if and only if any of the Flags in Bytes 231-238 are 1 for the particular Lane <n>."
+
+  # ===========================================================================
+  # § 8.11 Per-lane Flags (bytes 231-238) — Table 8-99
+  # 1 byte per lane; each byte holds 6 distinct flags. Each flag is 1 bit
+  # repeated across 8 lanes (one per byte). All RO/COR (clear-on-read).
+  # ===========================================================================
+
+  - name: target_output_power_oor_flag_tx
+    display_name: TargetOutputPowerOORFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "231 + (lane - 1)"
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Latched Flag indicating that a target output power value outside the allowed range was entered for media lane <n>=1-8."
+
+  - name: fine_tuning_out_of_range_flag_tx
+    display_name: FineTuningOutOfRangeFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "231 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Latched Flag indicating that a fine-tuning value outside the allowed range was given for media lane <n>=1-8."
+
+  - name: tuning_not_accepted_flag_tx
+    display_name: TuningNotAcceptedFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "231 + (lane - 1)"
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Latched Flag indicating a failed tuning operation for media lane <n>=1-8: the module was temporarily unable to serve a tuning request in its current state. The Flag indicates that the nominally programmed grid or channel do not match the actual condition of the laser. The Flag clears when channel or grid have been successfully re-programmed."
+
+  - name: invalid_channel_number_flag_tx
+    display_name: InvalidChannelNumberFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "231 + (lane - 1)"
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Latched Flag indicating that ChannelNumberTx<n> was not in advertised range of the channel spacing selected on media lane <n>=1-8."
+
+  - name: wavelength_unlocked_flag_tx
+    display_name: WavelengthUnlockedFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "231 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Latched Flag version of WavelengthUnlockedTx<n>."
+
+  - name: tuning_complete_flag_tx
+    display_name: TuningCompleteFlagTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "231 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Latched Flag indicating laser tuning has been completed for media lane <n>=1-8."
+
+  # ===========================================================================
+  # § 8.11 Per-lane Masks (bytes 239-246) — Table 8-99
+  # Masks for the 6 per-lane flags above; same packing.
+  # All Masks default to 1 (interrupt suppressed).
+  # ===========================================================================
+
+  - name: target_output_power_oor_mask_tx
+    display_name: TargetOutputPowerOORMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "239 + (lane - 1)"
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Mask for TargetOutputPowerOORFlagTx<n>. Default: 1."
+
+  - name: fine_tuning_out_of_range_mask_tx
+    display_name: FineTuningOutOfRangeMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "239 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Mask for FineTuningOutOfRangeFlagTx<n>. Default: 1."
+
+  - name: tuning_not_accepted_mask_tx
+    display_name: TuningNotAcceptedMaskTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "239 + (lane - 1)"
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Mask
+    tags: [Mask, "Control::Mask"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Mask for TuningNotAcceptedFlagTx<n>=1-8. Default: 1."

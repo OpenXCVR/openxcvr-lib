@@ -1,0 +1,328 @@
+fields:
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.30.1 Host Lane Polarity Inversion Indication (bytes 128-129)
+  # - Table 8-188. Lane 1 is bit 0 of its byte. Implementations supporting
+  # Page 60h must duplicate the advertised polarity inversion information
+  # from Page 01h § 8.4.13 onto bank 0 of Page 60h; this status indication
+  # reflects the actual polarity (also for programmable lane polarity).
+  # ===========================================================================
+
+  - name: input_polarity_status_tx
+    display_name: InputPolarityStatusTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 128
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "0b: Module input lane <lane> polarity is regular; 1b: Module input lane <lane> polarity is inverted. For inverted input lane polarity of the module, the host needs to invert its output lane polarity setting, too."
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30.1"
+      pdf_page: 313
+      table: "Table 8-188"
+      quote: "InputPolarityStatusTx<i>: 0b: Module input lane <i> polarity is regular; 1b: Module input lane <i> polarity is inverted"
+
+  - name: output_polarity_status_rx
+    display_name: OutputPolarityStatusRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 129
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "0b: Module output lane <lane> polarity is regular; 1b: Module output lane <lane> polarity is inverted. For inverted output lane polarity of the module, the host needs to invert its input lane polarity setting, too."
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30.1"
+      pdf_page: 313
+      table: "Table 8-188"
+      quote: "OutputPolarityStatusRx<i>: 0b: Module output lane <i> polarity is regular; 1b: Module output lane <i> polarity is inverted"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.30 Acquisition Counter support advertisement (byte 130, bank
+  # 0 only) - Table 8-188. Each bit refers to one of the four acquisition
+  # counter categories found on Page 61h.
+  # ===========================================================================
+
+  - name: acq_counters_rx_supported
+    display_name: AcqCountersRxSupported
+    offset: 130
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: the AcquisitionCounterRx category on Page 61h is supported; 0b: not supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-188"
+      quote: "AcqCountersRxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported"
+
+  - name: acq_counters_tx_supported
+    display_name: AcqCountersTxSupported
+    offset: 130
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: the AcquisitionCounterTx category on Page 61h is supported; 0b: not supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-188"
+      quote: "AcqCountersTxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported"
+
+  - name: dp_acq_counters_rx_supported
+    display_name: DpAcqCountersRxSupported
+    offset: 130
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: the DpAcquisitionCounterRx category on Page 61h is supported; 0b: not supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-188"
+      quote: "DpAcqCountersRxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported"
+
+  - name: dp_acq_counters_tx_supported
+    display_name: DpAcqCountersTxSupported
+    offset: 130
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: the DpAcquisitionCounterTx category on Page 61h is supported; 0b: not supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-188"
+      quote: "DpAcqCountersTxSupported: Referring to the four acquisition counter categories found on Page 61h: 0b: Acquisition counter category is not supported; 1b: Acquisition counter category is supported"
+
+  - name: reserved_page_60h_130_bits_3_0
+    display_name: ReservedPage60h130Bits3To0
+    offset: 130
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-188"
+      quote: "Byte 130 bits 3-0: Reserved"
+
+  - name: reserved_page_60h_131_191
+    display_name: ReservedPage60h131To191
+    offset: 131
+    size_bytes: 61
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-187"
+      quote: "Bytes 131-191: Reserved [61]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.30 Counter Resets (bytes 192-195) - Table 8-189. Supported
+  # when advertised in 60h:130.7-4. Table 8-189 prints the byte address of
+  # the last two rows as 195 twice; per the byte ordering of the table
+  # (Rx before Tx, matching rows 192/193) byte 194 is
+  # ResetDpAcquisitionCountersRx and byte 195 is ResetDpAcquisitionCountersTx.
+  # ===========================================================================
+
+  - name: reset_acquisition_counters_rx
+    display_name: ResetAcquisitionCountersRx
+    offset: 192
+    size_bytes: 1
+    type: bitmap
+    since: "5.4"
+    description: "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for media lane number k+1."
+    access: wo
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-189"
+      quote: "ResetAcquisitionCountersRx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for media lane number k+1."
+
+  - name: reset_acquisition_counters_tx
+    display_name: ResetAcquisitionCountersTx
+    offset: 193
+    size_bytes: 1
+    type: bitmap
+    since: "5.4"
+    description: "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for host lane number k+1."
+    access: wo
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 314
+      table: "Table 8-189"
+      quote: "ResetAcquisitionCountersTx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for host lane number k+1."
+
+  - name: reset_dp_acquisition_counters_rx
+    display_name: ResetDpAcquisitionCountersRx
+    offset: 194
+    size_bytes: 1
+    type: bitmap
+    since: "5.4"
+    description: "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for the media side data path with DPID (or NPID) k+1."
+    access: wo
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 314
+      table: "Table 8-189"
+      quote: "ResetDpAcquisitionCountersRx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for media side data path with DPID (or NPID) k+1."
+
+  - name: reset_dp_acquisition_counters_tx
+    display_name: ResetDpAcquisitionCountersTx
+    offset: 195
+    size_bytes: 1
+    type: bitmap
+    since: "5.4"
+    description: "Bit mask. Writing a value with bit k set, 0 <= k <= 7, resets the acquisition counter for the host side data path with DPID k+1."
+    access: wo
+    field_type: Control
+    tags: [Control, WriteTrigger]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: false
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 314
+      table: "Table 8-189"
+      quote: "ResetDpAcquisitionCountersTx: Bit mask. Writing a value with bit k set, where 0 <= k <= 7, resets the acquisition counter for host side data path with DPID k+1."
+
+  - name: reserved_page_60h_196_255
+    display_name: ReservedPage60h196To255
+    offset: 196
+    size_bytes: 60
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.30"
+      pdf_page: 313
+      table: "Table 8-187"
+      quote: "Bytes 196-255: Reserved [60]"

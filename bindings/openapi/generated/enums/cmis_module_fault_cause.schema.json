@@ -1,0 +1,54 @@
+{
+  "$id": "cmis_module_fault_cause.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "No fault detected, or the ModuleFaultCause field is not supported",
+      "title": "no_fault_detected_or_field_not_supported"
+    },
+    {
+      "const": 1,
+      "description": "Thermoelectric cooler runaway fault",
+      "title": "tec_runaway"
+    },
+    {
+      "const": 2,
+      "description": "Data memory corrupted fault",
+      "title": "data_memory_corrupted"
+    },
+    {
+      "const": 3,
+      "description": "Program memory corrupted fault",
+      "title": "program_memory_corrupted"
+    },
+    {
+      "const": 4,
+      "description": "Transmitter fault",
+      "title": "transmitter_fault"
+    },
+    {
+      "const": 5,
+      "description": "Receiver fault",
+      "title": "receiver_fault"
+    },
+    {
+      "const": 6,
+      "description": "Temperature related fault",
+      "title": "temperature_related_fault"
+    }
+  ],
+  "title": "CmisModuleFaultCause",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      153
+    ],
+    "spec": "CMIS 5.3 § 8.2.10 / Table 8-16"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

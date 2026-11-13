@@ -1,0 +1,62 @@
+{
+  "$id": "cmis_data_path_state.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Reserved",
+      "title": "reserved_0"
+    },
+    {
+      "const": 1,
+      "description": "DPDeactivated (or unused lane) — no Data Path is initialized on that lane",
+      "title": "dp_deactivated"
+    },
+    {
+      "const": 2,
+      "description": "DPInit — Data Path is initializing",
+      "title": "dp_init"
+    },
+    {
+      "const": 3,
+      "description": "DPDeinit — Data Path is de-initializing",
+      "title": "dp_deinit"
+    },
+    {
+      "const": 4,
+      "description": "DPActivated — Data Path is active",
+      "title": "dp_activated"
+    },
+    {
+      "const": 5,
+      "description": "DPTxTurnOn — Tx is being turned on",
+      "title": "dp_tx_turn_on",
+      "x-openxcvr-since": "4.0"
+    },
+    {
+      "const": 6,
+      "description": "DPTxTurnOff — Tx is being turned off",
+      "title": "dp_tx_turn_off",
+      "x-openxcvr-since": "4.0"
+    },
+    {
+      "const": 7,
+      "description": "DPInitialized — Data Path is initialized but Tx not yet enabled",
+      "title": "dp_initialized",
+      "x-openxcvr-since": "4.0"
+    }
+  ],
+  "title": "CmisDataPathState",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      208
+    ],
+    "spec": "CMIS 5.3 § 8.10.1 / Table 8-84; CMIS 4.0 Table 8-58; CMIS 3.0 § 1.7.7.1 Table 66"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

@@ -1,0 +1,121 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbControlPmStatistics
+title: CMIS CDB Command 0200h - Control PM Statistics
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.7.1
+  pdf_pages: [366]
+  table: Table 9-36
+cmd_id: 0x0200
+available_since: "4.0"
+cmd_id_group: performance_monitoring
+command_class: required
+description: >
+  Controls the behavior of CDB Performance Statistics Monitoring with
+  respect to Versatile Diagnostic Monitoring (VDM) in Pages 20h-2Fh and
+  allows the host to reset all underlying statistics. Present since
+  CMIS 4.0 (4.0 § 9.7.1 'CMD 0200h: PM Controls'). Required at CMIS 5.4
+  (Table 9-34: Rqd.). The LinkMode parameter (136.0, programmable linked
+  statistics mode between CDB and VDM PM objects) is declared obsolescent
+  in CMIS 5.4 (§ 1.3.1 'Features Declared Obsolescent in CMIS 5.4':
+  'The programmable linked statistics mode parameter for CDB vs VDM PM
+  statistics objects in CMD 200h is not well-defined... pending removal
+  in CMIS 5.6').
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 4
+    fields:
+      - name: reserved_136_bits_7_1
+        offset: 136
+        bit_offset: 1
+        bit_width: 7
+        type: u7
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        constraints: { equals: 0 }
+        provenance: { spec: "CMIS 5.4 § 9.7.1", table: "Table 9-36" }
+      - name: link_mode
+        offset: 136
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        description: >
+          When the CDB PM statistics and VDM are linked, the PM
+          statistics in VDM Pages 20h-2Fh access and refer to the same internal
+          PM data objects as the CDB Get PM Statistics commands; clearing or
+          restarting statistics using any of the VDM methods also affects the
+          statistics seen by CDB. Since all VDM observables and statistics use
+          one global Freeze command, the opposite direction is not clearly
+          specified; hosts are advised to use VDM freeze control for linked
+          statistics (CMIS 5.4 § 9.7.1 editor's note).
+        enum_inline:
+          - { value: 0, name: unlinked, description: "PM statistics are independent from VDM" }
+          - { value: 1, name: linked, description: "PM statistics are the same as VDM 20h-2Fh (linked). Obsolescent in CMIS 5.4 (section 1.3.1), pending removal in 5.6" }
+        provenance: { spec: "CMIS 5.4 § 9.7.1", table: "Table 9-36" }
+      - name: reserved_137
+        offset: 137
+        size_bytes: 1
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        constraints: { equals: 0 }
+        provenance: { spec: "CMIS 5.4 § 9.7.1", table: "Table 9-36" }
+      - name: reserved_138_bits_7_1
+        offset: 138
+        bit_offset: 1
+        bit_width: 7
+        type: u7
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        constraints: { equals: 0 }
+        provenance: { spec: "CMIS 5.4 § 9.7.1", table: "Table 9-36" }
+      - name: clear_all_statistics
+        offset: 138
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        enum_inline:
+          - { value: 0, name: no_operation, description: "No operation" }
+          - { value: 1, name: clear_all, description: "Clear all statistics (minimum, average, maximum) for all observables for all lanes at the same time, across all banks, best-effort" }
+        provenance: { spec: "CMIS 5.4 § 9.7.1", table: "Table 9-36" }
+      - name: reserved_139
+        offset: 139
+        size_bytes: 1
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        constraints: { equals: 0 }
+        provenance: { spec: "CMIS 5.4 § 9.7.1", table: "Table 9-36" }
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "4.0" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "4.0" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "4.0" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+  lpl:
+    length: 0
+    fields: []
+behavior:
+  abort_supported: true
+  retry_safe: false
+  side_effects:
+    - "May clear all minimum, average and maximum statistics for all observables and lanes."
+    - "May link or unlink CDB PM statistics with VDM (LinkMode, obsolescent at 5.4)."

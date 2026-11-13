@@ -1,0 +1,26 @@
+schema: openxcvr.parity.v1
+kind: parity_spec
+group: lower_memory_canonical
+fixtures:
+  # Paths must name real committed fixtures: the runner (crates/openxcvr-cmis/
+  # tests/parity.rs) decodes every listed fixture through the rev-transparent
+  # CmisModule API and compares each canonical_assertions field against the
+  # fixture's own committed golden. `path` is the fixture's .lower.bin; the
+  # sibling .page-00h.bin (same stem) is required for the identity accessors.
+  # `rev` must match the fixture's Lower:1 major-revision byte AND the golden's
+  # _metadata.cmis_version — a mismatch fails the run, it is never skipped.
+  - rev: "4.0"
+    path: tests/fixtures/cmis/fboss-cmis-4-0-osfp-2x400g-dr4.lower.bin
+    golden: tests/golden/cmis/fboss-cmis-4-0-osfp-2x400g-dr4.json
+  - rev: "5.3"
+    path: tests/fixtures/cmis/fboss-cmis-5-3-osfp-800g-zr.lower.bin
+    golden: tests/golden/cmis/fboss-cmis-5-3-osfp-800g-zr.json
+canonical_assertions:
+  # Accessor paths resolved by the runner against (a) the rev-transparent
+  # decode and (b) the fixture's golden. identity.* maps to the golden's
+  # identity block (part_number pairs with the golden's vendor_pn key);
+  # module_state pairs with module.module_state.
+  - identity.vendor_name
+  - identity.vendor_oui
+  - identity.part_number
+  - module_state

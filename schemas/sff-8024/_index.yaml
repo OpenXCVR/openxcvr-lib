@@ -1,0 +1,21 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: sff-8024
+  title: SFF-8024 Management Interface Specification
+  revision: "4.14"
+  source: docs/stds/sff-8024/SFF-8024-Rev4.14.pdf
+kind: enum_registry
+includes:
+  - identifier-values.yaml
+  - encoding-values.yaml
+  - connector-types.yaml
+  - extended-specification-compliance-codes.yaml
+  - host-ei-ids.yaml
+  - mmf-media-ids.yaml
+  - smf-media-ids.yaml
+  - copper-cable-passive.yaml
+  - copper-cable-active.yaml
+  - base-t-codes.yaml
+  - transceiver-subtype.yaml
+  - fiber-face-type.yaml
+  - heatsink-type.yaml

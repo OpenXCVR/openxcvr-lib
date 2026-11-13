@@ -1,0 +1,247 @@
+fields:
+  - name: sff8024_identifier
+    display_name: Identifier
+    offset: 0
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024Identifier
+    template: informational
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8472 v12.5a § 5.1", pdf_page: 21, table: "Table 5-1", quote: "Physical Device Identifier Values" }
+
+  - name: extended_identifier
+    display_name: ExtIdentifier
+    offset: 1
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8472ExtendedIdentifier
+    template: informational
+    scope: { module: true }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "SFF-8472 v12.5a § 5.2", pdf_page: 21, table: "Table 5-2", quote: "Physical Device Extended Identifier Values" }
+
+  - name: connector_type
+    display_name: Connector
+    offset: 2
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024ConnectorType
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 5.3", pdf_page: 21, table: "SFF-8024 Table 4-3", quote: "Connector" }
+
+  - name: transceiver_compliance
+    display_name: TransceiverCompliance<bit>
+    instances: { index: bit, start: 0, end: 63 }
+    offset_expr: "3 + (bit / 8)"
+    bit_offset_expr: "7 - (bit % 8)"
+    bit_width: 1
+    type: bool
+    template: capability_advertisement
+    tags: [CapabilityAdvertisement, "Capability::Compliance"]
+    scope: { module: true }
+    behavior:
+      bit_order: "10G Ethernet, InfiniBand, ESCON, SONET, Ethernet, Fibre Channel link length, technology, media, speed"
+      reserved_bits: [20, 28, 41, 48, 49, 55]
+    provenance: { section: "SFF-8472 v12.5a § 5.4", pdf_page: 22, table: "Table 5-3", quote: "Transceiver Compliance Codes" }
+
+  - name: encoding
+    display_name: Encoding
+    offset: 11
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024Encoding
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 5.5", pdf_page: 25, table: "SFF-8024 Table 4-2", quote: "Encoding" }
+
+  - name: signaling_rate_nominal
+    display_name: SignalingRate
+    offset: 12
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "100 MBd", special: "0xff means greater than 25.4 GBd; use bytes 66-67" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 5.6", pdf_page: 25, quote: "Nominal signaling rate in 100 MBd units" }
+
+  - name: rate_identifier
+    display_name: RateIdentifier
+    offset: 13
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8472RateIdentifier
+    template: capability_advertisement
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 5.7", pdf_page: 26, table: "Table 5-6", quote: "Rate Identifier" }
+
+  - name: length_smf_km
+    display_name: LengthSMFkm
+    offset: 14
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "1 km", special: "For copper assemblies, attenuation at 12.9 GHz in 1 dB units" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 6.1", pdf_page: 29, quote: "SMF link length in km" }
+
+  - name: length_smf_100m
+    display_name: LengthSMF100m
+    offset: 15
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "100 m", special: "For copper assemblies, attenuation at 25.78 GHz in 1 dB units" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 6.2", pdf_page: 29, quote: "SMF link length in 100 m units" }
+
+  - name: length_om2_10m
+    display_name: LengthOM2
+    offset: 16
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "10 m" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 6.3", pdf_page: 29, quote: "50 um OM2 fiber link length" }
+
+  - name: length_om1_10m
+    display_name: LengthOM1
+    offset: 17
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "10 m" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 6.4", pdf_page: 29, quote: "62.5 um OM1 fiber link length" }
+
+  - name: length_om4_or_copper_1m
+    display_name: LengthOM4OrCopper
+    offset: 18
+    size_bytes: 1
+    type: u8
+    encoding: { kind: scaled_unsigned, lsb_units: "10 m optical or 1 m copper/active cable" }
+    template: operational_parameter
+    scope: { module: true }
+    since: "11.3"
+    provenance: { section: "SFF-8472 v12.5a § 6.5", pdf_page: 29, quote: "50 um OM4 fiber or copper/active cable link length", lineage: "SFF-8472 Rev 12.5a change history, Rev 11.3: 'Added OM4 to Table 3.1 and Address A0h, Byte 18'" }
+
+  - name: length_om3_multiplier
+    display_name: LengthOM3Multiplier
+    offset: 19
+    bit_offset: 6
+    bit_width: 2
+    type: u2
+    template: operational_parameter
+    scope: { module: true }
+    enum_inline:
+      - { value: 0, name: times_0_1m, description: "Base length multiplier is 0.1 m" }
+      - { value: 1, name: times_1m, description: "Base length multiplier is 1 m" }
+      - { value: 2, name: times_10m, description: "Base length multiplier is 10 m" }
+      - { value: 3, name: times_100m, description: "Base length multiplier is 100 m" }
+    provenance: { section: "SFF-8472 v12.5a § 6.6", pdf_page: 29, quote: "Length multiplier for bits 5-0" }
+
+  - name: length_om3_base
+    display_name: LengthOM3Base
+    offset: 19
+    bit_offset: 0
+    bit_width: 6
+    type: u6
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 6.6", pdf_page: 29, quote: "50 um OM3 fiber or active/copper cable base length" }
+
+  - name: vendor_name
+    display_name: VendorName
+    offset: 20
+    size_bytes: 16
+    type: ascii
+    template: vendor_info
+    provenance: { section: "SFF-8472 v12.5a § 7.1", pdf_page: 30, quote: "Vendor name" }
+
+  - name: extended_specification_compliance
+    display_name: ExtSpecCompliance
+    offset: 36
+    size_bytes: 1
+    type: enum_ref
+    enum_ref: Sff8024ExtendedSpecCompliance
+    template: capability_advertisement
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 5.4", pdf_page: 25, quote: "Extended Specification Compliance Codes" }
+
+  - name: vendor_oui
+    display_name: VendorOUI
+    offset: 37
+    size_bytes: 3
+    type: bytes
+    template: vendor_info
+    provenance: { section: "SFF-8472 v12.5a § 7.2", pdf_page: 30, quote: "Vendor IEEE OUI" }
+
+  - name: vendor_pn
+    display_name: VendorPN
+    offset: 40
+    size_bytes: 16
+    type: ascii
+    template: vendor_info
+    provenance: { section: "SFF-8472 v12.5a § 7.3", pdf_page: 30, quote: "Vendor part number" }
+
+  - name: vendor_rev
+    display_name: VendorRev
+    offset: 56
+    size_bytes: 4
+    type: ascii
+    template: vendor_info
+    provenance: { section: "SFF-8472 v12.5a § 7.4", pdf_page: 30, quote: "Vendor revision number" }
+
+  - name: wavelength_or_cable_compliance
+    display_name: WavelengthOrCableCompliance
+    offset: 60
+    size_bytes: 2
+    type: u16be
+    variants:
+      discriminator: { field: "transceiver_compliance[37]" }
+      cases:
+        - when: { value: false }
+          encoding: { kind: scaled_unsigned, lsb_units: "1 nm", description: "Optical module nominal laser wavelength" }
+        - when: { value: true }
+          encoding: { kind: bitmap, description: "Passive or active cable compliance bits from Tables 8-1 and 8-2" }
+    template: operational_parameter
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.1", pdf_page: 31, tables: ["Table 8-1", "Table 8-2"], quote: "Wavelength / Cable Specification Compliance" }
+
+  - name: fc_speed2_64gfc
+    display_name: FCSpeed2_64GFC
+    offset: 62
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    template: capability_advertisement
+    tags: [CapabilityAdvertisement, "Capability::Compliance"]
+    scope: { module: true }
+    since: "12.4"
+    provenance: { section: "SFF-8472 v12.5a § 5.4", pdf_page: 25, quote: "Fibre Channel Speed 2: 64 GFC", lineage: "Added at Rev 12.4 (SFF-8472 Rev 12.5a change history, Rev 12.4: 'In Table 5-3 modified description for bit 1, byte 10 to refer to a secondary Fibre Channel Speed register 62. Added byte 62 to the table'). Rev 12.4 Table 5-3 (PDF p. 14) defines byte 62 'Fibre Channel Speed 2' bit 0 '64 GFC'; the Rev 12.3 document lists byte 62 as Unallocated. The Rev 12.3 64GFC additions are the A2h byte 119 bits, not this register" }
+
+  - name: cc_base
+    display_name: CC_BASE
+    offset: 63
+    size_bytes: 1
+    type: u8
+    encoding: { kind: checksum, covers: "A0h bytes 0-62", covers_range: [0, 62], algorithm: sum8 }
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 8.2", pdf_page: 31, quote: "CC_BASE" }
+
+  - name: options
+    display_name: Option<bit>
+    instances: { index: bit, start: 0, end: 15 }
+    offset_expr: "64 + (bit / 8)"
+    bit_offset_expr: "7 - (bit % 8)"
+    bit_width: 1
+    type: bool
+    template: capability_flag
+    scope: { module: true }
+    behavior:
+      bit_order: "power level 4, power level 3, paging, retimer/CDR, cooled, power level 2, linear output, RDT, tunable, rate select, Tx disable, Tx fault, LOS inverted, LOS standard, additional pages"
+      reserved_bits: [0]
+    provenance: { section: "SFF-8472 v12.5a § 8.3", pdf_page: 31, table: "Table 8-3", quote: "Option Values" }

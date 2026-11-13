@@ -1,0 +1,25 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTapTuningStep
+title: "CMIS-LT 1.0 FFE Tap Tuning Step Size"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 11, 46)"
+  pdf_pages: [41, 57]
+entries:
+  - value: 0x0
+    name: v_0_02
+    description: "0.02 (default)"
+  - value: 0x1
+    name: v_0_01
+    description: "0.01"
+  - value: 0x2
+    name: reserved
+    description: "Reserved"
+  - value: 0x3
+    name: v_0_04
+    description: "0.04"

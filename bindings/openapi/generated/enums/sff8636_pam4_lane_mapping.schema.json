@@ -1,0 +1,55 @@
+{
+  "$id": "sff8636_pam4_lane_mapping.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Lane mapping not determined or not supported",
+      "title": "not_determined_or_not_supported"
+    },
+    {
+      "const": 1,
+      "description": "Electrical lane appears on optical lane 1 in the LSB",
+      "title": "optical_lane_1_lsb"
+    },
+    {
+      "const": 2,
+      "description": "Electrical lane appears on optical lane 1 in the MSB",
+      "title": "optical_lane_1_msb"
+    },
+    {
+      "const": 3,
+      "description": "Electrical lane appears on optical lane 2 in the LSB",
+      "title": "optical_lane_2_lsb"
+    },
+    {
+      "const": 4,
+      "description": "Electrical lane appears on optical lane 2 in the MSB",
+      "title": "optical_lane_2_msb"
+    },
+    {
+      "const": 5,
+      "description": "Electrical lane appears on optical lane 1; split between LSB and MSB is unspecified",
+      "title": "optical_lane_1_unspecified_split"
+    },
+    {
+      "const": 6,
+      "description": "Electrical lane appears on optical lane 2; split between LSB and MSB is unspecified",
+      "title": "optical_lane_2_unspecified_split"
+    }
+  ],
+  "title": "Sff8636Pam4LaneMapping",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      74
+    ],
+    "spec": "SFF-8636 v2.11 § 6.7.2.6",
+    "table": "Table 6-45"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

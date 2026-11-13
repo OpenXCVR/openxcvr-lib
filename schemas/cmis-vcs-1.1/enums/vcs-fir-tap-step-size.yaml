@@ -1,0 +1,40 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcsFirTapStepSize
+title: CMIS-VCS 1.1 FIR Tap Step Size Attribute
+spec:
+  id: cmis-vcs-1.1
+  revision: "01.1"
+  parity_deferred: true
+description: >-
+  Values of the StepSize descriptor attribute of the FIR tap weight VCS
+  Parameters (read-write ID 0Dh, read-only ID 12h), OIF-CMIS-VCS-01.1
+  §§ 5.15 and 5.20 (Tables 5-33 and 5-45), encoded in 8 bits. The actual
+  tap weight is the S8 register value multiplied by the step size; the
+  supported range is -128 * StepSize to +127 * StepSize (Tables 5-32 and
+  5-44). § 5.15 scales dimensionless tap weights; § 5.20 states the step
+  in dB. Both printings share the encoding recorded here.
+provenance:
+  spec: OIF-CMIS-VCS-01.1 §§ 5.15 and 5.20 Tables 5-33 and 5-45
+  pdf_pages: [47, 56]
+entries:
+  - value: 0x00
+    name: step_0p01
+    description: Step size 0.01 (tap weight scaling per § 5.15; in dB per § 5.20)
+    tags: [step:0.01]
+  - value: 0x01
+    name: step_0p02
+    description: Step size 0.02
+    tags: [step:0.02]
+  - value: 0x02
+    name: step_0p025
+    description: Step size 0.025
+    tags: [step:0.025]
+  - value: 0x03
+    name: step_0p04
+    description: Step size 0.04
+    tags: [step:0.04]
+  - value: 0x04..0xff
+    name: reserved
+    description: Reserved step size values
+    tags: [unit:reserved]

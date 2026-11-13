@@ -1,0 +1,20 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: cmis-vcs-1.1
+  title: OIF-CMIS-VCS
+  revision: "01.1"
+  source: docs/stds/cmis/OIF-CMIS-VCS-01.1.pdf
+imports:
+  - ../cmis/_index.yaml
+kind: memory_map
+includes:
+  - enums/vcs-parameter-id.yaml
+  - enums/vcs-tx-input-eq-code.yaml
+  - enums/vcs-rx-output-eq-code.yaml
+  - enums/vcs-rx-output-amplitude-code.yaml
+  - enums/vcs-rx-output-fine-amplitude-code.yaml
+  - enums/vcs-equalizer-target.yaml
+  - enums/vcs-equalization-step-size.yaml
+  - enums/vcs-fir-tap-step-size.yaml
+  - page-18h-vcs-staged-overflow.yaml
+  - page-19h-vcs-active-overflow.yaml

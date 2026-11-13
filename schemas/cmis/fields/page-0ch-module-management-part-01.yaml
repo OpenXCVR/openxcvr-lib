@@ -1,0 +1,711 @@
+fields:
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.11 Supported Pages Map (bytes 128-159) - Table 8-70
+  # Bit k (0-7) of byte 128+n (0-31) set to 1 indicates the Page with Page
+  # Index j = n*8+k, 0 <= j <= 255, is supported. Modeled per page index,
+  # mirroring the per-instance bit decomposition of the VDM flag pages.
+  # ===========================================================================
+
+  - name: map_of_supported_pages
+    display_name: MapOfSupportedPages<page_index>
+    instances: { index: page_index, start: 0, end: 255 }
+    offset_expr: "128 + page_index / 8"
+    bit_offset_expr: "page_index % 8"
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: the Page with Page Index <page_index> is supported; 0b: not supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-70"
+      quote: "MapOfSupportedPages: U8[32] bit mask array indicating supported Pages: Bit k (0-7) in byte 128+ n (0-31) set to 1 indicates that the Page with Page Index j = n * 8+k, 0 <= j <= 255 is supported."
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.11 Named Feature Advertisements (bytes 160-163) - Tables 8-71
+  # and 8-72. Each named feature occupies one FeatureAdvertisement structure
+  # (Table 8-71): byte 0 FeatureSupport, byte 1 bits 7-4
+  # OptionsProfileCompliance and bits 3-0 RequirementsCompliance.
+  # ===========================================================================
+
+  - name: consolidated_pm_feature_support
+    display_name: ConsolidatedPmFeatureSupport
+    offset: 160
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    encoding: bcd
+    description: "FeatureSupport byte of the ConsolidatedPmFeature FeatureAdvertisement: 0 = Consolidated Performance Monitoring feature is not supported; >0 = CmisRevision of the feature definition (U4 major, U4 minor, upper nibble major per the CmisRevision convention)."
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-71 / Table 8-72"
+      quote: "FeatureSupport: 0: Feature is not supported; >0: CmisRevision of the feature definition (U4 major, U4 minor)"
+
+  - name: consolidated_pm_options_profile_compliance
+    display_name: ConsolidatedPmOptionsProfileCompliance
+    offset: 161
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    since: "5.4"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    description: "OptionsProfileCompliance of the ConsolidatedPmFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the NaSupportRegister is set to 10111100b (byte 192)."
+    enum_inline:
+      - { value: 0, name: undefined_unknown, description: "Undefined, unknown" }
+      - { value: 1, name: noncompliant, description: "Noncompliant" }
+      - { value: 2, name: partially_compliant_with_exceptions, description: "Partially compliant, with exceptions" }
+      - { value: 3, name: fully_compliant, description: "Fully compliant" }
+      - { value: "4..15", name: reserved, description: "Reserved" }
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-71 / Table 8-72"
+      quote: "OptionsProfileCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant"
+
+  - name: consolidated_pm_requirements_compliance
+    display_name: ConsolidatedPmRequirementsCompliance
+    offset: 161
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "5.4"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    description: "RequirementsCompliance of the ConsolidatedPmFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the module fulfills all requirements defined in CMIS 5.4 § 7.10.3."
+    enum_inline:
+      - { value: 0, name: undefined_unknown, description: "Undefined, unknown" }
+      - { value: 1, name: noncompliant, description: "Noncompliant" }
+      - { value: 2, name: partially_compliant_with_exceptions, description: "Partially compliant, with exceptions" }
+      - { value: 3, name: fully_compliant, description: "Fully compliant" }
+      - { value: "4..15", name: reserved, description: "Reserved" }
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-71 / Table 8-72"
+      quote: "RequirementsCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant"
+
+  - name: load_management_feature_support
+    display_name: LoadManagementFeatureSupport
+    offset: 162
+    size_bytes: 1
+    type: u8
+    since: "5.4"
+    encoding: bcd
+    description: "FeatureSupport byte of the LoadManagementFeature FeatureAdvertisement: 0 = Consolidated Firmware Load Management feature is not supported; >0 = CmisRevision of the feature definition (U4 major, U4 minor, upper nibble major per the CmisRevision convention)."
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-71 / Table 8-72"
+      quote: "FeatureSupport: 0: Feature is not supported; >0: CmisRevision of the feature definition (U4 major, U4 minor)"
+
+  - name: load_management_options_profile_compliance
+    display_name: LoadManagementOptionsProfileCompliance
+    offset: 163
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    since: "5.4"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    description: "OptionsProfileCompliance of the LoadManagementFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the FwSupportDetails register is set to 11110000b (byte 194)."
+    enum_inline:
+      - { value: 0, name: undefined_unknown, description: "Undefined, unknown" }
+      - { value: 1, name: noncompliant, description: "Noncompliant" }
+      - { value: 2, name: partially_compliant_with_exceptions, description: "Partially compliant, with exceptions" }
+      - { value: 3, name: fully_compliant, description: "Fully compliant" }
+      - { value: "4..15", name: reserved, description: "Reserved" }
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-71 / Table 8-72"
+      quote: "OptionsProfileCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant"
+
+  - name: load_management_requirements_compliance
+    display_name: LoadManagementRequirementsCompliance
+    offset: 163
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    since: "5.4"
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    description: "RequirementsCompliance of the LoadManagementFeature FeatureAdvertisement. Full compliance (3) can be advertised only when the module fulfills all behavioral requirements defined in CMIS 5.4 § 7.11.2."
+    enum_inline:
+      - { value: 0, name: undefined_unknown, description: "Undefined, unknown" }
+      - { value: 1, name: noncompliant, description: "Noncompliant" }
+      - { value: 2, name: partially_compliant_with_exceptions, description: "Partially compliant, with exceptions" }
+      - { value: 3, name: fully_compliant, description: "Fully compliant" }
+      - { value: "4..15", name: reserved, description: "Reserved" }
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-71 / Table 8-72"
+      quote: "RequirementsCompliance: 0: undefined, unknown; 1: noncompliant; 2: partially compliant, with exceptions; 3: fully compliant"
+
+  - name: reserved_page_0ch_164_191
+    display_name: ReservedPage0Ch164To191
+    offset: 164
+    size_bytes: 28
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-72"
+      quote: "Bytes 164-191: Reserved [30]"
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.11 Named Feature Details Advertisement (bytes 192-195) -
+  # Table 8-73. Byte 192 (NaSupportRegister) = 10111100b advertises full
+  # ConsolidatedPmFeature support; byte 194 (FwSupportDetails) = 11111000b
+  # advertises full LoadManagementFeature support. Conditional (RO Cnd.):
+  # the details of a feature advertised unsupported should be ignored.
+  # ===========================================================================
+
+  - name: na_supported
+    display_name: NaSupported
+    offset: 192
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: NA values are supported for observable samples."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "NaSupported: 1b: NA values are supported for observable samples"
+
+  - name: na_feeds_supervision
+    display_name: NaFeedsSupervision
+    offset: 192
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "0b: NA values are not fed to / ignored by threshold detectors."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "NaFeedsSupervision: 0b: NA values not fed to / ignored by threshold detectors"
+
+  - name: na_feeds_range_stats
+    display_name: NaFeedsRangeStats
+    offset: 192
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: NA values feed range statistics min and max."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "NaFeedsRangeStats: 1b: NA values feed range statistics min and max"
+
+  - name: na_feeds_averages
+    display_name: NaFeedsAverages
+    offset: 192
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: NA values feed average computations."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "NaFeedsAverages: 1b: NA values feed average computations"
+
+  - name: na_feeds_counter_stats
+    display_name: NaFeedsCounterStats
+    offset: 192
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: NA values feed event counter stats."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "NaFeedsCounterStats: 1b: NA values feed event counter stats"
+
+  - name: na_saturates_totals
+    display_name: NaSaturatesTotals
+    offset: 192
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: NA values saturate non-random totals."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "NaSaturatesTotals: 1b: NA values saturate non-random totals"
+
+  - name: na_feeds_diagnostics
+    display_name: NaFeedsDiagnostics
+    offset: 192
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "0b: NA values are not fed to diagnostics statistics observables."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "NaFeedsDiagnostics: 0b: NA not fed to diagnostics statistics observables"
+
+  - name: reserved_page_0ch_192_bits_0
+    display_name: ReservedPage0Ch192Bits0
+    offset: 192
+    bit_offset: 0
+    bit_width: 1
+    type: bitmap
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "Byte 192 bit 0: 0b: Reserved"
+
+  - name: reserved_page_0ch_193
+    display_name: ReservedPage0Ch193
+    offset: 193
+    size_bytes: 1
+    type: bytes
+    since: "5.4"
+    description: "NaSupportOptions: Reserved."
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "Byte 193: NaSupportOptions: Reserved"
+
+  - name: unique_load_version_supported
+    display_name: UniqueLoadVersionSupported
+    offset: 194
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Version information is characteristic of the entire load."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "UniqueLoadVersionSupported: 1b: Version information is characteristic of entire load"
+
+  - name: dual_bank_supported
+    display_name: DualBankSupported
+    offset: 194
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Banks A and B are supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "DualBankSupported: 1b: Banks A and B are supported"
+
+  - name: firmware_load_tag_supported
+    display_name: FirmwareLoadTagSupported
+    offset: 194
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Persistent Firmware Load Tag is supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "FirmwareLoadTagSupported: 1b: Persistent Firmware Load Tag is supported"
+
+  - name: abnormal_indication_supported
+    display_name: AbnormalIndicationSupported
+    offset: 194
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Abnormal Firmware Indication is supported."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "AbnormalIndicationSupported: 1b: Abnormal Firmware Indication is supported"
+
+  - name: transfer_is_harmless
+    display_name: TransferIsHarmless
+    offset: 194
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Transfer does not impact mission integrity and quality."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "TransferIsHarmless: 1b: Transfer does not impact mission integrity and quality"
+
+  - name: reject_unsupported_activation
+    display_name: RejectUnsupportedActivation
+    offset: 194
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: Module rejects activation if it would have unwanted side effects."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "RejectUnsupportedActivation: 1b: Module rejects if activation has unwanted side effects"
+
+  - name: reserved_page_0ch_194_bits_1_0
+    display_name: ReservedPage0Ch194Bits1To0
+    offset: 194
+    bit_offset: 0
+    bit_width: 2
+    type: u2
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "Byte 194 bits 1-0: Reserved"
+
+  - name: fixed_firmware_fallback
+    display_name: FixedFirmwareFallback
+    offset: 195
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    since: "5.4"
+    description: "1b: A fixed firmware load with basic firmware download capabilities is available. Recommended FW Management option (FwSupportOptions)."
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "FixedFirmwareFallback: 1b: A fixed firmware load with basic firmware download capabilities is available"
+
+  - name: reserved_page_0ch_195_bits_6_0
+    display_name: ReservedPage0Ch195Bits6To0
+    offset: 195
+    bit_offset: 0
+    bit_width: 7
+    type: u7
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "Byte 195 bits 6-0: Reserved"
+
+  - name: reserved_page_0ch_196_223
+    display_name: ReservedPage0Ch196To223
+    offset: 196
+    size_bytes: 28
+    type: bytes
+    since: "5.4"
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 219
+      table: "Table 8-73"
+      quote: "Bytes 196-223: Reserved [28]"
+
+  - name: reserved_page_0ch_224_255
+    display_name: ReservedPage0Ch224To255
+    offset: 224
+    size_bytes: 32
+    type: bytes
+    since: "5.4"
+    description: "Control and Status subject area: Reserved at CMIS 5.4 introduction (Table 8-69)."
+    access: ro
+    field_type: Reserved
+    tags: [Reserved]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.4 § 8.11"
+      pdf_page: 218
+      table: "Table 8-69"
+      quote: "Bytes 224-255: Control and Status: Reserved"

@@ -1,0 +1,40 @@
+{
+  "$id": "sff8636_rx_output_amplitude.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "Receiver output differential amplitude 100-400 mV p-p",
+      "title": "mv_100_to_400"
+    },
+    {
+      "const": 1,
+      "description": "Receiver output differential amplitude 300-600 mV p-p",
+      "title": "mv_300_to_600"
+    },
+    {
+      "const": 2,
+      "description": "Receiver output differential amplitude 400-800 mV p-p",
+      "title": "mv_400_to_800"
+    },
+    {
+      "const": 3,
+      "description": "Receiver output differential amplitude 600-1200 mV p-p",
+      "title": "mv_600_to_1200"
+    }
+  ],
+  "title": "Sff8636RxOutputAmplitude",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      63
+    ],
+    "spec": "SFF-8636 v2.11 § 6.6.3",
+    "table": "Table 6-31"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

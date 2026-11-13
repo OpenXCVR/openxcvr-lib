@@ -1,0 +1,57 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbDataMonitoringAdvertisements
+title: CMIS CDB Command 0281h - Data Monitoring and Recording Advertisements
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 9.9.2
+  pdf_pages: [339]
+  table: Table 9-45
+cmd_id: 0x0281
+available_since: "4.0"
+available_until: "5.3"
+cmd_id_group: data_recording
+command_class: optional
+description: >
+  Reserved in CMIS 5.3 for advertisement of the features defined in
+  CMDs 0280h-029Fh (5.3 § 9.9.2, Table 9-45): no command or reply fields
+  were ever defined. Present since CMIS 4.0 (4.0 § 9.8.2 'CMD 0281h:
+  Data Monitoring and Recording Advertisement'). CMIS 5.4 removes the
+  command entirely (5.4 revision history: 'CMD 0281h was partially
+  defined and has been removed'; the 5.4 § 9.8 group table lists
+  0281h-028Fh as Reserved), so this schema carries available_until 5.3 -
+  the first use of that window in the cdb_command vocabulary, added with
+  this change so the runtime gate refuses 0281h on CMIS 5.4 modules
+  instead of silently treating it as available.
+  Removed in CMIS 5.4 (0281h-028Fh Reserved); never carried defined payload fields in any revision.
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 0
+    fields: []
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "4.0" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "4.0" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "4.0" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+  lpl:
+    length: 0
+    fields: []
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects:

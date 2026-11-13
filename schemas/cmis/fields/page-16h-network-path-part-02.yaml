@@ -1,0 +1,254 @@
+fields:
+  - name: np_config_status_lane
+    display_name: NPConfigStatusLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "178 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisNetworkPathConfigStatus
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.3"
+      pdf_page: 255
+      table: "Table 8-140"
+      quote: "NPConfigStatusLane<i>: Provisioning Command Execution / Result Status for the Network Path of host lane <i>, during and after the most recent configuration command."
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.15.4 Network Path Status (bytes 192-204)
+  # Tables 8-142, 8-143, 8-144, 8-145
+  # ===========================================================================
+
+  - name: acs_npid_lane
+    display_name: ACSNPIDLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "192 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 3
+    type: u3
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.4"
+      pdf_page: 256
+      table: "Table 8-142"
+      quote: "ACS::NPConfigLane<i> NPIDLane<i>: active Network Path configuration; see CMIS 5.3 § 8.15.1 Table 8-133."
+
+  - name: acs_np_in_use_lane
+    display_name: ACSNPInUseLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "192 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    # CMIS 5.4 § 8.19.1 (corrigendum first published in the CMIS 5.3 Errata
+    # 01.0, § 7.6.9 background): the default configuration status of the
+    # ACS::NPInUseLane<i> bits shall always be initialized to zero on exit
+    # from the MgmtInit state of the MSM — NP Application behavior is only
+    # enabled after a configuration action of an NP-aware host.
+    changed_in:
+      - rev: "5.4"
+        behavior:
+          default_on_mgmt_init_exit: 0
+        provenance:
+          section: "CMIS 5.4 § 8.19.1 / § 7.6.9.3"
+          pdf_page: 280
+          table: "Table 8-143"
+          quote: "both the default configuration of the SCS<k>::NPInUseLane<i> bits and the default configuration status of the ACS::NPInUseLane<i> bits in the NP part of the Active Control Set (ACS) shall always be initialized as zero on exit from MgmtInit state of the Module State Machine (MSM)"
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: dp_or_unused, description: "Host lane is part of a DP Application Data Path or is unused" }
+      - { value: 1, name: np_in_use, description: "Host lane is part of a Host Path feeding the Network Path identified by NPID" }
+    provenance:
+      section: "CMIS 5.3 § 8.15.4"
+      pdf_page: 256
+      table: "Table 8-142"
+      quote: "ACS::NPConfigLane<i> NPInUseLane<i>: active Network Path configuration; see CMIS 5.3 § 8.15.1 Table 8-133."
+
+  - name: np_state_host_lane
+    display_name: NPStateHostLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "200 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisNetworkPathState
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.4"
+      pdf_page: 256
+      table: "Table 8-143"
+      quote: "NPStateHostLane<i>: Network Path State of host lane <i>; see Table 8-144 for encoding."
+
+  - name: np_init_pending_lane
+    display_name: NPInitPendingLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 204
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "CMIS 5.3 § 8.15.4"
+      pdf_page: 257
+      table: "Table 8-145"
+      quote: "NPInitPendingLane<i>: 1b means commissioning the NP Active Control Set during NPInit has not yet been executed after successful ApplyNPInit."
+
+  # ===========================================================================
+  # CMIS 5.3 § 8.15.5 Network Path Related Advertisements
+  # bytes 224-249 - Tables 8-146, 8-147, 8-148, 8-150, 8-151
+  # ===========================================================================
+
+  - name: max_duration_np_deinit
+    display_name: MaxDurationNPDeinit
+    offset: 224
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.1"
+      pdf_page: 258
+      table: "Table 8-146"
+      quote: "MaxDurationNPDeinit: maximum duration of the NPDeinit state encoded as per Table 8-48."
+
+  - name: max_duration_np_init
+    display_name: MaxDurationNPInit
+    offset: 224
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.1"
+      pdf_page: 258
+      table: "Table 8-146"
+      quote: "MaxDurationNPInit: maximum duration of the NPInit state encoded as per Table 8-48."
+
+  - name: max_duration_np_tx_turn_off
+    display_name: MaxDurationNPTxTurnOff
+    offset: 225
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.1"
+      pdf_page: 258
+      table: "Table 8-146"
+      quote: "MaxDurationNPTxTurnOff: encoded maximum duration of the NPTxTurnOff state."
+
+  - name: max_duration_np_tx_turn_on
+    display_name: MaxDurationNPTxTurnOn
+    offset: 225
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.1"
+      pdf_page: 258
+      table: "Table 8-146"
+      quote: "MaxDurationNPTxTurnOn: encoded maximum duration of the NPTxTurnOn state."
+
+  - name: replace_hp_signal_tx_supported
+    display_name: ReplaceHPSignalTxSupported
+    offset: 226
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityFlag
+    tags: [CapabilityFlag, CapabilityAdvertisement]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true
+      is_dynamic: false
+    provenance:
+      section: "CMIS 5.3 § 8.15.5.2"
+      pdf_page: 258
+      table: "Table 8-147"
+      quote: "ReplaceHPSignalTxSupported: 0b not supported; 1b Tx replacement signals for NP inputs are supported."

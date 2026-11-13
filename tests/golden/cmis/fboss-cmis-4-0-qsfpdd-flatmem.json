@@ -1,0 +1,44 @@
+{
+  "_metadata": {
+    "authored_at": "2026-04-29",
+    "authored_by": "ras + codex via claude-opus-4-7",
+    "cmis_version": "4.0",
+    "fixture": "fboss-cmis-4-0-qsfpdd-flatmem",
+    "monitoring_stale": true,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "cmis-5.3",
+    "spec_revision": "5.3",
+    "vendor_strings_synthetic": true
+  },
+  "applications": null,
+  "checksums": null,
+  "decode_status": "ok",
+  "flags": null,
+  "identity": {
+    "date_code": "\u0000\u0000\u0000\u0000\u0000\u0000",
+    "vendor_name": "FACETEST",
+    "vendor_oui": "00:00:00",
+    "vendor_pn": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+    "vendor_rev": "\u0000\u0000",
+    "vendor_sn": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  "lanes": null,
+  "module": {
+    "cmis_revision": "4.0",
+    "connector": {
+      "name": "unknown_or_unspecified",
+      "raw": "0x00"
+    },
+    "identifier": {
+      "name": "qsfp_dd",
+      "raw": "0x18"
+    },
+    "memory_model": "flat",
+    "module_state": "ModuleLowPwr",
+    "module_type": null
+  },
+  "monitoring": {
+    "module_temperature_c": 0.0,
+    "module_voltage_v": 0.0
+  }
+}

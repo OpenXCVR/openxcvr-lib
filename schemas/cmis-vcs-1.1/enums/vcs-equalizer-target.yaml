@@ -1,0 +1,30 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcsEqualizerTarget
+title: CMIS-VCS 1.1 Equalizer Target Attribute
+spec:
+  id: cmis-vcs-1.1
+  revision: "01.1"
+  parity_deferred: true
+description: >-
+  Values of the EqualizerTarget descriptor attribute of the numeric
+  equalization VCS Parameters (IDs 09h and 0Ah), OIF-CMIS-VCS-01.1
+  §§ 5.11 and 5.12 (Tables 5-24 and 5-26). GDC and GDC2 are the CTLE
+  gains of a Linear (LPO) module at high and low frequency respectively,
+  relative to 0 dB at 0 Hz (§ 2).
+provenance:
+  spec: OIF-CMIS-VCS-01.1 §§ 5.11 and 5.12 Tables 5-24 and 5-26
+  pdf_pages: [41, 43]
+entries:
+  - value: 0x00
+    name: gdc
+    description: GDC — CTLE gain at high frequency for a Linear (LPO) module
+    tags: [parameter:09h+0ah]
+  - value: 0x01
+    name: gdc2
+    description: GDC2 — CTLE gain at low frequency for a Linear (LPO) module
+    tags: [parameter:09h+0ah]
+  - value: 0x02..0xff
+    name: reserved
+    description: Reserved for future EqualizerTarget values
+    tags: [unit:reserved]

@@ -1,0 +1,230 @@
+fields:
+
+  - name: mod_hsout_pattern_requested
+    display_name: "ModHsOut<lane>PatternRequested"
+    description: "(Desired) pattern for ModHsOut on lane <lane>, written by the host requester engine."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "204 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtTrainingPattern
+    access: rw
+    field_type: Control
+    tags: [CMIS-LT, Request, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 53" }
+
+  - name: mod_hsout_preset_requested
+    display_name: "ModHsOut<lane>PresetRequested"
+    description: "Requested preset configuration for ModHsOut lane <lane>; the module does not return failure when a preset is not supported."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "208 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtPresetId
+    access: rw
+    field_type: Control
+    tags: [CMIS-LT, Request, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 59, table: "Table 54" }
+
+  - name: mod_hsout_precoder_requested
+    display_name: "ModHsOut<lane>PrecoderRequested"
+    description: "0: precoder off for lane <lane>, 1: precoder on for lane <lane>. The precoder is of type 1/(1+D) mod 4 as defined in IEEE 802.3 clause 135.5.7.2."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 212
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [CMIS-LT, Request, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 60, table: "Table 55" }
+
+  - name: reserved_213_221
+    offset: 213
+    size_bytes: 9
+    type: bytes
+    access: rw
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 60, table: "Table 55" }
+
+  - name: mod_hsout_pattern_configured
+    display_name: "ModHsOut<lane>PatternConfigured"
+    description: "Configured pattern of ModHsOut on lane <lane> after the last change; maintained by the module responder."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "222 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtTrainingPattern
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Configured, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 60, table: "Table 56" }
+
+  - name: mod_hsout_preset_configured
+    display_name: "ModHsOut<lane>PresetConfigured"
+    description: "Identifier of the actual ModHsOut preset loaded on lane <lane> in response to a request."
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "226 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    enum_ref: CmisLtPresetId
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Configured, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 60, table: "Table 57" }
+
+  - name: mod_hsout_precoder_configured
+    display_name: "ModHsOut<lane>PrecoderConfigured"
+    description: "Actual precoder configuration status maintained by the module: 0: precoder off, 1: precoder on. The module must keep this register current with the actual precoder configuration."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 230
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Control
+    tags: [CMIS-LT, Configured, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: true, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 61, table: "Table 58" }
+
+  - name: reserved_231_239
+    offset: 231
+    size_bytes: 9
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 61, table: "Table 58" }
+
+  - name: mod_hsout_invoke_set_pattern_trig
+    display_name: "ModHsOut<lane>InvokeSetPatternTrig"
+    description: "Pattern configuration change request per lane: 0: no pattern configuration change for lane <lane>, 1: pattern configuration change for lane <lane>; requested pattern in ModHsOut<lane>PatternRequested. H2M message bit, self-clearing."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 240
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 61, table: "Table 59" }
+
+  - name: mod_hsout_invoke_load_preset_trig
+    display_name: "ModHsOut<lane>InvokeLoadPresetTrig"
+    description: "Preset configuration change request per lane: 0: no preset configuration change on lane <lane>, 1: preset configuration change on lane <lane>; requested preset in ModHsOut<lane>PresetRequested. H2M message bit, self-clearing."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 241
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 61, table: "Table 60" }
+
+  - name: mod_hsout_invoke_set_precoder_trig
+    display_name: "ModHsOut<lane>InvokeSetPrecoderTrig"
+    description: "Precoder configuration change request per lane: 0: no precoder configuration change for lane <lane>, 1: precoder configuration change for lane <lane>; request in ModHsOut<lane>PrecoderConfigured. H2M message bit, self-clearing."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 242
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: wo_sc
+    field_type: Control
+    tags: [CMIS-LT, Trigger, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: false, is_writable: true, is_ever_writable: true, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 61, table: "Table 61" }
+
+  - name: reserved_243_245
+    offset: 243
+    size_bytes: 3
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 61, table: "Table 61" }
+
+  - name: mod_hsout_set_pattern_completed_flag
+    display_name: "ModHsOut<lane>SetPatternCompletedFlag"
+    description: "The module notifies the host about completion of a pattern configuration procedure (with or without success). The host clears the bits fetched and optionally compares actual and requested configuration. M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 246
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 62, table: "Table 62" }
+
+  - name: mod_hsout_load_preset_completed_flag
+    display_name: "ModHsOut<lane>LoadPresetCompletedFlag"
+    description: "The module notifies the host about completion of a preset configuration procedure (with or without success). M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 247
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 62, table: "Table 63" }
+
+  - name: mod_hsout_set_precoder_completed_flag
+    display_name: "ModHsOut<lane>SetPrecoderCompletedFlag"
+    description: "The module notifies the host about completion of a precoder configuration procedure (with or without success). The parsed description text names HostOut<lane>PrecoderSettingCompletedTrig; the register lives on the ingress map at byte 248 (see namespace README). M2H message bit, clear on read."
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 248
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro_cor
+    field_type: Flag
+    tags: [CMIS-LT, Flag, Ingress]
+    scope: { lane: lane }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: true }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 62, table: "Table 64" }
+
+  - name: reserved_249_255
+    description: "Reserved bytes 249-255 (Table 64 lists the row as Reserved with an unexplained RO/COR Adv. type marking in the parsed spec, which is not recorded as a field here)."
+    offset: 249
+    size_bytes: 7
+    type: bytes
+    access: ro
+    field_type: Reserved
+    tags: []
+    scope: { module: true }
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    provenance: { section: "OIF-CMIS-LT-01.0 § 6.4", pdf_page: 62, table: "Table 64" }

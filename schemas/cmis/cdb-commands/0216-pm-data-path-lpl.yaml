@@ -1,0 +1,151 @@
+schema: openxcvr.cdb_command.v1
+kind: cdb_command
+id: CmisCdbGetPmDataPathLpl
+title: CMIS CDB Command 0216h - Get PM Data Path LPL
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 9.7.6
+  pdf_pages: [372]
+  table: Table 9-41
+cmd_id: 0x0216
+available_since: "4.0"
+cmd_id_group: performance_monitoring
+command_class: advertised
+description: >
+  Collects performance monitoring statistics related to observables
+  of specified Data Paths, returned through the LPL. Present since
+  CMIS 4.0 (4.0 § 9.7.6 'CMD 0216h/0217h: Data Path Related
+  LPL/EPL').
+  A PM record of one observable consists of 6 or 8 X16 bytes: minimum, average (mean), maximum, plus the current value if requested. Up to 15-20 records fit in LPL depending on the requested record length; the record sequence follows the set bits of the Observables fields in ascending order.
+advertisement:
+  via_cmd: 0x0042
+  field: performance_monitoring_features.cmd_0216_supported
+preconditions:
+  - { field: lower_memory.cdb_status.cdb_is_busy, equals: false }
+max_completion_time:
+  source: advertised
+  field: cdb_module_features.max_completion_time
+processing_mode: foreground
+cmd:
+  lpl:
+    length: 20
+    fields:
+      - name: clear_on_read
+        offset: 136
+        bit_offset: 7
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        enum_inline:
+          - { value: 0, name: return_data, description: "Return the selected PM data" }
+          - { value: 1, name: return_and_reset, description: "Return the selected PM data and then reset their statistics" }
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: reserved_136_bits_6_1
+        offset: 136
+        bit_offset: 1
+        bit_width: 6
+        type: u6
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: record_type
+        offset: 136
+        bit_offset: 0
+        bit_width: 1
+        type: bool
+        template: cdb_cmd_parameter
+        enum_inline:
+          - { value: 0, name: six_byte_pm_record, description: "Return a 6-byte PM record (minimum, mean, maximum)" }
+          - { value: 1, name: eight_byte_pm_record, description: "Return an 8-byte PM record (append the current value)" }
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: data_path_group_index
+        offset: 137
+        size_bytes: 3
+        type: bytes
+        template: cdb_cmd_parameter
+        description: >
+          Group index for modules with more than 32 lanes (the CMIS
+          5.4 >32-lane extension; reserved through CMIS 5.3). For host-lane
+          commands the LanesMask bit k addresses lane k + 1 + LanesGroupIndex *
+          32.
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: data_paths_mask
+        offset: 140
+        size_bytes: 4
+        type: u32be
+        template: cdb_cmd_parameter
+        description: >
+          DataPathsMask is a U32 mask indicating which Data Path is present: bit k represents the Data Path with Data Path ID (lowest lane number) k + 1.
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: observables_mask_1
+        offset: 144
+        size_bytes: 1
+        type: bitmap
+        template: cdb_cmd_parameter
+        description: >
+          Bit 0: Media Side Frame Error Count (FERC). Bit 1: Media Side Pre-FEC BER. Bits 2-7: Reserved.
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: observables_mask_2
+        offset: 145
+        size_bytes: 1
+        type: bitmap
+        template: cdb_cmd_parameter
+        description: >
+          Bits 0-7: Reserved.
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: reserved_146_147
+        offset: 146
+        size_bytes: 2
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Reserved]
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: restricted_148_151
+        offset: 148
+        size_bytes: 4
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Restricted]
+        description: >
+          Restricted (OIF).
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+      - name: custom_152_155
+        offset: 152
+        size_bytes: 4
+        type: bytes
+        template: cdb_cmd_parameter
+        field_type: Reserved
+        tags: [CDB, Custom]
+        description: >
+          Custom.
+        provenance: { spec: "CMIS 5.4 § 9.7.4", table: "Table 9-39" }
+reply:
+  status_codes:
+    - { value: 0x81, name: busy_capturing_command, meaning: "Busy processing command, CMD captured", since: "4.0" }
+    - { value: 0x82, name: busy_checking_command, meaning: "Busy processing command, CMD checking", since: "4.0" }
+    - { value: 0x83, name: busy_executing_command, meaning: "Busy processing command, CMD execution", since: "4.0" }
+    - { value: 0x01, name: success, meaning: "Operation successful", since: "4.0" }
+    - { value: 0x40, name: failed_no_specific, meaning: "Failed, no specific failure", since: "4.0" }
+    - { value: 0x42, name: parameter_range_error, meaning: "Parameter range error or not supported", since: "4.0" }
+    - { value: 0x45, name: cdb_chk_code_error, meaning: "CdbChkCode error", since: "4.0" }
+  lpl:
+    length: variable
+    fields:
+      - name: pm_records
+        offset: 136
+        size_bytes: 120
+        type: bytes
+        template: cdb_cmd_parameter
+        description: >
+          LPL PM data, up to 120 bytes of 6- or 8-byte PM records.
+        provenance: { spec: "CMIS 5.4 § 9.7.6", table: "Table 9-41" }
+behavior:
+  abort_supported: true
+  retry_safe: true
+  side_effects:
+    - "May reset the selected statistics when ClearOnRead is set."

@@ -1,0 +1,536 @@
+{
+  "$id": "cmis_page14h_diagnostics_results.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "custom_diagnostics_selection": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 244,
+        "quote": "Bytes 130-131 are Custom[2].",
+        "section": "CMIS 5.3 § 8.13.1",
+        "table": "Table 8-126"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "diagnostics_selector": {
+      "$ref": "../enums/cmis_diagnostics_selector.schema.json",
+      "x-openxcvr-provenance": {
+        "pdf_page": 244,
+        "quote": "DiagnosticsSelector: Select content of Diagnostics Data, see Table 8-127. Reverts to 0 if value not supported.",
+        "section": "CMIS 5.3 § 8.13.1",
+        "table": "Table 8-126"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_host_side_ber": {
+      "items": {
+        "type": "number",
+        "x-openxcvr-note": "CMIS f16be encoding: m × 10^(s-24)"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedHostSideBERLane<i>: F16 BER values, stable gating results.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-unit": "ratio"
+    },
+    "gated_host_side_error_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedHostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 1-4.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_host_side_error_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedHostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 5-8.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_host_side_total_bits_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedHostSideTotalBitsCountLane<i>: U64 little-endian total bits counter for host lanes 1-4.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_host_side_total_bits_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedHostSideTotalBitsCountLane<i>: U64 little-endian total bits counter for host lanes 5-8.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_media_side_ber": {
+      "items": {
+        "type": "number",
+        "x-openxcvr-note": "CMIS f16be encoding: m × 10^(s-24)"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedMediaSideBERLane<i>: F16 BER values, stable gating results.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-unit": "ratio"
+    },
+    "gated_media_side_error_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedMediaSideErrorCountLane<i>: U64 little-endian error counter for media lanes 1-4.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_media_side_error_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedMediaSideErrorCountLane<i>: U64 little-endian error counter for media lanes 5-8.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_media_side_total_bits_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedMediaSideTotalBitsCountLane<i>: U64 little-endian total bits counter for media lanes 1-4.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "gated_media_side_total_bits_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 248,
+        "quote": "GatedMediaSideTotalBitsCountLane<i>: U64 little-endian total bits counter for media lanes 5-8.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "host_side_ber": {
+      "items": {
+        "type": "number",
+        "x-openxcvr-note": "CMIS f16be encoding: m × 10^(s-24)"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 246,
+        "quote": "HostSideBERLane<i>: F16 BER values, periodically updated while gating.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-unit": "ratio"
+    },
+    "host_side_error_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 246,
+        "quote": "HostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 1-4.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "host_side_error_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "HostSideErrorCountLane<i>: U64 little-endian error counter for host lanes 5-8.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "host_side_snr": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "1/256 dB",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "HostSideSNRLane<i>: U16 little-endian in units of 1/256 dB.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "host_side_total_bits_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 246,
+        "quote": "HostSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "host_side_total_bits_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "HostSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "loss_of_reference_clock_flag": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 245,
+        "quote": "LossOfReferenceClockFlag: Latched loss of reference clock Flag.",
+        "section": "CMIS 5.3 § 8.13.2",
+        "table": "Table 8-128"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "media_side_ber": {
+      "items": {
+        "type": "number",
+        "x-openxcvr-note": "CMIS f16be encoding: m × 10^(s-24)"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 246,
+        "quote": "MediaSideBERLane<i>: F16 BER values, periodically updated while gating.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0",
+      "x-openxcvr-unit": "ratio"
+    },
+    "media_side_error_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "MediaSideErrorCountLane<i>: U64 little-endian error counter for media lanes 1-4.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "media_side_error_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "MediaSideErrorCountLane<i>: U64 little-endian error counter for media lanes 5-8.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "media_side_snr": {
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "1/256 dB",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "MediaSideSNRLane<i>: U16 little-endian in units of 1/256 dB.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "media_side_total_bits_count_lane_1_4": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "MediaSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "media_side_total_bits_count_lane_5_8": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 247,
+        "quote": "MediaSideTotalBitsCountLane<i>: U64 little-endian total bits counter; odd values indicate pattern sync loss.",
+        "section": "CMIS 5.3 § 8.13.3",
+        "table": "Table 8-129"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "pattern_check_gating_complete_flag_host": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 245,
+        "quote": "Latched per-host lane gating complete Flag. When gating is complete, this bit will be set.",
+        "section": "CMIS 5.3 § 8.13.2",
+        "table": "Table 8-128"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "pattern_check_gating_complete_flag_media": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 245,
+        "quote": "Latched per-media lane gating complete Flag. When gating is complete, this bit will be set.",
+        "section": "CMIS 5.3 § 8.13.2",
+        "table": "Table 8-128"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "pattern_checker_lol_flag_host": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 245,
+        "quote": "Latched per-host lane pattern checker loss of pattern lock Flag.",
+        "section": "CMIS 5.3 § 8.13.2",
+        "table": "Table 8-128"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "pattern_checker_lol_flag_media": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 246,
+        "quote": "Latched per-media lane pattern checker loss of pattern lock Flag.",
+        "section": "CMIS 5.3 § 8.13.2",
+        "table": "Table 8-128"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "pattern_generator_lol_flag_host": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 245,
+        "quote": "Latched per-host lane pattern generator failure Flag.",
+        "section": "CMIS 5.3 § 8.13.2",
+        "table": "Table 8-128"
+      },
+      "x-openxcvr-since": "4.0"
+    },
+    "pattern_generator_lol_flag_media": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 245,
+        "quote": "Latched per-media lane pattern generator failure Flag.",
+        "section": "CMIS 5.3 § 8.13.2",
+        "table": "Table 8-128"
+      },
+      "x-openxcvr-since": "4.0"
+    }
+  },
+  "required": [
+    "diagnostics_selector",
+    "custom_diagnostics_selection",
+    "loss_of_reference_clock_flag",
+    "pattern_check_gating_complete_flag_host",
+    "pattern_check_gating_complete_flag_media",
+    "pattern_generator_lol_flag_host",
+    "pattern_generator_lol_flag_media",
+    "pattern_checker_lol_flag_host",
+    "pattern_checker_lol_flag_media"
+  ],
+  "title": "CmisPage14hDiagnosticsResults",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      244,
+      245,
+      246,
+      247,
+      248
+    ],
+    "since_origin": {
+      "note": "Page 14h diagnostics and the DiagnosticsSelector-controlled Diagnostics Data window (bytes 192-255) first appear in CMIS 4.0; every field on this page carries since: \"4.0\" for that reason. The 4.0 peak-detect regions under selector 06h are NOT modeled as reserved: this schema follows 5.3 Table 8-129 for the shared SNR/BER/counter offsets (CMIS 4.0 Table 8-94, printed pp. 181-184, supplies the same little-endian ordering and 1/256 dB SNR encoding).",
+      "pdf_pages": [
+        179,
+        180,
+        181,
+        182,
+        183,
+        184
+      ],
+      "spec": "CMIS 4.0 § 8.11",
+      "tables": [
+        "Table 8-92",
+        "Table 8-94"
+      ]
+    },
+    "spec": "CMIS 5.3 § 8.13"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

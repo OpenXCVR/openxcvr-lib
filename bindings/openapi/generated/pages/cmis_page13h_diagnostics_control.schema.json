@@ -1,0 +1,1169 @@
+{
+  "$id": "cmis_page13h_diagnostics_control.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "auto_restart_gating": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 236,
+        "quote": "When Gate Time expires, update error counter results, clear internal counters, and restart the Gate Timer.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "auto_restart_gating_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "AutoRestartGating control 13h:177.4 supported.",
+        "section": "CMIS 5.3 § 8.12.2",
+        "table": "Table 8-102"
+      }
+    },
+    "bit_error_ratio_results_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 226,
+        "quote": "DiagnosticsSelector value 01h is supported.",
+        "section": "CMIS 5.3 § 8.12.3",
+        "table": "Table 8-103"
+      }
+    },
+    "bits_and_errors_counting_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 226,
+        "quote": "DiagnosticsSelector values 02h-05h are supported.",
+        "section": "CMIS 5.3 § 8.12.3",
+        "table": "Table 8-103"
+      }
+    },
+    "custom_diagnostics_control": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 223,
+        "quote": "Bytes 196-205: Custom[10].",
+        "section": "CMIS 5.3 § 8.12",
+        "table": "Table 8-100"
+      }
+    },
+    "gating_results_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "Gating result statistics selectable by DiagnosticsSelector values 11h-15h are supported.",
+        "section": "CMIS 5.3 § 8.12.2",
+        "table": "Table 8-102"
+      }
+    },
+    "gating_support": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "GatingSupport: Gating measurement over a given time interval.",
+        "section": "CMIS 5.3 § 8.12.2",
+        "table": "Table 8-102"
+      }
+    },
+    "host_checker_per_lane_enable_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Host side pattern checker supports per lane enable.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_checker_per_lane_pattern_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Host side pattern selection for checker supports per lane pattern selection.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_generator_per_lane_enable_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Host side pattern generator supports per lane enable.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_generator_per_lane_pattern_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Host side pattern selection for generator supports per lane pattern selection.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_prbs_checker_clock_source": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 236,
+        "quote": "Clock source used for the Host PRBS Pattern Checker.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "host_prbs_generator_clock_source": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 235,
+        "quote": "Clock source for Host Side PRBS Pattern Generation.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "host_scratchpad": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 241,
+        "quote": "HostScratchPad<i>, i = 0..7, can be used by the host to store state in the module.",
+        "section": "CMIS 5.3 § 8.12.13",
+        "table": "Table 8-122"
+      }
+    },
+    "host_side_checker_data_invert": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 233,
+        "quote": "Invert the selected host side checker pattern.",
+        "section": "CMIS 5.3 § 8.12.8",
+        "table": "Table 8-113"
+      }
+    },
+    "host_side_checker_data_invert_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "HostSideCheckerSupportsDataInvert: Byte 13h:161 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_side_checker_data_swap_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "HostSideCheckerSupportsDataSwap: Byte 13h:162 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_side_checker_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 233,
+        "quote": "Enable host side pattern checker with configuration defined in Bytes 161-167.",
+        "section": "CMIS 5.3 § 8.12.8",
+        "table": "Table 8-113"
+      }
+    },
+    "host_side_checker_pattern_select": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 233,
+        "quote": "Selected pattern to be checked on each lane.",
+        "section": "CMIS 5.3 § 8.12.8",
+        "table": "Table 8-114"
+      }
+    },
+    "host_side_checker_post_fec_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 233,
+        "quote": "Check the selected encoded pattern at the output from the internal FEC decoder when set.",
+        "section": "CMIS 5.3 § 8.12.8",
+        "table": "Table 8-113"
+      }
+    },
+    "host_side_checker_supports_pattern": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 229,
+        "quote": "HostSideCheckerSupportsPattern<i>: Pattern with ID <i> is supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-107"
+      }
+    },
+    "host_side_checker_swap_symbol_bits": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 233,
+        "quote": "Swap MSB and LSB for PAM4 patterns.",
+        "section": "CMIS 5.3 § 8.12.8",
+        "table": "Table 8-113"
+      }
+    },
+    "host_side_fec_error_information_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 226,
+        "quote": "HostSideFEC: PRBS error information available.",
+        "section": "CMIS 5.3 § 8.12.3",
+        "table": "Table 8-103"
+      }
+    },
+    "host_side_generator_data_invert": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 231,
+        "quote": "Invert the selected host side generator pattern.",
+        "section": "CMIS 5.3 § 8.12.6",
+        "table": "Table 8-109"
+      }
+    },
+    "host_side_generator_data_invert_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "HostSideGeneratorSupportsDataInvert: Byte 13h:145 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_side_generator_data_swap_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "HostSideGeneratorSupportsDataSwap: Byte 13h:146 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "host_side_generator_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 231,
+        "quote": "Enable generator with configuration defined in Bytes 145-151.",
+        "section": "CMIS 5.3 § 8.12.6",
+        "table": "Table 8-109"
+      }
+    },
+    "host_side_generator_pattern_select": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 231,
+        "quote": "Selected pattern to be generated on each lane.",
+        "section": "CMIS 5.3 § 8.12.6",
+        "table": "Table 8-110"
+      }
+    },
+    "host_side_generator_pre_fec_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 231,
+        "quote": "Generate the selected pattern at the input to the internal host side FEC encoder when set.",
+        "section": "CMIS 5.3 § 8.12.6",
+        "table": "Table 8-109"
+      }
+    },
+    "host_side_generator_supports_pattern": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 228,
+        "quote": "HostSideGeneratorSupportsPattern<i>: Pattern with ID <i> is supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-106"
+      }
+    },
+    "host_side_generator_swap_symbol_bits": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 231,
+        "quote": "Swap MSB and LSB for PAM4 patterns.",
+        "section": "CMIS 5.3 § 8.12.6",
+        "table": "Table 8-109"
+      }
+    },
+    "host_side_input_loopback_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 240,
+        "quote": "HostSideInputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled.",
+        "section": "CMIS 5.3 § 8.12.12",
+        "table": "Table 8-121"
+      }
+    },
+    "host_side_input_loopback_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "HostSideInputLoopback capability advertisement.",
+        "section": "CMIS 5.3 § 8.12.1",
+        "table": "Table 8-101"
+      }
+    },
+    "host_side_input_snr_measurement_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 226,
+        "quote": "Host side SNR measurement reported via DiagnosticsSelector value 06h is supported.",
+        "section": "CMIS 5.3 § 8.12.3",
+        "table": "Table 8-103"
+      }
+    },
+    "host_side_output_loopback_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 240,
+        "quote": "HostSideOutputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled.",
+        "section": "CMIS 5.3 § 8.12.12",
+        "table": "Table 8-121"
+      }
+    },
+    "host_side_output_loopback_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "HostSideOutputLoopback capability advertisement.",
+        "section": "CMIS 5.3 § 8.12.1",
+        "table": "Table 8-101"
+      }
+    },
+    "loss_of_reference_clock_mask": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 242,
+        "quote": "Loss of reference clock Mask for the module. Default: 1.",
+        "section": "CMIS 5.3 § 8.12.14",
+        "table": "Table 8-123"
+      }
+    },
+    "measurement_time": {
+      "maximum": 7,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 236,
+        "quote": "Measurement gating time for one complete result over a defined measurement period.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "media_checker_per_lane_enable_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Media side pattern checker supports per lane enable.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_checker_per_lane_pattern_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Media side pattern selection for checker supports per lane pattern selection.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_generator_per_lane_enable_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Media side pattern generator supports per lane enable.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_generator_per_lane_pattern_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "Media side pattern selection for generator supports per lane pattern selection.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_prbs_checker_clock_source": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 236,
+        "quote": "Clock source used for the Media PRBS Pattern Checker.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "media_prbs_generator_clock_source": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 235,
+        "quote": "Clock source for Media Side PRBS Pattern Generation.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "media_side_checker_data_invert": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 234,
+        "quote": "Invert the selected media side checker pattern.",
+        "section": "CMIS 5.3 § 8.12.9",
+        "table": "Table 8-115"
+      }
+    },
+    "media_side_checker_data_invert_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "MediaSideCheckerSupportsDataInvert: Byte 13h:169 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_side_checker_data_swap_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "MediaSideCheckerSupportsDataSwap: Byte 13h:170 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_side_checker_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 234,
+        "quote": "Enable media side pattern checker with configuration defined in Bytes 169-175.",
+        "section": "CMIS 5.3 § 8.12.9",
+        "table": "Table 8-115"
+      }
+    },
+    "media_side_checker_pattern_select": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 234,
+        "quote": "Selected pattern to be checked on each lane.",
+        "section": "CMIS 5.3 § 8.12.9",
+        "table": "Table 8-116"
+      }
+    },
+    "media_side_checker_post_fec_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 234,
+        "quote": "Check the selected encoded pattern at the output from the internal FEC decoder when set.",
+        "section": "CMIS 5.3 § 8.12.9",
+        "table": "Table 8-115"
+      }
+    },
+    "media_side_checker_supports_pattern": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 229,
+        "quote": "MediaSideCheckerSupportsPattern<i>: Pattern with ID <i> is supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-107"
+      }
+    },
+    "media_side_checker_swap_symbol_bits": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 234,
+        "quote": "Swap MSB and LSB for PAM4 patterns.",
+        "section": "CMIS 5.3 § 8.12.9",
+        "table": "Table 8-115"
+      }
+    },
+    "media_side_fec_error_information_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 226,
+        "quote": "MediaSideFEC: PRBS error information available.",
+        "section": "CMIS 5.3 § 8.12.3",
+        "table": "Table 8-103"
+      }
+    },
+    "media_side_generator_data_invert": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 232,
+        "quote": "Invert the selected media side generator pattern.",
+        "section": "CMIS 5.3 § 8.12.7",
+        "table": "Table 8-111"
+      }
+    },
+    "media_side_generator_data_invert_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "MediaSideGeneratorSupportsDataInvert: Byte 13h:153 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_side_generator_data_swap_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 230,
+        "quote": "MediaSideGeneratorSupportsDataSwap: Byte 13h:154 supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "media_side_generator_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 232,
+        "quote": "Enable media side generator with configuration defined in Bytes 153-159.",
+        "section": "CMIS 5.3 § 8.12.7",
+        "table": "Table 8-111"
+      }
+    },
+    "media_side_generator_pattern_select": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 232,
+        "quote": "Selected pattern to be generated on each lane.",
+        "section": "CMIS 5.3 § 8.12.7",
+        "table": "Table 8-112"
+      }
+    },
+    "media_side_generator_pre_fec_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 232,
+        "quote": "Generate the selected pattern at the input to the internal media side FEC encoder when set.",
+        "section": "CMIS 5.3 § 8.12.7",
+        "table": "Table 8-111"
+      }
+    },
+    "media_side_generator_supports_pattern": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 228,
+        "quote": "MediaSideGeneratorSupportsPattern<i>: Pattern with ID <i> is supported.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-106"
+      }
+    },
+    "media_side_generator_swap_symbol_bits": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 232,
+        "quote": "Swap MSB and LSB for PAM4 patterns.",
+        "section": "CMIS 5.3 § 8.12.7",
+        "table": "Table 8-111"
+      }
+    },
+    "media_side_input_loopback_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 240,
+        "quote": "MediaSideInputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled.",
+        "section": "CMIS 5.3 § 8.12.12",
+        "table": "Table 8-121"
+      }
+    },
+    "media_side_input_loopback_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "MediaSideInputLoopback capability advertisement.",
+        "section": "CMIS 5.3 § 8.12.1",
+        "table": "Table 8-101"
+      }
+    },
+    "media_side_input_snr_measurement_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 226,
+        "quote": "Media side SNR measurement reported via DiagnosticsSelector value 06h is supported.",
+        "section": "CMIS 5.3 § 8.12.3",
+        "table": "Table 8-103"
+      }
+    },
+    "media_side_output_loopback_enable": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 240,
+        "quote": "MediaSideOutputLoopbackEnableLane<i>: 0b normal operation; 1b loopback enabled.",
+        "section": "CMIS 5.3 § 8.12.12",
+        "table": "Table 8-121"
+      }
+    },
+    "media_side_output_loopback_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "MediaSideOutputLoopback capability advertisement.",
+        "section": "CMIS 5.3 § 8.12.1",
+        "table": "Table 8-101"
+      }
+    },
+    "pattern_check_gating_complete_mask_host": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 242,
+        "quote": "Per-host lane gating complete Mask. Default: 1.",
+        "section": "CMIS 5.3 § 8.12.14",
+        "table": "Table 8-123"
+      }
+    },
+    "pattern_check_gating_complete_mask_media": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 242,
+        "quote": "Per-media lane gating complete Mask. Default: 1.",
+        "section": "CMIS 5.3 § 8.12.14",
+        "table": "Table 8-123"
+      }
+    },
+    "pattern_checker_lol_mask_host": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 242,
+        "quote": "Per-host lane pattern checker loss of lock Mask. Default: 1.",
+        "section": "CMIS 5.3 § 8.12.14",
+        "table": "Table 8-123"
+      }
+    },
+    "pattern_checker_lol_mask_media": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 242,
+        "quote": "Per-media lane pattern checker loss of lock Mask. Default: 1.",
+        "section": "CMIS 5.3 § 8.12.14",
+        "table": "Table 8-123"
+      }
+    },
+    "pattern_generator_lol_mask_host": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 242,
+        "quote": "Per-host lane pattern generator loss of lock Mask. Default: 1.",
+        "section": "CMIS 5.3 § 8.12.14",
+        "table": "Table 8-123"
+      }
+    },
+    "pattern_generator_lol_mask_media": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 242,
+        "quote": "Per-media lane pattern generator loss of lock Mask. Default: 1.",
+        "section": "CMIS 5.3 § 8.12.14",
+        "table": "Table 8-123"
+      }
+    },
+    "per_lane_gating_timers_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "Per lane gating timers are supported in all Banks.",
+        "section": "CMIS 5.3 § 8.12.2",
+        "table": "Table 8-102"
+      }
+    },
+    "per_lane_host_side_loopbacks_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "PerLaneHostSideLoopbacks: 1b: supported.",
+        "section": "CMIS 5.3 § 8.12.1",
+        "table": "Table 8-101"
+      }
+    },
+    "per_lane_media_side_loopbacks_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "PerLaneMediaSideLoopbacks: 1b: supported.",
+        "section": "CMIS 5.3 § 8.12.1",
+        "table": "Table 8-101"
+      }
+    },
+    "periodic_updates_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "Real-time statistics selectable by DiagnosticsSelector values 01h-06h are periodically updated during measurement.",
+        "section": "CMIS 5.3 § 8.12.2",
+        "table": "Table 8-102"
+      }
+    },
+    "prbs_checker_host_side_post_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSCheckerHostSidePostFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "prbs_checker_host_side_pre_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSCheckerHostSidePreFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "prbs_checker_media_side_post_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSCheckerMediaSidePostFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "prbs_checker_media_side_pre_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSCheckerMediaSidePreFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "prbs_generator_host_side_post_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSGeneratorHostSidePostFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "prbs_generator_host_side_pre_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSGeneratorHostSidePreFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "prbs_generator_media_side_post_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSGeneratorMediaSidePostFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "prbs_generator_media_side_pre_fec_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 227,
+        "quote": "PRBSGeneratorMediaSidePreFEC: supported.",
+        "section": "CMIS 5.3 § 8.12.4",
+        "table": "Table 8-104"
+      }
+    },
+    "recovered_clock_for_generator_options": {
+      "maximum": 3,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 229,
+        "quote": "Options to use recovered clock for contra-directional pattern generator on the same module side.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "reference_clock_for_patterns_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 229,
+        "quote": "Option to use reference clock for pattern generation.",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    },
+    "reset_error_information": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 235,
+        "quote": "This bit has effects on error information, and on gating timers when the value changes.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "simultaneous_host_and_media_side_loopbacks_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 225,
+        "quote": "SimultaneousHostAndMediaSideLoopbacks: 0b: not supported; 1b: supported.",
+        "section": "CMIS 5.3 § 8.12.1",
+        "table": "Table 8-101"
+      }
+    },
+    "start_stop_is_global": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 235,
+        "quote": "Controls whether writing a measurement Start/Stop control on one Bank globally starts or stops measurements across all Banks.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "update_period_select": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 236,
+        "quote": "Time between incremental updates to intermediate error counting results during a longer gating period.",
+        "section": "CMIS 5.3 § 8.12.10",
+        "table": "Table 8-117"
+      }
+    },
+    "user_pattern": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 243,
+        "quote": "Host defined user pattern (32 Bytes).",
+        "section": "CMIS 5.3 § 8.12.15",
+        "table": "Table 8-124"
+      }
+    },
+    "user_pattern_length_supported": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 229,
+        "quote": "U4 Maximum length L of the user defined pattern, where field value n encodes L as L=2(n+1).",
+        "section": "CMIS 5.3 § 8.12.5",
+        "table": "Table 8-108"
+      }
+    }
+  },
+  "required": [
+    "simultaneous_host_and_media_side_loopbacks_supported",
+    "per_lane_media_side_loopbacks_supported",
+    "per_lane_host_side_loopbacks_supported",
+    "host_side_input_loopback_supported",
+    "host_side_output_loopback_supported",
+    "media_side_input_loopback_supported",
+    "media_side_output_loopback_supported",
+    "gating_support",
+    "gating_results_supported",
+    "periodic_updates_supported",
+    "per_lane_gating_timers_supported",
+    "auto_restart_gating_supported",
+    "media_side_fec_error_information_supported",
+    "host_side_fec_error_information_supported",
+    "media_side_input_snr_measurement_supported",
+    "host_side_input_snr_measurement_supported",
+    "bits_and_errors_counting_supported",
+    "bit_error_ratio_results_supported",
+    "prbs_generator_media_side_pre_fec_supported",
+    "prbs_generator_media_side_post_fec_supported",
+    "prbs_checker_media_side_pre_fec_supported",
+    "prbs_checker_media_side_post_fec_supported",
+    "prbs_generator_host_side_pre_fec_supported",
+    "prbs_generator_host_side_post_fec_supported",
+    "prbs_checker_host_side_pre_fec_supported",
+    "prbs_checker_host_side_post_fec_supported",
+    "host_side_generator_supports_pattern",
+    "media_side_generator_supports_pattern",
+    "host_side_checker_supports_pattern",
+    "media_side_checker_supports_pattern",
+    "recovered_clock_for_generator_options",
+    "reference_clock_for_patterns_supported",
+    "user_pattern_length_supported",
+    "host_side_generator_data_invert_supported",
+    "host_side_generator_data_swap_supported",
+    "host_side_checker_data_invert_supported",
+    "host_side_checker_data_swap_supported",
+    "media_side_generator_data_invert_supported",
+    "media_side_generator_data_swap_supported",
+    "media_side_checker_data_invert_supported",
+    "media_side_checker_data_swap_supported",
+    "host_generator_per_lane_pattern_supported",
+    "host_generator_per_lane_enable_supported",
+    "host_checker_per_lane_pattern_supported",
+    "host_checker_per_lane_enable_supported",
+    "media_generator_per_lane_pattern_supported",
+    "media_generator_per_lane_enable_supported",
+    "media_checker_per_lane_pattern_supported",
+    "media_checker_per_lane_enable_supported",
+    "host_side_generator_enable",
+    "host_side_generator_data_invert",
+    "host_side_generator_swap_symbol_bits",
+    "host_side_generator_pre_fec_enable",
+    "host_side_generator_pattern_select",
+    "media_side_generator_enable",
+    "media_side_generator_data_invert",
+    "media_side_generator_swap_symbol_bits",
+    "media_side_generator_pre_fec_enable",
+    "media_side_generator_pattern_select",
+    "host_side_checker_enable",
+    "host_side_checker_data_invert",
+    "host_side_checker_swap_symbol_bits",
+    "host_side_checker_post_fec_enable",
+    "host_side_checker_pattern_select",
+    "media_side_checker_enable",
+    "media_side_checker_data_invert",
+    "media_side_checker_swap_symbol_bits",
+    "media_side_checker_post_fec_enable",
+    "media_side_checker_pattern_select",
+    "host_prbs_generator_clock_source",
+    "media_prbs_generator_clock_source",
+    "start_stop_is_global",
+    "reset_error_information",
+    "auto_restart_gating",
+    "measurement_time",
+    "update_period_select",
+    "host_prbs_checker_clock_source",
+    "media_prbs_checker_clock_source",
+    "media_side_output_loopback_enable",
+    "media_side_input_loopback_enable",
+    "host_side_output_loopback_enable",
+    "host_side_input_loopback_enable",
+    "host_scratchpad",
+    "custom_diagnostics_control",
+    "loss_of_reference_clock_mask",
+    "pattern_check_gating_complete_mask_host",
+    "pattern_check_gating_complete_mask_media",
+    "pattern_generator_lol_mask_host",
+    "pattern_generator_lol_mask_media",
+    "pattern_checker_lol_mask_host",
+    "pattern_checker_lol_mask_media",
+    "user_pattern"
+  ],
+  "title": "CmisPage13hDiagnosticsControl",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243
+    ],
+    "spec": "CMIS 5.3 § 8.12"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

@@ -1,0 +1,245 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis15Page31hMediaLaneProvisioning
+title: C-CMIS 1.5 Page 31h Media Lane Provisioning
+spec:
+  id: c-cmis-1.5
+  revision: "01.5"
+  source: docs/stds/cmis/OIF-C-CMIS-01.5.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.5 § 7.6.4
+  pdf_pages: [22, 23, 24]
+page_address: "31h"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+fields:
+  - name: reserved_128_7_3
+    offset: 128
+    bit_offset: 3
+    bit_width: 5
+    type: u5
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    description: "Reserved"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 22, table: "Table 11" }
+  - name: p_tmm_cons_act_enable
+    offset: 128
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, PayloadType, ConsequentAction]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Enable consequent action on Payload Type Mismatch; default is 1"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 22, table: "Table 11" }
+  - name: lf_insertion_on_ld_enable
+    offset: 128
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, LocalDegrade, ConsequentAction]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Enable LF insertion on Local Degrade detection; default is 0"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 22, table: "Table 11" }
+  - name: tx_filter_enable
+    offset: 128
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, TxFilter]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Enable Tx transmit shape control"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 22, table: "Table 11" }
+  - name: tx_filter_type
+    offset: 129
+    size_bytes: 1
+    type: u8
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, TxFilter]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Tx transmit filter type; applied on DPSM/NPSM transition to Initialized"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 22, table: "Table 11" }
+    enum_inline:
+      - { value: 1, name: root_raised_cosine, description: "Root-Raised-Cosine" }
+      - { value: 2, name: raised_cosine, description: "Raised-Cosine" }
+      - { value: 3, name: gaussian, description: "Gaussian" }
+  - name: tx_filter_roll_off
+    offset: 130
+    size_bytes: 1
+    type: u8
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, TxFilter]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Scaled roll-off factor, 1/255 units over 0.0 to 1.0; applied on DPSM/NPSM transition to Initialized"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 22, table: "Table 11" }
+  - name: reserved_131_7_4
+    offset: 131
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    description: "Reserved"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 23, table: "Table 11" }
+  - name: rx_los_type_config
+    offset: 131
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, RxLOS]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Configures which items contribute to Rx LOS being raised; overrides base CMIS 01h:151.4 when programmable (43h:130.0); invalid values fall back to the advertised default in 41h:129"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.5, § 7.6.4", pdf_page: 23, table: "Table 11" }
+    enum_inline:
+      - { value: 0, name: reserved_backward_compatibility, description: "Reserved for backward compatibility" }
+      - { value: 1, name: rx_total_power, description: "Rx LOS responds to Rx total power" }
+      - { value: 2, name: rx_signal_power, description: "Rx LOS responds to Rx signal power" }
+      - { value: 3, name: rx_dsp_lol, description: "Rx LOS responds to Rx DSP frame loss of lock" }
+      - { value: 4, name: total_power_and_dsp_hybrid, description: "Total power detection and DSP frame loss of lock hybrid" }
+      - { value: 5, name: signal_power_and_dsp_hybrid, description: "Signal power detection and DSP frame loss of lock hybrid" }
+      - { value: 6..11, name: reserved_6_11, description: "Reserved" }
+      - { value: 12..15, name: vendor_defined, description: "Vendor defined" }
+  - name: reserved_132_135
+    offset: 132
+    size_bytes: 4
+    type: bytes
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    description: "Reserved"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 23, table: "Table 11" }
+  - name: reserved_136_7
+    offset: 136
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    description: "Reserved"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 23, table: "Table 11" }
+  - name: cd_compensation_control
+    offset: 136
+    bit_offset: 4
+    bit_width: 3
+    type: u3
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, ChromaticDispersion]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Chromatic dispersion compensation control"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 23, table: "Table 11" }
+    enum_inline:
+      - { value: 0, name: automatic, description: "Automatic CD compensation" }
+      - { value: 1, name: cd_target_set, description: "CD target set compensation" }
+      - { value: 2, name: cd_search_range, description: "CD search range compensation" }
+      - { value: 3..5, name: reserved_3_5, description: "Reserved" }
+      - { value: 6..7, name: custom, description: "Custom" }
+  - name: tx_stat_mnt_insertion
+    offset: 136
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, STATMNT]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "STAT maintenance signal insertion"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }
+    enum_inline:
+      - { value: 0, name: none, description: "No maintenance signal insertion" }
+      - { value: 1, name: lck, description: "LCK maintenance signal" }
+      - { value: 2, name: ais, description: "AIS maintenance signal" }
+      - { value: 3..11, name: reserved_3_11, description: "Reserved" }
+      - { value: 12, name: custom_12, description: "Custom maintenance signal" }
+      - { value: 13, name: custom_13, description: "Custom maintenance signal" }
+      - { value: 14, name: custom_14, description: "Custom maintenance signal" }
+      - { value: 15, name: custom_15, description: "Custom maintenance signal" }
+  - name: cd_target_set
+    offset: 137
+    size_bytes: 2
+    type: i16be
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, ChromaticDispersion]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Target chromatic dispersion setpoint, 20 ps/nm per LSB"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }
+  - name: tx_pyld_type
+    offset: 139
+    size_bytes: 1
+    type: u8
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, PayloadType]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Transmit Payload Type"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }
+  - name: rx_pyld_type_exp_val
+    offset: 140
+    size_bytes: 1
+    type: u8
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, PayloadType]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Expected Receive Payload Type"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }
+  - name: cd_search_range_low
+    offset: 141
+    size_bytes: 2
+    type: i16be
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, ChromaticDispersion]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "CD search range minimum value, 20 ps/nm per LSB"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }
+  - name: cd_search_range_high
+    offset: 143
+    size_bytes: 2
+    type: i16be
+    access: rw
+    field_type: Configuration
+    tags: [C-CMIS, ChromaticDispersion]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "CD search range maximum value, 20 ps/nm per LSB"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }
+  - name: reserved_145_247
+    offset: 145
+    size_bytes: 103
+    type: bytes
+    access: ro
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    description: "Reserved"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }
+  - name: custom
+    offset: 248
+    size_bytes: 8
+    type: bytes
+    access: rw
+    field_type: Informational
+    tags: []
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Vendor defined custom bytes"
+    provenance: { section: "OIF-C-CMIS-01.5 § 7.6.4", pdf_page: 24, table: "Table 11" }

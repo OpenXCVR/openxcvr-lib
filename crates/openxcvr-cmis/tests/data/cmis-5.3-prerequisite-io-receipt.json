@@ -1,0 +1,145 @@
+{
+  "kind": "prerequisite-io-contract",
+  "version": "1",
+  "owner": "petabit",
+  "repository": "openxcvr-lib",
+  "capability": "instance-prerequisite-io",
+  "library_revision": "13f7526a936e4cc2c0bbef14d62cff2be49ec7e3",
+  "connector_revision": "7f24fb723863a40595a3baf585401046b5ff847f",
+  "delivered": false,
+  "footprints": [
+    {
+      "footprint": "cmis-5.3-lower-page00h-identity",
+      "qualification": "qualified",
+      "ranges": [
+        {
+          "device_address": 80,
+          "bank": 0,
+          "page": 0,
+          "offset": 0,
+          "length": 3
+        },
+        {
+          "device_address": 80,
+          "bank": 0,
+          "page": 0,
+          "offset": 126,
+          "length": 2
+        },
+        {
+          "device_address": 80,
+          "bank": 0,
+          "page": 0,
+          "offset": 129,
+          "length": 61
+        }
+      ]
+    },
+    {
+      "footprint": "cmis-5.3-lower-module-state",
+      "qualification": "qualified",
+      "ranges": [
+        {
+          "device_address": 80,
+          "bank": 0,
+          "page": 0,
+          "offset": 3,
+          "length": 1
+        }
+      ]
+    },
+    {
+      "footprint": "cmis-page-01h-duration",
+      "qualification": "uncovered",
+      "ranges": [
+        {
+          "device_address": 80,
+          "bank": 0,
+          "page": 1,
+          "offset": 166,
+          "length": 2
+        }
+      ]
+    },
+    {
+      "footprint": "C2.1",
+      "qualification": "unresolved"
+    }
+  ],
+  "grants": [
+    {
+      "step": "detection",
+      "transfers_per_generation": 4,
+      "authority": "privileged",
+      "steps": [
+        {
+          "footprint": "cmis-5.3-lower-page00h-identity",
+          "effect": "memory",
+          "declared": "read",
+          "plan": {
+            "read": {
+              "address": {
+                "device_address": 80,
+                "bank": 0,
+                "page": 0,
+                "offset": 0
+              },
+              "length": 3
+            }
+          }
+        },
+        {
+          "footprint": "cmis-5.3-lower-page00h-identity",
+          "effect": "memory",
+          "declared": "read",
+          "plan": {
+            "read": {
+              "address": {
+                "device_address": 80,
+                "bank": 0,
+                "page": 0,
+                "offset": 126
+              },
+              "length": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "step": "pre-identification",
+      "transfers_per_generation": 4,
+      "authority": "privileged",
+      "steps": [
+        {
+          "footprint": "cmis-5.3-lower-page00h-identity",
+          "effect": "memory",
+          "declared": "read",
+          "plan": {
+            "read": {
+              "address": {
+                "device_address": 80,
+                "bank": 0,
+                "page": 0,
+                "offset": 129
+              },
+              "length": 61
+            }
+          }
+        }
+      ]
+    },
+    {
+      "step": "startup-power-hold",
+      "denied": "the per-bit readiness/detection marking (C2.1) is unresolved at this revision, so no board-control plan for a power hold is qualified"
+    },
+    {
+      "step": "readiness-bootstrap",
+      "denied": "the module-state byte at lower page 00h offset 3 (footprint cmis-5.3-lower-module-state) is passive, but this contract does not issue a CMIS 5.3 readiness-bootstrap grant"
+    },
+    {
+      "step": "duration-acquisition",
+      "denied": "the advertised-duration bytes at bank 0 page 01h offset 166 lie outside the library's classification coverage (footprint cmis-page-01h-duration is uncovered), so no paged selector plan is qualified"
+    }
+  ]
+}

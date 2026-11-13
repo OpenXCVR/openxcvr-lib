@@ -1,0 +1,245 @@
+entries:
+  - value: 0x00
+    name: undefined
+    description: Undefined host electrical interface
+    reach: {kind: none}
+  - value: 0x01
+    name: base_1000_cx
+    description: 1000BASE-CX host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 1.25, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 1.25
+  - value: 0x02
+    name: xaui
+    description: XAUI host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 3.125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 12.50
+  - value: 0x03
+    name: xfi
+    description: XFI host interface with application and lane rates spanning 9.95 to 11.18 Gb/s or GBd
+    signaling: {lane_count: 1, modulation: nrz}
+    reach: {kind: c2m}
+  - value: 0x04
+    name: sfi
+    description: SFI host interface with application and lane rates spanning 9.95 to 11.18 Gb/s or GBd
+    signaling: {lane_count: 1, modulation: nrz}
+    reach: {kind: c2m}
+  - value: 0x05
+    name: gaui_25g_c2m
+    description: 25GAUI C2M host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 25.78
+  - value: 0x06
+    name: xlaui_c2m
+    description: XLAUI C2M host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 41.25
+  - value: 0x07
+    name: xlppi
+    description: XLPPI host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 41.25
+  - value: 0x08
+    name: laui_2_c2m
+    description: LAUI-2 C2M host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 51.56
+  - value: 0x09
+    name: gaui_50g_2_c2m
+    description: 50GAUI-2 C2M host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 26.5625, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 53.13
+  - value: 0x0a
+    name: gaui_50g_1_c2m
+    description: 50GAUI-1 C2M host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 53.13
+  - value: 0x0b
+    name: caui_4_c2m
+    description: CAUI-4 C2M host interface, not recommended for new designs
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 103.13
+  - value: 0x0c
+    name: gaui_100g_4_c2m
+    description: 100GAUI-4 C2M host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 26.5625, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.25
+  - value: 0x0d
+    name: gaui_100g_2_c2m
+    description: 100GAUI-2 C2M host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.25
+  - value: 0x0e
+    name: gaui_200g_8_c2m
+    description: 200GAUI-8 C2M host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 26.5625, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.50
+  - value: 0x0f
+    name: gaui_200g_4_c2m
+    description: 200GAUI-4 C2M host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.50
+  - value: 0x10
+    name: gaui_400g_16_c2m
+    description: 400GAUI-16 C2M host interface
+    signaling: {lane_count: 16, lane_rate_gbd: 26.5625, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425.00
+  - value: 0x11
+    name: gaui_400g_8_c2m
+    description: 400GAUI-8 C2M host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425.00
+  - value: 0x12
+    name: reserved_12
+    description: Reserved for Ethernet active modules
+    reach: {kind: none}
+  - value: 0x13
+    name: base_10g_cx4
+    description: 10GBASE-CX4 host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 3.125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 12.50
+  - value: 0x14
+    name: base_25g_cr_ca_25g_l
+    description: 25GBASE-CR CA-25G-L host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 25.78
+  - value: 0x15
+    name: base_25g_cr_ca_25g_s
+    description: 25GBASE-CR or 25GBASE-CR-S CA-25G-S host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 25.78
+  - value: 0x16
+    name: base_25g_cr_ca_25g_n
+    description: 25GBASE-CR or 25GBASE-CR-S CA-25G-N host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 25.78
+  - value: 0x17
+    name: base_40g_cr4
+    description: 40GBASE-CR4 host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 41.25
+  - value: 0x18
+    name: base_50g_cr
+    description: 50GBASE-CR host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 53.13
+  - value: 0x19
+    name: base_100g_cr10
+    description: 100GBASE-CR10 host interface
+    signaling: {lane_count: 10, lane_rate_gbd: 10.3125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 103.13
+  - value: 0x1a
+    name: base_100g_cr4
+    description: 100GBASE-CR4 host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 25.78125, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 103.13
+  - value: 0x1b
+    name: base_100g_cr2
+    description: 100GBASE-CR2 host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.25
+  - value: 0x1c
+    name: base_200g_cr4
+    description: 200GBASE-CR4 host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.50
+  - value: 0x1d
+    name: base_400g_cr8
+    description: 400G CR8 host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 26.5625, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425.00
+  - value: 0x1e
+    name: base_200g_cr1
+    description: 200GBASE-CR1 host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.50
+  - value: 0x1f
+    name: base_400g_cr2
+    description: 400GBASE-CR2 host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425.00
+  - value: 0x20
+    name: lei_100g_pam4_1
+    description: LEI-100G-PAM4-1 host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 106.25
+  - value: 0x21
+    name: lei_200g_pam4_2
+    description: LEI-200G-PAM4-2 host interface
+    signaling: {lane_count: 2, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 212.50
+  - value: 0x22
+    name: lei_400g_pam4_4
+    description: LEI-400G-PAM4-4 host interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 425.00
+  - value: 0x23
+    name: lei_800g_pam4_8
+    description: LEI-800G-PAM4-8 host interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 850.00
+  - value: 0x24
+    name: reserved_24
+    description: Reserved
+    reach: {kind: none}
+  - value: 0x25
+    name: fc_8g
+    description: 8G Fibre Channel host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 8.500, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 8.50
+  - value: 0x26
+    name: fc_10g
+    description: 10G Fibre Channel host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 10.51875, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 10.52
+  - value: 0x27
+    name: fc_16g
+    description: 16G Fibre Channel host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 14.025, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 14.03
+  - value: 0x28
+    name: fc_32g
+    description: 32G Fibre Channel host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 28.050, modulation: nrz}
+    reach: {kind: c2m}
+    bit_rate_gbps: 28.05
+  - value: 0x29
+    name: fc_64g
+    description: 64G Fibre Channel host interface
+    signaling: {lane_count: 1, lane_rate_gbd: 28.900, modulation: pam4}
+    reach: {kind: c2m}
+    bit_rate_gbps: 57.80

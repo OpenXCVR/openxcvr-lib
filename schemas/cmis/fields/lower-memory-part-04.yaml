@@ -1,0 +1,245 @@
+fields:
+  - name: aux2_mon_high_warning_flag
+    display_name: Aux2MonHighWarningFlag
+    offset: 10
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Aux 2 monitor warning."
+
+  - name: aux2_mon_low_warning_flag
+    display_name: Aux2MonLowWarningFlag
+    offset: 10
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Aux 2 monitor warning."
+
+  - name: aux3_mon_high_alarm_flag
+    display_name: Aux3MonHighAlarmFlag
+    offset: 11
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Aux 3 monitor alarm."
+
+  - name: aux3_mon_low_alarm_flag
+    display_name: Aux3MonLowAlarmFlag
+    offset: 11
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Aux 3 monitor alarm."
+
+  - name: aux3_mon_high_warning_flag
+    display_name: Aux3MonHighWarningFlag
+    offset: 11
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Aux 3 monitor warning."
+
+  - name: aux3_mon_low_warning_flag
+    display_name: Aux3MonLowWarningFlag
+    offset: 11
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, Monitor]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Aux 3 monitor warning."
+
+  - name: custom_mon_high_alarm_flag
+    display_name: CustomMonHighAlarmFlag
+    offset: 11
+    bit_offset: 4
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, CustomFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Vendor Defined Monitor alarm."
+
+  - name: custom_mon_low_alarm_flag
+    display_name: CustomMonLowAlarmFlag
+    offset: 11
+    bit_offset: 5
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, CustomFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Vendor Defined Monitor alarm."
+
+  - name: custom_mon_high_warning_flag
+    display_name: CustomMonHighWarningFlag
+    offset: 11
+    bit_offset: 6
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, CustomFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high Vendor Defined Monitor warning."
+
+  - name: custom_mon_low_warning_flag
+    display_name: CustomMonLowWarningFlag
+    offset: 11
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, CustomFlag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low Vendor Defined Monitor warning."
+
+  # ===========================================================================
+  # § 8.2.5 Module-Level Monitor Values (bytes 14-25)
+  # ===========================================================================
+
+  - name: temp_mon_value
+    display_name: TempMonValue
+    offset: 14
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "1/256 degC" }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::Temperature"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.5"
+      pdf_page: 147
+      quote: "S16 Module Temperature Monitor (Current Value)."

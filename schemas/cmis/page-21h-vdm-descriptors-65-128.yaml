@@ -1,0 +1,82 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage21hVdmDescriptors65To128
+title: CMIS Page 21h VDM Descriptors 65-128
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: CMIS 5.3 § 8.22.1
+  pdf_pages: [271, 272, 273, 274]
+page_address: "21h"
+size_bytes: 128
+present_when: "page_2fh_vdm_advertisement.vdm_support >= 1"
+
+# VDM group 2 is implicit in the page address; local instance index 1 maps to
+# global VDM instance 65.
+fields:
+  - name: local_threshold_set_id
+    display_name: LocalThresholdSetIDVDM<vdm_instance>
+    since: "4.0"
+    instances: { index: vdm_instance, start: 1, end: 64 }
+    offset_expr: "128 + 2 * (vdm_instance - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    template: vdm_descriptor_field
+    scope: { vdm_instance: vdm_instance }
+    behavior:
+      global_threshold_set_id_formula: "17 + local_threshold_set_id"
+      global_vdm_instance_formula: "64 + vdm_instance"
+    provenance:
+      section: "CMIS 5.3 § 8.22.1.1"
+      pdf_page: 273
+      table: "Table 8-169"
+      quote: "ThresholdSetID = 17 + LocalThresholdSetID"
+
+  - name: monitored_resource
+    display_name: MonitoredResourceVDM<vdm_instance>
+    since: "4.0"
+    instances: { index: vdm_instance, start: 1, end: 64 }
+    offset_expr: "128 + 2 * (vdm_instance - 1)"
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    template: vdm_descriptor_field
+    scope: { vdm_instance: vdm_instance }
+    provenance:
+      section: "CMIS 5.3 § 8.22.1.1"
+      pdf_page: 273
+      table: "Table 8-169"
+      quote: "Monitored Resource"
+
+  - name: observable_type
+    display_name: ObservableTypeVDM<vdm_instance>
+    since: "4.0"
+    changed_in:
+      # CMIS 5.4 Table 8-180 corrects the type-2 location (module -> media
+      # lane(s)) and redefines type 4 as Laser Temperature Deviation; the
+      # since-5.4 code set lives in CmisVdmObservableType5p4 (the in-place
+      # enum keeps the pre-5.4 names, windowed until 5.3).
+      - rev: "5.4"
+        enum_ref: CmisVdmObservableType5p4
+        provenance:
+          section: "CMIS 5.4 § 8.27.3.2"
+          pdf_page: 304
+          table: "Table 8-180"
+          quote: "VDM Observable Types (Type Coding)"
+    instances: { index: vdm_instance, start: 1, end: 64 }
+    offset_expr: "128 + 2 * (vdm_instance - 1) + 1"
+    size_bytes: 1
+    type: u8
+    enum_ref: CmisVdmObservableType
+    template: vdm_descriptor_field
+    scope: { vdm_instance: vdm_instance }
+    provenance:
+      section: "CMIS 5.3 § 8.22.1.1"
+      pdf_page: 273
+      table: "Table 8-169"
+      quote: "Observable Type"

@@ -1,0 +1,59 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcs10RxOutputEqCode
+title: CMIS-VCS 1.0 Rx Output Equalization Code
+spec:
+  id: cmis-vcs-1.0
+  revision: "01.0"
+  parity_deferred: true
+description: >-
+  Code values of the OutputEqPreCursorTargetRx<i> and
+  OutputEqPostCursorTargetRx<i> registers (VCS Parameter ID 07h),
+  OIF-CMIS-VCS-01.0 § 5.9 Table 5-18. Post-cursor codes step 1 dB per
+  code; pre-cursor codes step 0.5 dB per code (Equations 5-1 and 5-2
+  relate the dB settings to equalizer coefficients Cn). Codes 8 to 10
+  are reserved, 11 to 15 custom.
+provenance:
+  spec: OIF-CMIS-VCS-01.0 § 5.9 Table 5-18
+  pdf_pages: [35]
+entries:
+  - value: 0x00
+    name: no_equalization
+    description: No equalization (post-cursor 0 dB, pre-cursor 0 dB)
+    tags: [unit:dB, post_cursor_db:0, pre_cursor_db:0]
+  - value: 0x01
+    name: post_1_db_pre_0p5_db
+    description: Post-cursor 1 dB, pre-cursor 0.5 dB
+    tags: [unit:dB, post_cursor_db:1, pre_cursor_db:0.5]
+  - value: 0x02
+    name: post_2_db_pre_1_db
+    description: Post-cursor 2 dB, pre-cursor 1.0 dB
+    tags: [unit:dB, post_cursor_db:2, pre_cursor_db:1]
+  - value: 0x03
+    name: post_3_db_pre_1p5_db
+    description: Post-cursor 3 dB, pre-cursor 1.5 dB
+    tags: [unit:dB, post_cursor_db:3, pre_cursor_db:1.5]
+  - value: 0x04
+    name: post_4_db_pre_2_db
+    description: Post-cursor 4 dB, pre-cursor 2.0 dB
+    tags: [unit:dB, post_cursor_db:4, pre_cursor_db:2]
+  - value: 0x05
+    name: post_5_db_pre_2p5_db
+    description: Post-cursor 5 dB, pre-cursor 2.5 dB
+    tags: [unit:dB, post_cursor_db:5, pre_cursor_db:2.5]
+  - value: 0x06
+    name: post_6_db_pre_3_db
+    description: Post-cursor 6 dB, pre-cursor 3.0 dB
+    tags: [unit:dB, post_cursor_db:6, pre_cursor_db:3]
+  - value: 0x07
+    name: post_7_db_pre_3p5_db
+    description: Post-cursor 7 dB, pre-cursor 3.5 dB
+    tags: [unit:dB, post_cursor_db:7, pre_cursor_db:3.5]
+  - value: 0x08..0x0a
+    name: reserved
+    description: Reserved code values
+    tags: [unit:reserved]
+  - value: 0x0b..0x0f
+    name: custom
+    description: Custom code values
+    tags: [unit:custom]

@@ -1,0 +1,226 @@
+fields:
+  - name: explicit_control_lane
+    display_name: ExplicitControlLane<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "206 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.1"
+      pdf_page: 216
+      table: "Table 8-93"
+      quote: "ACS::ExplicitControlLane<i>: 0b: Lane <i> SI settings are Application dependent; 1b: Lane <i> SI settings are host defined."
+
+  # ===========================================================================
+  # § 8.10.6.2 Active Control Set: Provisioned Tx Signal Integrity Settings
+  # (bytes 214-221) — Table 8-94
+  # ===========================================================================
+
+  - name: adaptive_input_eq_enable_tx
+    display_name: AdaptiveInputEqEnableTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 214
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 217
+      table: "Table 8-94"
+      quote: "ACS::AdaptiveInputEqEnableTx<i>: Adaptive Tx input equalization for lane <i>. 1b: Enabled; 0b: Disabled (Host-controlled Tx input equalization for lane <i> as per HostControlledInputEqTargetTx<i>, if supported). Advertisement: 01h:161.3."
+
+  - name: adaptive_input_eq_recalled_tx
+    display_name: AdaptiveInputEqRecalledTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "215 + (lane - 1) / 4"
+    bit_offset_expr: "((lane - 1) % 4) * 2"
+    bit_width: 2
+    type: u2
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    enum_inline:
+      - { value: 0, name: not_recalled, description: "Settings are not recalled" }
+      - { value: 1, name: from_buffer_1, description: "Settings have been recalled from recall buffer 1" }
+      - { value: 2, name: from_buffer_2, description: "Settings have been recalled from recall buffer 2" }
+      - { value: 3, name: reserved, description: "Reserved" }
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 217
+      table: "Table 8-94"
+      quote: "ACS::AdaptiveInputEqRecalledTx<i>: Recalled Tx Eq settings status for lane <i>. See Table 8-73 and Table 8-78 for the recall settings in the staged control sets. Advertisement: 01h:161.6-5."
+
+  - name: host_controlled_input_eq_target_tx
+    display_name: HostControlledInputEqTargetTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "217 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 217
+      table: "Table 8-94"
+      quote: "ACS::HostControlledInputEqTargetTx<i>: Host-controlled Tx input equalization target for lane <i> encoded as defined in Table 6-6. Advertisement: 01h:161.2."
+
+  - name: cdr_enable_tx
+    display_name: CDREnableTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 221
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 218
+      table: "Table 8-94"
+      quote: "ACS::CDREnableTx<i>: 1b: CDR enabled; 0b: CDR bypassed. Advertisement: 01h:161.1."
+
+  # ===========================================================================
+  # § 8.10.6.2 Active Control Set: Provisioned Rx Signal Integrity Settings
+  # (bytes 222-234) — Table 8-95
+  # ===========================================================================
+
+  - name: cdr_enabled_rx
+    display_name: CDREnabledRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset: 222
+    bit_offset_expr: "lane - 1"
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 218
+      table: "Table 8-95"
+      quote: "ACS::CDREnableRx<i>: 1b: CDR enabled; 0b: CDR bypassed. Advertisement: 01h:162.1."
+
+  - name: output_eq_pre_cursor_target_rx
+    display_name: OutputEqPreCursorTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "223 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 218
+      table: "Table 8-95"
+      quote: "ACS::OutputEqPreCursorTargetRx<i>: Rx output pre-cursor equalization for lane <i>, encoded as per Table 6-7. Advertisement: 01h:162.4-3."
+
+  - name: output_eq_post_cursor_target_rx
+    display_name: OutputEqPostCursorTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "227 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 218
+      table: "Table 8-95"
+      quote: "ACS::OutputEqPostCursorTargetRx<i>: Rx output post-cursor equalization for lane <i>, encoded as per Table 6-7. Advertisement: 01h:162.4-3."
+
+  - name: output_amplitude_target_rx
+    display_name: OutputAmplitudeTargetRx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "231 + (lane - 1) / 2"
+    bit_offset_expr: "((lane - 1) % 2) * 4"
+    bit_width: 4
+    type: u4
+    access: ro
+    field_type: CapabilityAdvertisement
+    tags: [CapabilityAdvertisement]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.10.6.2"
+      pdf_page: 218
+      table: "Table 8-95"
+      quote: "ACS::OutputAmplitudeTargetRx<i>: Rx output amplitude level for lane <i>, encoded as per Table 6-8. Advertisement: 01h:162.2."
+
+  # ===========================================================================
+  # § 8.10.7 Data Path Conditions (bytes 235-239) — Table 8-96
+  # ===========================================================================

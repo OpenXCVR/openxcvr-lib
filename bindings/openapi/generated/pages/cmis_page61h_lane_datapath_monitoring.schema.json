@@ -1,0 +1,109 @@
+{
+  "$id": "cmis_page61h_lane_datapath_monitoring.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "acquisition_counter_rx": {
+      "description": "Saturating counter of media lane acquisitions after commissioning the relevant DP or NP: automatically reset when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, incremented when the media lane receiver declares lock to the incoming signal. Advertisement: 60h:130.7.",
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 316,
+        "quote": "AcquisitionCounterRx<i>: Saturating counter of media lane acquisitions after commissioning the relevant DP or NP: The module automatically resets the counter when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, and it increments the counter when the media lane receiver declares lock to the incoming signal.",
+        "section": "CMIS 5.4 § 8.31.1",
+        "table": "Table 8-191"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "acquisition_counter_tx": {
+      "description": "Saturating counter of host lane acquisitions after commissioning the relevant DP: automatically reset when the associated DPSM enters the DPInit state, incremented when the host lane receiver declares lock to the incoming signal. Advertisement: 60h:130.6.",
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 316,
+        "quote": "AcquisitionCounterTx<i>: Saturating counter of host lane acquisitions after commissioning the relevant DP: The module automatically resets the counter when the associated DPSM enters the DPInit state, and it increments the counter when the host lane receiver declares lock to the incoming signal.",
+        "section": "CMIS 5.4 § 8.31.1",
+        "table": "Table 8-191"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "dp_acquisition_counter_rx": {
+      "description": "Saturating counter of media side DP (or NP) acquisitions after commissioning the DP (or NP): automatically reset when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, incremented when the media side DP (or NP) receiver declares lock to the incoming signal. Advertisement: 60h:130.5.",
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 316,
+        "quote": "DpAcquisitionCounterRx<i>: Saturating counter of media side DP (or NP) acquisitions after commissioning the DP (or NP): The module automatically resets the counter when the associated DPSM (or NPSM) enters the DPInit (or NPInit) state, and it increments the counter when the media side DP (or NP) receiver declares lock to the incoming signal.",
+        "section": "CMIS 5.4 § 8.31.1",
+        "table": "Table 8-191"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "dp_acquisition_counter_tx": {
+      "description": "Saturating counter of host side DP acquisitions after commissioning the DP: automatically reset when the associated DPSM enters the DPInit state, incremented when the host side DP receiver declares lock to the incoming single- or multi-lane signal. Advertisement: 60h:130.4.",
+      "items": {
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 316,
+        "quote": "DpAcquisitionCounterTx<i>: Saturating counter of host side DP acquisitions after commissioning the DP: The module automatically resets the counter when the associated DPSM enters the DPInit state, and it increments the counter when the host side DP receiver declares lock to the incoming signal.",
+        "section": "CMIS 5.4 § 8.31.1",
+        "table": "Table 8-191"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "reserved_page_61h_192_255": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "pdf_page": 315,
+        "quote": "Bytes 192-255: Reserved [64]",
+        "section": "CMIS 5.4 § 8.31",
+        "table": "Table 8-190"
+      },
+      "x-openxcvr-since": "5.4"
+    }
+  },
+  "required": [
+    "acquisition_counter_tx",
+    "acquisition_counter_rx",
+    "dp_acquisition_counter_tx",
+    "dp_acquisition_counter_rx",
+    "reserved_page_61h_192_255"
+  ],
+  "title": "CmisPage61hLaneDatapathMonitoring",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      315,
+      316
+    ],
+    "spec": "CMIS 5.4 § 8.31"
+  },
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.4"
+  }
+}

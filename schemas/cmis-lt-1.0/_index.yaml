@@ -1,0 +1,30 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: cmis-lt-1.0
+  title: OIF-CMIS-LT
+  revision: "01.0"
+  source: "docs/stds/cmis/OIF-CMIS-LT-01.0.pdf"
+imports:
+  - ../cmis/_index.yaml
+kind: memory_map
+includes:
+  - enums/training-pattern.yaml
+  - enums/preset-id.yaml
+  - enums/tuning-instruction.yaml
+  - enums/training-protocol.yaml
+  - enums/training-timeout.yaml
+  - enums/training-retries.yaml
+  - enums/training-status.yaml
+  - enums/training-result.yaml
+  - enums/amplitude-code.yaml
+  - enums/tap-tuning-step.yaml
+  - enums/amplitude-tuning-step.yaml
+  - enums/preset-storage-level.yaml
+  - enums/sqm-alarm-threshold.yaml
+  - enums/ffe-length.yaml
+  - enums/ffe-cursor-location.yaml
+  - page-08h-general.yaml
+  - page-50h-egress-config.yaml
+  - page-51h-egress-tuning.yaml
+  - page-52h-ingress-config.yaml
+  - page-53h-ingress-tuning.yaml

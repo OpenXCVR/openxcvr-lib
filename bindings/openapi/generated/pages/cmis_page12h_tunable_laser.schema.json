@@ -1,0 +1,428 @@
+{
+  "$id": "cmis_page12h_tunable_laser.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "channel_number_tx": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 221,
+        "quote": "S16 Channel (offset) Number for media lane <n>=1-8. The meaning of the signed channel (offset) number and its dependence on the selected grid spacing is defined in section 8.7.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "current_laser_frequency_tx": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.001 GHz",
+      "x-openxcvr-provenance": {
+        "pdf_page": 221,
+        "quote": "U32 Current frequency for media lane <n>=1-8 in units of 0.001 GHz.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "fine_tuning_enable_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 221,
+        "quote": "Bool: fine-tuning enabled for media lane <n>=1-8. 0b: Fine-tuning disabled; 1b: Fine-tuning enabled.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "fine_tuning_offset_tx": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.001 GHz",
+      "x-openxcvr-provenance": {
+        "pdf_page": 221,
+        "quote": "S16 fine-tuning frequency offset for media lane <n>=1-8 in units of 0.001 GHz.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "fine_tuning_out_of_range_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Latched Flag indicating that a fine-tuning value outside the allowed range was given for media lane <n>=1-8.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "fine_tuning_out_of_range_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Mask for FineTuningOutOfRangeFlagTx<n>. Default: 1.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "grid_spacing_tx": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 221,
+        "quote": "Selected grid spacing of media lane <n>=1-8.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "invalid_channel_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Mask for InvalidChannelNumberFlagTx<n>. Default: 1.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "invalid_channel_number_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Latched Flag indicating that ChannelNumberTx<n> was not in advertised range of the channel spacing selected on media lane <n>=1-8.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "laser_tuning_flag_summary_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Laser tuning Flag summary for media lane <n>=1-8. The bit <n>-1 is set if and only if any of the Flags in Bytes 231-238 are 1 for the particular Lane <n>.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "output_power_tx_hi_alarm_rel_thr": {
+      "description": "Positive offset with respect to +0.5 dB, in units of 0.5 dB, for media lane supervision: threshold = nominal power + (1 + posOffset) * 0.5 dB. Advertised in 04h:196.6.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 250,
+        "quote": "U4 posOffset w.r.t. +0.5dB, in units of 0.5dB",
+        "section": "CMIS 5.4 § 8.15",
+        "table": "Table 8-109"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "output_power_tx_hi_warn_rel_thr": {
+      "description": "Positive offset with respect to +0.5 dB, in units of 0.5 dB, for media lane supervision: threshold = nominal power + (1 + posOffset) * 0.5 dB. Advertised in 04h:196.6.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 250,
+        "quote": "i.e. threshold = nominal Power + (1+posOffset) - 0.5 dB",
+        "section": "CMIS 5.4 § 8.15",
+        "table": "Table 8-109"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "output_power_tx_lo_alarm_rel_thr": {
+      "description": "Negative offset with respect to -0.5 dB, in units of -0.5 dB, for media lane supervision: threshold = nominal power - (1 + negOffset) * 0.5 dB. Advertised in 04h:196.6.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 250,
+        "quote": "U4 negOffset w.r.t. -0.5dB, in units of -0.5dB",
+        "section": "CMIS 5.4 § 8.15",
+        "table": "Table 8-109"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "output_power_tx_lo_warn_rel_thr": {
+      "description": "Negative offset with respect to -0.5 dB, in units of -0.5 dB, for media lane supervision: threshold = nominal power - (1 + negOffset) * 0.5 dB. Advertised in 04h:196.6.",
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 250,
+        "quote": "threshold = nominal Power - (1+negOffset) - 0.5 dB",
+        "section": "CMIS 5.4 § 8.15",
+        "table": "Table 8-109"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "relative_output_power_thresholds_enable_tx": {
+      "description": "Interpretation of supervision thresholds relative to programmed output power for media lane <n>=1-8: 0b disabled (absolute supervision thresholds are used), 1b enabled (relative supervision thresholds are used; see the resulting thresholds on Page 62h, Table 8-194). Advertised in 04h:196.6.",
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 250,
+        "quote": "Bool: Interpretation of supervision thresholds relative to programmed output power for media lane <n>=1-8",
+        "section": "CMIS 5.4 § 8.15",
+        "table": "Table 8-109"
+      },
+      "x-openxcvr-since": "5.4"
+    },
+    "target_output_power_oor_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Latched Flag indicating that a target output power value outside the allowed range was entered for media lane <n>=1-8.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "target_output_power_oor_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Mask for TargetOutputPowerOORFlagTx<n>. Default: 1.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "target_output_power_tx": {
+      "items": {
+        "maximum": 32767,
+        "minimum": -32768,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-lsb-units": "0.01 dBm",
+      "x-openxcvr-provenance": {
+        "pdf_page": 221,
+        "quote": "S16 Target programmable output power for media lane <n>=1-8 in units of 0.01 dBm.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "tuning_complete_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Latched Flag indicating laser tuning has been completed for media lane <n>=1-8.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "tuning_complete_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Mask for TuningCompleteFlagTx<n>. Default: 1.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "tuning_in_progress_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 221,
+        "quote": "Bool: Status indication for tuning in progress on media lane <n>=1-8. 0b/1b: Tuning not in progress / in progress. Tuning is in progress when the laser is tuning to an on-grid channel, or fine tuning to a frequency offset, or tuning to target output power.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "tuning_not_accepted_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Latched Flag indicating a failed tuning operation for media lane <n>=1-8: the module was temporarily unable to serve a tuning request in its current state. The Flag indicates that the nominally programmed grid or channel do not match the actual condition of the laser. The Flag clears when channel or grid have been successfully re-programmed.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "tuning_not_accepted_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Mask for TuningNotAcceptedFlagTx<n>=1-8. Default: 1.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "wavelength_unlock_status_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Bool: Unlocked status indication for laser wavelength on media lane <n>=1-8. 0b/1b: Wavelength locked / unlocked.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "wavelength_unlocked_flag_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Latched Flag version of WavelengthUnlockedTx<n>.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    },
+    "wavelength_unlocked_mask_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 222,
+        "quote": "Mask for WavelengthUnlockedFlagTx<n>. Default: 1.",
+        "section": "§ 8.11",
+        "table": "Table 8-99"
+      }
+    }
+  },
+  "required": [
+    "grid_spacing_tx",
+    "relative_output_power_thresholds_enable_tx",
+    "fine_tuning_enable_tx",
+    "channel_number_tx",
+    "fine_tuning_offset_tx",
+    "current_laser_frequency_tx",
+    "target_output_power_tx",
+    "output_power_tx_hi_alarm_rel_thr",
+    "output_power_tx_hi_warn_rel_thr",
+    "output_power_tx_lo_alarm_rel_thr",
+    "output_power_tx_lo_warn_rel_thr",
+    "tuning_in_progress_tx",
+    "wavelength_unlock_status_tx",
+    "laser_tuning_flag_summary_tx",
+    "target_output_power_oor_flag_tx",
+    "fine_tuning_out_of_range_flag_tx",
+    "tuning_not_accepted_flag_tx",
+    "invalid_channel_number_flag_tx",
+    "wavelength_unlocked_flag_tx",
+    "tuning_complete_flag_tx",
+    "target_output_power_oor_mask_tx",
+    "fine_tuning_out_of_range_mask_tx",
+    "tuning_not_accepted_mask_tx",
+    "invalid_channel_mask_tx",
+    "wavelength_unlocked_mask_tx",
+    "tuning_complete_mask_tx"
+  ],
+  "title": "CmisPage12hTunableLaser",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      221,
+      222
+    ],
+    "spec": "CMIS 5.3 § 8.11"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

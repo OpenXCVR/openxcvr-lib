@@ -1,0 +1,16 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8024HostElectricalInterface
+title: SFF-8024 Host Electrical Interface IDs
+spec:
+  id: sff-8024
+  revision: "4.14"
+provenance:
+  spec: SFF-8024 4.14 Table 4-5
+  pdf_pages: [23, 24, 25, 26, 27]
+entry_includes:
+  - entries/host-ei-ids-part-01.yaml
+  - entries/host-ei-ids-part-02.yaml
+  - entries/host-ei-ids-part-03.yaml
+  - entries/host-ei-ids-part-04.yaml
+entries: []

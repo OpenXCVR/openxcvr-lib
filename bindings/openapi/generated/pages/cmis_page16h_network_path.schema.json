@@ -1,0 +1,373 @@
+{
+  "$id": "cmis_page16h_network_path.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "acs_np_in_use_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 256,
+        "quote": "ACS::NPConfigLane<i> NPInUseLane<i>: active Network Path configuration; see CMIS 5.3 § 8.15.1 Table 8-133.",
+        "section": "CMIS 5.3 § 8.15.4",
+        "table": "Table 8-142"
+      }
+    },
+    "acs_npid_lane": {
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 256,
+        "quote": "ACS::NPConfigLane<i> NPIDLane<i>: active Network Path configuration; see CMIS 5.3 § 8.15.1 Table 8-133.",
+        "section": "CMIS 5.3 § 8.15.4",
+        "table": "Table 8-142"
+      }
+    },
+    "ext_app_descriptor": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 15,
+      "minItems": 15,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 259,
+        "quote": "ExtAppDescriptor<i>: 0b describes a supported DP Application; 1b (partially) describes a supported NP Application.",
+        "section": "CMIS 5.3 § 8.15.5.3",
+        "table": "Table 8-148"
+      }
+    },
+    "hp_source_rx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 253,
+        "quote": "HPSourceRx<i>: controls the signal source feeding host lane <i> in Rx direction. Advertisement: 16h:226.0.",
+        "section": "CMIS 5.3 § 8.15.2",
+        "table": "Table 8-137"
+      }
+    },
+    "max_duration_np_deinit": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 258,
+        "quote": "MaxDurationNPDeinit: maximum duration of the NPDeinit state encoded as per Table 8-48.",
+        "section": "CMIS 5.3 § 8.15.5.1",
+        "table": "Table 8-146"
+      }
+    },
+    "max_duration_np_init": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 258,
+        "quote": "MaxDurationNPInit: maximum duration of the NPInit state encoded as per Table 8-48.",
+        "section": "CMIS 5.3 § 8.15.5.1",
+        "table": "Table 8-146"
+      }
+    },
+    "max_duration_np_tx_turn_off": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 258,
+        "quote": "MaxDurationNPTxTurnOff: encoded maximum duration of the NPTxTurnOff state.",
+        "section": "CMIS 5.3 § 8.15.5.1",
+        "table": "Table 8-146"
+      }
+    },
+    "max_duration_np_tx_turn_on": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "pdf_page": 258,
+        "quote": "MaxDurationNPTxTurnOn: encoded maximum duration of the NPTxTurnOn state.",
+        "section": "CMIS 5.3 § 8.15.5.1",
+        "table": "Table 8-146"
+      }
+    },
+    "mux_granularity": {
+      "items": {
+        "maximum": 255,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 261,
+        "quote": "MuxGranularity<i>: 0 not supported; >0 HostInterfaceID indicating the lane data rate and multiplex rate granularity.",
+        "section": "CMIS 5.3 § 8.15.5.5",
+        "table": "Table 8-150"
+      }
+    },
+    "mux_structs_supported": {
+      "items": {
+        "contentEncoding": "base64",
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 261,
+        "quote": "MuxStructsSupported<i> contains a bit mask where each bit <j> set indicates support for the multiplex structure ID <j> as defined in Table 8-149.",
+        "section": "CMIS 5.3 § 8.15.5.5",
+        "table": "Table 8-151"
+      }
+    },
+    "np_config_status_lane": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 255,
+        "quote": "NPConfigStatusLane<i>: Provisioning Command Execution / Result Status for the Network Path of host lane <i>, during and after the most recent configuration command.",
+        "section": "CMIS 5.3 § 8.15.3",
+        "table": "Table 8-140"
+      }
+    },
+    "np_deinit_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 253,
+        "quote": "NPDeinitLane<i>: 0b Initialize the Network Path associated with host lane <i>; 1b Deinitialize the Network Path associated with host lane <i>.",
+        "section": "CMIS 5.3 § 8.15.2",
+        "table": "Table 8-136"
+      }
+    },
+    "np_init_pending_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 257,
+        "quote": "NPInitPendingLane<i>: 1b means commissioning the NP Active Control Set during NPInit has not yet been executed after successful ApplyNPInit.",
+        "section": "CMIS 5.3 § 8.15.4",
+        "table": "Table 8-145"
+      }
+    },
+    "np_source_tx": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 253,
+        "quote": "NPSourceTx<i>: controls the signal source feeding the Network Path input related to the HP containing host lane <i>. Advertisement: 16h:226.1.",
+        "section": "CMIS 5.3 § 8.15.2",
+        "table": "Table 8-137"
+      }
+    },
+    "np_state_host_lane": {
+      "items": {
+        "maximum": 15,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 256,
+        "quote": "NPStateHostLane<i>: Network Path State of host lane <i>; see Table 8-144 for encoding.",
+        "section": "CMIS 5.3 § 8.15.4",
+        "table": "Table 8-143"
+      }
+    },
+    "replace_hp_signal_rx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 258,
+        "quote": "ReplaceHPSignalRxSupported: 0b not supported; 1b Rx replacement signals for NP outputs are supported.",
+        "section": "CMIS 5.3 § 8.15.5.2",
+        "table": "Table 8-147"
+      }
+    },
+    "replace_hp_signal_tx_supported": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "pdf_page": 258,
+        "quote": "ReplaceHPSignalTxSupported: 0b not supported; 1b Tx replacement signals for NP inputs are supported.",
+        "section": "CMIS 5.3 § 8.15.5.2",
+        "table": "Table 8-147"
+      }
+    },
+    "scs0_apply_np_init_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 254,
+        "quote": "SCS0::ApplyNPInitLane<i>: 1b triggers the Provision procedure using NP Staged Control Set 0 settings for host lane <i>, with feedback in NPConfigStatusLane<i>.",
+        "section": "CMIS 5.3 § 8.15.3",
+        "table": "Table 8-138"
+      }
+    },
+    "scs0_np_in_use_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 251,
+        "quote": "SCS<k>::NPInUseLane<i>: 0b host lane <i> is either part of the Data Path of a DP Application or it is unused; 1b host lane <i> is part of a Host Path that feeds the Network Path identified by NPID.",
+        "section": "CMIS 5.3 § 8.15.1",
+        "table": "Table 8-133"
+      }
+    },
+    "scs0_npid_lane": {
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 251,
+        "quote": "SCS<k>::NPIDLane<i>: Network Path ID of that Network Path, defined as the number of the first host lane feeding the Network Path, decremented by one.",
+        "section": "CMIS 5.3 § 8.15.1",
+        "table": "Table 8-133"
+      }
+    },
+    "scs1_apply_np_init_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 254,
+        "quote": "SCS1::ApplyNPInitLane<i>: 1b triggers the Provision procedure using NP Staged Control Set 1 settings for host lane <i>, with feedback in NPConfigStatusLane<i>.",
+        "section": "CMIS 5.3 § 8.15.3",
+        "table": "Table 8-139"
+      }
+    },
+    "scs1_np_in_use_lane": {
+      "items": {
+        "type": "boolean"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 252,
+        "quote": "SCS1::NPConfigLane<i> NPInUseLane<i>: see CMIS 5.3 § 8.15.1 Table 8-133.",
+        "section": "CMIS 5.3 § 8.15.1",
+        "table": "Table 8-135"
+      }
+    },
+    "scs1_npid_lane": {
+      "items": {
+        "maximum": 7,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "pdf_page": 252,
+        "quote": "SCS1::NPConfigLane<i> NPIDLane<i>: see CMIS 5.3 § 8.15.1 Table 8-133.",
+        "section": "CMIS 5.3 § 8.15.1",
+        "table": "Table 8-135"
+      }
+    }
+  },
+  "required": [
+    "scs0_npid_lane",
+    "scs0_np_in_use_lane",
+    "scs1_npid_lane",
+    "scs1_np_in_use_lane",
+    "np_deinit_lane",
+    "hp_source_rx",
+    "np_source_tx",
+    "scs0_apply_np_init_lane",
+    "scs1_apply_np_init_lane",
+    "np_config_status_lane",
+    "acs_npid_lane",
+    "acs_np_in_use_lane",
+    "np_state_host_lane",
+    "np_init_pending_lane",
+    "max_duration_np_deinit",
+    "max_duration_np_init",
+    "max_duration_np_tx_turn_off",
+    "max_duration_np_tx_turn_on",
+    "replace_hp_signal_tx_supported",
+    "replace_hp_signal_rx_supported",
+    "mux_granularity",
+    "mux_structs_supported",
+    "ext_app_descriptor"
+  ],
+  "title": "CmisPage16hNetworkPath",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260,
+      261
+    ],
+    "spec": "CMIS 5.3 § 8.15"
+  },
+  "x-openxcvr-spec": {
+    "errata": [
+      {
+        "revision": "1.0",
+        "source": "docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf"
+      }
+    ],
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

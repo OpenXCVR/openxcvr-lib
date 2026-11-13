@@ -1,0 +1,18 @@
+{
+  "$id": "cmis_cdb_command_id.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CmisCdbCommandId",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      286,
+      287
+    ],
+    "spec": "CMIS 5.3 § 9.1 / Table 9-1"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: revision-qualified — entry revision windows are interpreted within the known CMIS family domain (3.0, 4.0, 5.0, 5.1, 5.2, 5.3, 5.4); entries without a window apply throughout that domain only, never outside it",
+  "x-openxcvr-spec": {
+    "id": "cmis",
+    "revision": "5.3"
+  }
+}

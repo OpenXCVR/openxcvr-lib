@@ -1,0 +1,285 @@
+schema: openxcvr.state_machine.v1
+kind: state_machine
+id: CmisDataPathStateMachine
+title: CMIS Data Path State Machine
+spec:
+  id: cmis
+  revision: "5.3"
+  errata:
+    - revision: "1.0"
+      source: docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+provenance:
+  spec: "CMIS 5.3 § 6.3.3"
+  pdf_pages: [84, 85, 86, 87, 88, 89, 90, 91, 92, 93]
+  figure: "Figure 6-5"
+state_enum: CmisDataPathState
+parent_machine: CmisModuleStateMachine
+lifecycle_dependency: "DPSM only runs while MSM is in ModuleReady"
+scope:
+  kind: per_data_path
+  cardinality_field: page_01h_advertising.banks_supported
+initial_state: DPDeactivated
+states:
+  - name: DPDeactivated
+    enum_name: dp_deactivated
+    enum_value: 0x1
+    is_initial: true
+    is_terminal: false
+    description: >
+      Ground state where no Data Path is initialized for the associated host
+      lane group or the lane is unused.
+    invariants:
+      - "Data Path resources are not initialized for traffic."
+      - "DPStateChangedFlag may be set on stable entry."
+    timeout: null
+  - name: DPInit
+    enum_name: dp_init
+    enum_value: 0x2
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where the module initializes all resources associated
+      with the Data Path.
+    invariants:
+      - "DPInitPendingLane bits for the Data Path are cleared while in DPInit."
+    timeout:
+      duration_ms_field: page_01h_advertising.max_duration_dp_init
+      on_expiry: DPDeinit
+  - name: DPDeinit
+    enum_name: dp_deinit
+    enum_value: 0x3
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where Data Path resources are deinitialized.
+    invariants:
+      - "Data Path is leaving initialized or active operation."
+    timeout:
+      duration_ms_field: page_01h_advertising.max_duration_dp_deinit
+      on_expiry: DPDeactivated
+  - name: DPActivated
+    enum_name: dp_activated
+    enum_value: 0x4
+    is_initial: false
+    is_terminal: false
+    description: >
+      Steady operational state where the Data Path is initialized and Tx output
+      is active unless separately limited by signal conditions.
+    invariants:
+      - "Data Path resources are initialized."
+      - "Tx output turn-on has completed."
+    timeout: null
+  - name: DPTxTurnOn
+    enum_name: dp_tx_turn_on
+    enum_value: 0x5
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where Tx output is being turned on after the Data Path is
+      initialized.
+    invariants:
+      - "Tx output enable sequencing is in progress."
+    timeout:
+      duration_ms_field: page_01h_advertising.max_duration_dp_tx_turn_on
+      on_expiry: DPTxTurnOff
+  - name: DPTxTurnOff
+    enum_name: dp_tx_turn_off
+    enum_value: 0x6
+    is_initial: false
+    is_terminal: false
+    description: >
+      Transient state where Tx output is being turned off before returning to an
+      initialized but non-active Data Path state.
+    invariants:
+      - "Tx output disable or squelch sequencing is in progress."
+    timeout:
+      duration_ms_field: page_01h_advertising.max_duration_dp_tx_turn_off
+      on_expiry: DPInitialized
+  - name: DPInitialized
+    enum_name: dp_initialized
+    enum_value: 0x7
+    is_initial: false
+    is_terminal: false
+    description: >
+      Steady initialized state where the Data Path configuration has been
+      realized but Tx output is not yet active.
+    invariants:
+      - "Active Control Set matches initialized hardware configuration."
+    timeout: null
+transitions:
+  - id: dp_deactivated_to_dp_init
+    from: DPDeactivated
+    to: DPInit
+    trigger:
+      kind: register_write
+      register: page_10h_lane_control.dp_deinit_lane
+      value: 0
+      condition: "DPDeinitS is FALSE for every host lane in the Data Path."
+    guard:
+      - { field: lower_memory.module_state, equals: ModuleReady }
+      - { field: page_10h_lane_control.dp_deinit_lane, equals: false }
+    side_effects:
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPInit }
+      - { kind: start_timer, timer: DPInitMaxDuration, duration_ms_field: page_01h_advertising.max_duration_dp_init }
+      - { kind: log_event, event_id: dpsm_init_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Table 6-16"
+      quote: "DPDeinitS = ( NOT ModuleReadyT ) OR LowPwrS OR DPDeinitT"
+  - id: dp_init_to_dp_initialized
+    from: DPInit
+    to: DPInitialized
+    since: "4.0"
+    trigger:
+      kind: internal
+      condition: "DPInit complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: DPInitMaxDuration }
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPInitialized }
+      - { kind: state_change, target: page_11h_lane_status.dp_init_pending_lane, operation: clear }
+      - { kind: log_event, event_id: dpsm_initialized }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Figure 6-5"
+      quote: "DPInit complete"
+  - id: dp_initialized_to_dp_deinit
+    from: DPInitialized
+    to: DPDeinit
+    since: "4.0"
+    trigger:
+      kind: internal
+      condition: "DPReDeinitS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPDeinit }
+      - { kind: start_timer, timer: DPDeinitMaxDuration, duration_ms_field: page_01h_advertising.max_duration_dp_deinit }
+      - { kind: log_event, event_id: dpsm_deinit_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Table 6-17"
+      quote: "DPReDeinitS = DPDeinitS OR DPReinitT"
+  - id: dp_initialized_to_dp_tx_turn_on
+    from: DPInitialized
+    to: DPTxTurnOn
+    since: "4.0"
+    trigger:
+      kind: internal
+      condition: "DPDeactivateS is FALSE."
+    guard:
+      - { field: page_10h_lane_control.output_disable_tx, equals: false }
+      - { field: page_10h_lane_control.output_squelch_force_tx, equals: false }
+    side_effects:
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPTxTurnOn }
+      - { kind: start_timer, timer: DPTxTurnOnMaxDuration, duration_ms_field: page_01h_advertising.max_duration_dp_tx_turn_on }
+      - { kind: log_event, event_id: dpsm_tx_turn_on_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Figure 6-5"
+      quote: "DPDeactivateS FALSE"
+  - id: dp_tx_turn_on_to_dp_activated
+    from: DPTxTurnOn
+    to: DPActivated
+    since: "4.0"
+    trigger:
+      kind: internal
+      condition: "DPTxTurnOn complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: DPTxTurnOnMaxDuration }
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPActivated }
+      - { kind: log_event, event_id: dpsm_activated }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Figure 6-5"
+      quote: "DPTxTurnOn complete"
+  - id: dp_activated_to_dp_tx_turn_off
+    from: DPActivated
+    to: DPTxTurnOff
+    since: "4.0"
+    trigger:
+      kind: internal
+      condition: "DPDeactivateS becomes TRUE."
+    guard: null
+    side_effects:
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPTxTurnOff }
+      - { kind: start_timer, timer: DPTxTurnOffMaxDuration, duration_ms_field: page_01h_advertising.max_duration_dp_tx_turn_off }
+      - { kind: log_event, event_id: dpsm_tx_turn_off_started }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Equation 6-12"
+      quote: "DPDeactivateS = DPReDeinitS OR DPTxDisableT OR DPTxForceSquelchT"
+  - id: dp_tx_turn_off_to_dp_initialized
+    from: DPTxTurnOff
+    to: DPInitialized
+    since: "4.0"
+    trigger:
+      kind: internal
+      condition: "DPTxTurnOff complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: DPTxTurnOffMaxDuration }
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPInitialized }
+      - { kind: log_event, event_id: dpsm_tx_off_complete }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Figure 6-5"
+      quote: "DPTxTurnOff complete"
+  - id: dp_deinit_to_dp_deactivated
+    from: DPDeinit
+    to: DPDeactivated
+    since: "4.0"
+    trigger:
+      kind: internal
+      condition: "DPDeinit complete."
+    guard: null
+    side_effects:
+      - { kind: cancel_timer, timer: DPDeinitMaxDuration }
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPDeactivated }
+      - { kind: log_event, event_id: dpsm_deactivated }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Figure 6-5"
+      quote: "DPDeinit complete"
+  # INTENTIONAL OMISSION: SCS1 trigger (page_10h_lane_control.scs1_apply_dp_init_lane) produces
+  # the same transition shape as SCS0 for both dp_apply_init_pending_from_initialized and
+  # dp_apply_init_pending_from_activated. It is omitted here as a mechanical duplication
+  # of the SCS0 transitions; see _FLAGS_101_103.md for rationale.
+  - id: dp_apply_init_pending_from_initialized
+    from: DPInitialized
+    to: DPDeinit
+    since: "5.0"
+    trigger:
+      kind: register_write
+      register: page_10h_lane_control.scs0_apply_dp_init_lane
+      value: 1
+      condition: "Successful ApplyDPInit sets DPInitPending and DPReDeinitS becomes TRUE."
+    guard:
+      - { field: lower_memory.stepped_config_only, equals: false }
+    side_effects:
+      - { kind: state_change, target: page_11h_lane_status.dp_init_pending_lane, operation: set }
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPDeinit }
+      - { kind: log_event, event_id: dpsm_reinit_requested }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Equation 6-10"
+      quote: "DPReinitT = DPInitPendingLane"
+  - id: dp_apply_init_pending_from_activated
+    from: DPActivated
+    to: DPTxTurnOff
+    since: "5.0"
+    trigger:
+      kind: register_write
+      register: page_10h_lane_control.scs0_apply_dp_init_lane
+      value: 1
+      condition: "Successful ApplyDPInit sets DPInitPending and DPDeactivateS becomes TRUE."
+    guard:
+      - { field: lower_memory.stepped_config_only, equals: false }
+    side_effects:
+      - { kind: state_change, target: page_11h_lane_status.dp_init_pending_lane, operation: set }
+      - { kind: state_change, target: page_11h_lane_status.dp_state_host_lane, operation: assign, value: DPTxTurnOff }
+      - { kind: log_event, event_id: dpsm_reinit_requested }
+    provenance:
+      section: "CMIS 5.3 § 6.3.3.1"
+      table: "Equation 6-12"
+      quote: "DPDeactivateS = DPReDeinitS OR"

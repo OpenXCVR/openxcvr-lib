@@ -1,0 +1,457 @@
+fields:
+
+  # ===========================================================================
+  # § 8.11 Grid Spacings (bytes 128-135) — Table 8-99
+  # 1 byte per media lane: bit 7-4 GridSpacing, bit 0 FineTuningEnable.
+  # ===========================================================================
+
+  - name: grid_spacing_tx
+    display_name: GridSpacingTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1)"
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    # R5 convention: the base block carries the newest code set (CMIS 5.4
+    # Table 8-109, where code 1001b is the 300 GHz grid spacing); the
+    # pre-5.4 code set, where 1001b sits inside the Reserved 9-14 span, is
+    # recorded by the changed_in blocks below (applied for every revision
+    # they cover, in ascending order).
+    enum_inline:
+      - { value: 0x0, name: ghz_3p125, description: "3.125 GHz" }
+      - { value: 0x1, name: ghz_6p25, description: "6.25 GHz" }
+      - { value: 0x2, name: ghz_12p5, description: "12.5 GHz" }
+      - { value: 0x3, name: ghz_25, description: "25 GHz" }
+      - { value: 0x4, name: ghz_50, description: "50 GHz" }
+      - { value: 0x5, name: ghz_100, description: "100 GHz" }
+      - { value: 0x6, name: ghz_33, description: "33 GHz" }
+      - { value: 0x7, name: ghz_75, description: "75 GHz" }
+      - { value: 0x8, name: ghz_150, description: "150 GHz" }
+      - { value: 0x9, name: ghz_300, description: "300 GHz" }
+      - { value: 0xa..0xe, name: reserved_a_e, description: "Reserved" }
+      - { value: 0xf, name: not_available, description: "Not available" }
+    changed_in:
+      # The through-5.3 code set, in force from the CMIS 4.0 introduction of
+      # Page 12h: code 1001b is Reserved (part of the 9-14 span).
+      - rev: "4.0"
+        enum_inline:
+          - { value: 0x0, name: ghz_3p125, description: "3.125 GHz" }
+          - { value: 0x1, name: ghz_6p25, description: "6.25 GHz" }
+          - { value: 0x2, name: ghz_12p5, description: "12.5 GHz" }
+          - { value: 0x3, name: ghz_25, description: "25 GHz" }
+          - { value: 0x4, name: ghz_50, description: "50 GHz" }
+          - { value: 0x5, name: ghz_100, description: "100 GHz" }
+          - { value: 0x6, name: ghz_33, description: "33 GHz" }
+          - { value: 0x7, name: ghz_75, description: "75 GHz" }
+          - { value: 0x8, name: ghz_150, description: "150 GHz" }
+          - { value: 0x9..0xe, name: reserved_9_e, description: "Reserved" }
+          - { value: 0xf, name: not_available, description: "Not available" }
+        provenance:
+          section: "CMIS 5.3 § 8.11"
+          pdf_page: 221
+          table: "Table 8-99"
+          quote: "Selected grid spacing of media lane <n>=1-8 (codes 1001b-1110b Reserved through CMIS 5.3; Table 8-68 advertises the 300 GHz grid from 5.4)."
+      # CMIS 5.4 Table 8-109: code 1001b defined as the 300 GHz grid spacing
+      # (E33; identical to the base block per the R5 base-equals-highest rule).
+      - rev: "5.4"
+        enum_inline:
+          - { value: 0x0, name: ghz_3p125, description: "3.125 GHz" }
+          - { value: 0x1, name: ghz_6p25, description: "6.25 GHz" }
+          - { value: 0x2, name: ghz_12p5, description: "12.5 GHz" }
+          - { value: 0x3, name: ghz_25, description: "25 GHz" }
+          - { value: 0x4, name: ghz_50, description: "50 GHz" }
+          - { value: 0x5, name: ghz_100, description: "100 GHz" }
+          - { value: 0x6, name: ghz_33, description: "33 GHz" }
+          - { value: 0x7, name: ghz_75, description: "75 GHz" }
+          - { value: 0x8, name: ghz_150, description: "150 GHz" }
+          - { value: 0x9, name: ghz_300, description: "300 GHz" }
+          - { value: 0xa..0xe, name: reserved_a_e, description: "Reserved" }
+          - { value: 0xf, name: not_available, description: "Not available" }
+        provenance:
+          section: "CMIS 5.4 § 8.15"
+          pdf_page: 250
+          table: "Table 8-109"
+          quote: "1001b: 300GHz"
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 221
+      table: "Table 8-99"
+      quote: "Selected grid spacing of media lane <n>=1-8."
+
+  # CMIS 5.4 Table 8-109: byte 128-135 bit 1, allocated from the 5.3
+  # reserved bits 3-1. Advertised in 04h:196.6.
+  - name: relative_output_power_thresholds_enable_tx
+    display_name: RelativeOutputPowerThresholdsEnableTx<lane>
+    since: "5.4"
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    description: >
+      Interpretation of supervision thresholds relative to programmed output
+      power for media lane <n>=1-8: 0b disabled (absolute supervision
+      thresholds are used), 1b enabled (relative supervision thresholds are
+      used; see the resulting thresholds on Page 62h, Table 8-194).
+      Advertised in 04h:196.6.
+    provenance:
+      section: "CMIS 5.4 § 8.15"
+      pdf_page: 250
+      table: "Table 8-109"
+      quote: "Bool: Interpretation of supervision thresholds relative to programmed output power for media lane <n>=1-8"
+
+  - name: fine_tuning_enable_tx
+    display_name: FineTuningEnableTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "128 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    changed_in:
+      # CMIS 5.4 Table 8-109 reclassifies this field from RW Rqd. to RW Adv.
+      # (advertised via 04h:129.7 FineTuningSupported), so the required flag
+      # ends at 5.4 and the advertised (conditionally present) window starts.
+      - rev: "5.4"
+        flags:
+          is_required: false
+          is_readable: true
+          is_writable: true
+          is_ever_writable: true
+          is_dynamic: true
+        provenance:
+          section: "CMIS 5.4 § 8.15"
+          pdf_page: 250
+          table: "Table 8-109"
+          quote: "Bool: fine-tuning enabled for media lane <n>=1-8. 0b: Fine-tuning disabled; 1b: Fine-tuning enabled. Advertisement: 04h:129"
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 221
+      table: "Table 8-99"
+      quote: "Bool: fine-tuning enabled for media lane <n>=1-8. 0b: Fine-tuning disabled; 1b: Fine-tuning enabled."
+
+  # ===========================================================================
+  # § 8.11 Channel Offset Numbers (bytes 136-151) — Table 8-99
+  # ===========================================================================
+
+  - name: channel_number_tx
+    display_name: ChannelNumberTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "136 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: i16be
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 221
+      table: "Table 8-99"
+      quote: "S16 Channel (offset) Number for media lane <n>=1-8. The meaning of the signed channel (offset) number and its dependence on the selected grid spacing is defined in section 8.7."
+
+  # ===========================================================================
+  # § 8.11 Fine Tuning Offsets (bytes 152-167) — Table 8-99
+  # ===========================================================================
+
+  - name: fine_tuning_offset_tx
+    display_name: FineTuningOffsetTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "152 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.001 GHz" }
+    access: rw
+    changed_in:
+      # CMIS 5.4 Table 8-109 reclassifies this field from RW Rqd. to RW Adv.
+      # (advertised via 04h:129.7 FineTuningSupported).
+      - rev: "5.4"
+        flags:
+          is_required: false
+          is_readable: true
+          is_writable: true
+          is_ever_writable: true
+          is_dynamic: true
+        provenance:
+          section: "CMIS 5.4 § 8.15"
+          pdf_page: 250
+          table: "Table 8-109"
+          quote: "S16 fine-tuning frequency offset for media lane <n>=1-8 in units of 0.001 GHz. Advertisement: 04h:129"
+    field_type: Control
+    tags: [Control, "Control::FrequencyOffset"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 221
+      table: "Table 8-99"
+      quote: "S16 fine-tuning frequency offset for media lane <n>=1-8 in units of 0.001 GHz."
+
+  # ===========================================================================
+  # § 8.11 Laser Frequencies (bytes 168-199) — Table 8-99
+  # 4 bytes per lane.
+  # ===========================================================================
+
+  - name: current_laser_frequency_tx
+    display_name: CurrentLaserFrequencyTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "168 + 4 * (lane - 1)"
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: scaled_unsigned, lsb_units: "0.001 GHz" }
+    access: ro
+    field_type: Telemetry
+    tags: [Monitor, "Monitor::Frequency"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 221
+      table: "Table 8-99"
+      quote: "U32 Current frequency for media lane <n>=1-8 in units of 0.001 GHz."
+
+  # ===========================================================================
+  # § 8.11 Target Output Power (bytes 200-215) — Table 8-99
+  # ===========================================================================
+
+  - name: target_output_power_tx
+    display_name: TargetOutputPowerTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "200 + 2 * (lane - 1)"
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: scaled_signed, lsb_units: "0.01 dBm" }
+    access: rw
+    field_type: Control
+    tags: [Control, "Control::Configuration"]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 221
+      table: "Table 8-99"
+      quote: "S16 Target programmable output power for media lane <n>=1-8 in units of 0.01 dBm."
+
+  # bytes 218-221 are 4 reserved bytes since 5.4 (the 5.3 window reserved
+  # bytes 216-221; CMIS 5.4 Table 8-109 allocates 216-217 to the relative
+  # output power supervision threshold offsets below).
+
+  # ===========================================================================
+  # CMIS 5.4 § 8.15 Relative Output Power Supervision Threshold Offsets
+  # (bytes 216-217) — Table 8-109. Advertised in 04h:196.6. U4 offsets in
+  # units of 0.5 dB relative to the nominal programmed output power.
+  # ===========================================================================
+
+  - name: output_power_tx_hi_alarm_rel_thr
+    display_name: OutputPowerTxHiAlarmRelThr
+    since: "5.4"
+    offset: 216
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Threshold
+    tags: [AlarmThreshold, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    description: >
+      Positive offset with respect to +0.5 dB, in units of 0.5 dB, for media
+      lane supervision: threshold = nominal power + (1 + posOffset) * 0.5 dB.
+      Advertised in 04h:196.6.
+    provenance:
+      section: "CMIS 5.4 § 8.15"
+      pdf_page: 250
+      table: "Table 8-109"
+      quote: "U4 posOffset w.r.t. +0.5dB, in units of 0.5dB"
+
+  - name: output_power_tx_hi_warn_rel_thr
+    display_name: OutputPowerTxHiWarnRelThr
+    since: "5.4"
+    offset: 216
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Threshold
+    tags: [AlarmThreshold, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    description: >
+      Positive offset with respect to +0.5 dB, in units of 0.5 dB, for media
+      lane supervision: threshold = nominal power + (1 + posOffset) * 0.5 dB.
+      Advertised in 04h:196.6.
+    provenance:
+      section: "CMIS 5.4 § 8.15"
+      pdf_page: 250
+      table: "Table 8-109"
+      quote: "i.e. threshold = nominal Power + (1+posOffset) - 0.5 dB"
+
+  - name: output_power_tx_lo_alarm_rel_thr
+    display_name: OutputPowerTxLoAlarmRelThr
+    since: "5.4"
+    offset: 217
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Threshold
+    tags: [AlarmThreshold, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    description: >
+      Negative offset with respect to -0.5 dB, in units of -0.5 dB, for media
+      lane supervision: threshold = nominal power - (1 + negOffset) * 0.5 dB.
+      Advertised in 04h:196.6.
+    provenance:
+      section: "CMIS 5.4 § 8.15"
+      pdf_page: 250
+      table: "Table 8-109"
+      quote: "U4 negOffset w.r.t. -0.5dB, in units of -0.5dB"
+
+  - name: output_power_tx_lo_warn_rel_thr
+    display_name: OutputPowerTxLoWarnRelThr
+    since: "5.4"
+    offset: 217
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    access: rw
+    field_type: Threshold
+    tags: [AlarmThreshold, "Control::Configuration"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: true
+      is_ever_writable: true
+      is_dynamic: true
+    description: >
+      Negative offset with respect to -0.5 dB, in units of -0.5 dB, for media
+      lane supervision: threshold = nominal power - (1 + negOffset) * 0.5 dB.
+      Advertised in 04h:196.6.
+    provenance:
+      section: "CMIS 5.4 § 8.15"
+      pdf_page: 250
+      table: "Table 8-109"
+      quote: "threshold = nominal Power - (1+negOffset) - 0.5 dB"
+
+  # ===========================================================================
+  # § 8.11 Status Indicators (bytes 222-229) — Table 8-99
+  # 1 byte per lane: bit 1 TuningInProgress, bit 0 WavelengthUnlockStatus.
+  # ===========================================================================
+
+  - name: tuning_in_progress_tx
+    display_name: TuningInProgressTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "222 + (lane - 1)"
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 221
+      table: "Table 8-99"
+      quote: "Bool: Status indication for tuning in progress on media lane <n>=1-8. 0b/1b: Tuning not in progress / in progress. Tuning is in progress when the laser is tuning to an on-grid channel, or fine tuning to a frequency offset, or tuning to target output power."
+
+  - name: wavelength_unlock_status_tx
+    display_name: WavelengthUnlockStatusTx<lane>
+    instances: { index: lane, start: 1, end: 8 }
+    offset_expr: "222 + (lane - 1)"
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [Status]
+    scope: { lane: lane }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.11"
+      pdf_page: 222
+      table: "Table 8-99"
+      quote: "Bool: Unlocked status indication for laser wavelength on media lane <n>=1-8. 0b/1b: Wavelength locked / unlocked."
+
+  # ===========================================================================
+  # § 8.11 Flag Summary (byte 230) — Table 8-99
+  # Byte-bitmap form: 1 bit per lane all packed into byte 230.
+  # ===========================================================================

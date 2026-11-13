@@ -1,0 +1,65 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmis13Page30hMediaLaneConfigurableThresholds
+title: C-CMIS 1.3 Page 30h Media Lane Configurable Thresholds
+spec:
+  id: c-cmis-1.3
+  revision: "01.3"
+  source: docs/stds/cmis/OIF-C-CMIS-01.3.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.3 § 7.4.1-7.4.3
+  pdf_pages: [17, 18]
+page_address: "30h"
+size_bytes: 128
+banking:
+  bank_select_field: lower_memory.bank_select
+  per_bank_dimension: lane
+fields:
+  - { name: total_pwr_hi_alarm_thresh, offset: 128, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxPower, AlarmThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Total Power high alarm threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: total_pwr_lo_alarm_thresh, offset: 130, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxPower, AlarmThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Total Power low alarm threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: total_pwr_hi_warn_thresh, offset: 132, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxPower, WarningThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Total Power high warning threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: total_pwr_lo_warn_thresh, offset: 134, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxPower, WarningThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Total Power low warning threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: sig_pwr_hi_alarm_thresh, offset: 136, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxSignalPower, AlarmThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Signal Power high alarm threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: sig_pwr_lo_alarm_thresh, offset: 138, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxSignalPower, AlarmThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Signal Power low alarm threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: sig_pwr_hi_warn_thresh, offset: 140, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxSignalPower, WarningThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Signal Power high warning threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: sig_pwr_lo_warn_thresh, offset: 142, size_bytes: 2, type: i16be, access: rw, field_type: Threshold, tags: [C-CMIS, RxSignalPower, WarningThreshold], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Rx Signal Power low warning threshold, 0.01 dBm per LSB", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - { name: reserved_144_7_2, offset: 144, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 17, table: "Table 10" } }
+  - name: total_pwr_use_cfg_thresh
+    offset: 144
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, RxPower, ThresholdSelect]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Select default or host-configured threshold for Rx total power VDM"
+    provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 18, table: "Table 10" }
+    enum_inline:
+      - { value: 0, name: default_threshold, description: "Use default threshold" }
+      - { value: 1, name: host_configured_threshold, description: "Use host-configured threshold" }
+  - name: sig_pwr_use_cfg_thresh
+    offset: 144
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: rw
+    field_type: Control
+    tags: [C-CMIS, RxSignalPower, ThresholdSelect]
+    flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }
+    description: "Select default or host-configured threshold for Rx signal power VDM"
+    provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 18, table: "Table 10" }
+    enum_inline:
+      - { value: 0, name: default_threshold, description: "Use default threshold" }
+      - { value: 1, name: host_configured_threshold, description: "Use host-configured threshold" }
+  - { name: reserved_145_159, offset: 145, size_bytes: 15, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.2", pdf_page: 18, table: "Table 10" } }
+  - { name: fdd_raise_thresh, offset: 160, size_bytes: 2, type: f16be, access: rw, field_type: Threshold, tags: [C-CMIS, FDD, BER], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold to activate FEC Detected Degrade", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: fdd_clear_thresh, offset: 162, size_bytes: 2, type: f16be, access: rw, field_type: Threshold, tags: [C-CMIS, FDD, BER], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold to clear FEC Detected Degrade", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: fed_raise_thresh, offset: 164, size_bytes: 2, type: f16be, access: rw, field_type: Threshold, tags: [C-CMIS, FED, BER], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold to activate FEC Excessive Degrade", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: fed_clear_thresh, offset: 166, size_bytes: 2, type: f16be, access: rw, field_type: Threshold, tags: [C-CMIS, FED, BER], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "BER threshold to clear FEC Excessive Degrade", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: reserved_168_7_2, offset: 168, bit_offset: 2, bit_width: 6, type: u6, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: fed_enable, offset: 168, bit_offset: 1, bit_width: 1, type: bool, access: rw, field_type: Control, tags: [C-CMIS, FED], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable media Rx FED monitoring", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: fdd_enable, offset: 168, bit_offset: 0, bit_width: 1, type: bool, access: rw, field_type: Control, tags: [C-CMIS, FDD], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Enable media Rx FDD monitoring", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: reserved_169_247, offset: 169, size_bytes: 79, type: bytes, access: ro, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }
+  - { name: custom, offset: 248, size_bytes: 8, type: bytes, access: rw, field_type: Informational, tags: [], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Vendor defined custom bytes", provenance: { section: "OIF-C-CMIS-01.3 § 7.4.3", pdf_page: 18, table: "Table 10" } }

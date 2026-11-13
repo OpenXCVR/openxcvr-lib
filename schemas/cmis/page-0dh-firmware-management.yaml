@@ -1,0 +1,22 @@
+schema: openxcvr.page.v1
+kind: page
+id: CmisPage0DhFirmwareManagement
+title: CMIS Page 0Dh Firmware Management
+spec:
+  id: cmis
+  revision: "5.4"
+provenance:
+  spec: CMIS 5.4 § 8.12
+  pdf_pages: [220]
+page_address: "0Dh"
+size_bytes: 128
+present_when: "page_01h_advertising.page_0dh_supported == true"
+
+# Introduced by CMIS 5.4 (Table 8-2 lists 0Dh as a 1-bank RW page):
+# register-based firmware management advertisement and status, so hosts can
+# present firmware version information without CDB messaging (Table 8-74).
+# Every field on this page is windowed since 5.4.
+
+field_includes:
+  - fields/page-0dh-firmware-management-part-01.yaml
+fields: []

@@ -1,0 +1,34 @@
+---
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisLtTrainingTimeout
+title: "CMIS-LT 1.0 Training Session Timeout"
+spec:
+  id: cmis-lt-1.0
+  revision: "01.0"
+  parity_deferred: true
+provenance:
+  spec: "OIF-CMIS-LT-01.0 §§ 6.2.2 and 6.4.2 (Tables 10, 45)"
+  pdf_pages: [40, 56]
+entries:
+  - value: 0x0
+    name: no_timeout
+    description: "No timeout"
+  - value: 0x1
+    name: s_10
+    description: "10 seconds"
+  - value: 0x2
+    name: s_30
+    description: "30 seconds"
+  - value: 0x3
+    name: min_1
+    description: "1 minute"
+  - value: 0x4
+    name: min_2
+    description: "2 minutes"
+  - value: 0x5
+    name: min_5
+    description: "5 minutes"
+  - value: 0x6..0x7
+    name: reserved
+    description: "Reserved"

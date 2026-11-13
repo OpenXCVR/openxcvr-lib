@@ -1,0 +1,60 @@
+{
+  "$id": "sff8636_rx_output_emphasis.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "const": 0,
+      "description": "0 dB; no emphasis",
+      "title": "db_0"
+    },
+    {
+      "const": 1,
+      "description": "1 dB",
+      "title": "db_1"
+    },
+    {
+      "const": 2,
+      "description": "2 dB",
+      "title": "db_2"
+    },
+    {
+      "const": 3,
+      "description": "3 dB",
+      "title": "db_3"
+    },
+    {
+      "const": 4,
+      "description": "4 dB",
+      "title": "db_4"
+    },
+    {
+      "const": 5,
+      "description": "5 dB",
+      "title": "db_5"
+    },
+    {
+      "const": 6,
+      "description": "6 dB",
+      "title": "db_6"
+    },
+    {
+      "const": 7,
+      "description": "7 dB",
+      "title": "db_7"
+    }
+  ],
+  "title": "Sff8636RxOutputEmphasis",
+  "type": "integer",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      63
+    ],
+    "spec": "SFF-8636 v2.11 § 6.6.3",
+    "table": "Table 6-33"
+  },
+  "x-openxcvr-revision-applicability": "Revision applicability: not modeled — this enum is a canonical catalog, not a revision-qualified contract; the enum IR carries no revision metadata, and revision annotations in the source schema are not interpreted",
+  "x-openxcvr-spec": {
+    "id": "sff-8636",
+    "revision": "2.11"
+  }
+}

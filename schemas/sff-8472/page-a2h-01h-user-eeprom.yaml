@@ -1,0 +1,39 @@
+schema: openxcvr.page.v1
+kind: page
+id: page_a2h_01h_user_eeprom
+title: SFF-8472 A2h Page 01h User EEPROM
+spec:
+  id: sff-8472
+  revision: "12.5a"
+provenance:
+  spec: SFF-8472 v12.5a § 11.1
+  pdf_pages: [52]
+page_address: A2h
+page_select: 01h
+page_select_field: page_a2h_diagnostics_base.page_select
+size_bytes: 256
+present_when: "page_a2h_diagnostics_base.page_select == 0x01"
+
+fields:
+  - name: user_eeprom
+    display_name: UserEEPROMPage01h
+    offset: 128
+    size_bytes: 120
+    type: bytes
+    template: storage
+    scope: { module: true }
+    behavior:
+      nonvolatile: true
+      may_alias_page_00h: true
+      write_guidance: "Page 01h may address the same data as page 00h or an additional 120 bytes; consult vendor data"
+    provenance: { section: "SFF-8472 v12.5a § 11.1", pdf_page: 52, table: "Table 11-1", quote: "Page 01h may address the same data as in page 00h, or may represent an additional 120 bytes" }
+
+  - name: vendor_specific_control_functions
+    display_name: VendorSpecificControlFunctionsPage01h
+    offset: 248
+    size_bytes: 8
+    type: bytes
+    template: vendor_specific
+    scope: { module: true }
+    behavior: { vendor_managed_with: "A2h bytes 120-127" }
+    provenance: { section: "SFF-8472 v12.5a § 11.2", pdf_page: 52, table: "Table 11-2", quote: "Vendor specific control functions" }

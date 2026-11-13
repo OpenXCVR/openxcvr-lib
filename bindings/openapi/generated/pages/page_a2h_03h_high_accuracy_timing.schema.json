@@ -1,0 +1,437 @@
+{
+  "$id": "page_a2h_03h_high_accuracy_timing.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "average_rx_lane_delay": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 77,
+        "quote": "Average Receiving delay on Lane",
+        "section": "SFF-8472 v12.5a § 13.4.6",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "average_tx_lane_delay": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 77,
+        "quote": "Average Transmitting delay on Lane",
+        "section": "SFF-8472 v12.5a § 13.4.7",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "calibration_date_day_high": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 73,
+        "quote": "Upper four bits of day value",
+        "section": "SFF-8472 v12.5a § 13.3.2",
+        "table": "Table 13-4"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "calibration_date_day_low": {
+      "type": "boolean",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 73,
+        "quote": "LSB of 5-bit day value",
+        "section": "SFF-8472 v12.5a § 13.3.2",
+        "table": "Table 13-4"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "calibration_date_month": {
+      "maximum": 15,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 73,
+        "quote": "MONTH = Byte132[7..4]",
+        "section": "SFF-8472 v12.5a § 13.3.2",
+        "table": "Table 13-4"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "calibration_date_sequence": {
+      "maximum": 127,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 73,
+        "quote": "Sequence number for multiple calibrations on same day",
+        "section": "SFF-8472 v12.5a § 13.3.2",
+        "table": "Table 13-4"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "calibration_date_year": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 73,
+        "quote": "Calibration Date",
+        "section": "SFF-8472 v12.5a § 13.3.2",
+        "table": "Table 13-4"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "calibration_stratum": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 74,
+        "quote": "Calibration accuracy decreases with each calibrator generation",
+        "section": "SFF-8472 v12.5a § 13.3.4"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "calibration_unique_identifier_osi": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 74,
+        "quote": "Organization Specific Identifier",
+        "section": "SFF-8472 v12.5a § 13.3.3",
+        "table": "Table 13-5"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "calibration_unique_identifier_oui": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 74,
+        "quote": "Organization Unique Identifier / Company ID",
+        "section": "SFF-8472 v12.5a § 13.3.3",
+        "table": "Table 13-5"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "cc_calib": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 71,
+        "quote": "Checkcode over bytes 128-254",
+        "section": "SFF-8472 v12.5a § 13",
+        "tables": [
+          "Table 13-1",
+          "Table 13-2"
+        ]
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "delta_rx_max": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 77,
+        "quote": "Delta_Rx_Max",
+        "section": "SFF-8472 v12.5a § 13.4.5",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "delta_tx_max": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 77,
+        "quote": "Delta_Tx_Max",
+        "section": "SFF-8472 v12.5a § 13.4.5",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "format_id": {
+      "$ref": "../enums/sff8472_page03h_format_id.schema.json",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 71,
+        "quote": "Format ID determines if page 03h contains a valid entry",
+        "section": "SFF-8472 v12.5a § 13",
+        "tables": [
+          "Table 13-1",
+          "Table 13-2"
+        ]
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "loopback_calibration_inaccuracy": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 78,
+        "quote": "Calibration Inaccuracy",
+        "section": "SFF-8472 v12.5a § 13.5.1",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_rx_to_mon_delay": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 78,
+        "quote": "Rx_to_Mon Delay",
+        "section": "SFF-8472 v12.5a § 13.5.4",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_tx_to_mon_delay": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 78,
+        "quote": "Tx_to_Mon Delay",
+        "section": "SFF-8472 v12.5a § 13.5.3",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "loopback_tx_to_rx_delay": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 78,
+        "quote": "Tx_to_Rx Delay",
+        "section": "SFF-8472 v12.5a § 13.5.2",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns"
+    },
+    "optical_number_of_lanes": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 75,
+        "quote": "For SFF-8472 this value is 1",
+        "section": "SFF-8472 v12.5a § 13.4.1",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "optical_operational_mode_id": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 75,
+        "quote": "For SFF-8472 this value is 0",
+        "section": "SFF-8472 v12.5a § 13.4.2",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "reserved_common_header": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 73,
+        "quote": "Common Header",
+        "section": "SFF-8472 v12.5a § 13.3",
+        "table": "Table 13-3"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "reserved_loopback_154": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 72,
+        "quote": "Reserved 00h",
+        "section": "SFF-8472 v12.5a § 13.5",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "reserved_loopback_159": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 72,
+        "quote": "Reserved 00h",
+        "section": "SFF-8472 v12.5a § 13.5",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "reserved_loopback_164": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 72,
+        "quote": "Reserved 00h",
+        "section": "SFF-8472 v12.5a § 13.5",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "reserved_loopback_calibration_tail": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 72,
+        "quote": "Reserved 00h",
+        "section": "SFF-8472 v12.5a § 13.5",
+        "table": "Table 13-2"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "reserved_optical_calibration_tail": {
+      "contentEncoding": "base64",
+      "type": "string",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 71,
+        "quote": "Reserved 00h",
+        "section": "SFF-8472 v12.5a § 13.4",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5"
+    },
+    "rx_power_delay_coefficient": {
+      "items": {
+        "contentEncoding": "base64",
+        "type": "string"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 76,
+        "quote": "Rx_Pwr_Dly(0) through Rx_Pwr_Dly(4)",
+        "section": "SFF-8472 v12.5a § 13.4.3",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "ns/dBm^degree"
+    },
+    "temperature_detune_offset": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 76,
+        "quote": "T_Detune_Offset",
+        "section": "SFF-8472 v12.5a § 13.4.4",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "0.1 nm"
+    },
+    "temperature_detune_slope": {
+      "maximum": 32767,
+      "minimum": -32768,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 76,
+        "quote": "T_Detune_Slope",
+        "section": "SFF-8472 v12.5a § 13.4.4",
+        "table": "Table 13-1"
+      },
+      "x-openxcvr-since": "12.5",
+      "x-openxcvr-unit": "0.01 nm/deg C"
+    },
+    "timing_format_version": {
+      "maximum": 255,
+      "minimum": 0,
+      "type": "integer",
+      "x-openxcvr-provenance": {
+        "lineage": "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'",
+        "pdf_page": 73,
+        "quote": "Memory map format version",
+        "section": "SFF-8472 v12.5a § 13.3.1",
+        "table": "Table 13-3"
+      },
+      "x-openxcvr-since": "12.5"
+    }
+  },
+  "required": [
+    "format_id",
+    "timing_format_version",
+    "calibration_date_year",
+    "calibration_date_month",
+    "calibration_date_day_high",
+    "calibration_date_day_low",
+    "calibration_date_sequence",
+    "calibration_unique_identifier_oui",
+    "calibration_unique_identifier_osi",
+    "calibration_stratum",
+    "reserved_common_header",
+    "cc_calib"
+  ],
+  "title": "page_a2h_03h_high_accuracy_timing",
+  "type": "object",
+  "x-openxcvr-provenance": {
+    "pdf_pages": [
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78
+    ],
+    "spec": "SFF-8472 v12.5a § 13"
+  },
+  "x-openxcvr-spec": {
+    "id": "sff-8472",
+    "revision": "12.5a"
+  }
+}

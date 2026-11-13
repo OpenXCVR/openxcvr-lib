@@ -1,0 +1,272 @@
+fields:
+  - name: format_id
+    since: "12.5"
+    display_name: FormatID
+    offset: 128
+    size_bytes: 2
+    type: enum_ref
+    enum_ref: Sff8472Page03hFormatId
+    template: informational
+    scope: { module: true }
+    behavior: { valid_values: ["0xca1b optical module calibration", "0x100b loopback module calibration"] }
+    provenance: { section: "SFF-8472 v12.5a § 13", pdf_page: 71, tables: ["Table 13-1", "Table 13-2"], quote: "Format ID determines if page 03h contains a valid entry", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: timing_format_version
+    since: "12.5"
+    display_name: Version
+    offset: 130
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    behavior: { expected_value: 0x01 }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.1", pdf_page: 73, table: "Table 13-3", quote: "Memory map format version", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_date_year
+    since: "12.5"
+    display_name: CalibrationDateYear
+    offset: 131
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    encoding: { kind: offset_year, base_year: 2000, invalid_value: 0xff }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.2", pdf_page: 73, table: "Table 13-4", quote: "Calibration Date", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_date_month
+    since: "12.5"
+    display_name: CalibrationDateMonth
+    offset: 132
+    bit_offset: 4
+    bit_width: 4
+    type: u4
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.2", pdf_page: 73, table: "Table 13-4", quote: "MONTH = Byte132[7..4]", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_date_day_high
+    since: "12.5"
+    display_name: CalibrationDateDayHigh
+    offset: 132
+    bit_offset: 0
+    bit_width: 4
+    type: u4
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.2", pdf_page: 73, table: "Table 13-4", quote: "Upper four bits of day value", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_date_day_low
+    since: "12.5"
+    display_name: CalibrationDateDayLow
+    offset: 133
+    bit_offset: 7
+    bit_width: 1
+    type: bool
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.2", pdf_page: 73, table: "Table 13-4", quote: "LSB of 5-bit day value", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_date_sequence
+    since: "12.5"
+    display_name: CalibrationDateNumber
+    offset: 133
+    bit_offset: 0
+    bit_width: 7
+    type: u7
+    template: informational
+    scope: { module: true }
+    encoding: { valid_range: "0..126", invalid_value: 127 }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.2", pdf_page: 73, table: "Table 13-4", quote: "Sequence number for multiple calibrations on same day", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_unique_identifier_oui
+    since: "12.5"
+    display_name: CUIOUI
+    offset: 134
+    size_bytes: 3
+    type: bytes
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.3", pdf_page: 74, table: "Table 13-5", quote: "Organization Unique Identifier / Company ID", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_unique_identifier_osi
+    since: "12.5"
+    display_name: CUIOSI
+    offset: 137
+    size_bytes: 3
+    type: bytes
+    template: informational
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.3", pdf_page: 74, table: "Table 13-5", quote: "Organization Specific Identifier", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: calibration_stratum
+    since: "12.5"
+    display_name: Stratum
+    offset: 140
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    encoding: { kind: generation, zero: "highest precision primary calibrator", ff: "unused or undefined" }
+    provenance: { section: "SFF-8472 v12.5a § 13.3.4", pdf_page: 74, quote: "Calibration accuracy decreases with each calibrator generation", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: reserved_common_header
+    since: "12.5"
+    display_name: ReservedCommonHeader
+    offset: 141
+    size_bytes: 9
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    provenance: { section: "SFF-8472 v12.5a § 13.3", pdf_page: 73, table: "Table 13-3", quote: "Common Header", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: optical_number_of_lanes
+    since: "12.5"
+    display_name: NbLanes
+    offset: 150
+    size_bytes: 1
+    type: u8
+    template: informational
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    behavior: { expected_value: 1, reason: "SFF-8472 supports a single lane" }
+    provenance: { section: "SFF-8472 v12.5a § 13.4.1", pdf_page: 75, table: "Table 13-1", quote: "For SFF-8472 this value is 1", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: optical_operational_mode_id
+    since: "12.5"
+    display_name: OpModeId
+    offset: 151
+    size_bytes: 1
+    type: u8
+    template: operational_parameter
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    behavior: { default_value: 0, reason: "single operational mode is in scope" }
+    provenance: { section: "SFF-8472 v12.5a § 13.4.2", pdf_page: 75, table: "Table 13-1", quote: "For SFF-8472 this value is 0", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: rx_power_delay_coefficient
+    since: "12.5"
+    display_name: RxPwrDly<degree>
+    instances: { index: degree, start: 0, end: 4 }
+    offset_expr: "152 + 3 * degree"
+    size_bytes: 3
+    type: bytes
+    encoding: { kind: q8_16_signed, unit: "ns/dBm^degree" }
+    template: informational
+    tags: [Information, "Monitor::OpticalPower"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    behavior: { formula: "Rx_Pwr_Dly_Cor = sum(Rx_Pwr_Dly(k) * Rx_PWR_dBm^k), k=0..4" }
+    provenance: { section: "SFF-8472 v12.5a § 13.4.3", pdf_page: 76, table: "Table 13-1", quote: "Rx_Pwr_Dly(0) through Rx_Pwr_Dly(4)", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: temperature_detune_offset
+    since: "12.5"
+    display_name: TDetuneOffset
+    offset: 167
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: q8_8_signed, unit: "0.1 nm" }
+    template: informational
+    tags: [Information, "Monitor::Frequency"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8472 v12.5a § 13.4.4", pdf_page: 76, table: "Table 13-1", quote: "T_Detune_Offset", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: temperature_detune_slope
+    since: "12.5"
+    display_name: TDetuneSlope
+    offset: 169
+    size_bytes: 2
+    type: i16be
+    encoding: { kind: q8_8_signed, unit: "0.01 nm/deg C" }
+    template: informational
+    tags: [Information, "Monitor::Frequency"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8472 v12.5a § 13.4.4", pdf_page: 76, table: "Table 13-1", quote: "T_Detune_Slope", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: delta_rx_max
+    since: "12.5"
+    display_name: DeltaRxMax
+    offset: 171
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8472 v12.5a § 13.4.5", pdf_page: 77, table: "Table 13-1", quote: "Delta_Rx_Max", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: delta_tx_max
+    since: "12.5"
+    display_name: DeltaTxMax
+    offset: 175
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8472 v12.5a § 13.4.5", pdf_page: 77, table: "Table 13-1", quote: "Delta_Tx_Max", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: average_rx_lane_delay
+    since: "12.5"
+    display_name: AvgRxLane1
+    offset: 179
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: 1 }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8472 v12.5a § 13.4.6", pdf_page: 77, table: "Table 13-1", quote: "Average Receiving delay on Lane", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: average_tx_lane_delay
+    since: "12.5"
+    display_name: AvgTxLane1
+    offset: 183
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { lane: 1 }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8472 v12.5a § 13.4.7", pdf_page: 77, table: "Table 13-1", quote: "Average Transmitting delay on Lane", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: reserved_optical_calibration_tail
+    since: "12.5"
+    display_name: ReservedOpticalCalibrationTail
+    offset: 187
+    size_bytes: 68
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0xca1b"
+    provenance: { section: "SFF-8472 v12.5a § 13.4", pdf_page: 71, table: "Table 13-1", quote: "Reserved 00h", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: loopback_calibration_inaccuracy
+    since: "12.5"
+    display_name: CalibrationInaccuracy
+    offset: 150
+    size_bytes: 4
+    type: u32be
+    encoding: { kind: q16_16_unsigned, unit: "ns" }
+    template: operational_parameter
+    tags: [OperationalParameter, "Monitor::Timing"]
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5.1", pdf_page: 78, table: "Table 13-2", quote: "Calibration Inaccuracy", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }
+
+  - name: reserved_loopback_154
+    since: "12.5"
+    display_name: ReservedLoopback154
+    offset: 154
+    size_bytes: 1
+    type: bytes
+    template: reserved
+    scope: { module: true }
+    present_when: "format_id == 0x100b"
+    provenance: { section: "SFF-8472 v12.5a § 13.5", pdf_page: 72, table: "Table 13-2", quote: "Reserved 00h", lineage: "SFF-8472 Rev 12.5a change history, Rev 12.5: 'Section 13. New High Accuracy Timing Specification, Calibration memory map'" }

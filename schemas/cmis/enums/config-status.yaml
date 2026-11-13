@@ -1,0 +1,50 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisConfigStatus
+title: CMIS Configuration Command Execution and Result Status (4-bit per-lane)
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.10.5 / Table 8-91
+  pdf_pages: [215]
+entries:
+  - value: 0x0
+    name: config_undefined
+    description: ConfigUndefined — no status information available (initial register value)
+  - value: 0x1
+    name: config_success
+    description: ConfigSuccess — the last accepted configuration command has been completed successfully
+  - value: 0x2
+    name: config_rejected
+    description: ConfigRejected — configuration rejected, unspecific validation failure
+  - value: 0x3
+    name: config_rejected_invalid_app_sel
+    description: ConfigRejectedInvalidAppSel — configuration rejected, invalid AppSel code
+  - value: 0x4
+    name: config_rejected_invalid_data_path
+    description: ConfigRejectedInvalidDataPath — configuration rejected, invalid set of lanes for AppSel
+  - value: 0x5
+    name: config_rejected_invalid_si
+    description: ConfigRejectedInvalidSI — configuration rejected, invalid SI control settings
+  - value: 0x6
+    name: config_rejected_lanes_in_use
+    description: ConfigRejectedLanesInUse — configuration rejected, some lanes not in DPDeactivated
+  - value: 0x7
+    name: config_rejected_partial_data_path
+    description: ConfigRejectedPartialDataPath — configuration rejected, lanes are only a subset of the Data Path
+  # CMIS 5.4 Table 8-101 allocates code 8h to ConfigRejectedNoEmulation
+  # (DP Emulation rejection, Network Path errata incorporation M1/M2);
+  # 9h-Bh remain Reserved. The since-5.4 code set, including the split
+  # reserved span, lives in CmisConfigStatus5p4; this entry keeps the
+  # pre-5.4 window, where 8h-Bh are uniformly Reserved.
+  - value: 0x8..0xb
+    name: reserved_8_b
+    description: Reserved (other validation failures)
+    until: "5.4"
+  - value: 0xc
+    name: config_in_progress
+    description: ConfigInProgress — a configuration command is still being processed by the module; new commands are ignored for this lane while ConfigInProgress
+  - value: 0xd..0xf
+    name: custom_rejected
+    description: Custom Configuration rejected for custom reasons (vendor-defined)

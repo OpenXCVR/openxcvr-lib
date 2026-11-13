@@ -1,0 +1,42 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisVcsEqualizationStepSize
+title: CMIS-VCS 1.1 Equalization Step Size Attribute
+spec:
+  id: cmis-vcs-1.1
+  revision: "01.1"
+  parity_deferred: true
+description: >-
+  Values of the StepSize descriptor attribute of the numeric equalization
+  VCS Parameters (IDs 09h and 0Ah), OIF-CMIS-VCS-01.1 §§ 5.11 and 5.12
+  (Tables 5-24 and 5-26), encoded in 8 bits. The register value multiplied
+  by the step size gives the equalization target in dB; the supported range
+  is Min to Max as advertised. 00h is reserved.
+provenance:
+  spec: OIF-CMIS-VCS-01.1 §§ 5.11 and 5.12 Tables 5-24 and 5-26
+  pdf_pages: [41, 43]
+entries:
+  - value: 0x00
+    name: reserved_00
+    description: Reserved step size value
+    tags: [unit:reserved]
+  - value: 0x01
+    name: step_0p25_db
+    description: Step size 0.25 dB
+    tags: [unit:dB, step_db:0.25]
+  - value: 0x02
+    name: step_0p5_db
+    description: Step size 0.5 dB
+    tags: [unit:dB, step_db:0.5]
+  - value: 0x03
+    name: step_1_db
+    description: Step size 1 dB
+    tags: [unit:dB, step_db:1]
+  - value: 0x04
+    name: step_2_db
+    description: Step size 2 dB
+    tags: [unit:dB, step_db:2]
+  - value: 0x05..0xff
+    name: reserved_05_ff
+    description: Reserved step size values
+    tags: [unit:reserved]

@@ -1,0 +1,335 @@
+fields:
+  - name: flags_summary_page_14h
+    display_name: FlagsSummaryBank<bank>Page14h
+    instances: { index: bank, start: 0, end: 3 }
+    offset_expr: "4 + bank"
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [Status, Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.3"
+      pdf_page: 145
+      table: "Table 8-8"
+      quote: "1b: at least one Flag is set on Bank <bank>, Page 14h."
+
+  - name: flags_summary_page_2ch
+    display_name: FlagsSummaryBank<bank>Page2Ch
+    instances: { index: bank, start: 0, end: 3 }
+    offset_expr: "4 + bank"
+    bit_offset: 3
+    bit_width: 1
+    type: bool
+    access: ro
+    field_type: Status
+    tags: [Status, Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.3"
+      pdf_page: 145
+      table: "Table 8-8"
+      quote: "1b: at least one Flag is set on Bank <bank>, Page 2Ch."
+
+  # ===========================================================================
+  # § 8.2.4 Module-Level Flags (bytes 8-13)
+  #
+  # Latched flags (read-only, clear-on-read). 5 module-status flags in byte 8,
+  # then 22 monitor alarm/warning flags in bytes 9-11.
+  # ===========================================================================
+
+  - name: module_state_changed_flag
+    display_name: ModuleStateChangedFlag
+    offset: 8
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: clear_on_read
+        read_effect_scope: byte
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.1.3.6; §8.1.4.2; §8.2.4"
+          table: "Table 8-3; Table 8-9"
+          row: "8 bits 7,6,2,1,0 RO/COR flags; bits 5-3 Reserved"
+          pdf_page: [138, 139, 146]
+          access: "RO/COR"
+          basis: "Table 8-3 explicitly clears all bits in a RO/COR Byte after reading, including the Reserved bits 5-3 identified by Table 8-9. This is a physical-byte consuming effect, not a None assertion for reserved bits. All collateral flags are consumed together and must be retained. Qualification is CMIS 5.3 only."
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag to indicate a Module State Change."
+
+  - name: module_firmware_error_flag
+    display_name: ModuleFirmwareErrorFlag
+    offset: 8
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: clear_on_read
+        read_effect_scope: byte
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.1.3.6; §8.1.4.2; §8.2.4"
+          table: "Table 8-3; Table 8-9"
+          row: "8 bits 7,6,2,1,0 RO/COR flags; bits 5-3 Reserved"
+          pdf_page: [138, 139, 146]
+          access: "RO/COR"
+          basis: "Table 8-3 explicitly clears all bits in a RO/COR Byte after reading, including the Reserved bits 5-3 identified by Table 8-9. This is a physical-byte consuming effect, not a None assertion for reserved bits. All collateral flags are consumed together and must be retained. Qualification is CMIS 5.3 only."
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag to indicate that self-supervision of the main module firmware has detected a failure in the main module firmware itself."
+
+  - name: data_path_firmware_error_flag
+    display_name: DataPathFirmwareErrorFlag
+    offset: 8
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: clear_on_read
+        read_effect_scope: byte
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.1.3.6; §8.1.4.2; §8.2.4"
+          table: "Table 8-3; Table 8-9"
+          row: "8 bits 7,6,2,1,0 RO/COR flags; bits 5-3 Reserved"
+          pdf_page: [138, 139, 146]
+          access: "RO/COR"
+          basis: "Table 8-3 explicitly clears all bits in a RO/COR Byte after reading, including the Reserved bits 5-3 identified by Table 8-9. This is a physical-byte consuming effect, not a None assertion for reserved bits. All collateral flags are consumed together and must be retained. Qualification is CMIS 5.3 only."
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag to indicate that subordinated firmware in an auxiliary device for processing transmitted or received signals (e.g. a DSP) has failed."
+
+  # CMIS 5.4 Table 8-9: byte 8 bit 3, allocated from the 5.3 reserved bits 5-3.
+  - name: abnormal_fw_indication_flag
+    display_name: AbnormalFwIndicationFlag
+    offset: 8
+    bit_offset: 3
+    bit_width: 1
+    since: "5.4"
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.4"
+        read_effect: clear_on_read
+        read_effect_scope: byte
+        read_effect_provenance:
+          source: "OIF-CMIS-05.4"
+          section: "§8.1.3.6; §8.1.4.2; §8.2.4"
+          table: "Table 8-3; Table 8-9"
+          row: "8 bit 3 AbnormalFwIndicationFlag RO/COR Adv.; bits 5-4 Reserved"
+          pdf_page: [138, 139, 172]
+          access: "RO/COR"
+          basis: "Table 8-3 explicitly clears all bits in a RO/COR Byte after reading, including the Reserved bits 5-4. This is a physical-byte consuming effect, not a None assertion for reserved bits. All collateral flags are consumed together and must be retained. Qualification is CMIS 5.4 only."
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 172
+      quote: "Latched Flag indicating that the currently running Firmware content deviates from the Load identified by the active firmware version information."
+
+  - name: cdb_cmd_complete_flag_1
+    display_name: CdbCmdCompleteFlag1
+    offset: 8
+    bit_offset: 6
+    bit_width: 1
+    since: "4.0"
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: clear_on_read
+        read_effect_scope: byte
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.1.3.6; §8.1.4.2; §8.2.4"
+          table: "Table 8-3; Table 8-9"
+          row: "8 bits 7,6,2,1,0 RO/COR flags; bits 5-3 Reserved"
+          pdf_page: [138, 139, 146]
+          access: "RO/COR"
+          basis: "Table 8-3 explicitly clears all bits in a RO/COR Byte after reading, including the Reserved bits 5-3 identified by Table 8-9. This is a physical-byte consuming effect, not a None assertion for reserved bits. All collateral flags are consumed together and must be retained. Qualification is CMIS 5.3 only."
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag to indicate completion of a CDB command for CDB instance 1."
+
+  - name: cdb_cmd_complete_flag_2
+    display_name: CdbCmdCompleteFlag2
+    offset: 8
+    bit_offset: 7
+    bit_width: 1
+    since: "4.0"
+    type: bool
+    access: ro
+    changed_in:
+      - rev: "5.3"
+        read_effect: clear_on_read
+        read_effect_scope: byte
+        read_effect_provenance:
+          source: "OIF-CMIS-05.3"
+          section: "§8.1.3.6; §8.1.4.2; §8.2.4"
+          table: "Table 8-3; Table 8-9"
+          row: "8 bits 7,6,2,1,0 RO/COR flags; bits 5-3 Reserved"
+          pdf_page: [138, 139, 146]
+          access: "RO/COR"
+          basis: "Table 8-3 explicitly clears all bits in a RO/COR Byte after reading, including the Reserved bits 5-3 identified by Table 8-9. This is a physical-byte consuming effect, not a None assertion for reserved bits. All collateral flags are consumed together and must be retained. Qualification is CMIS 5.3 only."
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag to indicate completion of a CDB command for CDB instance 2."
+
+  # Monitor alarm/warning flags — bytes 9-11. Bit layout:
+  #   byte 9 bits 0..7: temp high alarm, temp low alarm, temp high warn, temp low warn,
+  #                     vcc high alarm, vcc low alarm, vcc high warn, vcc low warn
+  #   byte 10 bits 0..7: aux1 hi-alarm, lo-alarm, hi-warn, lo-warn,
+  #                      aux2 hi-alarm, lo-alarm, hi-warn, lo-warn
+  #   byte 11 bits 0..3: aux3 hi-alarm, lo-alarm, hi-warn, lo-warn
+  #   byte 11 bits 4..7: custom hi-alarm, lo-alarm, hi-warn, lo-warn
+
+  - name: temp_mon_high_alarm_flag
+    display_name: TempMonHighAlarmFlag
+    offset: 9
+    bit_offset: 0
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Temperature"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high temperature alarm."
+
+  - name: temp_mon_low_alarm_flag
+    display_name: TempMonLowAlarmFlag
+    offset: 9
+    bit_offset: 1
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Temperature"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for low temperature alarm."
+
+  - name: temp_mon_high_warning_flag
+    display_name: TempMonHighWarningFlag
+    offset: 9
+    bit_offset: 2
+    bit_width: 1
+    type: bool
+    access: ro
+    behavior: { latching: clear_on_read }
+    field_type: Flag
+    tags: [Flag, AlarmFlag, "Monitor::Temperature"]
+    scope: { module: true }
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+    provenance:
+      section: "§ 8.2.4"
+      pdf_page: 146
+      quote: "Latched Flag for high temperature warning."

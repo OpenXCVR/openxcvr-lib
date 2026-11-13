@@ -1,0 +1,177 @@
+schema: openxcvr.schema_index.v1
+spec:
+  id: cmis
+  title: OIF-CMIS
+  revision: "5.4"
+  source: docs/stds/cmis/OIF-CMIS-05.4.pdf
+  errata:
+    - docs/stds/cmis/OIF-CMIS-05-Errata-01.0.pdf
+imports:
+  - ../sff-8024/_index.yaml
+kind: memory_map
+includes:
+  - enums/module-state.yaml
+  - enums/module-fault-cause.yaml
+  - enums/module-fault-cause-pre-5p3.yaml
+  - enums/password-cmd-result.yaml
+  - enums/sm-support.yaml
+  - enums/module-function-type.yaml
+  - enums/banks-supported.yaml
+  - enums/banks-supported-5p4.yaml
+  - enums/tx-input-clocking-capabilities.yaml
+  - enums/media-type.yaml
+  - enums/data-path-state.yaml
+  - enums/config-status.yaml
+  - enums/config-status-5p4.yaml
+  - enums/network-path-state.yaml
+  - enums/network-path-config-status.yaml
+  - enums/diagnostics-pattern-id.yaml
+  - enums/diagnostics-selector.yaml
+  - enums/redirection-commit-result.yaml
+  - enums/vdm-observable-type.yaml
+  - enums/vdm-observable-type-5p4.yaml
+  - enums/vdm-support.yaml
+  - enums/cdb-command-id.yaml
+  - enums/cdb-command-id-5p4.yaml
+  - enums/cdb-status.yaml
+  - lower-memory.yaml
+  - page-00h-administrative.yaml
+  - page-01h-advertising.yaml
+  - page-02h-thresholds.yaml
+  - page-03h-user-eeprom.yaml
+  - page-04h-laser-caps.yaml
+  - page-05h-form-factor-signals.yaml
+  - page-0ch-module-management.yaml
+  - page-0dh-firmware-management.yaml
+  - page-10h-lane-control.yaml
+  - page-11h-lane-status.yaml
+  - page-12h-tunable-laser.yaml
+  - page-13h-diag-control.yaml
+  - page-14h-diag-results.yaml
+  - page-15h-timing.yaml
+  - page-16h-network-path.yaml
+  - page-18h-control-set-extension.yaml
+  - page-19h-status-extension.yaml
+  - page-1ch-normalized-application-descriptors.yaml
+  - page-1dh-host-lane-switching.yaml
+  - page-20h-vdm-descriptors-1-64.yaml
+  - page-21h-vdm-descriptors-65-128.yaml
+  - page-22h-vdm-descriptors-129-192.yaml
+  - page-23h-vdm-descriptors-193-256.yaml
+  - page-24h-vdm-samples-1-64.yaml
+  - page-25h-vdm-samples-65-128.yaml
+  - page-26h-vdm-samples-129-192.yaml
+  - page-27h-vdm-samples-193-256.yaml
+  - page-28h-vdm-thresholds-1-16.yaml
+  - page-29h-vdm-thresholds-17-32.yaml
+  - page-2ah-vdm-thresholds-33-48.yaml
+  - page-2bh-vdm-thresholds-49-64.yaml
+  - page-2ch-vdm-flags.yaml
+  - page-2dh-vdm-masks.yaml
+  - page-2fh-vdm-advertisement.yaml
+  - page-60h-lane-datapath-management-extensions.yaml
+  - page-61h-lane-datapath-monitoring.yaml
+  - page-62h-lane-supervision-thresholds.yaml
+  - page-6dh-media-lane-switching.yaml
+  - page-9fh-cdb-message.yaml
+  - page-a0h-cdb-epl-segment-1.yaml
+  - page-a1h-cdb-epl-segment-2.yaml
+  - page-a2h-cdb-epl-segment-3.yaml
+  - page-a3h-cdb-epl-segment-4.yaml
+  - page-a4h-cdb-epl-segment-5.yaml
+  - page-a5h-cdb-epl-segment-6.yaml
+  - page-a6h-cdb-epl-segment-7.yaml
+  - page-a7h-cdb-epl-segment-8.yaml
+  - page-a8h-cdb-epl-segment-9.yaml
+  - page-a9h-cdb-epl-segment-10.yaml
+  - page-aah-cdb-epl-segment-11.yaml
+  - page-abh-cdb-epl-segment-12.yaml
+  - page-ach-cdb-epl-segment-13.yaml
+  - page-adh-cdb-epl-segment-14.yaml
+  - page-aeh-cdb-epl-segment-15.yaml
+  - page-afh-cdb-epl-segment-16.yaml
+
+# Spec-wide field-metadata templates. VDM-specific templates land
+# here first; the predefined set (threshold, telemetry_module, ...) per
+# § "Predefined spec-wide templates" is a future backfill.
+templates:
+
+  # Used by every entry in Pages 20h-23h VDM Descriptor Groups
+  vdm_descriptor_field:
+    field_type: Informational
+    tags: [Information, VDM]
+    access: ro
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+
+  # Used by every entry in Pages 24h-27h VDM Sample Groups (real-time values).
+  # The sample's actual storage type (f16be | i16be | u16be) is dispatched per
+  # polymorphic variants on the matching descriptor's observable_type;
+  # this template defines only the metadata common to all samples.
+  vdm_sample_field:
+    field_type: Telemetry
+    tags: [Monitor, VDM]
+    access: ro
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: true
+
+  # Used by every entry in Pages 28h-2Bh VDM Threshold Groups (16 sets per
+  # page, 4 × U16 high/low alarm + warning per set). RO at runtime; the spec
+  # text describes them as factory-programmed.
+  vdm_threshold_field:
+    field_type: Threshold
+    tags: [AlarmThreshold, AlarmThresholdValue, VDM]
+    access: ro
+    flags:
+      is_required: false
+      is_readable: true
+      is_writable: false
+      is_ever_writable: true # OEM-relabel pattern (per Resolved Notes)
+      is_dynamic: false
+
+cdb_commands:
+  - cdb-commands/0040-module-features.yaml
+  - cdb-commands/0005-get-module-time.yaml
+  - cdb-commands/0006-set-module-time.yaml
+  - cdb-commands/0041-firmware-management-features.yaml
+  - cdb-commands/0050-get-application-attributes.yaml
+  - cdb-commands/0051-get-interface-code-description.yaml
+  - cdb-commands/0100-get-firmware-info.yaml
+  - cdb-commands/0101-firmware-download-start.yaml
+  - cdb-commands/0103-firmware-write-block-lpl.yaml
+  - cdb-commands/0107-firmware-download-complete.yaml
+  - cdb-commands/0109-run-firmware-load.yaml
+  - cdb-commands/010b-check-firmware-activation-options.yaml
+  - cdb-commands/010c-store-firmware-load-tag.yaml
+  - cdb-commands/010d-retrieve-firmware-load-tag.yaml
+  - cdb-commands/0210-pm-module-lpl.yaml
+  - cdb-commands/0211-pm-module-epl.yaml
+  - cdb-commands/0200-control-pm-statistics.yaml
+  - cdb-commands/0212-pm-host-side-lpl.yaml
+  - cdb-commands/0213-pm-host-side-epl.yaml
+  - cdb-commands/0214-pm-media-side-lpl.yaml
+  - cdb-commands/0215-pm-media-side-epl.yaml
+  - cdb-commands/0216-pm-data-path-lpl.yaml
+  - cdb-commands/0217-pm-data-path-epl.yaml
+  - cdb-commands/0220-rmon-statistics.yaml
+  - cdb-commands/0230-fec-symbol-error-histogram.yaml
+  - cdb-commands/0233-get-max-fec-symbol-error-weight.yaml
+  - cdb-commands/0280-data-monitoring.yaml
+  - cdb-commands/0281-data-monitoring-advertisements.yaml
+  - cdb-commands/0290-temperature-histogram.yaml
+  - cdb-commands/0380-loopbacks.yaml
+  - cdb-commands/0400-device-id-cert-lpl.yaml
+  - cdb-commands/0402-set-digest-to-sign-lpl.yaml
+  - cdb-commands/0404-get-digest-signature-lpl.yaml
+state_machines:
+  - state-machines/module-state-machine.yaml
+  - state-machines/data-path-state-machine.yaml
+  - state-machines/network-path-state-machine.yaml

@@ -1,0 +1,5 @@
+entries:
+  - value: 0xff
+    name: end_of_list
+    description: End of list marker
+    reach: {kind: none}

@@ -1,0 +1,246 @@
+entries:
+  - value: 0x79
+    name: base_800g_fr4_500
+    description: 800GBASE-FR4-500 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x7a
+    name: base_800g_fr4
+    description: 800GBASE-FR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 113.4375, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x7b
+    name: base_800g_lr4
+    description: 800GBASE-LR4 SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 113.4375, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x7c
+    name: base_800g_lr1
+    description: 800GBASE-LR1 coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 123.6364, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x7d
+    name: base_800g_er1_20
+    description: 800GBASE-ER1-20 coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.2, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x7e
+    name: base_800g_er1
+    description: 800GBASE-ER1 coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 1, lane_rate_gbd: 118.2, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x7f
+    name: base_1_6t_dr8
+    description: 1.6TBASE-DR8 SMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 106.25, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 1700.00
+  - value: 0x80
+    name: base_1_6t_dr8_2
+    description: 1.6TBASE-DR8-2 SMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 113.4375, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 1700.00
+  - value: 0x81
+    name: xr400_16qam
+    description: XR400-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 16, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 484.023917
+  - value: 0x82
+    name: xr300_8qam
+    description: XR300-8QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 16, lane_rate_gbd: 3.7814369, modulation: other:dp_8qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 363.017938
+  - value: 0x83
+    name: xr200_qpsk
+    description: XR200-QPSK coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 16, lane_rate_gbd: 3.7814369, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 242.011959
+  - value: 0x84
+    name: xr200_16qam
+    description: XR200-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 8, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 242.011959
+  - value: 0x85
+    name: xr100_qpsk
+    description: XR100-QPSK coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 8, lane_rate_gbd: 3.7814369, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 121.005979
+  - value: 0x86
+    name: xr100_16qam
+    description: XR100-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 4, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 121.005979
+  - value: 0x87
+    name: xr400_ws_16qam
+    description: XR400-WS-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 16, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 484.023917
+  - value: 0x88
+    name: xr200_ws_qpsk
+    description: XR200-WS-QPSK coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 16, lane_rate_gbd: 3.7814369, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 242.011959
+  - value: 0x89
+    name: xr200_ws_16qam
+    description: XR200-WS-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 8, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 242.011959
+  - value: 0x8a
+    name: xr100_ws_qpsk
+    description: XR100-WS-QPSK coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 8, lane_rate_gbd: 3.7814369, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 121.005979
+  - value: 0x8b
+    name: xr100_ws_16qam
+    description: XR100-WS-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 4, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 121.005979
+  - value: 0x8c
+    name: xr200_ws_bidi_16qam
+    description: XR200-WS-BIDI-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 8, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 242.011959
+  - value: 0x8d
+    name: xr100_ws_bidi_qpsk
+    description: XR100-WS-BIDI-QPSK coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 8, lane_rate_gbd: 3.7814369, modulation: other:dp_qpsk}
+    reach: {kind: smf}
+    bit_rate_gbps: 121.005979
+  - value: 0x8e
+    name: xr100_ws_bidi_16qam
+    description: XR100-WS-BIDI-16QAM coherent SMF media interface
+    tags: [coherent]
+    signaling: {lane_count: 4, lane_rate_gbd: 3.7814369, modulation: other:dp_16qam}
+    reach: {kind: smf}
+    bit_rate_gbps: 121.005979
+  - value: 0x8f
+    name: dr1_100g_lpo
+    description: 100G-DR1-LPO SMF media interface
+    signaling: {lane_count: 1, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 106.25
+  - value: 0x90
+    name: dr2_200g_lpo
+    description: 200G-DR2-LPO SMF media interface
+    signaling: {lane_count: 2, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 212.50
+  - value: 0x91
+    name: dr4_400g_lpo
+    description: 400G-DR4-LPO SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x92
+    name: dr8_800g_lpo
+    description: 800G-DR8-LPO SMF media interface
+    signaling: {lane_count: 8, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 850.00
+  - value: 0x93
+    name: fr4_400g_lpo
+    description: 400G-FR4-LPO SMF media interface
+    signaling: {lane_count: 4, lane_rate_gbd: 53.125, modulation: pam4}
+    reach: {kind: smf}
+    bit_rate_gbps: 425.00
+  - value: 0x94..0xbd
+    name: reserved_94_bd
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xbe
+    name: overflow_escape
+    description: Escape to SMF media interface ID tables with nonzero GID; refer to the CMIS page 1Ch normalized application descriptor structure for the 12-bit Unique ID
+    reach: {kind: none}
+  - value: 0xbf
+    name: reserved_bf
+    description: Reserved
+    reach: {kind: none}
+  - value: 0xc0..0xef
+    name: vendor_specific
+    description: Vendor specific/custom SMF media interface
+    reach: {kind: smf}
+  - value: 0xF0
+    name: vendor_specific_f0
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF1
+    name: vendor_specific_f1
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF2
+    name: vendor_specific_f2
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF3
+    name: vendor_specific_f3
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF4
+    name: vendor_specific_f4
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF5
+    name: vendor_specific_f5
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF6
+    name: vendor_specific_f6
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF7
+    name: vendor_specific_f7
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF8
+    name: vendor_specific_f8
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}
+  - value: 0xF9
+    name: vendor_specific_f9
+    description: Vendor specific/custom SMF media interface
+    provenance: { spec: "SFF-8024 4.14", section: "Table 4-7", quote: "192-255 C0-FF Vendor Specific/Custom" }
+    reach: {kind: smf}

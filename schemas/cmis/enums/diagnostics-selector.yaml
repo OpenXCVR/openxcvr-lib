@@ -1,0 +1,56 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: CmisDiagnosticsSelector
+title: CMIS Diagnostics Selector
+spec:
+  id: cmis
+  revision: "5.3"
+provenance:
+  spec: CMIS 5.3 § 8.13.1 / Table 8-127
+  pdf_pages: [244, 245]
+entries:
+  - value: 0x00
+    name: none
+    description: No diagnostics data selected; bytes 192-255 read as zeroes
+  - value: 0x01
+    name: realtime_host_media_ber
+    description: Real-time Host and Media input lane 1-8 BER values
+  - value: 0x02
+    name: realtime_host_lanes_1_4_errors_bits
+    description: Real-time Host lanes 1-4 error and total-bits counters
+  - value: 0x03
+    name: realtime_host_lanes_5_8_errors_bits
+    description: Real-time Host lanes 5-8 error and total-bits counters
+  - value: 0x04
+    name: realtime_media_lanes_1_4_errors_bits
+    description: Real-time Media lanes 1-4 error and total-bits counters
+  - value: 0x05
+    name: realtime_media_lanes_5_8_errors_bits
+    description: Real-time Media lanes 5-8 error and total-bits counters
+  - value: 0x06
+    name: realtime_host_media_snr
+    description: Real-time Host and Media input lane 1-8 SNR values
+  - value: 0x07..0x10
+    name: reserved_07_10
+    description: Reserved diagnostics selector values
+  - value: 0x11
+    name: gated_host_media_ber
+    description: Host and Media input lane 1-8 BER values for the most recently completed gating period
+  - value: 0x12
+    name: gated_host_lanes_1_4_errors_bits
+    description: Host lanes 1-4 error and total-bits counters for the most recently completed gating period
+  - value: 0x13
+    name: gated_host_lanes_5_8_errors_bits
+    description: Host lanes 5-8 error and total-bits counters for the most recently completed gating period
+  - value: 0x14
+    name: gated_media_lanes_1_4_errors_bits
+    description: Media lanes 1-4 error and total-bits counters for the most recently completed gating period
+  - value: 0x15
+    name: gated_media_lanes_5_8_errors_bits
+    description: Media lanes 5-8 error and total-bits counters for the most recently completed gating period
+  - value: 0x16..0xbf
+    name: reserved_16_bf
+    description: Reserved diagnostics selector values
+  - value: 0xc0..0xff
+    name: custom_c0_ff
+    description: Custom diagnostics selector values

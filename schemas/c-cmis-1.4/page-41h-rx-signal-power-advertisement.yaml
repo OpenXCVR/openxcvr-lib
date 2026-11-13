@@ -1,0 +1,57 @@
+schema: openxcvr.page.v1
+kind: page
+id: CCmisPage41hRxSignalPowerAdvertisement
+title: C-CMIS 1.4 Page 41h Rx Signal Power Advertisement
+spec:
+  id: c-cmis-1.4
+  revision: "01.4"
+  source: docs/stds/cmis/OIF-C-CMIS-01.4_IA.pdf
+  parity_deferred: true
+provenance:
+  spec: OIF-C-CMIS-01.4 § 7.6.2
+  pdf_pages: [35, 36, 37]
+page_address: "41h"
+size_bytes: 128
+fields:
+  - { name: "reserved_128_7_2", offset: 128, bit_offset: 2, bit_width: 6, type: "u6", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 35, table: "Table 22" } }
+  - { name: "rx_sig_power_impl", offset: 128, bit_offset: 1, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=Rx Signal Power monitoring implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 35, table: "Table 22" } }
+  - { name: "rx_power_impl", offset: 128, bit_offset: 0, bit_width: 1, type: "bool", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "1=Rx Total Power monitoring implemented", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 35, table: "Table 22" } }
+  - { name: "reserved_129_7_3", offset: 129, bit_offset: 3, bit_width: 5, type: "u5", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 35, table: "Table 22" } }
+  - name: "rx_los_type"
+    offset: 129
+    bit_offset: 0
+    bit_width: 3
+    type: "u3"
+    access: "ro"
+    field_type: "Informational"
+    tags: [C-CMIS]
+    flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }
+    scope: { module: true }
+    provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 35, table: "Table 22" }
+    enum_inline:
+      - { value: 0, name: reserved, description: "Reserved" }
+      - { value: 1, name: total_power, description: "Rx LOS based on total power" }
+      - { value: 2, name: signal_power, description: "Rx LOS based on signal power" }
+      - { value: 3, name: dsp_lol, description: "Rx LOS based on DSP LOL" }
+      - { value: 4, name: total_power_and_dsp_hybrid, description: "Rx LOS based on total power and DSP hybrid" }
+      - { value: 5, name: signal_power_and_dsp_hybrid, description: "Rx LOS based on signal power and DSP hybrid" }
+      - { value: 6..7, name: reserved_6_7, description: "Reserved" }
+  - { name: "reserved_130_131", offset: 130, size_bytes: 2, type: "bytes", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_hi_alm_thresh_max", offset: 132, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_hi_alm_thresh_min", offset: 134, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_lo_alm_thresh_max", offset: 136, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_lo_alm_thresh_min", offset: 138, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_hi_warn_thresh_max", offset: 140, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_hi_warn_thresh_min", offset: 142, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_lo_warn_thresh_max", offset: 144, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_total_pwr_lo_warn_thresh_min", offset: 146, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_sig_pwr_hi_alm_thresh_max", offset: 148, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_sig_pwr_hi_alm_thresh_min", offset: 150, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_sig_pwr_lo_alm_thresh_max", offset: 152, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 36, table: "Table 22" } }
+  - { name: "rx_sig_pwr_lo_alm_thresh_min", offset: 154, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 37, table: "Table 22" } }
+  - { name: "rx_sig_pwr_hi_warn_thresh_max", offset: 156, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 37, table: "Table 22" } }
+  - { name: "rx_sig_pwr_hi_warn_thresh_min", offset: 158, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 37, table: "Table 22" } }
+  - { name: "rx_sig_pwr_lo_warn_thresh_max", offset: 160, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 37, table: "Table 22" } }
+  - { name: "rx_sig_pwr_lo_warn_thresh_min", offset: 162, size_bytes: 2, type: "i16be", access: "ro", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, units: "0.01 dBm", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 37, table: "Table 22" } }
+  - { name: "reserved_164_247", offset: 164, size_bytes: 84, type: "bytes", access: "ro", field_type: "Informational", tags: [], flags: { is_required: false, is_readable: true, is_writable: false, is_ever_writable: false, is_dynamic: false }, description: "Reserved", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 37, table: "Table 22" } }
+  - { name: custom, offset: 248, size_bytes: 8, type: "bytes", access: "rw", field_type: "Informational", tags: [C-CMIS], flags: { is_required: false, is_readable: true, is_writable: true, is_ever_writable: true, is_dynamic: false }, description: "Vendor defined custom bytes", scope: { module: true }, provenance: { section: "OIF-C-CMIS-01.4 § 7.6.2", pdf_page: 37, table: "Table 22" } }

@@ -1,0 +1,240 @@
+{
+  "_metadata": {
+    "authored_at": "2026-10-18",
+    "authored_by": "ras + claude-opus-4-8 via tools/build-cmis-5-2-synthetic.py",
+    "cmis_version": "5.2",
+    "fixture": "synthetic-cmis-5-2-qsfp-dd",
+    "monitoring_stale": true,
+    "schema_version": "openxcvr.golden.v1",
+    "spec": "cmis-5.3",
+    "spec_revision": "5.3",
+    "synthetic": true,
+    "synthetic_note": "Limited synthetic parity golden, NOT a hardware oracle: every byte is hand-authored by tools/build-cmis-5-2-synthetic.py and the expected semantics derive from the CMIS 5.2 spec (OIF-CMIS-05.2.pdf) applied to those bytes, not from a decoder run. Device revision is CMIS 5.2 (Lower:1=0x52); the canonical schema namespace every generated decoder is emitted from is cmis-5.3 (schemas/cmis). Every field this fixture exercises was verified to agree in offsets and encodings between CMIS 5.2 and CMIS 5.3: rev byte and MemoryModel (Table 8-5), ModuleState 000b=Reserved and InterruptDeasserted bit (Tables 8-6/8-7), module flags byte 9 (Table 8-9), temp/voltage monitors bytes 14-17 (Table 8-10), AppSel 1-8 descriptors at Lower 86-117 (Table 8-20) and AppSel 9-15 at Page 01h:223-250 (Table 8-53), Data Path State 0h=Reserved with 1h=DPDeactivated (Tables 8-76/8-77), lane monitors and the Page 01h:160 bias multiplier (Tables 8-82/8-47). Zeroed pages carry no field-content semantics: dp_state Reserved0 on every lane, no advertised Applications, 0.0 monitors. Nonconformance disclosure: the all-zero Application advertisement is an intentional nonconforming fixture \u2014 CMIS 5.2 \u00a7 8.2.11 requires every module to advertise at least one Application and requires FFh in the HostInterfaceID of the first unused Application Descriptor, and this fixture does neither. The authored bytes are preserved as-is; the golden's applications:null and decode_status:\"ok\" are the structural decode of those bytes \u2014 \"ok\" is decode-success, not conformance. Do not use as a field-round-trip or vendor-identity oracle.",
+    "vendor_strings_synthetic": true
+  },
+  "applications": null,
+  "checksums": null,
+  "decode_status": "ok",
+  "flags": {
+    "data_not_ready": null,
+    "interrupt_asserted": true,
+    "lanes": [
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      },
+      {
+        "rx_power_high_alarm": false,
+        "rx_power_high_warning": false,
+        "rx_power_low_alarm": false,
+        "rx_power_low_warning": false,
+        "tx_bias_high_alarm": false,
+        "tx_bias_high_warning": false,
+        "tx_bias_low_alarm": false,
+        "tx_bias_low_warning": false,
+        "tx_power_high_alarm": false,
+        "tx_power_high_warning": false,
+        "tx_power_low_alarm": false,
+        "tx_power_low_warning": false
+      }
+    ],
+    "supply_high_alarm": false,
+    "supply_low_alarm": false,
+    "temp_high_alarm": false,
+    "temp_low_alarm": false
+  },
+  "identity": {
+    "date_code": "220427",
+    "vendor_name": "CMIS_5_2_SYNTH",
+    "vendor_oui": "00:00:00",
+    "vendor_pn": "FIXTURE-SYNTH-V1",
+    "vendor_rev": "00",
+    "vendor_sn": "SYNTHETIC0000001"
+  },
+  "lanes": [
+    {
+      "dp_state": "Reserved0",
+      "index": 1,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 2,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 3,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 4,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 5,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 6,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 7,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    },
+    {
+      "dp_state": "Reserved0",
+      "index": 8,
+      "rx_los": false,
+      "rx_power_mw": 0.0,
+      "tx_bias_ma": 0.0,
+      "tx_fault": false,
+      "tx_power_mw": 0.0
+    }
+  ],
+  "module": {
+    "cmis_revision": "5.2",
+    "connector": {
+      "name": "unknown_or_unspecified",
+      "raw": "0x00"
+    },
+    "identifier": {
+      "name": "qsfp_dd",
+      "raw": "0x18"
+    },
+    "memory_model": "paged",
+    "module_state": "Reserved0",
+    "module_type": null
+  },
+  "monitoring": {
+    "module_temperature_c": 0.0,
+    "module_voltage_v": 0.0
+  }
+}

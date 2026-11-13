@@ -1,0 +1,24 @@
+fields:
+  - name: page_checksum
+    display_name: PageChecksum
+    offset: 255
+    size_bytes: 1
+    type: u8
+    access: ro
+    field_type: SupplementDefined
+    tags: [SupplementDefined]
+    scope: { module: true }
+    flags:
+      is_required: true
+      is_readable: true
+      is_writable: false
+      is_ever_writable: false
+      is_dynamic: false
+    encoding: { kind: checksum, covers: "Page 05h bytes 128-254", covers_range: [128, 254], algorithm: sum8 }
+    provenance:
+      spec: "CMIS 5.3 § 8.8"
+      section: "§ 7.7"
+      pdf_page: 25
+      table: "Table 9"
+      supplement: { spec: cmis-ff, revision: "1.0", section: "§ 7.7 / Table 9" }
+      quote: "Page Checksum of bytes 128-254"

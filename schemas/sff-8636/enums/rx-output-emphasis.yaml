@@ -1,0 +1,39 @@
+schema: openxcvr.enum.v2
+kind: enum
+id: Sff8636RxOutputEmphasis
+title: SFF-8636 Rx Output Emphasis Control Codes
+spec:
+  id: sff-8636
+  revision: "2.11"
+provenance:
+  spec: SFF-8636 v2.11 § 6.6.3
+  table: "Table 6-33"
+  pdf_pages: [63]
+entries:
+  - value: 0x0
+    name: db_0
+    description: 0 dB; no emphasis
+  - value: 0x1
+    name: db_1
+    description: 1 dB
+  - value: 0x2
+    name: db_2
+    description: 2 dB
+  - value: 0x3
+    name: db_3
+    description: 3 dB
+  - value: 0x4
+    name: db_4
+    description: 4 dB
+  - value: 0x5
+    name: db_5
+    description: 5 dB
+  - value: 0x6
+    name: db_6
+    description: 6 dB
+  - value: 0x7
+    name: db_7
+    description: 7 dB
+  - value: 0x8..0xf
+    name: reserved
+    description: Reserved

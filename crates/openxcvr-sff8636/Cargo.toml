@@ -1,0 +1,22 @@
+[package]
+name = "openxcvr-sff8636"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "SFF-8636 v2.11 (QSFP+ / QSFP28) adapter for the openxcvr universal transceiver library"
+readme = "README.md"
+keywords = ["transceiver", "qsfp", "qsfp28", "sff-8636", "optics"]
+categories = ["hardware-support", "encoding", "parser-implementations"]
+publish = false
+
+[dependencies]
+openxcvr-core = { path = "../openxcvr-core", version = "0.2.0" }
+thiserror = "2"
+
+[dev-dependencies]
+proptest = "1"
+serde_json = "1"
