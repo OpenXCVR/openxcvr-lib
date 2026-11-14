@@ -1,0 +1,33 @@
+name: maintainer-tool-tests
+
+on:
+  push:
+    branches: [main]
+    paths: ["tools/**", ".github/workflows/maintainer-tool-tests.yml"]
+  pull_request:
+    paths: ["tools/**", ".github/workflows/maintainer-tool-tests.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  portable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: openxcvr-lib
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python3 -m pip install pyyaml
+      - name: Synthetic tool tests (no maintainer data)
+        working-directory: openxcvr-lib
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 -m unittest -v tools.test_check_docs tools.test_check_provenance tools.test_check_parity_fixtures tools.test_check_publishable tools.test_digest_standards tools.test_standards_root
+          bash -n tools/extract-pdf-range.sh tools/watch-oif-ias.sh
+      - name: Synthetic qualification and recovery tests
+        working-directory: openxcvr-lib
+        run: PYTHONDONTWRITEBYTECODE=1 python3 tools/test_check_generated_neutrality.py
