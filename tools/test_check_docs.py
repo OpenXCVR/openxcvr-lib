@@ -1036,6 +1036,196 @@ class CliWorktreeRegressionTest(unittest.TestCase):
             [sys.executable, str(cwd / "tools" / (Path(_SPEC.origin).name)), *args],
             cwd=cwd, capture_output=True, text=True)
 
+    def _mount_fixture(self, tmp: Path) -> dict:
+        fx = self._build_fixture(tmp)
+        source = fx["hub"] / "lib" / "notes" / "index.md"
+        source.parent.mkdir(parents=True)
+        source.write_text("# Index\n[crate](../crates/x/README.md)\n", encoding="utf-8")
+        target = fx["wt"] / "crates" / "x" / "README.md"
+        target.parent.mkdir(parents=True)
+        target.write_text("# Crate\n", encoding="utf-8")
+        fx.update(source=source, target=target,
+                  manifest=fx["wt"] / "docs" / "fixture-manifest.toml")
+        return fx
+
+    @staticmethod
+    def _declare_mounts(fx, extra=""):
+        with fx["manifest"].open("a", encoding="utf-8") as fh:
+            fh.write(
+                '\n[mounts]\nlinks = [\n'
+                '  { path = "openxcvr-lib/notes", source = "openxcvr/lib/notes" },\n'
+                + extra + ']\n')
+
+    def test_project_positions_mounted_source_without_library_symlinks(self):
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            # Absent mounts retain the old coordinator-relative finding.
+            before = self._run_cli(fx["wt"], "--project")
+            self.assertEqual(before.returncode, 1)
+            self.assertIn("openxcvr/lib/notes/index.md:2: broken Markdown link", before.stderr)
+            self._declare_mounts(fx)
+            result = self._run_cli(fx["wt"], "--project")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("OK: checked 3 documentation files (project)", result.stdout)
+            fx["target"].unlink()
+            broken = self._run_cli(fx["wt"], "--project")
+            self.assertEqual(broken.returncode, 1)
+            self.assertEqual(broken.stderr.count("broken Markdown link"), 1)
+            self.assertIn("openxcvr-lib/notes/index.md:2: broken Markdown link", broken.stderr)
+
+    def test_link_between_mounts_without_library_symlinks(self):
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            note = fx["hub"] / "lib" / "docs" / "note.md"
+            note.parent.mkdir()
+            note.write_text("# Note\n[index](../notes/index.md)\n", encoding="utf-8")
+            fx["source"].write_text("# Index\n[note](../docs/note.md)\n", encoding="utf-8")
+            self._declare_mounts(fx,
+                '  { path = "openxcvr-lib/docs/note.md", source = "openxcvr/lib/docs/note.md" },\n')
+            result = self._run_cli(fx["wt"], "--project")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            note.unlink()
+            broken = self._run_cli(fx["wt"], "--project")
+            self.assertEqual(broken.returncode, 1)
+            self.assertIn("openxcvr-lib/notes/index.md:2: broken Markdown link", broken.stderr)
+
+    def test_link_from_coordinator_into_mount_without_library_symlinks(self):
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            self._declare_mounts(fx)
+            readme = fx["hub"] / "docs" / "README.md"
+            with readme.open("a", encoding="utf-8") as fh:
+                fh.write("[index](../../openxcvr-lib/notes/index.md)\n")
+            result = self._run_cli(fx["wt"], "--project")
+            self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_source_parent_peer_keeps_coordinator_position(self):
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            self._declare_mounts(fx)
+            peer = fx["hub"] / "lib" / "README.md"
+            peer.write_text("# Peer\n[docs](../docs/README.md)\n", encoding="utf-8")
+            result = self._run_cli(fx["wt"], "--project")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            peer.write_text("# Peer\n[bad](missing.md)\n", encoding="utf-8")
+            broken = self._run_cli(fx["wt"], "--project")
+            self.assertIn("openxcvr/lib/README.md:2: broken Markdown link", broken.stderr)
+
+    def test_workspace_deduplicates_mounted_symlinked_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            source = fx["hub"] / "lib" / "note.md"
+            source.write_text("# Note\n[bad](missing.md)\n", encoding="utf-8")
+            (fx["wt"] / "note.md").symlink_to(source)
+            self._declare_mounts(fx,
+                '  { path = "openxcvr-lib/note.md", source = "openxcvr/lib/note.md" },\n')
+            result = self._run_cli(fx["wt"], "--workspace")
+            self.assertEqual(result.returncode, 1)
+            self.assertEqual(result.stderr.count("broken Markdown link"), 1, result.stderr)
+            self.assertIn("openxcvr-lib/note.md:2: broken Markdown link", result.stderr)
+
+    def test_missing_mount_source_makes_inputs_incomplete_without_remapping(self):
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            self._declare_mounts(fx,
+                '  { path = "openxcvr-lib/missing", source = "openxcvr/lib/missing" },\n')
+            # A missing source must not remap/exclude a real file at its mount path.
+            (fx["wt"] / "missing").mkdir()
+            (fx["wt"] / "missing" / "bad.md").write_text("[bad](absent.md)\n", encoding="utf-8")
+            result = self._run_cli(fx["wt"], "--workspace", "--write-inventory")
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("missing mount source", result.stderr)
+            self.assertIn("openxcvr-lib/missing", result.stderr)
+            self.assertIn("openxcvr/lib/missing", result.stderr)
+            self.assertIn("inputs are incomplete", result.stderr)
+            self.assertIn("openxcvr-lib/missing/bad.md:1: broken Markdown link", result.stderr)
+            self.assertFalse((fx["hub"] / "docs" / "inventory.md").exists())
+
+    def test_mount_manifest_shape_errors_have_manifest_diagnostic(self):
+        cases = [
+            'mounts = []',
+            '[mounts]\nlinks = "not a list"',
+            '[mounts]\nlinks = ["not a table"]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes" }]',
+            '[mounts]\nlinks = [{ source = "openxcvr/lib/notes" }]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes", source = "openxcvr/lib/notes", extra = true }]',
+            '[mounts]\nlinks = [{ path = 1, source = "openxcvr/lib/notes" }]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes", source = 1 }]',
+            '[mounts]\nlinks = [{ path = "notes", source = "openxcvr/lib/notes" }]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes", source = "lib" }]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes", source = "openxcvr/lib/notes" },'
+            ' { path = "openxcvr-lib/notes", source = "openxcvr/lib/other" }]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes", source = "openxcvr/lib/notes" },'
+            ' { path = "openxcvr-lib/other", source = "openxcvr/lib/notes" }]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes", source = "openxcvr/lib/notes" },'
+            ' { path = "openxcvr-lib/notes/sub", source = "openxcvr/lib/other" }]',
+            '[mounts]\nlinks = [{ path = "openxcvr-lib/notes", source = "openxcvr/lib/notes" },'
+            ' { path = "openxcvr-lib/other", source = "openxcvr/lib/notes/sub" }]',
+        ]
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            original = fx["manifest"].read_text(encoding="utf-8")
+            for shape in cases:
+                with self.subTest(shape=shape):
+                    # Prefix scalar cases so they remain top-level TOML keys.
+                    fx["manifest"].write_text(shape + "\n" + original if shape.startswith("mounts =")
+                                              else original + "\n" + shape, encoding="utf-8")
+                    result = self._run_cli(fx["wt"], "--project")
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertTrue(result.stderr.startswith("--manifest:"), result.stderr)
+
+    def test_scope_of_the_linked_repository_scans_the_mount_source(self):
+        # Only the repository the material is linked into is active, and it
+        # has no symlinks: the source is still scanned at its linked position.
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            self._declare_mounts(fx)
+            with fx["manifest"].open("a", encoding="utf-8") as fh:
+                fh.write('\n[scopes.library]\nrepos = ["openxcvr-lib"]\n'
+                         'entry_points = ["openxcvr-lib/README.md"]\n'
+                         'current_doc_prefixes = ["openxcvr-lib/README.md"]\n'
+                         '[scopes.library.personas]\n')
+            result = self._run_cli(fx["wt"], "--scope", "library")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            fx["target"].unlink()
+            broken = self._run_cli(fx["wt"], "--scope", "library")
+            self.assertEqual(broken.returncode, 1)
+            self.assertIn("openxcvr-lib/notes/index.md:2: broken Markdown link", broken.stderr)
+
+    def test_github_url_into_a_mount_is_reported_with_or_without_symlinks(self):
+        # Linked material is not in the repository on GitHub, so a URL to it is
+        # broken for readers whether or not this checkout has the symlink.
+        url = "https://github.com/OpenXCVR/openxcvr-lib/blob/main/notes/index.md"
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            self._declare_mounts(fx)
+            readme = fx["hub"] / "docs" / "README.md"
+            with readme.open("a", encoding="utf-8") as fh:
+                fh.write(f"[published index]({url})\n")
+            unlinked = self._run_cli(fx["wt"], "--workspace")
+            self.assertIn(f"broken Markdown link: {url}", unlinked.stderr)
+            (fx["wt"] / "notes").symlink_to(fx["source"].parent)
+            linked = self._run_cli(fx["wt"], "--workspace")
+            self.assertIn(f"broken Markdown link: {url}", linked.stderr)
+
+    def test_entrypoint_and_persona_start_at_mount_path(self):
+        with tempfile.TemporaryDirectory() as d:
+            fx = self._mount_fixture(Path(d))
+            fx["source"].write_text(
+                "# Index\n\nLibrary documentation.\n\nSee [crate](../crates/x/README.md).\n",
+                encoding="utf-8")
+            self._declare_mounts(fx)
+            with fx["manifest"].open("a", encoding="utf-8") as fh:
+                fh.write(
+                    '\n[scopes.mounted]\nrepos = ["openxcvr"]\n'
+                    'entry_points = ["openxcvr-lib/notes/index.md"]\n'
+                    'current_doc_prefixes = ["openxcvr-lib/notes"]\n'
+                    '[scopes.mounted.personas]\n'
+                    'reader = { start = "openxcvr-lib/notes/index.md", '
+                    'expect = ["openxcvr-lib/crates/x/README.md"] }\n')
+            result = self._run_cli(fx["wt"], "--scope", "mounted")
+            self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_project_from_worktree_validates_sibling_hub(self):
         with tempfile.TemporaryDirectory() as d:
             fx = self._build_fixture(Path(d))

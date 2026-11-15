@@ -27,6 +27,13 @@ git metadata), never under .worktrees. Missing or unreadable repo roots,
 unreadable in-scope subtrees and documents fail closed: an input the validator
 cannot read is inconclusive, never clean. Directories excluded by name (see
 EXCLUDE_PARTS) are pruned deliberately and are not inputs.
+
+Optional [mounts].links declares workspace-logical path/source pairs: documents
+at or under a source are validated at their linked path, and logical targets
+under that path resolve back to the source. Missing sources fail closed and are
+not remapped. Each logical document is checked once, preferring its source copy;
+directory symlinks are still never traversed. Without mounts, positioning and
+traversal are unchanged.
 """
 
 from __future__ import annotations
@@ -142,6 +149,29 @@ def load_manifest(path: Path) -> dict:
             sys.exit(f"--manifest: missing required section [{section}]")
         if key not in data[section]:
             sys.exit(f"--manifest: missing required key [{section}].{key}")
+    if "mounts" in data:
+        mounts = data["mounts"]
+        if not isinstance(mounts, dict) or set(mounts) != {"links"}:
+            sys.exit("--manifest: [mounts] must contain only links")
+        if not isinstance(mounts["links"], list):
+            sys.exit("--manifest: [mounts].links must be a list of tables")
+        seen = {"path": set(), "source": set()}
+        for link in mounts["links"]:
+            if not isinstance(link, dict) or set(link) != {"path", "source"}:
+                sys.exit("--manifest: each mount must contain exactly path and source")
+            for key in ("path", "source"):
+                value = link[key]
+                if not isinstance(value, str):
+                    sys.exit(f"--manifest: mount {key} must be a string")
+                rel = Path(value)
+                if rel.is_absolute() or len(rel.parts) < 2 or ".." in rel.parts:
+                    sys.exit(f"--manifest: mount {key} must be workspace-logical (repo/path): {value}")
+                if rel in seen[key]:
+                    sys.exit(f"--manifest: duplicate mount {key}: {value}")
+                nested = [other for other in seen[key] if rel in other.parents or other in rel.parents]
+                if nested:
+                    sys.exit(f"--manifest: mount {key} {value} is nested with {nested[0]}")
+                seen[key].add(rel)
     return data
 
 
@@ -243,12 +273,39 @@ def _repo_bases() -> dict[str, Path]:
     return bases
 
 
+def _mounts():
+    """Declared positions and physical sources (never recursively remapped)."""
+    bases = _repo_bases()
+    for link in MANIFEST.get("mounts", {}).get("links", []):
+        position, source = Path(link["path"]), Path(link["source"])
+        base = bases.get(source.parts[0])
+        physical = base.joinpath(*source.parts[1:]) if base is not None else None
+        yield position, source, physical
+
+
+def _available_mounts():
+    return [(position, physical) for position, _source, physical in _mounts()
+            if physical is not None and physical.exists()]
+
+
+def _mounted_path(rel: Path) -> Path | None:
+    """Physical source for a logical mount position, or None if unavailable."""
+    for position, physical in _available_mounts():
+        if rel.is_relative_to(position):
+            return physical / rel.relative_to(position)
+    return None
+
+
 def _locate(path: Path) -> tuple[str, Path] | None:
     """Logical position of a physical path: (repo name, repo-relative path).
 
     None when the path is outside every mapped checkout; callers fall back to
     ROOT-relative or physical handling, preserving pre-worktree behaviour.
     """
+    for position, source in _available_mounts():
+        if path.is_relative_to(source):
+            logical = position / path.relative_to(source)
+            return logical.parts[0], Path(*logical.parts[1:])
     for repo, base in sorted(_repo_bases().items(),
                              key=lambda kv: len(kv[1].parts), reverse=True):
         try:
@@ -272,6 +329,9 @@ def _logical(path: Path) -> Path:
 
 def workspace_path(rel: Path) -> Path:
     """Physical path for a workspace-logical path (entry points, persona starts)."""
+    mounted = _mounted_path(rel)
+    if mounted is not None:
+        return mounted
     parts = rel.parts
     if parts and parts[0] in ALL_COMPONENT_REPOS:
         return repo_root(parts[0]).joinpath(*parts[1:])
@@ -293,6 +353,9 @@ def _resolve_local_target(path: Path, target: str) -> Path:
         logical_dir = Path(repo, *rel.parts).parent
         joined = Path(os.path.normpath(str(logical_dir / target)))
         if joined.parts and joined.parts[0] in _repo_bases():
+            mounted = _mounted_path(joined)
+            if mounted is not None:
+                return mounted.resolve()
             return repo_root(joined.parts[0]).joinpath(*joined.parts[1:]).resolve()
     return (path.parent / target).resolve()
 
@@ -375,7 +438,28 @@ def doc_files(scandir=os.scandir) -> tuple[list[Path], list[Problem]]:
         found, failures = _scan_doc_tree(base, scandir)
         files.extend(found)
         problems.extend(failures)
-    return sorted(set(files)), problems
+    for position, source, physical in _mounts():
+        if physical is None or not physical.exists():
+            problems.append(Problem(
+                physical if physical is not None else ROOT / source, 0,
+                f"missing mount source: {source} (mount {position}): validation is inconclusive"))
+        elif position.parts[0] in ACTIVE_REPOS and source.parts[0] not in ACTIVE_REPOS:
+            # The material belongs to an active repository but is kept in an
+            # inactive one: scan its source, which the walk above did not reach.
+            if physical.is_dir():
+                found, failures = _scan_doc_tree(physical, scandir)
+                files.extend(found)
+                problems.extend(failures)
+            elif physical.suffix in DOC_SUFFIXES:
+                files.append(physical)
+    sources = [source for _position, source in _available_mounts()]
+    by_position: dict[Path, Path] = {}
+    # Source paths sort first, so a library-side file symlink cannot duplicate
+    # its source document or replace it as the graph's authoritative input.
+    for path in sorted(files, key=lambda p: (
+            not any(p.is_relative_to(source) for source in sources), str(p))):
+        by_position.setdefault(_logical(path), path)
+    return sorted(by_position.values()), problems
 
 
 def is_archive(path: Path) -> bool:
@@ -422,6 +506,13 @@ def resolve_external_workspace_link(path: Path, target: str) -> Path | None:
     else:
         return None
     rel = Path(rest) if rest else Path("README.md")
+    logical = Path(repo) / rel
+    if any(logical == Path(link["path"]) or Path(link["path"]) in logical.parents
+           for link in MANIFEST.get("mounts", {}).get("links", [])):
+        # Mounted material is linked into a checkout, never committed, so the
+        # URL names nothing on GitHub: report it whether or not this checkout
+        # holds the link. (No path under the null device exists.)
+        return Path(os.devnull) / "unpublished-mount" / logical
     return (local / rel).resolve()
 
 
