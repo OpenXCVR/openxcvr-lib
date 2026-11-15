@@ -5,6 +5,10 @@
 progress. Full mode checks every commit's tree, added text, message, identity
 and single-parent history. Neither mode writes to the repository.
 Policy is TOML data; it is never imported or executed.
+
+A diff shows a binary change as one line, so an added or modified binary is
+scanned in full from its new blob, its raw bytes read as Latin-1. Text a file
+format stores compressed or in another encoding is not seen.
 """
 from __future__ import annotations
 
@@ -19,6 +23,11 @@ import tomllib
 def git(repo: Path, *args: str) -> str:
     return subprocess.run(['git', '-C', str(repo), *args], capture_output=True,
                           text=True, check=True).stdout
+
+
+def git_bytes(repo: Path, *args: str) -> bytes:
+    return subprocess.run(['git', '-C', str(repo), *args], capture_output=True,
+                          check=True).stdout
 
 
 def load_rules(path: Path) -> dict:
@@ -85,9 +94,21 @@ def check(repo: Path, base: str, head: str, rules: dict, content: bool) -> list[
         if hits:
             bad.append(f'{label} added-content deny {hits}')
 
+    def binary(old, new, label):
+        stat = git(repo, 'diff', '--numstat', '-z', '--no-renames', '--diff-filter=d', old, new)
+        for entry in filter(None, stat.split('\0')):
+            added_count, deleted_count, path = entry.split('\t', 2)
+            if added_count != '-' or deleted_count != '-':
+                continue
+            data = git_bytes(repo, 'cat-file', 'blob', f'{new}:{path}').decode('latin-1')
+            hits = deny_hits(rules, data, 'content')
+            if hits:
+                bad.append(f'{label} binary {path!r} deny {hits}')
+
     if content:
         tree(head)
         added(git(repo, 'diff', '-U0', '--no-color', base, head).splitlines(), 'net')
+        binary(base, head, 'net')
         print(f'checked net change {base}..{head} (content only)')
     else:
         commits = git(repo, 'rev-list', '--reverse', f'{base}..{head}').split()
@@ -103,6 +124,7 @@ def check(repo: Path, base: str, head: str, rules: dict, content: bool) -> list[
             if hits:
                 bad.append(f'{commit[:10]} message deny {hits}')
             added(git(repo, 'show', '--format=', '-U0', '--no-color', commit).splitlines(), commit[:10])
+            binary(f'{commit}^', commit, commit[:10])
         print(f'checked {len(commits)} commits in {base}..{head}')
     return bad
 

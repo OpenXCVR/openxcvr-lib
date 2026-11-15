@@ -58,6 +58,13 @@ reason = "ordinary word"
         self.git('add', '-A')
         self.git('commit', '-qm', message)
 
+    def commit_bytes(self, path, content, message='binary'):
+        target = self.repo / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(content)
+        self.git('add', '-A')
+        self.git('commit', '-qm', message)
+
     def check(self, content=False):
         with contextlib.redirect_stdout(io.StringIO()):
             return p.check(self.repo, self.base, 'HEAD', self.rules, content)
@@ -71,6 +78,27 @@ reason = "ordinary word"
         self.commit('example.py', 'RESTRICTED\n')
         for content in (True, False):
             self.assertTrue(any('added-content deny' in x for x in self.check(content)))
+
+    def test_binary_content_deny_in_both_modes(self):
+        # A diff shows a binary change as one "Binary files differ" line, so
+        # the denied text inside the new bytes must be read from the blob.
+        self.commit_bytes('docs/blob.bin', b'\x00\xff%PDF RESTRICTED\x00\x01')
+        for content in (True, False):
+            self.assertTrue(any('binary' in x and 'docs/blob.bin' in x and 'restricted' in x
+                                for x in self.check(content)), self.check(content))
+
+    def test_modified_binary_is_scanned(self):
+        self.commit_bytes('docs/blob.bin', b'\x00clean\x00')
+        self.base = self.git('rev-parse', 'HEAD').strip()
+        self.rules['public_root'] = self.git('rev-list', '--max-parents=0', 'HEAD').strip()
+        self.commit_bytes('docs/blob.bin', b'\x00now restricted\x00')
+        for content in (True, False):
+            self.assertTrue(any('binary' in x for x in self.check(content)))
+
+    def test_clean_binary_passes(self):
+        self.commit_bytes('docs/blob.bin', b'\x00\xffunrestricted\x00')
+        self.assertEqual(self.check(), [])
+        self.assertEqual(self.check(True), [])
 
     def test_filename_allow_never_covers_content(self):
         self.commit('tools/check-restricted.py', 'clean\n')
