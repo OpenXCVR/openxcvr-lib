@@ -5,8 +5,8 @@ name: artifacts
 # Four legs (ubuntu x86_64 baseline, macOS arm64, macOS x86_64 cross,
 # Windows x86_64 MSVC ABI) each:
 #   1. record the ACTUAL runner OS + arch (the caption that goes into
-#      manifest.json and docs/versioning.md — windows-latest is Windows Server,
-#      not native Windows 11),
+#      manifest.json and docs/versioning.md — the Windows runner is Windows
+#      Server, not native Windows 11),
 #   2. run an early `cargo check --workspace --target <triple>` portability
 #      gate BEFORE any full build (the codegen case-sensitivity fix 04a646a
 #      is an ancestor of the base this workflow landed on; the check gate is
@@ -582,7 +582,7 @@ jobs:
           retention-days: 90
 
   # ---------------- Windows x86_64 (Clang / MSVC ABI) -----------------------
-  # windows-latest is Windows SERVER — the OS caption recorded below is the
+  # This runner is Windows SERVER — the OS caption recorded below is the
   # honest one and goes into manifest.json and docs/versioning.md. ctest here
   # excludes the four install/portability tests that structurally require
   # pkg-config and GCC/Clang-only link flags (they run on the POSIX legs);
@@ -590,7 +590,9 @@ jobs:
   # proof on Windows itself: cl + import library + DLL run, plus a static
   # link, plus dumpbin architecture asserts.
   windows-x86_64:
-    runs-on: windows-latest
+    # windows-latest bundles Clang 20.1.8 with a VS 2026 STL that requires
+    # Clang 22+. Use the VS 2022 image until the newer image ships a match.
+    runs-on: windows-2022
     # R1: the steps in this job are written in bash. Under the image default
     # (pwsh) `"$RUST_TARGET"` is an unset PowerShell variable, so cargo was
     # invoked with an empty --target and failed with "target was empty". The
@@ -812,7 +814,7 @@ jobs:
               "rust_rlibs_included": False,
               "notes": "Clang GNU-driver build with MSVC ABI and dynamic MSVC CRT; "
                        "staged-package consumers validated separately with cl /W4 /MD. "
-                       "windows-latest is Windows Server (see "
+                       "The Windows runner is Windows Server (see "
                        "runner_os_caption), not native Windows 11. "
                        "lib/openxcvr_c.lib is the DLL import library; the "
                        "static archive is built/installed as lib/openxcvr_c_static.lib. "
