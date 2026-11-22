@@ -120,9 +120,12 @@ jobs:
           # Relocatable .pc (the autotools convention): the absolute install
           # prefix becomes ${pcfiledir}-relative so the unpacked package
           # resolves wherever it was unpacked.
-          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
-            dist/"$DIST"/lib/pkgconfig/*.pc
-          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          pc_tmp=$(mktemp -d)
+          trap 'rm -rf "$pc_tmp"' EXIT
+          for pc in dist/"$DIST"/lib/pkgconfig/*.pc; do
+            sed "s|^prefix=.*|prefix=\${pcfiledir}/../..|" "$pc" > "$pc_tmp/pc"
+            mv "$pc_tmp/pc" "$pc"
+          done
           echo "DIST=$DIST" >> "$GITHUB_ENV"
       - name: Write manifest.json
         run: |
@@ -257,9 +260,12 @@ jobs:
           mkdir -p "dist/$DIST"
           mv pkgroot/include "dist/$DIST/include"
           mv pkgroot/lib "dist/$DIST/lib"
-          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
-            dist/"$DIST"/lib/pkgconfig/*.pc
-          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          pc_tmp=$(mktemp -d)
+          trap 'rm -rf "$pc_tmp"' EXIT
+          for pc in dist/"$DIST"/lib/pkgconfig/*.pc; do
+            sed "s|^prefix=.*|prefix=\${pcfiledir}/../..|" "$pc" > "$pc_tmp/pc"
+            mv "$pc_tmp/pc" "$pc"
+          done
           # Relocatable dylib: the installed id (absolute staging prefix)
           # becomes @rpath/... so the unpacked package loads wherever the
           # consumer's rpath points.
@@ -474,9 +480,12 @@ jobs:
           mkdir -p "dist/$DIST"
           mv pkgroot/include "dist/$DIST/include"
           mv pkgroot/lib "dist/$DIST/lib"
-          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
-            dist/"$DIST"/lib/pkgconfig/*.pc
-          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          pc_tmp=$(mktemp -d)
+          trap 'rm -rf "$pc_tmp"' EXIT
+          for pc in dist/"$DIST"/lib/pkgconfig/*.pc; do
+            sed "s|^prefix=.*|prefix=\${pcfiledir}/../..|" "$pc" > "$pc_tmp/pc"
+            mv "$pc_tmp/pc" "$pc"
+          done
           install_name_tool -id "@rpath/libopenxcvr_c.dylib" \
             dist/"$DIST"/lib/libopenxcvr_c.dylib
           echo "DIST=$DIST" >> "$GITHUB_ENV"
@@ -738,9 +747,12 @@ jobs:
           mv pkgroot/include "dist/$DIST/include"
           mv pkgroot/lib "dist/$DIST/lib"
           mv pkgroot/bin "dist/$DIST/bin"
-          sed -i.bak "s|^prefix=.*|prefix=\${pcfiledir}/../..|" \
-            dist/"$DIST"/lib/pkgconfig/*.pc
-          rm -f dist/"$DIST"/lib/pkgconfig/*.pc.bak
+          pc_tmp=$(mktemp -d)
+          trap 'rm -rf "$pc_tmp"' EXIT
+          for pc in dist/"$DIST"/lib/pkgconfig/*.pc; do
+            sed "s|^prefix=.*|prefix=\${pcfiledir}/../..|" "$pc" > "$pc_tmp/pc"
+            mv "$pc_tmp/pc" "$pc"
+          done
           echo "DIST=$DIST" >> "$GITHUB_ENV"
       - name: Write manifest.json
         shell: bash
