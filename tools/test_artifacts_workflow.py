@@ -103,6 +103,10 @@ class ArtifactsWorkflowTests(unittest.TestCase):
             f"real_sed = {real_sed!r}\n"
             f"log_path = pathlib.Path({str(spy_log)!r})\n"
             f"dist_root = pathlib.Path({str(workdir / 'dist')!r})\n"
+            "if os.environ.get('SPY_SED_FAIL_PARTIAL') == '1':\n"
+            "    sys.stdout.write('prefix=partial\\n')\n"
+            "    sys.stdout.flush()\n"
+            "    sys.exit(1)\n"
             "rc = subprocess.run([real_sed, *sys.argv[1:]]).returncode\n"
             "seen_bak = []\n"
             "if dist_root.exists():\n"
@@ -211,6 +215,32 @@ class ArtifactsWorkflowTests(unittest.TestCase):
                     self.assertEqual((pc_dir / "legacy.pc.bak").read_text(encoding="utf-8"), "legacy-bytes\n")
                     self.assertEqual((pc_dir / "unrelated.txt").read_text(encoding="utf-8"), "keep-me\n")
                     self.assertEqual(list(step_tmp.iterdir()), [])
+
+    def test_stage_steps_abort_before_replacing_pc_when_render_fails(self):
+        """A render that writes partial output and fails leaves every original .pc byte-identical."""
+        for job_id, platform, arch in LEGS:
+            with self.subTest(job=job_id):
+                script = _load_stage_step(job_id)
+                with tempfile.TemporaryDirectory() as td:
+                    tmp = Path(td)
+                    workdir, _spy_log, step_tmp, github_env, env = self._setup_fixture(tmp, platform)
+                    env["ARCH"] = arch
+                    env["SPY_SED_FAIL_PARTIAL"] = "1"
+                    before = {p.name: p.read_bytes() for p in (workdir / "pkgroot" / "lib" / "pkgconfig").glob("*.pc")}
+                    self.assertEqual(len(before), 2)
+                    proc = subprocess.run(
+                        ["bash", "-c", script],
+                        cwd=workdir,
+                        env=env,
+                        capture_output=True,
+                        text=True,
+                    )
+                    self.assertNotEqual(proc.returncode, 0, f"{job_id} hid a failed render")
+                    pc_dir = workdir / "dist" / f"openxcvr-c-{platform}-{arch}" / "lib" / "pkgconfig"
+                    after = {p.name: p.read_bytes() for p in pc_dir.glob("*.pc")}
+                    self.assertEqual(after, before, f"{job_id} changed a .pc after a failed render")
+                    self.assertEqual(github_env.read_text(encoding="utf-8"), "")
+                    self.assertEqual(list(step_tmp.iterdir()), [], f"{job_id} leaked temp files in TMPDIR")
 
     def test_stage_steps_fail_loudly_when_pc_files_are_missing_and_clean_tmpdir(self):
         for job_id, platform, arch in LEGS:
